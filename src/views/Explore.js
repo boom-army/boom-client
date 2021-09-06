@@ -1,0 +1,15 @@
+import React from "react";
+import styled from "styled-components";
+import SearchInput from "../components/Search/SearchInput";
+
+const Wrapper = styled.div`
+	padding-bottom: 5rem;
+`;
+
+export const Explore = () => {
+	return (
+		<Wrapper>
+			<SearchInput />
+		</Wrapper>
+	);
+};
