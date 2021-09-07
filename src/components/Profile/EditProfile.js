@@ -54,7 +54,7 @@ const Wrapper = styled.div`
 	}
 `;
 
-const EditProfile = () => {
+export const EditProfile = () => {
 	const {
 		data: { user }
 	} = useQuery(USER);
@@ -72,5 +72,3 @@ const EditProfile = () => {
 		</Wrapper>
 	);
 };
-
-export default EditProfile;

@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Profile = () => {
+export const Profile = () => {
   const { handle } = useParams();
 
   const { loading, error, data } = useQuery(PROFILE, {
@@ -53,5 +53,3 @@ const Profile = () => {
     </Wrapper>
   );
 };
-
-export default Profile;

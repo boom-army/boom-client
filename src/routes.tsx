@@ -1,12 +1,15 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { AccountsProvider } from "./contexts/accounts";
+import { AppHeader } from "./components/AppHeader";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ConnectionProvider } from "./contexts/connection";
-import { Home, Suggestion, Nav } from "./views";
+import { EditProfile } from "./components/Profile/EditProfile";
+import { Home, Suggestion, Nav, Explore, Notifications } from "./views";
 import { MarketProvider } from "./contexts/market";
+import { MasterTweet } from "./components/Tweet/MasterTweet";
+import { Profile } from "./components/Profile/Profile";
 import { WalletProvider } from "./contexts/wallet";
 import { makeStyles, Container, Grid } from "@material-ui/core";
-import { AppHeader } from "./components/AppHeader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +48,24 @@ export function Routes() {
                       <Grid direction="row" xs={7}>
                         <Switch>
                           <Route exact path="/" component={Home} />
+                          <Route exact path="/explore" component={Explore} />
+                          <Route
+                            exact
+                            path="/notifications"
+                            component={Notifications}
+                          />
+                          <Route
+                            exact
+                            path={`/:handle/status/:tweetId`}
+                            component={MasterTweet}
+                          />
+                          <Route
+                            exact
+                            path={`/settings/profile`}
+                            component={EditProfile}
+                          />
+                          <Route exact path={`/:handle`} component={Profile} />
+                          <Redirect from="*" to="/" />
                         </Switch>
                       </Grid>
                       <Grid direction="row" xs={3}>
