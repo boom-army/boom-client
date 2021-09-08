@@ -9,11 +9,11 @@ export const USER_LOGGED_IN = gql`
 
 // client query
 export const USER = gql`
-  query user {
-    user {
+  query me {
+    me {
       id
-      handle
       avatar
+      handle
       fullname
     }
   }

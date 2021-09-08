@@ -56,10 +56,11 @@ const Wrapper = styled.div`
 
 export const EditProfile = () => {
 	const {
-		data: { user }
+		data: { me }
 	} = useQuery(USER);
+
 	const { loading, error, data } = useQuery(PROFILE, {
-		variables: { handle: user.handle }
+		variables: { handle: me.handle }
 	});
 
 	if (loading) return <Loader />;
