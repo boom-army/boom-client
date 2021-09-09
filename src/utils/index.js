@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import fs from 'fs';
+import moment from "moment";
 
 export const displayError = (err) => {
   let e = err.message.split(":");
@@ -15,6 +15,7 @@ export const sortFn = (a, b) => {
 };
 
 export const setDate = (date) => {
+  date = moment.utc(date).valueOf();
   const newDate = new Date(0);
   newDate.setUTCSeconds(date / 1000);
   return newDate;
