@@ -1,6 +1,6 @@
 import React from "react";
 import { ENDPOINTS, useConnectionConfig } from "../../contexts/connection";
-import { useWallet } from "../../contexts/wallet-old";
+import { useWallet } from '@solana/wallet-adapter-react';
 import {
   Button,
   Box,

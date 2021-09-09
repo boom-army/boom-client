@@ -1,9 +1,10 @@
 import React from "react";
-import { ConnectButton } from "../ConnectButton";
 import { CurrentUserBadge } from "../CurrentUserBadge";
 import { Link } from "react-router-dom";
 import { Network } from "../Network";
-import { useWallet } from "../../contexts/wallet-old";
+import DisconnectIcon from '@material-ui/icons/LinkOff';
+import { WalletDisconnectButton, WalletMultiButton } from '@solana/wallet-adapter-material-ui';
+import { useWallet } from '@solana/wallet-adapter-react';
 import {
   AppBar,
   Container,
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const AppHeader = () => {
-  const { connected } = useWallet();
+  const { connected, wallet } = useWallet();
   const classes = useStyles();
 
   const TopBar = (
@@ -36,8 +37,10 @@ export const AppHeader = () => {
           <Link to="/" className={classes.hero}>
             {connected ? <CurrentUserBadge /> : <Typography variant="h6">Sosol</Typography>}
           </Link>
-          <ConnectButton />
-          {process.env.NODE_ENV === "development" ? <Network /> : null}
+          {/* <ConnectButton /> */}
+          {/* {process.env.NODE_ENV === "development" ? <Network /> : null} */}
+          {wallet && <WalletDisconnectButton startIcon={<DisconnectIcon />} style={{ marginLeft: 8 }} />}
+          <WalletMultiButton />
         </Toolbar>
       </Container>
     </AppBar>

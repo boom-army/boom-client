@@ -1,5 +1,5 @@
 import React from "react";
-import { useWallet } from "../../contexts/wallet-old";
+import { useWallet } from '@solana/wallet-adapter-react';
 import { formatNumber } from "../../utils/utils";
 import { Identicon } from "../Identicon";
 import { useNativeAccount } from "../../contexts/accounts";
@@ -20,20 +20,17 @@ export const CurrentUserBadge = (props: {}) => {
   const { account } = useNativeAccount();
   const classes = useStyles();
 
-  if (!wallet?.publicKey) {
-    return null;
-  }
-
   // should use SOL ◎ ?
 
   return (
     <>
       <Grid container>
         <Grid className={classes.icon}>
-          <Identicon
-            address={wallet.publicKey.toBase58()}
+          {/* <Identicon
+            address={wallet.name}
             style={{ marginLeft: "0.5rem", display: "flex", width: "30" }}
-          />
+          /> */}
+          {/* Put wallet.icon here if no avatar */}
         </Grid>
         <Grid className={classes.units}>
           <p>{formatNumber.format((account?.lamports || 0) / LAMPORTS_PER_SOL)} SOL</p>
