@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   position: relative;
 
   .row {
-    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .avatar {
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   }
 
   .profile-info {
-    padding: 1rem 0 1rem 1.4rem;
+    padding: 0 1.4rem 1rem;
 
     .bio {
       width: 90%;
