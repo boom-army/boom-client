@@ -57,10 +57,7 @@ export const User = ({ user }) => (
   <UserWrapper>
     <div className="avatar-handle">
       <Link to={`/${user && user.handle}`}>
-        {/* {user && user.avatar ? <Avatar size="large" src={user.avatar} /> : <Avatar size="large" icon={<UserOutlined />} />} */}
-        <Avatar>
-          <PersonIcon />
-        </Avatar>
+        <Avatar src={user && user.avatar ? user.avatar : <PersonIcon />} />
       </Link>
 
       <div className="handle-fullname">

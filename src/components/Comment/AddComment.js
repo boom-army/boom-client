@@ -90,15 +90,14 @@ const AddComment = ({ id }) => {
   };
 
   const {
-    data: { user },
+    data,
   } = useQuery(USER);
 
   return (
     <Wrapper>
-      {/* <Avatar size="large" icon={user && user.avatar} /> */}
-      <Avatar>
-        <PersonIcon />
-      </Avatar>
+      <Avatar
+        src={data?.me?.avatar ? data?.me?.avatar : <PersonIcon />}
+      />
 
       <form onSubmit={handleAddComment}>
         <div className="add-comment">
