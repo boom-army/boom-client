@@ -120,6 +120,7 @@ export const NewTweet = () => {
   return (
     <Wrapper>
       <Avatar
+        className="avatar"
         src={data?.me?.avatar ? data?.me?.avatar : <PersonIcon />}
       />
       <form onSubmit={handleNewTweet}>
