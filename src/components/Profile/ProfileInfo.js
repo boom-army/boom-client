@@ -4,14 +4,19 @@ import styled from "styled-components";
 import CoverPhoto from "../../styles/CoverPhoto";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from "@material-ui/icons/Person";
-import Button from "../../styles/Button";
+import { Button, Grid } from "@material-ui/core";
+// import Button from "../../styles/Button";
 import Follow from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
 import CustomResponse from "../CustomResponse";
 
 const Wrapper = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.tertiaryColor};
-  padding-bottom: 1rem;
+  position: relative;
+
+  .row {
+    padding-top: 1rem;
+  }
 
   .avatar {
     margin-left: 1.4rem;
@@ -19,11 +24,7 @@ const Wrapper = styled.div`
   }
 
   .profile-name-handle {
-    display: flex;
-    flex-direction: column;
     margin-left: 1.4rem;
-    position: relative;
-    top: -16px;
 
     span.fullname {
       font-weight: bold;
@@ -36,11 +37,16 @@ const Wrapper = styled.div`
   }
 
   .profile-info {
-    padding-left: 1.4rem;
+    padding: 1rem 0 1rem 1.4rem;
 
     .bio {
       width: 90%;
     }
+  }
+
+  .action-btn {
+    position: absolute;
+    right: 1rem;
   }
 
   div.loc-dob-web {
@@ -103,68 +109,93 @@ const ProfileInfo = ({ profile }) => {
 
   return (
     <Wrapper>
-      <CoverPhoto src={coverPhoto} alt="cover" />
-      <Avatar>
-        <PersonIcon />
-      </Avatar>
+      <Grid
+        container
+        direction="row"
+        className="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
+      >
+        <CoverPhoto src={coverPhoto} alt="cover" />
+        <Avatar className="avatar" src={avatar ? avatar : <PersonIcon />} />
+      </Grid>
 
-      {isSelf ? (
-        <Link to="/settings/profile">
-          <Button relative outline className="action-btn">
+      <Grid
+        container
+        direction="row"
+        className="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
+      >
+        {isSelf ? (
+          <Button
+            className="action-btn"
+            component={Link}
+            to="/settings/profile"
+            variant="outlined"
+            color="primary"
+          >
             Edit Profile
           </Button>
-        </Link>
-      ) : (
-        <Follow
-          relative
-          className="action-btn"
-          isFollowing={isFollowing}
-          id={id}
-        />
-      )}
-
-      <div className="profile-name-handle">
-        <span className="fullname">{fullname}</span>
-        <span className="handle">{`@${handle}`}</span>
-      </div>
-
-      <div className="profile-info">
-        <p className="bio">{bio}</p>
-
-        {!location && !website && !dob ? null : (
-          <div className="loc-dob-web">
-            {location ? (
-              <span>
-                <LocationIcon /> {location}
-              </span>
-            ) : null}
-
-            {website ? (
-              <span>
-                <LinkIcon /> {website}
-              </span>
-            ) : null}
-
-            {dob ? (
-              <span>
-                <DobIcon />
-                {dob}
-              </span>
-            ) : null}
-          </div>
+        ) : (
+          <Follow
+            relative
+            className="action-btn"
+            isFollowing={isFollowing}
+            id={id}
+          />
         )}
 
-        <div className="follow-following">
-          <span>
-            {followersCount ? `${followersCount} followers` : "No followers"}
-          </span>
-          <span>
-            {followingCount
-              ? `${followingCount} following`
-              : "Not following anyone"}
-          </span>
+        <div className="profile-name-handle">
+          <span className="fullname">{fullname}</span>
+          <br />
+          <span className="handle">{`@${handle}`}</span>
         </div>
-      </div>
+
+        </Grid>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="flex-start"
+          className="profile-info"
+        >
+          <p className="bio">{bio}</p>
+
+          {!location && !website && !dob ? null : (
+            <div className="loc-dob-web">
+              {location ? (
+                <span>
+                  <LocationIcon /> {location}
+                </span>
+              ) : null}
+
+              {website ? (
+                <span>
+                  <LinkIcon /> {website}
+                </span>
+              ) : null}
+
+              {dob ? (
+                <span>
+                  <DobIcon />
+                  {dob}
+                </span>
+              ) : null}
+            </div>
+          )}
+
+          <div className="follow-following">
+            <span>
+              {followersCount ? `${followersCount} followers` : "No followers"}
+            </span>
+            <span>
+              {followingCount
+                ? `${followingCount} following`
+                : "Not following anyone"}
+            </span>
+          </div>
+        </Grid>
     </Wrapper>
   );
 };

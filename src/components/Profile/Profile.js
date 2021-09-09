@@ -34,16 +34,14 @@ export const Profile = () => {
 
   return (
     <Wrapper>
-      {/* <Header>
-        <div className="profile-top">
-          <span>{data && data.profile && data.profile.fullname}</span>
-          <span className="tweetsCount">
-            {data && data.profile && data.profile.tweetsCount
-              ? `${data.profile.tweetsCount} Tweets`
-              : "No Tweets"}
-          </span>
-        </div>
-      </Header> */}
+      {/* <div className="profile-top">
+        <span>{data && data.profile && data.profile.fullname}</span>
+        <span className="tweetsCount">
+          {data && data.profile && data.profile.tweetsCount
+            ? `${data.profile.tweetsCount} Tweets`
+            : "No Tweets"}
+        </span>
+      </div> */}
       <ProfileInfo profile={data && data.profile} />
       {data && data.profile && data.profile.tweets && data.profile.tweets.length
         ? data.profile.tweets.map((tweet) => (

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useMutation } from '@apollo/client';
 import Button from "../../styles/Button";
-import { displayError } from "../../utils";
 import { FEED, USERS } from "../../queries/others";
 import { FOLLOW, UNFOLLOW } from "../../queries/follow";
+import { displayError } from "../../utils";
+import { useMutation } from '@apollo/client';
 
 const Follow = ({ isFollowing, id, sm = false, relative = false }) => {
   const [followState, setFollowState] = useState(isFollowing);
@@ -37,7 +37,12 @@ const Follow = ({ isFollowing, id, sm = false, relative = false }) => {
   };
 
   return (
-    <Button outline sm={sm} relative={relative} onClick={handleFollow}>
+    <Button
+      className="action-btn"
+      onClick={handleFollow}
+      variant="outlined"
+      color="primary"
+    >
       {followState ? "Following" : "Follow"}
     </Button>
   );
