@@ -63,10 +63,7 @@ const Comment = ({ comment }) => {
 
   return (
     <Wrapper>
-      {/* <Avatar size="large" icon={user && user.avatar} /> */}
-      <Avatar>
-        <PersonIcon />
-      </Avatar>
+      <Avatar src={user && user.avatar ? user.avatar : <PersonIcon />} />
       <div className="comment-info">
         <div className="comment-info-user">
           <span className="username">{user && user.fullname}</span>

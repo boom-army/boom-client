@@ -128,10 +128,7 @@ export const Tweet = ({ tweet }) => {
   return (
     <Wrapper>
       <Link to={`/${handle}`}>
-        {/* {user && user.avatar ? <Avatar size="large" src={user.avatar} /> : <Avatar size="large" icon={<UserOutlined />} />} */}
-        <Avatar className="avatar">
-          <PersonIcon />
-        </Avatar>
+        <Avatar className="avatar" src={user && user.avatar ? user.avatar : <PersonIcon />} />
       </Link>
 
       <div className="tweet-info">

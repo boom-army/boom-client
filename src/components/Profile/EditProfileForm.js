@@ -16,7 +16,7 @@ import { PROFILE, EDIT_PROFILE } from "../../queries/profile";
 
 const EditProfileForm = ({ profile, history }) => {
   const [avatarState, setAvatar] = useState("");
-  const [coverPhotoState, setCoverPhoto] = useState("");
+  const [coverPhotoState, setCoverPhoto] = useState(<PersonIcon />);
 
   const firstname = useInput(profile && profile.firstname);
   const lastname = useInput(profile && profile.lastname);
@@ -93,14 +93,7 @@ const EditProfileForm = ({ profile, history }) => {
 
       <div className="avatar-input">
         <label htmlFor="avatar-input-file">
-          {/* <Avatar
-            lg
-            src={avatarState ? avatarState : avatar.value}
-            alt="avatar"
-          /> */}
-          <Avatar>
-            <PersonIcon />
-          </Avatar>
+          <Avatar src={avatarState ? avatarState : avatar.value} />
         </label>
         <input
           type="file"

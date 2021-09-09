@@ -95,9 +95,7 @@ const AddComment = ({ id }) => {
 
   return (
     <Wrapper>
-      <Avatar
-        src={data?.me?.avatar ? data?.me?.avatar : <PersonIcon />}
-      />
+      <Avatar src={data?.me?.avatar ? data?.me?.avatar : <PersonIcon />} />
 
       <form onSubmit={handleAddComment}>
         <div className="add-comment">
