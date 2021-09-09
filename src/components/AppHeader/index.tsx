@@ -1,7 +1,6 @@
 import React from "react";
 import { CurrentUserBadge } from "../CurrentUserBadge";
 import { Link } from "react-router-dom";
-import { Network } from "../Network";
 import DisconnectIcon from '@material-ui/icons/LinkOff';
 import { WalletDisconnectButton, WalletMultiButton } from '@solana/wallet-adapter-material-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
@@ -37,8 +36,6 @@ export const AppHeader = () => {
           <Link to="/" className={classes.hero}>
             {connected ? <CurrentUserBadge /> : <Typography variant="h6">Sosol</Typography>}
           </Link>
-          {/* <ConnectButton /> */}
-          {/* {process.env.NODE_ENV === "development" ? <Network /> : null} */}
           {wallet && <WalletDisconnectButton startIcon={<DisconnectIcon />} style={{ marginLeft: 8 }} />}
           <WalletMultiButton />
         </Toolbar>
