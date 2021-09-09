@@ -1,9 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import EventEmitter from "eventemitter3";
 import Wallet from "@project-serum/sol-wallet-adapter";
 import type { PublicKey } from "@solana/web3.js";
@@ -138,7 +133,7 @@ export function WalletProvider({ children = null as any }) {
             });
             if (address.hasPublicAddress) {
               const data = new TextEncoder().encode(address.user.nonce);
-              const signed = await wallet.sign(data, "utf8");              
+              const signed = await wallet.sign(data, "utf8");
               await setLogin({
                 variables: {
                   publicAddress: walletPublicKey,
@@ -154,8 +149,8 @@ export function WalletProvider({ children = null as any }) {
             }
             setConnected(true);
           } catch (error) {
-            console.log('wallet connect error:', error);
-            // toast.error(`Error connecting: ${error?.message}`);
+            console.log("wallet connect error:", error);
+            toast.error(`Error connecting: ${error}`);
             wallet.disconnect();
           }
         }
@@ -194,7 +189,7 @@ export function WalletProvider({ children = null as any }) {
         wallet,
         connected,
         provider,
-        setProviderUrl
+        setProviderUrl,
       }}
     >
       {children}

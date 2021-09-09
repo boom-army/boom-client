@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useConnection } from "./connection";
-import { useWallet } from "./wallet";
 import {
   AccountInfo,
   ConfirmedSignatureInfo,
@@ -13,7 +12,7 @@ import { TokenAccount } from "./../models";
 import { chunks } from "../utils/utils";
 import { EventEmitter } from "./../utils/eventEmitter";
 import { useUserAccounts } from "../hooks/useUserAccounts";
-import { WRAPPED_SOL_MINT, programIds } from "../utils/ids";
+import { useWallet } from "./wallet";
 
 const AccountsContext = React.createContext<any>(null);
 
@@ -390,7 +389,7 @@ export function AccountsProvider({ children = null as any }) {
         programIds().token,
         (info) => {
           // TODO: fix type in web3.js
-          const id = info.accountId as unknown as string;
+          const id = (info.accountId as unknown) as string;
           // TODO: do we need a better way to identify layout (maybe a enum identifing type?)
           if (info.accountInfo.data.length === AccountLayout.span) {
             const data = deserializeAccount(info.accountInfo.data);
