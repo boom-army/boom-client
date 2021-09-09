@@ -3,6 +3,7 @@ import { ENDPOINTS, useConnectionConfig } from "../../contexts/connection";
 import { useWallet } from "../../contexts/wallet";
 import {
   Button,
+  Box,
   Menu,
   MenuItem,
 } from "@material-ui/core";
@@ -25,7 +26,7 @@ export const Network = () => {
   };
 
   return (
-    <>
+    <Box ml={1}>
       <Button
         aria-controls="connect-network-button"
         aria-haspopup="true"
@@ -54,6 +55,6 @@ export const Network = () => {
             })
           : <MenuItem onClick={disconnect}>Disconnect</MenuItem>}
       </Menu>
-    </>
+    </Box>
   );
 };
