@@ -1,16 +1,16 @@
 import React from "react";
-import { CurrentUserBadge } from "../CurrentUserBadge";
+import { CurrentUser } from "../CurrentUser";
 import { Link } from "react-router-dom";
-import DisconnectIcon from '@material-ui/icons/LinkOff';
-import { WalletDisconnectButton, WalletMultiButton } from '@solana/wallet-adapter-material-ui';
-import { useWallet } from '@solana/wallet-adapter-react';
+import { formatNumber } from "../../utils/utils";
+import { useNativeAccount } from "../../contexts/accounts";
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import DisconnectIcon from "@material-ui/icons/LinkOff";
 import {
-  AppBar,
-  Container,
-  Toolbar,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
+  WalletDisconnectButton,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-material-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { AppBar, Box, Container, Toolbar, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -22,11 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
   hero: {
     flexGrow: 1,
-  }
+  },
 }));
 
 export const AppHeader = () => {
   const { connected, wallet } = useWallet();
+  const { account } = useNativeAccount();
   const classes = useStyles();
 
   const TopBar = (
@@ -34,9 +35,24 @@ export const AppHeader = () => {
       <Container maxWidth="lg">
         <Toolbar variant="dense" disableGutters={true}>
           <Link to="/" className={classes.hero}>
-            {connected ? <CurrentUserBadge /> : <Typography variant="h6">Sosol</Typography>}
+            <CurrentUser connected={connected} />
           </Link>
-          {wallet && <WalletDisconnectButton startIcon={<DisconnectIcon />} style={{ marginLeft: 8 }} />}
+          {wallet && (
+            <>
+              <Box mr={1}>
+                <p>
+                  {formatNumber.format(
+                    (account?.lamports || 0) / LAMPORTS_PER_SOL
+                  )}{" "}
+                  SOL
+                </p>
+              </Box>
+              <WalletDisconnectButton
+                startIcon={<DisconnectIcon />}
+                style={{ marginLeft: 8 }}
+              />
+            </>
+          )}
           <WalletMultiButton />
         </Toolbar>
       </Container>
