@@ -10,13 +10,12 @@ import Form from "../../styles/Form";
 import { displayError } from "../../utils";
 import CoverPhoto from "../../styles/CoverPhoto";
 import Avatar from "@material-ui/core/Avatar";
-import PersonIcon from "@material-ui/icons/Person";
 import { uploadImage } from "../../utils";
 import { PROFILE, EDIT_PROFILE } from "../../queries/profile";
 
 const EditProfileForm = ({ profile, history }) => {
   const [avatarState, setAvatar] = useState("");
-  const [coverPhotoState, setCoverPhoto] = useState(<PersonIcon />);
+  const [coverPhotoState, setCoverPhoto] = useState("");
 
   const firstname = useInput(profile && profile.firstname);
   const lastname = useInput(profile && profile.lastname);
