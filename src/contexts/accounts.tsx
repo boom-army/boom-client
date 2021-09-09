@@ -13,7 +13,7 @@ import { chunks } from "../utils/utils";
 import { EventEmitter } from "../utils/eventEmitter";
 import { useUserAccounts } from "../hooks/useUserAccounts";
 import { WRAPPED_SOL_MINT, programIds } from "../utils/ids";
-import { useWallet } from "./wallet";
+import { useWallet } from "./wallet-old";
 
 const AccountsContext = React.createContext<any>(null);
 

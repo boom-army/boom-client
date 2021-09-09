@@ -6,8 +6,8 @@ import {
   Menu,
   MenuItem,
 } from "@material-ui/core";
-import { useWallet } from "../../contexts/wallet";
-import { WALLET_PROVIDERS } from "../../contexts/wallet";
+import { useWallet } from "../../contexts/wallet-old";
+import { WALLET_PROVIDERS } from "../../contexts/wallet-old";
 import { shortenAddress } from "../../utils/utils";
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';

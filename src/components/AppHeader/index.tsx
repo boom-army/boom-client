@@ -3,7 +3,7 @@ import { ConnectButton } from "../ConnectButton";
 import { CurrentUserBadge } from "../CurrentUserBadge";
 import { Link } from "react-router-dom";
 import { Network } from "../Network";
-import { useWallet } from "../../contexts/wallet";
+import { useWallet } from "../../contexts/wallet-old";
 import {
   AppBar,
   Container,

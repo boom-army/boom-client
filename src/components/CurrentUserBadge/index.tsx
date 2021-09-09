@@ -1,5 +1,5 @@
 import React from "react";
-import { useWallet } from "../../contexts/wallet";
+import { useWallet } from "../../contexts/wallet-old";
 import { formatNumber } from "../../utils/utils";
 import { Identicon } from "../Identicon";
 import { useNativeAccount } from "../../contexts/accounts";

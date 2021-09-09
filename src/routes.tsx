@@ -8,7 +8,8 @@ import { Home, Suggestion, Nav, Explore, Notifications } from "./views";
 import { MarketProvider } from "./contexts/market";
 import { MasterTweet } from "./components/Tweet/MasterTweet";
 import { Profile } from "./components/Profile/Profile";
-import { WalletProvider } from "./contexts/wallet";
+// import { WalletProvider } from "./contexts/wallet";
+import { Wallet } from "./contexts/wallet";
 import { makeStyles, Container, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +35,7 @@ export function Routes() {
     <div className={classes.root}>
       <BrowserRouter basename={"/"}>
         <ConnectionProvider>
-          <WalletProvider>
+          <Wallet>
             <AccountsProvider>
               <MarketProvider>
                 <AppHeader />
@@ -76,7 +77,7 @@ export function Routes() {
                 </main>
               </MarketProvider>
             </AccountsProvider>
-          </WalletProvider>
+          </Wallet>
         </ConnectionProvider>
       </BrowserRouter>
     </div>

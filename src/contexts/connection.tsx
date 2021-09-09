@@ -10,7 +10,7 @@ import {
 } from "@solana/web3.js";
 import { ExplorerLink } from "../components/ExplorerLink";
 import { setProgramIds } from "../utils/ids";
-import { WalletAdapter } from "./wallet";
+import { WalletAdapter } from "./wallet-old";
 import { cache, getMultipleAccounts, MintParser } from "./accounts";
 import {
   TokenListProvider,
