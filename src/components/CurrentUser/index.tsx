@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { useMutation } from "@apollo/client";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
+import { FEED, USERS } from "../../queries/others";
 import base58 from 'bs58';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
 
   const [getNonce] = useMutation(PUBLIC_ADDRESS);
   const [setLogin] = useMutation(LOGIN_REGISTER, {
+    refetchQueries: [{ query: FEED }, { query: USERS }],
     onCompleted({ loginRegister }) {
       if (localStorage) {
         localStorage.setItem("token", loginRegister.token);
@@ -65,6 +67,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
               signature: base58.encode(signature),
             },
           });
+          window.location.reload();
           toast.success(
             `Wallet ${walletPublicKey} connected to account. Happy posting.`
           );

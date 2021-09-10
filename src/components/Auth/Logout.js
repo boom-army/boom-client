@@ -18,6 +18,7 @@ const Logout = () => {
 		setTimeout(() => {
 			window.location = "/";
 		}, 2100);
+		window.location.reload();
 		toast.success("You are logged out");
 	},
 	[disconnect]);
