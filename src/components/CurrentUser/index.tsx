@@ -9,9 +9,10 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  // icon: {
-  //   marginRight: theme.spacing(2),
-  // }
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
 }));
 
 export const CurrentUser = (props: { connected: boolean }) => {
@@ -40,9 +41,8 @@ export const CurrentUser = (props: { connected: boolean }) => {
         <Typography variant="h6">Sosol</Typography>
         {connected && (
           <>
-            <Avatar src={wallet?.icon} />
             <Button variant="contained" color="primary" onClick={handleClick}>
-              Login with {content}
+              Login with <Avatar src={wallet?.icon} className={classes.small} /> {content}
             </Button>
           </>
         )}
