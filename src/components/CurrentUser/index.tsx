@@ -8,8 +8,9 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
+import { HEALTH } from "../../queries/others";
 import base58 from 'bs58';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +26,9 @@ export const CurrentUser = (props: { connected: boolean }) => {
   const { wallet, publicKey, signMessage } = useWallet();
 
   const [getNonce] = useMutation(PUBLIC_ADDRESS);
+  const {data} = useQuery(HEALTH);
+  console.log('************', data);
+  
   const [setLogin] = useMutation(LOGIN_REGISTER, {
     onCompleted({ loginRegister }) {
       if (localStorage) {

@@ -76,3 +76,9 @@ export const MENTIONS = gql`
     }
   }
 `;
+
+export const HEALTH = gql`
+  query healthCheck {
+    healthCheck
+  }
+`;
