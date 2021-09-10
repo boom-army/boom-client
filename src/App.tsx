@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import Auth from "./components/Auth/Auth";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Routes } from "./routes";
 import { ThemeContext } from "./contexts/theme";
