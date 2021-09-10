@@ -3,7 +3,7 @@ import "./index.css";
 import { App } from "./App";
 import React from "react";
 import { client } from "./apollo/client";
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "./contexts/theme";
 import { render } from "react-dom";
 
