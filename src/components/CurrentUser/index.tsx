@@ -1,5 +1,6 @@
 import React, { useMemo, MouseEventHandler, useCallback } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { toast } from "react-toastify";
 import {
   Avatar,
   Button,
@@ -7,6 +8,9 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
+import { useMutation } from "@apollo/client";
+import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
+import base58 from 'bs58';
 
 const useStyles = makeStyles((theme) => ({
   small: {
@@ -18,22 +22,62 @@ const useStyles = makeStyles((theme) => ({
 export const CurrentUser = (props: { connected: boolean }) => {
   const { connected } = props;
   const classes = useStyles();
-  const { wallet, publicKey } = useWallet();
+  const { wallet, publicKey, signMessage } = useWallet();
 
-  const base58 = useMemo(() => publicKey?.toBase58(), [publicKey]);
+  const [getNonce] = useMutation(PUBLIC_ADDRESS);
+  const [setLogin] = useMutation(LOGIN_REGISTER, {
+    onCompleted({ loginRegister }) {
+      if (localStorage) {
+        localStorage.setItem("token", loginRegister.token);
+        localStorage.setItem("user", JSON.stringify(loginRegister.user));
+      }
+    },
+  });
+
+  const walletPublicKey = useMemo(() => publicKey?.toBase58(), [publicKey]);
   const content = useMemo(() => {
-    if (!wallet || !base58) return null;
-    return base58.slice(0, 4) + ".." + base58.slice(-4);
-  }, [wallet, base58]);
+    if (!wallet || !walletPublicKey) return null;
+    return walletPublicKey.slice(0, 4) + ".." + walletPublicKey.slice(-4);
+  }, [wallet, walletPublicKey]);
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(
-    (event) => {
+    async (event) => {
       console.log(event);
-    },
-    []
-  );
-
-  // should use SOL ◎ ?
+      if (!publicKey) {
+        toast.error('Wallet not connected!');
+        return;
+      }
+      if (!signMessage) {
+        toast.error('Wallet does not support message signing!');
+          return;
+      }
+      try {
+        const {
+          data: { address },
+        } = await getNonce({
+          variables: { publicAddress: publicKey },
+        });
+        if (address.hasPublicAddress) {
+          const data = new TextEncoder().encode(address.user.nonce);
+          const signature = await signMessage(data);
+          await setLogin({
+            variables: {
+              publicAddress: publicKey,
+              signature: base58.encode(signature),
+            },
+          });
+          toast.success(
+            `Wallet ${publicKey.toBase58()} connected to account. Happy posting.`
+          );
+        } else {
+          await setLogin({ variables: { publicAddress: walletPublicKey } });
+          toast.success(`Wallet ${walletPublicKey} created for account.`);
+        }
+      } catch (error) {
+        console.log("wallet connect error:", error);
+        toast.error(`Error connecting: ${error}`);
+      }
+    }, [publicKey, signMessage, getNonce, setLogin, walletPublicKey]);
 
   return (
     <>
