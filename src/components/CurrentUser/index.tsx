@@ -42,8 +42,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     async (event) => {
-      console.log(event);
-      if (!publicKey) {
+      if (!walletPublicKey) {
         toast.error('Wallet not connected!');
         return;
       }
@@ -55,19 +54,19 @@ export const CurrentUser = (props: { connected: boolean }) => {
         const {
           data: { address },
         } = await getNonce({
-          variables: { publicAddress: publicKey },
+          variables: { publicAddress: walletPublicKey },
         });
         if (address.hasPublicAddress) {
           const data = new TextEncoder().encode(address.user.nonce);
           const signature = await signMessage(data);
           await setLogin({
             variables: {
-              publicAddress: publicKey,
+              publicAddress: walletPublicKey,
               signature: base58.encode(signature),
             },
           });
           toast.success(
-            `Wallet ${publicKey.toBase58()} connected to account. Happy posting.`
+            `Wallet ${walletPublicKey} connected to account. Happy posting.`
           );
         } else {
           await setLogin({ variables: { publicAddress: walletPublicKey } });
@@ -77,7 +76,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
         console.log("wallet connect error:", error);
         toast.error(`Error connecting: ${error}`);
       }
-    }, [publicKey, signMessage, getNonce, setLogin, walletPublicKey]);
+    }, [signMessage, getNonce, setLogin, walletPublicKey]);
 
   return (
     <>
