@@ -2,13 +2,11 @@ import React from "react";
 import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { ConnectionProvider } from "./contexts/connection";
 import { EditProfile } from "./components/Profile/EditProfile";
 import { Home, Suggestion, Nav, Explore, Notifications } from "./views";
 import { MarketProvider } from "./contexts/market";
 import { MasterTweet } from "./components/Tweet/MasterTweet";
 import { Profile } from "./components/Profile/Profile";
-// import { WalletProvider } from "./contexts/wallet";
 import { Wallet } from "./contexts/wallet";
 import { makeStyles, Container, Grid } from "@material-ui/core";
 
@@ -34,7 +32,6 @@ export function Routes() {
   return (
     <div className={classes.root}>
       <BrowserRouter basename={"/"}>
-        <ConnectionProvider>
           <Wallet>
             <AccountsProvider>
               <MarketProvider>
@@ -78,7 +75,6 @@ export function Routes() {
               </MarketProvider>
             </AccountsProvider>
           </Wallet>
-        </ConnectionProvider>
       </BrowserRouter>
     </div>
   );
