@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { Emoji, Picker } from "emoji-mart";
 import { SmilePlusIcon } from "../Icons";
@@ -6,9 +6,9 @@ import { TOGGLE_REACTION } from "../../queries/tweet";
 import { ThemeContext } from "styled-components";
 import { displayError } from "../../utils";
 import { toast } from "react-toastify";
-import { useMutation } from '@apollo/client';
+import { useMutation } from "@apollo/client";
 import { FEED } from "../../queries/others";
-import { Loader } from '../Loader';
+import { Loader } from "../Loader";
 
 import "emoji-mart/css/emoji-mart.css";
 
@@ -71,6 +71,27 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
     refetchQueries: [{ query: FEED }],
+  });
+
+  const handleDocumentClick = (event) => {
+    let isEmojiClassFound = false;
+
+    event &&
+      event.path &&
+      event.path.forEach((elem) => {
+        if (elem && elem.classList) {
+          const data = elem.classList.value;
+          if (data.includes("emoji")) {
+            isEmojiClassFound = true;
+          }
+        }
+      }); // end
+    if (isEmojiClassFound === false && event.target.id !== "emojis-btn")
+      togglePicker(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleDocumentClick, false);
   });
 
   const handleReaction = async ({ emojiId, skin }) => {
