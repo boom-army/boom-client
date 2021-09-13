@@ -2,6 +2,7 @@ import React, { useMemo, MouseEventHandler, useCallback } from "react";
 import base58 from "bs58";
 import {
   Avatar,
+  Box,
   Button,
   Grid,
   Typography,
@@ -36,7 +37,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
         localStorage.setItem("user", JSON.stringify(loginRegister.user));
       }
     },
-  });  
+  });
 
   const walletPublicKey = useMemo(() => publicKey?.toBase58(), [publicKey]);
   const content = useMemo(() => {
@@ -93,9 +94,11 @@ export const CurrentUser = (props: { connected: boolean }) => {
         justifyContent="flex-start"
         alignItems="flex-start"
       >
-        <Link to="/">
-          <Typography variant="h6">Sosol</Typography>
-        </Link>
+        <Box mr={1}>
+          <Link to="/">
+            <Typography variant="h6">Sosol</Typography>
+          </Link>
+        </Box>
         {connected && !token && (
           <>
             <Button variant="contained" color="primary" onClick={handleClick}>

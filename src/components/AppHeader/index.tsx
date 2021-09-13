@@ -55,10 +55,12 @@ export const AppHeader = () => {
                     )}{" "}
                     SOL
                 </Box>
-                <WalletDisconnectButton
-                  startIcon={<DisconnectIcon />}
-                  style={{ marginLeft: 8 }}
-                />
+                <Box mr={1}>
+                  <WalletDisconnectButton
+                    startIcon={<DisconnectIcon />}
+                    style={{ marginLeft: 8 }}
+                  />
+                </Box>
               </>
             )}
             <WalletMultiButton />
