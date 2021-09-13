@@ -34,6 +34,10 @@ const Wrapper = styled.div`
   }
   .emoji-pick {
     margin-left: 8px;
+    cursor: pointer;
+  }
+  .emoji-pick svg path:hover {
+    fill: ${(props) => props.theme.accentColor};
   }
   .emoji-count {
     border-radius: 7px;
