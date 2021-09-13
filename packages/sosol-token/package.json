@@ -1,0 +1,16 @@
+{
+  "name": "sosol-token",
+  "version": "0.0.1",
+  "description": "The web3 interface for the sosol token contract",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "console.log('no tests configured!')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "null"
+  },
+  "author": "@harkl_",
+  "license": "Apache-2.0"
+}
