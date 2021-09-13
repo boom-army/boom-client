@@ -1,6 +1,5 @@
 import React from "react";
 import { CurrentUser } from "../CurrentUser";
-import { Link } from "react-router-dom";
 import { formatNumber } from "../../utils/utils";
 import { useNativeAccount } from "../../contexts/accounts";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
@@ -10,7 +9,14 @@ import {
   WalletMultiButton,
 } from "@solana/wallet-adapter-material-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { AppBar, Box, Container, Toolbar, makeStyles } from "@material-ui/core";
+import {
+  AppBar,
+  Box,
+  Container,
+  Grid,
+  Toolbar,
+  makeStyles,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -34,26 +40,29 @@ export const AppHeader = () => {
     <AppBar position="absolute" className={classes.appBar}>
       <Container maxWidth="lg">
         <Toolbar variant="dense" disableGutters={true}>
-          <Link to="/" className={classes.hero}>
-            <CurrentUser connected={connected} />
-          </Link>
-          {wallet && (
-            <>
-              <Box mr={1}>
-                <p>
-                  {formatNumber.format(
-                    (account?.lamports || 0) / LAMPORTS_PER_SOL
-                  )}{" "}
-                  SOL
-                </p>
-              </Box>
-              <WalletDisconnectButton
-                startIcon={<DisconnectIcon />}
-                style={{ marginLeft: 8 }}
-              />
-            </>
-          )}
-          <WalletMultiButton />
+          <CurrentUser connected={connected} />
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="flex-end"
+          >
+            {wallet && (
+              <>
+                <Box mr={1} mb={0.5}>
+                    {formatNumber.format(
+                      (account?.lamports || 0) / LAMPORTS_PER_SOL
+                    )}{" "}
+                    SOL
+                </Box>
+                <WalletDisconnectButton
+                  startIcon={<DisconnectIcon />}
+                  style={{ marginLeft: 8 }}
+                />
+              </>
+            )}
+            <WalletMultiButton />
+          </Grid>
         </Toolbar>
       </Container>
     </AppBar>

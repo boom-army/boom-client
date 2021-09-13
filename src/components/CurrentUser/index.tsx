@@ -1,17 +1,18 @@
 import React, { useMemo, MouseEventHandler, useCallback } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { toast } from "react-toastify";
+import base58 from "bs58";
 import {
   Avatar,
   Button,
   Grid,
-  makeStyles,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
-import { useMutation } from "@apollo/client";
-import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { FEED, USERS } from "../../queries/others";
-import base58 from 'bs58';
+import { Link } from "react-router-dom";
+import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
+import { toast } from "react-toastify";
+import { useMutation } from "@apollo/client";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const useStyles = makeStyles((theme) => ({
   small: {
@@ -24,6 +25,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
   const { connected } = props;
   const classes = useStyles();
   const { wallet, publicKey, signMessage } = useWallet();
+  const token = localStorage.getItem("token");
 
   const [getNonce] = useMutation(PUBLIC_ADDRESS);
   const [setLogin] = useMutation(LOGIN_REGISTER, {
@@ -34,7 +36,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
         localStorage.setItem("user", JSON.stringify(loginRegister.user));
       }
     },
-  });
+  });  
 
   const walletPublicKey = useMemo(() => publicKey?.toBase58(), [publicKey]);
   const content = useMemo(() => {
@@ -45,12 +47,12 @@ export const CurrentUser = (props: { connected: boolean }) => {
   const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     async (event) => {
       if (!walletPublicKey) {
-        toast.error('Wallet not connected!');
+        toast.error("Wallet not connected!");
         return;
       }
       if (!signMessage) {
-        toast.error('Wallet does not support message signing!');
-          return;
+        toast.error("Wallet does not support message signing!");
+        return;
       }
       try {
         const {
@@ -79,16 +81,26 @@ export const CurrentUser = (props: { connected: boolean }) => {
         console.log("wallet connect error:", error);
         toast.error(`Error connecting: ${error}`);
       }
-    }, [signMessage, getNonce, setLogin, walletPublicKey]);
+    },
+    [signMessage, getNonce, setLogin, walletPublicKey]
+  );
 
   return (
     <>
-      <Grid container direction="row">
-        <Typography variant="h6">Sosol</Typography>
-        {connected && (
+      <Grid
+        container
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+      >
+        <Link to="/">
+          <Typography variant="h6">Sosol</Typography>
+        </Link>
+        {connected && !token && (
           <>
             <Button variant="contained" color="primary" onClick={handleClick}>
-              Login with <Avatar src={wallet?.icon} className={classes.small} /> {content}
+              Login with <Avatar src={wallet?.icon} className={classes.small} />{" "}
+              {content}
             </Button>
           </>
         )}
