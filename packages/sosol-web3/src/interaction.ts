@@ -1,5 +1,5 @@
 import * as BufferLayout from "buffer-layout";
-import * as Layout from "./utils/layout";
+import * as Layout from "./utils";
 import {
   Connection,
   Keypair,

@@ -1,5 +1,5 @@
 {
-  "name": "sosol-token",
+  "name": "sosol-web3",
   "version": "0.0.1",
   "description": "The web3 interface for the sosol token contract",
   "main": "index.js",
@@ -12,5 +12,11 @@
     "url": "null"
   },
   "author": "@harkl_",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@solana/spl-token": "^0.1.8",
+    "@solana/web3.js": "^1.26.0",
+    "bn.js": "^5.2.0",
+    "buffer-layout": "^1.2.2"
+  }
 }
