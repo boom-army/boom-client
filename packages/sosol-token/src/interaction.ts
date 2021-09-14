@@ -1,13 +1,13 @@
 import * as BufferLayout from "buffer-layout";
 import * as Layout from "./utils/layout";
-import BN from "bn.js";
 import {
   Connection,
   Keypair,
   PublicKey,
   TransactionInstruction,
+  Transaction,
 } from "@solana/web3.js";
-import { Numberu64, signAndSendTransactionInstructions } from "./utils";
+import { Numberu64, sendAndConfirmTransaction } from "./utils";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 
 const URL = process.env.RPC_URL || "http://localhost:8899";
@@ -16,7 +16,7 @@ const SOSOL_PROGRAM_ID = new PublicKey(
 );
 
 let connection: Connection;
-async function getConnection(): Promise<Connection> {
+const getConnection = async(): Promise<Connection> => {
   if (connection) return connection;
 
   connection = new Connection(URL, "recent");
@@ -26,11 +26,38 @@ async function getConnection(): Promise<Connection> {
   return connection;
 }
 
+export const exeInteraction = async (
+  fromTokenAcc: PublicKey,
+  creatorTokenAcc: PublicKey,
+  storageTokenAcc: PublicKey,
+  ownerWallet: Keypair,
+  interactionFee: Numberu64
+) => {
+  connection = await getConnection();
+  const transaction = new Transaction();
+  const fromOwnerAcc = ownerWallet.publicKey;
+  const instruction = interactionInstruction(
+    fromTokenAcc,
+    creatorTokenAcc,
+    storageTokenAcc,
+    TOKEN_PROGRAM_ID,
+    fromOwnerAcc,
+    interactionFee
+  );
+  transaction.add(instruction);
+  await sendAndConfirmTransaction(
+    "interaction",
+    connection,
+    transaction,
+    ownerWallet
+  );
+};
+
 export const interactionInstruction = (
   fromTokenAcc: PublicKey,
   creatorTokenAcc: PublicKey,
   storageTokenAcc: PublicKey,
-  tokenProgram: PublicKey,
+  tokenProgram = TOKEN_PROGRAM_ID,
   fromOwnerAcc: PublicKey,
   interactionFee: Numberu64
 ): TransactionInstruction => {

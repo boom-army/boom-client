@@ -1,11 +1,5 @@
-import assert from 'assert';
-import {
-  Connection,
-  Keypair,
-  Transaction,
-  TransactionInstruction,
-} from '@solana/web3.js';
-import BN from 'bn.js';
+import BN from "bn.js";
+import assert from "assert";
 
 export class Numberu32 extends BN {
   /**
@@ -17,7 +11,7 @@ export class Numberu32 extends BN {
     if (b.length === 4) {
       return b;
     }
-    assert(b.length < 4, 'Numberu32 too large');
+    assert(b.length < 4, "Numberu32 too large");
 
     const zeroPad = Buffer.alloc(4);
     b.copy(zeroPad);
@@ -33,7 +27,7 @@ export class Numberu32 extends BN {
       [...buffer]
         .reverse()
         .map((i) => `00${i.toString(16)}`.slice(-2))
-        .join(''),
+        .join(""),
       16
     );
   }
@@ -49,7 +43,7 @@ export class Numberu64 extends BN {
     if (b.length === 8) {
       return b;
     }
-    assert(b.length < 8, 'Numberu64 too large');
+    assert(b.length < 8, "Numberu64 too large");
 
     const zeroPad = Buffer.alloc(8);
     b.copy(zeroPad);
@@ -65,22 +59,10 @@ export class Numberu64 extends BN {
       [...buffer]
         .reverse()
         .map((i) => `00${i.toString(16)}`.slice(-2))
-        .join(''),
+        .join(""),
       16
     );
   }
 }
 
-export const signAndSendTransactionInstructions = async (
-  // sign and send transaction
-  connection: Connection,
-  signers: Array<Keypair>,
-  feePayer: Keypair,
-  txInstructions: Array<TransactionInstruction>
-): Promise<string> => {
-  const tx = new Transaction();
-  tx.feePayer = feePayer.publicKey;
-  signers.push(feePayer);
-  tx.add(...txInstructions);
-  return await connection.sendTransaction(tx, signers);
-};
+
