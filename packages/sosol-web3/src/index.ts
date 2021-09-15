@@ -2,6 +2,14 @@ import { Address, web3, BN, Program } from "@project-serum/anchor";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import fs from "fs";
 
+/**
+ * Executes an on-chain interaction
+ * @param consumerTokenAcc token account of the consumer/payer
+ * @param creatorTokenAcc token account of the content creator
+ * @param storageTokenAcc token account of the content storage hosting provider
+ * @param consumerAcc the wallet/account of the consumer/payer
+ * @param interactionFee the fee to charge 100000000 = 1 sosol
+ */
 export const interactionInstruction = async (
   consumerTokenAcc: Address,
   creatorTokenAcc: Address,
