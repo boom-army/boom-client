@@ -107,6 +107,6 @@
     "url": "https://github.com/sosol-gmi/sosol-client"
   },
   "workspaces": [
-    "packages/*"
+    "packages/sosol-web3"
   ]
 }
