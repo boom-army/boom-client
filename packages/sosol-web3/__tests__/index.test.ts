@@ -1,46 +1,46 @@
+import fs from 'fs';
+import { createTokenAccount } from "@project-serum/common";
+import { Address, web3, Program } from "@project-serum/anchor";
 import { interactionInstruction } from "../src";
 
-const anchor = require("@project-serum/anchor");
-const serumCmn = require("@project-serum/common");
-
 describe("sosol-tests", () => {
-  let mint = new anchor.web3.PublicKey(
+  let mint = new web3.PublicKey(
     "soso1vCmdxwEZqU47M4NZ4MxZH19ppgqF1auG7dP3wz"
   );
-  let consumerAcc = new anchor.web3.PublicKey(
+  let consumerAcc = new web3.PublicKey(
     "CtjoSnmJHWuJiemKxpbFM1hb9CkMGBXEKDHmdoqmhh4z"
   );
-  let consumerTokenAcc = new anchor.web3.PublicKey(
+  let consumerTokenAcc = new web3.PublicKey(
     "DAGnJEaRqVVVrKCX2Su1z5e1ywVznjhqUSkGr2w9JRN4"
   );
-  let creatorAcc = anchor.web3.Keypair.generate();
-  let creatorTokenAcc = null;
-  let storageAcc = anchor.web3.Keypair.generate();
-  let storageTokenAcc = null;
+  let creatorAcc = web3.Keypair.generate();
+  let creatorTokenAcc: Address = "";
+  let storageAcc = web3.Keypair.generate();
+  let storageTokenAcc: Address = "";
 
   const idl = JSON.parse(
-    require("fs").readFileSync("../src/sosol.json", "utf8")
+    fs.readFileSync("src/sosol.json", "utf8")
   );
-  const programId = new anchor.web3.PublicKey(
+  const programId = new web3.PublicKey(
     "8Ea7iXE3UstZTtH8EfkvQRSHsn2KF76Z3wx4kbdtqrjN"
   );
-  const program = new anchor.Program(idl, programId);
+  const program = new Program(idl, programId);
 
-  it("Sets up initial test state", async () => {
-    creatorTokenAcc = await serumCmn.createTokenAccount(
+  beforeAll(async () => {
+    creatorTokenAcc = await createTokenAccount(
       program.provider,
       mint,
       creatorAcc.publicKey
     );
 
-    storageTokenAcc = await serumCmn.createTokenAccount(
+    storageTokenAcc = await createTokenAccount(
       program.provider,
       mint,
       storageAcc.publicKey
     );
   });
 
-  it("Actions an interaction", async () => {
+  test("Actions an interaction", async () => {
     const INTERACTION_FEE = 10000000;
 
     // console.log('*************', {

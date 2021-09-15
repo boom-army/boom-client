@@ -11,7 +11,7 @@ export const interactionInstruction = async (
 ) => {
   const idl = JSON.parse(fs.readFileSync("./sosol.json", "utf8"));
   const programId = new anchor.web3.PublicKey(
-    "8Ea7iXE3UstZTtH8EfkvQRSHsn2KF76Z3wx4kbdtqrjN"
+    "CQrhjjHtMrTnGGBSWbJaHESnUBqx7X3t9vfM6LqKqG9R"
   );
   const program = new anchor.Program(idl, programId);
 
