@@ -19,7 +19,7 @@ export const interactionInstruction = async (
 ) => {
   const idl = JSON.parse(fs.readFileSync("src/sosol.json", "utf8"));
   const programId = new web3.PublicKey(
-    "CQrhjjHtMrTnGGBSWbJaHESnUBqx7X3t9vfM6LqKqG9R"
+    "GUc7rVpFLGrnyFAodiYpFPBVHjL8ZbMudESGJAPC5MPs"
   );
   const program = new Program(idl, programId);
 

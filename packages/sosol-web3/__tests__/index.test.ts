@@ -3,16 +3,12 @@ import { createTokenAccount } from "@project-serum/common";
 import { Address, web3, Program } from "@project-serum/anchor";
 import { interactionInstruction } from "../src";
 
+require('dotenv').config();
+
 describe("sosol-tests", () => {
-  let mint = new web3.PublicKey(
-    "soso1vCmdxwEZqU47M4NZ4MxZH19ppgqF1auG7dP3wz"
-  );
-  let consumerAcc = new web3.PublicKey(
-    "CtjoSnmJHWuJiemKxpbFM1hb9CkMGBXEKDHmdoqmhh4z"
-  );
-  let consumerTokenAcc = new web3.PublicKey(
-    "DAGnJEaRqVVVrKCX2Su1z5e1ywVznjhqUSkGr2w9JRN4"
-  );
+  let mint = new web3.PublicKey(process.env.MINT_KEY as string);
+  let consumerAcc = new web3.PublicKey(process.env.CONSUMER_ACC as string);
+  let consumerTokenAcc = new web3.PublicKey(process.env.CONSUMER_TOKEN_ACC as string);
   let creatorAcc = web3.Keypair.generate();
   let creatorTokenAcc: Address = "";
   let storageAcc = web3.Keypair.generate();
@@ -21,9 +17,7 @@ describe("sosol-tests", () => {
   const idl = JSON.parse(
     fs.readFileSync("src/sosol.json", "utf8")
   );
-  const programId = new web3.PublicKey(
-    "8Ea7iXE3UstZTtH8EfkvQRSHsn2KF76Z3wx4kbdtqrjN"
-  );
+  const programId = new web3.PublicKey(process.env.PROGRAM_ID as string);
   const program = new Program(idl, programId);
 
   beforeAll(async () => {
@@ -41,15 +35,7 @@ describe("sosol-tests", () => {
   });
 
   test("Actions an interaction", async () => {
-    const INTERACTION_FEE = 10000000;
-
-    // console.log('*************', {
-    //   from: god.toBase58(),
-    //   to: creatorTokenAcc.toBase58(),
-    //   toStorageAccount: storageTokenAcc.toBase58(),
-    //   tokenProgram: TOKEN_PROGRAM_ID.toBase58(),
-    //   programId: program.programId.toBase58(),
-    // });
+    const INTERACTION_FEE = 1000000000; // 1 token
 
     await interactionInstruction(
       consumerTokenAcc,
