@@ -9,18 +9,17 @@ import { clusterApiUrl } from "@solana/web3.js";
 import {
   getLedgerWallet,
   getPhantomWallet,
-  getSlopeWallet,
+  // getSlopeWallet,
   getSolflareWallet,
-  getSolletWallet,
+  // getSolletWallet,
   // getTorusWallet,
 } from "@solana/wallet-adapter-wallets";
 import { useSnackbar } from "notistack";
 
 export const Wallet: FC = ({ children = null as any }) => {
-  const network =
-    process.env.NODE_ENV === "development"
-      ? WalletAdapterNetwork.Devnet
-      : WalletAdapterNetwork.Mainnet;
+  let network = process.env.NODE_ENV === "development"
+    ? WalletAdapterNetwork.Devnet
+    : WalletAdapterNetwork.Mainnet;
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
   // @solana/wallet-adapter-wallets imports all the adapters but supports tree shaking --
@@ -28,18 +27,18 @@ export const Wallet: FC = ({ children = null as any }) => {
   const wallets = useMemo(
     () => [
       getPhantomWallet(),
-      getSolflareWallet(),
-      getSlopeWallet(),
+      // getSolflareWallet(),
+      // getSlopeWallet(),
       // getTorusWallet({
       //   options: {
       //     clientId:
       //       "BOM5Cl7PXgE9Ylq1Z1tqzhpydY0RVr8k90QQ85N7AKI5QGSrr9iDC-3rvmy0K_hF0JfpLMiXoDhta68JwcxS1LQ",
       //   },
       // }),
-      getLedgerWallet(),
-      getSolletWallet({ network }),
+      // getLedgerWallet(),
+      // getSolletWallet({ network }),
     ],
-    [network]
+    [/*network*/]
   );
 
   const { enqueueSnackbar } = useSnackbar();

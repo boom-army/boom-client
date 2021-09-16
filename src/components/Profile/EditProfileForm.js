@@ -1,22 +1,24 @@
 import React, { useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
-import { withRouter } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { toast } from "react-toastify";
-import useInput from "../../hooks/useInput";
-import Input from "../Input";
-import Button from "../../styles/Button";
-import Form from "../../styles/Form";
-import { displayError } from "../../utils";
-import CoverPhoto from "../../styles/CoverPhoto";
 import Avatar from "@material-ui/core/Avatar";
-import { uploadImage } from "../../utils";
+import Button from "../../styles/Button";
+import CoverPhoto from "../../styles/CoverPhoto";
+import Form from "../../styles/Form";
+import Input from "../Input";
+import TextareaAutosize from "react-textarea-autosize";
+import useInput from "../../hooks/useInput";
 import { PROFILE, EDIT_PROFILE } from "../../queries/profile";
+import { displayError } from "../../utils";
+import { toast } from "react-toastify";
+import { uploadImage } from "../../utils";
+import { useMutation } from "@apollo/client";
+import { useWallet } from '@solana/wallet-adapter-react';
+import { withRouter } from "react-router-dom";
 
 const EditProfileForm = ({ profile, history }) => {
   const [avatarState, setAvatar] = useState("");
   const [coverPhotoState, setCoverPhoto] = useState("");
 
+  const handle = useInput(profile && profile.handle);
   const firstname = useInput(profile && profile.firstname);
   const lastname = useInput(profile && profile.lastname);
   const location = useInput(profile && profile.location);
@@ -26,11 +28,11 @@ const EditProfileForm = ({ profile, history }) => {
   const bio = useInput(profile && profile.bio);
   const coverPhoto = useInput(profile && profile.coverPhoto);
 
-  const handle = profile && profile.handle;
-
   const [editProfileMutation, { loading }] = useMutation(EDIT_PROFILE, {
     refetchQueries: [{ query: PROFILE, variables: { handle } }],
   });
+
+  const { disconnect } = useWallet();
 
   const handleEditProfile = async (e) => {
     e.preventDefault();
@@ -42,6 +44,7 @@ const EditProfileForm = ({ profile, history }) => {
     try {
       await editProfileMutation({
         variables: {
+          handle: handle.value,
           firstname: firstname.value,
           lastname: lastname.value,
           dob: dob.value,
@@ -53,12 +56,19 @@ const EditProfileForm = ({ profile, history }) => {
         },
       });
 
-      toast.success("Your profile has been updated 🥳");
+      localStorage.clear();
+      disconnect().catch(() => {
+        // Silently catch because any errors are caught by the context `onError` handler
+      });
+      history.push("/");
+      window.location.reload();
+
+      toast.success("Your profile has been updated 🥳. Please login again to refresh your session.");
     } catch (err) {
       return displayError(err);
     }
 
-    [firstname, lastname, dob, location, website, avatar, coverPhoto].map(
+    [handle, firstname, lastname, dob, location, website, avatar, coverPhoto].map(
       (field) => field.setValue("")
     );
 
@@ -101,6 +111,13 @@ const EditProfileForm = ({ profile, history }) => {
           onChange={handleAvatar}
         />
       </div>
+
+      <Input
+        lg={true}
+        text="Handle"
+        value={handle.value}
+        onChange={handle.onChange}
+      />
 
       <Input
         lg={true}

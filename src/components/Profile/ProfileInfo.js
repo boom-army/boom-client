@@ -30,6 +30,11 @@ const Wrapper = styled.div`
       font-weight: bold;
     }
 
+    span.wallet {
+      margin-top: 0.1rem;
+      color: ${(props) => props.theme.secondaryColor};
+    }
+
     span.handle {
       margin-top: 0.1rem;
       color: ${(props) => props.theme.secondaryColor};
@@ -105,6 +110,7 @@ const ProfileInfo = ({ profile }) => {
     followingCount,
     handle,
     fullname,
+    publicAddress,
   } = profile;
 
   return (
@@ -148,6 +154,8 @@ const ProfileInfo = ({ profile }) => {
 
         <div className="profile-name-handle">
           <span className="fullname">{fullname}</span>
+          <br />
+          <span className="wallet"><strong>wallet: </strong>{publicAddress}</span>
           <br />
           <span className="handle">{`@${handle}`}</span>
         </div>

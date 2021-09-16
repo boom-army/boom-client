@@ -4,6 +4,7 @@ export const PROFILE = gql`
   query profile($handle: String!) {
     profile(handle: $handle) {
       id
+      publicAddress
       handle
       firstname
       lastname
@@ -54,6 +55,7 @@ export const PROFILE = gql`
 
 export const EDIT_PROFILE = gql`
   mutation editProfile(
+    $handle: String
     $firstname: String
     $lastname: String
     $location: String
@@ -64,6 +66,7 @@ export const EDIT_PROFILE = gql`
     $coverPhoto: String
   ) {
     editProfile(
+      handle: $handle
       firstname: $firstname
       lastname: $lastname
       location: $location
