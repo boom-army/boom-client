@@ -42,6 +42,7 @@ export const TWEET = gql`
       mentions
       user {
         id
+        publicAddress
         fullname
         handle
         avatar

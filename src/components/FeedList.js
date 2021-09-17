@@ -16,10 +16,10 @@ export const FeedList = () => {
   if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;
 
-  // // logout the user if removed from db
-  // if(data === undefined) {
-  // 	localStorage.clear();
-  // }
+  // logout the user if removed from db
+  if(data === undefined) {
+  	localStorage.clear();
+  }
 
   return (
     <Wrapper>

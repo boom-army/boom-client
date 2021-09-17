@@ -16,6 +16,7 @@ export const FEED = gql`
       }
       user {
         id
+        publicAddress
         avatar
         handle
         fullname

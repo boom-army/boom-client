@@ -1,14 +1,18 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { Emoji, Picker } from "emoji-mart";
+import { FEED } from "../../queries/others";
+import { Loader } from "../Loader";
 import { SmilePlusIcon } from "../Icons";
 import { TOGGLE_REACTION } from "../../queries/tweet";
 import { ThemeContext } from "styled-components";
 import { displayError } from "../../utils";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
-import { FEED } from "../../queries/others";
-import { Loader } from "../Loader";
+import { interactionInstruction } from "../../utils/og-sosol-web3";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
+import { PublicKey, Transaction } from "@solana/web3.js";
 
 import "emoji-mart/css/emoji-mart.css";
 
@@ -36,7 +40,7 @@ const Wrapper = styled.div`
     margin-left: 8px;
     cursor: pointer;
   }
-  .emoji-pick svg path:hover {
+  .emoji-pick:hover svg path {
     fill: ${(props) => props.theme.accentColor};
   }
   .emoji-count {
@@ -68,6 +72,9 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
   const [picker, togglePicker] = useState(false);
   const [emoji, setEmoji] = useState({});
 
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
+
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
     refetchQueries: [{ query: FEED }],
@@ -94,15 +101,32 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
     document.addEventListener("click", handleDocumentClick, false);
   });
 
-  const handleReaction = async ({ emojiId, skin }) => {
+  const handleReaction = useCallback(async ({ emojiId, skin }) => {
     try {
-      await setEmoji({ emojiId, skin });
-      await toggleReactionMutation();
+      if (!publicKey) throw new WalletNotConnectedError();
+
+      const transaction = new Transaction();
+      
+      transaction.add(
+        await interactionInstruction(
+          publicKey,
+          new PublicKey("H7YMWzXh7JUJ7bqfiqAkn2nXDCUD4LoZpwhNNrwsgeAv"),
+          new PublicKey("FUj13QZHBbgy1B3vXKw151pVvDB1GDxJ2QQGHSxqp2J7"),
+          10000
+        )
+      );
+
+      const signature = await sendTransaction(transaction, connection);
+
+      await connection.confirmTransaction(signature, 'processed');
+      // await setEmoji({ emojiId, skin });
+      // await toggleReactionMutation();
       toast.success("Reaction updated");
     } catch (err) {
+      console.log(err);
       return displayError(err);
     }
-  };
+  }, [publicKey, sendTransaction, connection]);
 
   const ReactionList = ({ reactions }) => {
     return reactions
