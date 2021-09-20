@@ -116,14 +116,14 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
       );
       console.log('***********', signature);
 
-      // await setEmoji({ emojiId, skin });
-      // await toggleReactionMutation();
+      await setEmoji({ emojiId, skin });
+      await toggleReactionMutation();
       toast.success(`Transaction complete: ${signature}`);
     } catch (err) {
       console.log(err);
       return displayError(err);
     }
-  }, [connection, program, wallet]);
+  }, [program, wallet, toggleReactionMutation]);
 
   const ReactionList = ({ reactions }) => {
     return reactions
