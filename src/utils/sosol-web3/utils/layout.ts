@@ -31,6 +31,7 @@ export const rustString = (property: string = 'string'): any => {
 
   rsl.decode = (buffer: Buffer, offset: number) => {
     const data = _decode(buffer, offset);
+    // @ts-ignore
     return data.chars.toString('utf8');
   };
 
