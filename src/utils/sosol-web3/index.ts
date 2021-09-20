@@ -1,14 +1,33 @@
-import { web3, BN, Program } from "@project-serum/anchor";
+import { web3, BN, Program, Provider } from "@project-serum/anchor";
+import { AnchorWallet } from "@solana/wallet-adapter-react";
 import {
   TOKEN_PROGRAM_ID,
   ASSOCIATED_TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import { PublicKeyInitData, PublicKey } from "@solana/web3.js";
+import { PublicKeyInitData, PublicKey, Connection, TransactionSignature } from "@solana/web3.js";
 import { idl } from "./sosol";
 
 const SOSOL_MINT: PublicKey = new PublicKey(
   process.env.REACT_APP_SOSOL_MINT as PublicKeyInitData
 );
+
+export const loadAnchor = async (wallet: AnchorWallet, setProgram: any) => {
+  const programId = new PublicKey(
+    process.env.REACT_APP_PROGRAM_ID as PublicKeyInitData
+  );
+  const connection = new Connection("http://127.0.0.1:8899", {
+    commitment: "processed",
+  });
+
+  const provider = new Provider(connection, wallet, {
+    commitment: "processed",
+  });
+
+  const newProgram = new Program(idl, programId, provider);
+
+  console.log(newProgram, "Is Anchor Working?");
+  setProgram(newProgram);
+};
 
 const findAssociatedTokenAddress = async (
   walletAddress: PublicKey,
@@ -27,6 +46,7 @@ const findAssociatedTokenAddress = async (
 
 /**
  * Executes an on-chain interaction
+ * @param program sosol program derived from loadAnchor()
  * @param consumerTokenAcc token account of the consumer/payer
  * @param creatorTokenAcc token account of the content creator
  * @param storageTokenAcc token account of the content storage hosting provider
@@ -34,21 +54,14 @@ const findAssociatedTokenAddress = async (
  * @param interactionFee the fee to charge 100000000 = 1 sosol
  */
 export const interactionInstruction = async (
+  program: Program,
   consumerAcc: PublicKey,
   creatorAcc: String,
   storageAcc: String,
   interactionFee: any
-) => {  
-  const programId = new web3.PublicKey(
-    process.env.REACT_APP_PROGRAM_ID as PublicKeyInitData
-  );  
-  const program = new Program(idl, programId);
-  console.log('***************', programId.toBase58());
-
+): Promise<TransactionSignature> => {
   const creator = new web3.PublicKey(creatorAcc);
   const storage = new web3.PublicKey(storageAcc);
-
-  console.log("1:", consumerAcc, creator, storage);
 
   const consumerTokenAcc = await findAssociatedTokenAddress(
     consumerAcc,
@@ -57,9 +70,10 @@ export const interactionInstruction = async (
   const creatorTokenAcc = await findAssociatedTokenAddress(creator, SOSOL_MINT);
   const storageTokenAcc = await findAssociatedTokenAddress(storage, SOSOL_MINT);
 
-  console.log( "2:", consumerTokenAcc.toBase58(), creatorTokenAcc.toBase58(), storageTokenAcc.toBase58() );
+  console.log( "accounts:", consumerAcc.toBase58() ,consumerTokenAcc.toBase58(), creatorTokenAcc.toBase58(), storageTokenAcc.toBase58() );
+  if (!program.provider) throw new Error("Program provider missing - try again");
 
-  await program.rpc.interaction(new BN(interactionFee), {
+  return await program.rpc.interaction(new BN(interactionFee), {
     accounts: {
       from: consumerTokenAcc,
       to: creatorTokenAcc,

@@ -9,10 +9,10 @@ import { ThemeContext } from "styled-components";
 import { displayError } from "../../utils";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
-import { interactionInstruction } from "../../utils/sosol-web3";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { interactionInstruction, loadAnchor } from "../../utils/sosol-web3";
+import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
-import { PublicKey, Transaction } from "@solana/web3.js";
+import { PublicKey } from "@solana/web3.js";
 
 import "emoji-mart/css/emoji-mart.css";
 
@@ -71,9 +71,10 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
   const theme = useContext(ThemeContext);
   const [picker, togglePicker] = useState(false);
   const [emoji, setEmoji] = useState({});
+  const [program, setProgram] = useState({});
 
   const { connection } = useConnection();
-  const { publicKey, sendTransaction } = useWallet();
+  const wallet = useAnchorWallet();
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
@@ -103,31 +104,26 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
 
   const handleReaction = useCallback(async ({ emojiId, skin }) => {
     try {
-      if (!publicKey) throw new WalletNotConnectedError();
+      if (!wallet.publicKey) throw new WalletNotConnectedError();
 
-      const transaction = new Transaction();
-      
-      transaction.add(
-        await interactionInstruction(
-          publicKey,
-          new PublicKey("H7YMWzXh7JUJ7bqfiqAkn2nXDCUD4LoZpwhNNrwsgeAv"),
-          new PublicKey("FUj13QZHBbgy1B3vXKw151pVvDB1GDxJ2QQGHSxqp2J7"),
-          10000
-        )
+      await loadAnchor(wallet, setProgram);
+      const signature = await interactionInstruction(
+        program,
+        wallet.publicKey,
+        new PublicKey("H7YMWzXh7JUJ7bqfiqAkn2nXDCUD4LoZpwhNNrwsgeAv"),
+        new PublicKey("FUj13QZHBbgy1B3vXKw151pVvDB1GDxJ2QQGHSxqp2J7"),
+        1000000000
       );
-
-      const signature = await sendTransaction(transaction, connection);
       console.log('***********', signature);
 
-      await connection.confirmTransaction(signature, 'processed');
       // await setEmoji({ emojiId, skin });
       // await toggleReactionMutation();
-      toast.success("Reaction updated");
+      toast.success(`Transaction complete: ${signature}`);
     } catch (err) {
       console.log(err);
       return displayError(err);
     }
-  }, [publicKey, sendTransaction, connection]);
+  }, [connection, program, wallet]);
 
   const ReactionList = ({ reactions }) => {
     return reactions
