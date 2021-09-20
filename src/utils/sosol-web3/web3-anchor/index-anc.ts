@@ -59,13 +59,13 @@ export const interactionInstruction = async (
 
   console.log( "2:", consumerTokenAcc.toBase58(), creatorTokenAcc.toBase58(), storageTokenAcc.toBase58() );
 
-  // await program.rpc.interaction(new BN(interactionFee), {
-  //   accounts: {
-  //     from: consumerTokenAcc,
-  //     to: creatorTokenAcc,
-  //     toStorageAccount: storageTokenAcc,
-  //     owner: consumerAcc,
-  //     tokenProgram: TOKEN_PROGRAM_ID,
-  //   },
-  // });
+  await program.rpc.interaction(new BN(interactionFee), {
+    accounts: {
+      from: consumerTokenAcc,
+      to: creatorTokenAcc,
+      toStorageAccount: storageTokenAcc,
+      owner: consumerAcc,
+      tokenProgram: TOKEN_PROGRAM_ID,
+    },
+  });
 };

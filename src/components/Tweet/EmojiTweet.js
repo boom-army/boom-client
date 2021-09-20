@@ -9,7 +9,7 @@ import { ThemeContext } from "styled-components";
 import { displayError } from "../../utils";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
-import { interactionInstruction } from "../../utils/og-sosol-web3";
+import { interactionInstruction } from "../../utils/sosol-web3";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
 import { PublicKey, Transaction } from "@solana/web3.js";
@@ -117,6 +117,7 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
       );
 
       const signature = await sendTransaction(transaction, connection);
+      console.log('***********', signature);
 
       await connection.confirmTransaction(signature, 'processed');
       // await setEmoji({ emojiId, skin });
