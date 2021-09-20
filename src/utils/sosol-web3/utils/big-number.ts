@@ -54,10 +54,10 @@ export class Numberu64 extends BN {
   /**
    * Construct a Numberu64 from Buffer representation
    */
-  // @ts-ignore
-  static fromBuffer(buffer): BN {
+  static fromBuffer(buffer: string | any[]): BN {
     assert(buffer.length === 8, `Invalid buffer length: ${buffer.length}`);
     return new BN(
+      // @ts-ignore
       [...buffer]
         .reverse()
         .map((i) => `00${i.toString(16)}`.slice(-2))
