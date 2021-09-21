@@ -8,37 +8,20 @@ import { MarketProvider } from "./contexts/market";
 import { MasterTweet } from "./components/Tweet/MasterTweet";
 import { Profile } from "./components/Profile/Profile";
 import { Wallet } from "./contexts/wallet";
-import { makeStyles, Container, Grid } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-  },
-  container: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-}));
+import { Container, Grid } from "@mui/material";
 
 export function Routes() {
-  const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div>
       <BrowserRouter basename={"/"}>
         <Wallet>
           <AccountsProvider>
             <MarketProvider>
               <AppHeader />
-              <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
+              <main>
+                <div/>
+                <Container maxWidth="lg">
                   <Grid container>
                     <Grid direction="row" xs={2}>
                       <Nav />

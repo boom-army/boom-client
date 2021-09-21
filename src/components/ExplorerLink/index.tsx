@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { shortenAddress } from "../../utils/utils";
 import { PublicKey } from "@solana/web3.js";
 

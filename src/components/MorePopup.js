@@ -5,7 +5,7 @@ import Popup from "reactjs-popup";
 import ToggleTheme from "./ToggleTheme";
 import Logout from "./Auth/Logout";
 import ChangeColor from "./ChangeColor";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 const Wrapper = styled.div`
   .btn {

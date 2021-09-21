@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
+import Avatar from "@mui/material/Avatar";
 import Button from "../../styles/Button";
-import PersonIcon from "@material-ui/icons/Person";
+import PersonIcon from "@mui/icons-material/Person";
 import TextareaAutosize from "react-textarea-autosize";
 import TweetFile from "../../styles/TweetFile";
 import styled from "styled-components";

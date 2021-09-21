@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import Avatar from "@material-ui/core/Avatar";
-import PersonIcon from '@material-ui/icons/Person';
+import Avatar from "@mui/material/Avatar";
+import PersonIcon from '@mui/icons-material/Person';
 import DeleteComment from "./DeleteComment";
 import { setDate } from "../../utils";
 

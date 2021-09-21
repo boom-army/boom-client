@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
+import Avatar from "@mui/material/Avatar";
 import Button from "../../styles/Button";
 import CoverPhoto from "../../styles/CoverPhoto";
 import Form from "../../styles/Form";

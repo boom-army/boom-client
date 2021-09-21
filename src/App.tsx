@@ -7,7 +7,7 @@ import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import { ToastContainer } from "react-toastify";
 // import { USER_LOGGED_IN } from "./queries/client";
 // import { useQuery } from "@apollo/client";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline } from "@mui/material";
 import { SnackbarProvider } from 'notistack';
 
 export const App = () => {

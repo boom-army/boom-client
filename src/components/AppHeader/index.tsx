@@ -3,7 +3,7 @@ import { CurrentUser } from "../CurrentUser";
 import { formatNumber } from "../../utils/utils";
 import { useNativeAccount } from "../../contexts/accounts";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
-import DisconnectIcon from "@material-ui/icons/LinkOff";
+import DisconnectIcon from "@mui/icons-material/LinkOff";
 import {
   WalletDisconnectButton,
   WalletMultiButton,
@@ -15,29 +15,14 @@ import {
   Container,
   Grid,
   Toolbar,
-  makeStyles,
-} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  hero: {
-    flexGrow: 1,
-  },
-}));
+} from "@mui/material";
 
 export const AppHeader = () => {
   const { connected, wallet } = useWallet();
   const { account } = useNativeAccount();
-  const classes = useStyles();
 
   const TopBar = (
-    <AppBar position="absolute" className={classes.appBar}>
+    <AppBar position="absolute">
       <Container maxWidth="lg">
         <Toolbar variant="dense" disableGutters={true}>
           <CurrentUser connected={connected} />

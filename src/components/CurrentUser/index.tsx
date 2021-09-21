@@ -6,8 +6,7 @@ import {
   Button,
   Grid,
   Typography,
-  makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
 import { FEED, USERS } from "../../queries/others";
 import { Link } from "react-router-dom";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
@@ -15,16 +14,8 @@ import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
 import { useWallet } from "@solana/wallet-adapter-react";
 
-const useStyles = makeStyles((theme) => ({
-  small: {
-    width: theme.spacing(3),
-    height: theme.spacing(3),
-  },
-}));
-
 export const CurrentUser = (props: { connected: boolean }) => {
   const { connected } = props;
-  const classes = useStyles();
   const { wallet, publicKey, signMessage } = useWallet();
   const token = localStorage.getItem("token");
 
@@ -102,7 +93,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
         {connected && !token && (
           <>
             <Button variant="contained" color="primary" onClick={handleClick}>
-              Login with <Avatar src={wallet?.icon} className={classes.small} />{" "}
+              Login with <Avatar src={wallet?.icon} />{" "}
               {content}
             </Button>
           </>

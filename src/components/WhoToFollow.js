@@ -1,13 +1,13 @@
 import React from "react";
+import Avatar from "@mui/material/Avatar";
+import Follow from "./Profile/Follow";
+import PersonIcon from "@mui/icons-material/Person";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
 import { Loader } from "./Loader";
-import Follow from "./Profile/Follow";
 import { USERS } from "../queries/others";
-import Button from "../styles/Button";
-import Avatar from "@material-ui/core/Avatar";
-import PersonIcon from "@material-ui/icons/Person";
+import { useQuery } from "@apollo/client";
+import { Button } from "@mui/material";
 
 const Wrapper = styled.div`
   margin-left: 0.4rem;
@@ -19,42 +19,8 @@ const Wrapper = styled.div`
   }
 `;
 
-const UserWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 1rem;
-  border-bottom: 1px solid ${(props) => props.theme.tertiaryColor};
-  font-size: 0.9rem;
-
-  button {
-    align-self: flex-start;
-  }
-
-  .avatar-handle,
-  .avatar {
-    display: flex;
-
-    a {
-      margin-right: 1rem;
-    }
-  }
-
-  .handle-fullname {
-    display: flex;
-    flex-direction: column;
-
-    span:first-child {
-      font-weight: 500;
-    }
-
-    span.secondary {
-      color: ${(props) => props.theme.secondaryColor};
-    }
-  }
-`;
-
 export const User = ({ user }) => (
-  <UserWrapper>
+  <>
     <div className="avatar-handle">
       <Link to={`/${user && user.handle}`}>
         <Avatar src={user && user.avatar ? user.avatar : <PersonIcon />} />
@@ -68,16 +34,12 @@ export const User = ({ user }) => (
       </div>
     </div>
 
-    {user && !user.isSelf ? (
+    {/* {user && !user.isSelf ? (
       <Follow sm id={user && user.id} isFollowing={user && user.isFollowing} />
-    ) : (
-      <Link to="/settings/profile">
-        <Button sm outline className="action-btn">
-          Edit Profile
-        </Button>
-      </Link>
-    )}
-  </UserWrapper>
+    ) : ( */}
+      <Button variant="contained" component={Link} to="/settings/profile">Edit Profile</Button>
+    {/* )} */}
+  </>
 );
 
 export const WhoToFollow = () => {
