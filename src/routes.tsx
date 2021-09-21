@@ -13,14 +13,12 @@ import { Container, Grid } from "@mui/material";
 export function Routes() {
 
   return (
-    <div>
+    <>
       <BrowserRouter basename={"/"}>
         <Wallet>
           <AccountsProvider>
             <MarketProvider>
               <AppHeader />
-              <main>
-                <div/>
                 <Container maxWidth="lg">
                   <Grid container>
                     <Grid direction="row" xs={2}>
@@ -54,11 +52,10 @@ export function Routes() {
                     </Grid>
                   </Grid>
                 </Container>
-              </main>
             </MarketProvider>
           </AccountsProvider>
         </Wallet>
       </BrowserRouter>
-    </div>
+    </>
   );
 }
