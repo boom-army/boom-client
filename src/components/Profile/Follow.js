@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import Button from "../../styles/Button";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import { FEED, USERS } from "../../queries/others";
 import { FOLLOW, UNFOLLOW } from "../../queries/follow";
+import { Box, Link } from "@mui/material";
 import { displayError } from "../../utils";
 import { useMutation } from '@apollo/client';
 
@@ -37,14 +39,11 @@ const Follow = ({ isFollowing, id, sm = false, relative = false }) => {
   };
 
   return (
-    <Button
-      className="action-btn"
-      onClick={handleFollow}
-      variant="outlined"
-      color="primary"
-    >
-      {followState ? "Following" : "Follow"}
-    </Button>
+    <Box>
+      <Link onClick={handleFollow} >
+        {followState ? <PersonRemoveIcon /> : <PersonAddIcon />}
+      </Link>
+    </Box>
   );
 };
 

@@ -1,42 +1,63 @@
 import React from "react";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Avatar from "@mui/material/Avatar";
 import Follow from "./Profile/Follow";
 import PersonIcon from "@mui/icons-material/Person";
+import {
+  Box,
+  Grid,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { Loader } from "./Loader";
 import { USERS } from "../queries/others";
+import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
-import { Button, Grid, Stack, Typography } from "@mui/material";
+
+const Demo = styled("div")(({ theme }) => ({
+  // backgroundColor: theme.palette.background.paper,
+}));
 
 export const User = ({ user }) => (
-  <Grid container spacing={2}>
-    <Grid item xs={8}>
-      <Link to={`/${user && user.handle}`}>
-      <Stack direction="row">
-        <Avatar
-          sx={{ width: 24, height: 24 }}
-          src={user && user.avatar ? user.avatar : <PersonIcon />}
-        />
-        <Typography variant="body2">{user && user.fullname}</Typography>
-        </Stack>
-      </Link>
-      <Typography variant="body2">@{user && user.handle}</Typography>
+  <Box sx={{ flexGrow: 1 }}>
+    <Grid item xs={12}>
+      <Demo>
+        <List dense={false}>
+          <ListItem
+            secondaryAction={
+              <IconButton edge="end" aria-label="delete">
+                {user && !user.isSelf ? (
+                  <Follow
+                    sm
+                    id={user && user.id}
+                    isFollowing={user && user.isFollowing}
+                  />
+                ) : (
+                  <Link to="/settings/profile">
+                    <AccountBoxIcon />
+                  </Link>
+                )}
+              </IconButton>
+            }
+          >
+            <ListItemAvatar>
+              <Avatar
+                src={user && user.avatar ? user.avatar : <PersonIcon />}
+              />
+            </ListItemAvatar>
+            <ListItemText
+              primary={user && user.fullname}
+              secondary={`@${user && user.handle}`}
+            />
+          </ListItem>
+        </List>
+      </Demo>
     </Grid>
-    <Grid item xs={4}>
-      {/* {user && !user.isSelf ? (
-      <Follow sm id={user && user.id} isFollowing={user && user.isFollowing} />
-    ) : ( */}
-      <Button
-        variant="contained"
-        component={Link}
-        to="/settings/profile"
-        size="small"
-      >
-        Edit
-      </Button>
-      {/* )} */}
-    </Grid>
-  </Grid>
+  </Box>
 );
 
 export const WhoToFollow = () => {
@@ -45,16 +66,5 @@ export const WhoToFollow = () => {
   if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;
 
-  return (
-    <Stack
-      direction="column"
-      justifyContent="space-evenly"
-      alignItems="flex-start"
-      spacing={2}
-    >
-      {data.users.map((user) => (
-        <User key={user.id} user={user} />
-      ))}
-    </Stack>
-  );
+  return data.users.map((user) => <User key={user.id} user={user} />);
 };

@@ -4,8 +4,7 @@ import styled from "styled-components";
 import CoverPhoto from "../../styles/CoverPhoto";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
-import { Button, Grid } from "@mui/material";
-// import Button from "../../styles/Button";
+import { Button, Box, Grid } from "@mui/material";
 import Follow from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
 import CustomResponse from "../CustomResponse";
@@ -126,84 +125,80 @@ const ProfileInfo = ({ profile }) => {
         <Avatar className="avatar" src={avatar ? avatar : <PersonIcon />} />
       </Grid>
 
-      <Grid
-        container
-        direction="row"
-        className="row"
-        justifyContent="space-between"
-        alignItems="flex-start"
-      >
+      <Grid container direction="row" className="row" alignItems="flex-start">
         {isSelf ? (
-          <Button
-            className="action-btn"
-            component={Link}
-            to="/settings/profile"
-            variant="outlined"
-            color="primary"
-          >
-            Edit Profile
-          </Button>
+          <Box pl={3}>
+            <Button
+              component={Link}
+              to="/settings/profile"
+              variant="outlined"
+              color="primary"
+              size="small"
+            >
+              Edit Profile
+            </Button>
+          </Box>
         ) : (
-          <Follow
-            relative
-            className="action-btn"
-            isFollowing={isFollowing}
-            id={id}
-          />
+          <Box p={2} pl={4}>
+            <Follow isFollowing={isFollowing} id={id} />
+          </Box>
         )}
-
+      </Grid>
+      <Grid container direction="row" className="row" alignItems="flex-start">
         <div className="profile-name-handle">
           <span className="fullname">{fullname}</span>
           <br />
-          <span className="wallet"><strong>wallet: </strong>{publicAddress}</span>
+          <span className="wallet">
+            <strong>wallet: </strong>
+            {publicAddress}
+          </span>
           <br />
           <span className="handle">{`@${handle}`}</span>
         </div>
+      </Grid>
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
+        className="profile-info"
+      >
+        <p className="bio">{bio}</p>
 
-        </Grid>
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-between"
-          alignItems="flex-start"
-          className="profile-info"
-        >
-          <p className="bio">{bio}</p>
+        {!location && !website && !dob ? null : (
+          <div className="loc-dob-web">
+            {location ? (
+              <span>
+                <LocationIcon /> {location}
+              </span>
+            ) : null}
 
-          {!location && !website && !dob ? null : (
-            <div className="loc-dob-web">
-              {location ? (
-                <span>
-                  <LocationIcon /> {location}
-                </span>
-              ) : null}
+            {website ? (
+              <span>
+                <LinkIcon /> {website}
+              </span>
+            ) : null}
 
-              {website ? (
-                <span>
-                  <LinkIcon /> {website}
-                </span>
-              ) : null}
-
-              {dob ? (
-                <span>
-                  <DobIcon />
-                  {dob}
-                </span>
-              ) : null}
-            </div>
-          )}
-
-          <div className="follow-following">
-            <span>
-              {followersCount ? `${followersCount} followers` : "No followers"}
-            </span>
-            <span>
-              {followingCount
-                ? `${followingCount} following`
-                : "Not following anyone"}
-            </span>
+            {dob ? (
+              <span>
+                <DobIcon />
+                {dob}
+              </span>
+            ) : null}
           </div>
-        </Grid>
+        )}
+
+        <div className="follow-following">
+          <span>
+            {followersCount ? `${followersCount} followers` : "No followers"}
+          </span>
+          <span>
+            {followingCount
+              ? `${followingCount} following`
+              : "Not following anyone"}
+          </span>
+        </div>
+      </Grid>
     </Wrapper>
   );
 };
