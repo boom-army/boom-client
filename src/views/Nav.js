@@ -1,13 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@apollo/client";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { MorePopUp } from "../components/MorePopup";
 import { PROFILE } from "../queries/profile";
-import {
-  Logo,
-  // BmIcon,
-} from "../components/Icons";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -42,6 +38,7 @@ const Wrapper = styled.nav`
   }
 
   ul {
+    margin-top: 1.3rem;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -113,11 +110,6 @@ export const Nav = () => {
   return (
     <Wrapper>
       <ul>
-        <Link to="/">
-          <h3 className="logo">
-            <Logo />
-          </h3>
-        </Link>
         <li>
           <NavLink exact activeClassName="selected" to="/">
             <HomeIcon /> <span>Home</span>
