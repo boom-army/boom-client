@@ -16,7 +16,7 @@
     "localnet:reset": "solana-test-validator --reset",
     "localnet:logs": "solana logs -u localhost",
     "predeploy": "git pull --ff-only && yarn && yarn build",
-    "deploy": "gh-pages -d build",
+    "deploy:prod": "bash ./scripts/prod-deploy.sh",
     "deploy:ar": "arweave deploy-dir build --key-file ",
     "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\""
   },
