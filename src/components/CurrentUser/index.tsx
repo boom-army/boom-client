@@ -1,12 +1,6 @@
 import React, { useMemo, MouseEventHandler, useCallback } from "react";
 import base58 from "bs58";
-import {
-  Avatar,
-  Box,
-  Button,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
 import { FEED, USERS } from "../../queries/others";
 import { Link } from "react-router-dom";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
@@ -92,9 +86,13 @@ export const CurrentUser = (props: { connected: boolean }) => {
         </Box>
         {connected && !token && (
           <>
-            <Button variant="contained" color="primary" onClick={handleClick}>
-              Login with <Avatar src={wallet?.icon} />{" "}
-              {content}
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={handleClick}
+            >
+              Login with <Avatar src={wallet?.icon} /> {content}
             </Button>
           </>
         )}
