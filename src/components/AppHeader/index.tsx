@@ -18,15 +18,14 @@ export const AppHeader = () => {
   const TopBar = (
     <AppBar
       position="absolute"
-      color="default"
-      elevation={0}
       sx={{
         position: "relative",
         borderBottom: (t) => `1px solid ${t.palette.divider}`,
+        bgcolor: 'primary.main',
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar variant="dense" disableGutters={true}>
+        <Toolbar variant="dense">
           <CurrentUser connected={connected} />
           <Grid
             container
