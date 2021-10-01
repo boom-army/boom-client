@@ -92,7 +92,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
               color="primary"
               onClick={handleClick}
             >
-              Login with <Avatar src={wallet?.icon} /> {content}
+              Login with <Avatar sx={{ width: 24, height: 24 }} src={wallet?.icon} /> {content}
             </Button>
           </>
         )}
