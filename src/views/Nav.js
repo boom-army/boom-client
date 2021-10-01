@@ -123,7 +123,7 @@ export const Nav = () => {
         <li>
           <NavLink activeClassName="selected " to="/notifications">
             <NotificationsIcon /> <span>Notifications</span>
-            {data?.profile?.newMentionsCount !== 0 && (
+            {data?.profile?.newMentionsCount >= 1 && (
               <span className="badge">{data?.profile?.newMentionsCount}</span>
             )}
           </NavLink>
