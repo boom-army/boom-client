@@ -111,10 +111,10 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
         program,
         wallet.publicKey,
         new PublicKey("H7YMWzXh7JUJ7bqfiqAkn2nXDCUD4LoZpwhNNrwsgeAv"),
-        new PublicKey("FUj13QZHBbgy1B3vXKw151pVvDB1GDxJ2QQGHSxqp2J7"),
+        new PublicKey(process.env.REACT_APP_CONTENT_HOST),
         1000000000
       );
-      console.log('***********', signature);
+      // console.log('***********', signature);
 
       await setEmoji({ emojiId, skin });
       await toggleReactionMutation();
