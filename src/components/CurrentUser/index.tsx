@@ -87,7 +87,6 @@ export const CurrentUser = (props: { connected: boolean }) => {
         {connected && !token && (
           <>
             <Button
-              size="small"
               variant="contained"
               color="primary"
               onClick={handleClick}
