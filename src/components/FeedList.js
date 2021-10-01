@@ -14,7 +14,7 @@ export const FeedList = () => {
   const { loading, error, data } = useQuery(FEED);
 
   if (loading) return <Loader />;
-  if (error) return <p>Error :(</p>;
+  if (error) return <CustomResponse text={error.message} />;
 
   // logout the user if removed from db
   if(data === undefined) {

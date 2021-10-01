@@ -64,7 +64,7 @@ export const WhoToFollow = () => {
   const { loading, error, data } = useQuery(USERS);
 
   if (loading) return <Loader />;
-  if (error) return <p>Error :(</p>;
+  if (error) return null;
 
   return data.users.map((user) => <User key={user.id} user={user} />);
 };
