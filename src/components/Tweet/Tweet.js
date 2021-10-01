@@ -155,7 +155,7 @@ export const Tweet = ({ tweet }) => {
 
         <div className="tweet-stats">
           <span>
-            <EmojiTweet tweetId={id} reactions={reactions} />
+            <EmojiTweet tweetId={id} userPubKey={user?.publicAddress} reactions={reactions} />
           </span>
 
           <div>

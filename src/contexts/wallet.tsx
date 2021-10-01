@@ -3,24 +3,21 @@ import {
   ConnectionProvider,
   WalletProvider,
 } from "@solana/wallet-adapter-react";
-import { WalletAdapterNetwork, WalletError } from "@solana/wallet-adapter-base";
+import { WalletError } from "@solana/wallet-adapter-base";
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 import { clusterApiUrl } from "@solana/web3.js";
 import {
-  getLedgerWallet,
+  // getLedgerWallet,
   getPhantomWallet,
   // getSlopeWallet,
-  getSolflareWallet,
+  // getSolflareWallet,
   // getSolletWallet,
   // getTorusWallet,
 } from "@solana/wallet-adapter-wallets";
 import { useSnackbar } from "notistack";
 
 export const Wallet: FC = ({ children = null as any }) => {
-  let network = process.env.NODE_ENV === "development"
-    ? WalletAdapterNetwork.Devnet
-    : WalletAdapterNetwork.Mainnet;
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const endpoint = process.env.REACT_APP_RPC_URL as string;
 
   // @solana/wallet-adapter-wallets imports all the adapters but supports tree shaking --
   // Only the wallets you want to support will be compiled into your application

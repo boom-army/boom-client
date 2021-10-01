@@ -4,7 +4,12 @@ import {
   TOKEN_PROGRAM_ID,
   ASSOCIATED_TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import { PublicKeyInitData, PublicKey, Connection, TransactionSignature } from "@solana/web3.js";
+import {
+  PublicKeyInitData,
+  PublicKey,
+  Connection,
+  TransactionSignature,
+} from "@solana/web3.js";
 import { idl } from "./sosol";
 
 const SOSOL_MINT: PublicKey = new PublicKey(
@@ -15,17 +20,16 @@ export const loadAnchor = async (wallet: AnchorWallet, setProgram: any) => {
   const programId = new PublicKey(
     process.env.REACT_APP_PROGRAM_ID as PublicKeyInitData
   );
-  const connection = new Connection("http://127.0.0.1:8899", {
+  const connection = new Connection(process.env.REACT_APP_RPC_URL as string, {
     commitment: "processed",
   });
-
   const provider = new Provider(connection, wallet, {
     commitment: "processed",
   });
 
   const newProgram = new Program(idl, programId, provider);
 
-  console.log(newProgram, "Is Anchor Working?");
+  // console.log(newProgram, "Is Anchor Working?");
   setProgram(newProgram);
 };
 
@@ -54,6 +58,7 @@ const findAssociatedTokenAddress = async (
  * @param interactionFee the fee to charge 100000000 = 1 sosol
  */
 export const interactionInstruction = async (
+  connection: Connection,
   program: Program,
   consumerAcc: PublicKey,
   creatorAcc: String,
@@ -67,11 +72,14 @@ export const interactionInstruction = async (
     consumerAcc,
     SOSOL_MINT
   );
+  const consumerTokenAccBalance = await connection.getTokenAccountBalance(consumerTokenAcc);
+  if (consumerTokenAccBalance?.value?.amount < interactionFee) throw new Error("Not enough $sosol for this transaction");
+
   const creatorTokenAcc = await findAssociatedTokenAddress(creator, SOSOL_MINT);
   const storageTokenAcc = await findAssociatedTokenAddress(storage, SOSOL_MINT);
 
-  console.log( "accounts:", consumerAcc.toBase58() ,consumerTokenAcc.toBase58(), creatorTokenAcc.toBase58(), storageTokenAcc.toBase58() );
-  if (!program.provider) throw new Error("Program provider missing - try again");
+  if (!program.provider)
+    throw new Error("Program provider missing - try again");
 
   return await program.rpc.interaction(new BN(interactionFee), {
     accounts: {

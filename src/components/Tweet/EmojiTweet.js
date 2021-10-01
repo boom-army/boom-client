@@ -67,7 +67,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export const EmojiTweet = ({ tweetId, reactions }) => {
+export const EmojiTweet = ({ tweetId, userPubKey, reactions }) => {
   const theme = useContext(ThemeContext);
   const [picker, togglePicker] = useState(false);
   const [emoji, setEmoji] = useState({});
@@ -108,13 +108,13 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
 
       await loadAnchor(wallet, setProgram);
       const signature = await interactionInstruction(
+        connection,
         program,
         wallet.publicKey,
-        new PublicKey("H7YMWzXh7JUJ7bqfiqAkn2nXDCUD4LoZpwhNNrwsgeAv"),
+        new PublicKey(userPubKey),
         new PublicKey(process.env.REACT_APP_CONTENT_HOST),
         1000000000
       );
-      // console.log('***********', signature);
 
       await setEmoji({ emojiId, skin });
       await toggleReactionMutation();
@@ -123,7 +123,7 @@ export const EmojiTweet = ({ tweetId, reactions }) => {
       console.log(err);
       return displayError(err);
     }
-  }, [program, wallet, toggleReactionMutation]);
+  }, [program, wallet, toggleReactionMutation, connection, userPubKey]);
 
   const ReactionList = ({ reactions }) => {
     return reactions
