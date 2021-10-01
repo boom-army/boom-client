@@ -113,7 +113,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions }) => {
         wallet.publicKey,
         new PublicKey(userPubKey),
         new PublicKey(process.env.REACT_APP_CONTENT_HOST),
-        1000000000
+        100000000 // 0.1 SSL
       );
 
       await setEmoji({ emojiId, skin });
