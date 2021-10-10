@@ -81,7 +81,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
       >
         <Box mr={1}>
           <Link to="/">
-            <Typography variant="h6">Sosol</Typography>
+            <Typography variant="h6">Sosol α</Typography>
           </Link>
         </Box>
         {connected && !token && (
