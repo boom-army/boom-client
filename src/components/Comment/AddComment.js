@@ -11,6 +11,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { TWEET } from "../../queries/tweet";
 import { ADD_COMMENT } from "../../queries/comment";
 import { USER } from "../../queries/client";
+import { Box } from "@mui/system";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -95,7 +96,9 @@ const AddComment = ({ id }) => {
 
   return (
     <Wrapper>
-      <Avatar src={data?.me?.avatar ? data?.me?.avatar : <PersonIcon />} />
+      <Box mr={2}>
+        <Avatar src={data?.me?.avatar ? data?.me?.avatar : <PersonIcon />} />
+      </Box>
 
       <form onSubmit={handleAddComment}>
         <div className="add-comment">

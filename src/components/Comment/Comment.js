@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import PersonIcon from '@mui/icons-material/Person';
 import DeleteComment from "./DeleteComment";
 import { setDate } from "../../utils";
+import { Box } from "@mui/system";
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,7 +64,9 @@ const Comment = ({ comment }) => {
 
   return (
     <Wrapper>
-      <Avatar src={user && user.avatar ? user.avatar : <PersonIcon />} />
+      <Box mr={2}>
+        <Avatar src={user && user.avatar ? user.avatar : <PersonIcon />} />
+      </Box>
       <div className="comment-info">
         <div className="comment-info-user">
           <span className="username">{user && user.fullname}</span>
