@@ -13,6 +13,7 @@ const Wrapper = styled.nav`
   border-right: 1px solid ${(props) => props.theme.tertiaryColor};
   font-weight: 500;
   padding: 0 1em;
+  min-height: 100vh;
 
   .badge {
     padding: 2px 7px;

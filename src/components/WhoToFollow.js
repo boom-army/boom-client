@@ -19,7 +19,7 @@ import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
 
 const Demo = styled("div")(({ theme }) => ({
-  // backgroundColor: theme.palette.background.paper,
+  backgroundColor: '#313d48',
 }));
 
 export const User = ({ user }) => (
