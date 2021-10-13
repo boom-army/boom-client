@@ -14,3 +14,7 @@ NB - you'll need [**sosol** tokens](https://explorer.solana.com/address/soso1vCm
 - Copy `.env.example` to `.env`
 - `npm i`
 - `npm start`
+
+## Project board
+
+Theres a [project board](https://github.com/orgs/sosol-gmi/projects/1) with tasks that are open for dev, paid in **sosol**. Contact @harkl_ on Twitter if you're interested in being added with read access to complete tasks.
