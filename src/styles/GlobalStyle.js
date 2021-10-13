@@ -31,6 +31,11 @@ export default createGlobalStyle`
 		background: ${(props) => props.theme.accentColor};
 	}
 
+	.MuiPaper-root {
+		color: ${(props) => props.theme.primaryColor};
+		background-color: ${(props) => props.theme.background};
+	}
+
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: normal;
 	}

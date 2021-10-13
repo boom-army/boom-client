@@ -21,7 +21,6 @@ export const AppHeader = () => {
       sx={{
         position: "relative",
         borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        bgcolor: 'primary.main',
       }}
     >
       <Container maxWidth="lg">
