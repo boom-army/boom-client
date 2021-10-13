@@ -8,6 +8,7 @@ NB - you'll need [**sosol** tokens](https://explorer.solana.com/address/soso1vCm
 
 - Run the [sosol back-end](https://github.com/sosol-gmi/sosol-graphql-api)
 - Setup the [Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools)
+- Set you config to test-net `solana config set --url https://api.testnet.solana.com`
 - Setup [Phantom](https://phantom.app) and create a wallet for your **sosol** account
 - Copy `.env.example` to `.env`
 - `npm i`
