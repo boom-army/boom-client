@@ -10,6 +10,7 @@ NB - you'll need [**sosol** tokens](https://explorer.solana.com/address/soso1vCm
 - Setup the [Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools)
 - Set you config to test-net `solana config set --url https://api.testnet.solana.com`
 - Setup [Phantom](https://phantom.app) and create a wallet for your **sosol** account
+- Make sure you have some testnet [**sosol** tokens](https://explorer.solana.com/address/soso1vCmdxwEZqU47M4NZ4MxZH19ppgqF1auG7dP3wz?cluster=testnet)
 - Copy `.env.example` to `.env`
 - `npm i`
 - `npm start`
