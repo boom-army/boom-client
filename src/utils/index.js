@@ -14,26 +14,19 @@ export const sortFn = (a, b) => {
 };
 
 export const setDate = (date) => {
-  date = new Date(date/1000);
+  date = new Date(date / 1000);
   const newDate = new Date(0);
   newDate.setUTCSeconds(date);
   return newDate;
 };
 
 export const uploadImage = async (file, signedUrl) => {
-  const formData = new FormData();
-  formData.append("image", file);
-  formData.append("name", file.name);
-
   let toastId = null;
-  const data = await axios.request({
-    method: "PUT",
-    url: signedUrl,
-    data: formData,
+  const data = await axios.put(signedUrl, file, {
     headers: {
       "Content-Type": file.type,
-      "x-amz-acl": "public-read",
-      "Content-Disposition": "inline",
+      // "x-amz-acl": "public-read",
+      // "Content-Disposition": "inline",
     },
     onUploadProgress: (p) => {
       const progress = p.loaded / p.total;

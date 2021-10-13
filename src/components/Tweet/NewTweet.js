@@ -107,8 +107,8 @@ export const NewTweet = () => {
         },
       });
       const signedUrl = data.signFileUrl;
-      const imageUrl = await uploadImage(file, signedUrl);
-      console.log(imageUrl);
+      const imageData = await uploadImage(file, signedUrl);
+      const imageUrl = imageData.config.url.split('?')[0];
       setTweetFiles([...tweetFiles, imageUrl]);
     } catch (error) {
       console.log(error);
