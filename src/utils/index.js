@@ -25,7 +25,7 @@ export const uploadImage = async (file, signedUrl) => {
   const data = await axios.put(signedUrl, file, {
     headers: {
       "Content-Type": file.type,
-      // "x-amz-acl": "public-read",
+      "x-amz-acl": "public-read",
       // "Content-Disposition": "inline",
     },
     onUploadProgress: (p) => {
