@@ -14,7 +14,7 @@ export const USER = gql`
       id
       avatar
       handle
-      fullname
+      consumerName
     }
   }
 `;

@@ -10,7 +10,7 @@ export const ADD_COMMENT = gql`
         id
         handle
         avatar
-        fullname
+        consumerName
       }
       createdAt
     }

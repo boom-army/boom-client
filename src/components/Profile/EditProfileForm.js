@@ -20,8 +20,7 @@ const EditProfileForm = ({ profile, history }) => {
   const [coverPhotoState, setCoverPhoto] = useState("");
 
   const handle = useInput(profile && profile.handle);
-  const firstname = useInput(profile && profile.firstname);
-  const lastname = useInput(profile && profile.lastname);
+  const consumerName = useInput(profile && profile.consumerName);
   const location = useInput(profile && profile.location);
   const website = useInput(profile && profile.website);
   const dob = useInput(profile && profile.dob);
@@ -39,16 +38,15 @@ const EditProfileForm = ({ profile, history }) => {
   const handleEditProfile = async (e) => {
     e.preventDefault();
 
-    if (!firstname.value || !lastname.value) {
-      return toast.error("You cannot leaveout firstname/lastname empty");
+    if (!consumerName.value) {
+      return toast.error("You cannot leave name empty");
     }
 
     try {
       await editProfileMutation({
         variables: {
           handle: handle.value,
-          firstname: firstname.value,
-          lastname: lastname.value,
+          consumerName: consumerName.value,
           dob: dob.value,
           bio: bio.value,
           location: location.value,
@@ -70,13 +68,13 @@ const EditProfileForm = ({ profile, history }) => {
       return displayError(err);
     }
 
-    [handle, firstname, lastname, dob, location, website, avatar, coverPhoto].map(
+    [handle, consumerName, dob, location, website, avatar, coverPhoto].map(
       (field) => field.setValue("")
     );
 
     history.push(`/${handle}`);
   };
-  
+
   const handleCoverPhoto = async (e) => {
     try {
       const file = e.target.files[0];
@@ -151,15 +149,9 @@ const EditProfileForm = ({ profile, history }) => {
 
       <Input
         lg={true}
-        text="First Name"
-        value={firstname.value}
-        onChange={firstname.onChange}
-      />
-      <Input
-        lg={true}
-        text="Last Name"
-        value={lastname.value}
-        onChange={lastname.onChange}
+        text="Name"
+        value={consumerName.value}
+        onChange={consumerName.onChange}
       />
       <div className="bio-wrapper">
         <label className="bio" htmlFor="bio">

@@ -43,7 +43,7 @@ export const TWEET = gql`
       user {
         id
         publicAddress
-        fullname
+        consumerName
         handle
         avatar
       }
@@ -67,7 +67,7 @@ export const TWEET = gql`
         isCommentMine
         user {
           id
-          fullname
+          consumerName
           handle
           avatar
         }

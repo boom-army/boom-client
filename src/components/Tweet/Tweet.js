@@ -134,7 +134,7 @@ export const Tweet = ({ tweet }) => {
       <div className="tweet-info">
         <div className="tweet-info-user">
           <Link to={`/${handle}`}>
-            <span className="username">{user && user.fullname}</span>
+            <span className="username">{user && user.consumerName}</span>
             <span className="secondary">{`@${handle}`}</span>
           </Link>
           &nbsp;&nbsp;

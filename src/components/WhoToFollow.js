@@ -50,7 +50,7 @@ export const User = ({ user }) => (
               />
             </ListItemAvatar>
             <ListItemText
-              primary={user && user.fullname}
+              primary={user && user.consumerName}
               secondary={`@${user && user.handle}`}
             />
           </ListItem>

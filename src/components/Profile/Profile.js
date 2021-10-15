@@ -35,7 +35,7 @@ export const Profile = () => {
   return (
     <Wrapper>
       {/* <div className="profile-top">
-        <span>{data && data.profile && data.profile.fullname}</span>
+        <span>{data && data.profile && data.profile.consumerName}</span>
         <span className="tweetsCount">
           {data && data.profile && data.profile.tweetsCount
             ? `${data.profile.tweetsCount} Tweets`

@@ -6,9 +6,8 @@ export const PROFILE = gql`
       id
       publicAddress
       handle
-      firstname
-      lastname
-      fullname
+      consumerName
+      consumerName
       avatar
       coverPhoto
       dob
@@ -28,7 +27,7 @@ export const PROFILE = gql`
         isTweetMine
         user {
           id
-          fullname
+          consumerName
           handle
           avatar
         }
@@ -56,8 +55,7 @@ export const PROFILE = gql`
 export const EDIT_PROFILE = gql`
   mutation editProfile(
     $handle: String
-    $firstname: String
-    $lastname: String
+    $consumerName: String
     $location: String
     $dob: String
     $bio: String
@@ -67,8 +65,7 @@ export const EDIT_PROFILE = gql`
   ) {
     editProfile(
       handle: $handle
-      firstname: $firstname
-      lastname: $lastname
+      consumerName: $consumerName
       location: $location
       dob: $dob
       bio: $bio

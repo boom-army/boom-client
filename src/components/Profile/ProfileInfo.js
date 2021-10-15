@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   .profile-name-handle {
     margin-left: 1.4rem;
 
-    span.fullname {
+    span.consumerName {
       font-weight: bold;
     }
 
@@ -108,7 +108,7 @@ const ProfileInfo = ({ profile }) => {
     followersCount,
     followingCount,
     handle,
-    fullname,
+    consumerName,
     publicAddress,
   } = profile;
 
@@ -146,7 +146,7 @@ const ProfileInfo = ({ profile }) => {
       </Grid>
       <Grid container direction="row" className="row" alignItems="flex-start">
         <div className="profile-name-handle">
-          <span className="fullname">{fullname}</span>
+          <span className="consumerName">{consumerName}</span>
           <br />
           <span className="wallet">
             <strong>wallet: </strong>

@@ -19,7 +19,7 @@ export const FEED = gql`
         publicAddress
         avatar
         handle
-        fullname
+        consumerName
       }
       reactions {
         id
@@ -40,7 +40,7 @@ export const USERS = gql`
       handle
       isFollowing
       isSelf
-      fullname
+      consumerName
       avatar
     }
   }
@@ -71,7 +71,7 @@ export const MENTIONS = gql`
         id
         avatar
         handle
-        fullname
+        consumerName
       }
       createdAt
     }

@@ -5,7 +5,7 @@ export const SEARCH_BY_USER = gql`
     searchByUser(term: $term) {
       id
       handle
-      fullname
+      consumerName
       avatar
       followingCount
       followersCount
@@ -34,7 +34,7 @@ export const SEARCH_BY_TAG = gql`
         id
         handle
         avatar
-        fullname
+        consumerName
       }
       createdAt
     }
@@ -66,7 +66,7 @@ export const SEARCH_BY_TWEET = gql`
         id
         handle
         avatar
-        fullname
+        consumerName
       }
       createdAt
     }

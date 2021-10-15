@@ -69,7 +69,7 @@ const Comment = ({ comment }) => {
       </Box>
       <div className="comment-info">
         <div className="comment-info-user">
-          <span className="username">{user && user.fullname}</span>
+          <span className="username">{user && user.consumerName}</span>
           <Link to={`/${handle}`}>
             <span className="secondary">{`@${handle}`}</span>
             <span className="secondary">
