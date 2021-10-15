@@ -13,6 +13,7 @@ import { uploadImage } from "../../utils";
 import { useMutation } from "@apollo/client";
 import { useWallet } from '@solana/wallet-adapter-react';
 import { withRouter } from "react-router-dom";
+import { SIGN_FILE } from "../../queries/files";
 
 const EditProfileForm = ({ profile, history }) => {
   const [avatarState, setAvatar] = useState("");
@@ -31,6 +32,7 @@ const EditProfileForm = ({ profile, history }) => {
   const [editProfileMutation, { loading }] = useMutation(EDIT_PROFILE, {
     refetchQueries: [{ query: PROFILE, variables: { handle } }],
   });
+  const [signFileMutation] = useMutation(SIGN_FILE);
 
   const { disconnect } = useWallet();
 
@@ -80,7 +82,21 @@ const EditProfileForm = ({ profile, history }) => {
   };
 
   const handleAvatar = async (e) => {
-    setAvatar(await uploadImage(e.target.files[0]));
+    try {
+      const file = e.target.files[0];
+      const { data } = await signFileMutation({
+        variables: {
+          file: file.name,
+          type: file.type,
+        },
+      });
+      const signedUrl = data.signFileUrl;
+      const imageData = await uploadImage(file, signedUrl);
+      const imageUrl = imageData.config.url.split('?')[0];
+      setAvatar(imageUrl);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
