@@ -76,9 +76,23 @@ const EditProfileForm = ({ profile, history }) => {
 
     history.push(`/${handle}`);
   };
-
+  
   const handleCoverPhoto = async (e) => {
-    setCoverPhoto(await uploadImage(e.target.files[0]));
+    try {
+      const file = e.target.files[0];
+      const { data } = await signFileMutation({
+        variables: {
+          file: file.name,
+          type: file.type,
+        },
+      });
+      const signedUrl = data.signFileUrl;
+      const imageData = await uploadImage(file, signedUrl);
+      const imageUrl = imageData.config.url.split('?')[0];
+      setCoverPhoto(imageUrl);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleAvatar = async (e) => {
