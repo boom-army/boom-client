@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import { Program } from "@project-serum/anchor";
 import { useConnection } from "./connection";
 import {
   AccountInfo,
@@ -13,7 +14,12 @@ import { chunks } from "../utils/utils";
 import { EventEmitter } from "../utils/eventEmitter";
 import { useUserAccounts } from "../hooks/useUserAccounts";
 import { WRAPPED_SOL_MINT, programIds } from "../utils/ids";
-import { useWallet } from '@solana/wallet-adapter-react';
+import {
+  useWallet,
+  AnchorWallet,
+  useAnchorWallet,
+} from "@solana/wallet-adapter-react";
+import { loadAnchor } from "../utils/sosol-web3";
 
 const AccountsContext = React.createContext<any>(null);
 
@@ -335,7 +341,9 @@ export function AccountsProvider({ children = null as any }) {
   const { publicKey, wallet, connected } = useWallet();
   const [tokenAccounts, setTokenAccounts] = useState<TokenAccount[]>([]);
   const [userAccounts, setUserAccounts] = useState<TokenAccount[]>([]);
+  const [sosolProgram, setSosolProgram] = useState<Program>();
   const { nativeAccount } = UseNativeAccount();
+  const anchorWallet = useAnchorWallet();
 
   const selectUserAccounts = useCallback(() => {
     if (!publicKey) {
@@ -390,7 +398,7 @@ export function AccountsProvider({ children = null as any }) {
         programIds().token,
         (info) => {
           // TODO: fix type in web3.js
-          const id = (info.accountId as unknown) as string;
+          const id = info.accountId as unknown as string;
           // TODO: do we need a better way to identify layout (maybe a enum identifing type?)
           if (info.accountInfo.data.length === AccountLayout.span) {
             const data = deserializeAccount(info.accountInfo.data);
@@ -410,11 +418,19 @@ export function AccountsProvider({ children = null as any }) {
     }
   }, [connection, connected, publicKey, selectUserAccounts]);
 
+  useEffect(() => {
+    (async () => {
+      const program = await loadSosolProgram(anchorWallet as AnchorWallet);
+      setSosolProgram(program as Program);
+    })();
+  }, [anchorWallet]);
+
   return (
     <AccountsContext.Provider
       value={{
         userAccounts,
         nativeAccount,
+        sosolProgram,
       }}
     >
       {children}
@@ -628,4 +644,18 @@ const deserializeMint = (data: Buffer) => {
   }
 
   return mintInfo as MintInfo;
+};
+
+/**
+ * @summary Load the program for sosol
+ */
+const loadSosolProgram = async (
+  wallet: AnchorWallet
+): Promise<Program | null> => {
+  return loadAnchor(wallet)
+    .then(async (program: Program) => program)
+    .catch((err: Error) => {
+      console.error(err);
+      return null;
+    });
 };

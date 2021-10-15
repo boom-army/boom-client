@@ -16,7 +16,7 @@ const SOSOL_MINT: PublicKey = new PublicKey(
   process.env.REACT_APP_SOSOL_MINT as PublicKeyInitData
 );
 
-export const loadAnchor = async (wallet: AnchorWallet, setProgram: any) => {
+export const loadAnchor = async (wallet: AnchorWallet) => {
   const programId = new PublicKey(
     process.env.REACT_APP_PROGRAM_ID as PublicKeyInitData
   );
@@ -27,10 +27,7 @@ export const loadAnchor = async (wallet: AnchorWallet, setProgram: any) => {
     commitment: "processed",
   });
 
-  const newProgram = new Program(idl, programId, provider);
-
-  // console.log(newProgram, "Is Anchor Working?");
-  setProgram(newProgram);
+  return new Program(idl, programId, provider);
 };
 
 const findAssociatedTokenAddress = async (

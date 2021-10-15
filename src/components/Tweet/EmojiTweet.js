@@ -9,10 +9,11 @@ import { ThemeContext } from "styled-components";
 import { displayError } from "../../utils";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
-import { interactionInstruction, loadAnchor } from "../../utils/sosol-web3";
+import { interactionInstruction } from "../../utils/sosol-web3";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
 import { PublicKey } from "@solana/web3.js";
+import { useSosolProgram } from "../../hooks";
 
 import "emoji-mart/css/emoji-mart.css";
 
@@ -69,9 +70,9 @@ const Wrapper = styled.div`
 
 export const EmojiTweet = ({ tweetId, userPubKey, reactions }) => {
   const theme = useContext(ThemeContext);
+  const { sosolProgram } = useSosolProgram();
   const [picker, togglePicker] = useState(false);
   const [emoji, setEmoji] = useState({});
-  const [program, setProgram] = useState({});
 
   const { connection } = useConnection();
   const wallet = useAnchorWallet();
@@ -105,11 +106,9 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions }) => {
   const handleReaction = useCallback(async ({ emojiId, skin }) => {
     try {
       if (!wallet.publicKey) throw new WalletNotConnectedError();
-
-      await loadAnchor(wallet, setProgram);
       const signature = await interactionInstruction(
         connection,
-        program,
+        sosolProgram,
         wallet.publicKey,
         new PublicKey(userPubKey),
         new PublicKey(process.env.REACT_APP_CONTENT_HOST),
@@ -123,7 +122,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions }) => {
       console.log(err);
       return displayError(err);
     }
-  }, [program, wallet, toggleReactionMutation, connection, userPubKey]);
+  }, [sosolProgram, wallet, toggleReactionMutation, connection, userPubKey]);
 
   const ReactionList = ({ reactions }) => {
     return reactions
