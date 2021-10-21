@@ -175,9 +175,9 @@ export const Tweet = ({ tweet }) => {
             />
           </div>
 
-          <div>
+          {/* <div>
             <span>{isTweetMine ? <DeleteTweet id={id} /> : null}</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </Wrapper>
