@@ -31,6 +31,7 @@ export const MorePopUp = () => {
     borderRadius: "6px",
     border: `1px solid ${theme.tertiaryColor}`,
     boxShadow: theme.bs1,
+    padding: "1rem 1rem 0 1rem",
   };
 
   const overlayStyle = {
@@ -42,7 +43,7 @@ export const MorePopUp = () => {
       <Popup
         className="btn"
         trigger={(open) => <MoreBtn open={open} />}
-        position="top right"
+        position="top left"
         closeOnDocumentClick
         contentStyle={contentStyle}
         overlayStyle={overlayStyle}
