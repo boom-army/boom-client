@@ -1,6 +1,5 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from '@mui/icons-material/Person';
+import UserAvatar from "../UserAvatar";
 import Linkify from "linkifyjs/react";
 import { EmojiTweet, DeleteTweet, Retweet } from "./index";
 import TweetFile from "../../styles/TweetFile";
@@ -128,7 +127,7 @@ export const Tweet = ({ tweet }) => {
   return (
     <Wrapper>
       <Link to={`/${handle}`}>
-        <Avatar className="avatar" src={user && user.avatar ? user.avatar : <PersonIcon />} />
+        <UserAvatar className="avatar" avatar={user?.avatar} />
       </Link>
 
       <div className="tweet-info">

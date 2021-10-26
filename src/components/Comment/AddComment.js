@@ -6,8 +6,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import useInput from "../../hooks/useInput";
 import Button from "../../styles/Button";
 import { displayError } from "../../utils";
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from "@mui/icons-material/Person";
+import UserAvatar from "../UserAvatar";
 import { TWEET } from "../../queries/tweet";
 import { ADD_COMMENT } from "../../queries/comment";
 import { USER } from "../../queries/client";
@@ -90,14 +89,12 @@ const AddComment = ({ id }) => {
     comment.setValue("");
   };
 
-  const {
-    data,
-  } = useQuery(USER);
+  const { data } = useQuery(USER);
 
   return (
     <Wrapper>
       <Box mr={2}>
-        <Avatar src={data?.me?.avatar ? data?.me?.avatar : <PersonIcon />} />
+        <UserAvatar avatar={data?.me?.avatar} />
       </Box>
 
       <form onSubmit={handleAddComment}>

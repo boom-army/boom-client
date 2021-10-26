@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import CoverPhoto from "../../styles/CoverPhoto";
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from "@mui/icons-material/Person";
+import UserAvatar from "../UserAvatar";
 import { Button, Box, Grid } from "@mui/material";
 import Follow from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
@@ -122,7 +121,7 @@ const ProfileInfo = ({ profile }) => {
         alignItems="flex-start"
       >
         <CoverPhoto src={coverPhoto} alt="cover" />
-        <Avatar className="avatar" src={avatar ? avatar : <PersonIcon />} />
+        <UserAvatar avatar={avatar} />
       </Grid>
 
       <Grid container direction="row" className="row" alignItems="flex-start">
