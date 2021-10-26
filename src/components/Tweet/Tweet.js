@@ -115,13 +115,9 @@ export const Tweet = ({ tweet }) => {
 
   const handle = user && user.handle;
   const linkifyOptions = {
-    formatHref: function (value, type) {
-      if (type === "hashtag") {
-        return "explore?=" + value.substring(1);
-      }
-      return value;
-    },
     className: "body",
+    target: { url: '_blank' },
+    formatHref: { hashtag: (href) => `explore?=${href.substring(1)}` },
   };
 
   return (
