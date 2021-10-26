@@ -24,7 +24,7 @@ export const AppHeader = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" disableGutters={true}>
           <CurrentUser connected={connected} />
           <Grid
             container

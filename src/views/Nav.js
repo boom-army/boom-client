@@ -12,7 +12,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 const Wrapper = styled.nav`
   border-right: 1px solid ${(props) => props.theme.tertiaryColor};
   font-weight: 500;
-  padding: 0 1em;
   min-height: 100vh;
 
   .badge {
@@ -55,9 +54,7 @@ const Wrapper = styled.nav`
     fill: ${(props) => props.theme.accentColor};
   }
 
-  @media screen and (max-width: 1100px) {
-    width: 10%;
-
+  @media screen and (max-width: 900px) {
     span {
       display: none;
     }

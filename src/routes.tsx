@@ -19,39 +19,39 @@ export function Routes() {
           <AccountsProvider>
             <MarketProvider>
               <AppHeader />
-                <Container maxWidth="lg">
-                  <Grid container>
-                    <Grid direction="row" xs={2}>
-                      <Nav />
-                    </Grid>
-                    <Grid direction="row" xs={7}>
-                      <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/explore" component={Explore} />
-                        <Route
-                          exact
-                          path="/notifications"
-                          component={Notifications}
-                        />
-                        <Route
-                          exact
-                          path={`/:handle/status/:tweetId`}
-                          component={MasterTweet}
-                        />
-                        <Route
-                          exact
-                          path={`/settings/profile`}
-                          component={EditProfile}
-                        />
-                        <Route exact path={`/:handle`} component={Profile} />
-                        <Redirect from="*" to="/" />
-                      </Switch>
-                    </Grid>
-                    <Grid direction="row" xs={3}>
-                      <Suggestion />
-                    </Grid>
+              <Container maxWidth="lg">
+                <Grid container>
+                  <Grid direction="row" xs={1} sm={1} md={2}>
+                    <Nav />
                   </Grid>
-                </Container>
+                  <Grid direction="row" xs={7}>
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/explore" component={Explore} />
+                      <Route
+                        exact
+                        path="/notifications"
+                        component={Notifications}
+                      />
+                      <Route
+                        exact
+                        path={`/:handle/status/:tweetId`}
+                        component={MasterTweet}
+                      />
+                      <Route
+                        exact
+                        path={`/settings/profile`}
+                        component={EditProfile}
+                      />
+                      <Route exact path={`/:handle`} component={Profile} />
+                      <Redirect from="*" to="/" />
+                    </Switch>
+                  </Grid>
+                  <Grid direction="row" xs={3}>
+                    <Suggestion />
+                  </Grid>
+                </Grid>
+              </Container>
             </MarketProvider>
           </AccountsProvider>
         </Wallet>
