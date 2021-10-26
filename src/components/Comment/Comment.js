@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from '@mui/icons-material/Person';
+import UserAvatar from "../UserAvatar";
 import DeleteComment from "./DeleteComment";
 import { setDate } from "../../utils";
 import { Box } from "@mui/system";
@@ -65,7 +64,7 @@ const Comment = ({ comment }) => {
   return (
     <Wrapper>
       <Box mr={2}>
-        <Avatar src={user && user.avatar ? user.avatar : <PersonIcon />} />
+        <UserAvatar avatar={user?.avatar} />
       </Box>
       <div className="comment-info">
         <div className="comment-info-user">
