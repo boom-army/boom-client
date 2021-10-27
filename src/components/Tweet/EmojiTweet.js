@@ -20,6 +20,7 @@ import "emoji-mart/css/emoji-mart.css";
 const Wrapper = styled.div`
   .emoji-mart {
     position: absolute;
+    z-index: 1;
   }
   .emoji-mart-preview {
     display: none;
