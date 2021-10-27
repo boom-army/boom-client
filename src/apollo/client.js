@@ -1,7 +1,16 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { offsetLimitPagination } from "@apollo/client/utilities";
 
 export const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          feed: offsetLimitPagination(),
+        },
+      },
+    },
+  }),
   uri: process.env.REACT_APP_APOLLO_API || "http://locahost:7777",
   headers: {
     authorization: localStorage.getItem("token") || "",
