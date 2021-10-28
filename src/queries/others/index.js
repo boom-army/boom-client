@@ -70,6 +70,7 @@ export const MENTIONS = gql`
       user {
         id
         avatar
+        publicAddress
         handle
         consumerName
       }

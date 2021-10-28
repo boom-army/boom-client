@@ -67,6 +67,7 @@ export const TWEET = gql`
         isCommentMine
         user {
           id
+          publicAddress
           consumerName
           handle
           avatar

@@ -33,6 +33,7 @@ export const SEARCH_BY_TAG = gql`
       user {
         id
         handle
+        publicAddress
         avatar
         consumerName
       }
@@ -65,6 +66,7 @@ export const SEARCH_BY_TWEET = gql`
       user {
         id
         handle
+        publicAddress
         avatar
         consumerName
       }

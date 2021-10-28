@@ -28,6 +28,7 @@ export const PROFILE = gql`
         user {
           id
           consumerName
+          publicAddress
           handle
           avatar
         }
