@@ -33,6 +33,8 @@
     "@mui/material": "^5.0.0",
     "@project-serum/serum": "^0.13.41",
     "@project-serum/sol-wallet-adapter": "^0.2.5",
+    "@sentry/react": "^6.13.3",
+    "@sentry/tracing": "^6.13.3",
     "@solana/spl-token": "^0.1.6",
     "@solana/spl-token-registry": "^0.2.168",
     "@solana/spl-token-swap": "0.1.0",
