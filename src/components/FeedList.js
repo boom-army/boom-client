@@ -23,7 +23,6 @@ export const FeedList = () => {
       Math.ceil(window.innerHeight + window.scrollY) >=
       document.documentElement.scrollHeight;
     if (bottom) {
-      console.log("at the bottom");
       fetchMore({
         variables: {
           offset: data?.feed?.length,
