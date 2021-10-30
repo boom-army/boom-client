@@ -3,7 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "../../styles/Button";
 import PersonIcon from "@mui/icons-material/Person";
 import TextareaAutosize from "react-textarea-autosize";
-import TweetFile from "../../styles/TweetFile";
 import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import { FEED } from "../../queries/others";
@@ -15,6 +14,7 @@ import { displayError } from "../../utils";
 import { uploadImage } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
+import { ImageBox } from "../ImageBox";
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ const Wrapper = styled.div`
     font-size: 1.23rem;
     font-family: ${(props) => props.theme.font};
     color: ${(props) => props.theme.primaryColor};
-    margin-bottom: 1.4rem;
+    margin-bottom: 0.75rem;
   }
 
   .new-tweet {
@@ -99,6 +99,10 @@ export const NewTweet = () => {
 
   const handleTweetFiles = async (e) => {
     try {
+      if (tweetFiles.length >= 4) {
+        return enqueueSnackbar('You can only upload a maximum of 4 files', { variant: 'error' });
+      }
+
       const file = e.target.files[0];
       const { data } = await signFileMutation({
         variables: {
@@ -112,10 +116,18 @@ export const NewTweet = () => {
       setTweetFiles([...tweetFiles, imageUrl]);
     } catch (error) {
       console.log(error);
+    } finally {
+      // reset value so the input event handler can trigger again
+      e.target.value = null;
     }
   };
 
   const { data } = useQuery(USER);
+
+  const mapTweetFiles = (url, index) => ({
+    url,
+    id: `preview-${index}`,
+  });
 
   return (
     <Wrapper>
@@ -135,9 +147,7 @@ export const NewTweet = () => {
             onChange={tweet.onChange}
           />
 
-          {tweetFiles[0] && (
-            <TweetFile newtweet src={tweetFiles[0]} alt="preview" />
-          )}
+          {!!tweetFiles.length && <ImageBox files={tweetFiles.map(mapTweetFiles)} />}
 
           <div className="new-tweet-action">
             <div className="svg-input">

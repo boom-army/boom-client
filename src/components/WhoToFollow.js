@@ -2,7 +2,6 @@ import React from "react";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Avatar from "@mui/material/Avatar";
 import Follow from "./Profile/Follow";
-import PersonIcon from "@mui/icons-material/Person";
 import {
   Box,
   Grid,
@@ -45,9 +44,7 @@ export const User = ({ user }) => (
             }
           >
             <ListItemAvatar>
-              <Avatar
-                src={user && user.avatar ? user.avatar : <PersonIcon />}
-              />
+              <Avatar src={user?.avatar} />
             </ListItemAvatar>
             <ListItemText
               primary={user && user.consumerName}
