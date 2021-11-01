@@ -8,7 +8,8 @@ import { ToastContainer } from "react-toastify";
 // import { USER_LOGGED_IN } from "./queries/client";
 // import { useQuery } from "@apollo/client";
 import { CssBaseline } from "@mui/material";
-import { SnackbarProvider } from 'notistack';
+import { SnackbarProvider } from "notistack";
+import SimpleReactLightbox from "simple-react-lightbox";
 
 export const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -28,7 +29,9 @@ export const App = () => {
         draggable={false}
       />
       <SnackbarProvider maxSnack={3}>
-        <Routes />
+        <SimpleReactLightbox>
+          <Routes />
+        </SimpleReactLightbox>
       </SnackbarProvider>
     </StyledThemeProvider>
   );

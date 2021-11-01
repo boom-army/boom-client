@@ -1,8 +1,8 @@
 import React from "react";
 import UserAvatar from "../UserAvatar";
 import Linkify from "linkifyjs/react";
-import { EmojiTweet, DeleteTweet, Retweet } from "./index";
-import TweetFile from "../../styles/TweetFile";
+import { EmojiTweet, Retweet } from "./index";
+import { ImageBox } from "../ImageBox";
 // eslint-disable-next-line
 import hashtag from "linkifyjs/plugins/hashtag";
 // eslint-disable-next-line
@@ -36,6 +36,11 @@ const Wrapper = styled.div`
     color: ${(props) => props.theme.secondaryColor};
   }
 
+  .tweet-body {
+    margin-bottom: 0.75rem;
+    word-break: break-word;
+  }
+
   .tags {
     display: flex;
   }
@@ -46,7 +51,6 @@ const Wrapper = styled.div`
 
   div.tweet-stats {
     display: flex;
-    margin-top: 0.5rem;
     align-items: center;
 
     div {
@@ -105,7 +109,7 @@ export const Tweet = ({ tweet, offset }) => {
     // tags,
     user,
     files,
-    isTweetMine,
+    // isTweetMine,
     isRetweet,
     retweetsCount,
     reactions,
@@ -115,7 +119,7 @@ export const Tweet = ({ tweet, offset }) => {
 
   const handle = user && user.handle;
   const linkifyOptions = {
-    className: "body",
+    className: 'body',
     target: { url: '_blank' },
     formatHref: { hashtag: (href) => `explore?=${href.substring(1)}` },
   };
@@ -139,14 +143,10 @@ export const Tweet = ({ tweet, offset }) => {
         </div>
 
         <Linkify options={linkifyOptions}>
-          <p>{text}</p>
+          <p className="tweet-body">{text}</p>
         </Linkify>
 
-        <Link to={`/${handle}/status/${id}`}>
-          {files && files.length && files[0] ? (
-            <TweetFile src={files[0].url} alt="tweet-file" />
-          ) : null}
-        </Link>
+        <ImageBox files={files} />
 
         <div className="tweet-stats">
           <span>

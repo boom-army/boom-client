@@ -102,6 +102,9 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
 
   useEffect(() => {
     document.addEventListener("click", handleDocumentClick, false);
+    return () => {
+      document.removeEventListener("click", handleDocumentClick, false);
+    }
   });
 
   const handleReaction = useCallback(async ({ emojiId, skin }) => {

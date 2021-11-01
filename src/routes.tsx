@@ -21,10 +21,10 @@ export function Routes() {
               <AppHeader />
               <Container maxWidth="lg">
                 <Grid container>
-                  <Grid direction="row" xs={1} sm={1} md={2}>
+                  <Grid item xs={1} sm={1} md={2}>
                     <Nav />
                   </Grid>
-                  <Grid direction="row" xs={7}>
+                  <Grid item xs={7}>
                     <Switch>
                       <Route exact path="/" component={Home} />
                       <Route exact path="/explore" component={Explore} />
@@ -47,7 +47,7 @@ export function Routes() {
                       <Redirect from="*" to="/" />
                     </Switch>
                   </Grid>
-                  <Grid direction="row" xs={3}>
+                  <Grid item xs={3}>
                     <Suggestion />
                   </Grid>
                 </Grid>
