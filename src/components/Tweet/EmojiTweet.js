@@ -69,7 +69,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export const EmojiTweet = ({ tweetId, userPubKey, reactions }) => {
+export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
   const theme = useContext(ThemeContext);
   const { sosolProgram } = useSosolProgram();
   const [picker, togglePicker] = useState(false);
@@ -80,10 +80,11 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions }) => {
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
-    refetchQueries: [{ query: FEED }],
+    refetchQueries: [{ query: FEED, variables: { offset: 0, limit: offset } }], // TODO: get dyunamic page length data
   });
 
   const handleDocumentClick = (event) => {
+    console.log('*****', offset);
     let isEmojiClassFound = false;
 
     event &&

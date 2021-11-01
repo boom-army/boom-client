@@ -98,7 +98,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export const Tweet = ({ tweet }) => {
+export const Tweet = ({ tweet, offset }) => {
   const {
     id,
     text,
@@ -150,7 +150,7 @@ export const Tweet = ({ tweet }) => {
 
         <div className="tweet-stats">
           <span>
-            <EmojiTweet tweetId={id} userPubKey={user?.publicAddress} reactions={reactions} />
+            <EmojiTweet tweetId={id} userPubKey={user?.publicAddress} reactions={reactions} offset={offset} />
           </span>
 
           <div>
