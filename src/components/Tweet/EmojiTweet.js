@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { Emoji, Picker } from "emoji-mart";
-import { FEED } from "../../queries/others";
+import { FEED, MENTIONS } from "../../queries/others";
 import { Loader } from "../Loader";
 import { SmilePlusIcon } from "../Icons";
 import { TOGGLE_REACTION } from "../../queries/tweet";
@@ -80,7 +80,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
-    refetchQueries: [{ query: FEED, variables: { offset: 0, limit: offset } }], // TODO: get dyunamic page length data
+    refetchQueries: [{ query: FEED, variables: { offset: 0, limit: offset } }, {query: MENTIONS}], // TODO: get dyunamic page length data
   });
 
   const handleDocumentClick = (event) => {
