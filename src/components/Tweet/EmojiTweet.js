@@ -84,7 +84,6 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
   });
 
   const handleDocumentClick = (event) => {
-    console.log('*****', offset);
     let isEmojiClassFound = false;
 
     event &&

@@ -49,7 +49,6 @@ export const CurrentUser = (props: { connected: boolean }) => {
         if (address.hasPublicAddress) {
           const data = new TextEncoder().encode(address.user.nonce);
           const signature = await signMessage(data);
-          console.log('**************', signature);
           
           await setLogin({
             variables: {
