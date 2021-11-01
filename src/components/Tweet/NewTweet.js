@@ -119,10 +119,12 @@ export const NewTweet = () => {
 
   return (
     <Wrapper>
-      <Avatar
+      {data?.me?.avatar ? <Avatar
         className="avatar"
-        src={data?.me?.avatar ? data?.me?.avatar : <PersonIcon />}
-      />
+        src={data.me.avatar}
+      /> :
+        <PersonIcon className="avatar" />
+      }
       <form onSubmit={handleNewTweet}>
         <div className="new-tweet">
           <TextareaAutosize
