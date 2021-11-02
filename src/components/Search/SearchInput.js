@@ -1,15 +1,15 @@
 import React from "react";
+import SearchResult from "./SearchResult";
 import styled from "styled-components";
-import { toast } from "react-toastify";
-import { useLazyQuery } from '@apollo/client';
 import useInput from "../../hooks/useInput";
-import { displayError } from "../../utils";
 import {
-  SEARCH_BY_USER,
   SEARCH_BY_TAG,
   SEARCH_BY_TWEET,
+  SEARCH_BY_USER,
 } from "../../queries/search";
-import SearchResult from "./SearchResult";
+import { displayError } from "../../utils";
+import { useLazyQuery } from "@apollo/client";
+import { useSnackbar } from "notistack";
 
 const Wrapper = styled.div`
   margin: 1rem 0;
@@ -37,26 +37,24 @@ const Wrapper = styled.div`
 const SearchInput = () => {
   const term = useInput("");
 
-  const [
-    searchByTag,
-    { data: searchTagData, loading: searchTagLoading },
-  ] = useLazyQuery(SEARCH_BY_TAG);
+  const [searchByTag, { data: searchTagData, loading: searchTagLoading }] =
+    useLazyQuery(SEARCH_BY_TAG);
 
   const [
     searchByTweet,
     { data: searchTweetData, loading: searchTweetLoading },
   ] = useLazyQuery(SEARCH_BY_TWEET);
 
-  const [
-    searchByUser,
-    { data: searchUserData, loading: searchUserLoading },
-  ] = useLazyQuery(SEARCH_BY_USER);
+  const [searchByUser, { data: searchUserData, loading: searchUserLoading }] =
+    useLazyQuery(SEARCH_BY_USER);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSearch = async (e) => {
     e.preventDefault();
 
     if (!term.value) {
-      return toast.error("Enter something to search");
+      return enqueueSnackbar("Enter something to search", { variant: "error" });
     }
 
     try {
@@ -64,7 +62,7 @@ const SearchInput = () => {
       await searchByTweet({ variables: { term: term.value } });
       await searchByUser({ variables: { term: term.value } });
     } catch (err) {
-      displayError(err);
+      displayError(err, enqueueSnackbar);
     }
     term.setValue("");
   };

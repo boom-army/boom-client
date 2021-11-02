@@ -85,7 +85,7 @@ const AddComment = ({ id }) => {
       comment.setValue("");
       return enqueueSnackbar("Your reply has been added", { variant: "success" });
     } catch (err) {
-      return displayError(err);
+      return displayError(err, enqueueSnackbar);
     }
   };
 

@@ -1,9 +1,9 @@
 import React from "react";
-import { useMutation } from '@apollo/client';
-import { toast } from "react-toastify";
-import { FEED } from "../../queries/others";
 import { DELETE_TWEET } from "../../queries/tweet";
+import { FEED } from "../../queries/others";
 import { TrashIcon } from "../Icons";
+import { useMutation } from '@apollo/client';
+import { useSnackbar } from "notistack";
 
 export const DeleteTweet = ({ id }) => {
   const [deleteTweetMutation, { loading }] = useMutation(DELETE_TWEET, {
@@ -18,10 +18,11 @@ export const DeleteTweet = ({ id }) => {
       });
     },
   });
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDeleteTweet = async () => {
     await deleteTweetMutation();
-    toast.success("Your tweet has been deleted");
+    enqueueSnackbar("Your tweet has been deleted", { variant: "success" });
   };
 
   return <TrashIcon loading={loading} onClick={handleDeleteTweet} />;

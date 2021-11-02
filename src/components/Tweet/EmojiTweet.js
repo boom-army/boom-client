@@ -3,16 +3,16 @@ import styled from "styled-components";
 import { Emoji, Picker } from "emoji-mart";
 import { FEED, MENTIONS } from "../../queries/others";
 import { Loader } from "../Loader";
+import { PublicKey } from "@solana/web3.js";
 import { SmilePlusIcon } from "../Icons";
 import { TOGGLE_REACTION } from "../../queries/tweet";
 import { ThemeContext } from "styled-components";
+import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
 import { displayError } from "../../utils";
-import { toast } from "react-toastify";
-import { useMutation } from "@apollo/client";
 import { interactionInstruction } from "../../utils/sosol-web3";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
-import { PublicKey } from "@solana/web3.js";
+import { useMutation } from "@apollo/client";
+import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
 
 import "emoji-mart/css/emoji-mart.css";
@@ -83,6 +83,8 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
     refetchQueries: [{ query: FEED, variables: { offset: 0, limit: offset } }, {query: MENTIONS}], // TODO: get dyunamic page length data
   });
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const handleDocumentClick = (event) => {
     let isEmojiClassFound = false;
 
@@ -121,12 +123,12 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
 
       await setEmoji({ emojiId, skin });
       await toggleReactionMutation();
-      toast.success(`Transaction complete: ${signature}`);
+      enqueueSnackbar(`Transaction complete: ${signature}`, { variant: "success" });
     } catch (err) {
       console.log(err);
-      return displayError(err);
+      return displayError(err, enqueueSnackbar);
     }
-  }, [sosolProgram, wallet, toggleReactionMutation, connection, userPubKey]);
+  }, [sosolProgram, wallet, toggleReactionMutation, connection, userPubKey,enqueueSnackbar]);
 
   const ReactionList = ({ reactions }) => {
     return reactions

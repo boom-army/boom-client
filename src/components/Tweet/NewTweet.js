@@ -90,7 +90,7 @@ export const NewTweet = () => {
 
       enqueueSnackbar("Your tweet has been posted", { variant: "success" });
     } catch (err) {
-      return displayError(err);
+      return displayError(err, enqueueSnackbar);
     }
 
     tweet.setValue("");

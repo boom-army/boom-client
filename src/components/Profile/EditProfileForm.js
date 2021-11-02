@@ -7,13 +7,13 @@ import Input from "../Input";
 import TextareaAutosize from "react-textarea-autosize";
 import useInput from "../../hooks/useInput";
 import { PROFILE, EDIT_PROFILE } from "../../queries/profile";
+import { SIGN_FILE } from "../../queries/files";
 import { displayError } from "../../utils";
-import { toast } from "react-toastify";
 import { uploadImage } from "../../utils";
 import { useMutation } from "@apollo/client";
+import { useSnackbar } from "notistack";
 import { useWallet } from '@solana/wallet-adapter-react';
 import { withRouter } from "react-router-dom";
-import { SIGN_FILE } from "../../queries/files";
 
 const EditProfileForm = ({ profile, history }) => {
   const [avatarState, setAvatar] = useState("");
@@ -34,12 +34,13 @@ const EditProfileForm = ({ profile, history }) => {
   const [signFileMutation] = useMutation(SIGN_FILE);
 
   const { disconnect } = useWallet();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleEditProfile = async (e) => {
     e.preventDefault();
 
     if (!consumerName.value) {
-      return toast.error("You cannot leave name empty");
+      return enqueueSnackbar("You cannot leave name empty", { variant: "error" });
     }
 
     try {
@@ -63,9 +64,9 @@ const EditProfileForm = ({ profile, history }) => {
       history.push("/");
       window.location.reload();
 
-      toast.success("Your profile has been updated 🥳. Please login again to refresh your session.");
+      enqueueSnackbar("Your profile has been updated 🥳. Please login again to refresh your session.", { variant: "success" });
     } catch (err) {
-      return displayError(err);
+      return displayError(err, enqueueSnackbar);
     }
 
     [handle, consumerName, dob, location, website, avatar, coverPhoto].map(

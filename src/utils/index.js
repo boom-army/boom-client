@@ -1,10 +1,9 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 
-export const displayError = (err) => {
+export const displayError = (err, enqueueSnackbar) => {
   let e = err.message.split(":");
   e = e.length === 1 ? e[0] : e[1];
-  toast.error(e.trim().replace(".", ""));
+  enqueueSnackbar(e.trim().replace(".", ""),{ variant:"error" });
 };
 
 export const sortFn = (a, b) => {
