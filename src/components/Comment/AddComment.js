@@ -9,7 +9,6 @@ import { Box } from "@mui/system";
 import { TWEET } from "../../queries/tweet";
 import { USER } from "../../queries/client";
 import { displayError } from "../../utils";
-import { toast } from "react-toastify";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 
@@ -73,7 +72,7 @@ const AddComment = ({ id }) => {
   const handleAddComment = async (e) => {
     e.preventDefault();
 
-    if (!comment.value) return toast("Reply something");
+    if (!comment.value) return enqueueSnackbar("Write a reply");
 
     try {
       await addCommentMutation({
@@ -82,7 +81,7 @@ const AddComment = ({ id }) => {
           text: comment.value,
         },
       });
-      
+
       comment.setValue("");
       return enqueueSnackbar("Your reply has been added", { variant: "success" });
     } catch (err) {

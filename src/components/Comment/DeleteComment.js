@@ -1,13 +1,14 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useMutation } from '@apollo/client';
-import { toast } from "react-toastify";
-import { TWEET } from "../../queries/tweet";
 import { DELETE_COMMENT } from "../../queries/comment";
+import { TWEET } from "../../queries/tweet";
 import { TrashIcon } from "../Icons";
+import { useMutation } from '@apollo/client';
+import { useParams } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 const DeleteComment = ({ id }) => {
   const { tweetId } = useParams();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [deleteCommentMutation, { loading }] = useMutation(DELETE_COMMENT, {
     variables: { id },
@@ -34,7 +35,7 @@ const DeleteComment = ({ id }) => {
 
   const handleDeleteComment = async () => {
     await deleteCommentMutation();
-    toast.success("Your comment has been deleted");
+    enqueueSnackbar("Your comment has been deleted", { variant: "success" });
   };
 
   return <TrashIcon loading={loading} onClick={handleDeleteComment} />;
