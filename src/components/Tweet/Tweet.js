@@ -1,15 +1,13 @@
 import React from "react";
+import 'linkify-plugin-hashtag';
+import 'linkify-plugin-mention';
+import Linkify from 'linkify-react';
 import UserAvatar from "../UserAvatar";
-import Linkify from "linkifyjs/react";
-import { EmojiTweet, Retweet } from "./index";
-import { ImageBox } from "../ImageBox";
-// eslint-disable-next-line
-import hashtag from "linkifyjs/plugins/hashtag";
-// eslint-disable-next-line
-import mention from "linkifyjs/plugins/mention";
 import moment from "moment";
 import styled from "styled-components";
 import { CommentIcon } from "../Icons";
+import { EmojiTweet, Retweet } from "./index";
+import { ImageBox } from "../ImageBox";
 import { Link } from "react-router-dom";
 import { setDate } from "../../utils";
 
