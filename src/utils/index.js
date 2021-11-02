@@ -1,10 +1,9 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 
-export const displayError = (err) => {
+export const displayError = (err, enqueueSnackbar) => {
   let e = err.message.split(":");
   e = e.length === 1 ? e[0] : e[1];
-  toast.error(e.trim().replace(".", ""));
+  enqueueSnackbar(e.trim().replace(".", ""),{ variant:"error" });
 };
 
 export const sortFn = (a, b) => {
@@ -20,8 +19,7 @@ export const setDate = (date) => {
   return newDate;
 };
 
-export const uploadImage = async (file, signedUrl) => {
-  let toastId = null;
+export const uploadImage = async (file, signedUrl, enqueueSnackbar) => {
   const data = await axios.put(signedUrl, file, {
     headers: {
       "Content-Type": file.type,
@@ -29,22 +27,10 @@ export const uploadImage = async (file, signedUrl) => {
       // "Content-Disposition": "inline",
     },
     onUploadProgress: (p) => {
-      const progress = p.loaded / p.total;
-
-      if (toastId === null) {
-        toastId = toast("Upload in progress", {
-          progress,
-          bodyClassName: "upload-progress-bar",
-        });
-      } else {
-        toast.update(toastId, {
-          progress,
-        });
-      }
+      // const progress = p.loaded / p.total;
+      enqueueSnackbar("Upload in progress", { variant: 'info' });
     },
   });
-
-  toast.dismiss(toastId);
 
   return data;
 };

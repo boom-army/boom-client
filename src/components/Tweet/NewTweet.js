@@ -90,7 +90,7 @@ export const NewTweet = () => {
 
       enqueueSnackbar("Your tweet has been posted", { variant: "success" });
     } catch (err) {
-      return displayError(err);
+      return displayError(err, enqueueSnackbar);
     }
 
     tweet.setValue("");
@@ -111,7 +111,7 @@ export const NewTweet = () => {
         },
       });
       const signedUrl = data.signFileUrl;
-      const imageData = await uploadImage(file, signedUrl);
+      const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
       const imageUrl = imageData.config.url.split('?')[0];
       setTweetFiles([...tweetFiles, imageUrl]);
     } catch (error) {

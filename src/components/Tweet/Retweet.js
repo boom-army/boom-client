@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useMutation } from '@apollo/client';
-import { toast } from "react-toastify";
 import { RetweetIcon, RtFillIcon } from "../Icons";
 import { TOGGLE_RETWEET } from "../../queries/tweet";
 import { displayError } from "../../utils";
+import { useMutation } from "@apollo/client";
+import { useSnackbar } from "notistack";
 
 export const Retweet = ({ id, isRetweet, retweetsCount }) => {
   const [retweet, setRetweet] = useState(isRetweet);
@@ -11,6 +11,7 @@ export const Retweet = ({ id, isRetweet, retweetsCount }) => {
   const [toggleRetweetMutation, { loading }] = useMutation(TOGGLE_RETWEET, {
     variables: { id },
   });
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleRetweet = async () => {
     try {
@@ -18,13 +19,13 @@ export const Retweet = ({ id, isRetweet, retweetsCount }) => {
       setRetweet(!retweet);
       if (retweet) {
         setRetweetsCount(retweetsCountState - 1);
-        toast.success("Retweet removed");
+        enqueueSnackbar("Retweet removed", { variant: "success" });
       } else {
         setRetweetsCount(retweetsCountState + 1);
-        toast.success("Retweet done");
+        enqueueSnackbar("Retweet done", { variant: "success" });
       }
     } catch (err) {
-      return displayError(err);
+      return displayError(err, enqueueSnackbar);
     }
   };
 

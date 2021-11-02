@@ -4,14 +4,15 @@ import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
 import { FEED, USERS } from "../../queries/others";
 import { Link } from "react-router-dom";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
-import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
+import { useSnackbar } from "notistack";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 export const CurrentUser = (props: { connected: boolean }) => {
   const { connected } = props;
   const { wallet, publicKey, signMessage } = useWallet();
   const token = localStorage.getItem("token");
+  const { enqueueSnackbar } = useSnackbar();
 
   const [getNonce] = useMutation(PUBLIC_ADDRESS);
   const [setLogin] = useMutation(LOGIN_REGISTER, {
@@ -33,11 +34,13 @@ export const CurrentUser = (props: { connected: boolean }) => {
   const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     async (event) => {
       if (!walletPublicKey) {
-        toast.error("Wallet not connected!");
+        enqueueSnackbar("Wallet not connected!", { variant: "error" });
         return;
       }
       if (!signMessage) {
-        toast.error("Wallet does not support message signing!");
+        enqueueSnackbar("Wallet does not support message signing!", {
+          variant: "error",
+        });
         return;
       }
       try {
@@ -49,7 +52,7 @@ export const CurrentUser = (props: { connected: boolean }) => {
         if (address.hasPublicAddress) {
           const data = new TextEncoder().encode(address.user.nonce);
           const signature = await signMessage(data);
-          
+
           await setLogin({
             variables: {
               publicAddress: walletPublicKey,
@@ -57,19 +60,22 @@ export const CurrentUser = (props: { connected: boolean }) => {
             },
           });
           window.location.reload();
-          toast.success(
-            `Wallet ${walletPublicKey} connected to account. Happy posting.`
+          enqueueSnackbar(
+            `Wallet ${walletPublicKey} connected to account. Happy posting.`,
+            { variant: "success" }
           );
         } else {
           await setLogin({ variables: { publicAddress: walletPublicKey } });
-          toast.success(`Wallet ${walletPublicKey} created for account.`);
+          enqueueSnackbar(`Wallet ${walletPublicKey} created for account.`, {
+            variant: "success",
+          });
         }
       } catch (error) {
         console.log("wallet connect error:", error);
-        toast.error(`Error connecting: ${error}`);
+        enqueueSnackbar(`Error connecting: ${error}`, { variant: "error" });
       }
     },
-    [signMessage, getNonce, setLogin, walletPublicKey]
+    [signMessage, getNonce, setLogin, walletPublicKey,enqueueSnackbar]
   );
 
   return (
@@ -87,12 +93,10 @@ export const CurrentUser = (props: { connected: boolean }) => {
         </Box>
         {connected && !token && (
           <>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleClick}
-            >
-              Login with <Avatar sx={{ width: 24, height: 24 }} src={wallet?.icon} /> {content}
+            <Button variant="contained" color="primary" onClick={handleClick}>
+              Login with{" "}
+              <Avatar sx={{ width: 24, height: 24 }} src={wallet?.icon} />{" "}
+              {content}
             </Button>
           </>
         )}

@@ -1,16 +1,16 @@
 import React from "react";
-import styled from "styled-components";
-import { toast } from "react-toastify";
-import TextareaAutosize from "react-textarea-autosize";
-import { useQuery, useMutation } from "@apollo/client";
-import useInput from "../../hooks/useInput";
 import Button from "../../styles/Button";
-import { displayError } from "../../utils";
+import TextareaAutosize from "react-textarea-autosize";
 import UserAvatar from "../UserAvatar";
-import { TWEET } from "../../queries/tweet";
+import styled from "styled-components";
+import useInput from "../../hooks/useInput";
 import { ADD_COMMENT } from "../../queries/comment";
-import { USER } from "../../queries/client";
 import { Box } from "@mui/system";
+import { TWEET } from "../../queries/tweet";
+import { USER } from "../../queries/client";
+import { displayError } from "../../utils";
+import { useQuery, useMutation } from "@apollo/client";
+import { useSnackbar } from "notistack";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -46,6 +46,7 @@ const Wrapper = styled.div`
 
 const AddComment = ({ id }) => {
   const comment = useInput("");
+  const { enqueueSnackbar } = useSnackbar();
 
   const [addCommentMutation, { loading }] = useMutation(ADD_COMMENT, {
     update: (cache, payload) => {
@@ -71,7 +72,7 @@ const AddComment = ({ id }) => {
   const handleAddComment = async (e) => {
     e.preventDefault();
 
-    if (!comment.value) return toast("Reply something");
+    if (!comment.value) return enqueueSnackbar("Write a reply");
 
     try {
       await addCommentMutation({
@@ -81,12 +82,11 @@ const AddComment = ({ id }) => {
         },
       });
 
-      toast.success("Your reply has been added");
+      comment.setValue("");
+      return enqueueSnackbar("Your reply has been added", { variant: "success" });
     } catch (err) {
-      return displayError(err);
+      return displayError(err, enqueueSnackbar);
     }
-
-    comment.setValue("");
   };
 
   const { data } = useQuery(USER);

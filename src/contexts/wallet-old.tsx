@@ -6,7 +6,7 @@ import type { PublicKey } from "@solana/web3.js";
 // import { PhantomWalletAdapter } from "../wallet-adapters/phantom";
 // import { SolongWalletAdapter } from "../wallet-adapters/solong";
 import { Transaction } from "@solana/web3.js";
-import { toast } from "react-toastify";
+import { useSnackbar } from "notistack";
 import { useConnectionConfig } from "./connection";
 import { useLocalStorageState } from "../utils/utils";
 import { useMutation } from "@apollo/client";
@@ -89,6 +89,7 @@ export function WalletProvider({ children = null as any }) {
       }
     },
   });
+  const { enqueueSnackbar } = useSnackbar();
 
   const provider = useMemo(
     () => WALLET_PROVIDERS.find(({ url }) => url === providerUrl),
@@ -140,17 +141,17 @@ export function WalletProvider({ children = null as any }) {
                   signature: base58.encode(signed.signature),
                 },
               });
-              toast.success(
+              enqueueSnackbar(
                 `Wallet ${keyToDisplay} connected to account. Happy posting.`
               );
             } else {
               await setLogin({ variables: { publicAddress: walletPublicKey } });
-              toast.success(`Wallet ${keyToDisplay} created for account.`);
+              enqueueSnackbar(`Wallet ${keyToDisplay} created for account.`);
             }
             setConnected(true);
           } catch (error) {
             console.log("wallet connect error:", error);
-            toast.error(`Error connecting: ${error}`);
+            enqueueSnackbar(`Error connecting: ${error}`);
             wallet.disconnect();
           }
         }
@@ -162,7 +163,7 @@ export function WalletProvider({ children = null as any }) {
         // setTimeout(() => {
         //   window.location.href = "/";
         // }, 2100);
-        toast.success(`Disconnected from wallet`);
+        enqueueSnackbar(`Disconnected from wallet`);
       });
     }
 
@@ -172,7 +173,7 @@ export function WalletProvider({ children = null as any }) {
         wallet.disconnect();
       }
     };
-  }, [wallet, getNonce, setLogin]);
+  }, [wallet, getNonce, setLogin,enqueueSnackbar]);
 
   useEffect(() => {
     if (wallet && autoConnect) {
