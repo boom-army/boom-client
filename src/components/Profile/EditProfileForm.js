@@ -86,7 +86,7 @@ const EditProfileForm = ({ profile, history }) => {
         },
       });
       const signedUrl = data.signFileUrl;
-      const imageData = await uploadImage(file, signedUrl);
+      const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
       const imageUrl = imageData.config.url.split('?')[0];
       setCoverPhoto(imageUrl);
     } catch (error) {
@@ -104,7 +104,7 @@ const EditProfileForm = ({ profile, history }) => {
         },
       });
       const signedUrl = data.signFileUrl;
-      const imageData = await uploadImage(file, signedUrl);
+      const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
       const imageUrl = imageData.config.url.split('?')[0];
       setAvatar(imageUrl);
     } catch (error) {

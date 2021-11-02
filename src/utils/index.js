@@ -19,8 +19,7 @@ export const setDate = (date) => {
   return newDate;
 };
 
-export const uploadImage = async (file, signedUrl) => {
-  let toastId = null;
+export const uploadImage = async (file, signedUrl, enqueueSnackbar) => {
   const data = await axios.put(signedUrl, file, {
     headers: {
       "Content-Type": file.type,
@@ -28,22 +27,10 @@ export const uploadImage = async (file, signedUrl) => {
       // "Content-Disposition": "inline",
     },
     onUploadProgress: (p) => {
-      const progress = p.loaded / p.total;
-
-      if (toastId === null) {
-        toastId = toast("Upload in progress", {
-          progress,
-          bodyClassName: "upload-progress-bar",
-        });
-      } else {
-        toast.update(toastId, {
-          progress,
-        });
-      }
+      // const progress = p.loaded / p.total;
+      enqueueSnackbar("Upload in progress", { variant: 'info' });
     },
   });
-
-  toast.dismiss(toastId);
 
   return data;
 };

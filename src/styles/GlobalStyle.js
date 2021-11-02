@@ -53,11 +53,6 @@ export default createGlobalStyle`
     outline: none;
   }
 
-	.toast-style {
-		background: ${(props) => props.theme.accentColor};
-		font-family: ${(props) => props.theme.font};
-	}
-
 	.upload-progress-bar {
 		color: #FFF;
 	}
@@ -78,13 +73,5 @@ export default createGlobalStyle`
 		display: none;
 	}
 
- .Toastify__toast {
-		border-radius: 4px;
-	}
-
-	@media screen and (max-width: 769px) {
-		body {
-			font-size: 0.9rem;
-		}
 }
 `;
