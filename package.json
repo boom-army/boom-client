@@ -202,7 +202,7 @@
       "^.+\\.js": "<rootDir>/node_modules/babel-jest"
     },
     "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!@agm|@solana/wallet-adapter-material-ui)"
+      "<rootDir>/node_modules/(?!@agm)"
     ],
     "modulePaths": [],
     "moduleNameMapper": {
