@@ -1,13 +1,14 @@
 import React, { useCallback, useContext } from "react";
-import { useWallet } from '@solana/wallet-adapter-react';
-import { toast } from "react-toastify";
-import { UserIcon } from "../Icons";
 import { ThemeContext } from "../../contexts/theme";
+import { UserIcon } from "../Icons";
 import { Wrapper } from "../ToggleTheme";
+import { useSnackbar } from "notistack";
+import { useWallet } from '@solana/wallet-adapter-react';
 
 const Logout = () => {
 	const { theme } = useContext(ThemeContext);
 	const { disconnect } = useWallet();
+	const { enqueueSnackbar } = useSnackbar();
 
 	const handleLogout = useCallback(
         (event) => {
@@ -19,9 +20,9 @@ const Logout = () => {
 			window.location = "/";
 		}, 2100);
 		window.location.reload();
-		toast.success("You are logged out");
+		return enqueueSnackbar("You are logged out", { variant: "success" });
 	},
-	[disconnect]);
+	[disconnect, enqueueSnackbar]);
 
 	return (
 		<Wrapper onClick={handleLogout}>
