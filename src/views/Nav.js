@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { MorePopUp } from "../components/MorePopup";
 import { PROFILE } from "../queries/profile";
 import HomeIcon from "@mui/icons-material/Home";
-import ExploreIcon from "@mui/icons-material/Explore";
+import GroupIcon from "@mui/icons-material/Group";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
@@ -114,8 +114,8 @@ export const Nav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="selected" to="/explore">
-            <ExploreIcon /> <span>Explore</span>
+          <NavLink activeClassName="selected" to="/connect">
+            <GroupIcon /> <span>Connect</span>
           </NavLink>
         </li>
         <li>
