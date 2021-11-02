@@ -1,16 +1,17 @@
 import React from "react";
-import styled from "styled-components";
-import { toast } from "react-toastify";
-import TextareaAutosize from "react-textarea-autosize";
-import { useQuery, useMutation } from "@apollo/client";
-import useInput from "../../hooks/useInput";
 import Button from "../../styles/Button";
-import { displayError } from "../../utils";
+import TextareaAutosize from "react-textarea-autosize";
 import UserAvatar from "../UserAvatar";
-import { TWEET } from "../../queries/tweet";
+import styled from "styled-components";
+import useInput from "../../hooks/useInput";
 import { ADD_COMMENT } from "../../queries/comment";
-import { USER } from "../../queries/client";
 import { Box } from "@mui/system";
+import { TWEET } from "../../queries/tweet";
+import { USER } from "../../queries/client";
+import { displayError } from "../../utils";
+import { toast } from "react-toastify";
+import { useQuery, useMutation } from "@apollo/client";
+import { useSnackbar } from "notistack";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -46,6 +47,7 @@ const Wrapper = styled.div`
 
 const AddComment = ({ id }) => {
   const comment = useInput("");
+  const { enqueueSnackbar } = useSnackbar();
 
   const [addCommentMutation, { loading }] = useMutation(ADD_COMMENT, {
     update: (cache, payload) => {
@@ -80,13 +82,12 @@ const AddComment = ({ id }) => {
           text: comment.value,
         },
       });
-
-      toast.success("Your reply has been added");
+      
+      comment.setValue("");
+      return enqueueSnackbar("Your reply has been added", { variant: "success" });
     } catch (err) {
       return displayError(err);
     }
-
-    comment.setValue("");
   };
 
   const { data } = useQuery(USER);
