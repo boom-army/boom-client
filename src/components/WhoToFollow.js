@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Loader } from "./Loader";
-import { USERS } from "../../queries/follow";
+import { USERS } from "../queries/follow";
 import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
 
