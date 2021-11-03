@@ -57,8 +57,7 @@ const ImageColumnContainer = ({ files, isLeftCol }) => {
   );
 };
 
-export const ImageBox = props => {
-  const files = props.files || [];
+export const ImageBox = ({ files }) => {
   const options = {
     settings: {
       lightboxTransitionSpeed: 0,

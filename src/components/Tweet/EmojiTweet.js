@@ -80,7 +80,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
-    refetchQueries: [{ query: FEED, variables: { offset: 0, limit: offset } }, {query: MENTIONS}], // TODO: get dyunamic page length data
+    refetchQueries: [{ query: FEED, variables: { offset: 0, limit: offset } }, { query: MENTIONS }], // TODO: get dyunamic page length data
   });
 
   const { enqueueSnackbar } = useSnackbar();
@@ -128,7 +128,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
       console.log(err);
       return displayError(err, enqueueSnackbar);
     }
-  }, [sosolProgram, wallet, toggleReactionMutation, connection, userPubKey,enqueueSnackbar]);
+  }, [sosolProgram, wallet, toggleReactionMutation, connection, userPubKey, enqueueSnackbar]);
 
   const ReactionList = ({ reactions }) => {
     return reactions
@@ -159,6 +159,8 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
         </span>
         {picker && (
           <Picker
+            button={true}
+            sheetSize={20}
             theme={theme.background === "#15202b" ? "dark" : "light"}
             onSelect={(pickedEmoji) => {
               handleReaction({

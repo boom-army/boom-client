@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "../../styles/Button";
-import PersonIcon from "@mui/icons-material/Person";
 import TextareaAutosize from "react-textarea-autosize";
 import styled from "styled-components";
 import useInput from "../../hooks/useInput";
@@ -15,6 +14,7 @@ import { uploadImage } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { ImageBox } from "../ImageBox";
+import { EmojiPicker } from "../Emoji/Picker";
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,6 +29,7 @@ const Wrapper = styled.div`
     font-family: ${(props) => props.theme.font};
     color: ${(props) => props.theme.primaryColor};
     margin-bottom: 0.75rem;
+    padding: 0.75rem 0;
   }
 
   .new-tweet {
@@ -41,7 +42,8 @@ const Wrapper = styled.div`
     align-items: center;
   }
 
-  .svg-input svg {
+  .svg-input .emoji-pick svg,
+  .svg-input .file-upload-icon svg {
     width: 24px;
     height: 24px;
     fill: ${(props) => props.theme.accentColor};
@@ -51,19 +53,23 @@ const Wrapper = styled.div`
   .avatar {
     margin: 0 1rem;
   }
-
-  button {
-    position: relative;
-  }
 `;
 
-export const NewTweet = () => {
+export const NewTweet = ({ feed }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [tweetFiles, setTweetFiles] = useState([]);
   const tweet = useInput("");
 
   const [newTweetMutation, { loading }] = useMutation(NEW_TWEET, {
-    refetchQueries: [{ query: FEED, variables: { offset: 0, limit: 10 } }],
+    refetchQueries: [
+      {
+        query: FEED,
+        variables: {
+          offset: 0,
+          limit: feed?.length + 1, // current tweet length + 1 for the new tweet
+        }
+      }
+    ],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 
@@ -133,11 +139,10 @@ export const NewTweet = () => {
 
   return (
     <Wrapper>
-      {data?.me?.avatar ? (
-        <Avatar className="avatar" src={data.me.avatar} />
-      ) : (
-        <PersonIcon className="avatar" />
-      )}
+      <Avatar
+        className="avatar"
+        src={data?.me?.avatar}
+      />
       <form onSubmit={handleNewTweet}>
         <div className="new-tweet">
           <TextareaAutosize
@@ -154,8 +159,12 @@ export const NewTweet = () => {
 
           <div className="new-tweet-action">
             <div className="svg-input">
+              <EmojiPicker emojiHandler={pickedEmoji => tweet.setValue(tweet.value + pickedEmoji.native)} />
+
               <label htmlFor="file-input">
-                <UploadFileIcon />
+                <span className="file-upload-icon">
+                  <UploadFileIcon />
+                </span>
               </label>
               <input
                 id="file-input"
