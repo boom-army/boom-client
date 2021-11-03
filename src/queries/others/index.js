@@ -33,19 +33,6 @@ export const FEED = gql`
   }
 `;
 
-export const USERS = gql`
-  query users {
-    users {
-      id
-      handle
-      isFollowing
-      isSelf
-      consumerName
-      avatar
-    }
-  }
-`;
-
 export const MENTIONS = gql`
   query mention {
     mentions {

@@ -11,3 +11,16 @@ export const UNFOLLOW = gql`
     unfollow(id: $id)
   }
 `;
+
+export const USERS = gql`
+  query users {
+    users {
+      id
+      handle
+      isFollowing
+      isSelf
+      consumerName
+      avatar
+    }
+  }
+`;
