@@ -21,6 +21,8 @@ export const USERS = gql`
       isSelf
       consumerName
       avatar
+      coverPhoto
+      bio
     }
   }
 `;
