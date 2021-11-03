@@ -1,9 +1,10 @@
 import React from "react";
+import CustomResponse from "../CustomResponse";
+import Grid from "@mui/material/Grid";
+import { ConsumerCard } from "./ConsumerCard";
 import { Loader } from "../Loader";
 import { USERS } from "../../queries/follow";
 import { useQuery } from "@apollo/client";
-import { ConsumerCard } from "./ConsumerCard";
-import CustomResponse from "../CustomResponse";
 
 export const Follow = () => {
   const { loading, error, data } = useQuery(USERS);
@@ -13,9 +14,17 @@ export const Follow = () => {
   return (
     <>
       {data?.users?.length ? (
-        data.users.map((consumer) => (
-          <ConsumerCard key={consumer.id} consumer={consumer} />
-        ))
+        <Grid
+          container
+          spacing={{ md: 2 }}
+          columns={{ md: 4 }}
+        >
+          {data.users.map((consumer) => (
+            <Grid item md={4} key={`grid-${consumer.id}`}>
+              <ConsumerCard key={`card-${consumer.id}`} consumer={consumer} />
+            </Grid>
+          ))}
+        </Grid>
       ) : (
         <CustomResponse text="No other Creators to follow right now" />
       )}
