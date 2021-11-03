@@ -17,18 +17,16 @@ export const ConsumerCard = ({ consumer }) => {
   return (
     <Wrapper>
       <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="80"
-            image={`${window.location.origin}/default-cover.png`}
-            alt={`${consumer.handle}-${consumer.coverPhoto}`}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">{consumer.consumerName}</Typography>
-            <Typography variant="body2" color="text.secondary">{consumer.bio}</Typography>
-          </CardContent>
-        </CardActionArea>
+        <CardMedia
+          component="img"
+          height="80"
+          image={consumer.coverPhoto ? consumer.coverPhoto : `${window.location.origin}/default-cover.png`}
+          alt={`${consumer.handle} cover photo`}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">{consumer.consumerName}</Typography>
+          <Typography variant="body2" color="text.secondary">{consumer.bio}</Typography>
+        </CardContent>
         <CardActions>
           <Button size="small" color="primary">
             Follow

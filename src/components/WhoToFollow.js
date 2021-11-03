@@ -18,7 +18,7 @@ import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
 
 const Demo = styled("div")(({ theme }) => ({
-  backgroundColor: '#313d48',
+  backgroundColor: "#313d48",
 }));
 
 export const User = ({ user }) => (
@@ -58,7 +58,7 @@ export const User = ({ user }) => (
 );
 
 export const WhoToFollow = () => {
-  const { loading, error, data } = useQuery(USERS);
+  const { loading, error, data } = useQuery(USERS, { variables: { limit: 4, excludeFollows: true } });
 
   if (loading) return <Loader />;
   if (error) return null;
