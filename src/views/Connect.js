@@ -1,9 +1,8 @@
 import React from "react";
+import { Follow } from '../components/Connect';
 
 export const Connect = () => {
 	return (
-		<>
-		<h1>Boom</h1>
-		</>
+		<Follow />
 	);
 };
