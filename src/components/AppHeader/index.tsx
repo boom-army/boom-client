@@ -12,7 +12,7 @@ import {
 import { useWallet } from "@solana/wallet-adapter-react";
 import { AppBar, Box, Container, Grid, Toolbar } from "@mui/material";
 import { FEED } from "../../queries/others";
-import { USERS } from "../../queries/follow";
+import { USER_FOLLOW } from "../../queries/follow";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
@@ -26,7 +26,7 @@ export const AppHeader = () => {
 
   const [getNonce] = useMutation(PUBLIC_ADDRESS);
   const [setLogin] = useMutation(LOGIN_REGISTER, {
-    refetchQueries: [{ query: FEED }, { query: USERS }],
+    refetchQueries: [{ query: FEED }, { query: USER_FOLLOW }],
     onCompleted({ loginRegister }) {
       if (localStorage) {
         localStorage.setItem("token", loginRegister.token);

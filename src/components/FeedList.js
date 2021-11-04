@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CustomResponse from "./CustomResponse";
 import styled from "styled-components";
 import { FEED } from "../queries/others";
 import { Loader } from "./Loader";
 import { Tweet } from "./Tweet";
 import { useQuery } from "@apollo/client";
-// import { handleScroll } from "../utils";
 
 const Wrapper = styled.div`
   margin-bottom: 7rem;

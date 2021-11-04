@@ -1,8 +1,6 @@
 import React from "react";
 import {
   Avatar,
-  Box,
-  Button,
   Card,
   CardActions,
   CardContent,

@@ -26,3 +26,16 @@ export const USERS = gql`
     }
   }
 `;
+
+export const USER_FOLLOW = gql`
+  query userFollow($offset: Int, $limit: Int) {
+    userFollow(offset: $offset, limit: $limit) {
+      id
+      handle
+      isFollowing
+      isSelf
+      consumerName
+      bio
+    }
+  }
+`;

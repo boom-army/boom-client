@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Loader } from "./Loader";
-import { USERS } from "../queries/follow";
+import { USER_FOLLOW } from "../queries/follow";
 import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
 
@@ -58,10 +58,10 @@ export const User = ({ user }) => (
 );
 
 export const WhoToFollow = () => {
-  const { loading, error, data } = useQuery(USERS, { variables: { limit: 4, filter: 'excludeFollowing' } });
+  const { loading, error, data } = useQuery(USER_FOLLOW);
 
   if (loading) return <Loader />;
   if (error) return null;
 
-  return data.users.map((user) => <User key={user.id} user={user} />);
+  return data.userFollow.map((user) => <User key={user.id} user={user} />);
 };
