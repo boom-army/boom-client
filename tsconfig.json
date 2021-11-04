@@ -28,10 +28,11 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src",
-    "types"
+    "src/**/*",
+    "types/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/node_modules/*"
   ]
 }
