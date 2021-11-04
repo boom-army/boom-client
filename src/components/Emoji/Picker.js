@@ -6,10 +6,14 @@ import { ThemeContext } from "styled-components";
 import styled from "styled-components";
 import "emoji-mart/css/emoji-mart.css";
 
-const Wrapper = styled.span`
+const PickerWrapper = styled.span`
   .emoji-mart {
     position: absolute;
     z-index: 1;
+  }
+  .emoji-mart-bar.emoji-mart-bar,
+  .emoji-mart-scroll.emoji-mart-scroll {
+    margin-right: 0;
   }
   .emoji-mart-bar svg,
   .emoji-mart-bar svg path {
@@ -71,7 +75,7 @@ const Wrapper = styled.span`
   }
 `;
 
-export const EmojiPicker = ({ emojiHandler }) => {
+export const EmojiPicker = ({ emojiHandler, customIcon, dismissOnClick }) => {
   const [picker, togglePicker] = useState(false);
   const theme = useContext(ThemeContext);
 
@@ -96,20 +100,25 @@ export const EmojiPicker = ({ emojiHandler }) => {
     }
   });
 
+  const handleEmojiSelect = pickedEmoji => {
+    emojiHandler(pickedEmoji);
+    if (dismissOnClick) togglePicker(!picker);
+  };
+
   return (
-    <Wrapper>
+    <PickerWrapper>
       <span className="emoji-pick" onClick={() => togglePicker(!picker)}>
-        <SmileIcon />
+        {customIcon ? customIcon : <SmileIcon />}
       </span>
 
       {picker && (
         <Picker
           button={true}
-          sheetSize={20}
+          sheetSize={64}
           theme={theme.background === "#15202b" ? "dark" : "light"}
-          onSelect={pickedEmoji => emojiHandler(pickedEmoji)}
+          onSelect={handleEmojiSelect}
         />
       )}
-    </Wrapper>
+    </PickerWrapper>
   );
 }
