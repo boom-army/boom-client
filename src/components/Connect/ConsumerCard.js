@@ -1,9 +1,16 @@
 import React from "react";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Stack,
+  Typography,
+} from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
 
 export const ConsumerCard = ({ consumer }) => {
   console.log(consumer);
@@ -12,22 +19,27 @@ export const ConsumerCard = ({ consumer }) => {
       <CardMedia
         component="img"
         height="80"
-        image={consumer.coverPhoto ? consumer.coverPhoto : `${window.location.origin}/default-cover.png`}
+        image={
+          consumer.coverPhoto
+            ? consumer.coverPhoto
+            : `${window.location.origin}/default-cover.png`
+        }
         alt={`${consumer.handle} cover photo`}
       />
       <CardContent>
-        <CardMedia
-          sx={{ borderRadius: 40, height: 40, width: 40}}
-          component="img"
-          width="80"
-          image={consumer.avatar ? consumer.avatar : `${window.location.origin}/default-cover.png`}
-          alt={`${consumer.handle} cover avatar`}
-        />
-        <Typography gutterBottom variant="body" component="div">{consumer.consumerName}</Typography>
+        <Stack direction="row" spacing={2} sx={{ marginBottom: 2 }}>
+          <Avatar
+            alt={`${consumer.handle} cover photo`}
+            src={consumer.avatar}
+          />
+          <Typography gutterBottom variant="body" component="div" sx={{ paddingTop: 1 }}>
+            {consumer.consumerName}
+          </Typography>
+        </Stack>
         <Typography variant="body2">{consumer.bio}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" sx={{ alignSelf: 'flex-end' }}>
           Follow
         </Button>
       </CardActions>
