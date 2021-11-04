@@ -17,10 +17,10 @@ export const Follow = () => {
         <Grid
           container
           spacing={{ md: 2 }}
-          columns={{ md: 4 }}
+          sx={{ paddingTop: 3, paddingLeft: 2, paddingRight: 2 }}
         >
           {data.users.map((consumer) => (
-            <Grid item md={4} key={`grid-${consumer.id}`}>
+            <Grid item md={4}>
               <ConsumerCard key={`card-${consumer.id}`} consumer={consumer} />
             </Grid>
           ))}
