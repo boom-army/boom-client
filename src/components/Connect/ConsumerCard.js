@@ -32,14 +32,21 @@ export const ConsumerCard = ({ consumer }) => {
             alt={`${consumer.handle} cover photo`}
             src={consumer.avatar}
           />
-          <Typography
-            gutterBottom
-            variant="body"
-            component="div"
-            sx={{ paddingTop: 1 }}
-          >
-            {consumer.consumerName}
-          </Typography>
+          <Stack>
+            <Typography
+              variant="body"
+              component="div"
+              sx={{ marginTop: -0.7 }}
+            >
+              {consumer.consumerName}
+            </Typography>
+            <Typography
+              variant="body2"
+              component="div"
+            >
+              @{consumer.handle}
+            </Typography>
+          </Stack>
         </Stack>
         <Typography variant="body2">{consumer.bio}</Typography>
       </CardContent>
