@@ -63,7 +63,7 @@ export const NewTweet = () => {
   const tweet = useInput("");
 
   const [newTweetMutation, { loading }] = useMutation(NEW_TWEET, {
-    refetchQueries: [{ query: FEED }],
+    refetchQueries: [{ query: FEED, variables: { offset: 0, limit: 10 } }],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 
@@ -100,7 +100,9 @@ export const NewTweet = () => {
   const handleTweetFiles = async (e) => {
     try {
       if (tweetFiles.length >= 4) {
-        return enqueueSnackbar('You can only upload a maximum of 4 files', { variant: 'error' });
+        return enqueueSnackbar("You can only upload a maximum of 4 files", {
+          variant: "error",
+        });
       }
 
       const file = e.target.files[0];
@@ -112,7 +114,7 @@ export const NewTweet = () => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
-      const imageUrl = imageData.config.url.split('?')[0];
+      const imageUrl = imageData.config.url.split("?")[0];
       setTweetFiles([...tweetFiles, imageUrl]);
     } catch (error) {
       console.log(error);
@@ -131,12 +133,11 @@ export const NewTweet = () => {
 
   return (
     <Wrapper>
-      {data?.me?.avatar ? <Avatar
-        className="avatar"
-        src={data.me.avatar}
-      /> :
+      {data?.me?.avatar ? (
+        <Avatar className="avatar" src={data.me.avatar} />
+      ) : (
         <PersonIcon className="avatar" />
-      }
+      )}
       <form onSubmit={handleNewTweet}>
         <div className="new-tweet">
           <TextareaAutosize
@@ -147,7 +148,9 @@ export const NewTweet = () => {
             onChange={tweet.onChange}
           />
 
-          {!!tweetFiles.length && <ImageBox files={tweetFiles.map(mapTweetFiles)} />}
+          {!!tweetFiles.length && (
+            <ImageBox files={tweetFiles.map(mapTweetFiles)} />
+          )}
 
           <div className="new-tweet-action">
             <div className="svg-input">
