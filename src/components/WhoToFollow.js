@@ -58,7 +58,7 @@ export const User = ({ user }) => (
 );
 
 export const WhoToFollow = () => {
-  const { loading, error, data } = useQuery(USERS, { variables: { limit: 4, excludeFollows: true } });
+  const { loading, error, data } = useQuery(USERS, { variables: { limit: 4, filter: 'excludeFollowing' } });
 
   if (loading) return <Loader />;
   if (error) return null;

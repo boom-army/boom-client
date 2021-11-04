@@ -13,8 +13,8 @@ export const UNFOLLOW = gql`
 `;
 
 export const USERS = gql`
-  query users($offset: Int, $limit: Int, $excludeFollows: Boolean) {
-    users(offset: $offset, limit: $limit, excludeFollows: $excludeFollows) {
+  query users($offset: Int, $limit: Int, $filter: String) {
+    users(offset: $offset, limit: $limit, filter: $filter) {
       id
       handle
       isFollowing
