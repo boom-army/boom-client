@@ -5,6 +5,7 @@ import { FEED } from "../queries/others";
 import { Loader } from "./Loader";
 import { Tweet } from "./Tweet";
 import { useQuery } from "@apollo/client";
+// import { handleScroll } from "../utils";
 
 const Wrapper = styled.div`
   margin-bottom: 7rem;
@@ -18,6 +19,7 @@ export const FeedList = () => {
     },
   });
 
+  //  TODO: This needs to be consolidated into a util
   const handleScroll = () => {
     const bottom =
       Math.ceil(window.innerHeight + window.scrollY) >=
@@ -30,6 +32,7 @@ export const FeedList = () => {
       });
     }
   };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, {
       passive: true,
