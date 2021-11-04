@@ -2,13 +2,12 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { FeedList } from "../components/FeedList";
 import { NewTweet } from "../components/Tweet";
-import { useQuery } from "@apollo/client";
-import { FEED } from "../queries/others";
+import { useFeedQuery } from "../generated/graphql";
 
 const Wrapper = styled.div``;
 
 export const Home: React.FC = () => {
-  const { loading, error, data, fetchMore } = useQuery(FEED, {
+  const { loading, error, data, fetchMore } = useFeedQuery({
     variables: {
       offset: 0,
       limit: 10,

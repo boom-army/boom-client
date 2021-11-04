@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Loader } from "./Loader";
 import { Tweet } from "./Tweet";
 import { ApolloError } from "@apollo/client";
+import { FeedQuery } from "../generated/graphql";
 
 const Wrapper = styled.div`
   margin-bottom: 7rem;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
 interface Props {
   loading: boolean;
   error: ApolloError | undefined;
-  data: any;
+  data: FeedQuery | undefined;
 };
 
 export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
@@ -26,8 +27,8 @@ export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
 
   return (
     <Wrapper>
-      {data?.feed?.length ? (
-        data.feed.map((tweet: any) => <Tweet key={tweet.id} tweet={tweet} offset={data?.feed?.length} />)
+      {data?.feed.length ? (
+        data.feed.map((tweet) => <Tweet key={tweet.id} tweet={tweet} offset={data.feed.length} />)
       ) : (
         <CustomResponse text="Follow some people to get some feed updates" />
       )}
