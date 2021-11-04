@@ -9,7 +9,7 @@ import { displayError } from "../../utils";
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from "notistack";
 
-const Follow = ({ isFollowing, id, sm = false, relative = false }) => {
+export const Follow = ({ isFollowing, id, sm = false, relative = false }) => {
   const [followState, setFollowState] = useState(isFollowing);
 
   const [followMutation] = useMutation(FOLLOW, {
@@ -44,11 +44,9 @@ const Follow = ({ isFollowing, id, sm = false, relative = false }) => {
 
   return (
     <Box>
-      <Link onClick={handleFollow} >
+      <Link onClick={handleFollow} sx={{ cursor: "pointer"}}>
         {followState ? <PersonRemoveIcon /> : <PersonAddIcon />}
       </Link>
     </Box>
   );
 };
-
-export default Follow;

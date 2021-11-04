@@ -4,7 +4,7 @@ import styled from "styled-components";
 import CoverPhoto from "../../styles/CoverPhoto";
 import UserAvatar from "../UserAvatar";
 import { Button, Box, Grid } from "@mui/material";
-import Follow from "./Follow";
+import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
 import CustomResponse from "../CustomResponse";
 

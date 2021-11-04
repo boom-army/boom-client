@@ -1,7 +1,7 @@
 import React from "react";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Avatar from "@mui/material/Avatar";
-import Follow from "./Profile/Follow";
+import { Follow } from "./Profile/Follow";
 import {
   Box,
   Grid,

@@ -1,1 +1,1 @@
-export { Follow } from './Follow';
+export { Connect } from './Connect';

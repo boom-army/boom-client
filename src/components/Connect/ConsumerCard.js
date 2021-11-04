@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
+import { Follow } from "../Profile/Follow";
 
 export const ConsumerCard = ({ consumer }) => {
   console.log(consumer);
@@ -32,16 +32,23 @@ export const ConsumerCard = ({ consumer }) => {
             alt={`${consumer.handle} cover photo`}
             src={consumer.avatar}
           />
-          <Typography gutterBottom variant="body" component="div" sx={{ paddingTop: 1 }}>
+          <Typography
+            gutterBottom
+            variant="body"
+            component="div"
+            sx={{ paddingTop: 1 }}
+          >
             {consumer.consumerName}
           </Typography>
         </Stack>
         <Typography variant="body2">{consumer.bio}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary" sx={{ alignSelf: 'flex-end' }}>
-          Follow
-        </Button>
+        <Follow
+          sm
+          id={consumer.id}
+          isFollowing={consumer.isFollowing}
+        />
       </CardActions>
     </Card>
   );

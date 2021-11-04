@@ -6,7 +6,7 @@ import { Loader } from "../Loader";
 import { USERS } from "../../queries/follow";
 import { useQuery } from "@apollo/client";
 
-export const Follow = () => {
+export const Connect = () => {
   const { loading, error, data } = useQuery(USERS);
 
   if (loading) return <Loader />;

@@ -1,8 +1,8 @@
 import React from "react";
-import { Follow } from '../components/Connect';
+import { Connect } from '../components/Connect';
 
-export const Connect = () => {
+export const ConnectView = () => {
 	return (
-		<Follow />
+		<Connect />
 	);
 };
