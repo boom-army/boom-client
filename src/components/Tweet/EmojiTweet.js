@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { Emoji } from "emoji-mart";
 import { FEED, MENTIONS } from "../../queries/others";
 import { Loader } from "../Loader";
@@ -13,7 +13,31 @@ import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
 import { EmojiPicker } from "../Emoji/Picker";
+import styled from "styled-components";
 import "emoji-mart/css/emoji-mart.css";
+
+const ReactionWrapper = styled.div`
+  display: flex;
+
+  .emoji-count {
+    border-radius: 7px;
+    padding: 4px 4px 0;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+
+  .emoji-count.mine {
+    border: 1px solid ${(props) => props.theme.tertiaryColor};
+    background: ${(props) => props.theme.tertiaryColor2};
+  }
+
+  .emoji-number {
+    font-size: 14px;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    color: ${(props) => props.theme.secondaryColor};
+  }
+`;
 
 export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
   const { sosolProgram } = useSosolProgram();
@@ -71,7 +95,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
   if (loading) return <Loader />;
 
   return (
-    <div>
+    <ReactionWrapper>
       {reactions && <ReactionList reactions={reactions} />}
 
       <EmojiPicker
@@ -79,6 +103,6 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
         customIcon={<SmilePlusIcon />}
         dismissOnClick={true}
       />
-    </div>
+    </ReactionWrapper>
   );
 };

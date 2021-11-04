@@ -21,7 +21,7 @@ export const Home: React.FC = () => {
     if (bottom) {
       fetchMore({
         variables: {
-          offset: data?.feed?.length,
+          offset: data?.feed?.length ?? 0,
         },
       });
     }

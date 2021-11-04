@@ -51,22 +51,6 @@ const PickerWrapper = styled.span`
   .emoji-pick:hover svg path {
     fill: ${(props) => props.theme.accentColor};
   }
-  .emoji-count {
-    border-radius: 7px;
-    padding: 4px 4px 0;
-    margin-right: 4px;
-    cursor: pointer;
-  }
-  .emoji-count.mine {
-    border: 1px solid ${(props) => props.theme.tertiaryColor};
-    background: ${(props) => props.theme.tertiaryColor2};
-  }
-  .emoji-number {
-    font-size: 14px;
-    margin-left: 2px;
-    vertical-align: text-bottom;
-    color: ${(props) => props.theme.secondaryColor};
-  }
   @media screen and (max-width: 430px) {
     .emoji-mart {
       position: fixed;
@@ -108,7 +92,7 @@ export const EmojiPicker = ({ emojiHandler, customIcon, dismissOnClick }) => {
   return (
     <PickerWrapper>
       <span className="emoji-pick" onClick={() => togglePicker(!picker)}>
-        {customIcon ? customIcon : <SmileIcon />}
+        {customIcon ?? <SmileIcon />}
       </span>
 
       {picker && (
