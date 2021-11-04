@@ -27,7 +27,7 @@ export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
 
   return (
     <Wrapper>
-      {data?.feed.length ? (
+      {data?.feed?.length ? (
         data.feed.map((tweet) => <Tweet key={tweet.id} tweet={tweet} offset={data.feed.length} />)
       ) : (
         <CustomResponse text="Follow some people to get some feed updates" />
