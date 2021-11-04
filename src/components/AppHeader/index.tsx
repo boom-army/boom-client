@@ -11,7 +11,8 @@ import {
 } from "@solana/wallet-adapter-material-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { AppBar, Box, Container, Grid, Toolbar } from "@mui/material";
-import { FEED, USERS } from "../../queries/others";
+import { FEED } from "../../queries/others";
+import { USERS } from "../../queries/follow";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
