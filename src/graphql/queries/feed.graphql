@@ -1,0 +1,30 @@
+query feed($offset: Int!, $limit: Int) {
+  feed(offset: $offset, limit: $limit) {
+    id
+    text
+    tags
+    isTweetMine
+    commentsCount
+    retweetsCount
+    isRetweet
+    files {
+      id
+      url
+    }
+    user {
+      id
+      publicAddress
+      avatar
+      handle
+      consumerName
+    }
+    reactions {
+      id
+      emojiId
+      skin
+      isMine
+      count
+    }
+    createdAt
+  }
+}

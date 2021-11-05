@@ -10,7 +10,6 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Wrapper = styled.nav`
-  border-right: 1px solid ${(props) => props.theme.tertiaryColor};
   font-weight: 500;
   min-height: 100vh;
 

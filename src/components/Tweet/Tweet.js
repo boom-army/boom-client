@@ -21,6 +21,10 @@ const Wrapper = styled.div`
     margin-bottom: 1em;
   }
 
+  .tweet-info {
+    width: 100%;
+  }
+
   .tweet-info-user {
     display: flex;
   }
@@ -49,11 +53,11 @@ const Wrapper = styled.div`
 
   div.tweet-stats {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 
     div {
       margin-right: 4rem;
-      min-width: 40px;
       color: ${(props) => props.theme.secondaryColor};
     }
 
@@ -147,9 +151,12 @@ export const Tweet = ({ tweet, offset }) => {
         <ImageBox files={files} />
 
         <div className="tweet-stats">
-          <span>
-            <EmojiTweet tweetId={id} userPubKey={user?.publicAddress} reactions={reactions} offset={offset} />
-          </span>
+          <EmojiTweet
+            tweetId={id}
+            userPubKey={user?.publicAddress}
+            reactions={reactions}
+            offset={offset}
+          />
 
           <div>
             <span className="comment">
