@@ -13,7 +13,8 @@
     "predeploy": "git pull --ff-only && yarn && yarn build",
     "deploy:prod": "bash ./scripts/prod-deploy.sh",
     "deploy:ar": "arweave deploy-dir build --key-file ",
-    "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\""
+    "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
+    "gen:graphql": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
@@ -133,6 +134,10 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.2.2",
+    "@graphql-codegen/typescript": "2.3.0",
+    "@graphql-codegen/typescript-operations": "^2.2.0",
+    "@graphql-codegen/typescript-react-apollo": "3.2.0",
     "@tsconfig/recommended": "^1.0.1",
     "@types/bn.js": "^5.1.0",
     "@types/bs58": "^4.0.1",
@@ -189,7 +194,7 @@
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "testEnvironment": "jsdom",
-    "testRunner": "/home/ezy/Sites-c/sosol/alpha/node_modules/jest-circus/runner.js",
+    "testRunner": "<rootDir>/node_modules/jest-circus/runner.js",
     "transform": {
       "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",

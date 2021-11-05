@@ -3,8 +3,8 @@ import { useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import ProfileInfo from "./ProfileInfo";
-import {Tweet} from "../Tweet";
-import {Loader} from "../Loader";
+import { Tweet } from "../Tweet";
+import { Loader } from "../Loader";
 import { PROFILE } from "../../queries/profile";
 
 const Wrapper = styled.div`
@@ -45,8 +45,8 @@ export const Profile = () => {
       <ProfileInfo profile={data && data.profile} />
       {data && data.profile && data.profile.tweets && data.profile.tweets.length
         ? data.profile.tweets.map((tweet) => (
-            <Tweet key={tweet.id} tweet={tweet} />
-          ))
+          <Tweet key={tweet.id} tweet={tweet} />
+        ))
         : null}
     </Wrapper>
   );

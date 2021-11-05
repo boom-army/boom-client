@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -9,8 +9,15 @@ import { MasterTweet } from "./components/Tweet/MasterTweet";
 import { Profile } from "./components/Profile/Profile";
 import { Wallet } from "./contexts/wallet";
 import { Container, Grid } from "@mui/material";
+import { ThemeContext } from "./contexts/theme";
 
 export function Routes() {
+  const { theme } = useContext(ThemeContext);
+
+  const middleColStyles = {
+    borderRight: `1px solid ${theme.tertiaryColor}`,
+    borderLeft: `1px solid ${theme.tertiaryColor}`,
+  };
 
   return (
     <>
@@ -24,7 +31,7 @@ export function Routes() {
                   <Grid item xs={1} sm={1} md={2}>
                     <Nav />
                   </Grid>
-                  <Grid item xs={7}>
+                  <Grid item xs={7} sx={middleColStyles}>
                     <Switch>
                       <Route exact path="/" component={Home} />
                       <Route exact path="/connect" component={ConnectView} />
