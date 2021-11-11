@@ -36,6 +36,12 @@ export const PROFILE = gql`
           id
           url
         }
+        gif {
+          id
+          title
+          fixedHeightUrl
+          originalUrl
+        }
         reactions {
           id
           emojiId

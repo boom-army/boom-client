@@ -39,17 +39,17 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   position: relative;
-  cursor: pointer;
+  cursor: ${props => props.disableLightbox ? 'inherit' : 'pointer'}
 `;
 
-const ImageColumnContainer = ({ files, isLeftCol }) => {
+const ImageColumnContainer = ({ files, isLeftCol, disableLightbox }) => {
   const className = `tweet-image-col ${isLeftCol ? 'tweet-image-left-col' : 'tweet-image-right-col'}`
   return (
     <div className={className}>
       <ImageColumn filesLength={files.length}>
         {files.map((file, index, arr) => (
           <ImageWrapper key={file.id} hasFullHeight={arr.length === 1} hasBottomMargin={arr.length > 1 && index === 0} fileIndex={index}>
-            <Image key={file.id} src={file.url} alt="tweet-file" />
+            <Image disableLightbox={disableLightbox} key={file.id} src={file.url} alt="tweet-file" />
           </ImageWrapper>
         ))}
       </ImageColumn>
@@ -57,7 +57,7 @@ const ImageColumnContainer = ({ files, isLeftCol }) => {
   );
 };
 
-export const ImageBox = ({ files }) => {
+export const ImageBox = ({ files, disableLightbox }) => {
   const options = {
     settings: {
       lightboxTransitionSpeed: 0,
@@ -76,6 +76,17 @@ export const ImageBox = ({ files }) => {
   const rightColumnFiles = files.filter((_, index, arr) => {
     return index === 1 || (arr.length === 3 && index === 2) || (arr.length === 4 && index === 3);
   });
+
+  if (disableLightbox) return (
+    <ImageBoxWrapper>
+      {!!files.length && (
+        <div>
+          {!!leftColumnFiles.length && <ImageColumnContainer disableLightbox files={leftColumnFiles} isLeftCol={true} />}
+          {!!rightColumnFiles.length && <ImageColumnContainer disableLightbox files={rightColumnFiles} isLeftCol={false} />}
+        </div>
+      )}
+    </ImageBoxWrapper>
+  )
 
   return (
     <ImageBoxWrapper>

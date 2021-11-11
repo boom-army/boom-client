@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const NEW_TWEET = gql`
-  mutation newTweet($text: String!, $files: [String!]!, $tags: [String!]!, $mentions: [String!]!) {
-    newTweet(text: $text, files: $files, tags: $tags, mentions: $mentions) {
+  mutation newTweet($text: String!, $files: [String!]!, $tags: [String!]!, $mentions: [String!]!, $gif: GifInput) {
+    newTweet(text: $text, files: $files, tags: $tags, mentions: $mentions, gif: $gif) {
       id
       text
       tags
@@ -48,6 +48,10 @@ export const TWEET = gql`
         avatar
       }
       files {
+        id
+        url
+      }
+      gif {
         id
         url
       }
