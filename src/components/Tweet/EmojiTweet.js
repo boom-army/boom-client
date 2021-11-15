@@ -5,7 +5,7 @@ import { Loader } from "../Loader";
 import { PublicKey } from "@solana/web3.js";
 import { SmilePlusIcon } from "../Icons";
 import { TOGGLE_REACTION } from "../../queries/tweet";
-import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
+import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { displayError } from "../../utils";
 import { interactionInstruction } from "../../utils/sosol-web3";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
@@ -48,31 +48,46 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
-    refetchQueries: [{ query: FEED, variables: { offset: 0, limit: offset } }, { query: MENTIONS }], // TODO: get dyunamic page length data
+    refetchQueries: [
+      { query: FEED, variables: { offset: 0, limit: offset } },
+      { query: MENTIONS },
+    ], // TODO: get dyunamic page length data
   });
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleReaction = useCallback(async ({ emojiId, skin }) => {
-    try {
-      if (!wallet.publicKey) throw new WalletNotConnectedError();
-      const signature = await interactionInstruction(
-        connection,
-        sosolProgram,
-        wallet.publicKey,
-        new PublicKey(userPubKey),
-        new PublicKey(process.env.REACT_APP_CONTENT_HOST),
-        100000000 // 0.1 SSL
-      );
+  const handleReaction = useCallback(
+    async ({ emojiId, skin }) => {
+      try {
+        if (!wallet.publicKey) throw new WalletNotConnectedError();
+        const signature = await interactionInstruction(
+          connection,
+          sosolProgram,
+          wallet.publicKey,
+          new PublicKey(userPubKey),
+          new PublicKey(process.env.REACT_APP_CONTENT_HOST),
+          100000000 // 0.1 SSL
+        );
 
-      await setEmoji({ emojiId, skin });
-      await toggleReactionMutation();
-      enqueueSnackbar(`Transaction complete: ${signature}`, { variant: "success" });
-    } catch (err) {
-      console.log(err);
-      return displayError(err, enqueueSnackbar);
-    }
-  }, [sosolProgram, wallet, toggleReactionMutation, connection, userPubKey, enqueueSnackbar]);
+        setEmoji({ emojiId, skin });
+        await toggleReactionMutation();
+        enqueueSnackbar(`Transaction complete: ${signature}`, {
+          variant: "success",
+        });
+      } catch (err) {
+        console.log(err);
+        return displayError(err, enqueueSnackbar);
+      }
+    },
+    [
+      sosolProgram,
+      wallet,
+      toggleReactionMutation,
+      connection,
+      userPubKey,
+      enqueueSnackbar,
+    ]
+  );
 
   const ReactionList = ({ reactions }) => {
     return reactions
@@ -99,7 +114,9 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
       {reactions && <ReactionList reactions={reactions} />}
 
       <EmojiPicker
-        emojiHandler={({ id: emojiId, skin }) => handleReaction({ emojiId, skin })}
+        emojiHandler={({ id: emojiId, skin }) =>
+          handleReaction({ emojiId, skin })
+        }
         customIcon={<SmilePlusIcon />}
         dismissOnClick={true}
       />
