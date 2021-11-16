@@ -18,9 +18,7 @@ export const Connect = () => {
     const bottom =
       Math.ceil(window.innerHeight + window.scrollY) >=
       document.documentElement.scrollHeight;
-    console.log(bottom);
     if (bottom) {
-      console.log(data?.users?.length);
       fetchMore({
         variables: {
           offset: data?.users?.length,
