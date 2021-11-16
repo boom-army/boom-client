@@ -3,7 +3,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import { Box, Link } from "@mui/material";
 import { FEED } from "../../queries/others";
-import { USERS } from "../../queries/follow";
+import { USER_FOLLOW } from "../../queries/follow";
 import { FOLLOW, UNFOLLOW } from "../../queries/follow";
 import { displayError } from "../../utils";
 import { useMutation } from '@apollo/client';
@@ -14,12 +14,12 @@ export const Follow = ({ isFollowing, id, sm = false, relative = false }) => {
 
   const [followMutation] = useMutation(FOLLOW, {
     variables: { id },
-    refetchQueries: [{ query: FEED }, { query: USERS }],
+    refetchQueries: [{ query: FEED }, { query: USER_FOLLOW }],
   });
 
   const [unfollowMutation] = useMutation(UNFOLLOW, {
     variables: { id },
-    refetchQueries: [{ query: FEED }, { query: USERS }],
+    refetchQueries: [{ query: FEED }, { query: USER_FOLLOW }],
   });
 
   const { enqueueSnackbar } = useSnackbar();
