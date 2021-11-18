@@ -8,6 +8,7 @@ export const Following: React.FC = () => {
     variables: {
       offset: 0,
       limit: 10,
+      global: false,
     },
     fetchPolicy: "no-cache",
   });
