@@ -154,6 +154,7 @@ export type Query = {
   searchByTweet: Array<Tweet>;
   searchByUser: Array<User>;
   tweet: Tweet;
+  userFollow: Array<User>;
   users: Array<User>;
 };
 
@@ -186,6 +187,19 @@ export type QuerySearchByUserArgs = {
 
 export type QueryTweetArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryUserFollowArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryUsersArgs = {
+  filter?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
 
 export type Reaction = {
