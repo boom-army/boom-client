@@ -8,7 +8,9 @@ export const Home: React.FC = () => {
     variables: {
       offset: 0,
       limit: 10,
+      global: true,
     },
+    fetchPolicy: "no-cache",
   });
 
   const handleScroll = () => {

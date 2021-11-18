@@ -160,6 +160,7 @@ export type Query = {
 
 
 export type QueryFeedArgs = {
+  global?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -275,6 +276,7 @@ export type User = {
 export type FeedQueryVariables = Exact<{
   offset: Scalars['Int'];
   limit?: Maybe<Scalars['Int']>;
+  global?: Maybe<Scalars['Boolean']>;
 }>;
 
 
@@ -282,8 +284,8 @@ export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Twee
 
 
 export const FeedDocument = gql`
-    query feed($offset: Int!, $limit: Int) {
-  feed(offset: $offset, limit: $limit) {
+    query feed($offset: Int!, $limit: Int, $global: Boolean) {
+  feed(offset: $offset, limit: $limit, global: $global) {
     id
     text
     tags
@@ -328,6 +330,7 @@ export const FeedDocument = gql`
  *   variables: {
  *      offset: // value for 'offset'
  *      limit: // value for 'limit'
+ *      global: // value for 'global'
  *   },
  * });
  */

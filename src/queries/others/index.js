@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const FEED = gql`
-  query feed($offset: Int!, $limit: Int) {
-    feed(offset: $offset, limit: $limit) {
+  query feed($offset: Int!, $limit: Int, $global: Boolean) {
+    feed(offset: $offset, limit: $limit, global: $global) {
       id
       text
       tags
