@@ -1,8 +1,10 @@
-import { useState, useCallback } from "react";
+import "emoji-mart/css/emoji-mart.css";
+import styled from "styled-components";
 import { Emoji } from "emoji-mart";
+import { EmojiPicker } from "../Emoji/Picker";
 import { FEED, MENTIONS } from "../../queries/others";
 import { Loader } from "../Loader";
-import { PublicKey } from "@solana/web3.js";
+import { PublicKey, Transaction } from "@solana/web3.js";
 import { SmilePlusIcon } from "../Icons";
 import { TOGGLE_REACTION } from "../../queries/tweet";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
@@ -12,9 +14,9 @@ import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
-import { EmojiPicker } from "../Emoji/Picker";
-import styled from "styled-components";
-import "emoji-mart/css/emoji-mart.css";
+import { useState, useCallback } from "react";
+import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { SOSOL_TOKEN_ID } from "../../utils/ids";
 
 const ReactionWrapper = styled.div`
   display: flex;
@@ -44,7 +46,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
   const [emoji, setEmoji] = useState({});
 
   const { connection } = useConnection();
-  const wallet = useAnchorWallet();
+  const anchorWallet = useAnchorWallet();
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
@@ -59,11 +61,60 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
   const handleReaction = useCallback(
     async ({ emojiId, skin }) => {
       try {
-        if (!wallet.publicKey) throw new WalletNotConnectedError();
+        if (!anchorWallet.publicKey) throw new WalletNotConnectedError();
+        const sosolMint = new Token(
+          connection,
+          SOSOL_TOKEN_ID,
+          TOKEN_PROGRAM_ID,
+          anchorWallet.publicKey
+        );
+        const toCreatorAcc = new PublicKey(userPubKey);
+        const associatedDestinationTokenAddr =
+          await Token.getAssociatedTokenAddress(
+            sosolMint.associatedProgramId,
+            sosolMint.programId,
+            SOSOL_TOKEN_ID,
+            toCreatorAcc
+          );
+
+        const receiverAccount = await connection.getAccountInfo(
+          associatedDestinationTokenAddr
+        );
+
+        // Create receiver sosol acc if null
+        if (receiverAccount === null) {
+          const instructions = [];
+          instructions.push(
+            Token.createAssociatedTokenAccountInstruction(
+              sosolMint.associatedProgramId,
+              sosolMint.programId,
+              SOSOL_TOKEN_ID,
+              associatedDestinationTokenAddr,
+              toCreatorAcc,
+              anchorWallet.publicKey
+            )
+          );
+
+          const transaction = new Transaction().add(...instructions);
+          transaction.feePayer = anchorWallet.publicKey;
+          transaction.recentBlockhash = (
+            await connection.getRecentBlockhash()
+          ).blockhash;
+
+          const anchorTx = await anchorWallet.signTransaction(transaction);
+
+          const transactionSignature = await connection.sendRawTransaction(
+            anchorTx.serialize(),
+            { skipPreflight: true }
+          );
+
+          await connection.confirmTransaction(transactionSignature);
+        }
+
         const signature = await interactionInstruction(
           connection,
           sosolProgram,
-          wallet.publicKey,
+          anchorWallet.publicKey,
           new PublicKey(userPubKey),
           new PublicKey(process.env.REACT_APP_CONTENT_HOST),
           100000000 // 0.1 SSL
@@ -81,7 +132,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
     },
     [
       sosolProgram,
-      wallet,
+      anchorWallet,
       toggleReactionMutation,
       connection,
       userPubKey,

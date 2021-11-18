@@ -15,6 +15,10 @@ export let SWAP_PROGRAM_ID = new PublicKey(
   "SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8"
 );
 
+export let SOSOL_TOKEN_ID = new PublicKey(
+  "soso1vCmdxwEZqU47M4NZ4MxZH19ppgqF1auG7dP3wz"
+);
+
 export const PROGRAM_IDS = [
   {
     name: "mainnet-beta",
