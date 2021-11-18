@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect, useMemo} from "react";
-import base58 from "bs58";   
+import React, { useCallback, useEffect, useMemo } from "react";
+import base58 from "bs58";
 import { CurrentUser } from "../CurrentUser";
 import { formatNumber } from "../../utils/utils";
 import { useNativeAccount } from "../../contexts/accounts";
@@ -44,18 +44,22 @@ export const AppHeader = () => {
     }
 
     if (!signMessage) {
-      enqueueSnackbar("Wallet does not support message signing!", { variant: "error" });
+      enqueueSnackbar("Wallet does not support message signing!", {
+        variant: "error",
+      });
       return;
     }
 
     try {
-      const { data: { address } } = await getNonce({
+      const {
+        data: { address },
+      } = await getNonce({
         variables: { publicAddress: walletPublicKey },
       });
       if (address.hasPublicAddress) {
         const data = new TextEncoder().encode(address.user.nonce);
         const signature = await signMessage(data);
-        
+
         await setLogin({
           variables: {
             publicAddress: walletPublicKey,
@@ -63,19 +67,24 @@ export const AppHeader = () => {
           },
         });
         window.location.reload();
-        enqueueSnackbar(`Wallet ${walletPublicKey} connected to account. Happy posting.`, { variant: "success" });
+        enqueueSnackbar(
+          `Wallet ${walletPublicKey} connected to account. Happy posting.`,
+          { variant: "success" }
+        );
       } else {
         await setLogin({ variables: { publicAddress: walletPublicKey } });
-        enqueueSnackbar(`Wallet ${walletPublicKey} created for account.`, { variant: "success" });
+        enqueueSnackbar(`Wallet ${walletPublicKey} created for account.`, {
+          variant: "success",
+        });
       }
     } catch (error) {
       enqueueSnackbar(`Error connecting: ${error}`, { variant: "error" });
     }
-  }, [signMessage, getNonce, setLogin, walletPublicKey, enqueueSnackbar])
+  }, [signMessage, getNonce, setLogin, walletPublicKey, enqueueSnackbar]);
 
   useEffect(() => {
-    if (wallet && !token && connected) signin()
-  } , [wallet, signin, token, connected])
+    if (wallet && !token && connected) signin();
+  }, [wallet, signin, token, connected]);
 
   const TopBar = (
     <AppBar
