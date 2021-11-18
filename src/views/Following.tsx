@@ -10,7 +10,7 @@ export const Following: React.FC = () => {
       limit: 10,
       global: false,
     },
-    fetchPolicy: "no-cache",
+    fetchPolicy: "network-only",
   });
 
   const handleScroll = () => {
