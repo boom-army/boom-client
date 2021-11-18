@@ -3,7 +3,7 @@ import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { EditProfile } from "./components/Profile/EditProfile";
-import { Home, Suggestion, Nav, ConnectView, Notifications } from "./views";
+import { Home, Suggestion, Nav, ConnectView, Notifications, Following } from "./views";
 import { MarketProvider } from "./contexts/market";
 import { MasterTweet } from "./components/Tweet/MasterTweet";
 import { Profile } from "./components/Profile/Profile";
@@ -34,6 +34,7 @@ export function Routes() {
                   <Grid item xs={7} sx={middleColStyles}>
                     <Switch>
                       <Route exact path="/" component={Home} />
+                      <Route exact path="/following" component={Following} />
                       <Route exact path="/connect" component={ConnectView} />
                       <Route
                         exact

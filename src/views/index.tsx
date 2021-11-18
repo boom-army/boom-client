@@ -4,3 +4,4 @@ export { Home } from "./Home";
 export { Nav } from "./Nav";
 export { Notifications } from "./Notifications";
 export { Suggestion } from "./Suggestion";
+export { Following } from "./Following";

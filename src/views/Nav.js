@@ -4,8 +4,9 @@ import { useQuery } from "@apollo/client";
 import { NavLink } from "react-router-dom";
 import { MorePopUp } from "../components/MorePopup";
 import { PROFILE } from "../queries/profile";
-import HomeIcon from "@mui/icons-material/Home";
+import Person from "@mui/icons-material/Person";
 import GroupIcon from "@mui/icons-material/Group";
+import Language from "@mui/icons-material/Language";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
@@ -109,7 +110,12 @@ export const Nav = () => {
       <ul>
         <li>
           <NavLink exact activeClassName="selected" to="/">
-            <HomeIcon /> <span>Home</span>
+            <Language /> <span>Global</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName="selected" to="/following">
+            <Person /> <span>Following</span>
           </NavLink>
         </li>
         <li>
