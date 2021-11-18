@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Box } from '@mui/system';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const VideoBoxWrapper = styled.div`
   display: flex;
@@ -28,9 +30,10 @@ interface Gif {
 
 interface videoProps {
   gif: Gif;
+  onClose?: (() => void) | undefined,
 }
 
-export const Video: React.FC<videoProps> = ({ gif }) => {
+export const Video: React.FC<videoProps> = ({ gif, onClose }) => {
   const { fixedHeightUrl, title } = gif;
 
   const handleVideoPlayerClick = (e: React.MouseEvent<HTMLVideoElement>) => {
@@ -39,6 +42,27 @@ export const Video: React.FC<videoProps> = ({ gif }) => {
 
   return (
     <VideoBoxWrapper>
+      {onClose && (
+        <Box sx={{
+          position: "absolute",
+          left: "3%",
+          top: "3%",
+          padding: "5px",
+          borderRadius: "50%",
+          background: "rgba(0, 0, 0, 0.7)",
+          lineHeight: "1.5",
+          fontSize: "14px",
+          zIndex: "99",
+          '&:hover': {
+            background: "rgba(0, 0, 0, 0.57)",
+          }
+        }}>
+          <IconButton onClick={onClose} aria-label="close" size="medium">
+            <CloseIcon />
+          </IconButton>
+        </Box>
+      )}
+
       <video
         onClick={e => handleVideoPlayerClick(e)}
         preload="auto"

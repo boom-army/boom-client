@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { GIFObject } from 'giphy-api';
 
 export type GiphyContextType = {
-  searchGiphy: Array<Search>,
-  setSearchGiphy: React.Dispatch<React.SetStateAction<Search[]>> | (() => void),
+  searchGiphyCache: Array<Search>,
+  setSearchGiphyCache: React.Dispatch<React.SetStateAction<Search[]>> | (() => void),
 };
 
 export const GiphyContext = React.createContext<GiphyContextType>({
-  searchGiphy: [],
-  setSearchGiphy: () => console.warn("no setStateAction provided"),
+  searchGiphyCache: [],
+  setSearchGiphyCache: () => console.warn("no setStateAction provided"),
 });
 
 export interface Search {
@@ -17,10 +17,10 @@ export interface Search {
 };
 
 export const GiphyContextProvider: React.FC = ({ children }) => {
-  const [searchGiphy, setSearchGiphy] = useState<Array<Search>>([]);
+  const [searchGiphyCache, setSearchGiphyCache] = useState<Array<Search>>([]);
 
   return (
-    <GiphyContext.Provider value={{ searchGiphy, setSearchGiphy }}>
+    <GiphyContext.Provider value={{ searchGiphyCache, setSearchGiphyCache }}>
       {children}
     </GiphyContext.Provider>
   );

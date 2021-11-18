@@ -61,7 +61,7 @@ export const GiphyModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<any>(null);
   const [searchResults, setSearchResults] = useState<Search | null>(null); // current searched gifs
-  const { searchGiphy, setSearchGiphy } = useContext(GiphyContext); // search cache
+  const { searchGiphyCache, setSearchGiphyCache } = useContext(GiphyContext); // search cache
   const { theme } = useContext(ThemeContext);
   const handleClose = () => setOpen(false);
   const handleOpen = () => {
@@ -74,7 +74,7 @@ export const GiphyModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction
   const imageBoxRef = useRef<any>(null);
 
   const handleScroll = debounce(async () => {
-    if (!imageBoxRef.current) return;
+    if (!imageBoxRef.current || !input) return;
     const { scrollHeight, scrollTop, clientHeight } = imageBoxRef.current;
 
     if (scrollHeight - scrollTop - clientHeight >= 1) return;
@@ -90,17 +90,17 @@ export const GiphyModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction
 
       if (!result.gif.length) return;
 
-      const updatedSearchCache = searchGiphy.map(search => {
-        if (search.query === result.query) {
+      const updatedSearchCache = searchGiphyCache.map(cache => {
+        if (cache.query === result.query) {
           return {
-            query: search.query,
-            gif: [...search.gif, ...result.gif],
+            query: cache.query,
+            gif: [...cache.gif, ...result.gif],
           };
         }
-        return search;
+        return cache;
       })
 
-      setSearchGiphy(updatedSearchCache);
+      setSearchGiphyCache(updatedSearchCache);
       const updatedGifs = updatedSearchCache.find(cache => cache.query === input) || null;
       setSearchResults(updatedGifs);
     } finally {
@@ -108,10 +108,9 @@ export const GiphyModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction
     }
   }, 300);
 
-  const memoDebouncedScrollHandler = useCallback(handleScroll, [searchResults, searchGiphy]);
+  const memoDebouncedScrollHandler = useCallback(handleScroll, [searchResults, searchGiphyCache, input]);
 
   useEffect(() => {
-    console.log('listener')
     const imageListNode = imageBoxRef.current;
 
     if (!imageListNode) return;
@@ -124,7 +123,7 @@ export const GiphyModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction
 
   const handleInputQuery = debounce(async (
     value: string,
-    searchGiphy: Search[],
+    searchGiphyCache: Search[],
   ) => {
     setError(false);
 
@@ -133,7 +132,7 @@ export const GiphyModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction
       return setSearchResults(null);
     }
 
-    const cachedGif = searchGiphy.find(gif => gif.query === value);
+    const cachedGif = searchGiphyCache.find(gif => gif.query === value);
 
     if (cachedGif) {
       setIsLoading(false);
@@ -142,7 +141,7 @@ export const GiphyModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction
 
     try {
       const searchResult = await queryGiphy(value);
-      setSearchGiphy([...searchGiphy, searchResult]);
+      setSearchGiphyCache([...searchGiphyCache, searchResult]);
       setSearchResults(searchResult);
       setError(false);
     } catch (error) {
@@ -156,9 +155,8 @@ export const GiphyModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction
   const memoDebouncedQuery = useCallback(handleInputQuery, []);
 
   useEffect(() => {
-    console.log('init')
-    memoDebouncedQuery(input, searchGiphy);
-  }, [input, memoDebouncedQuery, searchGiphy]);
+    memoDebouncedQuery(input, searchGiphyCache);
+  }, [input, memoDebouncedQuery, searchGiphyCache]);
 
   return (
     <>

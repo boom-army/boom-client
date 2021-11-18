@@ -53,7 +53,9 @@ export const TWEET = gql`
       }
       gif {
         id
-        url
+        title
+        fixedHeightUrl
+        originalUrl
       }
       commentsCount
       retweetsCount

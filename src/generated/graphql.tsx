@@ -50,7 +50,6 @@ export type Gif = {
 
 export type GifInput = {
   fixedHeightUrl: Scalars['String'];
-  id: Scalars['ID'];
   originalUrl: Scalars['String'];
   title: Scalars['String'];
 };

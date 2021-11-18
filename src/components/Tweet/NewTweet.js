@@ -172,7 +172,7 @@ export const NewTweet = ({ feed }) => {
           {gif && (
             <Box sx={{ marginBottom: 2 }}>
               <Stack direction="column">
-                <Video gif={createGifInput(gif)} />
+                <Video gif={createGifInput(gif)} onClose={() => setGif(null)} />
                 <AttributionLink src={gif.url} />
               </Stack>
             </Box>
@@ -184,9 +184,9 @@ export const NewTweet = ({ feed }) => {
 
           <div className="new-tweet-action">
             <div className="svg-input">
-              {!gif && <EmojiPicker emojiHandler={pickedEmoji => tweet.setValue(tweet.value + pickedEmoji.native)} />}
+              <EmojiPicker emojiHandler={pickedEmoji => tweet.setValue(tweet.value + pickedEmoji.native)} />
 
-              <GiphyModal setGif={setGif} />
+              {!tweetFiles.length && <GiphyModal setGif={setGif} />}
 
               {!gif && (
                 <>

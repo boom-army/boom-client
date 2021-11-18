@@ -5,6 +5,7 @@ import { Loader } from "./Loader";
 import { Tweet } from "./Tweet";
 import { ApolloError } from "@apollo/client";
 import { FeedQuery } from "../generated/graphql";
+import { Box } from '@mui/system';
 
 const Wrapper = styled.div`
   margin-bottom: 7rem;
@@ -17,7 +18,7 @@ interface Props {
 };
 
 export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
-  if (loading) return <Loader />;
+  if (loading) return <Box sx={{ marginTop: "1rem" }}><Loader /></Box>;
   if (error) return <CustomResponse text={error.message} />;
 
   // logout the user if removed from db
