@@ -81,6 +81,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
           associatedDestinationTokenAddr
         );
 
+        // TODO: move this out into a method in utils to use across the site
         // Create receiver sosol acc if null
         if (receiverAccount === null) {
           const instructions = [];
