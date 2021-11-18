@@ -18,6 +18,8 @@ import { EmojiPicker } from "../Emoji/Picker";
 import { GiphyModal } from "../Giphy/Modal";
 import { Box } from '@mui/system';
 import { Video } from '../Giphy/Video';
+import Stack from '@mui/material/Stack';
+import { AttributionLink } from '../Giphy/AttributionLink';
 
 const Wrapper = styled.div`
   display: flex;
@@ -169,7 +171,10 @@ export const NewTweet = ({ feed }) => {
 
           {gif && (
             <Box sx={{ marginBottom: 2 }}>
-              <Video gif={createGifInput(gif)} />
+              <Stack direction="column">
+                <Video gif={createGifInput(gif)} />
+                <AttributionLink src={gif.url} />
+              </Stack>
             </Box>
           )}
 
