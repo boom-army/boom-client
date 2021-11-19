@@ -33,7 +33,7 @@ interface videoProps {
   onClose?: (() => void) | undefined,
 }
 
-export const Video: React.FC<videoProps> = ({ gif, onClose }) => {
+export const VideoContainer: React.FC<videoProps> = ({ gif, onClose }) => {
   const { fixedHeightUrl, title } = gif;
 
   const handleVideoPlayerClick = (e: React.MouseEvent<HTMLVideoElement>) => {

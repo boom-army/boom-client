@@ -15,9 +15,9 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { ImageBox } from "../ImageBox";
 import { EmojiPicker } from "../Emoji/Picker";
-import { GiphyModal } from "../Giphy/Modal";
+import { SearchModal } from "../Giphy/SearchModal";
 import { Box } from '@mui/system';
-import { Video } from '../Giphy/Video';
+import { VideoContainer } from '../Giphy/VideoContainer';
 import Stack from '@mui/material/Stack';
 import { AttributionLink } from '../Giphy/AttributionLink';
 
@@ -172,7 +172,7 @@ export const NewTweet = ({ feed }) => {
           {gif && (
             <Box sx={{ marginBottom: 2 }}>
               <Stack direction="column">
-                <Video gif={createGifInput(gif)} onClose={() => setGif(null)} />
+                <VideoContainer gif={createGifInput(gif)} onClose={() => setGif(null)} />
                 <AttributionLink src={gif.url} />
               </Stack>
             </Box>
@@ -186,7 +186,7 @@ export const NewTweet = ({ feed }) => {
             <div className="svg-input">
               <EmojiPicker emojiHandler={pickedEmoji => tweet.setValue(tweet.value + pickedEmoji.native)} />
 
-              {!tweetFiles.length && <GiphyModal setGif={setGif} />}
+              {!tweetFiles.length && <SearchModal setGif={setGif} />}
 
               {!gif && (
                 <>

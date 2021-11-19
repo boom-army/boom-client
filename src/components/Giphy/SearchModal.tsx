@@ -54,7 +54,7 @@ const queryGiphy = async (query: string, offset: number = 0): Promise<Search> =>
   return { query, gif: json.data };
 };
 
-export const GiphyModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction<GIFObject>> })> = ({ setGif }) => {
+export const SearchModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction<GIFObject>> })> = ({ setGif }) => {
   const [input, setInput] = useState("");
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

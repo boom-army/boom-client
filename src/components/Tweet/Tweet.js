@@ -10,7 +10,7 @@ import { EmojiTweet, Retweet } from "./index";
 import { ImageBox } from "../ImageBox";
 import { Link } from "react-router-dom";
 import { setDate } from "../../utils";
-import { Video } from "../Giphy/Video"
+import { VideoContainer } from "../Giphy/VideoContainer"
 
 const Wrapper = styled.div`
   display: flex;
@@ -150,7 +150,7 @@ export const Tweet = ({ tweet, offset }) => {
           <p className="tweet-body">{text}</p>
         </Linkify>
 
-        {gif && <Video gif={gif} />}
+        {gif && <VideoContainer gif={gif} />}
 
         {!!files.length && <ImageBox files={files} />}
 
