@@ -10,7 +10,7 @@ import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 
 
-if (process.env.NODE_ENV !== 'development') {
+if (process.env.REACT_APP_ENV !== 'development') {
   Sentry.init({
     dsn: process.env.REACT_APP_SENTRY,
     integrations: [new Integrations.BrowserTracing()],
