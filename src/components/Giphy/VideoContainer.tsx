@@ -87,4 +87,4 @@ export const VideoContainer: React.FC<videoProps> = ({ gif, onClose }) => {
       </Box>
     </VideoBoxWrapper >
   );
-}
+};
