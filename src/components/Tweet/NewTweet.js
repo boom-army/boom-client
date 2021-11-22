@@ -14,7 +14,8 @@ import { uploadImage } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { ImageBox } from "../ImageBox";
-import { EmojiPicker } from "../Emoji/Picker";
+import { EmojiPicker } from "../Pickers/EmojiPicker";
+import { NFTPicker } from "../Pickers/NFTPicker";
 
 const Wrapper = styled.div`
   display: flex;
@@ -172,6 +173,8 @@ export const NewTweet = ({ feed }) => {
                 type="file"
                 onChange={handleTweetFiles}
               />
+
+            <NFTPicker />
             </div>
             <Button sm disabled={loading}>
               Post
