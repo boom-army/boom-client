@@ -14,7 +14,7 @@ interface Props {
 };
 
 export const ImageGrid: React.FC<Props> = ({ gifArr, setGif, setOpen, isLoadingMore }) => {
-  if (!gifArr.length) {
+  if (!gifArr?.length) {
     return <Box sx={{ margin: 2 }}>
       <p>No gifs were found</p>
     </Box>
