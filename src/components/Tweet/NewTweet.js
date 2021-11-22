@@ -15,6 +15,11 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { ImageBox } from "../ImageBox";
 import { EmojiPicker } from "../Emoji/Picker";
+import { SearchModal } from "../Giphy/SearchModal";
+import { Box } from '@mui/system';
+import { VideoContainer } from '../Giphy/VideoContainer';
+import Stack from '@mui/material/Stack';
+import { AttributionLink } from '../Giphy/AttributionLink';
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,6 +48,7 @@ const Wrapper = styled.div`
   }
 
   .svg-input .emoji-pick svg,
+  .svg-input .tweet-gif svg,
   .svg-input .file-upload-icon svg {
     width: 24px;
     height: 24px;
@@ -58,6 +64,7 @@ const Wrapper = styled.div`
 export const NewTweet = ({ feed }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [tweetFiles, setTweetFiles] = useState([]);
+  const [gif, setGif] = useState(null);
   const tweet = useInput("");
 
   const [newTweetMutation, { loading }] = useMutation(NEW_TWEET, {
@@ -73,10 +80,17 @@ export const NewTweet = ({ feed }) => {
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 
+  const createGifInput = gif => ({
+    title: gif.title,
+    fixedHeightUrl: gif.images.fixed_height.mp4,
+    originalUrl: gif.images.original.mp4,
+  });
+
   const handleNewTweet = async (e) => {
     e.preventDefault();
 
-    if (!tweet.value)
+    // a tweet can have no text body if it has a gif
+    if (!tweet.value && !gif)
       return enqueueSnackbar("Write something...", { variant: "info" });
 
     const tags = tweet.value.split(" ").filter((str) => str.startsWith("#"));
@@ -90,6 +104,7 @@ export const NewTweet = ({ feed }) => {
           text: tweet.value,
           tags,
           mentions,
+          gif: createGifInput(gif),
           files: tweetFiles,
         },
       });
@@ -101,6 +116,7 @@ export const NewTweet = ({ feed }) => {
 
     tweet.setValue("");
     setTweetFiles([]);
+    setGif(null);
   };
 
   const handleTweetFiles = async (e) => {
@@ -153,6 +169,15 @@ export const NewTweet = ({ feed }) => {
             onChange={tweet.onChange}
           />
 
+          {gif && (
+            <Box sx={{ marginBottom: 2 }}>
+              <Stack direction="column">
+                <VideoContainer gif={createGifInput(gif)} onClose={() => setGif(null)} />
+                <AttributionLink src={gif.url} />
+              </Stack>
+            </Box>
+          )}
+
           {!!tweetFiles.length && (
             <ImageBox files={tweetFiles.map(mapTweetFiles)} />
           )}
@@ -161,17 +186,23 @@ export const NewTweet = ({ feed }) => {
             <div className="svg-input">
               <EmojiPicker emojiHandler={pickedEmoji => tweet.setValue(tweet.value + pickedEmoji.native)} />
 
-              <label htmlFor="file-input">
-                <span className="file-upload-icon">
-                  <UploadFileIcon />
-                </span>
-              </label>
-              <input
-                id="file-input"
-                accept="image/*"
-                type="file"
-                onChange={handleTweetFiles}
-              />
+              {!tweetFiles.length && <SearchModal setGif={setGif} />}
+
+              {!gif && (
+                <>
+                  <label htmlFor="file-input">
+                    <span className="file-upload-icon">
+                      <UploadFileIcon />
+                    </span>
+                  </label>
+                  <input
+                    id="file-input"
+                    accept="image/*"
+                    type="file"
+                    onChange={handleTweetFiles}
+                  />
+                </>
+              )}
             </div>
             <Button sm disabled={loading}>
               Post
@@ -179,6 +210,6 @@ export const NewTweet = ({ feed }) => {
           </div>
         </div>
       </form>
-    </Wrapper>
+    </Wrapper >
   );
 };
