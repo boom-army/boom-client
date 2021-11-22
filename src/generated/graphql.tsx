@@ -39,6 +39,21 @@ export type File = {
   user?: Maybe<User>;
 };
 
+export type Gif = {
+  __typename?: 'Gif';
+  fixedHeightUrl: Scalars['String'];
+  id: Scalars['ID'];
+  originalUrl: Scalars['String'];
+  title: Scalars['String'];
+  tweet?: Maybe<Tweet>;
+};
+
+export type GifInput = {
+  fixedHeightUrl: Scalars['String'];
+  originalUrl: Scalars['String'];
+  title: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addComment: Comment;
@@ -103,6 +118,7 @@ export type MutationLoginRegisterArgs = {
 
 export type MutationNewTweetArgs = {
   files?: Maybe<Array<Scalars['String']>>;
+  gif?: Maybe<GifInput>;
   mentions?: Maybe<Array<Scalars['String']>>;
   tags?: Maybe<Array<Scalars['String']>>;
   text: Scalars['String'];
@@ -229,6 +245,7 @@ export type Tweet = {
   commentsCount: Scalars['Int'];
   createdAt?: Maybe<Scalars['String']>;
   files: Array<File>;
+  gif?: Maybe<Gif>;
   id: Scalars['ID'];
   isRetweet: Scalars['Boolean'];
   isTweetMine: Scalars['Boolean'];
@@ -280,7 +297,7 @@ export type FeedQueryVariables = Exact<{
 }>;
 
 
-export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, createdAt?: string | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, user?: { __typename?: 'User', id: string, publicAddress: string, avatar?: string | null | undefined, handle: string, consumerName?: string | null | undefined } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> };
+export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, createdAt?: string | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar?: string | null | undefined, handle: string, consumerName?: string | null | undefined } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> };
 
 
 export const FeedDocument = gql`
@@ -296,6 +313,12 @@ export const FeedDocument = gql`
     files {
       id
       url
+    }
+    gif {
+      id
+      title
+      fixedHeightUrl
+      originalUrl
     }
     user {
       id

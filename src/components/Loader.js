@@ -13,12 +13,14 @@ const rotateABD = keyframes`
 `;
 
 const Wrapper = styled.div`
+  position: relative;
+
   svg {
     fill: ${(props) => props.theme.accentColor};
     width: 34px;
     height: 34px;
     position: absolute;
-    top: 60%;
+    top: 0;
     left: 43%;
     opacity: 0.8;
     transform: translateX(-50%) translateY(-50%);

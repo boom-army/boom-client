@@ -11,6 +11,12 @@ query feed($offset: Int!, $limit: Int, $global: Boolean) {
       id
       url
     }
+    gif {
+      id
+      title
+      fixedHeightUrl
+      originalUrl
+    }
     user {
       id
       publicAddress

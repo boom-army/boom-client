@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const Wrapper = styled.div`
-  width: 315px;
+  width: ${(props) => props.fullWidth ? '100%' : '315px'};
   background: ${(props) => props.theme.tertiaryColor2};
   padding: 0.2rem 0.4rem;
   display: flex;
@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 
   input {
     width: 100%;
+    padding: 0.5rem;
     background: inherit;
     border: none;
     font-size: 1rem;
@@ -25,6 +26,21 @@ const Wrapper = styled.div`
     margin-bottom: 2px;
   }
 
+  label.fullWidth {
+    width: 100%;
+  }
+
+  label.hideLabel {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
   ${(props) =>
     props.lg &&
     css`
@@ -32,17 +48,19 @@ const Wrapper = styled.div`
     `}
 `;
 
-export default ({
+const Input = ({
   lg = false,
   type = "text",
   text,
   value,
   onChange,
   placeholder,
+  fullWidth = false,
+  hideLabel = false,
 }) => {
   return (
-    <Wrapper lg={lg}>
-      <label>{text}</label>
+    <Wrapper lg={lg} fullWidth={fullWidth}>
+      <label className={hideLabel ? 'hideLabel' : ''}>{text}</label>
       <input
         autoComplete="new-password"
         type={type}
@@ -53,3 +71,5 @@ export default ({
     </Wrapper>
   );
 };
+
+export default Input;
