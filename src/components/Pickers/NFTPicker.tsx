@@ -1,13 +1,16 @@
 import { useEffect, useState, useContext } from "react";
 import CheckIcon from "@mui/icons-material/Check";
-import ClearIcon from '@mui/icons-material/Clear';
+import ClearIcon from "@mui/icons-material/Clear";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import {
   Box,
+  Button,
+  Chip,
   InputAdornment,
   InputBase,
   InputLabel,
   Stack,
+  Typography,
 } from "@mui/material";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
@@ -16,8 +19,10 @@ import { useConnection } from "@solana/wallet-adapter-react";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { useSnackbar } from "notistack";
 import { displayError } from "../../utils";
-import { programs } from '@metaplex/js';
-const { metadata: { Metadata } } = programs;
+import { programs } from "@metaplex/js";
+const {
+  metadata: { Metadata },
+} = programs;
 
 interface NFTObject {
   name: string;
@@ -25,7 +30,7 @@ interface NFTObject {
   description: string;
   seller_fee_basis_points: number;
   image: string;
-  attributes?: (AttributesEntity)[] | null;
+  attributes?: AttributesEntity[] | null;
   collection: Collection;
   properties: Properties;
 }
@@ -38,9 +43,9 @@ interface Collection {
   family: string;
 }
 interface Properties {
-  files?: (FilesEntity)[] | null;
+  files?: FilesEntity[] | null;
   category: string;
-  creators?: (CreatorsEntity)[] | null;
+  creators?: CreatorsEntity[] | null;
 }
 interface FilesEntity {
   uri: string;
@@ -50,7 +55,6 @@ interface CreatorsEntity {
   address: string;
   share: number;
 }
-
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -107,10 +111,7 @@ export const NFTPicker: React.FC<{
   const { connection } = useConnection();
   const { enqueueSnackbar } = useSnackbar();
 
-  const fetchSetMeta = async (
-    connection: Connection,
-    key: PublicKey,
-  ) => {
+  const fetchSetMeta = async (connection: Connection, key: PublicKey) => {
     const mintMeta = await Metadata.findMany(connection, { mint: key });
     const uri = mintMeta[0].data.data.uri;
     if (uri) {
@@ -132,13 +133,12 @@ export const NFTPicker: React.FC<{
           // @ts-ignore: error in types
           const mintKey = new PublicKey(acc.value.data.parsed.info.mint);
           await fetchSetMeta(connection, mintKey);
-          console.log('***********', metadata);
+          console.log("***********", metadata);
         }
         // @ts-ignore: error in types
         if (Math.floor(acc?.value?.data?.parsed.info.supply) === 1) {
           await fetchSetMeta(connection, key);
-          console.log('***********', metadata);
-          
+          console.log("***********", metadata);
         }
       } catch (error) {
         setValidKey(false);
@@ -211,41 +211,77 @@ export const NFTPicker: React.FC<{
                 />
               </Stack>
               {metadata && (
-                <Stack
-                  direction="column"
-                  sx={{
-                    height: "100%",
-                    borderTop: "1px solid",
-                    marginTop: "1rem",
-                    paddingTop: "1rem",
-                  }}
-                >
-                  <Box style={{ width: "100%" }}>
+                <>
+                  <Stack
+                    direction="column"
+                    sx={{
+                      height: "100%",
+                      borderTop: "1px solid",
+                      marginTop: "1rem",
+                      paddingTop: "1rem",
+                    }}
+                  >
                     <Box
                       sx={{
                         display: "flex",
                         flexDirection: "row",
                       }}
                     >
-                      <img width="150" className="thumb" src={metadata.image} alt={metadata.name} />
+                      <img
+                        width="150"
+                        height="150"
+                        className="thumb"
+                        src={metadata.image}
+                        alt={metadata.name}
+                      />
                       <Box ml={2}>
-                        <Stack
-                          direction="column"
-                        >
-                          <Box>{metadata.name}</Box>
-                          <Box>{metadata.description}</Box>
-                          <Box>{metadata.attributes &&
-                            metadata.attributes.map((attr) => (
-                              <>
-                                {attr.trait_type} | {attr.value}
-                              </>
-                            ))}
+                        <Stack direction="column">
+                          <Box mb={1}>
+                            <Typography variant="body1">
+                              {metadata.name}
+                            </Typography>
+                          </Box>
+                          <Box mb={2}>
+                            <Typography variant="body2">
+                              {metadata.description}
+                            </Typography>
+                          </Box>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              flexDirection: "row",
+                              flexWrap: "wrap",
+                            }}
+                          >
+                            {metadata.attributes &&
+                              metadata.attributes.map((attr) => (
+                                <Box mr={1} mb={1}>
+                                  <Chip
+                                    label={
+                                      attr.trait_type + " | " + attr.value
+                                    }
+                                    color="primary"
+                                    variant="outlined"
+                                  />
+                                </Box>
+                              ))}
                           </Box>
                         </Stack>
                       </Box>
                     </Box>
+                  </Stack>
+                  <Box
+                    sx={{
+                      borderTop: "1px solid",
+                      marginTop: "1rem",
+                      paddingTop: "1rem",
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                    }}
+                  >
+                    <Button variant="contained">Post</Button>
                   </Box>
-                </Stack>
+                </>
               )}
             </Box>
           </StyledModal>
