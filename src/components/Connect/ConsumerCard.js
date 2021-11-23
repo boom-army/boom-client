@@ -43,7 +43,7 @@ export const ConsumerCard = ({ consumer }) => {
             />
             <Stack>
               <Typography
-                variant="body"
+                variant="body1"
                 component="div"
                 sx={{ marginTop: -0.7 }}
               >
