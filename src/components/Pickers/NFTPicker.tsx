@@ -100,16 +100,25 @@ const Wrapper = styled("span")`
 `;
 
 export const NFTPicker: React.FC<{
-  setNft: React.Dispatch<React.SetStateAction<NFTObject>>;
-}> = ({ setNft }) => {
+  setNftData: React.Dispatch<React.SetStateAction<NFTObject | null>>;
+}> = ({ setNftData }) => {
   const [nftForm, toggleNftForm] = useState(false);
   const [nftInput, setNftInput] = useState("");
   const [metadata, setMetadata] = useState<NFTObject | null>(null);
   const [validKey, setValidKey] = useState<null | Boolean>(null);
   const { theme } = useContext(ThemeContext);
-  const handleClose = () => toggleNftForm(false);
+  const handleClose = () => {
+    setNftInput("");
+    setMetadata(null);
+    toggleNftForm(false);
+  };
   const { connection } = useConnection();
   const { enqueueSnackbar } = useSnackbar();
+
+  const handleSelect = () => {
+    setNftData(metadata);
+    toggleNftForm(false)
+  };
 
   const fetchSetMeta = async (connection: Connection, key: PublicKey) => {
     const mintMeta = await Metadata.findMany(connection, { mint: key });
@@ -140,7 +149,9 @@ export const NFTPicker: React.FC<{
         }
       } catch (error) {
         setValidKey(false);
-        displayError(error, enqueueSnackbar);
+        if (nftInput.length > 42) {
+          displayError(error, enqueueSnackbar);
+        }
       }
     })();
   }, [nftInput, validKey, connection, enqueueSnackbar]);
@@ -277,7 +288,8 @@ export const NFTPicker: React.FC<{
                       flexDirection: "row-reverse",
                     }}
                   >
-                    <Button variant="contained">Select</Button>
+                    <Button variant="contained" onClick={handleSelect}>Select</Button>
+                    <Box mr={1}><Button variant="contained" color="secondary" onClick={handleClose}>Close</Button></Box>
                   </Box>
                 </>
               )}

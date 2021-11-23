@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 export const NewTweet = ({ feed }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif] = useState(null);
-  const [nft, setNft] = useState(null);
+  const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles] = useState([]);
   const tweet = useInput("");
 
@@ -188,9 +188,9 @@ export const NewTweet = ({ feed }) => {
             <div className="svg-input">
               <EmojiPicker emojiHandler={pickedEmoji => tweet.setValue(tweet.value + pickedEmoji.native)} />
 
-              {!tweetFiles.length && !nft && <SearchModal setGif={setGif} />}
+              {!tweetFiles.length && !nftData && <SearchModal setGif={setGif} />}
 
-              {!gif && !nft && (
+              {!gif && !nftData && (
                 <>
                   <label htmlFor="file-input">
                     <span className="file-upload-icon">
@@ -206,7 +206,7 @@ export const NewTweet = ({ feed }) => {
                 </>
               )}
 
-              {!tweetFiles.length && !gif && <NFTPicker setNft={setNft}/>}
+              {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData}/>}
             </div>
             <Button sm disabled={loading}>
               Post
