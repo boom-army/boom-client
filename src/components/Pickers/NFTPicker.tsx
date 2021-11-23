@@ -277,7 +277,7 @@ export const NFTPicker: React.FC<{
                       flexDirection: "row-reverse",
                     }}
                   >
-                    <Button variant="contained">Post</Button>
+                    <Button variant="contained">Select</Button>
                   </Box>
                 </>
               )}
