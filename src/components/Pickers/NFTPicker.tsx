@@ -13,13 +13,11 @@ import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
 import { styled } from "@mui/system";
 import { useConnection } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
+import { Connection, PublicKey } from "@solana/web3.js";
 import { useSnackbar } from "notistack";
 import { displayError } from "../../utils";
-// import { METADATA_PROGRAM_ID } from "../../utils/ids";
 import { programs } from '@metaplex/js';
-const { metadata: { Metadata }} = programs;
-
+const { metadata: { Metadata } } = programs;
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -74,11 +72,27 @@ export const NFTPicker: React.FC<{
 }> = ({ setNft }) => {
   const [nftForm, toggleNftForm] = useState(false);
   const [nftInput, setNftInput] = useState("");
+  const [metadata, setMetadata] = useState<typeof Metadata | null>(null);
   const [validKey, setValidKey] = useState<null | Boolean>(null);
   const { theme } = useContext(ThemeContext);
   const handleClose = () => toggleNftForm(false);
   const { connection } = useConnection();
   const { enqueueSnackbar } = useSnackbar();
+
+  const fetchSetMeta = async (
+    connection: Connection,
+    key: PublicKey,
+  ) => {
+    const mintMeta = await Metadata.findMany(connection, { mint: key });
+    const uri = mintMeta[0].data.data.uri;
+    if (uri) {
+      const data: typeof Metadata = await fetch(uri).then((response) =>
+        response.json()
+      );
+      setMetadata(data);
+      setValidKey(true);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -89,22 +103,20 @@ export const NFTPicker: React.FC<{
         if (acc && acc.value.data.parsed.info.mint) {
           // @ts-ignore: error in types
           const mintKey = new PublicKey(acc.value.data.parsed.info.mint);
-          const mintMeta = await Metadata.findMany(connection, { mint: mintKey });
-          setValidKey(true);
-          console.log('phantom*************', mintMeta[0].data.data.uri);   
+          await fetchSetMeta(connection, mintKey);
+          console.log('**************', metadata);
         }
         // @ts-ignore: error in types
         if (Math.floor(acc?.value?.data?.parsed.info.supply) === 1) {
-          const mintMeta = await Metadata.findMany(connection, { mint: key });
-          setValidKey(true);
-          console.log('mint*************', mintMeta[0].data.data.uri);
+          await fetchSetMeta(connection, key);
+          console.log('**************', metadata);
         }
       } catch (error) {
         setValidKey(false);
         displayError(error, enqueueSnackbar);
       }
     })();
-  }, [nftInput, validKey, connection, enqueueSnackbar])
+  }, [nftInput, validKey, connection, enqueueSnackbar]);
 
   return (
     <Wrapper>
