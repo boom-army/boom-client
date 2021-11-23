@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "../../styles/Button";
+import Stack from '@mui/material/Stack';
 import TextareaAutosize from "react-textarea-autosize";
 import styled from "styled-components";
 import useInput from "../../hooks/useInput";
+import { AttributionLink } from '../Giphy/AttributionLink';
+import { Box } from '@mui/system';
+import { EmojiPicker } from "../Pickers/EmojiPicker";
 import { FEED } from "../../queries/others";
+import { ImageBox } from "../ImageBox";
 import { NEW_TWEET } from "../../queries/tweet";
+import { NFTPicker } from "../Pickers/NFTPicker";
 import { SIGN_FILE } from "../../queries/files";
+import { SearchModal } from "../Giphy/SearchModal";
 import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
+import { VideoContainer } from '../Giphy/VideoContainer';
 import { displayError } from "../../utils";
 import { uploadImage } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { ImageBox } from "../ImageBox";
-import { EmojiPicker } from "../Pickers/EmojiPicker";
-import { NFTPicker } from "../Pickers/NFTPicker";
-import { SearchModal } from "../Giphy/SearchModal";
-import { Box } from '@mui/system';
-import { VideoContainer } from '../Giphy/VideoContainer';
-import Stack from '@mui/material/Stack';
-import { AttributionLink } from '../Giphy/AttributionLink';
 
 const Wrapper = styled.div`
   display: flex;
@@ -64,8 +64,9 @@ const Wrapper = styled.div`
 
 export const NewTweet = ({ feed }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const [tweetFiles, setTweetFiles] = useState([]);
   const [gif, setGif] = useState(null);
+  const [nft, setNft] = useState(null);
+  const [tweetFiles, setTweetFiles] = useState([]);
   const tweet = useInput("");
 
   const [newTweetMutation, { loading }] = useMutation(NEW_TWEET, {
@@ -187,9 +188,9 @@ export const NewTweet = ({ feed }) => {
             <div className="svg-input">
               <EmojiPicker emojiHandler={pickedEmoji => tweet.setValue(tweet.value + pickedEmoji.native)} />
 
-              {!tweetFiles.length && <SearchModal setGif={setGif} />}
+              {!tweetFiles.length && !nft && <SearchModal setGif={setGif} />}
 
-              {!gif && (
+              {!gif && !nft && (
                 <>
                   <label htmlFor="file-input">
                     <span className="file-upload-icon">
@@ -204,6 +205,8 @@ export const NewTweet = ({ feed }) => {
                   />
                 </>
               )}
+
+              {!tweetFiles.length && !gif && <NFTPicker setNft={setNft}/>}
             </div>
             <Button sm disabled={loading}>
               Post
