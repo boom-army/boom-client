@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "../../styles/Button";
 import Stack from '@mui/material/Stack';
@@ -7,11 +7,11 @@ import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import { AttributionLink } from '../Giphy/AttributionLink';
 import { Box } from '@mui/system';
-import { EmojiPicker } from "../Pickers/EmojiPicker";
+import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { FEED } from "../../queries/others";
 import { ImageBox } from "../ImageBox";
 import { NEW_TWEET } from "../../queries/tweet";
-import { NFTPicker } from "../Pickers/NFTPicker";
+import { NFTPicker } from "../NFT/NFTPicker";
 import { SIGN_FILE } from "../../queries/files";
 import { SearchModal } from "../Giphy/SearchModal";
 import { USER } from "../../queries/client";
@@ -154,6 +154,10 @@ export const NewTweet = ({ feed }) => {
     url,
     id: `preview-${index}`,
   });
+
+  useEffect(() => {
+    console.log('*********', nftData);
+  }, [nftData])
 
   return (
     <Wrapper>

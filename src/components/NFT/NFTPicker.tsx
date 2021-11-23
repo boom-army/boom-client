@@ -110,6 +110,7 @@ export const NFTPicker: React.FC<{
   const handleClose = () => {
     setNftInput("");
     setMetadata(null);
+    setNftData(null);
     toggleNftForm(false);
   };
   const { connection } = useConnection();

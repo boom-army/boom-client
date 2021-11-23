@@ -1,7 +1,7 @@
 import "emoji-mart/css/emoji-mart.css";
 import styled from "styled-components";
 import { Emoji } from "emoji-mart";
-import { EmojiPicker } from "../Pickers/EmojiPicker";
+import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { FEED, MENTIONS } from "../../queries/others";
 import { Loader } from "../Loader";
 import { PublicKey, Transaction } from "@solana/web3.js";
