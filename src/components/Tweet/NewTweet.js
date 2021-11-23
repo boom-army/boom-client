@@ -104,7 +104,7 @@ export const NewTweet = ({ feed }) => {
           text: tweet.value,
           tags,
           mentions,
-          gif: createGifInput(gif),
+          gif: gif ? createGifInput(gif) : null,
           files: tweetFiles,
         },
       });
