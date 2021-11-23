@@ -1,16 +1,25 @@
 import { useEffect, useState, useContext } from "react";
-import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
-import { alpha, styled } from "@mui/system";
+import CheckIcon from "@mui/icons-material/Check";
+import ClearIcon from '@mui/icons-material/Clear';
+import ModalUnstyled from "@mui/core/ModalUnstyled";
 import {
-  InputLabel,
+  Box,
   InputAdornment,
   InputBase,
-  Box,
+  InputLabel,
   Stack,
 } from "@mui/material";
-import ModalUnstyled from "@mui/core/ModalUnstyled";
+import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
-import CheckIcon from "@mui/icons-material/Check";
+import { styled } from "@mui/system";
+import { useConnection } from "@solana/wallet-adapter-react";
+import { PublicKey } from "@solana/web3.js";
+import { useSnackbar } from "notistack";
+import { displayError } from "../../utils";
+// import { METADATA_PROGRAM_ID } from "../../utils/ids";
+import { programs } from '@metaplex/js';
+const { metadata: { Metadata }} = programs;
+
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -65,12 +74,37 @@ export const NFTPicker: React.FC<{
 }> = ({ setNft }) => {
   const [nftForm, toggleNftForm] = useState(false);
   const [nftInput, setNftInput] = useState("");
+  const [validKey, setValidKey] = useState<null | Boolean>(null);
   const { theme } = useContext(ThemeContext);
   const handleClose = () => toggleNftForm(false);
+  const { connection } = useConnection();
+  const { enqueueSnackbar } = useSnackbar();
 
-  const handleNftSearch = (e: Element) => {
-    console.log(e);
-  };
+  useEffect(() => {
+    (async () => {
+      try {
+        const key = new PublicKey(nftInput);
+        const acc = await connection.getParsedAccountInfo(key);
+        // @ts-ignore: error in types
+        if (acc && acc.value.data.parsed.info.mint) {
+          // @ts-ignore: error in types
+          const mintKey = new PublicKey(acc.value.data.parsed.info.mint);
+          const mintMeta = await Metadata.findMany(connection, { mint: mintKey });
+          setValidKey(true);
+          console.log('phantom*************', mintMeta[0].data.data.uri);   
+        }
+        // @ts-ignore: error in types
+        if (Math.floor(acc?.value?.data?.parsed.info.supply) === 1) {
+          const mintMeta = await Metadata.findMany(connection, { mint: key });
+          setValidKey(true);
+          console.log('mint*************', mintMeta[0].data.data.uri);
+        }
+      } catch (error) {
+        setValidKey(false);
+        displayError(error, enqueueSnackbar);
+      }
+    })();
+  }, [nftInput, validKey, connection, enqueueSnackbar])
 
   return (
     <Wrapper>
@@ -112,14 +146,15 @@ export const NFTPicker: React.FC<{
                   id="nft-input"
                   value={nftInput}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setNftInput(e.target.value);
+                    setNftInput(e.currentTarget.value);
                   }}
                   endAdornment={
+                    validKey !== null &&
                     <InputAdornment
                       position="end"
                       sx={{ paddingRight: "0.5rem" }}
                     >
-                      <CheckIcon color="success" />
+                      {validKey === true ? <CheckIcon color="success" /> : <ClearIcon color="error" />}
                     </InputAdornment>
                   }
                   sx={{
