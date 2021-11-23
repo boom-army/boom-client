@@ -133,12 +133,10 @@ export const NFTPicker: React.FC<{
           // @ts-ignore: error in types
           const mintKey = new PublicKey(acc.value.data.parsed.info.mint);
           await fetchSetMeta(connection, mintKey);
-          console.log("***********", metadata);
         }
         // @ts-ignore: error in types
         if (Math.floor(acc?.value?.data?.parsed.info.supply) === 1) {
           await fetchSetMeta(connection, key);
-          console.log("***********", metadata);
         }
       } catch (error) {
         setValidKey(false);
