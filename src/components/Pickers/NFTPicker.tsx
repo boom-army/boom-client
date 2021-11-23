@@ -19,6 +19,39 @@ import { displayError } from "../../utils";
 import { programs } from '@metaplex/js';
 const { metadata: { Metadata } } = programs;
 
+interface NFTObject {
+  name: string;
+  symbol: string;
+  description: string;
+  seller_fee_basis_points: number;
+  image: string;
+  attributes?: (AttributesEntity)[] | null;
+  collection: Collection;
+  properties: Properties;
+}
+interface AttributesEntity {
+  trait_type: string;
+  value: string;
+}
+interface Collection {
+  name: string;
+  family: string;
+}
+interface Properties {
+  files?: (FilesEntity)[] | null;
+  category: string;
+  creators?: (CreatorsEntity)[] | null;
+}
+interface FilesEntity {
+  uri: string;
+  type: string;
+}
+interface CreatorsEntity {
+  address: string;
+  share: number;
+}
+
+
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -62,17 +95,12 @@ const Wrapper = styled("span")`
   }
 `;
 
-interface NFTObject {
-  name: String;
-  description: String;
-}
-
 export const NFTPicker: React.FC<{
   setNft: React.Dispatch<React.SetStateAction<NFTObject>>;
 }> = ({ setNft }) => {
   const [nftForm, toggleNftForm] = useState(false);
   const [nftInput, setNftInput] = useState("");
-  const [metadata, setMetadata] = useState<typeof Metadata | null>(null);
+  const [metadata, setMetadata] = useState<NFTObject | null>(null);
   const [validKey, setValidKey] = useState<null | Boolean>(null);
   const { theme } = useContext(ThemeContext);
   const handleClose = () => toggleNftForm(false);
@@ -86,7 +114,7 @@ export const NFTPicker: React.FC<{
     const mintMeta = await Metadata.findMany(connection, { mint: key });
     const uri = mintMeta[0].data.data.uri;
     if (uri) {
-      const data: typeof Metadata = await fetch(uri).then((response) =>
+      const data: NFTObject = await fetch(uri).then((response) =>
         response.json()
       );
       setMetadata(data);
@@ -104,12 +132,13 @@ export const NFTPicker: React.FC<{
           // @ts-ignore: error in types
           const mintKey = new PublicKey(acc.value.data.parsed.info.mint);
           await fetchSetMeta(connection, mintKey);
-          console.log('**************', metadata);
+          console.log('***********', metadata);
         }
         // @ts-ignore: error in types
         if (Math.floor(acc?.value?.data?.parsed.info.supply) === 1) {
           await fetchSetMeta(connection, key);
-          console.log('**************', metadata);
+          console.log('***********', metadata);
+          
         }
       } catch (error) {
         setValidKey(false);
@@ -161,13 +190,18 @@ export const NFTPicker: React.FC<{
                     setNftInput(e.currentTarget.value);
                   }}
                   endAdornment={
-                    validKey !== null &&
-                    <InputAdornment
-                      position="end"
-                      sx={{ paddingRight: "0.5rem" }}
-                    >
-                      {validKey === true ? <CheckIcon color="success" /> : <ClearIcon color="error" />}
-                    </InputAdornment>
+                    validKey !== null && (
+                      <InputAdornment
+                        position="end"
+                        sx={{ paddingRight: "0.5rem" }}
+                      >
+                        {validKey === true ? (
+                          <CheckIcon color="success" />
+                        ) : (
+                          <ClearIcon color="error" />
+                        )}
+                      </InputAdornment>
+                    )
                   }
                   sx={{
                     border: `1px solid ${theme.secondaryColor}`,
@@ -176,6 +210,43 @@ export const NFTPicker: React.FC<{
                   }}
                 />
               </Stack>
+              {metadata && (
+                <Stack
+                  direction="column"
+                  sx={{
+                    height: "100%",
+                    borderTop: "1px solid",
+                    marginTop: "1rem",
+                    paddingTop: "1rem",
+                  }}
+                >
+                  <Box style={{ width: "100%" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <img width="150" className="thumb" src={metadata.image} alt={metadata.name} />
+                      <Box ml={2}>
+                        <Stack
+                          direction="column"
+                        >
+                          <Box>{metadata.name}</Box>
+                          <Box>{metadata.description}</Box>
+                          <Box>{metadata.attributes &&
+                            metadata.attributes.map((attr) => (
+                              <>
+                                {attr.trait_type} | {attr.value}
+                              </>
+                            ))}
+                          </Box>
+                        </Stack>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Stack>
+              )}
             </Box>
           </StyledModal>
         </>
