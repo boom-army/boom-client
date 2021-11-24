@@ -131,9 +131,7 @@ export const NFTPicker: React.FC<{
       const data: NFTObject = await fetch(uri)
         .then((response) => response.json())
         .then((data) => camelizeKeys(data));
-      data.publicKey = key.toString();
-      console.log('********', data);
-      
+      data.publicKey = key.toString();      
       setMetadata(data);
       setValidKey(true);
     }
