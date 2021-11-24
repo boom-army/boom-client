@@ -120,6 +120,7 @@ export const NFTPicker: React.FC<{
 
   const handleSelect = () => {
     setNftData(metadata);
+    setMetadata(null);
     toggleNftForm(false);
   };
 
