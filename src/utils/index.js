@@ -1,4 +1,5 @@
 import axios from "axios";
+import { transform, camelCase, isArray, isObject } from 'lodash';
 
 export const displayError = (err, enqueueSnackbar) => {
   let e = err.message.split(":");
@@ -34,3 +35,9 @@ export const uploadImage = async (file, signedUrl, enqueueSnackbar) => {
 
   return data;
 };
+
+export const camelizeKeys = obj => transform(obj, (acc, value, key, target) => {
+  const camelKey = isArray(target) ? key : camelCase(key);
+  
+  acc[camelKey] = isObject(value) ? camelizeKeys(value) : value;
+});

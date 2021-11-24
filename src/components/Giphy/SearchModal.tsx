@@ -6,7 +6,7 @@ import { GIFObject } from 'giphy-api';
 import Stack from '@mui/material/Stack';
 import { GifIcon } from "../Icons";
 import { GiphyContext, Search } from "../../contexts/giphy";
-import debounce from 'lodash.debounce';
+import { debounce } from 'lodash';
 import { ImageGrid } from './ImageGrid';
 import { ImageSuggestionGrid } from './ImageSuggestionGrid';
 import { Loader } from '../Loader';
