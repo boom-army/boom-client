@@ -119,6 +119,7 @@ export const NFTPicker: React.FC<{
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSelect = () => {
+    setNftInput("");
     setNftData(metadata);
     setMetadata(null);
     toggleNftForm(false);
