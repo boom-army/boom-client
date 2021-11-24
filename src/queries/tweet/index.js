@@ -1,8 +1,22 @@
 import gql from "graphql-tag";
 
 export const NEW_TWEET = gql`
-  mutation newTweet($text: String!, $files: [String!]!, $tags: [String!]!, $mentions: [String!]!, $gif: GifInput, $nft: NFTInput) {
-    newTweet(text: $text, files: $files, tags: $tags, mentions: $mentions, gif: $gif, nft: $nft) {
+  mutation newTweet(
+    $text: String!
+    $files: [String!]!
+    $tags: [String!]!
+    $mentions: [String!]!
+    $gif: GifInput
+    $nft: NFTInput
+  ) {
+    newTweet(
+      text: $text
+      files: $files
+      tags: $tags
+      mentions: $mentions
+      gif: $gif
+      nft: $nft
+    ) {
       id
       text
       tags
@@ -66,9 +80,25 @@ export const TWEET = gql`
         sellerFeeBasisPoints
         externalUrl
         image
-        attributes
-        collection
-        properties
+        attributes {
+          traitType
+          value
+        }
+        collection {
+          name
+          family
+        }
+        properties {
+          files {
+            uri
+            type
+          }
+          category
+          creators {
+            address
+            share
+          }
+        }
       }
       commentsCount
       retweetsCount
