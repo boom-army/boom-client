@@ -14,10 +14,32 @@ export type Scalars = {
   Float: number;
 };
 
+export type AttributesEntity = {
+  __typename?: 'AttributesEntity';
+  traitType?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AttributesEntityInput = {
+  traitType?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
 export type AuthPayload = {
   __typename?: 'AuthPayload';
   token: Scalars['String'];
   user: User;
+};
+
+export type Collection = {
+  __typename?: 'Collection';
+  family?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type CollectionInput = {
+  family?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type Comment = {
@@ -31,12 +53,34 @@ export type Comment = {
   user?: Maybe<User>;
 };
 
+export type CreatorsEntity = {
+  __typename?: 'CreatorsEntity';
+  address?: Maybe<Scalars['String']>;
+  share?: Maybe<Scalars['Int']>;
+};
+
+export type CreatorsEntityInput = {
+  address?: Maybe<Scalars['String']>;
+  share?: Maybe<Scalars['Int']>;
+};
+
 export type File = {
   __typename?: 'File';
   id: Scalars['ID'];
   tweet?: Maybe<Tweet>;
   url: Scalars['String'];
   user?: Maybe<User>;
+};
+
+export type FilesEntity = {
+  __typename?: 'FilesEntity';
+  type?: Maybe<Scalars['String']>;
+  uri?: Maybe<Scalars['String']>;
+};
+
+export type FilesEntityInput = {
+  type?: Maybe<Scalars['String']>;
+  uri?: Maybe<Scalars['String']>;
 };
 
 export type Gif = {
@@ -120,6 +164,7 @@ export type MutationNewTweetArgs = {
   files?: Maybe<Array<Scalars['String']>>;
   gif?: Maybe<GifInput>;
   mentions?: Maybe<Array<Scalars['String']>>;
+  nft?: Maybe<NftInput>;
   tags?: Maybe<Array<Scalars['String']>>;
   text: Scalars['String'];
 };
@@ -153,10 +198,51 @@ export type MutationUpdateTweetArgs = {
   text: Scalars['String'];
 };
 
+export type Nft = {
+  __typename?: 'NFT';
+  attributes?: Maybe<Array<Maybe<AttributesEntity>>>;
+  collection?: Maybe<Collection>;
+  description?: Maybe<Scalars['String']>;
+  externalUrl?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  image: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  properties?: Maybe<Properties>;
+  publicKey: Scalars['String'];
+  sellerFeeBasisPoints?: Maybe<Scalars['Int']>;
+  symbol?: Maybe<Scalars['String']>;
+};
+
+export type NftInput = {
+  attributes?: Maybe<Array<Maybe<AttributesEntityInput>>>;
+  collection?: Maybe<CollectionInput>;
+  description?: Maybe<Scalars['String']>;
+  externalUrl?: Maybe<Scalars['String']>;
+  image: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  properties?: Maybe<PropertiesInput>;
+  publicKey: Scalars['String'];
+  sellerFeeBasisPoints?: Maybe<Scalars['Int']>;
+  symbol?: Maybe<Scalars['String']>;
+};
+
 export type Nonce = {
   __typename?: 'Nonce';
   hasPublicAddress: Scalars['Boolean'];
   user?: Maybe<User>;
+};
+
+export type Properties = {
+  __typename?: 'Properties';
+  category?: Maybe<Scalars['String']>;
+  creators?: Maybe<Array<Maybe<CreatorsEntity>>>;
+  files?: Maybe<Array<Maybe<FilesEntity>>>;
+};
+
+export type PropertiesInput = {
+  category?: Maybe<Scalars['String']>;
+  creators?: Maybe<Array<Maybe<CreatorsEntityInput>>>;
+  files?: Maybe<Array<Maybe<FilesEntityInput>>>;
 };
 
 export type Query = {
@@ -250,6 +336,7 @@ export type Tweet = {
   isRetweet: Scalars['Boolean'];
   isTweetMine: Scalars['Boolean'];
   mentions?: Maybe<Array<Scalars['String']>>;
+  nft?: Maybe<Nft>;
   reactions: Array<Reaction>;
   retweets: Array<Retweet>;
   retweetsCount: Scalars['Int'];
@@ -297,7 +384,7 @@ export type FeedQueryVariables = Exact<{
 }>;
 
 
-export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, createdAt?: string | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar?: string | null | undefined, handle: string, consumerName?: string | null | undefined } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> };
+export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, createdAt?: string | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar?: string | null | undefined, handle: string, consumerName?: string | null | undefined } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> };
 
 
 export const FeedDocument = gql`
@@ -319,6 +406,35 @@ export const FeedDocument = gql`
       title
       fixedHeightUrl
       originalUrl
+    }
+    nft {
+      id
+      publicKey
+      name
+      symbol
+      description
+      sellerFeeBasisPoints
+      externalUrl
+      image
+      attributes {
+        traitType
+        value
+      }
+      collection {
+        name
+        family
+      }
+      properties {
+        files {
+          uri
+          type
+        }
+        category
+        creators {
+          address
+          share
+        }
+      }
     }
     user {
       id

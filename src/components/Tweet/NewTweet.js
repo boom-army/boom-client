@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "../../styles/Button";
+import Stack from "@mui/material/Stack";
 import TextareaAutosize from "react-textarea-autosize";
 import styled from "styled-components";
 import useInput from "../../hooks/useInput";
+import { AttributionLink } from "../Giphy/AttributionLink";
+import { Box } from "@mui/system";
+import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { FEED } from "../../queries/others";
+import { ImageBox } from "../ImageBox";
 import { NEW_TWEET } from "../../queries/tweet";
+import { NFTPicker } from "../NFT/NFTPicker";
+import { NFTTweet } from "../NFT/NFTTweet";
 import { SIGN_FILE } from "../../queries/files";
+import { SearchModal } from "../Giphy/SearchModal";
 import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
+import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError } from "../../utils";
 import { uploadImage } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { ImageBox } from "../ImageBox";
-import { EmojiPicker } from "../Emoji/Picker";
-import { SearchModal } from "../Giphy/SearchModal";
-import { Box } from '@mui/system';
-import { VideoContainer } from '../Giphy/VideoContainer';
-import Stack from '@mui/material/Stack';
-import { AttributionLink } from '../Giphy/AttributionLink';
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,8 +65,9 @@ const Wrapper = styled.div`
 
 export const NewTweet = ({ feed }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const [tweetFiles, setTweetFiles] = useState([]);
   const [gif, setGif] = useState(null);
+  const [nftData, setNftData] = useState(null);
+  const [tweetFiles, setTweetFiles] = useState([]);
   const tweet = useInput("");
 
   const [newTweetMutation, { loading }] = useMutation(NEW_TWEET, {
@@ -74,13 +77,13 @@ export const NewTweet = ({ feed }) => {
         variables: {
           offset: 0,
           limit: feed?.length + 1, // current tweet length + 1 for the new tweet
-        }
-      }
+        },
+      },
     ],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 
-  const createGifInput = gif => ({
+  const createGifInput = (gif) => ({
     title: gif.title,
     fixedHeightUrl: gif.images.fixed_height.mp4,
     originalUrl: gif.images.original.mp4,
@@ -105,10 +108,12 @@ export const NewTweet = ({ feed }) => {
           tags,
           mentions,
           gif: gif ? createGifInput(gif) : null,
+          nft: nftData,
           files: tweetFiles,
         },
       });
 
+      setNftData(null);
       enqueueSnackbar("Your tweet has been posted", { variant: "success" });
     } catch (err) {
       return displayError(err, enqueueSnackbar);
@@ -155,10 +160,7 @@ export const NewTweet = ({ feed }) => {
 
   return (
     <Wrapper>
-      <Avatar
-        className="avatar"
-        src={data?.me?.avatar}
-      />
+      <Avatar className="avatar" src={data?.me?.avatar} />
       <form onSubmit={handleNewTweet}>
         <div className="new-tweet">
           <TextareaAutosize
@@ -172,11 +174,16 @@ export const NewTweet = ({ feed }) => {
           {gif && (
             <Box sx={{ marginBottom: 2 }}>
               <Stack direction="column">
-                <VideoContainer gif={createGifInput(gif)} onClose={() => setGif(null)} />
+                <VideoContainer
+                  gif={createGifInput(gif)}
+                  onClose={() => setGif(null)}
+                />
                 <AttributionLink src={gif.url} />
               </Stack>
             </Box>
           )}
+
+          {nftData && <NFTTweet nftData={nftData} />}
 
           {!!tweetFiles.length && (
             <ImageBox files={tweetFiles.map(mapTweetFiles)} />
@@ -184,11 +191,17 @@ export const NewTweet = ({ feed }) => {
 
           <div className="new-tweet-action">
             <div className="svg-input">
-              <EmojiPicker emojiHandler={pickedEmoji => tweet.setValue(tweet.value + pickedEmoji.native)} />
+              <EmojiPicker
+                emojiHandler={(pickedEmoji) =>
+                  tweet.setValue(tweet.value + pickedEmoji.native)
+                }
+              />
 
-              {!tweetFiles.length && <SearchModal setGif={setGif} />}
+              {!tweetFiles.length && !nftData && (
+                <SearchModal setGif={setGif} />
+              )}
 
-              {!gif && (
+              {!gif && !nftData && (
                 <>
                   <label htmlFor="file-input">
                     <span className="file-upload-icon">
@@ -203,6 +216,10 @@ export const NewTweet = ({ feed }) => {
                   />
                 </>
               )}
+
+              {!tweetFiles.length && !gif && (
+                <NFTPicker setNftData={setNftData} />
+              )}
             </div>
             <Button sm disabled={loading}>
               Post
@@ -210,6 +227,6 @@ export const NewTweet = ({ feed }) => {
           </div>
         </div>
       </form>
-    </Wrapper >
+    </Wrapper>
   );
 };

@@ -19,6 +19,10 @@ export let SOSOL_TOKEN_ID = new PublicKey(
   "soso1vCmdxwEZqU47M4NZ4MxZH19ppgqF1auG7dP3wz"
 );
 
+export let METADATA_PROGRAM_ID = new PublicKey(
+  "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+)
+
 export const PROGRAM_IDS = [
   {
     name: "mainnet-beta",

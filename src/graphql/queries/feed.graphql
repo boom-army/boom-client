@@ -17,6 +17,35 @@ query feed($offset: Int!, $limit: Int, $global: Boolean) {
       fixedHeightUrl
       originalUrl
     }
+    nft {
+      id
+      publicKey
+      name
+      symbol
+      description
+      sellerFeeBasisPoints
+      externalUrl
+      image
+      attributes {
+        traitType
+        value
+      }
+      collection {
+        name
+        family
+      }
+      properties {
+        files {
+          uri
+          type
+        }
+        category
+        creators {
+          address
+          share
+        }
+      }
+    }
     user {
       id
       publicAddress

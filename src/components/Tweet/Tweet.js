@@ -11,6 +11,7 @@ import { ImageBox } from "../ImageBox";
 import { Link } from "react-router-dom";
 import { setDate } from "../../utils";
 import { VideoContainer } from "../Giphy/VideoContainer"
+import { NFTTweet } from "../NFT/NFTTweet";
 
 const Wrapper = styled.div`
   display: flex;
@@ -113,6 +114,7 @@ export const Tweet = ({ tweet, offset }) => {
     user,
     files,
     gif,
+    nft,
     // isTweetMine,
     isRetweet,
     retweetsCount,
@@ -151,6 +153,8 @@ export const Tweet = ({ tweet, offset }) => {
         </Linkify>
 
         {gif && <VideoContainer gif={gif} />}
+
+        {nft && <NFTTweet nftData={nft}/>}
 
         {!!files.length && <ImageBox files={files} />}
 
