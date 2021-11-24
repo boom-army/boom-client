@@ -186,7 +186,7 @@ export const NFTPicker: React.FC<{
                 padding: "1rem",
               }}
             >
-              <Stack direction="column" sx={{ height: "100%" }}>
+              <Stack direction="column" sx={{ height: "100%" }} key="StackInput">
                 <InputLabel
                   shrink
                   htmlFor="nft-input"
@@ -232,6 +232,7 @@ export const NFTPicker: React.FC<{
                       marginTop: "1rem",
                       paddingTop: "1rem",
                     }}
+                    key={metadata.publicKey}
                   >
                     <Box
                       sx={{
@@ -247,7 +248,7 @@ export const NFTPicker: React.FC<{
                         alt={metadata.name}
                       />
                       <Box ml={2}>
-                        <Stack direction="column">
+                        <Stack direction="column" key="StackMeta">
                           <Box mb={1}>
                             <Typography variant="body1">
                               {metadata.name}
@@ -267,7 +268,7 @@ export const NFTPicker: React.FC<{
                           >
                             {metadata.attributes &&
                               metadata.attributes.map((attr) => (
-                                <Box mr={1} mb={1}>
+                                <Box mr={1} mb={1} key={attr.trait_type + attr.value}>
                                   <Chip
                                     label={
                                       attr.trait_type + " | " + attr.value

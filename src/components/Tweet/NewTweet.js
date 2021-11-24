@@ -22,6 +22,7 @@ import { displayError } from "../../utils";
 import { uploadImage } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
+import { camelizeKeys } from "../../utils";
 
 const Wrapper = styled.div`
   display: flex;
@@ -107,11 +108,13 @@ export const NewTweet = ({ feed }) => {
           text: tweet.value,
           tags,
           mentions,
-          gif: createGifInput(gif),
+          gif: gif ? createGifInput(gif) : null,
+          nft: camelizeKeys(nftData),
           files: tweetFiles,
         },
       });
 
+      setNftData(null);
       enqueueSnackbar("Your tweet has been posted", { variant: "success" });
     } catch (err) {
       return displayError(err, enqueueSnackbar);
@@ -157,7 +160,7 @@ export const NewTweet = ({ feed }) => {
   });
 
   useEffect(() => {
-    console.log("*********", nftData);
+    console.log("*********", camelizeKeys(nftData));
   }, [nftData]);
 
   return (
