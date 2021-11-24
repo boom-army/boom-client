@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "../../styles/Button";
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 import TextareaAutosize from "react-textarea-autosize";
 import styled from "styled-components";
 import useInput from "../../hooks/useInput";
-import { AttributionLink } from '../Giphy/AttributionLink';
-import { Box } from '@mui/system';
+import { AttributionLink } from "../Giphy/AttributionLink";
+import { Box } from "@mui/system";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { FEED } from "../../queries/others";
 import { ImageBox } from "../ImageBox";
 import { NEW_TWEET } from "../../queries/tweet";
 import { NFTPicker } from "../NFT/NFTPicker";
+import { NFTTweet } from "../NFT/NFTTweet";
 import { SIGN_FILE } from "../../queries/files";
 import { SearchModal } from "../Giphy/SearchModal";
 import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
-import { VideoContainer } from '../Giphy/VideoContainer';
+import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError } from "../../utils";
 import { uploadImage } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
@@ -76,13 +77,13 @@ export const NewTweet = ({ feed }) => {
         variables: {
           offset: 0,
           limit: feed?.length + 1, // current tweet length + 1 for the new tweet
-        }
-      }
+        },
+      },
     ],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 
-  const createGifInput = gif => ({
+  const createGifInput = (gif) => ({
     title: gif.title,
     fixedHeightUrl: gif.images.fixed_height.mp4,
     originalUrl: gif.images.original.mp4,
@@ -156,15 +157,12 @@ export const NewTweet = ({ feed }) => {
   });
 
   useEffect(() => {
-    console.log('*********', nftData);
-  }, [nftData])
+    console.log("*********", nftData);
+  }, [nftData]);
 
   return (
     <Wrapper>
-      <Avatar
-        className="avatar"
-        src={data?.me?.avatar}
-      />
+      <Avatar className="avatar" src={data?.me?.avatar} />
       <form onSubmit={handleNewTweet}>
         <div className="new-tweet">
           <TextareaAutosize
@@ -178,11 +176,16 @@ export const NewTweet = ({ feed }) => {
           {gif && (
             <Box sx={{ marginBottom: 2 }}>
               <Stack direction="column">
-                <VideoContainer gif={createGifInput(gif)} onClose={() => setGif(null)} />
+                <VideoContainer
+                  gif={createGifInput(gif)}
+                  onClose={() => setGif(null)}
+                />
                 <AttributionLink src={gif.url} />
               </Stack>
             </Box>
           )}
+
+          {nftData && <NFTTweet nftData={nftData} />}
 
           {!!tweetFiles.length && (
             <ImageBox files={tweetFiles.map(mapTweetFiles)} />
@@ -190,9 +193,15 @@ export const NewTweet = ({ feed }) => {
 
           <div className="new-tweet-action">
             <div className="svg-input">
-              <EmojiPicker emojiHandler={pickedEmoji => tweet.setValue(tweet.value + pickedEmoji.native)} />
+              <EmojiPicker
+                emojiHandler={(pickedEmoji) =>
+                  tweet.setValue(tweet.value + pickedEmoji.native)
+                }
+              />
 
-              {!tweetFiles.length && !nftData && <SearchModal setGif={setGif} />}
+              {!tweetFiles.length && !nftData && (
+                <SearchModal setGif={setGif} />
+              )}
 
               {!gif && !nftData && (
                 <>
@@ -210,7 +219,9 @@ export const NewTweet = ({ feed }) => {
                 </>
               )}
 
-              {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData}/>}
+              {!tweetFiles.length && !gif && (
+                <NFTPicker setNftData={setNftData} />
+              )}
             </div>
             <Button sm disabled={loading}>
               Post
@@ -218,6 +229,6 @@ export const NewTweet = ({ feed }) => {
           </div>
         </div>
       </form>
-    </Wrapper >
+    </Wrapper>
   );
 };

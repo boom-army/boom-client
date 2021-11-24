@@ -24,7 +24,8 @@ const {
   metadata: { Metadata },
 } = programs;
 
-interface NFTObject {
+export interface NFTObject {
+  publicKey: string,
   name: string;
   symbol: string;
   description: string;
@@ -128,6 +129,7 @@ export const NFTPicker: React.FC<{
       const data: NFTObject = await fetch(uri).then((response) =>
         response.json()
       );
+      data.publicKey = key.toString();      
       setMetadata(data);
       setValidKey(true);
     }
@@ -270,7 +272,7 @@ export const NFTPicker: React.FC<{
                                     label={
                                       attr.trait_type + " | " + attr.value
                                     }
-                                    color="primary"
+                                    color="info"
                                     variant="outlined"
                                   />
                                 </Box>
@@ -290,7 +292,7 @@ export const NFTPicker: React.FC<{
                     }}
                   >
                     <Button variant="contained" onClick={handleSelect}>Select</Button>
-                    <Box mr={1}><Button variant="contained" color="secondary" onClick={handleClose}>Close</Button></Box>
+                    <Box mr={1}><Button variant="contained" color="secondary" onClick={handleClose}>Cancel</Button></Box>
                   </Box>
                 </>
               )}
