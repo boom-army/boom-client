@@ -18,25 +18,25 @@ import { styled } from "@mui/system";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { useSnackbar } from "notistack";
-import { displayError } from "../../utils";
+import { camelizeKeys, displayError } from "../../utils";
 import { programs } from "@metaplex/js";
 const {
   metadata: { Metadata },
 } = programs;
 
 export interface NFTObject {
-  publicKey: string,
+  publicKey: string;
   name: string;
   symbol: string;
   description: string;
-  seller_fee_basis_points: number;
+  sellerFeeBasisPoints: number;
   image: string;
   attributes?: AttributesEntity[] | null;
   collection: Collection;
   properties: Properties;
 }
 interface AttributesEntity {
-  trait_type: string;
+  traitType: string;
   value: string;
 }
 interface Collection {
@@ -119,17 +119,17 @@ export const NFTPicker: React.FC<{
 
   const handleSelect = () => {
     setNftData(metadata);
-    toggleNftForm(false)
+    toggleNftForm(false);
   };
 
   const fetchSetMeta = async (connection: Connection, key: PublicKey) => {
     const mintMeta = await Metadata.findMany(connection, { mint: key });
     const uri = mintMeta[0].data.data.uri;
     if (uri) {
-      const data: NFTObject = await fetch(uri).then((response) =>
-        response.json()
-      );
-      data.publicKey = key.toString();      
+      const data: NFTObject = await fetch(uri)
+        .then((response) => response.json())
+        .then((data) => camelizeKeys(data));
+      data.publicKey = key.toString();
       setMetadata(data);
       setValidKey(true);
     }
@@ -186,7 +186,11 @@ export const NFTPicker: React.FC<{
                 padding: "1rem",
               }}
             >
-              <Stack direction="column" sx={{ height: "100%" }} key="StackInput">
+              <Stack
+                direction="column"
+                sx={{ height: "100%" }}
+                key="StackInput"
+              >
                 <InputLabel
                   shrink
                   htmlFor="nft-input"
@@ -268,11 +272,13 @@ export const NFTPicker: React.FC<{
                           >
                             {metadata.attributes &&
                               metadata.attributes.map((attr) => (
-                                <Box mr={1} mb={1} key={attr.trait_type + attr.value}>
+                                <Box
+                                  mr={1}
+                                  mb={1}
+                                  key={attr.traitType + attr.value}
+                                >
                                   <Chip
-                                    label={
-                                      attr.trait_type + " | " + attr.value
-                                    }
+                                    label={attr.traitType + " | " + attr.value}
                                     color="info"
                                     variant="outlined"
                                   />
@@ -292,8 +298,18 @@ export const NFTPicker: React.FC<{
                       flexDirection: "row-reverse",
                     }}
                   >
-                    <Button variant="contained" onClick={handleSelect}>Select</Button>
-                    <Box mr={1}><Button variant="contained" color="secondary" onClick={handleClose}>Cancel</Button></Box>
+                    <Button variant="contained" onClick={handleSelect}>
+                      Select
+                    </Button>
+                    <Box mr={1}>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleClose}
+                      >
+                        Cancel
+                      </Button>
+                    </Box>
                   </Box>
                 </>
               )}

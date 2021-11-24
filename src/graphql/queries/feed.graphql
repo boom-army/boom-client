@@ -25,9 +25,25 @@ query feed($offset: Int!, $limit: Int, $global: Boolean) {
       description
       sellerFeeBasisPoints
       image
-      attributes
-      collection
-      properties
+      attributes {
+        traitType
+        value
+      }
+      collection {
+        name
+        family
+      }
+      properties {
+        files {
+          uri
+          type
+        }
+        category
+        creators {
+          address
+          share
+        }
+      }
     }
     user {
       id

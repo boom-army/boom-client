@@ -8,7 +8,7 @@ export const NFTTweet: React.FC<{
 }> = ({ nftData }) => {
   return (
     <>
-      <Stack direction="column">
+      <Stack direction="column" key={"NFTStack" + nftData.name}>
         <Box>
           <img
             width="90%"
@@ -32,9 +32,9 @@ export const NFTTweet: React.FC<{
         >
           {nftData?.attributes &&
             nftData?.attributes.map((attr) => (
-              <Box mr={1} mb={1}>
+              <Box mr={1} mb={1}  key={attr.traitType + " | " + attr.value}>
                 <Chip
-                  label={attr.trait_type + " | " + attr.value}
+                  label={attr.traitType + " | " + attr.value}
                   color="info"
                   variant="outlined"
                 />

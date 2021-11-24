@@ -22,7 +22,6 @@ import { displayError } from "../../utils";
 import { uploadImage } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { camelizeKeys } from "../../utils";
 
 const Wrapper = styled.div`
   display: flex;
@@ -109,7 +108,7 @@ export const NewTweet = ({ feed }) => {
           tags,
           mentions,
           gif: gif ? createGifInput(gif) : null,
-          nft: camelizeKeys(nftData),
+          nft: nftData,
           files: tweetFiles,
         },
       });
@@ -158,10 +157,6 @@ export const NewTweet = ({ feed }) => {
     url,
     id: `preview-${index}`,
   });
-
-  useEffect(() => {
-    console.log("*********", camelizeKeys(nftData));
-  }, [nftData]);
 
   return (
     <Wrapper>
