@@ -24,6 +24,7 @@ query feed($offset: Int!, $limit: Int, $global: Boolean) {
       symbol
       description
       sellerFeeBasisPoints
+      externalUrl
       image
       attributes {
         traitType

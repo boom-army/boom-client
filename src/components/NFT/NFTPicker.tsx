@@ -27,6 +27,7 @@ const {
 export interface NFTObject {
   publicKey: string;
   name: string;
+  externalUrl: string;
   symbol: string;
   description: string;
   sellerFeeBasisPoints: number;
@@ -123,13 +124,15 @@ export const NFTPicker: React.FC<{
   };
 
   const fetchSetMeta = async (connection: Connection, key: PublicKey) => {
-    const mintMeta = await Metadata.findMany(connection, { mint: key });
-    const uri = mintMeta[0].data.data.uri;
+    const mintMeta = await Metadata.findMany(connection, { mint: key });    
+    const uri = mintMeta[0].data.data.uri;    
     if (uri) {
       const data: NFTObject = await fetch(uri)
         .then((response) => response.json())
         .then((data) => camelizeKeys(data));
       data.publicKey = key.toString();
+      console.log('********', data);
+      
       setMetadata(data);
       setValidKey(true);
     }
@@ -139,9 +142,9 @@ export const NFTPicker: React.FC<{
     (async () => {
       try {
         const key = new PublicKey(nftInput);
-        const acc = await connection.getParsedAccountInfo(key);
+        const acc = await connection.getParsedAccountInfo(key);        
         // @ts-ignore: error in types
-        if (acc && acc.value.data.parsed.info.mint) {
+        if (acc && acc.value.data.parsed.info.mint) {          
           // @ts-ignore: error in types
           const mintKey = new PublicKey(acc.value.data.parsed.info.mint);
           await fetchSetMeta(connection, mintKey);
@@ -151,7 +154,8 @@ export const NFTPicker: React.FC<{
           await fetchSetMeta(connection, key);
         }
       } catch (error) {
-        setValidKey(false);
+        console.log(error);
+        setValidKey(false);        
         if (nftInput.length > 42) {
           displayError(error, enqueueSnackbar);
         }

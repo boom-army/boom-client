@@ -64,6 +64,7 @@ export const TWEET = gql`
         symbol
         description
         sellerFeeBasisPoints
+        externalUrl
         image
         attributes
         collection
