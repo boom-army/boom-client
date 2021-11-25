@@ -24,39 +24,39 @@ const {
   metadata: { Metadata },
 } = programs;
 
-export interface NFTObject {
-  publicKey: string;
-  name: string;
-  externalUrl: string;
-  symbol: string;
-  description: string;
-  sellerFeeBasisPoints: number;
-  image: string;
-  attributes?: AttributesEntity[] | null;
-  collection: Collection;
-  properties: Properties;
-}
-interface AttributesEntity {
-  traitType: string;
-  value: string;
-}
-interface Collection {
-  name: string;
-  family: string;
-}
-interface Properties {
-  files?: FilesEntity[] | null;
-  category: string;
-  creators?: CreatorsEntity[] | null;
-}
-interface FilesEntity {
-  uri: string;
-  type: string;
-}
-interface CreatorsEntity {
-  address: string;
-  share: number;
-}
+// export interface NFTObject {
+//   publicKey: string;
+//   name: string;
+//   externalUrl: string;
+//   symbol: string;
+//   description: string;
+//   sellerFeeBasisPoints: number;
+//   image: string;
+//   attributes?: AttributesEntity[] | null;
+//   collection: Collection;
+//   properties: Properties;
+// }
+// interface AttributesEntity {
+//   traitType: string;
+//   value: string;
+// }
+// interface Collection {
+//   name: string;
+//   family: string;
+// }
+// interface Properties {
+//   files?: FilesEntity[] | null;
+//   category: string;
+//   creators?: CreatorsEntity[] | null;
+// }
+// interface FilesEntity {
+//   uri: string;
+//   type: string;
+// }
+// interface CreatorsEntity {
+//   address: string;
+//   share: number;
+// }
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -102,11 +102,11 @@ const Wrapper = styled("span")`
 `;
 
 export const NFTPicker: React.FC<{
-  setNftData: React.Dispatch<React.SetStateAction<NFTObject | null>>;
+  setNftData: React.Dispatch<React.SetStateAction<any>>;
 }> = ({ setNftData }) => {
   const [nftForm, toggleNftForm] = useState(false);
   const [nftInput, setNftInput] = useState("");
-  const [metadata, setMetadata] = useState<NFTObject | null>(null);
+  const [metadata, setMetadata] = useState<any>(null);
   const [validKey, setValidKey] = useState<null | Boolean>(null);
   const { theme } = useContext(ThemeContext);
   const handleClose = () => {
@@ -129,7 +129,7 @@ export const NFTPicker: React.FC<{
     const mintMeta = await Metadata.findMany(connection, { mint: key });    
     const uri = mintMeta[0].data.data.uri;    
     if (uri) {
-      const data: NFTObject = await fetch(uri)
+      const data: any = await fetch(uri)
         .then((response) => response.json())
         .then((data) => camelizeKeys(data));
       data.publicKey = key.toString();      
@@ -275,6 +275,7 @@ export const NFTPicker: React.FC<{
                             }}
                           >
                             {metadata.attributes &&
+                            // @ts-ignore
                               metadata.attributes.map((attr) => (
                                 <Box
                                   mr={1}

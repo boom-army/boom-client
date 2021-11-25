@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, Stack, Chip, Typography } from "@mui/material";
-import { NFTObject } from "./NFTPicker";
+// import { NFTObject } from "./NFTPicker";
 // import { ExplorerLink } from "../ExplorerLink";
 // import { ENDPOINTS } from "../../contexts/connection";
 
 export const NFTTweet: React.FC<{
-  nftData: NFTObject;
+  nftData: any;
 }> = ({ nftData }) => {
   // const endpoint = process.env.REACT_APP_RPC_URL as string;
   // const context = ENDPOINTS.filter((obj) => obj.endpoint === endpoint)[0];
@@ -32,6 +32,7 @@ export const NFTTweet: React.FC<{
           }}
         >
           {nftData?.attributes &&
+            // @ts-ignore
             nftData?.attributes.map((attr) => (
               <Box mr={1} mb={1} key={attr.traitType + attr.value}>
                 <Chip
