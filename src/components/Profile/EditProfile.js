@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { Loader } from "../Loader";
-import EditProfileForm from "./EditProfileForm";
+import { EditProfileForm } from "./EditProfileForm";
 import { PROFILE } from "../../queries/profile";
 
 const Wrapper = styled.div`

@@ -1,18 +1,27 @@
-import React, { useContext } from "react";
-import { AccountsProvider } from "./contexts/accounts";
-import { AppHeader } from "./components/AppHeader";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { EditProfile } from "./components/Profile/EditProfile";
-import { Home, Suggestion, Nav, ConnectView, Notifications, Following } from "./views";
-import { MarketProvider } from "./contexts/market";
-import { MasterTweet } from "./components/Tweet/MasterTweet";
-import { Profile } from "./components/Profile/Profile";
-import { Wallet } from "./contexts/wallet";
-import { Container, Grid } from "@mui/material";
-import { ThemeContext } from "./contexts/theme";
-import { GiphyContextProvider } from "./contexts/giphy";
+import React, { useContext } from 'react';
+import { AccountsProvider } from './contexts/accounts';
+import { AppHeader } from './components/AppHeader';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { EditProfile } from './components/Profile/EditProfile';
+import {
+  Home,
+  Suggestion,
+  Nav,
+  ConnectView,
+  Notifications,
+  Following,
+} from './views';
+import { MarketProvider } from './contexts/market';
+import { MasterTweet } from './components/Tweet/MasterTweet';
+import { Profile } from './components/Profile/Profile';
+import { Wallet } from './contexts/wallet';
+import { Container, Grid } from '@mui/material';
+import { ThemeContext } from './contexts/theme';
+import { GiphyContextProvider } from './contexts/giphy';
+import { useQuery } from '@apollo/client';
+import { PROFILE } from './queries/profile';
 
-export function Routes() {
+export function AppRoutes() {
   const { theme } = useContext(ThemeContext);
 
   const middleColStyles = {
@@ -20,9 +29,15 @@ export function Routes() {
     borderLeft: `1px solid ${theme.tertiaryColor}`,
   };
 
+  const userFromStore = localStorage.getItem('user');
+  const user = userFromStore ? JSON.parse(userFromStore) : null;
+  const { data, refetch } = useQuery(PROFILE, {
+    variables: { handle: user?.handle },
+  });
+
   return (
     <>
-      <BrowserRouter basename={"/"}>
+      <BrowserRouter basename={'/'}>
         <Wallet>
           <AccountsProvider>
             <MarketProvider>
@@ -30,34 +45,35 @@ export function Routes() {
                 <AppHeader />
                 <Container maxWidth="lg">
                   <Grid container>
-                    <Grid item xs={1} sm={1} md={2}>
-                      <Nav />
+                    <Grid item xs={2} sm={1} md={2}>
+                      <Nav user={user} profile={data?.profile} />
                     </Grid>
-                    <Grid item xs={7} sx={middleColStyles}>
-                      <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/following" component={Following} />
-                        <Route exact path="/connect" component={ConnectView} />
+                    <Grid item xs={10} sm={11} md={7} sx={middleColStyles}>
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="following" element={<Following />} />
+                        <Route path="connect" element={<ConnectView />} />
                         <Route
-                          exact
-                          path="/notifications"
-                          component={Notifications}
+                          path="notifications"
+                          element={<Notifications refetchProfile={refetch} />}
                         />
                         <Route
-                          exact
-                          path={`/:handle/status/:tweetId`}
-                          component={MasterTweet}
+                          path={`:handle/status/:tweetId`}
+                          element={<MasterTweet />}
                         />
                         <Route
-                          exact
-                          path={`/settings/profile`}
-                          component={EditProfile}
+                          path={`settings/profile`}
+                          element={<EditProfile />}
                         />
-                        <Route exact path={`/:handle`} component={Profile} />
-                        <Redirect from="*" to="/" />
-                      </Switch>
+                        <Route path={`:handle`} element={<Profile />} />
+                        <Route path="*" element={<Navigate replace to="/" />} />
+                      </Routes>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid
+                      item
+                      md={3}
+                      display={{ xs: 'none', sm: 'none', md: 'block' }}
+                    >
                       <Suggestion />
                     </Grid>
                   </Grid>

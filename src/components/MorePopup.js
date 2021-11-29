@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "styled-components";
-import styled from "styled-components";
-import Popup from "reactjs-popup";
-import ToggleTheme from "./ToggleTheme";
-import Logout from "./Auth/Logout";
-import ChangeColor from "./ChangeColor";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import React, { useContext } from 'react';
+import { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
+import Popup from 'reactjs-popup';
+import ToggleTheme from './ToggleTheme';
+import Logout from './Auth/Logout';
+import ChangeColor from './ChangeColor';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Stack, Typography } from '@mui/material';
 
 const Wrapper = styled.div`
   .btn {
@@ -13,36 +14,47 @@ const Wrapper = styled.div`
   }
 `;
 
-const MoreBtn = React.forwardRef(({ open, ...props }, ref) => {
-  return (
-    <div ref={ref} {...props}>
-      <MoreHorizIcon />
-      <span className="btn">More</span>
-    </div>
-  );
-});
+const MoreBtn = React.forwardRef(
+  ({ open, iconProps, stackProps, ...props }, ref) => {
+    return (
+      <div ref={ref} {...props}>
+        <Stack direction="row" {...stackProps} sx={{ cursor: 'pointer' }}>
+          <MoreHorizIcon sx={iconProps} />
+          <Typography
+            variant="body1"
+            display={{ xs: 'none', sm: 'none', md: 'block', lg: 'block' }}
+          >
+            More
+          </Typography>
+        </Stack>
+      </div>
+    );
+  }
+);
 
-export const MorePopUp = () => {
+export const MorePopUp = ({ iconProps, stackProps }) => {
   const theme = useContext(ThemeContext);
 
   const contentStyle = {
-    width: "160px",
+    width: '160px',
     background: theme.background,
-    borderRadius: "6px",
+    borderRadius: '6px',
     border: `1px solid ${theme.tertiaryColor}`,
     boxShadow: theme.bs1,
-    padding: "1rem 1rem 0 1rem",
+    padding: '1rem 1rem 0 1rem',
   };
 
   const overlayStyle = {
-    background: "none",
+    background: 'none',
   };
 
   return (
     <Wrapper>
       <Popup
         className="btn"
-        trigger={(open) => <MoreBtn open={open} />}
+        trigger={(open) => (
+          <MoreBtn open={open} iconProps={iconProps} stackProps={stackProps} />
+        )}
         position="top left"
         closeOnDocumentClick
         contentStyle={contentStyle}

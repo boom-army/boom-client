@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Follow } from "../Profile/Follow";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
 const CardStyled = styled(Card)`
@@ -20,8 +20,8 @@ const CardStyled = styled(Card)`
 `;
 
 export const ConsumerCard = ({ consumer }) => {
-  const history = useHistory();
-  const handleOnClick = () => history.push(`/${consumer.handle}`);
+  const navigate = useNavigate();
+  const handleOnClick = () => navigate(`/${consumer.handle}`);
   return (
     <CardStyled sx={{ maxWidth: 345, height: "100%" }}>
       <CardActionArea onClick={handleOnClick}>

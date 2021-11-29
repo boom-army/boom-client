@@ -13,9 +13,10 @@ import { uploadImage } from "../../utils";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useWallet } from '@solana/wallet-adapter-react';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-const EditProfileForm = ({ profile, history }) => {
+export const EditProfileForm = ({ profile }) => {
+  const navigate = useNavigate();
   const [avatarState, setAvatar] = useState("");
   const [coverPhotoState, setCoverPhoto] = useState("");
 
@@ -61,7 +62,7 @@ const EditProfileForm = ({ profile, history }) => {
       disconnect().catch(() => {
         // Silently catch because any errors are caught by the context `onError` handler
       });
-      history.push("/");
+      navigate("/");
       window.location.reload();
 
       enqueueSnackbar("Your profile has been updated 🥳. Please login again to refresh your session.", { variant: "success" });
@@ -73,7 +74,9 @@ const EditProfileForm = ({ profile, history }) => {
       (field) => field.setValue("")
     );
 
-    history.push(`/${handle}`);
+    console.log(handle)
+
+    navigate(`/${handle.value}`);
   };
 
   const handleCoverPhoto = async (e) => {
@@ -189,5 +192,3 @@ const EditProfileForm = ({ profile, history }) => {
     </Form>
   );
 };
-
-export default withRouter(EditProfileForm);

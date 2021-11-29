@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import GlobalStyle from "./styles/GlobalStyle";
-import { Routes } from "./routes";
+import { AppRoutes } from "./routes";
 import { ThemeContext } from "./contexts/theme";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 // import { USER_LOGGED_IN } from "./queries/client";
@@ -22,7 +22,7 @@ export const App = () => {
       <GlobalStyle />
       <SnackbarProvider maxSnack={3}>
         <SimpleReactLightbox>
-          <Routes />
+          <AppRoutes />
         </SimpleReactLightbox>
       </SnackbarProvider>
     </StyledThemeProvider>
