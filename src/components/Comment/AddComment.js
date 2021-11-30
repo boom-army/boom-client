@@ -1,8 +1,6 @@
 import React from "react";
 import Button from "../../styles/Button";
-import TextareaAutosize from "react-textarea-autosize";
 import UserAvatar from "../UserAvatar";
-import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import { ADD_COMMENT } from "../../queries/comment";
 import { Box } from "@mui/system";
@@ -11,38 +9,8 @@ import { USER } from "../../queries/client";
 import { displayError } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
+import { NewTweet } from "../Tweet";
 
-const Wrapper = styled.div`
-	display: flex;
-	padding: 1rem 1rem;
-	border-bottom: 1px solid ${(props) => props.theme.tertiaryColor};
-
-	textarea {
-		width: 100%;
-		background: inherit;
-		border: none;
-		font-size: 1.23rem;
-		font-family: ${(props) => props.theme.font};
-		color: ${(props) => props.theme.primaryColor};
-		margin-bottom: 1.4rem;
-	}
-
-	.add-comment {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.add-comment-action
-		display: flex;
-		align-items: center;
-	}
-
-	@media screen and (max-width: 530px) {
-		textarea {
-		  font-size: 0.9rem;
-		}
-	}
-`;
 
 const AddComment = ({ id }) => {
   const comment = useInput("");
@@ -92,29 +60,9 @@ const AddComment = ({ id }) => {
   const { data } = useQuery(USER);
 
   return (
-    <Wrapper>
-      <Box mr={2}>
-        <UserAvatar avatar={data?.me?.avatar} />
-      </Box>
-
-      <form onSubmit={handleAddComment}>
-        <div className="add-comment">
-          <TextareaAutosize
-            cols="48"
-            placeholder="Tweet your reply"
-            type="text"
-            value={comment.value}
-            onChange={comment.onChange}
-          />
-
-          <div className="add-comment-action">
-            <Button sm disabled={loading}>
-              Reply
-            </Button>
-          </div>
-        </div>
-      </form>
-    </Wrapper>
+    <>
+      <NewTweet feed={data?.feed} parentTweet={id} />
+    </>
   );
 };
 

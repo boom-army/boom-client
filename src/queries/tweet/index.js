@@ -8,6 +8,7 @@ export const NEW_TWEET = gql`
     $mentions: [String!]!
     $gif: GifInput
     $nft: NFTInput
+    $parentTweet: String
   ) {
     newTweet(
       text: $text
@@ -16,6 +17,7 @@ export const NEW_TWEET = gql`
       mentions: $mentions
       gif: $gif
       nft: $nft
+      parentTweet: $parentTweet
     ) {
       id
       text

@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import Avatar from "@mui/material/Avatar";
+import { useState } from "react";
 import Button from "../../styles/Button";
-import Stack from "@mui/material/Stack";
-import TextareaAutosize from "react-textarea-autosize";
+import { Stack, Avatar, TextareaAutosize } from "@mui/material";
 import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import { AttributionLink } from "../Giphy/AttributionLink";
@@ -63,7 +61,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export const NewTweet = ({ feed }) => {
+export const NewTweet = ({ feed, parentTweet }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif] = useState(null);
   const [nftData, setNftData] = useState(null);
@@ -110,12 +108,14 @@ export const NewTweet = ({ feed }) => {
           gif: gif ? createGifInput(gif) : null,
           nft: nftData,
           files: tweetFiles,
+          parentTweet
         },
       });
 
       setNftData(null);
       enqueueSnackbar("Your tweet has been posted", { variant: "success" });
     } catch (err) {
+      console.log(err);
       return displayError(err, enqueueSnackbar);
     }
 
@@ -164,7 +164,6 @@ export const NewTweet = ({ feed }) => {
       <form onSubmit={handleNewTweet}>
         <div className="new-tweet">
           <TextareaAutosize
-            cols="48"
             placeholder="What's happening?"
             type="text"
             value={tweet.value}
