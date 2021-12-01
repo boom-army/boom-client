@@ -1,24 +1,23 @@
-import React, { useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "../../styles/Button";
-import CoverPhoto from "../../styles/CoverPhoto";
-import Form from "../../styles/Form";
-import Input from "../Input";
-import TextareaAutosize from "react-textarea-autosize";
-import useInput from "../../hooks/useInput";
-import { PROFILE, EDIT_PROFILE } from "../../queries/profile";
-import { SIGN_FILE } from "../../queries/files";
-import { displayError } from "../../utils";
-import { uploadImage } from "../../utils";
-import { useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
-import { useWallet } from '@solana/wallet-adapter-react';
+import React, { useState } from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '../../styles/Button';
+import CoverPhoto from '../../styles/CoverPhoto';
+import Form from '../../styles/Form';
+import Input from '../Input';
+import TextareaAutosize from 'react-textarea-autosize';
+import useInput from '../../hooks/useInput';
+import { PROFILE, EDIT_PROFILE } from '../../queries/profile';
+import { SIGN_FILE } from '../../queries/files';
+import { displayError } from '../../utils';
+import { uploadImage } from '../../utils';
+import { useMutation } from '@apollo/client';
+import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 
 export const EditProfileForm = ({ profile }) => {
   const navigate = useNavigate();
-  const [avatarState, setAvatar] = useState("");
-  const [coverPhotoState, setCoverPhoto] = useState("");
+  const [avatarState, setAvatar] = useState('');
+  const [coverPhotoState, setCoverPhoto] = useState('');
 
   const handle = useInput(profile && profile.handle);
   const consumerName = useInput(profile && profile.consumerName);
@@ -30,22 +29,23 @@ export const EditProfileForm = ({ profile }) => {
   const coverPhoto = useInput(profile && profile.coverPhoto);
 
   const [editProfileMutation, { loading }] = useMutation(EDIT_PROFILE, {
-    refetchQueries: [{ query: PROFILE, variables: { handle } }],
+    refetchQueries: [{ query: PROFILE, variables: { handle: handle.value } }],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 
-  const { disconnect } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleEditProfile = async (e) => {
     e.preventDefault();
 
     if (!consumerName.value) {
-      return enqueueSnackbar("You cannot leave name empty", { variant: "error" });
+      return enqueueSnackbar('You cannot leave name empty', {
+        variant: 'error',
+      });
     }
 
     try {
-      await editProfileMutation({
+      const { data } = await editProfileMutation({
         variables: {
           handle: handle.value,
           consumerName: consumerName.value,
@@ -58,25 +58,23 @@ export const EditProfileForm = ({ profile }) => {
         },
       });
 
-      localStorage.clear();
-      disconnect().catch(() => {
-        // Silently catch because any errors are caught by the context `onError` handler
-      });
-      navigate("/");
-      window.location.reload();
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          handle: data.editProfile.handle,
+          publicAddress: data.editProfile.publicAddress,
+          id: data.editProfile.id,
+        })
+      );
 
-      enqueueSnackbar("Your profile has been updated 🥳. Please login again to refresh your session.", { variant: "success" });
+      navigate(`/${data.editProfile.handle}`);
+
+      enqueueSnackbar('Your profile has been updated 🥳.', {
+        variant: 'success',
+      });
     } catch (err) {
       return displayError(err, enqueueSnackbar);
     }
-
-    [handle, consumerName, dob, location, website, avatar, coverPhoto].map(
-      (field) => field.setValue("")
-    );
-
-    console.log(handle)
-
-    navigate(`/${handle.value}`);
   };
 
   const handleCoverPhoto = async (e) => {
@@ -187,7 +185,7 @@ export const EditProfileForm = ({ profile }) => {
         onChange={location.onChange}
       />
       <Button outline disabled={loading} type="submit">
-        {loading ? "Saving" : "Save"}
+        {loading ? 'Saving' : 'Save'}
       </Button>
     </Form>
   );

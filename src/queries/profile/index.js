@@ -81,6 +81,8 @@ export const EDIT_PROFILE = gql`
       coverPhoto: $coverPhoto
     ) {
       id
+      handle
+      publicAddress
     }
   }
 `;
