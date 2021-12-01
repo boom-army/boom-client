@@ -141,6 +141,7 @@ export const NFTPicker: React.FC<{
   useEffect(() => {
     (async () => {
       try {
+        if (!nftInput) return;
         const key = new PublicKey(nftInput);
         const acc = await connection.getParsedAccountInfo(key);        
         // @ts-ignore: error in types
