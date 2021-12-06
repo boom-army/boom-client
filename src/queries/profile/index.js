@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const PROFILE = gql`
-  query profile($handle: String!) {
-    profile(handle: $handle) {
+  query profile($id: String!) {
+    profile(id: $id) {
       id
       publicAddress
       handle

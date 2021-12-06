@@ -102,7 +102,7 @@ const Wrapper = styled.nav`
 export const Nav = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const { data } = useQuery(PROFILE, {
-    variables: { handle: user?.handle },
+    variables: { id: user?.id },
   });
 
   return (
@@ -132,7 +132,7 @@ export const Nav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="selected" to={`/${user?.handle}`}>
+          <NavLink activeClassName="selected" to="/profile">
             <AccountCircleIcon /> <span>Profile</span>
           </NavLink>
         </li>

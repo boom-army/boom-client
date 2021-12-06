@@ -58,7 +58,7 @@ export const EditProfile = () => {
   const [currentUser] = useState(JSON.parse(user));
 
   const { loading, error, data } = useQuery(PROFILE, {
-    variables: { handle: currentUser?.handle },
+    variables: { id: currentUser?.id },
   });
 
   if (loading) return <Loader />;

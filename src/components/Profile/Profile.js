@@ -1,6 +1,5 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import ProfileInfo from "./ProfileInfo";
 import { Tweet } from "../Tweet";
@@ -24,10 +23,9 @@ const Wrapper = styled.div`
 `;
 
 export const Profile = () => {
-  const { handle } = useParams();
-
+  const user = JSON.parse(localStorage.getItem("user"));
   const { loading, error, data } = useQuery(PROFILE, {
-    variables: { handle },
+    variables: { id: user?.id },
   });
 
   if (loading) return <Loader />;
