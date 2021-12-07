@@ -2,9 +2,9 @@ import React from "react";
 import CustomResponse from "./CustomResponse";
 import styled from "styled-components";
 import { Loader } from "./Loader";
-import { Tweet } from "./Tweet";
+import { ShowTweet } from "./Tweet";
 import { ApolloError } from "@apollo/client";
-import { FeedQuery } from "../generated/graphql";
+import { FeedQuery, Tweet } from "../generated/graphql";
 import { Box } from "@mui/system";
 
 const Wrapper = styled.div`
@@ -35,9 +35,9 @@ export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
     <Wrapper>
       {data?.feed?.length ? (
         data.feed.map((tweet) => (
-          <Tweet
+          <ShowTweet
             key={tweet.id}
-            tweet={tweet}
+            tweet={tweet as Tweet}
             offset={data.feed.length}
             parentTweetId={tweet?.parentTweet?.id}
           />

@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { setDate } from "../../utils";
 import { VideoContainer } from "../Giphy/VideoContainer"
 import { NFTTweet } from "../NFT/NFTTweet";
+import { Tweet } from "../../generated/graphql";
 
 const Wrapper = styled.div`
   display: flex;
@@ -106,7 +107,13 @@ const Wrapper = styled.div`
   }
 `;
 
-export const Tweet = ({ tweet, offset, parentTweetId }) => {
+interface Props {
+  tweet: Tweet;
+  offset: Number;
+  parentTweetId: String | undefined;
+}
+
+export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => {
   const {
     id,
     text,
@@ -127,13 +134,13 @@ export const Tweet = ({ tweet, offset, parentTweetId }) => {
   const linkifyOptions = {
     className: 'body',
     target: { url: '_blank' },
-    formatHref: { hashtag: (href) => `explore?=${href.substring(1)}` },
+    formatHref: { hashtag: (href: any) => `explore?=${href.substring(1)}` },
   };
 
   return (
     <Wrapper>
       <Link to={`/${handle}`}>
-        <UserAvatar className="avatar" avatar={user?.avatar} />
+        <UserAvatar className="avatar" avatar={user?.avatar as string} />
       </Link>
 
       <div className="tweet-info">
@@ -156,7 +163,7 @@ export const Tweet = ({ tweet, offset, parentTweetId }) => {
 
         {nft && <NFTTweet nftData={nft}/>}
 
-        {!!files.length && <ImageBox files={files} />}
+        {!!files.length && <ImageBox files={files} disableLightbox={false} />}
 
         <div className="tweet-stats">
           <EmojiTweet

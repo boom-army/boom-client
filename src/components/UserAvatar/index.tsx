@@ -3,7 +3,8 @@ import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
 
 interface IProps {
-  avatar?: string 
+  avatar?: string
+  className?: string
 }
 
 const PersonAvatar = ({avatar}: IProps) => (

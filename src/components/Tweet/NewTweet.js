@@ -80,7 +80,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
       {
         query: TWEET,
         variables: { id: parentTweet },
-      }
+      },
     ],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
@@ -112,7 +112,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
           gif: gif ? createGifInput(gif) : null,
           nft: nftData,
           files: tweetFiles,
-          parentTweet
+          parentTweet,
         },
       });
 

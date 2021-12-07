@@ -1,7 +1,7 @@
 import React from "react";
 import CustomResponse from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
-import { Tweet } from "../components/Tweet";
+import { ShowTweet } from "../components/Tweet";
 import styled from "styled-components";
 import { MENTIONS } from "../queries/others";
 import { useQuery } from "@apollo/client";
@@ -16,7 +16,7 @@ export const Notifications = () => {
   return (
     <Wrapper>
       {data?.mentions?.length ? (
-        data.mentions.map((tweet) => <Tweet key={tweet.id} tweet={tweet} />)
+        data.mentions.map((tweet) => <ShowTweet key={tweet.id} tweet={tweet} />)
       ) : (
         <CustomResponse text="Follow some people to get some feed updates" />
       )}
