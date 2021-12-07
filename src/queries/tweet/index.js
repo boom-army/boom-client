@@ -49,6 +49,13 @@ export const TOGGLE_REACTION = gql`
   }
 `;
 
+const tweetFragment = gql`
+  fragment User_user on User {
+    firstName
+    lastName
+  }
+`
+
 export const TWEET = gql`
   query tweet($id: ID!) {
     tweet(id: $id) {
@@ -56,6 +63,13 @@ export const TWEET = gql`
       text
       tags
       mentions
+      parentTweet {
+        id
+      }
+      childTweets {
+        id
+        text
+      }
       user {
         id
         publicAddress
@@ -102,7 +116,6 @@ export const TWEET = gql`
           }
         }
       }
-      commentsCount
       retweetsCount
       isRetweet
       reactions {
@@ -111,19 +124,6 @@ export const TWEET = gql`
         skin
         isMine
         count
-      }
-      comments {
-        id
-        text
-        isCommentMine
-        user {
-          id
-          publicAddress
-          consumerName
-          handle
-          avatar
-        }
-        createdAt
       }
       createdAt
     }
