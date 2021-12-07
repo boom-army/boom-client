@@ -6,7 +6,7 @@ import { FEED, MENTIONS } from "../../queries/others";
 import { Loader } from "../Loader";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SmilePlusIcon } from "../Icons";
-import { TOGGLE_REACTION } from "../../queries/tweet";
+import { TOGGLE_REACTION, TWEET } from "../../queries/tweet";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { displayError } from "../../utils";
 import { interactionInstruction } from "../../utils/sosol-web3";
@@ -41,7 +41,7 @@ const ReactionWrapper = styled.div`
   }
 `;
 
-export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
+export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset, parentTweetId }) => {
   const { sosolProgram } = useSosolProgram();
   const [emoji, setEmoji] = useState({});
 
@@ -53,7 +53,8 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset }) => {
     refetchQueries: [
       { query: FEED, variables: { offset: 0, limit: offset } },
       { query: MENTIONS },
-    ], // TODO: get dyunamic page length data
+      { query: TWEET, variables: { id: parentTweetId }}
+    ], // TODO: get dynamic page length data
   });
 
   const { enqueueSnackbar } = useSnackbar();

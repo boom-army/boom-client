@@ -10,6 +10,10 @@ export const FEED = gql`
       commentsCount
       retweetsCount
       isRetweet
+      createdAt
+      parentTweet {
+        id
+      }
       files {
         id
         url
@@ -28,7 +32,6 @@ export const FEED = gql`
         isMine
         count
       }
-      createdAt
     }
   }
 `;

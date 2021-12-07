@@ -29,13 +29,13 @@ export const MasterTweet = () => {
       ) : (
         <>
           {exists ? (
-            <Tweet tweet={data && data.tweet} />
+            <Tweet tweet={data && data.tweet} parentTweetId={data?.tweet?.id} />
           ) : (
             <CustomResponse text="Oops, the tweet you are looking for doesn't seem to exist." />
           )}
           {exists ? <NewTweet parentTweet={data.tweet.id} /> : null}
           {comments && comments.map((comment) => (
-            <Tweet tweet={comment && comment} />
+            <Tweet tweet={comment && comment} parentTweetId={data?.tweet?.id} />
           ))}
         </>
       )}

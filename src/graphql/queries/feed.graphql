@@ -7,6 +7,10 @@ query feed($offset: Int!, $limit: Int, $global: Boolean) {
     commentsCount
     retweetsCount
     isRetweet
+    createdAt
+    parentTweet {
+      id
+    }
     files {
       id
       url
@@ -60,6 +64,5 @@ query feed($offset: Int!, $limit: Int, $global: Boolean) {
       isMine
       count
     }
-    createdAt
   }
 }
