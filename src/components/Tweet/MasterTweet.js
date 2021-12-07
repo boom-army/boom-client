@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { TWEET } from "../../queries/tweet";
 import { Loader } from "../Loader";
 import { Tweet } from "./Tweet";
-import AddComment from "../Comment/AddComment";
+import { NewTweet } from ".";
 import CustomResponse from "../CustomResponse";
 
 const Wrapper = styled.div`
@@ -22,8 +22,6 @@ export const MasterTweet = () => {
   const comments = data?.tweet?.childTweets?.length > 0 ? data.tweet.childTweets : [];
   const exists = !!data?.tweet?.id;
 
-  console.log('******', comments);
-
   return (
     <Wrapper>
       {loading ? (
@@ -35,10 +33,10 @@ export const MasterTweet = () => {
           ) : (
             <CustomResponse text="Oops, the tweet you are looking for doesn't seem to exist." />
           )}
-          {exists ? <AddComment id={data.tweet.id} /> : null}
-          {/* {comments && comments.map((comment) => (
+          {exists ? <NewTweet parentTweet={data.tweet.id} /> : null}
+          {comments && comments.map((comment) => (
             <Tweet tweet={comment && comment} />
-          ))} */}
+          ))}
         </>
       )}
     </Wrapper>

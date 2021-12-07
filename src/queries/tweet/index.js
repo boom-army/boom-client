@@ -125,6 +125,12 @@ export const TWEET = gql`
         ...subTweet
         childTweets {
           ...subTweet
+          childTweets {
+            ...subTweet
+            childTweets {
+              ...subTweet
+            }
+          }
         }
       }
     }

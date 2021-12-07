@@ -8,7 +8,7 @@ import { Box } from "@mui/system";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { FEED } from "../../queries/others";
 import { ImageBox } from "../ImageBox";
-import { NEW_TWEET } from "../../queries/tweet";
+import { NEW_TWEET, TWEET } from "../../queries/tweet";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { SIGN_FILE } from "../../queries/files";
@@ -77,6 +77,10 @@ export const NewTweet = ({ feed, parentTweet }) => {
           limit: feed?.length + 1, // current tweet length + 1 for the new tweet
         },
       },
+      {
+        query: TWEET,
+        variables: { id: parentTweet },
+      }
     ],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
