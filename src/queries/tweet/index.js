@@ -49,83 +49,85 @@ export const TOGGLE_REACTION = gql`
   }
 `;
 
-const tweetFragment = gql`
-  fragment User_user on User {
-    firstName
-    lastName
+const TWEET_FRAGMENT = gql`
+  fragment subTweet on Tweet {
+    id
+    text
+    tags
+    mentions
+    retweetsCount
+    isRetweet
+    createdAt
+    parentTweet {
+      id
+    }
+    user {
+      id
+      publicAddress
+      consumerName
+      handle
+      avatar
+    }
+    files {
+      id
+      url
+    }
+    gif {
+      id
+      title
+      fixedHeightUrl
+      originalUrl
+    }
+    nft {
+      id
+      publicKey
+      name
+      symbol
+      description
+      sellerFeeBasisPoints
+      externalUrl
+      image
+      attributes {
+        traitType
+        value
+      }
+      collection {
+        name
+        family
+      }
+      properties {
+        files {
+          uri
+          type
+        }
+        category
+        creators {
+          address
+          share
+        }
+      }
+    }
+    reactions {
+      id
+      emojiId
+      skin
+      isMine
+      count
+    }
   }
-`
+`;
 
 export const TWEET = gql`
   query tweet($id: ID!) {
     tweet(id: $id) {
-      id
-      text
-      tags
-      mentions
-      parentTweet {
-        id
-      }
+      ...subTweet
       childTweets {
-        id
-        text
-      }
-      user {
-        id
-        publicAddress
-        consumerName
-        handle
-        avatar
-      }
-      files {
-        id
-        url
-      }
-      gif {
-        id
-        title
-        fixedHeightUrl
-        originalUrl
-      }
-      nft {
-        id
-        publicKey
-        name
-        symbol
-        description
-        sellerFeeBasisPoints
-        externalUrl
-        image
-        attributes {
-          traitType
-          value
-        }
-        collection {
-          name
-          family
-        }
-        properties {
-          files {
-            uri
-            type
-          }
-          category
-          creators {
-            address
-            share
-          }
+        ...subTweet
+        childTweets {
+          ...subTweet
         }
       }
-      retweetsCount
-      isRetweet
-      reactions {
-        id
-        emojiId
-        skin
-        isMine
-        count
-      }
-      createdAt
     }
   }
+  ${TWEET_FRAGMENT}
 `;
