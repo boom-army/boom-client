@@ -10,12 +10,7 @@ import { Badge, Stack, Typography } from '@mui/material';
 import { ThemeContext } from 'styled-components';
 import { ThemeVars } from '../styles/themes';
 import { User } from '../generated/graphql';
-
-interface StoreUser {
-  handle: string;
-  id: string;
-  publicAddress: string;
-}
+import { User as StoreUser } from '../contexts/user';
 
 interface Props {
   profile: User;

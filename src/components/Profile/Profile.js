@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 export const Profile = () => {
   const { handle } = useParams();
 
-  const { loading, error, data } = useQuery(PROFILE, {
+  const { loading, data } = useQuery(PROFILE, {
     variables: { handle },
   });
 

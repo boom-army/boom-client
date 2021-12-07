@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '../../styles/Button';
 import CoverPhoto from '../../styles/CoverPhoto';
@@ -14,7 +14,7 @@ import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 
-export const EditProfileForm = ({ profile }) => {
+export const EditProfileForm = ({ profile, setUser }) => {
   const navigate = useNavigate();
   const [avatarState, setAvatar] = useState('');
   const [coverPhotoState, setCoverPhoto] = useState('');
@@ -58,14 +58,11 @@ export const EditProfileForm = ({ profile }) => {
         },
       });
 
-      localStorage.setItem(
-        'user',
-        JSON.stringify({
-          handle: data.editProfile.handle,
-          publicAddress: data.editProfile.publicAddress,
-          id: data.editProfile.id,
-        })
-      );
+      setUser({
+        handle: data.editProfile.handle,
+        publicAddress: data.editProfile.publicAddress,
+        id: data.editProfile.id,
+      });
 
       navigate(`/${data.editProfile.handle}`);
 
