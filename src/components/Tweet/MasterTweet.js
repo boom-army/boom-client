@@ -35,7 +35,7 @@ export const MasterTweet = () => {
           )}
           {exists ? <NewTweet parentTweet={data.tweet.id} /> : null}
           {comments && comments.map((comment) => (
-            <ShowTweet tweet={comment && comment} parentTweetId={data?.tweet?.id} />
+            <ShowTweet tweet={comment && comment} parentTweetId={data?.tweet?.id} key={comment.id} />
           ))}
         </>
       )}

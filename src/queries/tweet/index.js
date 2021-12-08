@@ -56,6 +56,7 @@ const TWEET_FRAGMENT = gql`
     tags
     mentions
     retweetsCount
+    commentsCount
     isRetweet
     createdAt
     parentTweet {
@@ -123,15 +124,6 @@ export const TWEET = gql`
       ...subTweet
       childTweets {
         ...subTweet
-        childTweets {
-          ...subTweet
-          childTweets {
-            ...subTweet
-            childTweets {
-              ...subTweet
-            }
-          }
-        }
       }
     }
   }
