@@ -1,9 +1,6 @@
-import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import { Loader } from "../Loader";
-import EditProfileForm from "./EditProfileForm";
-import { PROFILE } from "../../queries/profile";
+import { EditProfileForm } from "./EditProfileForm";
 
 const Wrapper = styled.div`
   padding-bottom: 5rem;
@@ -53,20 +50,13 @@ const Wrapper = styled.div`
   }
 `;
 
-export const EditProfile = () => {
-  const user = localStorage.getItem("user");
-  const [currentUser] = useState(JSON.parse(user));
-
-  const { loading, error, data } = useQuery(PROFILE, {
-    variables: { handle: currentUser?.handle },
-  });
-
+export const EditProfile = ({ data, loading, setUser }) => {
   if (loading) return <Loader />;
 
   return (
     <Wrapper>
       <div className="flex-wrapper">
-        <EditProfileForm profile={data && data?.profile} />
+        <EditProfileForm profile={data && data?.profile} setUser={setUser} />
       </div>
     </Wrapper>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import CustomResponse from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
 import { ShowTweet } from "../components/Tweet";
@@ -8,8 +8,12 @@ import { useQuery } from "@apollo/client";
 
 const Wrapper = styled.div``;
 
-export const Notifications = () => {
-  const { loading, error, data } = useQuery(MENTIONS);
+export const Notifications = ({ refetchProfile }) => {
+  const { loading, data } = useQuery(MENTIONS);
+
+  useEffect(() => {
+    refetchProfile();
+  }, [data, refetchProfile]);
 
   if (loading) return <Loader />;
 

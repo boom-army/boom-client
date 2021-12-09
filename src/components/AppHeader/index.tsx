@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useContext } from "react";
 import base58 from "bs58";
 import { CurrentUser } from "../CurrentUser";
 import { formatNumber } from "../../utils/utils";
@@ -16,11 +16,13 @@ import { USER_FOLLOW } from "../../queries/follow";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
+import { UserContext } from '../../contexts/user';
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
   const { account } = useNativeAccount();
   const { enqueueSnackbar } = useSnackbar();
+  const { setUser } = useContext(UserContext);
 
   const token = localStorage.getItem("token");
 
@@ -29,8 +31,8 @@ export const AppHeader = () => {
     refetchQueries: [{ query: FEED }, { query: USER_FOLLOW }],
     onCompleted({ loginRegister }) {
       if (localStorage) {
+        setUser(loginRegister.user)
         localStorage.setItem("token", loginRegister.token);
-        localStorage.setItem("user", JSON.stringify(loginRegister.user));
       }
     },
   });
@@ -86,6 +88,11 @@ export const AppHeader = () => {
     if (wallet && !token && connected) signin();
   }, [wallet, signin, token, connected]);
 
+  const logout = () => {
+    localStorage.clear();
+    window.location.replace('/');
+  };
+
   const TopBar = (
     <AppBar
       position="absolute"
@@ -113,6 +120,7 @@ export const AppHeader = () => {
                 </Box>
                 <Box mr={1}>
                   <WalletDisconnectButton
+                    onClick={logout}
                     startIcon={<DisconnectIcon />}
                     style={{ marginLeft: 8 }}
                   />
