@@ -1,15 +1,16 @@
-import "./index.css";
 // import * as serviceWorker from "./serviceWorker";
-import { App } from "./App";
-import React from "react";
-import { client } from "./apollo/client";
-import { ApolloProvider } from "@apollo/client";
-import { ThemeProvider } from "./contexts/theme";
-import { render } from "react-dom";
+import "./index.css";
 import * as Sentry from "@sentry/react";
+import OneSignal from "react-onesignal";
+import React from "react";
+import { ApolloProvider } from "@apollo/client";
+import { App } from "./App";
 import { Integrations } from "@sentry/tracing";
+import { ThemeProvider } from "./contexts/theme";
+import { client } from "./apollo/client";
+import { render } from "react-dom";
 
-if (process.env.REACT_APP_ENV !== 'development') {
+if (process.env.REACT_APP_ENV !== "development") {
   Sentry.init({
     dsn: process.env.REACT_APP_SENTRY,
     integrations: [new Integrations.BrowserTracing()],
@@ -20,6 +21,11 @@ if (process.env.REACT_APP_ENV !== 'development') {
     tracesSampleRate: 1.0,
   });
 }
+
+OneSignal.init({
+  appId: process.env.REACT_APP_ONESIGNAL_APP_ID as string,
+});
+OneSignal.registerForPushNotifications();
 
 const RootApp = () => (
   <React.StrictMode>
