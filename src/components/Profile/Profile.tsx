@@ -1,11 +1,10 @@
 import React from "react";
-import { useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import ProfileInfo from "./ProfileInfo";
 import { ShowTweet } from "../Tweet";
 import { Loader } from "../Loader";
-import { PROFILE } from "../../queries/profile";
+import { useProfileQuery, Tweet } from "../../generated/graphql";
 
 const Wrapper = styled.div`
 	padding-bottom: 5rem;
@@ -23,10 +22,11 @@ const Wrapper = styled.div`
   }
 `;
 
-export const Profile = () => {
-  const { handle } = useParams();
+export const Profile: React.FC = () => {
+  let { handle } = useParams<string>();
+  handle = handle ? handle : "";
 
-  const { loading, data } = useQuery(PROFILE, {
+  const { loading, data } = useProfileQuery({
     variables: { handle },
   });
 
@@ -34,18 +34,10 @@ export const Profile = () => {
 
   return (
     <Wrapper>
-      {/* <div className="profile-top">
-        <span>{data && data.profile && data.profile.consumerName}</span>
-        <span className="tweetsCount">
-          {data && data.profile && data.profile.tweetsCount
-            ? `${data.profile.tweetsCount} Tweets`
-            : "No Tweets"}
-        </span>
-      </div> */}
       <ProfileInfo profile={data && data.profile} />
       {data && data.profile && data.profile.tweets && data.profile.tweets.length
-        ? data.profile.tweets.map((tweet) => (
-          <ShowTweet key={tweet.id} tweet={tweet} />
+        ? data.profile.tweets.map(tweet => (
+          <ShowTweet key={tweet.id} tweet={tweet as Tweet} offset={10} parentTweetId="" />
         ))
         : null}
     </Wrapper>

@@ -59,14 +59,14 @@ export function AppRoutes() {
                             element={<Notifications refetchProfile={refetch} />}
                           />
                           <Route
-                            path={`:handle/status/:tweetId`}
+                            path=":handle/status/:tweetId"
                             element={<MasterTweet />}
                           />
                           <Route
-                            path={`settings/profile`}
+                            path="settings/profile"
                             element={<EditProfile loading={loading} data={data} setUser={setUser} />}
                           />
-                          <Route path={`:handle`} element={<Profile />} />
+                          <Route path=":handle" element={<Profile />} />
                           <Route path="*" element={<Navigate replace to="/" />} />
                         </Routes>
                       </Grid>
