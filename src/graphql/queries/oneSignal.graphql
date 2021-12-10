@@ -1,0 +1,9 @@
+query oneSignal($oneSignalId: String!) {
+  oneSignal(oneSignalId: $oneSignalId) {
+    id
+    user {
+      id
+    }
+    oneSignalId
+  }
+}

@@ -233,6 +233,19 @@ export type Nonce = {
   user?: Maybe<User>;
 };
 
+export type OneSignal = {
+  __typename?: 'OneSignal';
+  createdAt?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  oneSignalId?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
+};
+
+export type OneSignalInput = {
+  oneSignalId: Scalars['String'];
+};
+
 export type Properties = {
   __typename?: 'Properties';
   category?: Maybe<Scalars['String']>;
@@ -252,6 +265,7 @@ export type Query = {
   healthCheck: Scalars['String'];
   me: User;
   mentions: Array<Tweet>;
+  oneSignal: OneSignal;
   profile: User;
   profileById: User;
   searchByTag: Array<Tweet>;
@@ -267,6 +281,11 @@ export type QueryFeedArgs = {
   global?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryOneSignalArgs = {
+  oneSignalId: Scalars['String'];
 };
 
 
@@ -395,6 +414,13 @@ export type FeedQueryVariables = Exact<{
 
 export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, createdAt?: string | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string } | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar?: string | null | undefined, handle: string, consumerName?: string | null | undefined } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> };
 
+export type OneSignalQueryVariables = Exact<{
+  oneSignalId: Scalars['String'];
+}>;
+
+
+export type OneSignalQuery = { __typename?: 'Query', oneSignal: { __typename?: 'OneSignal', id: string, oneSignalId?: string | null | undefined, user?: { __typename?: 'User', id: string } | null | undefined } };
+
 export type ProfileQueryVariables = Exact<{
   handle: Scalars['String'];
 }>;
@@ -503,6 +529,45 @@ export function useFeedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FeedQ
 export type FeedQueryHookResult = ReturnType<typeof useFeedQuery>;
 export type FeedLazyQueryHookResult = ReturnType<typeof useFeedLazyQuery>;
 export type FeedQueryResult = Apollo.QueryResult<FeedQuery, FeedQueryVariables>;
+export const OneSignalDocument = gql`
+    query oneSignal($oneSignalId: String!) {
+  oneSignal(oneSignalId: $oneSignalId) {
+    id
+    user {
+      id
+    }
+    oneSignalId
+  }
+}
+    `;
+
+/**
+ * __useOneSignalQuery__
+ *
+ * To run a query within a React component, call `useOneSignalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOneSignalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOneSignalQuery({
+ *   variables: {
+ *      oneSignalId: // value for 'oneSignalId'
+ *   },
+ * });
+ */
+export function useOneSignalQuery(baseOptions: Apollo.QueryHookOptions<OneSignalQuery, OneSignalQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<OneSignalQuery, OneSignalQueryVariables>(OneSignalDocument, options);
+      }
+export function useOneSignalLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OneSignalQuery, OneSignalQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<OneSignalQuery, OneSignalQueryVariables>(OneSignalDocument, options);
+        }
+export type OneSignalQueryHookResult = ReturnType<typeof useOneSignalQuery>;
+export type OneSignalLazyQueryHookResult = ReturnType<typeof useOneSignalLazyQuery>;
+export type OneSignalQueryResult = Apollo.QueryResult<OneSignalQuery, OneSignalQueryVariables>;
 export const ProfileDocument = gql`
     query profile($handle: String!) {
   profile(handle: $handle) {
