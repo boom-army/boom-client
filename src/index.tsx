@@ -22,10 +22,11 @@ if (process.env.REACT_APP_ENV !== "development") {
   });
 }
 
-OneSignal.init({
-  appId: process.env.REACT_APP_ONESIGNAL_APP_ID as string,
-});
-OneSignal.registerForPushNotifications();
+(async () => {
+  await OneSignal.init({
+    appId: process.env.REACT_APP_ONESIGNAL_APP_ID as string,
+  });
+})();
 
 const RootApp = () => (
   <React.StrictMode>
