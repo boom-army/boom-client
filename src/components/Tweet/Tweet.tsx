@@ -13,6 +13,7 @@ import { setDate } from "../../utils";
 import { VideoContainer } from "../Giphy/VideoContainer"
 import { NFTTweet } from "../NFT/NFTTweet";
 import { Tweet } from "../../generated/graphql";
+import { TipCreator } from "../TipCreator";
 
 const Wrapper = styled.div`
   display: flex;
@@ -190,6 +191,10 @@ export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => 
               retweetsCount={retweetsCount}
             />
           </div>
+
+          <>
+            <TipCreator />
+          </>
 
           {/* <div>
             <span>{isTweetMine ? <DeleteTweet id={id} /> : null}</span>
