@@ -84,23 +84,6 @@ const Backdrop = styled("div")`
   -webkit-tap-highlight-color: transparent;
 `;
 
-// TODO: integrate this with theme when whichape delivers it
-const Wrapper = styled("span")`
-  & .nft-pick {
-    margin-right: 2rem;
-    width: 26px;
-    height: 26px;
-    display: inline-block;
-    & svg {
-      width: 26px;
-      cursor: pointer;
-      & path {
-        fill: #ca2055;
-      }
-    }
-  }
-`;
-
 export const NFTPicker: React.FC<{
   setNftData: React.Dispatch<React.SetStateAction<any>>;
 }> = ({ setNftData }) => {
@@ -163,6 +146,22 @@ export const NFTPicker: React.FC<{
       }
     })();
   }, [nftInput, validKey, connection, enqueueSnackbar]);
+
+  const Wrapper = styled("span")`
+    & .nft-pick {
+      margin-right: 2rem;
+      width: 26px;
+      height: 26px;
+      display: inline-block;
+      & svg {
+        width: 26px;
+        cursor: pointer;
+        & path {
+          fill: ${theme.accentColor};
+        }
+      }
+    }
+  `;
 
   return (
     <Wrapper>
