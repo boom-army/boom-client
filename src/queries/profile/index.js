@@ -1,10 +1,7 @@
 import gql from "graphql-tag";
 
 export const PROFILE = gql`
-  query profile($oneSignalId: String!, $handle: String!, ) {
-    oneSignal(oneSignalId: $oneSignalId) {
-      oneSignalId
-    }
+  query profile($handle: String!, ) {
     profile(handle: $handle) {
       id
       publicAddress

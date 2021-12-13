@@ -1,7 +1,6 @@
 // import * as serviceWorker from "./serviceWorker";
 import "./index.css";
 import * as Sentry from "@sentry/react";
-import OneSignal from "react-onesignal";
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { App } from "./App";
@@ -21,12 +20,6 @@ if (process.env.REACT_APP_ENV !== "development") {
     tracesSampleRate: 1.0,
   });
 }
-
-(async () => {
-  await OneSignal.init({
-    appId: process.env.REACT_APP_ONESIGNAL_APP_ID as string,
-  });
-})();
 
 const RootApp = () => (
   <React.StrictMode>
