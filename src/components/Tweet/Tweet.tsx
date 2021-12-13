@@ -196,7 +196,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => 
           </div>
 
           <>
-            <TipCreator userPubKey={user?.publicAddress} tipAmount={200} />
+            <TipCreator userPubKey={user?.publicAddress} tipAmount={0} />
           </>
 
           {/* <div>
