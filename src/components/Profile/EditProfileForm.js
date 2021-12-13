@@ -4,7 +4,7 @@ import Button from '../../styles/Button';
 import CoverPhoto from '../../styles/CoverPhoto';
 import Form from '../../styles/Form';
 import Input from '../Input';
-import TextareaAutosize from 'react-textarea-autosize';
+import { TextareaAutosize } from "@mui/material";
 import useInput from '../../hooks/useInput';
 import { PROFILE, EDIT_PROFILE } from '../../queries/profile';
 import { SIGN_FILE } from '../../queries/files';
