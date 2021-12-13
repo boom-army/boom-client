@@ -16,20 +16,23 @@ export const App = () => {
 
   const [oneSignalPlayer, setOneSignalPlayer] = useState<string>("");
 
-  const { refetch } = useOneSignalQuery({
+  const { refetch, data } = useOneSignalQuery({
     variables: { oneSignalId: oneSignalPlayer },
   });
 
   useEffect(() => {
-    if (appProfile) {
-      (async () => {
-        console.log('init boom');
+    (async () => {
+      if (appProfile) {
         await OneSignal.init({
           appId: process.env.REACT_APP_ONESIGNAL_APP_ID as string,
         });
-      })();
-    }
-  }, [appProfile])
+      }
+      const userId = await OneSignal.getUserId();
+      if (userId) {
+        setOneSignalPlayer(userId as string);
+      }
+    })();
+  }, [appProfile, data]);
 
   OneSignal.on("subscriptionChange", async (isSubscribed: Boolean) => {
     const userId = await OneSignal.getUserId();
