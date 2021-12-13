@@ -30,7 +30,6 @@ export const TipInput = ({ userPubKey, setShowTip }) => {
     async ({ txAmount }) => {
       const boomTokens = txAmount * 1000000000;
       try {
-        console.log(boomTokens, userPubKey);
         if (txAmount * 1 === 0) {
           setInputError(true);
           throw new Error("You need to enter a Custom value");
