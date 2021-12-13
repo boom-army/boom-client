@@ -1,9 +1,12 @@
+import CloseIcon from "@material-ui/icons/Close";
 import React, { useContext, useState, useCallback } from "react";
 import { Box } from "@mui/system";
+import { IconButton } from "@material-ui/core";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
 import { TextField, Stack, Button } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
+import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { displayError } from "../../utils";
 import { interactionInstruction } from "../../utils/sosol-web3";
@@ -11,7 +14,6 @@ import { styled } from "@mui/system";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
-import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 
 export const TipInput = ({ userPubKey, setShowTip }) => {
   const { theme } = useContext(ThemeContext);
@@ -23,6 +25,7 @@ export const TipInput = ({ userPubKey, setShowTip }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { sosolProgram } = useSosolProgram();
 
+  // TODO: consolodate tx react hook from EmojiTweet and this
   const handleTipAction = useCallback(
     async ({ txAmount }) => {
       const boomTokens = txAmount * 1000000000;
@@ -129,10 +132,32 @@ export const TipInput = ({ userPubKey, setShowTip }) => {
     & .MuiInputBase-root {
       width: 100%;
     }
+    & .MuiIconButton-label {
+      & svg {
+        fill: ${theme.accentColor};
+        width: 16px;
+      }
+    }
   `;
   return (
     <Wrapper>
-      <Box>
+      <Box sx={{ position: "relative" }}>
+        <Box
+          sx={{
+            position: "absolute",
+            left: "99%",
+            top: "-55%",
+          }}
+        >
+          <IconButton
+            size="small"
+            onClick={() => {
+              setShowTip(false);
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Box>
         <Stack
           direction="row"
           justifyContent="flex-start"
