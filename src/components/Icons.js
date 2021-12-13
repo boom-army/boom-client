@@ -282,8 +282,8 @@ export const GifIcon = () => (
   </svg>
 );
 
-export const TipIcon = () => (
-  <DimmedSvg viewBox="0 0 24 24">
+export const TipIcon = ({ onClick }) => (
+  <DimmedSvg viewBox="0 0 24 24" onClick={onClick}>
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"

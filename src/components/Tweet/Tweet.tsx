@@ -61,8 +61,11 @@ const Wrapper = styled.div`
     align-items: center;
 
     div {
-      margin-right: 4rem;
       color: ${(props) => props.theme.secondaryColor};
+    }
+
+    .controls {
+      margin-right: 4rem;
     }
 
     svg {
@@ -175,7 +178,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => 
             offset={offset}
           />
 
-          <div>
+          <div className="controls">
             <span className="comment">
               <Link to={`/${handle}/status/${id}`}>
                 <CommentIcon />
@@ -184,7 +187,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => 
             </span>
           </div>
 
-          <div>
+          <div className="controls">
             <Retweet
               id={id}
               isRetweet={isRetweet}
@@ -193,7 +196,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => 
           </div>
 
           <>
-            <TipCreator tipAmount={200} />
+            <TipCreator userPubKey={user?.publicAddress} tipAmount={200} />
           </>
 
           {/* <div>
