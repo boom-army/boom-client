@@ -32,6 +32,7 @@ export function AppRoutes() {
     const userId = await OneSignal.getUserId();
     if (isSubscribed) {
       setOneSignalPlayer(userId as string);
+      refetch();
     }
   });
 
