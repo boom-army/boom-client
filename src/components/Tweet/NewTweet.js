@@ -26,6 +26,10 @@ const Wrapper = styled.div`
   padding: 1rem 0;
   border-bottom: 7px solid ${(props) => props.theme.tertiaryColor};
 
+  form {
+    width: 100%;
+  }
+
   textarea {
     width: 100%;
     background: inherit;
