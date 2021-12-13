@@ -10,6 +10,7 @@ export const FEED = gql`
       commentsCount
       retweetsCount
       isRetweet
+      tipsCount
       createdAt
       parentTweet {
         id
@@ -46,6 +47,7 @@ export const MENTIONS = gql`
       commentsCount
       retweetsCount
       isRetweet
+      tipsCount
       reactions {
         id
         emojiId

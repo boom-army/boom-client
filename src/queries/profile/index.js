@@ -52,6 +52,7 @@ export const PROFILE = gql`
         commentsCount
         retweetsCount
         isRetweet
+        tipsCount
         createdAt
       }
       createdAt

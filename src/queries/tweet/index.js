@@ -58,6 +58,7 @@ const TWEET_FRAGMENT = gql`
     retweetsCount
     commentsCount
     isRetweet
+    tipsCount
     createdAt
     parentTweet {
       id

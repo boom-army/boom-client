@@ -49,6 +49,7 @@ query profile($handle: String!) {
       commentsCount
       retweetsCount
       isRetweet
+      tipsCount
       createdAt
     }
     createdAt

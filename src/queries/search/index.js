@@ -23,6 +23,7 @@ export const SEARCH_BY_TAG = gql`
       text
       tags
       isRetweet
+      tipsCount
       isTweetMine
       retweetsCount
       commentsCount
@@ -49,6 +50,7 @@ export const SEARCH_BY_TWEET = gql`
       text
       tags
       isRetweet
+      tipsCount
       isTweetMine
       retweetsCount
       commentsCount
