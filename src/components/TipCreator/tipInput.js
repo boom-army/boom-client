@@ -107,7 +107,6 @@ export const TipInput = ({ userPubKey, setShowTip }) => {
       enqueueSnackbar,
       setShowTip,
       sosolProgram,
-      txValue,
       userPubKey,
     ]
   );
