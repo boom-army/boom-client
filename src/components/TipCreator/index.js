@@ -14,7 +14,7 @@ export const TipCreator = ({ tipAmount, userPubKey }) => {
     <Wrapper>
       <TipIcon onClick={() => setShowTip(!showTip)} userPubKey={userPubKey} />
       {tipAmount ? tipAmount : null}
-      {showTip ? <TipInput /> : null}
+      {showTip ? <TipInput userPubKey={userPubKey} setShowTip={setShowTip} /> : null}
     </Wrapper>
   );
 };

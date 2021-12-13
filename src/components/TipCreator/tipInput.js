@@ -13,9 +13,10 @@ import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 
-export const TipInput = ({ userPubKey }) => {
+export const TipInput = ({ userPubKey, setShowTip }) => {
   const { theme } = useContext(ThemeContext);
-  const [inputError, setInputError] = useState(true);
+  const [inputError, setInputError] = useState(false);
+  const [txValue, setTxValue] = useState(0);
 
   const anchorWallet = useAnchorWallet();
   const { connection } = useConnection();
@@ -24,76 +25,89 @@ export const TipInput = ({ userPubKey }) => {
 
   const handleTipAction = useCallback(
     async ({ txAmount }) => {
+      const boomTokens = txAmount * 1000000000;
       try {
-        if (!anchorWallet.publicKey) throw new WalletNotConnectedError();
-        const sosolMint = new Token(
-          connection,
-          SOSOL_TOKEN_ID,
-          TOKEN_PROGRAM_ID,
-          anchorWallet.publicKey
-        );
-        const toCreatorAcc = new PublicKey(userPubKey);
-        const associatedDestinationTokenAddr =
-          await Token.getAssociatedTokenAddress(
-            sosolMint.associatedProgramId,
-            sosolMint.programId,
-            SOSOL_TOKEN_ID,
-            toCreatorAcc
-          );
-
-        const receiverAccount = await connection.getAccountInfo(
-          associatedDestinationTokenAddr
-        );
-
-        // TODO: move this out into a method in utils to use across the site
-        // Create receiver sosol acc if null
-        if (receiverAccount === null) {
-          const instructions = [];
-          instructions.push(
-            Token.createAssociatedTokenAccountInstruction(
-              sosolMint.associatedProgramId,
-              sosolMint.programId,
-              SOSOL_TOKEN_ID,
-              associatedDestinationTokenAddr,
-              toCreatorAcc,
-              anchorWallet.publicKey
-            )
-          );
-
-          const transaction = new Transaction().add(...instructions);
-          transaction.feePayer = anchorWallet.publicKey;
-          transaction.recentBlockhash = (
-            await connection.getRecentBlockhash()
-          ).blockhash;
-
-          const anchorTx = await anchorWallet.signTransaction(transaction);
-
-          const transactionSignature = await connection.sendRawTransaction(
-            anchorTx.serialize(),
-            { skipPreflight: true }
-          );
-
-          await connection.confirmTransaction(transactionSignature);
+        console.log(boomTokens, txValue, txAmount);
+        if (txAmount*1 === 0) {
+          setInputError(true);
+          throw new Error("You need to enter a Custom value");
         }
+        // if (!anchorWallet.publicKey) throw new WalletNotConnectedError();
+        // const sosolMint = new Token(
+        //   connection,
+        //   SOSOL_TOKEN_ID,
+        //   TOKEN_PROGRAM_ID,
+        //   anchorWallet.publicKey
+        // );
+        // const toCreatorAcc = new PublicKey(userPubKey);
+        // const associatedDestinationTokenAddr =
+        //   await Token.getAssociatedTokenAddress(
+        //     sosolMint.associatedProgramId,
+        //     sosolMint.programId,
+        //     SOSOL_TOKEN_ID,
+        //     toCreatorAcc
+        //   );
 
-        const signature = await interactionInstruction(
-          connection,
-          sosolProgram,
-          anchorWallet.publicKey,
-          new PublicKey(userPubKey),
-          new PublicKey(process.env.REACT_APP_CONTENT_HOST),
-          (txAmount = 100000000) // 0.1 SSL
-        );
+        // const receiverAccount = await connection.getAccountInfo(
+        //   associatedDestinationTokenAddr
+        // );
 
-        enqueueSnackbar(`Transaction complete: ${signature}`, {
-          variant: "success",
-        });
+        // // TODO: move this out into a method in utils to use across the site
+        // // Create receiver sosol acc if null
+        // if (receiverAccount === null) {
+        //   const instructions = [];
+        //   instructions.push(
+        //     Token.createAssociatedTokenAccountInstruction(
+        //       sosolMint.associatedProgramId,
+        //       sosolMint.programId,
+        //       SOSOL_TOKEN_ID,
+        //       associatedDestinationTokenAddr,
+        //       toCreatorAcc,
+        //       anchorWallet.publicKey
+        //     )
+        //   );
+
+        //   const transaction = new Transaction().add(...instructions);
+        //   transaction.feePayer = anchorWallet.publicKey;
+        //   transaction.recentBlockhash = (
+        //     await connection.getRecentBlockhash()
+        //   ).blockhash;
+
+        //   const anchorTx = await anchorWallet.signTransaction(transaction);
+
+        //   const transactionSignature = await connection.sendRawTransaction(
+        //     anchorTx.serialize(),
+        //     { skipPreflight: true }
+        //   );
+
+        //   await connection.confirmTransaction(transactionSignature);
+        // }
+
+        // const signature = await interactionInstruction(
+        //   connection,
+        //   sosolProgram,
+        //   anchorWallet.publicKey,
+        //   new PublicKey(userPubKey),
+        //   new PublicKey(process.env.REACT_APP_CONTENT_HOST),
+        //   (boomTokens ? boomTokens : 100000000) // 0.1 SSL
+        // );
+
+        // enqueueSnackbar(`Transaction complete: ${signature}`, {
+        //   variant: "success",
+        // });
       } catch (err) {
         console.log(err);
         return displayError(err, enqueueSnackbar);
       }
     },
-    [sosolProgram, anchorWallet, connection, userPubKey, enqueueSnackbar]
+    [
+      sosolProgram,
+      anchorWallet,
+      connection,
+      userPubKey,
+      enqueueSnackbar,
+      txValue,
+    ]
   );
 
   const Wrapper = styled("div")`
@@ -129,7 +143,7 @@ export const TipInput = ({ userPubKey }) => {
               color="inherit"
               variant="outlined"
               onClick={() => {
-                alert("clicked");
+                handleTipAction({ txAmount: 1 });
               }}
             >
               1
@@ -140,7 +154,7 @@ export const TipInput = ({ userPubKey }) => {
               color="inherit"
               variant="outlined"
               onClick={() => {
-                alert("clicked");
+                handleTipAction({ txAmount: 3 });
               }}
             >
               3
@@ -154,14 +168,19 @@ export const TipInput = ({ userPubKey }) => {
             InputLabelProps={{
               shrink: true,
             }}
+            value={txValue}
             size="small"
+            onChange={(e) => {
+              setInputError(false);
+              setTxValue(e.target.value);
+            }}
           />
           <div>
             <Button
               color="inherit"
               variant="outlined"
               onClick={() => {
-                alert("clicked");
+                handleTipAction({ txAmount: txValue });
               }}
             >
               Tip
