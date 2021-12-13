@@ -25,7 +25,6 @@ if (process.env.REACT_APP_ENV !== "development") {
 (async () => {
   await OneSignal.init({
     appId: process.env.REACT_APP_ONESIGNAL_APP_ID as string,
-    autoResubscribe: true,
   });
 })();
 
