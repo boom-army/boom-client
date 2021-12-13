@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TipIcon } from "../Icons";
+import { TipIcon2 } from "../Icons";
 import { TipInput } from "./tipInput";
 import { styled } from "@mui/system";
 
@@ -12,7 +12,7 @@ export const TipCreator = ({ tipAmount, userPubKey }) => {
   `;
   return (
     <Wrapper>
-      <TipIcon onClick={() => setShowTip(!showTip)} userPubKey={userPubKey} />
+      <TipIcon2 onClick={() => setShowTip(!showTip)} userPubKey={userPubKey} />
       {tipAmount ? tipAmount : null}
       {showTip ? <TipInput userPubKey={userPubKey} setShowTip={setShowTip} /> : null}
     </Wrapper>
