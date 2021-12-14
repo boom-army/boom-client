@@ -105,7 +105,7 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
         });
         await tipCreatorMutation({
           variables: {
-            tipAmount: boomTokens,
+            tipAmount: boomTokens.toString(),
             tweetId,
             userId,
           },
