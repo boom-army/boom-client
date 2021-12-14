@@ -5,7 +5,7 @@ import {
 } from "@solana/wallet-adapter-react";
 import { WalletError } from "@solana/wallet-adapter-base";
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
-import { clusterApiUrl } from "@solana/web3.js";
+// import { clusterApiUrl } from "@solana/web3.js";
 import {
   // getLedgerWallet,
   getPhantomWallet,
