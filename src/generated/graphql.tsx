@@ -109,6 +109,7 @@ export type Mutation = {
   loginRegister: AuthPayload;
   newTweet: Tweet;
   signFileUrl: Scalars['String'];
+  tipCreator: Tip;
   toggleReaction: Scalars['Boolean'];
   toggleRetweet: Scalars['Boolean'];
   unfollow: Scalars['Boolean'];
@@ -174,6 +175,13 @@ export type MutationNewTweetArgs = {
 export type MutationSignFileUrlArgs = {
   file: Scalars['String'];
   type: Scalars['String'];
+};
+
+
+export type MutationTipCreatorArgs = {
+  tipAmount: Scalars['Int'];
+  tweetId: Scalars['String'];
+  userId: Scalars['String'];
 };
 
 
@@ -271,7 +279,6 @@ export type Query = {
   searchByTag: Array<Tweet>;
   searchByTweet: Array<Tweet>;
   searchByUser: Array<User>;
-  tipCreator: Tip;
   tweet: Tweet;
   userFollow: Array<User>;
   users: Array<User>;
@@ -312,13 +319,6 @@ export type QuerySearchByTweetArgs = {
 
 export type QuerySearchByUserArgs = {
   term: Scalars['String'];
-};
-
-
-export type QueryTipCreatorArgs = {
-  tipAmount: Scalars['Int'];
-  tweetId: Scalars['String'];
-  userId: Scalars['String'];
 };
 
 
@@ -394,7 +394,7 @@ export type Tweet = {
   retweetsCount: Scalars['Int'];
   tags: Array<Scalars['String']>;
   text: Scalars['String'];
-  tipsCount: Scalars['Int'];
+  tipsCount?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
 };
@@ -437,7 +437,7 @@ export type FeedQueryVariables = Exact<{
 }>;
 
 
-export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount: number, createdAt?: string | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string } | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar?: string | null | undefined, handle: string, consumerName?: string | null | undefined } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> };
+export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: number | null | undefined, createdAt?: string | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string } | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar?: string | null | undefined, handle: string, consumerName?: string | null | undefined } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> };
 
 export type OneSignalQueryVariables = Exact<{
   oneSignalId: Scalars['String'];
@@ -451,7 +451,16 @@ export type ProfileQueryVariables = Exact<{
 }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar?: string | null | undefined, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount: number, createdAt?: string | null | undefined, user?: { __typename?: 'User', id: string, consumerName?: string | null | undefined, publicAddress: string, handle: string, avatar?: string | null | undefined } | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> } };
+export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar?: string | null | undefined, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: number | null | undefined, createdAt?: string | null | undefined, user?: { __typename?: 'User', id: string, consumerName?: string | null | undefined, publicAddress: string, handle: string, avatar?: string | null | undefined } | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> } };
+
+export type TipCreatorMutationVariables = Exact<{
+  tipAmount: Scalars['Int'];
+  tweetId: Scalars['String'];
+  userId: Scalars['String'];
+}>;
+
+
+export type TipCreatorMutation = { __typename?: 'Mutation', tipCreator: { __typename?: 'Tip', id: string } };
 
 
 export const FeedDocument = gql`
@@ -681,3 +690,38 @@ export function useProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pr
 export type ProfileQueryHookResult = ReturnType<typeof useProfileQuery>;
 export type ProfileLazyQueryHookResult = ReturnType<typeof useProfileLazyQuery>;
 export type ProfileQueryResult = Apollo.QueryResult<ProfileQuery, ProfileQueryVariables>;
+export const TipCreatorDocument = gql`
+    mutation tipCreator($tipAmount: Int!, $tweetId: String!, $userId: String!) {
+  tipCreator(tipAmount: $tipAmount, tweetId: $tweetId, userId: $userId) {
+    id
+  }
+}
+    `;
+export type TipCreatorMutationFn = Apollo.MutationFunction<TipCreatorMutation, TipCreatorMutationVariables>;
+
+/**
+ * __useTipCreatorMutation__
+ *
+ * To run a mutation, you first call `useTipCreatorMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTipCreatorMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [tipCreatorMutation, { data, loading, error }] = useTipCreatorMutation({
+ *   variables: {
+ *      tipAmount: // value for 'tipAmount'
+ *      tweetId: // value for 'tweetId'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useTipCreatorMutation(baseOptions?: Apollo.MutationHookOptions<TipCreatorMutation, TipCreatorMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<TipCreatorMutation, TipCreatorMutationVariables>(TipCreatorDocument, options);
+      }
+export type TipCreatorMutationHookResult = ReturnType<typeof useTipCreatorMutation>;
+export type TipCreatorMutationResult = Apollo.MutationResult<TipCreatorMutation>;
+export type TipCreatorMutationOptions = Apollo.BaseMutationOptions<TipCreatorMutation, TipCreatorMutationVariables>;

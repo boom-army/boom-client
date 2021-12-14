@@ -13,10 +13,10 @@ import { displayError } from "../../utils";
 import { interactionInstruction } from "../../utils/sosol-web3";
 import { styled } from "@mui/system";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
 import { TWEET } from "../../queries/tweet";
+import { useTipCreatorMutation } from "../../generated/graphql";
 
 export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
   const { theme } = useContext(ThemeContext);
@@ -28,7 +28,7 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { sosolProgram } = useSosolProgram();
 
-  const [tipMutation] = useMutation(TIP_CREATOR, {
+  const [tipCreatorMutation] = useTipCreatorMutation({
     refetchQueries: [{ query: TWEET, variables: { id: tweetId } }],
   });
 
@@ -104,7 +104,7 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
         enqueueSnackbar(`Transaction complete: ${signature}`, {
           variant: "success",
         });
-        await tipMutation({
+        await tipCreatorMutation({
           variables: {
             tipAmount: boomTokens,
             tweetId,

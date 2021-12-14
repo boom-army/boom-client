@@ -1,0 +1,5 @@
+mutation tipCreator($tipAmount: Int!, $tweetId: String!, $userId: String!) {
+  tipCreator(tipAmount: $tipAmount, tweetId: $tweetId, userId: $userId) {
+    id
+  }
+}
