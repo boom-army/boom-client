@@ -10,7 +10,7 @@ import {
   // getLedgerWallet,
   getPhantomWallet,
   // getSlopeWallet,
-  // getSolflareWallet,
+  getSolflareWallet,
   // getSolletWallet,
   // getTorusWallet,
 } from "@solana/wallet-adapter-wallets";
@@ -24,7 +24,7 @@ export const Wallet: FC = ({ children = null as any }) => {
   const wallets = useMemo(
     () => [
       getPhantomWallet(),
-      // getSolflareWallet(),
+      getSolflareWallet(),
       // getSlopeWallet(),
       // getTorusWallet({
       //   options: {
