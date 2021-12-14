@@ -1,7 +1,7 @@
 import React from "react";
-import 'linkify-plugin-hashtag';
-import 'linkify-plugin-mention';
-import Linkify from 'linkify-react';
+import "linkify-plugin-hashtag";
+import "linkify-plugin-mention";
+import Linkify from "linkify-react";
 import UserAvatar from "../UserAvatar";
 import moment from "moment";
 import styled from "styled-components";
@@ -10,10 +10,11 @@ import { EmojiTweet, Retweet } from "./index";
 import { ImageBox } from "../ImageBox";
 import { Link } from "react-router-dom";
 import { setDate } from "../../utils";
-import { VideoContainer } from "../Giphy/VideoContainer"
+import { VideoContainer } from "../Giphy/VideoContainer";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { Tweet } from "../../generated/graphql";
 import { TipCreator } from "../TipCreator";
+import { LAMPORTS_PER_SOL } from "../../constants/math";
 
 const Wrapper = styled.div`
   display: flex;
@@ -117,7 +118,11 @@ interface Props {
   parentTweetId: String | undefined;
 }
 
-export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => {
+export const ShowTweet: React.FC<Props> = ({
+  tweet,
+  offset,
+  parentTweetId,
+}) => {
   const {
     id,
     text,
@@ -131,13 +136,14 @@ export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => 
     retweetsCount,
     reactions,
     commentsCount,
+    tipsCount,
     createdAt,
   } = tweet;
 
   const handle = user && user.handle;
   const linkifyOptions = {
-    className: 'body',
-    target: { url: '_blank' },
+    className: "body",
+    target: { url: "_blank" },
     formatHref: { hashtag: (href: any) => `explore?=${href.substring(1)}` },
   };
 
@@ -165,7 +171,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => 
 
         {gif && <VideoContainer gif={gif} />}
 
-        {nft && <NFTTweet nftData={nft}/>}
+        {nft && <NFTTweet nftData={nft} />}
 
         {!!files.length && <ImageBox files={files} disableLightbox={false} />}
 
@@ -196,7 +202,12 @@ export const ShowTweet: React.FC<Props> = ({ tweet, offset, parentTweetId }) => 
           </div>
 
           <>
-            <TipCreator userPubKey={user?.publicAddress} tipAmount={0} tweetId={id} userId={user?.id} />
+            <TipCreator
+              userPubKey={user?.publicAddress}
+              tipAmount={tipsCount && tipsCount / LAMPORTS_PER_SOL}
+              tweetId={id}
+              userId={user?.id}
+            />
           </>
 
           {/* <div>
