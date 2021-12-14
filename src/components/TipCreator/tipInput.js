@@ -4,7 +4,6 @@ import { Box } from "@mui/system";
 import { IconButton } from "@material-ui/core";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
-import { TIP_CREATOR } from "../../queries/tips";
 import { TextField, Stack, Button } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
@@ -124,7 +123,7 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
       setShowTip,
       sosolProgram,
       userPubKey,
-      tipMutation,
+      tipCreatorMutation,
       tweetId,
       userId,
     ]
