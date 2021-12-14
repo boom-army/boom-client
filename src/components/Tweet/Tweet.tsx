@@ -204,7 +204,7 @@ export const ShowTweet: React.FC<Props> = ({
           <>
             <TipCreator
               userPubKey={user?.publicAddress}
-              tipAmount={tipsCount && tipsCount / LAMPORTS_PER_SOL}
+              tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
               tweetId={id}
               userId={user?.id}
             />
