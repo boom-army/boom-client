@@ -109,7 +109,6 @@ export type Mutation = {
   loginRegister: AuthPayload;
   newTweet: Tweet;
   signFileUrl: Scalars['String'];
-  tipCreator: Tip;
   toggleReaction: Scalars['Boolean'];
   toggleRetweet: Scalars['Boolean'];
   unfollow: Scalars['Boolean'];
@@ -175,13 +174,6 @@ export type MutationNewTweetArgs = {
 export type MutationSignFileUrlArgs = {
   file: Scalars['String'];
   type: Scalars['String'];
-};
-
-
-export type MutationTipCreatorArgs = {
-  tipAmount: Scalars['Int'];
-  tweetId: Scalars['String'];
-  userId: Scalars['String'];
 };
 
 
@@ -279,6 +271,7 @@ export type Query = {
   searchByTag: Array<Tweet>;
   searchByTweet: Array<Tweet>;
   searchByUser: Array<User>;
+  tipCreator: Tip;
   tweet: Tweet;
   userFollow: Array<User>;
   users: Array<User>;
@@ -319,6 +312,13 @@ export type QuerySearchByTweetArgs = {
 
 export type QuerySearchByUserArgs = {
   term: Scalars['String'];
+};
+
+
+export type QueryTipCreatorArgs = {
+  tipAmount: Scalars['Int'];
+  tweetId: Scalars['String'];
+  userId: Scalars['String'];
 };
 
 

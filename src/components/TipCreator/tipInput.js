@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import { IconButton } from "@material-ui/core";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
+import { TIP_CREATOR } from "../../queries/tips";
 import { TextField, Stack, Button } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
@@ -12,10 +13,12 @@ import { displayError } from "../../utils";
 import { interactionInstruction } from "../../utils/sosol-web3";
 import { styled } from "@mui/system";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
+import { TWEET } from "../../queries/tweet";
 
-export const TipInput = ({ userPubKey, setShowTip }) => {
+export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
   const { theme } = useContext(ThemeContext);
   const [inputError, setInputError] = useState(false);
   const [txValue, setTxValue] = useState(0);
@@ -24,6 +27,10 @@ export const TipInput = ({ userPubKey, setShowTip }) => {
   const { connection } = useConnection();
   const { enqueueSnackbar } = useSnackbar();
   const { sosolProgram } = useSosolProgram();
+
+  const [tipMutation] = useMutation(TIP_CREATOR, {
+    refetchQueries: [{ query: TWEET, variables: { id: tweetId } }],
+  });
 
   // TODO: consolodate tx react hook from EmojiTweet and this
   const handleTipAction = useCallback(
@@ -97,6 +104,13 @@ export const TipInput = ({ userPubKey, setShowTip }) => {
         enqueueSnackbar(`Transaction complete: ${signature}`, {
           variant: "success",
         });
+        await tipMutation({
+          variables: {
+            tipAmount: boomTokens,
+            tweetId,
+            userId,
+          },
+        });
         setShowTip(false);
       } catch (err) {
         console.log(err);
@@ -110,6 +124,9 @@ export const TipInput = ({ userPubKey, setShowTip }) => {
       setShowTip,
       sosolProgram,
       userPubKey,
+      tipMutation,
+      tweetId,
+      userId,
     ]
   );
 
