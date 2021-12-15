@@ -181,7 +181,6 @@ export const ShowTweet: React.FC<Props> = ({
             tweetId={id}
             userPubKey={user?.publicAddress}
             reactions={reactions}
-            offset={offset}
           />
 
           <div className="controls">

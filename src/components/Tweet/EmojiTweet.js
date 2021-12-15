@@ -2,7 +2,7 @@ import "emoji-mart/css/emoji-mart.css";
 import styled from "styled-components";
 import { Emoji } from "emoji-mart";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
-import { FEED, MENTIONS } from "../../queries/others";
+import { MENTIONS } from "../../queries/others";
 import { Loader } from "../Loader";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SmilePlusIcon } from "../Icons";
@@ -42,7 +42,7 @@ const ReactionWrapper = styled.div`
   }
 `;
 
-export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset, parentTweetId }) => {
+export const EmojiTweet = ({ tweetId, userPubKey, reactions, parentTweetId }) => {
   const { sosolProgram } = useSosolProgram();
   const [emoji, setEmoji] = useState({});
 
@@ -52,10 +52,9 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, offset, parentTweet
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
     refetchQueries: [
-      { query: FEED, variables: { offset: 0, limit: offset } },
       { query: MENTIONS },
-      { query: TWEET, variables: { id: parentTweetId }}
-    ], // TODO: get dynamic page length data
+      { query: TWEET, variables: { id: tweetId }}
+    ],
   });
 
   const { enqueueSnackbar } = useSnackbar();
