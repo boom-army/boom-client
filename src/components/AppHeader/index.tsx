@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useContext } from "react";
 import base58 from "bs58";
 import { CurrentUser } from "../CurrentUser";
-import { formatNumber } from "../../utils/utils";
-import { useNativeAccount } from "../../contexts/accounts";
-import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+// import { formatNumber } from "../../utils/utils";
+// import { useNativeAccount } from "../../contexts/accounts";
+// import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import DisconnectIcon from "@mui/icons-material/LinkOff";
 import {
   WalletDisconnectButton,
@@ -20,7 +20,7 @@ import { UserContext } from '../../contexts/user';
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
-  const { account } = useNativeAccount();
+  // const { account } = useNativeAccount();
   const { enqueueSnackbar } = useSnackbar();
   const { setUser } = useContext(UserContext);
 
