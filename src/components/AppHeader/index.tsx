@@ -112,12 +112,12 @@ export const AppHeader = () => {
           >
             {wallet && (
               <>
-                <Box mr={1} mb={0.5}>
+                {/* <Box mr={1} mb={0.5}>
                   {formatNumber.format(
                     (account?.lamports || 0) / LAMPORTS_PER_SOL
                   )}{" "}
                   SOL
-                </Box>
+                </Box> */}
                 <Box mr={1}>
                   <WalletDisconnectButton
                     onClick={logout}
