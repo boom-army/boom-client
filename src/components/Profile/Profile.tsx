@@ -8,6 +8,7 @@ import { ThemeContext } from "../../contexts/theme";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { useProfileQuery } from "../../generated/graphql";
+import { NFTGallery } from "./NFTGallery";
 
 export const Profile: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -59,7 +60,9 @@ export const Profile: React.FC = () => {
           <TabPanel value="1">
             <Meeps data={data} />
           </TabPanel>
-          <TabPanel value="2">NFT Gallery</TabPanel>
+          <TabPanel value="2">
+            <NFTGallery />
+          </TabPanel>
         </TabContext>
       </Box>
     </Wrapper>
