@@ -2,16 +2,17 @@ import React, { useContext } from "react";
 import ProfileInfo from "./ProfileInfo";
 import { Box, Tab } from "@mui/material";
 import { Loader } from "../Loader";
-import { ShowTweet } from "../Tweet";
+import { Meeps } from "./Meeps";
 import { TabContext, TabPanel, TabList } from "@mui/lab";
 import { ThemeContext } from "../../contexts/theme";
 import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
-import { useProfileQuery, Tweet } from "../../generated/graphql";
+import { useProfileQuery } from "../../generated/graphql";
 
 export const Profile: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const [tabValue, setTabValue] = React.useState("1");
+
   let { handle } = useParams<string>();
   handle = handle ? handle : "";
 
@@ -46,28 +47,21 @@ export const Profile: React.FC = () => {
       <ProfileInfo profile={data && data.profile} />
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={tabValue}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Item One" value="1" />
-              <Tab label="Item Two" value="2" />
-              <Tab label="Item Three" value="3" />
+          <Box sx={{ borderColor: "divider" }}>
+            <TabList
+              onChange={handleChange}
+              aria-label="Profile tablist select"
+            >
+              <Tab label="Meeps" value="1" />
+              <Tab label="NFT Gallery" value="2" />
             </TabList>
           </Box>
-          <TabPanel value="1">Item One</TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-          <TabPanel value="3">Item Three</TabPanel>
+          <TabPanel value="1">
+            <Meeps data={data} />
+          </TabPanel>
+          <TabPanel value="2">NFT Gallery</TabPanel>
         </TabContext>
       </Box>
-      {data && data.profile && data.profile.tweets && data.profile.tweets.length
-        ? data.profile.tweets.map((tweet) => (
-            <ShowTweet
-              key={tweet.id}
-              tweet={tweet as Tweet}
-              offset={10}
-              parentTweetId=""
-            />
-          ))
-        : null}
     </Wrapper>
   );
 };
