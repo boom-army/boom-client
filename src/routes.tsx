@@ -2,28 +2,29 @@ import React, { useContext, useEffect } from "react";
 import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { EditProfile } from "./components/Profile/EditProfile";
 import {
-  Home,
-  Suggestion,
-  Nav,
   ConnectView,
-  Notifications,
   Following,
+  Home,
+  Nav,
+  Notifications,
+  Suggestion,
 } from "./views";
+import { Container, Grid } from "@mui/material";
+import { EditProfile } from "./components/Profile/EditProfile";
+import { GiphyContextProvider } from "./contexts/giphy";
 import { MarketProvider } from "./contexts/market";
 import { MasterTweet } from "./components/Tweet/MasterTweet";
-import { Profile } from "./components/Profile/Profile";
-import { Wallet } from "./contexts/wallet";
-import { Container, Grid } from "@mui/material";
-import { ThemeContext } from "./contexts/theme";
-import { GiphyContextProvider } from "./contexts/giphy";
-import { UserContext } from "./contexts/user";
-import { useQuery } from "@apollo/client";
+import { NFTMint } from "./components/Mint/NFTMint";
 import { PROFILE } from "./queries/profile";
+import { Profile } from "./components/Profile/Profile";
+import { ThemeContext } from "./contexts/theme";
+import { UserContext } from "./contexts/user";
+import { Wallet } from "./contexts/wallet";
+import { useQuery } from "@apollo/client";
 
 interface Props {
-  setAppProfile: React.Dispatch<React.SetStateAction<undefined>>
+  setAppProfile: React.Dispatch<React.SetStateAction<undefined>>;
 }
 
 export const AppRoutes: React.FC<Props> = ({ setAppProfile }) => {
@@ -36,7 +37,7 @@ export const AppRoutes: React.FC<Props> = ({ setAppProfile }) => {
 
   useEffect(() => {
     setAppProfile(data);
-  }, [data, setAppProfile])
+  }, [data, setAppProfile]);
 
   const middleColStyles = {
     borderRight: `1px solid ${theme.tertiaryColor}`,
@@ -80,6 +81,7 @@ export const AppRoutes: React.FC<Props> = ({ setAppProfile }) => {
                           }
                         />
                         <Route path=":handle" element={<Profile />} />
+                        <Route path="mint-nft" element={<NFTMint />} />
                         <Route path="*" element={<Navigate replace to="/" />} />
                       </Routes>
                     </Grid>
@@ -99,4 +101,4 @@ export const AppRoutes: React.FC<Props> = ({ setAppProfile }) => {
       </BrowserRouter>
     </>
   );
-}
+};
