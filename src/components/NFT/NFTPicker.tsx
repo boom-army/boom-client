@@ -19,10 +19,7 @@ import { useConnection } from "@solana/wallet-adapter-react";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { useSnackbar } from "notistack";
 import { camelizeKeys, displayError } from "../../utils";
-import { programs } from "@metaplex/js";
-const {
-  metadata: { Metadata },
-} = programs;
+import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 
 // export interface NFTObject {
 //   publicKey: string;
