@@ -53,15 +53,15 @@ export const Profile: React.FC = () => {
               onChange={handleChange}
               aria-label="Profile tablist select"
             >
-              <Tab label="Meeps" value="1" />
-              <Tab label="NFT Gallery" value="2" />
+              <Tab label="NFT Gallery" value="1" />
+              <Tab label="Meeps" value="2" />
             </TabList>
           </Box>
           <TabPanel value="1">
-            <Meeps data={data} />
+            <NFTGallery />
           </TabPanel>
           <TabPanel value="2">
-            <NFTGallery />
+            <Meeps data={data} />
           </TabPanel>
         </TabContext>
       </Box>
