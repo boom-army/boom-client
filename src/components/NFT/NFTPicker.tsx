@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
@@ -105,27 +105,41 @@ export const NFTPicker: React.FC<{
     toggleNftForm(false);
   };
 
-  const fetchSetMeta = async (connection: Connection, key: PublicKey) => {
-    const mintMeta = await Metadata.findMany(connection, { mint: key });    
-    const uri = mintMeta[0].data.data.uri;    
-    if (uri) {
-      const data: any = await fetch(uri)
-        .then((response) => response.json())
-        .then((data) => camelizeKeys(data));
-      data.publicKey = key.toString();      
-      setMetadata(data);
-      setValidKey(true);
-    }
-  };
+  const fetchSetMeta = useCallback(
+    async (connection: Connection, key: PublicKey) => {
+      const mintMeta = await Metadata.findMany(connection, { mint: key });
+      const uri = mintMeta[0].data.data.uri;
+      if (uri) {
+        const data: any = await fetch(uri)
+          .then((response) => response.json())
+          .then((data) => camelizeKeys(data));
+        data.publicKey = key.toString();
+        setMetadata({
+          publicKey: data.publicKey,
+          name: data.name,
+          symbol: data.symbol,
+          description: data.description,
+          externalUrl: data.externalUrl,
+          sellerFeeBasisPoints: data.sellerFeeBasisPoints,
+          image: data.image,
+          attributes: data.attributes,
+          collection: data.collection,
+          properties: data.properties,
+        });
+        setValidKey(true);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     (async () => {
       try {
         if (!nftInput) return;
         const key = new PublicKey(nftInput);
-        const acc = await connection.getParsedAccountInfo(key);        
+        const acc = await connection.getParsedAccountInfo(key);
         // @ts-ignore: error in types
-        if (acc && acc.value.data.parsed.info.mint) {          
+        if (acc && acc.value.data.parsed.info.mint) {
           // @ts-ignore: error in types
           const mintKey = new PublicKey(acc.value.data.parsed.info.mint);
           await fetchSetMeta(connection, mintKey);
@@ -136,13 +150,13 @@ export const NFTPicker: React.FC<{
         }
       } catch (error) {
         console.log(error);
-        setValidKey(false);        
+        setValidKey(false);
         if (nftInput.length > 42) {
           displayError(error, enqueueSnackbar);
         }
       }
     })();
-  }, [nftInput, validKey, connection, enqueueSnackbar]);
+  }, [nftInput, validKey, connection, enqueueSnackbar, fetchSetMeta]);
 
   const Wrapper = styled("span")`
     & .nft-pick {
@@ -272,7 +286,7 @@ export const NFTPicker: React.FC<{
                             }}
                           >
                             {metadata.attributes &&
-                            // @ts-ignore
+                              // @ts-ignore
                               metadata.attributes.map((attr) => (
                                 <Box
                                   mr={1}

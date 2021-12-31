@@ -99,7 +99,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
     e.preventDefault();
 
     // a tweet can have no text body if it has a gif
-    if (!tweet.value && !gif)
+    if (!tweet.value && !gif && !tweetFiles.length && !nftData)
       return enqueueSnackbar("Write something...", { variant: "info" });
 
     const tags = tweet.value.split(" ").filter((str) => str.startsWith("#"));
