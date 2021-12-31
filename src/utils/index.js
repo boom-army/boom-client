@@ -28,11 +28,11 @@ export const uploadImage = async (file, signedUrl, enqueueSnackbar) => {
       // "Content-Disposition": "inline",
     },
     onUploadProgress: (p) => {
-      // const progress = p.loaded / p.total;
-      enqueueSnackbar("Upload in progress", { variant: 'info' });
+      // progress = p.loaded / p.total;
     },
   });
-
+  // TODO: probably should replace notistack with https://github.com/fkhadra/react-toastify
+  enqueueSnackbar(`Upload in progress`, { variant: 'info' });
   return data;
 };
 
