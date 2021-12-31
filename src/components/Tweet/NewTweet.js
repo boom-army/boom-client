@@ -16,8 +16,7 @@ import { SearchModal } from "../Giphy/SearchModal";
 import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
-import { displayError } from "../../utils";
-import { uploadImage } from "../../utils";
+import { displayError, uploadImage } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 
