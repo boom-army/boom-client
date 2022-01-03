@@ -84,7 +84,7 @@ export const EditProfileForm = ({ profile, setUser }) => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
-      const imageUrl = imageData.config.url.split('?')[0];
+      const imageUrl = imageData?.config?.url?.split('?')[0];
       setCoverPhoto(imageUrl);
     } catch (error) {
       console.log(error);
@@ -102,7 +102,7 @@ export const EditProfileForm = ({ profile, setUser }) => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
-      const imageUrl = imageData.config.url.split('?')[0];
+      const imageUrl = imageData?.config?.url?.split('?')[0];
       setAvatar(imageUrl);
     } catch (error) {
       console.log(error);

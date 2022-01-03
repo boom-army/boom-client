@@ -148,7 +148,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
-      const imageUrl = imageData.config.url.split("?")[0];
+      const imageUrl = imageData?.config?.url?.split("?")[0];
       setTweetFiles([...tweetFiles, imageUrl]);
     } catch (error) {
       console.log(error);
