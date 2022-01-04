@@ -16,7 +16,7 @@ import { SearchModal } from "../Giphy/SearchModal";
 import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
-import { displayError, uploadImage } from "../../utils";
+import { displayError, uploadFile } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 
@@ -147,7 +147,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
         },
       });
       const signedUrl = data.signFileUrl;
-      const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
+      const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
       const imageUrl = imageData?.config?.url?.split("?")[0];
       setTweetFiles([...tweetFiles, imageUrl]);
     } catch (error) {

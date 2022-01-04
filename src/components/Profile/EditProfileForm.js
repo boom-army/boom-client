@@ -8,7 +8,7 @@ import { TextareaAutosize } from "@mui/material";
 import useInput from '../../hooks/useInput';
 import { PROFILE, EDIT_PROFILE } from '../../queries/profile';
 import { SIGN_FILE } from '../../queries/files';
-import { displayError, uploadImage } from '../../utils';
+import { displayError, uploadFile } from '../../utils';
 import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
@@ -83,7 +83,7 @@ export const EditProfileForm = ({ profile, setUser }) => {
         },
       });
       const signedUrl = data.signFileUrl;
-      const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
+      const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
       const imageUrl = imageData?.config?.url?.split('?')[0];
       setCoverPhoto(imageUrl);
     } catch (error) {
@@ -101,7 +101,7 @@ export const EditProfileForm = ({ profile, setUser }) => {
         },
       });
       const signedUrl = data.signFileUrl;
-      const imageData = await uploadImage(file, signedUrl, enqueueSnackbar);
+      const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
       const imageUrl = imageData?.config?.url?.split('?')[0];
       setAvatar(imageUrl);
     } catch (error) {

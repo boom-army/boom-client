@@ -20,7 +20,7 @@ export const setDate = (date) => {
   return newDate;
 };
 
-export const uploadImage = async (file, signedUrl, enqueueSnackbar) => {
+export const uploadFile = async (file, signedUrl, enqueueSnackbar) => {
   const data = await axios.put(signedUrl, file, {
     headers: {
       "Content-Type": file.type,
