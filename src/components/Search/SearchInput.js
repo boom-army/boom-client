@@ -1,7 +1,7 @@
 import React from "react";
 import SearchResult from "./SearchResult";
 import styled from "styled-components";
-import useInput from "../../hooks/useInput";
+import { useInput } from "../../hooks/useInput";
 import {
   SEARCH_BY_TAG,
   SEARCH_BY_TWEET,

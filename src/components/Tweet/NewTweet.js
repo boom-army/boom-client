@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../styles/Button";
 import { Stack, Avatar, TextareaAutosize } from "@mui/material";
 import styled from "styled-components";
-import useInput from "../../hooks/useInput";
+import { useInput } from "../../hooks/useInput";
 import { AttributionLink } from "../Giphy/AttributionLink";
 import { Box } from "@mui/system";
 import { EmojiPicker } from "../Emojis/EmojiPicker";

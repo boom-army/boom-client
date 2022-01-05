@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {Loader} from "../Loader";
-import CustomResponse from "../CustomResponse";
+import { CustomResponse } from "../CustomResponse";
 import {ShowTweet} from "../Tweet";
 
 const Wrapper = styled.div`

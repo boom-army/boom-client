@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import CustomResponse from "../CustomResponse";
+import { CustomResponse } from "../CustomResponse";
 import { ShowTweet } from "../Tweet";
 import { Loader } from "../Loader";
 

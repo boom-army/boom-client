@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { TWEET } from "../../queries/tweet";
 import { Loader } from "../Loader";
 import { NewTweet, ParentTweet, ShowTweet } from ".";
-import CustomResponse from "../CustomResponse";
+import { CustomResponse } from "../CustomResponse";
 
 const Wrapper = styled.div`
   margin-bottom: 7rem;

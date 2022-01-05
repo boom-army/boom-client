@@ -6,7 +6,7 @@ import UserAvatar from "../UserAvatar";
 import { Button, Box, Grid } from "@mui/material";
 import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
-import CustomResponse from "../CustomResponse";
+import { CustomResponse } from "../CustomResponse";
 
 const Wrapper = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.tertiaryColor};

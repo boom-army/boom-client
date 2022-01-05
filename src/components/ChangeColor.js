@@ -3,7 +3,7 @@ import { ThemeContext } from "../contexts/theme";
 import { ColorIcon } from "./Icons";
 import { Wrapper } from "./ToggleTheme";
 
-export default () => {
+export const ChangeColor = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const colors = [

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import CustomResponse from "../components/CustomResponse";
+import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
 import { ShowTweet } from "../components/Tweet";
 import styled from "styled-components";

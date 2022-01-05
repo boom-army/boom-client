@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import CustomResponse from "../CustomResponse";
+import { CustomResponse } from "../CustomResponse";
 import Grid from "@mui/material/Grid";
 import { ConsumerCard } from "./ConsumerCard";
 import { Loader } from "../Loader";
@@ -7,34 +7,33 @@ import { USERS } from "../../queries/follow";
 import { useQuery } from "@apollo/client";
 
 export const Connect = () => {
-  const { loading, error, data, fetchMore } = useQuery(USERS, {
+  const { loading, data, fetchMore } = useQuery(USERS, {
     variables: {
       offset: 0,
     },
   });
 
-  //  TODO: This needs to be consolidated into a util
-  const handleScroll = () => {
-    const bottom =
-      Math.ceil(window.innerHeight + window.scrollY) >=
-      document.documentElement.scrollHeight;
-    if (bottom) {
-      fetchMore({
-        variables: {
-          offset: data?.users?.length,
-        },
-      });
-    }
-  };
-
   useEffect(() => {
+    //  TODO: This needs to be consolidated into a util
+    const handleScroll = () => {
+      const bottom =
+        Math.ceil(window.innerHeight + window.scrollY) >=
+        document.documentElement.scrollHeight;
+      if (bottom) {
+        fetchMore({
+          variables: {
+            offset: data?.users?.length,
+          },
+        });
+      }
+    };
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [data]);
+  }, [data, fetchMore]);
 
   if (loading) return <Loader />;
 

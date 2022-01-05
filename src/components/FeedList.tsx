@@ -1,5 +1,5 @@
 import React from "react";
-import CustomResponse from "./CustomResponse";
+import { CustomResponse } from "./CustomResponse";
 import styled from "styled-components";
 import { Loader } from "./Loader";
 import { ShowTweet } from "./Tweet";

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Popup from 'reactjs-popup';
 import ToggleTheme from './ToggleTheme';
 import Logout from './Auth/Logout';
-import ChangeColor from './ChangeColor';
+import { ChangeColor } from './ChangeColor';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Stack, Typography } from '@mui/material';
 
