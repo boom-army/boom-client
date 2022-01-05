@@ -6,7 +6,6 @@ import UserAvatar from "../UserAvatar";
 import { Button, Box, Grid } from "@mui/material";
 import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
-import { CustomResponse } from "../CustomResponse";
 
 const Wrapper = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.tertiaryColor};
@@ -88,12 +87,6 @@ const Wrapper = styled.div`
 `;
 
 const ProfileInfo = ({ profile }) => {
-  if (!profile) {
-    return (
-      <CustomResponse text="Oops, you are trying to visit a profile which seems to be doesn't exist. Make sure the profile handle exists" />
-    );
-  }
-
   const {
     id,
     coverPhoto,

@@ -1,50 +1,40 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import ProfileInfo from "./ProfileInfo";
 import { Box, Tab } from "@mui/material";
 import { Loader } from "../Loader";
 import { Meeps } from "./Meeps";
 import { TabContext, TabPanel, TabList } from "@mui/lab";
-import { ThemeContext } from "../../contexts/theme";
-import { styled } from "@mui/system";
 import { useParams } from "react-router-dom";
-import { useProfileQuery } from "../../generated/graphql";
+import { useProfileLazyQuery } from "../../generated/graphql";
 import { NFTGallery } from "./NFTGallery";
+import { CustomResponse } from "../CustomResponse";
 
 export const Profile: React.FC = () => {
-  const { theme } = useContext(ThemeContext);
-  const [tabValue, setTabValue] = React.useState("1");
+  const [tabValue, setTabValue] = useState("1");
 
   let { handle } = useParams<string>();
-  handle = handle ? handle : "";
 
-  const { loading, data } = useProfileQuery({
-    variables: { handle },
-  });
+  const [setHandle, { loading, data }] = useProfileLazyQuery();
+
+  useEffect(() => {
+    if (handle) setHandle({ variables: { handle } });
+  }, [handle, setHandle]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 
-  if (loading) return <Loader />;
-
-  const Wrapper = styled("div")`
-    padding-bottom: 5rem;
-
-    .profile-top {
-      display: flex;
-      flex-direction: column;
-      margin-left: 1rem;
-
-      span.tweetsCount {
-        margin-top: 0.1rem;
-        color: ${theme.secondaryColor};
-        font-size: 0.9rem;
-      }
-    }
-  `;
+  if (loading) {
+    return <Loader />;
+  }
+  if (!loading && !data) {
+    return (
+      <CustomResponse text="Oops, you are trying to visit a profile which doesn't exist. Make sure the profile handle exists" />
+    );
+  }
 
   return (
-    <Wrapper>
+    <>
       <ProfileInfo profile={data && data.profile} />
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={tabValue}>
@@ -53,7 +43,11 @@ export const Profile: React.FC = () => {
               onChange={handleChange}
               aria-label="Profile tablist select"
             >
-              <Tab label="NFT Gallery" value="1" />
+              <Tab
+                sx={{ padding: "1em", color: "#FF0000" }}
+                label="NFT Gallery"
+                value="1"
+              />
               <Tab label="Meeps" value="2" />
             </TabList>
           </Box>
@@ -65,6 +59,6 @@ export const Profile: React.FC = () => {
           </TabPanel>
         </TabContext>
       </Box>
-    </Wrapper>
+    </>
   );
 };
