@@ -173,6 +173,7 @@ export type MutationNewTweetArgs = {
 
 
 export type MutationSignFileUrlArgs = {
+  bucket?: Maybe<Scalars['String']>;
   file: Scalars['String'];
   type: Scalars['String'];
 };
@@ -453,6 +454,20 @@ export type ProfileQueryVariables = Exact<{
 
 export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar?: string | null | undefined, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, user?: { __typename?: 'User', id: string, consumerName?: string | null | undefined, publicAddress: string, handle: string, avatar?: string | null | undefined } | null | undefined, files: Array<{ __typename?: 'File', id: string, url: string }>, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, reactions: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> }> } };
 
+export type EditProfileMutationVariables = Exact<{
+  handle?: Maybe<Scalars['String']>;
+  consumerName?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  dob?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  coverPhoto?: Maybe<Scalars['String']>;
+}>;
+
+
+export type EditProfileMutation = { __typename?: 'Mutation', editProfile: { __typename?: 'User', id: string, handle: string, publicAddress: string } };
+
 export type TipCreatorMutationVariables = Exact<{
   tipAmount: Scalars['String'];
   tweetId: Scalars['String'];
@@ -690,6 +705,57 @@ export function useProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pr
 export type ProfileQueryHookResult = ReturnType<typeof useProfileQuery>;
 export type ProfileLazyQueryHookResult = ReturnType<typeof useProfileLazyQuery>;
 export type ProfileQueryResult = Apollo.QueryResult<ProfileQuery, ProfileQueryVariables>;
+export const EditProfileDocument = gql`
+    mutation editProfile($handle: String, $consumerName: String, $location: String, $dob: String, $bio: String, $website: String, $avatar: String, $coverPhoto: String) {
+  editProfile(
+    handle: $handle
+    consumerName: $consumerName
+    location: $location
+    dob: $dob
+    bio: $bio
+    website: $website
+    avatar: $avatar
+    coverPhoto: $coverPhoto
+  ) {
+    id
+    handle
+    publicAddress
+  }
+}
+    `;
+export type EditProfileMutationFn = Apollo.MutationFunction<EditProfileMutation, EditProfileMutationVariables>;
+
+/**
+ * __useEditProfileMutation__
+ *
+ * To run a mutation, you first call `useEditProfileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditProfileMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editProfileMutation, { data, loading, error }] = useEditProfileMutation({
+ *   variables: {
+ *      handle: // value for 'handle'
+ *      consumerName: // value for 'consumerName'
+ *      location: // value for 'location'
+ *      dob: // value for 'dob'
+ *      bio: // value for 'bio'
+ *      website: // value for 'website'
+ *      avatar: // value for 'avatar'
+ *      coverPhoto: // value for 'coverPhoto'
+ *   },
+ * });
+ */
+export function useEditProfileMutation(baseOptions?: Apollo.MutationHookOptions<EditProfileMutation, EditProfileMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EditProfileMutation, EditProfileMutationVariables>(EditProfileDocument, options);
+      }
+export type EditProfileMutationHookResult = ReturnType<typeof useEditProfileMutation>;
+export type EditProfileMutationResult = Apollo.MutationResult<EditProfileMutation>;
+export type EditProfileMutationOptions = Apollo.BaseMutationOptions<EditProfileMutation, EditProfileMutationVariables>;
 export const TipCreatorDocument = gql`
     mutation tipCreator($tipAmount: String!, $tweetId: String!, $userId: String!) {
   tipCreator(tipAmount: $tipAmount, tweetId: $tweetId, userId: $userId) {

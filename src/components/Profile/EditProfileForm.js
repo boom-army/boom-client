@@ -6,7 +6,7 @@ import Form from '../../styles/Form';
 import Input from '../Input';
 import { TextareaAutosize } from "@mui/material";
 import { useInput } from '../../hooks/useInput';
-import { EDIT_PROFILE } from '../../queries/profile';
+import { useEditProfileMutation } from '../../generated/graphql';
 import { ProfileDocument } from "../../generated/graphql"
 import { SIGN_FILE } from '../../queries/files';
 import { displayError, uploadFile } from '../../utils';
@@ -28,7 +28,7 @@ export const EditProfileForm = ({ profile, setUser }) => {
   const bio = useInput(profile && profile.bio);
   const coverPhoto = useInput(profile && profile.coverPhoto);
 
-  const [editProfileMutation, { loading }] = useMutation(EDIT_PROFILE, {
+  const [editProfileMutation, { loading }] = useEditProfileMutation({
     refetchQueries: [{ query: ProfileDocument, variables: { handle: handle.value } }],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
