@@ -6,7 +6,8 @@ import Form from '../../styles/Form';
 import Input from '../Input';
 import { TextareaAutosize } from "@mui/material";
 import { useInput } from '../../hooks/useInput';
-import { PROFILE, EDIT_PROFILE } from '../../queries/profile';
+import { EDIT_PROFILE } from '../../queries/profile';
+import { ProfileDocument } from "../../generated/graphql"
 import { SIGN_FILE } from '../../queries/files';
 import { displayError, uploadFile } from '../../utils';
 import { useMutation } from '@apollo/client';
@@ -28,7 +29,7 @@ export const EditProfileForm = ({ profile, setUser }) => {
   const coverPhoto = useInput(profile && profile.coverPhoto);
 
   const [editProfileMutation, { loading }] = useMutation(EDIT_PROFILE, {
-    refetchQueries: [{ query: PROFILE, variables: { handle: handle.value } }],
+    refetchQueries: [{ query: ProfileDocument, variables: { handle: handle.value } }],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 

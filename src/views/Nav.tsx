@@ -9,15 +9,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Badge, Stack, Typography } from '@mui/material';
 import { ThemeContext } from 'styled-components';
 import { ThemeVars } from '../styles/themes';
-import { User } from '../generated/graphql';
 import { User as StoreUser } from '../contexts/user';
 
 interface Props {
-  profile: User;
+  newMentionsCount: Number;
   user: StoreUser | null;
 }
 
-export const Nav = ({ profile, user }: Props) => {
+export const Nav = ({ newMentionsCount, user }: Props) => {
   const theme = useContext<ThemeVars>(ThemeContext);
   const displayProps = { xs: 'none', sm: 'none', md: 'block', lg: 'block' };
   const iconProps = {
@@ -74,7 +73,7 @@ export const Nav = ({ profile, user }: Props) => {
         <Stack direction="row" {...stackProps}>
           <Badge
             max={99}
-            badgeContent={profile?.newMentionsCount ?? 0}
+            badgeContent={newMentionsCount ?? 0}
             sx={{
               '& .MuiBadge-badge': {
                 color: '#FFFFFF',

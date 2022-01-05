@@ -16,28 +16,24 @@ import { GiphyContextProvider } from "./contexts/giphy";
 import { MarketProvider } from "./contexts/market";
 import { MasterTweet } from "./components/Tweet/MasterTweet";
 import { NFTMint } from "./components/Mint/NFTMint";
-import { PROFILE } from "./queries/profile";
 import { Profile } from "./components/Profile/Profile";
 import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
-import { useQuery } from "@apollo/client";
+import { useProfileLazyQuery } from "./generated/graphql";
 
-interface Props {
-  setAppProfile: React.Dispatch<React.SetStateAction<undefined>>;
-}
 
-export const AppRoutes: React.FC<Props> = ({ setAppProfile }) => {
+export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { user, setUser } = useContext(UserContext);
 
-  const { loading, data, refetch } = useQuery(PROFILE, {
-    variables: { handle: user?.handle },
-  });
+  const [getHandle, { loading, data, refetch }] = useProfileLazyQuery();
 
   useEffect(() => {
-    setAppProfile(data);
-  }, [data, setAppProfile]);
+    if (user?.handle) getHandle({
+      variables: { handle: user?.handle },
+    })
+  }, [getHandle, user]);
 
   const middleColStyles = {
     borderRight: `1px solid ${theme.tertiaryColor}`,
@@ -55,7 +51,7 @@ export const AppRoutes: React.FC<Props> = ({ setAppProfile }) => {
                 <Container maxWidth="lg">
                   <Grid container>
                     <Grid item xs={2} sm={1} md={2}>
-                      <Nav user={user} profile={data?.profile} />
+                      {data?.profile && <Nav user={user} newMentionsCount={data?.profile?.newMentionsCount} />}
                     </Grid>
                     <Grid item xs={10} sm={11} md={7} sx={middleColStyles}>
                       <Routes>

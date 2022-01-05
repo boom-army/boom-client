@@ -12,17 +12,17 @@ import { UserContextProvider } from "./contexts/user";
 
 export const App = () => {
   const { theme } = useContext(ThemeContext);
-  const [appProfile, setAppProfile] = useState();
+  const isLoggedIn = localStorage.getItem("user");
 
-  const [oneSignalPlayer, setOneSignalPlayer] = useState<string>("");
+  const [oneSignalPlayer, setOneSignalPlayer] = useState("");
 
-  const { refetch, data } = useOneSignalQuery({
+  const { refetch } = useOneSignalQuery({
     variables: { oneSignalId: oneSignalPlayer },
   });
 
   useEffect(() => {
     (async () => {
-      if (appProfile) {
+      if (isLoggedIn) {
         await OneSignal.init({
           appId: process.env.REACT_APP_ONESIGNAL_APP_ID as string,
         });
@@ -32,7 +32,7 @@ export const App = () => {
         setOneSignalPlayer(userId as string);
       }
     })();
-  }, [appProfile, data]);
+  }, [isLoggedIn]);
 
   OneSignal.on("subscriptionChange", async (isSubscribed: Boolean) => {
     const userId = await OneSignal.getUserId();
@@ -49,7 +49,7 @@ export const App = () => {
       <SnackbarProvider maxSnack={3}>
         <SimpleReactLightbox>
           <UserContextProvider>
-            <AppRoutes setAppProfile={setAppProfile} />
+            <AppRoutes />
           </UserContextProvider>
         </SimpleReactLightbox>
       </SnackbarProvider>
