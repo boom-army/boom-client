@@ -52,7 +52,7 @@ export const Profile: React.FC = () => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <NFTGallery />
+            {data && <NFTGallery publicAddress={data?.profile.publicAddress} />}
           </TabPanel>
           <TabPanel value="2">
             <Meeps data={data} />
