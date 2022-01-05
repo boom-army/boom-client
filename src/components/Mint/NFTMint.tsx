@@ -1,5 +1,5 @@
 // TODO: add attributes fiels for NFT minting
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { Box } from "@mui/system";
 import {
@@ -11,14 +11,15 @@ import {
   styled,
 } from "@mui/material";
 import { SIGN_FILE } from "../../queries/files";
+import { SOSOL_HOST_ID } from "../../utils/ids";
 import { actions, Wallet } from "@metaplex/js";
 import { displayError } from "../../utils";
+import { uniqBy } from "lodash";
 import { uploadFile } from "../../utils";
 import { useConnection, useAnchorWallet } from "@solana/wallet-adapter-react";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { SOSOL_HOST_ID } from "../../utils/ids";
-import { uniqBy } from "lodash";
+import { ThemeContext } from "../../contexts/theme";
 
 const { mintNFT } = actions;
 
@@ -42,6 +43,7 @@ interface FileObj {
 }
 
 export const NFTMint: React.FC = (props) => {
+  const { theme } = useContext(ThemeContext);
   const { connection } = useConnection();
   const anchorWallet = useAnchorWallet();
   const wallet = anchorWallet as Wallet;
@@ -53,7 +55,7 @@ export const NFTMint: React.FC = (props) => {
 
   const [isMinting, setMinting] = useState<boolean>(false);
   const [fileName, setFileName] = useState("");
-  const [attributes, setAttributes] = useState({
+  const defaultAttrState = {
     name: "",
     symbol: "",
     description: "",
@@ -66,15 +68,10 @@ export const NFTMint: React.FC = (props) => {
     properties: {
       files: [] as FileObj[],
       category: MetadataCategory.Image,
-      creators: [
-        { address: SOSOL_HOST_ID.toBase58(), share: 100 },
-      ],
+      creators: [{ address: SOSOL_HOST_ID.toBase58(), share: 100 }],
     },
-  });
-
-  useEffect(() => {
-    console.log("************", attributes);
-  }, [attributes]);
+  }
+  const [attributes, setAttributes] = useState(defaultAttrState);
 
   const handleImageUpload = async (e: any) => {
     try {
@@ -101,9 +98,12 @@ export const NFTMint: React.FC = (props) => {
       setFileName(renamed.name);
       setAttributes((attr) => {
         attr.properties.files.push({ uri: imageUrl, type: file?.type });
-        attr.properties.creators.push({ address: wallet?.publicKey?.toBase58(), share: 0 });
-        attr.properties.files = uniqBy(attr.properties.files, 'uri');
-        attr.properties.creators = uniqBy(attr.properties.creators, 'address');
+        attr.properties.creators.push({
+          address: wallet?.publicKey?.toBase58(),
+          share: 0,
+        });
+        attr.properties.files = uniqBy(attr.properties.files, "uri");
+        attr.properties.creators = uniqBy(attr.properties.creators, "address");
         return { ...attr, image: imageUrl };
       });
     } catch (error) {
@@ -136,7 +136,8 @@ export const NFTMint: React.FC = (props) => {
     try {
       if (!attributes.image) throw new Error("You need to upload an image");
       if (!attributes.name) throw new Error("You need to add a name");
-      if (!attributes.description) throw new Error("You need to add a description");
+      if (!attributes.description)
+        throw new Error("You need to add a description");
       const uri = (await handleURIUpload()) as string;
 
       const _nft = await mintNFT({
@@ -146,6 +147,7 @@ export const NFTMint: React.FC = (props) => {
         maxSupply: 1,
       });
 
+      setAttributes(defaultAttrState);
       enqueueSnackbar(`Successful mint: ${_nft.txId}`, {
         variant: "success",
       });
@@ -156,72 +158,100 @@ export const NFTMint: React.FC = (props) => {
       setMinting(false);
     }
   };
+
   return (
     <>
       <Box>
         <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-          <FormLabel component="legend">Create an NFT</FormLabel>
+          <FormLabel
+            sx={{ color: theme.primaryColor, marginBottom: 2 }}
+            component="legend"
+          >
+            Create an NFT
+          </FormLabel>
           <FormGroup>
-            <label htmlFor="contained-button-file">
-              <ImageInput
-                accept="image/*"
-                id="contained-button-file"
-                multiple
-                type="file"
-                onChange={handleImageUpload}
-              />
-              <Button
-                variant="contained"
-                component="span"
-                endIcon={<PhotoCamera />}
-              >
-                Upload NFT Image
-              </Button>
-            </label>
-            <Box>
-              {attributes.image && <img src={attributes.image} alt="Preview for NFT upload" width="250" />}
+            <Box mb={2}>
+              <label htmlFor="contained-button-file">
+                <ImageInput
+                  accept="image/*"
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                  onChange={handleImageUpload}
+                />
+                <Button
+                  variant="contained"
+                  component="span"
+                  endIcon={<PhotoCamera />}
+                >
+                  Upload NFT Image
+                </Button>
+              </label>
             </Box>
-            <TextField
-              // error={inputError}
-              required
-              id="input-name"
-              label="Name"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={attributes.name}
-              size="small"
-              onChange={(e) => {
-                // setInputError(false);
-                setAttributes((attr) => ({ ...attr, name: e.target.value }));
-              }}
-            />
-            <TextField
-              // error={inputError}
-              required
-              id="input-description"
-              label="Description"
-              rows={4}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={attributes.description}
-              size="small"
-              onChange={(e) => {
-                // setInputError(false);
-                setAttributes((attr) => ({
-                  ...attr,
-                  description: e.target.value,
-                }));
-              }}
-            />
-            <Button
-              disabled={isMinting}
-              variant="contained"
-              onClick={() => mint()}
-            >
-              Mint NFT
-            </Button>
+            <Box mb={2}>
+              {attributes.image && (
+                <img
+                  src={attributes.image}
+                  alt="Preview for NFT upload"
+                  width="250"
+                />
+              )}
+            </Box>
+            <Box mb={2}>
+              <TextField
+                // error={inputError}
+                required
+                id="input-name"
+                label="Name"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { color: theme.secondaryColor },
+                }}
+                InputProps={{
+                  style: { color: theme.secondaryColor },
+                }}
+                value={attributes.name}
+                size="small"
+                onChange={(e) => {
+                  // setInputError(false);
+                  setAttributes((attr) => ({ ...attr, name: e.target.value }));
+                }}
+              />
+            </Box>
+            <Box mb={2}>
+              <TextField
+                // error={inputError}
+                required
+                id="input-description"
+                label="Description"
+                rows={4}
+                InputLabelProps={{
+                  shrink: true,
+                  style: { color: theme.secondaryColor },
+                }}
+                InputProps={{
+                  style: { color: theme.secondaryColor },
+                }}
+                value={attributes.description}
+                size="small"
+                onChange={(e) => {
+                  // setInputError(false);
+                  setAttributes((attr) => ({
+                    ...attr,
+                    description: e.target.value,
+                  }));
+                }}
+              />
+            </Box>
+            <Box mb={2}>
+              <Button
+                disabled={isMinting}
+                variant="contained"
+                onClick={() => mint()}
+              >
+                Mint NFT
+              </Button>
+            </Box>
           </FormGroup>
         </FormControl>
       </Box>
