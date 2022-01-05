@@ -15,7 +15,7 @@ import { uploadFile } from "../../utils";
 import { useConnection, useAnchorWallet } from "@solana/wallet-adapter-react";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { SOSOL_AUTHORITY_ID } from "../../utils/ids";
+import { SOSOL_HOST_ID } from "../../utils/ids";
 
 const { mintNFT } = actions;
 
@@ -59,13 +59,13 @@ export const NFTMint: React.FC = (props) => {
     animation_url: undefined,
     attributes: undefined,
     seller_fee_basis_points: 500,
-    creators: [
-      { address: SOSOL_AUTHORITY_ID.toBase58(), share: 50 },
-      { address: wallet?.publicKey?.toBase58(), share: 50 },
-    ],
     properties: {
       files: [] as FileObj[],
       category: MetadataCategory.Image,
+      creators: [
+        { address: SOSOL_HOST_ID.toBase58(), share: 100 },
+        { address: wallet.publicKey.toBase58(), share: 0 },
+      ],
     },
   });
 
@@ -84,19 +84,17 @@ export const NFTMint: React.FC = (props) => {
         { type: file.type }
       );
 
-      // const { data } = await signFileMutation({
-      //   variables: {
-      //     file: renamed.name,
-      //     type: renamed.type,
-      //     bucket: AWSBucket.NFT,
-      //   },
-      // });
-      // const signedUrl = data.signFileUrl;
-      // const imageData = await uploadFile(renamed, signedUrl, enqueueSnackbar);
-      // const imageUrl = imageData?.config?.url?.split("?")[0] as string;
+      const { data } = await signFileMutation({
+        variables: {
+          file: renamed.name,
+          type: renamed.type,
+          bucket: AWSBucket.NFT,
+        },
+      });
+      const signedUrl = data.signFileUrl;
+      const imageData = await uploadFile(renamed, signedUrl, enqueueSnackbar);
+      const imageUrl = imageData?.config?.url?.split("?")[0] as string;
 
-      const imageUrl =
-        "https://sosol-dev.s3.us-west-2.amazonaws.com/nft/G1p59D3CScwE9r31RNFsGm3q5xZapt6EXHmtHV7Jq5AS-boom-round+(1).png";
       setFileName(renamed.name);
       setAttributes((attr) => {
         attr.properties.files.push({ uri: imageUrl, type: file?.type });
@@ -123,32 +121,14 @@ export const NFTMint: React.FC = (props) => {
     });
     const signedUrl = data.signFileUrl;
     const fileData = await uploadFile(blob, signedUrl, enqueueSnackbar);
-    const fileUrl = fileData?.config?.url?.split('?')[0];
-    console.log('fileUrl:', fileUrl);
+    const fileUrl = fileData?.config?.url?.split("?")[0];
     return fileUrl;
   };
 
   const mint = async () => {
-    const metadata = {
-      name: attributes.name,
-      symbol: attributes.symbol,
-      creators: attributes.creators,
-      description: attributes.description,
-      sellerFeeBasisPoints: attributes.seller_fee_basis_points,
-      image: attributes.image,
-      animation_url: attributes.animation_url,
-      attributes: attributes.attributes,
-      external_url: attributes.external_url,
-      properties: {
-        files: attributes.properties?.files,
-        category: attributes.properties?.category,
-      },
-    };
     setMinting(true);
-
     try {
-      const uri = await handleURIUpload() as string;
-      console.log("boom", metadata);
+      const uri = (await handleURIUpload()) as string;
 
       const _nft = await mintNFT({
         connection,
@@ -157,9 +137,11 @@ export const NFTMint: React.FC = (props) => {
         maxSupply: 1,
       });
 
-      if (_nft) console.log("*******************", _nft);
+      enqueueSnackbar(`Successful mint: ${_nft.txId}`, {
+        variant: "success",
+      });
     } catch (e: any) {
-      console.log(e.message);
+      console.log(e);
       displayError(e, enqueueSnackbar);
     } finally {
       setMinting(false);
