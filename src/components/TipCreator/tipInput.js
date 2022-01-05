@@ -4,17 +4,16 @@ import { Box } from "@mui/system";
 import { IconButton } from "@material-ui/core";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
+import { TWEET } from "../../queries/tweet";
 import { TextField, Stack, Button } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { displayError } from "../../utils";
 import { interactionInstruction } from "../../utils/sosol-web3";
-import { styled } from "@mui/system";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
-import { TWEET } from "../../queries/tweet";
 import { useTipCreatorMutation } from "../../generated/graphql";
 
 export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
@@ -129,48 +128,35 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
     ]
   );
 
-  const Wrapper = styled("div")`
-    position: absolute;
-    bottom: 2em;
-    left: -12em;
-    background: ${theme.background};
-    padding: 1em;
-    border-radius: 5px;
-    border: 1px solid ${theme.secondaryColor};
-    min-width: 400px;
-    & .MuiInputLabel-root {
-      color: ${theme.secondaryColor};
-    }
-    & .MuiOutlinedInput-input {
-      border-color: ${theme.accentColor};
-    }
-    & .MuiInputBase-root {
-      width: 100%;
-    }
-    & .MuiIconButton-label {
-      & svg {
-        fill: ${theme.accentColor};
-        width: 16px;
-      }
-    }
-  `;
   return (
-    <Wrapper>
+    <Box
+      sx={{
+        position: "absolute",
+        bottom: "2em",
+        left: "-12em",
+        background: theme.background,
+        padding: "1em",
+        borderRadius: "5px",
+        border: `1px solid ${theme.secondaryColor}`,
+        minWidth: "400px",
+      }}
+    >
       <Box sx={{ position: "relative" }}>
         <Box
           sx={{
             position: "absolute",
-            left: "99%",
+            left: "98.5%",
             top: "-55%",
           }}
         >
           <IconButton
             size="small"
+            color="secondary"
             onClick={() => {
               setShowTip(false);
             }}
           >
-            <CloseIcon />
+            <CloseIcon fontSize="small" />
           </IconButton>
         </Box>
         <Stack
@@ -208,6 +194,10 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
             type="number"
             InputLabelProps={{
               shrink: true,
+              style: { color: theme.secondaryColor },
+            }}
+            InputProps={{
+              style: { color: theme.secondaryColor },
             }}
             value={txValue}
             size="small"
@@ -229,6 +219,6 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
           </div>
         </Stack>
       </Box>
-    </Wrapper>
+    </Box>
   );
 };
