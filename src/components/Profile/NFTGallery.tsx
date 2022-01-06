@@ -1,13 +1,84 @@
-import React, { useEffect, useState } from "react";
-import { Metadata, MetadataData } from "@metaplex-foundation/mpl-token-metadata";
+import React, { useEffect, useState, useContext } from "react";
+import {
+  Metadata,
+  MetadataData,
+} from "@metaplex-foundation/mpl-token-metadata";
 import { useConnection } from "@solana/wallet-adapter-react";
+import { Box } from "@mui/system";
+import { Link, Stack, Typography } from "@mui/material";
+import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
+import { currentCluster } from "../../utils/utils";
+import { ThemeContext } from "../../contexts/theme";
 
-interface props {
+interface NFTGalleryProps {
   publicAddress: string;
 }
 
-export const NFTGallery: React.FC<props> = ({ publicAddress }) => {
+interface NFTTileProps {
+  data: MetadataData;
+  cluster: string;
+}
+
+interface URIData {
+  name: string;
+  description: string;
+  image: string;
+}
+
+const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
+  const { theme } = useContext(ThemeContext);
+
+  const [uRIData, setURIData] = useState<URIData>();
+  const [explorerLink, setExplorerLink] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(data.data.uri);
+      const json = await response.json();
+      setURIData(json);
+      setExplorerLink(
+        `https://explorer.solana.com/address/${data?.mint}?cluster=${cluster}`
+      );
+    })();
+  }, [data, cluster]);
+
+  return (
+    <>
+      <Box
+        pb={4}
+        pr={4}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minWidth: "140px",
+        }}
+      >
+        <Link
+          href={explorerLink}
+          target="_blank"
+          color={theme.secondaryColor}
+          underline="hover"
+        >
+          <Box>
+            {uRIData?.image ? (
+              <img src={uRIData?.image} alt={uRIData?.name} width="120" />
+            ) : (
+              <DoNotDisturbOnIcon fontSize="large" />
+            )}
+          </Box>
+          <Box>
+            <Typography sx={{ fontSize: "0.8em" }}>{uRIData?.name}</Typography>
+          </Box>
+        </Link>
+      </Box>
+    </>
+  );
+};
+
+export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
   const { connection } = useConnection();
+  const { name } = currentCluster();
+
   const [nfts, setNfts] = useState<MetadataData[]>();
 
   useEffect(() => {
@@ -17,14 +88,23 @@ export const NFTGallery: React.FC<props> = ({ publicAddress }) => {
       setNfts(nftData);
       console.log(nftData);
     })();
-  }, [publicAddress]);
+  }, [publicAddress, connection]);
 
   return (
     <>
-      {nfts &&
-        nfts.map((nft: any) => {
-          return <div>{nft.mint}</div>;
-        })}
+      <Stack
+        direction="row"
+        sx={{
+          flexWrap: "wrap",
+          justifyContent: "flex-start",
+          alignItems: "baseline",
+        }}
+      >
+        {nfts &&
+          nfts.map((nft: MetadataData) => (
+            <NFTTile data={nft} key={nft.mint} cluster={name} />
+          ))}
+      </Stack>
     </>
   );
 };

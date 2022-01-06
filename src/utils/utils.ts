@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js';
+import { ENDPOINTS } from "../contexts/connection";
 import { MintInfo } from "@solana/spl-token";
 import { PublicKey } from "@solana/web3.js";
 import { TokenAccount } from "../models";
@@ -243,4 +244,9 @@ export function convert(
   let result = (amount / precision) * rate;
 
   return result;
+}
+
+export function currentCluster() {
+  const endpoint = process.env.REACT_APP_RPC_URL as string;
+  return ENDPOINTS.filter((obj) => obj.endpoint === endpoint)[0];
 }
