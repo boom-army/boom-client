@@ -1,4 +1,5 @@
 import React from "react";
+import { Box, Typography } from "@mui/material";
 import { ShowTweet } from "../Tweet";
 import { Tweet, ProfileQuery } from "../../generated/graphql";
 
@@ -16,7 +17,11 @@ export const Meeps: React.FC<{
               parentTweetId=""
             />
           ))
-        : null}
+        : (
+          <Box pt={10} sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography>You haven't Meeped yet</Typography>
+          </Box>
+        )}
     </>
   );
 };
