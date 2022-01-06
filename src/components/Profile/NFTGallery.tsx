@@ -11,6 +11,7 @@ import { currentCluster } from "../../utils/utils";
 import { ThemeContext } from "../../contexts/theme";
 import { useSnackbar } from "notistack";
 import { displayError } from "../../utils";
+import { Loader } from "../Loader";
 
 interface NFTGalleryProps {
   publicAddress: string;
@@ -29,18 +30,23 @@ interface URIData {
 
 const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
   const { theme } = useContext(ThemeContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   const [uRIData, setURIData] = useState<URIData>();
   const [explorerLink, setExplorerLink] = useState("");
 
   useMemo(() => {
     (async () => {
-      const response = await fetch(data.data.uri);
-      const json = await response.json();
-      setURIData(json);
-      setExplorerLink(
-        `https://explorer.solana.com/address/${data?.mint}?cluster=${cluster}`
-      );
+      try {
+        const response = await fetch(data.data.uri);
+        const json = await response.json();
+        setURIData(json);
+        setExplorerLink(
+          `https://explorer.solana.com/address/${data?.mint}?cluster=${cluster}`
+        );
+      } catch (error) {
+        displayError(error, enqueueSnackbar);
+      }
     })();
   }, [data, cluster]);
 
@@ -83,18 +89,24 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [nfts, setNfts] = useState<MetadataData[]>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true);
         const nftMeta = await Metadata.findByOwnerV2(connection, publicAddress);
         const nftData = nftMeta.map((meta) => meta.data);
         setNfts(nftData);
       } catch (error) {
         displayError(error, enqueueSnackbar);
+      } finally {
+        setLoading(false);
       }
     })();
   }, [publicAddress, connection, enqueueSnackbar]);
+
+  if (loading) return <Loader />;
 
   return (
     <>
