@@ -44,7 +44,7 @@ export const Profile: React.FC = () => {
               aria-label="Profile tablist select"
             >
               <Tab
-                sx={{ padding: "1em", color: "#FF0000" }}
+                sx={{ minWidth: 150 }}
                 label="NFT Gallery"
                 value="1"
               />

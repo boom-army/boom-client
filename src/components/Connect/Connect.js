@@ -46,7 +46,7 @@ export const Connect = () => {
           sx={{ paddingTop: 3, paddingLeft: 2, paddingRight: 2 }}
         >
           {data.users.map((consumer) => (
-            <Grid item md={4}>
+            <Grid item md={4} key={`grid-${consumer.id}`}>
               <ConsumerCard key={`card-${consumer.id}`} consumer={consumer} />
             </Grid>
           ))}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext, useMemo, useEffect } from "react";
 import {
   Metadata,
   MetadataData,
@@ -9,6 +9,8 @@ import { Link, Stack, Typography } from "@mui/material";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import { currentCluster } from "../../utils/utils";
 import { ThemeContext } from "../../contexts/theme";
+import { useSnackbar } from "notistack";
+import { displayError } from "../../utils";
 
 interface NFTGalleryProps {
   publicAddress: string;
@@ -31,7 +33,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
   const [uRIData, setURIData] = useState<URIData>();
   const [explorerLink, setExplorerLink] = useState("");
 
-  useEffect(() => {
+  useMemo(() => {
     (async () => {
       const response = await fetch(data.data.uri);
       const json = await response.json();
@@ -78,17 +80,21 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
 export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
   const { connection } = useConnection();
   const { name } = currentCluster();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [nfts, setNfts] = useState<MetadataData[]>();
 
   useEffect(() => {
     (async () => {
-      const nftMeta = await Metadata.findByOwnerV2(connection, publicAddress);
-      const nftData = nftMeta.map((meta) => meta.data);
-      setNfts(nftData);
-      console.log(nftData);
+      try {
+        const nftMeta = await Metadata.findByOwnerV2(connection, publicAddress);
+        const nftData = nftMeta.map((meta) => meta.data);
+        setNfts(nftData);
+      } catch (error) {        
+        displayError(error, enqueueSnackbar);
+      }
     })();
-  }, [publicAddress, connection]);
+  }, [publicAddress, connection, enqueueSnackbar]);
 
   return (
     <>
