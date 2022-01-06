@@ -69,7 +69,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
             )}
           </Box>
           <Box>
-            <Typography sx={{ fontSize: "0.8em" }}>{uRIData?.name}</Typography>
+            <Typography sx={{ fontSize: "0.8em", maxWidth: "120px" }}>{uRIData?.name}</Typography>
           </Box>
         </Link>
       </Box>
