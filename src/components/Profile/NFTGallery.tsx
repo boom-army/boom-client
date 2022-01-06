@@ -90,7 +90,7 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
         const nftMeta = await Metadata.findByOwnerV2(connection, publicAddress);
         const nftData = nftMeta.map((meta) => meta.data);
         setNfts(nftData);
-      } catch (error) {        
+      } catch (error) {
         displayError(error, enqueueSnackbar);
       }
     })();
@@ -98,19 +98,25 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
 
   return (
     <>
-      <Stack
-        direction="row"
-        sx={{
-          flexWrap: "wrap",
-          justifyContent: "flex-start",
-          alignItems: "baseline",
-        }}
-      >
-        {nfts &&
-          nfts.map((nft: MetadataData) => (
-            <NFTTile data={nft} key={nft.mint} cluster={name} />
-          ))}
-      </Stack>
+      {nfts?.length ? (
+        <Stack
+          direction="row"
+          sx={{
+            flexWrap: "wrap",
+            justifyContent: "flex-start",
+            alignItems: "baseline",
+          }}
+        >
+          {nfts &&
+            nfts.map((nft: MetadataData) => (
+              <NFTTile data={nft} key={nft.mint} cluster={name} />
+            ))}
+        </Stack>
+      ) : (
+        <Box pt={10} sx={{ display: "flex", justifyContent: "center" }}>
+          <Typography>No NFTs in your wallet</Typography>
+        </Box>
+      )}
     </>
   );
 };
