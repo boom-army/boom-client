@@ -19,7 +19,7 @@ import {
   AnchorWallet,
   useAnchorWallet,
 } from "@solana/wallet-adapter-react";
-import { loadAnchor } from "../utils/sosol-web3";
+import { loadAnchor } from "../utils/boom-web3";
 
 const AccountsContext = React.createContext<any>(null);
 

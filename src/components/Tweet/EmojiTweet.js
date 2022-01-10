@@ -9,7 +9,7 @@ import { SmilePlusIcon } from "../Icons";
 import { TOGGLE_REACTION, TWEET } from "../../queries/tweet";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { displayError } from "../../utils";
-import { interactionInstruction } from "../../utils/sosol-web3";
+import { interactionInstruction } from "../../utils/boom-web3";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";

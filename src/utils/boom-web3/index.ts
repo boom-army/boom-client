@@ -87,7 +87,7 @@ const assertProgramProvider = (program: Program) => {
  * @param creatorTokenAcc token account of the content creator
  * @param storageTokenAcc token account of the content storage hosting provider
  * @param consumerAcc the wallet/account of the consumer/payer
- * @param interactionFee the fee to charge 100000000 = 1 sosol
+ * @param interactionFee the fee to charge 100000000 = 1 BMA
  */
 export const interactionInstruction = async (
   connection: Connection,

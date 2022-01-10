@@ -10,7 +10,7 @@ import { ThemeContext } from "../../contexts/theme";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { displayError } from "../../utils";
-import { interactionInstruction } from "../../utils/sosol-web3";
+import { interactionInstruction } from "../../utils/boom-web3";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
