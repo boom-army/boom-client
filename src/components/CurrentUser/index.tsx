@@ -13,7 +13,7 @@ export const CurrentUser = () => {
       >
         <Box mr={1}>
           <Link to="/">
-            <Typography variant="h6">Sosol α</Typography>
+            <Typography variant="h6">Boom β</Typography>
           </Link>
         </Box>
       </Grid>
