@@ -12,7 +12,7 @@ import { ThemeVars } from '../styles/themes';
 import { User as StoreUser } from '../contexts/user';
 
 interface Props {
-  newMentionsCount: Number;
+  newMentionsCount: Number | undefined;
   user: StoreUser | null;
 }
 

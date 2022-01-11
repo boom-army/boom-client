@@ -51,7 +51,7 @@ export const AppRoutes: React.FC = () => {
                 <Container maxWidth="lg">
                   <Grid container>
                     <Grid item xs={2} sm={1} md={2}>
-                      {data?.profile && <Nav user={user} newMentionsCount={data?.profile?.newMentionsCount} />}
+                      {user?.handle && <Nav user={user} newMentionsCount={data?.profile?.newMentionsCount} />}
                     </Grid>
                     <Grid item xs={10} sm={11} md={7} sx={middleColStyles}>
                       <Routes>
