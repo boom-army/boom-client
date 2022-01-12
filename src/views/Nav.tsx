@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MorePopUp } from '../components/MorePopup';
-import Person from '@mui/icons-material/Person';
+// import Person from '@mui/icons-material/Person';
+import StyleIcon from '@mui/icons-material/Style';
 import GroupIcon from '@mui/icons-material/Group';
 import Language from '@mui/icons-material/Language';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -49,23 +50,31 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
         <Stack direction="row" {...stackProps}>
           <Language style={iconProps} />
           <Typography variant="body1" display={displayProps}>
-            Global
+            Community
           </Typography>
         </Stack>
       </NavLink>
-      <NavLink style={applyActiveStyles} to="/following">
+      <NavLink style={applyActiveStyles} to="/mint-nft">
+        <Stack direction="row" {...stackProps}>
+          <StyleIcon sx={iconProps} />
+          <Typography variant="body1" display={displayProps}>
+            Mint NFT
+          </Typography>
+        </Stack>
+      </NavLink>
+      {/* <NavLink style={applyActiveStyles} to="/following">
         <Stack direction="row" {...stackProps}>
           <Person sx={iconProps} />
           <Typography variant="body1" display={displayProps}>
             Following
           </Typography>
         </Stack>
-      </NavLink>
+      </NavLink> */}
       <NavLink style={applyActiveStyles} to="/connect">
         <Stack direction="row" {...stackProps}>
           <GroupIcon sx={iconProps} />
           <Typography variant="body1" display={displayProps}>
-            Connect
+            Creators
           </Typography>
         </Stack>
       </NavLink>
