@@ -13,8 +13,8 @@ import {
 import { idl } from "./sosol";
 import { ERRORS } from "./constants";
 
-const SOSOL_MINT: PublicKey = new PublicKey(
-  process.env.REACT_APP_SOSOL_MINT as PublicKeyInitData
+const BOOMARMY_MINT: PublicKey = new PublicKey(
+  process.env.REACT_APP_BOOMARMY_MINT as PublicKeyInitData
 );
 
 export const loadAnchor = async (wallet: AnchorWallet) => {
@@ -47,7 +47,7 @@ const findAssociatedTokenAddress = async (
       )
     )[0];
   } catch (err) {
-    throw new Error(`${ERRORS.NO_SSL_ACCOUNT} ${walletAddress}`);
+    throw new Error(`${ERRORS.NO_BMA_ACCOUNT} ${walletAddress}`);
   }
 };
 
@@ -58,7 +58,7 @@ const getTokenAccountBalance = async (
   try {
     return await connection.getTokenAccountBalance(acc);
   } catch (err) {
-    throw new Error(ERRORS.NO_SSL);
+    throw new Error(ERRORS.NO_BMA);
   }
 };
 
@@ -73,7 +73,7 @@ const assertSufficientTokens = async (
   );
 
   if (consumerTokenAccBalance?.value?.amount < required)
-    throw new Error(ERRORS.INSUFFICIENT_SSL);
+    throw new Error(ERRORS.INSUFFICIENT_BMA);
 };
 
 const assertProgramProvider = (program: Program) => {
@@ -99,7 +99,7 @@ export const interactionInstruction = async (
 ): Promise<TransactionSignature> => {
   const consumerTokenAcc = await findAssociatedTokenAddress(
     consumerAcc,
-    SOSOL_MINT
+    BOOMARMY_MINT
   );
 
   const creator = new web3.PublicKey(creatorAcc);
@@ -107,8 +107,8 @@ export const interactionInstruction = async (
 
   const [, creatorTokenAcc, storageTokenAcc] = await Promise.all([
     assertSufficientTokens(connection, consumerTokenAcc, interactionFee),
-    findAssociatedTokenAddress(creator, SOSOL_MINT),
-    findAssociatedTokenAddress(storage, SOSOL_MINT),
+    findAssociatedTokenAddress(creator, BOOMARMY_MINT),
+    findAssociatedTokenAddress(storage, BOOMARMY_MINT),
   ]);
 
   assertProgramProvider(program);
