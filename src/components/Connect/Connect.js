@@ -5,6 +5,7 @@ import { ConsumerCard } from "./ConsumerCard";
 import { Loader } from "../Loader";
 import { USERS } from "../../queries/follow";
 import { useQuery } from "@apollo/client";
+import { Box } from "@mui/system";
 
 export const Connect = () => {
   const { loading, data, fetchMore } = useQuery(USERS, {
@@ -53,6 +54,11 @@ export const Connect = () => {
         </Grid>
       ) : (
         <CustomResponse text="No other Creators to follow right now" />
+      )}
+      {data?.users?.length && loading && (
+        <Box sx={{ marginTop: "1rem" }}>
+          <Loader />
+        </Box>
       )}
     </>
   );
