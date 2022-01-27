@@ -454,8 +454,6 @@ export const mintOneToken = async (
     ).txs.map(t => t.txid);
   } catch (e) {
     console.log(e);
-
-    console.log(e);
   }
 
   return [];
