@@ -13,8 +13,6 @@ export const Meeps: React.FC<{
             <ShowTweet
               key={tweet.id}
               tweet={tweet as Tweet}
-              offset={10}
-              parentTweetId=""
             />
           ))
         : (

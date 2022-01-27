@@ -114,14 +114,10 @@ const Wrapper = styled.div`
 
 interface Props {
   tweet: Tweet;
-  offset: Number;
-  parentTweetId: String | undefined;
 }
 
 export const ShowTweet: React.FC<Props> = ({
   tweet,
-  offset,
-  parentTweetId,
 }) => {
   const {
     id,
@@ -177,9 +173,7 @@ export const ShowTweet: React.FC<Props> = ({
 
         <div className="tweet-stats">
           <EmojiTweet
-            parentTweetId={parentTweetId}
             tweetId={id}
-            userPubKey={user?.publicAddress}
             reactions={reactions}
           />
 

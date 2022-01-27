@@ -38,8 +38,6 @@ export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
           <ShowTweet
             key={tweet.id}
             tweet={tweet as Tweet}
-            offset={data.feed.length}
-            parentTweetId={tweet?.parentTweet?.id}
           />
         ))
       ) : (

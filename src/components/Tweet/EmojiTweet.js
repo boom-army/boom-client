@@ -42,12 +42,8 @@ const ReactionWrapper = styled.div`
   }
 `;
 
-export const EmojiTweet = ({ tweetId, userPubKey, reactions, parentTweetId }) => {
-  const { sosolProgram } = useSosolProgram();
+export const EmojiTweet = ({ tweetId, reactions }) => {
   const [emoji, setEmoji] = useState({});
-
-  const { connection } = useConnection();
-  const anchorWallet = useAnchorWallet();
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     variables: { id: tweetId, emojiId: emoji?.emojiId, skin: emoji?.skin },
@@ -62,69 +58,9 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, parentTweetId }) =>
   const handleReaction = useCallback(
     async ({ emojiId, skin }) => {
       try {
-        if (!anchorWallet.publicKey) throw new WalletNotConnectedError();
-        const sosolMint = new Token(
-          connection,
-          SOSOL_TOKEN_ID,
-          TOKEN_PROGRAM_ID,
-          anchorWallet.publicKey
-        );
-        const toCreatorAcc = new PublicKey(userPubKey);
-        const associatedDestinationTokenAddr =
-          await Token.getAssociatedTokenAddress(
-            sosolMint.associatedProgramId,
-            sosolMint.programId,
-            SOSOL_TOKEN_ID,
-            toCreatorAcc
-          );
-
-        const receiverAccount = await connection.getAccountInfo(
-          associatedDestinationTokenAddr
-        );
-
-        // TODO: move this out into a method in utils to use across the site
-        // Create receiver sosol acc if null
-        if (receiverAccount === null) {
-          const instructions = [];
-          instructions.push(
-            Token.createAssociatedTokenAccountInstruction(
-              sosolMint.associatedProgramId,
-              sosolMint.programId,
-              SOSOL_TOKEN_ID,
-              associatedDestinationTokenAddr,
-              toCreatorAcc,
-              anchorWallet.publicKey
-            )
-          );
-
-          const transaction = new Transaction().add(...instructions);
-          transaction.feePayer = anchorWallet.publicKey;
-          transaction.recentBlockhash = (
-            await connection.getRecentBlockhash()
-          ).blockhash;
-
-          const anchorTx = await anchorWallet.signTransaction(transaction);
-
-          const transactionSignature = await connection.sendRawTransaction(
-            anchorTx.serialize(),
-            { skipPreflight: true }
-          );
-
-          await connection.confirmTransaction(transactionSignature);
-        }
-
-        const signature = await interactionInstruction(
-          connection,
-          sosolProgram,
-          anchorWallet.publicKey,
-          new PublicKey(userPubKey),
-          new PublicKey(process.env.REACT_APP_CONTENT_HOST),
-          100000000 // 0.1 SSL
-        );
-
         setEmoji({ emojiId, skin });
         await toggleReactionMutation();
-        enqueueSnackbar(`Transaction complete: ${signature}`, {
+        enqueueSnackbar(`Emoji added`, {
           variant: "success",
         });
       } catch (err) {
@@ -132,14 +68,7 @@ export const EmojiTweet = ({ tweetId, userPubKey, reactions, parentTweetId }) =>
         return displayError(err, enqueueSnackbar);
       }
     },
-    [
-      sosolProgram,
-      anchorWallet,
-      toggleReactionMutation,
-      connection,
-      userPubKey,
-      enqueueSnackbar,
-    ]
+    [toggleReactionMutation]
   );
 
   const ReactionList = ({ reactions }) => {
