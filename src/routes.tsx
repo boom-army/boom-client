@@ -8,6 +8,7 @@ import {
   Home,
   Nav,
   Notifications,
+  OGMint,
   Suggestion,
 } from "./views";
 import { Container, Grid } from "@mui/material";
@@ -78,6 +79,7 @@ export const AppRoutes: React.FC = () => {
                         />
                         <Route path=":handle" element={<Profile />} />
                         <Route path="mint-nft" element={<NFTMint />} />
+                        <Route path="mint-nft/1303" element={<OGMint />} />
                         <Route path="*" element={<Navigate replace to="/" />} />
                       </Routes>
                     </Grid>
