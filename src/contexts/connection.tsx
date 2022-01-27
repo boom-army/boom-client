@@ -1,23 +1,34 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useLocalStorageState } from "../utils/utils";
 import {
-  Keypair,
-  clusterApiUrl,
+  Commitment,
   Connection,
+  Keypair,
   PublicKey,
+  RpcResponseAndContext,
+  SignatureStatus,
+  SimulatedTransactionResponse,
   Transaction,
   TransactionInstruction,
+  TransactionSignature,
+  clusterApiUrl,
+  Blockhash,
+  FeeCalculator,
 } from "@solana/web3.js";
-import { ExplorerLink } from "../components/ExplorerLink";
 import { setProgramIds } from "../utils/ids";
-import { WalletAdapter } from "./wallet-old";
 import { cache, getMultipleAccounts, MintParser } from "./accounts";
 import {
   TokenListProvider,
   ENV as ChainID,
   TokenInfo,
 } from "@solana/spl-token-registry";
-import { useSnackbar } from "notistack";
+// import { useSnackbar } from "notistack";
+import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
+
+interface BlockhashAndFeeCalculator {
+  blockhash: Blockhash;
+  feeCalculator: FeeCalculator;
+}
 
 export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
 
@@ -238,64 +249,164 @@ const getErrorForTransaction = async (connection: Connection, txid: string) => {
 
 export const sendTransaction = async (
   connection: Connection,
-  wallet: WalletAdapter,
+  wallet: any,
   instructions: TransactionInstruction[],
   signers: Keypair[],
-  awaitConfirmation = true
-) => {
-  if (!wallet?.publicKey) {
-    throw new Error("Wallet is not connected");
-  }
+  awaitConfirmation = true,
+  commitment: Commitment = 'singleGossip',
+  includesFeePayer: boolean = false,
+  block?: BlockhashAndFeeCalculator,
+) => {  
+  if (!wallet.publicKey) throw new WalletNotConnectedError();
 
   let transaction = new Transaction();
-  instructions.forEach((instruction) => transaction.add(instruction));
+  instructions.forEach(instruction => transaction.add(instruction));
   transaction.recentBlockhash = (
-    await connection.getRecentBlockhash("max")
+    block || (await connection.getRecentBlockhash(commitment))
   ).blockhash;
-  transaction.setSigners(
-    // fee payied by the wallet owner
-    wallet.publicKey,
-    ...signers.map((s) => s.publicKey)
-  );
+
+  if (includesFeePayer) {
+    transaction.setSigners(...signers.map(s => s.publicKey));
+  } else {
+    transaction.setSigners(
+      // fee payed by the wallet owner
+      wallet.publicKey,
+      ...signers.map(s => s.publicKey),
+    );
+  }
+
   if (signers.length > 0) {
     transaction.partialSign(...signers);
   }
-  transaction = await wallet.signTransaction(transaction);
+  if (!includesFeePayer) {
+    transaction = await wallet.signTransaction(transaction);
+  }
+
   const rawTransaction = transaction.serialize();
   let options = {
     skipPreflight: true,
-    commitment: "singleGossip",
+    commitment,
   };
 
   const txid = await connection.sendRawTransaction(rawTransaction, options);
+  let slot = 0;
 
   if (awaitConfirmation) {
-    const status = (
-      await connection.confirmTransaction(
-        txid,
-        options && (options.commitment as any)
-      )
-    ).value;
+    const confirmation = await awaitTransactionSignatureConfirmation(
+      txid,
+      DEFAULT_TIMEOUT,
+      connection,
+      commitment,
+    );
 
-    if (status?.err) {
+    if (!confirmation)
+      throw new Error('Timed out awaiting confirmation on transaction');
+    slot = confirmation?.slot || 0;
+
+    if (confirmation?.err) {
       const errors = await getErrorForTransaction(connection, txid);
-      const TransactionFail = () => {
-        const { enqueueSnackbar } = useSnackbar();
-        enqueueSnackbar(<TransactionFail />, { variant: 'error' });
-        return (
-          <>
-            {errors.map((err) => (
-              <div>{err}</div>
-            ))}
-            <ExplorerLink address={txid} type="transaction" />
-          </>
-        );
-      };
-      throw new Error(
-        `Raw transaction ${txid} failed (${JSON.stringify(status)})`
-      );
+
+      console.log(errors);
+      throw new Error(`Raw transaction ${txid} failed`);
     }
   }
 
-  return txid;
+  return { txid, slot };
 };
+
+export const getUnixTs = () => {
+  return new Date().getTime() / 1000;
+};
+
+const DEFAULT_TIMEOUT = 15000;
+
+async function awaitTransactionSignatureConfirmation(
+  txid: TransactionSignature,
+  timeout: number,
+  connection: Connection,
+  commitment: Commitment = 'recent',
+  queryStatus = false,
+): Promise<SignatureStatus | null | void> {
+  let done = false;
+  let status: SignatureStatus | null | void = {
+    slot: 0,
+    confirmations: 0,
+    err: null,
+  };
+  let subId = 0;
+  status = await new Promise(async (resolve, reject) => {
+    setTimeout(() => {
+      if (done) {
+        return;
+      }
+      done = true;
+      console.log('Rejecting for timeout...');
+      reject({ timeout: true });
+    }, timeout);
+    try {
+      subId = connection.onSignature(
+        txid,
+        (result, context) => {
+          done = true;
+          status = {
+            err: result.err,
+            slot: context.slot,
+            confirmations: 0,
+          };
+          if (result.err) {
+            console.log('Rejected via websocket', result.err);
+            reject(status);
+          } else {
+            console.log('Resolved via websocket', result);
+            resolve(status);
+          }
+        },
+        commitment,
+      );
+    } catch (e) {
+      done = true;
+      console.error('WS error in setup', txid, e);
+    }
+    while (!done && queryStatus) {
+      // eslint-disable-next-line no-loop-func
+      (async () => {
+        try {
+          const signatureStatuses = await connection.getSignatureStatuses([
+            txid,
+          ]);
+          status = signatureStatuses && signatureStatuses.value[0];
+          if (!done) {
+            if (!status) {
+              console.log('REST null result for', txid, status);
+            } else if (status.err) {
+              console.log('REST error for', txid, status);
+              done = true;
+              reject(status.err);
+            } else if (!status.confirmations) {
+              console.log('REST no confirmations for', txid, status);
+            } else {
+              console.log('REST confirmation for', txid, status);
+              done = true;
+              resolve(status);
+            }
+          }
+        } catch (e) {
+          if (!done) {
+            console.log('REST connection error: txid', txid, e);
+          }
+        }
+      })();
+      await sleep(2000);
+    }
+  });
+
+  //@ts-ignore
+  if (connection._signatureSubscriptions[subId])
+    connection.removeSignatureListener(subId);
+  done = true;
+  console.log('Returning status', status);
+  return status;
+}
+export function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
