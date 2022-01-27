@@ -65,14 +65,14 @@ const getTokenAccountBalance = async (
 const assertSufficientTokens = async (
   connection: Connection,
   consumerTokenAcc: PublicKey,
-  required: any
+  required: number
 ) => {
   const consumerTokenAccBalance = await getTokenAccountBalance(
     connection,
     consumerTokenAcc
   );
 
-  if (consumerTokenAccBalance?.value?.amount < required)
+  if (Number(consumerTokenAccBalance?.value?.amount) < required)
     throw new Error(ERRORS.INSUFFICIENT_BMA);
 };
 
@@ -93,9 +93,9 @@ export const interactionInstruction = async (
   connection: Connection,
   program: Program,
   consumerAcc: PublicKey,
-  creatorAcc: String,
-  storageAcc: String,
-  interactionFee: any
+  creatorAcc: string,
+  storageAcc: string,
+  interactionFee: number
 ): Promise<TransactionSignature> => {
   const consumerTokenAcc = await findAssociatedTokenAddress(
     consumerAcc,
@@ -103,6 +103,8 @@ export const interactionInstruction = async (
   );
 
   const creator = new web3.PublicKey(creatorAcc);
+  // TODO: when we start using other storage hosts we'll need to create a BMA 
+  // token account for them otherwise the tx will fail
   const storage = new web3.PublicKey(storageAcc);
 
   const [, creatorTokenAcc, storageTokenAcc] = await Promise.all([
@@ -111,7 +113,7 @@ export const interactionInstruction = async (
     findAssociatedTokenAddress(storage, BOOMARMY_MINT),
   ]);
 
-  assertProgramProvider(program);
+  assertProgramProvider(program);  
 
   try {
     return await program.rpc.interaction(new BN(interactionFee), {

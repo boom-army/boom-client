@@ -16,7 +16,19 @@ import { useSnackbar } from "notistack";
 import { useSosolProgram } from "../../hooks";
 import { useTipCreatorMutation } from "../../generated/graphql";
 
-export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
+interface Props {
+  userPubKey: PublicKey;
+  setShowTip: React.Dispatch<React.SetStateAction<boolean>>;
+  userId: string;
+  tweetId: string;
+}
+
+export const TipInput: React.FC<Props> = ({
+  userPubKey,
+  setShowTip,
+  userId,
+  tweetId,
+}) => {
   const { theme } = useContext(ThemeContext);
   const [inputError, setInputError] = useState(false);
   const [txValue, setTxValue] = useState(0);
@@ -39,11 +51,12 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
           setInputError(true);
           throw new Error("You need to enter a Custom value");
         }
-        if (!anchorWallet.publicKey) throw new WalletNotConnectedError();
+        if (!anchorWallet?.publicKey) throw new WalletNotConnectedError();
         const sosolMint = new Token(
           connection,
           SOSOL_TOKEN_ID,
           TOKEN_PROGRAM_ID,
+          // @ts-ignore
           anchorWallet.publicKey
         );
         const toCreatorAcc = new PublicKey(userPubKey);
@@ -94,8 +107,8 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
           connection,
           sosolProgram,
           anchorWallet.publicKey,
-          new PublicKey(userPubKey),
-          new PublicKey(process.env.REACT_APP_CONTENT_HOST),
+          userPubKey.toString(),
+          process.env.REACT_APP_CONTENT_HOST as string,
           boomTokens ? boomTokens : 100000000 // 0.1 SSL
         );
 
@@ -203,7 +216,7 @@ export const TipInput = ({ userPubKey, setShowTip, userId, tweetId }) => {
             size="small"
             onChange={(e) => {
               setInputError(false);
-              setTxValue(e.target.value);
+              setTxValue(Number(e.target.value));
             }}
           />
           <div>
