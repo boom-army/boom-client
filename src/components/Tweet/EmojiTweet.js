@@ -4,19 +4,12 @@ import { Emoji } from "emoji-mart";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { MENTIONS } from "../../queries/others";
 import { Loader } from "../Loader";
-import { PublicKey, Transaction } from "@solana/web3.js";
 import { SmilePlusIcon } from "../Icons";
 import { TOGGLE_REACTION, TWEET } from "../../queries/tweet";
-import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { displayError } from "../../utils";
-import { interactionInstruction } from "../../utils/boom-web3";
-import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { useSosolProgram } from "../../hooks";
 import { useState, useCallback } from "react";
-import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { SOSOL_TOKEN_ID } from "../../utils/ids";
 
 const ReactionWrapper = styled.div`
   display: flex;
