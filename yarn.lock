@@ -3132,7 +3132,7 @@
     superstruct "^0.14.2"
     tweetnacl "^1.0.0"
 
-"@solana/web3.js@^1.22.0":
+"@solana/web3.js@^1.22.0", "@solana/web3.js@^1.32.0":
   version "1.32.0"
   resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.32.0.tgz#b9821de52d0e773c363516c3dcef9be701295d82"
   integrity sha512-jquZ/VBvM3zXAaTJvdWd9mlP0WiZaZqjji0vw5UAsb5IKIossrLhHtyUqMfo41Qkdwu1aVwf7YWG748i4XIJnw==
