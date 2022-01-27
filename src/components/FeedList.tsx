@@ -35,13 +35,15 @@ export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
     <Wrapper>
       {data?.feed?.length ? (
         data.feed.map((tweet) => (
-          <ShowTweet
-            key={tweet.id}
-            tweet={tweet as Tweet}
-          />
+          <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
         ))
       ) : (
         <CustomResponse text="Follow some people to get some feed updates" />
+      )}
+      {data?.feed?.length && loading && (
+        <Box sx={{ marginTop: "1rem" }}>
+          <Loader />
+        </Box>
       )}
     </Wrapper>
   );
