@@ -2,7 +2,7 @@ import * as anchor from "@project-serum/anchor";
 
 import { MintLayout, TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
 import { SystemProgram } from "@solana/web3.js";
-import { sendTransaction } from "../contexts/connection";
+import { sendTransactions } from "../contexts/connection";
 
 import {
   CIVIC,
@@ -444,30 +444,14 @@ export const mintOneToken = async (
   );
 
   try {
-    const seen = new Set();
-    const sd = signers
-      .filter((publicKey) => {
-        const key = publicKey.toString();
-        if (seen.has(key)) {
-          return false;
-        } else {
-          seen.add(key);
-          return true;
-        }
-      })
-      .map((publicKey) => ({ signature: null, publicKey }));
-    console.log(sd);
-
     return (
-      await sendTransaction(
+      await sendTransactions(
         candyMachine.program.provider.connection,
         candyMachine.program.provider.wallet,
-        // @ts-ignore
         [instructions, cleanupInstructions],
-        [signers, []]
+        [signers, []],
       )
-    // @ts-ignore
-    ).txs.map((t) => t.txid);
+    ).txs.map(t => t.txid);
   } catch (e) {
     console.log(e);
 
