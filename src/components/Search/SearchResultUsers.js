@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { User } from "../WhoToFollow";
+import { User } from "../User";
 import { CustomResponse } from "../CustomResponse";
 import { Loader } from "../Loader";
 
