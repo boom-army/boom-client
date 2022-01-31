@@ -16,27 +16,25 @@ export const User = ({ user }: Props) => {
   const { theme } = useContext(ThemeContext);
   return (
     <>
-      <Grid container spacing={2} sx={{ paddingBottom: "3em" }}>
-        <Grid container xs={10}>
-          <Grid item xs={2}>
-            <Box>
-              <Avatar
-                sx={{ width: 30, height: 30 }}
-                src={user?.avatar as string}
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={10}>
-            <Box mr={2}>
-              <Typography noWrap>{user && user.consumerName}</Typography>
-              <Typography noWrap sx={{ color: theme.secondaryColor }}>{`@${
-                user && user.handle
-              }`}</Typography>
-            </Box>
-          </Grid>
-        </Grid>
-        <Grid container xs={2}>
+      <Grid container sx={{ paddingBottom: "3em" }}>
+        <Grid item xs={10}>
+          <Box sx={{ display: "flex"}}>
           <Box>
+            <Avatar
+              sx={{ width: 30, height: 30 }}
+              src={user?.avatar as string}
+            />
+          </Box>
+          <Box ml={2}>
+            <Typography noWrap sx={{ width: "10em" }}>{user && user.consumerName}</Typography>
+            <Typography noWrap sx={{ color: theme.secondaryColor, width: "10em" }}>{`@${
+              user && user.handle
+            }`}</Typography>
+          </Box>
+          </Box>
+        </Grid>
+        <Grid item xs={2}>
+          <Box sx={{ justifyContent: "flex-end" }}>
             <IconButton edge="end" aria-label="delete">
               {user && !user.isSelf ? (
                 <Follow
