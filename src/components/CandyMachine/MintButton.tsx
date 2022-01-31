@@ -1,20 +1,25 @@
-import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
-import { CandyMachineAccount } from '../../utils/candy-machine';
-import { CircularProgress } from '@material-ui/core';
-import { GatewayStatus, useGateway } from '@civic/solana-gateway-react';
-import { useEffect, useState } from 'react';
+import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+import { CandyMachineAccount } from "../../utils/candy-machine";
+import { CircularProgress } from "@material-ui/core";
+import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
+import { useEffect, useState } from "react";
 
-export const CTAButton = styled(Button)`
-  width: 100%;
-  height: 60px;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  background: linear-gradient(180deg, #604ae5 0%, #813eee 100%);
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-`; // add your own styles here
+export const CTAButton = styled(Button)(({ theme }) => ({
+  width: "100%",
+  height: "60px",
+  marginTop: "10px",
+  marginBottom: "5px",
+  backgroundColor: "#FD0069",
+  color: "white",
+  fontSize: "16px",
+  fontWeight: "bold",
+  "&.Mui-disabled": {
+    backgroundColor: "#FD0069",
+    opacity: "0.3",
+    color: "white",
+  }
+}));
 
 export const MintButton = ({
   onMint,
@@ -37,14 +42,14 @@ export const MintButton = ({
 
   const getMintButtonContent = () => {
     if (candyMachine?.state.isSoldOut) {
-      return 'SOLD OUT';
+      return "SOLD OUT";
     } else if (isMinting) {
       return <CircularProgress />;
     } else if (candyMachine?.state.isPresale) {
-      return 'PRESALE MINT';
+      return "PRESALE MINT";
     }
 
-    return 'MINT';
+    return "MINT";
   };
 
   return (

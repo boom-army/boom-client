@@ -28,7 +28,7 @@ const ConnectButton = styled(WalletDialogButton)`
   height: 60px;
   margin-top: 10px;
   margin-bottom: 5px;
-  background: linear-gradient(180deg, #604ae5 0%, #813eee 100%);
+  background: #FD0069;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -180,8 +180,9 @@ export const OGMint = () => {
             <Paper
               style={{
                 padding: 24,
-                backgroundColor: "#151A1F",
+                backgroundColor: "#002F46",
                 borderRadius: 6,
+                border: "3px solid #005078"
               }}
             >
               {!wallet.connected ? (
