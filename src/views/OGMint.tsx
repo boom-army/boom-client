@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback, useContext } from "react";
 import * as anchor from "@project-serum/anchor";
 
 import styled from "styled-components";
@@ -20,15 +20,26 @@ import { AlertState } from "../utils/utils";
 import { Header } from "../components/CandyMachine/Header";
 import { MintButton } from "../components/CandyMachine/MintButton";
 import { GatewayProvider } from "@civic/solana-gateway-react";
-import { Box, Grid } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import Tilt from "react-parallax-tilt";
+import { ThemeContext } from "../contexts/theme";
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 100%;
   height: 60px;
   margin-top: 10px;
   margin-bottom: 5px;
-  background: #FD0069;
+  background: #fd0069;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -48,6 +59,19 @@ const TiltStyled = styled(Tilt)(({ theme }) => ({
   transformStyle: "preserve-3d",
 }));
 
+function createData(serial: string, cost: number, minting: string) {
+  return { serial, cost, minting };
+}
+
+const rows = [
+  createData("#1 - 100", 1.303, "Feb 4 - 2:30pm"),
+  createData("#101 - 250", 1.6, "Feb 5 - 2:30pm"),
+  createData("#251 - 500", 2, "Feb 6 - 2:30pm"),
+  createData("#501 - 750", 2.3, "Feb 7 - 2:30pm"),
+  createData("#751 - 1000", 2.5, "Feb 8 - 2:30pm"),
+  createData("#1001 - 1303", 3, "Feb 9 - 2:30pm"),
+];
+
 const MintContainer = styled.div``; // add your owns styles here
 
 const candyMachineId = new anchor.web3.PublicKey(
@@ -56,6 +80,7 @@ const candyMachineId = new anchor.web3.PublicKey(
 const txTimeoutInMilliseconds: number = 30000;
 
 export const OGMint = () => {
+  const { theme } = useContext(ThemeContext);
   const { connection } = useConnection();
   const [isUserMinting, setIsUserMinting] = useState(false);
   const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
@@ -173,16 +198,26 @@ export const OGMint = () => {
   }, [anchorWallet, connection, refreshCandyMachineState]);
 
   return (
-    <Container style={{ marginTop: 100 }}>
+    <Container style={{ marginTop: 20 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: "2em",
+        }}
+      >
+        <img src={"/assets/boom-og.png"} alt="Boom OG NFT Mint" width="300em" />
+      </Box>
       <Grid container spacing={2}>
-        <Grid item xs={7}>
+        <Grid item sm={7} xs={12}>
           <Box mt={4}>
             <Paper
               style={{
                 padding: 24,
                 backgroundColor: "#002F46",
                 borderRadius: 6,
-                border: "3px solid #005078"
+                border: "3px solid #005078",
               }}
             >
               {!wallet.connected ? (
@@ -228,33 +263,114 @@ export const OGMint = () => {
             </Paper>
           </Box>
         </Grid>
-        <Grid item xs={5}>
-          <TiltStyled
-            className="track-on-window"
-            tiltMaxAngleX={30}
-            tiltMaxAngleY={30}
-            perspective={800}
-            transitionSpeed={1500}
-            trackOnWindow={true}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                transform: "translateZ(30px)",
-              }}
+        <Grid item sm={5}>
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <TiltStyled
+              className="track-on-window"
+              tiltMaxAngleX={30}
+              tiltMaxAngleY={30}
+              perspective={800}
+              transitionSpeed={1500}
+              trackOnWindow={true}
             >
-              <img
-                src={"/assets/inner.png"}
-                width="120"
-                className="inner-element"
-                alt="1303 OG NFT Card"
-              />
-            </Box>
-          </TiltStyled>
+              <Box
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  transform: "translateZ(30px)",
+                  display: "flex",
+                }}
+              >
+                <img
+                  src={"/assets/inner.png"}
+                  width="120"
+                  className="inner-element"
+                  alt="1303 OG NFT Card"
+                />
+              </Box>
+            </TiltStyled>
+          </Box>
         </Grid>
       </Grid>
+      <Box>
+        <Typography>
+          To commemorate the official launch of Boom.Army Beta, we're launching
+          1303 OG NFTs for everyone who is early. There are 1303 NFTs available,
+          and they will receive a 1303 split share of 20% of our Market Place
+          fees in perpetuity.
+        </Typography>
+      </Box>
+      <Box mt={4}>
+        <img src={"/assets/minting.png"} width="184" alt="Minting Schedule" />
+      </Box>
+      <Box>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ border: "none" }}>
+                  <Typography
+                    sx={{ color: theme.secondaryColor, fontSize: "8px" }}
+                    variant="body2"
+                  >
+                    Serial
+                  </Typography>
+                </TableCell>
+                <TableCell sx={{ border: "none" }} align="right">
+                  <Typography
+                    variant="body2"
+                    sx={{ color: theme.secondaryColor, fontSize: "10px" }}
+                  >
+                    Cost (SOL)
+                  </Typography>
+                </TableCell>
+                <TableCell sx={{ border: "none" }} align="right">
+                  <Typography
+                    sx={{ color: theme.secondaryColor, fontSize: "10px" }}
+                    variant="body2"
+                  >
+                    Minting (EST)
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.serial}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell
+                    sx={{ borderBottom: "1px solid #0071AA" }}
+                    component="th"
+                    scope="row"
+                  >
+                    <Typography sx={{ color: theme.primaryColor }}>
+                      {row.serial}
+                    </Typography>
+                  </TableCell>
+                  <TableCell
+                    sx={{ borderBottom: "1px solid #0071AA" }}
+                    align="right"
+                  >
+                    <Typography sx={{ color: theme.primaryColor }}>
+                      {row.cost}
+                    </Typography>
+                  </TableCell>
+                  <TableCell
+                    sx={{ borderBottom: "1px solid #0071AA" }}
+                    align="right"
+                  >
+                    <Typography sx={{ color: theme.primaryColor }}>
+                      {row.minting}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
 
       <Snackbar
         open={alertState.open}
