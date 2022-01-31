@@ -54,11 +54,11 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
           </Typography>
         </Stack>
       </NavLink>
-      <NavLink style={applyActiveStyles} to="/mint-nft/1303">
+      <NavLink style={applyActiveStyles} to="/mint-nft">
         <Stack direction="row" {...stackProps}>
           <StyleIcon sx={iconProps} />
           <Typography variant="body1" display={displayProps}>
-            Mint 1303
+            Mint NFT
           </Typography>
         </Stack>
       </NavLink>
