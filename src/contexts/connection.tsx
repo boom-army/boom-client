@@ -39,6 +39,11 @@ export const ENDPOINTS = [
     chainID: ChainID.MainnetBeta,
   },
   {
+    name: "mainnet-beta" as ENV,
+    endpoint: "https://ssc-dao.genesysgo.net/",
+    chainID: ChainID.MainnetBeta,
+  },
+  {
     name: "testnet" as ENV,
     endpoint: clusterApiUrl("testnet"),
     chainID: ChainID.Testnet,
@@ -46,6 +51,11 @@ export const ENDPOINTS = [
   {
     name: "devnet" as ENV,
     endpoint: clusterApiUrl("devnet"),
+    chainID: ChainID.Devnet,
+  },
+  {
+    name: "devnet" as ENV,
+    endpoint: "https://psytrbhymqlkfrhudd.dev.genesysgo.net:8899/",
     chainID: ChainID.Devnet,
   },
   {
