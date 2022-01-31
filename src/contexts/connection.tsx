@@ -33,11 +33,11 @@ interface BlockhashAndFeeCalculator {
 export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
 
 export const ENDPOINTS = [
-  // {
-  //   name: "mainnet-beta" as ENV,
-  //   endpoint: clusterApiUrl("mainnet-beta"),
-  //   chainID: ChainID.MainnetBeta,
-  // },
+  {
+    name: "mainnet-beta" as ENV,
+    endpoint: clusterApiUrl("mainnet-beta"),
+    chainID: ChainID.MainnetBeta,
+  },
   {
     name: "mainnet-beta" as ENV,
     endpoint: "https://ssc-dao.genesysgo.net/",
@@ -48,11 +48,11 @@ export const ENDPOINTS = [
     endpoint: clusterApiUrl("testnet"),
     chainID: ChainID.Testnet,
   },
-  // {
-  //   name: "devnet" as ENV,
-  //   endpoint: clusterApiUrl("devnet"),
-  //   chainID: ChainID.Devnet,
-  // },
+  {
+    name: "devnet" as ENV,
+    endpoint: clusterApiUrl("devnet"),
+    chainID: ChainID.Devnet,
+  },
   {
     name: "devnet" as ENV,
     endpoint: "https://psytrbhymqlkfrhudd.dev.genesysgo.net:8899/",
