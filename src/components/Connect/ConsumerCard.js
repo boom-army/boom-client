@@ -45,11 +45,12 @@ export const ConsumerCard = ({ consumer }) => {
               <Typography
                 variant="body1"
                 component="div"
+                nowrap
                 sx={{ marginTop: -0.7 }}
               >
                 {consumer.consumerName}
               </Typography>
-              <Typography variant="body2" component="div">
+              <Typography nowrap variant="body2" component="div">
                 @{consumer.handle}
               </Typography>
             </Stack>
