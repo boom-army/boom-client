@@ -63,15 +63,6 @@ function createData(serial: string, cost: number, minting: string) {
   return { serial, cost, minting };
 }
 
-const rows = [
-  createData("#1 - 100", 1.303, "Feb 4 - 2:30pm"),
-  createData("#101 - 250", 1.6, "Feb 5 - 2:30pm"),
-  createData("#251 - 500", 2, "Feb 6 - 2:30pm"),
-  createData("#501 - 750", 2.3, "Feb 7 - 2:30pm"),
-  createData("#751 - 1000", 2.5, "Feb 8 - 2:30pm"),
-  createData("#1001 - 1303", 3, "Feb 9 - 2:30pm"),
-];
-
 const MintContainer = styled.div``; // add your owns styles here
 
 const candyMachineId = new anchor.web3.PublicKey(
@@ -196,6 +187,15 @@ export const OGMint = () => {
   useEffect(() => {
     refreshCandyMachineState();
   }, [anchorWallet, connection, refreshCandyMachineState]);
+
+  const rows = [
+    createData("#1 - 100", 1.303, `PRESALE - ${candyMachine?.state.itemsRemaining} remaining`),
+    createData("#101 - 250", 1.6, "Feb 5 - 2:30pm"),
+    createData("#251 - 500", 2, "Feb 6 - 2:30pm"),
+    createData("#501 - 750", 2.3, "Feb 7 - 2:30pm"),
+    createData("#751 - 1000", 2.5, "Feb 8 - 2:30pm"),
+    createData("#1001 - 1303", 3, "Feb 9 - 2:30pm"),
+  ];
 
   return (
     <Container style={{ marginTop: 20 }}>
