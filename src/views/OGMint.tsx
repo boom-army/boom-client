@@ -195,13 +195,13 @@ export const OGMint = () => {
       `PRESALE: ${
         candyMachine?.state.itemsRemaining &&
         100 - candyMachine?.state.itemsRemaining
-      } sold | Feb 4 - 2:30pm`
+      } sold | Feb 3 - 2:30pm`
     ),
-    createData("#101 - 250", 1.6, "Feb 5 - 2:30pm"),
-    createData("#251 - 500", 2, "Feb 6 - 2:30pm"),
-    createData("#501 - 750", 2.3, "Feb 7 - 2:30pm"),
-    createData("#751 - 1000", 2.5, "Feb 8 - 2:30pm"),
-    createData("#1001 - 1303", 3, "Feb 9 - 2:30pm"),
+    createData("#101 - 250", 1.6, "Feb 4 - 2:30pm"),
+    createData("#251 - 500", 2, "Feb 5 - 2:30pm"),
+    createData("#501 - 750", 2.3, "Feb 6 - 2:30pm"),
+    createData("#751 - 1000", 2.5, "Feb 7 - 2:30pm"),
+    createData("#1001 - 1303", 3, "Feb 8 - 2:30pm"),
   ];
 
   return (
