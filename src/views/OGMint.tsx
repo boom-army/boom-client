@@ -192,7 +192,7 @@ export const OGMint = () => {
     createData(
       "#1 - 100 | Legendary",
       1.303,
-      `PRESALE - SOLD OUT`
+      `PRESALE: SOLD OUT`
     ),
     createData("#101 - 250 | Ultra Rare", 1.6, `PRESALE: ${
       candyMachine?.state.itemsRemaining ?
