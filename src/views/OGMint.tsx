@@ -194,10 +194,7 @@ export const OGMint = () => {
       1.303,
       `PRESALE: SOLD OUT`
     ),
-    createData("#101 - 250 | Ultra Rare", 1.6, `PRESALE: ${
-      candyMachine?.state.itemsRemaining ?
-      `${candyMachine?.state.itemsAvailable - candyMachine?.state.itemsRemaining} sold` : 'SOLD OUT'
-    } | Feb 4 - 2:30pm`),
+    createData("#101 - 250 | Ultra Rare", 1.6, `SELLING NOW | Feb 4 - 2:30pm`),
     createData("#251 - 500 | Rare", 2, "Feb 5 - 2:30pm"),
     createData("#501 - 750 | Rare", 2.3, "Feb 6 - 2:30pm"),
     createData("#751 - 1000 | Regular", 2.5, "Feb 7 - 2:30pm"),
