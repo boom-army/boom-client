@@ -189,12 +189,12 @@ export const OGMint = () => {
   }, [anchorWallet, connection, refreshCandyMachineState]);
 
   const rows = [
-    createData("#1 - 100 | Legendary", 1.303, `PRESALE: SOLD OUT`),
+    createData("#1 - 100 | Legendary", 1.303, `Pre-sale: SOLD OUT`),
     createData("#101 - 250 | Ultra Rare", 1.6, `SELLING NOW`),
-    createData("#251 - 500 | Rare", 2, "LOADED"),
-    createData("#501 - 750 | Rare", 2.3, "LOADED"),
-    createData("#751 - 1000 | Regular", 2.5, "LOADED"),
-    createData("#1001 - 1303 | Regular", 3, "LOADED"),
+    createData("#251 - 500 | Rare", 2, "CM Loaded"),
+    createData("#501 - 750 | Rare", 2.3, "CM Loaded"),
+    createData("#751 - 1000 | Regular", 2.5, "CM Loaded"),
+    createData("#1001 - 1303 | Regular", 3, "CM Loaded"),
   ];
 
   return (
