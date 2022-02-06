@@ -189,16 +189,12 @@ export const OGMint = () => {
   }, [anchorWallet, connection, refreshCandyMachineState]);
 
   const rows = [
-    createData(
-      "#1 - 100 | Legendary",
-      1.303,
-      `PRESALE: SOLD OUT`
-    ),
-    createData("#101 - 250 | Ultra Rare", 1.6, `SELLING NOW | Feb 4 - 2:30pm`),
-    createData("#251 - 500 | Rare", 2, "Feb 5 - 2:30pm"),
-    createData("#501 - 750 | Rare", 2.3, "Feb 6 - 2:30pm"),
-    createData("#751 - 1000 | Regular", 2.5, "Feb 7 - 2:30pm"),
-    createData("#1001 - 1303 | Regular", 3, "Feb 8 - 2:30pm"),
+    createData("#1 - 100 | Legendary", 1.303, `PRESALE: SOLD OUT`),
+    createData("#101 - 250 | Ultra Rare", 1.6, `SELLING NOW`),
+    createData("#251 - 500 | Rare", 2, "LOADED"),
+    createData("#501 - 750 | Rare", 2.3, "LOADED"),
+    createData("#751 - 1000 | Regular", 2.5, "LOADED"),
+    createData("#1001 - 1303 | Regular", 3, "LOADED"),
   ];
 
   return (
@@ -301,7 +297,8 @@ export const OGMint = () => {
           To commemorate the official launch of Boom.Army Beta, we're launching
           1303 OG NFTs for everyone who is early. There are 1303 NFTs available,
           and they will receive a 1303 split share of 20% of our Market Place
-          fees in perpetuity.
+          fees in perpetuity. All White List i3o3...3bos tokens mint at 1.303
+          SOL discount.
         </Typography>
       </Box>
       <Box mt={4}>
