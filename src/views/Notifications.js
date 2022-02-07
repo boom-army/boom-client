@@ -12,7 +12,7 @@ export const Notifications = ({ refetchProfile }) => {
   const { loading, data } = useQuery(MENTIONS);
 
   useEffect(() => {
-    refetchProfile();
+    refetchProfile && refetchProfile();
   }, [data, refetchProfile]);
 
   if (loading) return <Loader />;
