@@ -138,10 +138,7 @@ export const ShowTweet: React.FC<Props> = ({
     createdAt,
   } = tweet;
 
-  const { handleReaction, loading } = useReaction({
-    tweetId: id,
-    userPubKey: user?.publicAddress
-  });
+  const { handleReaction } = useReaction({ tweetId: id });
 
   const handle = user && user.handle;
   const linkifyOptions = {
@@ -181,10 +178,7 @@ export const ShowTweet: React.FC<Props> = ({
         {reactions.length > 0 && <ReactionsList reactions={reactions} handleReaction={handleReaction} />}
 
         <div className="tweet-stats">
-          <EmojiTweet
-            tweetId={id}
-            userPubKey={user?.publicAddress}
-          />
+          <EmojiTweet handleReaction={handleReaction} />
 
           <div className="controls">
             <span className="comment">
