@@ -15,6 +15,8 @@ import { NFTTweet } from "../NFT/NFTTweet";
 import { Tweet } from "../../generated/graphql";
 import { TipCreator } from "../TipCreator";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
+import { List as ReactionsList } from "../Reactions/List";
+import { useReaction } from "../../hooks/useReaction";
 
 const Wrapper = styled.div`
   display: flex;
@@ -136,6 +138,11 @@ export const ShowTweet: React.FC<Props> = ({
     createdAt,
   } = tweet;
 
+  const { handleReaction, loading } = useReaction({
+    tweetId: id,
+    userPubKey: user?.publicAddress
+  });
+
   const handle = user && user.handle;
   const linkifyOptions = {
     className: "body",
@@ -171,10 +178,12 @@ export const ShowTweet: React.FC<Props> = ({
 
         {!!files.length && <ImageBox files={files} disableLightbox={false} />}
 
+        {reactions.length > 0 && <ReactionsList reactions={reactions} handleReaction={handleReaction} />}
+
         <div className="tweet-stats">
           <EmojiTweet
             tweetId={id}
-            reactions={reactions}
+            userPubKey={user?.publicAddress}
           />
 
           <div className="controls">

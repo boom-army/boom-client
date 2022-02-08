@@ -60,6 +60,10 @@ export const SEARCH_BY_TWEET = gql`
         skin
         isMine
         count
+        user {
+          handle
+          avatar
+        }
       }
       files {
         id

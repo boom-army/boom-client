@@ -32,6 +32,10 @@ export const FEED = gql`
         skin
         isMine
         count
+        user {
+          handle
+          avatar
+        }
       }
     }
   }
@@ -54,6 +58,10 @@ export const MENTIONS = gql`
         skin
         isMine
         count
+        user {
+          handle
+          avatar
+        }
       }
       files {
         id
