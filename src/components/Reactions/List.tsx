@@ -56,7 +56,7 @@ export const List: React.FC<{ reactions: Array<Reaction>, handleReaction: Handle
       {
         reactionsWithUsersAndCount
           .sort((a, b) => a.emojiId.localeCompare(b.emojiId))
-          .map(({ emojiId, count, isMine, users }) => {
+          .map(({ emojiId, count, users }) => {
             return (
               <Tooltip key={emojiId} title={
                 <Stack
@@ -68,7 +68,6 @@ export const List: React.FC<{ reactions: Array<Reaction>, handleReaction: Handle
                   {reactionUsers(users)}
                 </Stack>
               }>
-                {/* <> */}
                 <Button
                   onClick={() => handleReaction({ emojiId })}
                   variant="outlined"
@@ -86,18 +85,6 @@ export const List: React.FC<{ reactions: Array<Reaction>, handleReaction: Handle
                 >
                   {count > 0 && <Typography>{count}</Typography>}
                 </Button>
-
-                {/* 
-                  <span
-                    className={`emoji-count ${isMine ? "mine" : ""}`}
-                    onClick={() => handleReaction({ emojiId })}
-                    key={emojiId}
-                  >
-                    <Emoji emoji={emojiId} size={16} />
-                    <span className="emoji-number">{count > 0 && count}</span>
-                  </span> */}
-                {/* </> */}
-
               </Tooltip>
             );
           })
