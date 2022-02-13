@@ -193,8 +193,8 @@ export const OGMint = () => {
     createData("#101 - 250 | Ultra Rare", 1.6, `LOCKED`),
     createData("#251 - 500 | Rare", 2, "LOCKED"),
     createData("#501 - 750 | Rare", 2.3, "LOCKED"),
-    createData("#751 - 1000 | Regular", 2.5, "SELLING NOW"),
-    createData("#1001 - 1303 | Regular", 3, "CM Loaded"),
+    createData("#751 - 1000 | Regular", 2.5, "LOCKED"),
+    createData("#1001 - 1303 | Regular", 3, "SELLING NOW"),
   ];
 
   return (
