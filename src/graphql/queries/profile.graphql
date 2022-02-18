@@ -45,10 +45,6 @@ query profile($handle: String!) {
         skin
         isMine
         count
-        user {
-          handle
-          avatar
-        }
       }
       commentsCount
       retweetsCount

@@ -64,10 +64,6 @@ query feed($offset: Int!, $limit: Int, $global: Boolean) {
       skin
       isMine
       count
-      user {
-        handle
-        avatar
-      }
     }
   }
 }

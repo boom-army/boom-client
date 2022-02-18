@@ -115,10 +115,6 @@ const TWEET_FRAGMENT = gql`
       skin
       isMine
       count
-      user {
-        handle
-        avatar
-      }
     }
   }
 `;

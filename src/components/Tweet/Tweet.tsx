@@ -175,7 +175,7 @@ export const ShowTweet: React.FC<Props> = ({
 
         {!!files.length && <ImageBox files={files} disableLightbox={false} />}
 
-        {reactions.length > 0 && <ReactionsList reactions={reactions} handleReaction={handleReaction} />}
+        {reactions.length > 0 && <ReactionsList reactions={reactions} handleReaction={handleReaction} tweetId={id} />}
 
         <div className="tweet-stats">
           <EmojiTweet handleReaction={handleReaction} />
