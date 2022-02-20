@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Reaction, User, useTweetReactionsLazyQuery } from '../../generated/graphql';
+import { Reaction, useTweetReactionsLazyQuery } from '../../generated/graphql';
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -72,7 +72,6 @@ export const List: React.FC<{ reactions: Array<Reaction>, handleReaction: Handle
           .map(({ emojiId, count, isMine }) => {
             return (
               <Tooltip
-                enterDelay={400}
                 onOpen={() => getTweetReactions()}
                 key={emojiId}
                 title={reactionsWithUsers && !loading ? createUserReactionTooltip(reactionsWithUsers, emojiId) : ""}
