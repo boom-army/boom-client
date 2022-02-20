@@ -16,13 +16,27 @@ export interface Accumulator extends Record<string, {
 
 export type HandleReaction = ((Arg: { emojiId: string }) => void);
 
-const reactionUsers = (users: User[]) => {
-  return users.map(user => (
-    <Stack key={user.handle} direction="row" spacing={1}>
-      <Avatar alt={user.handle} src={user.avatar} sx={{ width: 20, height: 20 }} />
-      <span>@{user.handle}</span>
+const createUserReactionTooltip = (reactions: Array<Reaction>, emojiId: string) => {
+  const users = reactions
+    .filter(reaction => reaction.emojiId === emojiId)
+    .map(reaction => reaction.user)
+    .concat();
+
+  return (
+    <Stack
+      alignItems="flex-start"
+      direction="column"
+      spacing={1}
+      sx={{ m: 0.5 }}
+    >
+      {users.map(user => (
+        <Stack key={user.handle} direction="row" spacing={1}>
+          <Avatar alt={user.handle} src={user.avatar} sx={{ width: 20, height: 20 }} />
+          <span>@{user.handle}</span>
+        </Stack>
+      ))}
     </Stack>
-  ));
+  );
 };
 
 const createReactionsList = (reactions: Array<Reaction>) => {
@@ -50,24 +64,6 @@ export const List: React.FC<{ reactions: Array<Reaction>, handleReaction: Handle
     setReactionsWithUsers(data?.tweet?.reactions as Array<Reaction>);
   }, [data]);
 
-  const userReactions = (reactions: Array<Reaction>, emojiId: string) => {
-    const users = reactions
-      .filter(reaction => reaction.emojiId === emojiId)
-      .map(reaction => reaction.user)
-      .concat();
-
-    return (
-      <Stack
-        alignItems="flex-start"
-        direction="column"
-        spacing={1}
-        sx={{ m: 0.5 }}
-      >
-        {reactionUsers(users)}
-      </Stack>
-    );
-  };
-
   return (
     <Box sx={{ marginBottom: 1.5 }}>
       {
@@ -79,7 +75,7 @@ export const List: React.FC<{ reactions: Array<Reaction>, handleReaction: Handle
                 enterDelay={400}
                 onOpen={() => getTweetReactions()}
                 key={emojiId}
-                title={reactionsWithUsers && !loading ? userReactions(reactionsWithUsers, emojiId) : ""}
+                title={reactionsWithUsers && !loading ? createUserReactionTooltip(reactionsWithUsers, emojiId) : ""}
               >
                 <Button
                   onClick={() => handleReaction({ emojiId })}
