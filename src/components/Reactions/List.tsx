@@ -37,7 +37,7 @@ const createUserReactionTooltip = (
       sx={{ m: 0.5 }}
     >
       {users.map((user) => (
-        <Stack key={user.handle} direction="row" spacing={1}>
+        user && <Stack key={user.handle} direction="row" spacing={1}>
           <Avatar
             alt={user.handle}
             src={user.avatar}
