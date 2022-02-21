@@ -59,7 +59,7 @@ const Wrapper = styled.div`
   }
 
   div.tweet-stats {
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
 
@@ -118,9 +118,7 @@ interface Props {
   tweet: Tweet;
 }
 
-export const ShowTweet: React.FC<Props> = ({
-  tweet,
-}) => {
+export const ShowTweet: React.FC<Props> = ({ tweet }) => {
   const {
     id,
     text,
@@ -175,7 +173,13 @@ export const ShowTweet: React.FC<Props> = ({
 
         {!!files.length && <ImageBox files={files} disableLightbox={false} />}
 
-        {reactions.length > 0 && <ReactionsList reactions={reactions} handleReaction={handleReaction} tweetId={id} />}
+        {reactions.length > 0 && (
+          <ReactionsList
+            reactions={reactions}
+            handleReaction={handleReaction}
+            tweetId={id}
+          />
+        )}
 
         <div className="tweet-stats">
           <EmojiTweet handleReaction={handleReaction} />
