@@ -93,6 +93,9 @@ const Wrapper = styled.div`
       div {
         margin-right: 1.5rem;
       }
+      .controls {
+        margin-right: 1.5rem;
+      }
     }
   }
 
