@@ -5,18 +5,21 @@ import Linkify from "linkify-react";
 import UserAvatar from "../UserAvatar";
 import moment from "moment";
 import styled from "styled-components";
+import useMetaTags from "react-metatags-hook";
 import { CommentIcon } from "../Icons";
 import { EmojiTweet, Retweet } from "./index";
 import { ImageBox } from "../ImageBox";
-import { Link } from "react-router-dom";
-import { setDate } from "../../utils";
-import { VideoContainer } from "../Giphy/VideoContainer";
-import { NFTTweet } from "../NFT/NFTTweet";
-import { Tweet } from "../../generated/graphql";
-import { TipCreator } from "../TipCreator";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
+import { META_LINKS, META_METAS } from "../../constants/meta";
+import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
+import { NFTTweet } from "../NFT/NFTTweet";
+import { TipCreator } from "../TipCreator";
+import { Tweet } from "../../generated/graphql";
+import { VideoContainer } from "../Giphy/VideoContainer";
+import { setDate } from "../../utils";
 import { useReaction } from "../../hooks/useReaction";
+import { Loader } from "../Loader";
 
 const Wrapper = styled.div`
   display: flex;
@@ -140,8 +143,25 @@ export const ShowTweet: React.FC<Props> = ({ tweet }) => {
   } = tweet;
 
   const { handleReaction } = useReaction({ tweetId: id });
-
   const handle = user && user.handle;
+
+  let heroImage = `${window.location.origin}/logo.png`;
+  if (files.length) heroImage = files[0].url;
+  if (nft?.image) heroImage = nft.image;
+
+  useMetaTags(
+    {
+      metas: [...META_METAS],
+      links: [...META_LINKS],
+      twitter: {
+        title: `Meep on app.boom.army by ${handle}`,
+        description: text,
+        image: heroImage,
+      },
+    },
+    []
+  );
+
   const linkifyOptions = {
     className: "body",
     target: { url: "_blank" },
@@ -169,6 +189,8 @@ export const ShowTweet: React.FC<Props> = ({ tweet }) => {
         <Linkify options={linkifyOptions}>
           <p className="tweet-body">{text}</p>
         </Linkify>
+
+        <Loader />
 
         {gif && <VideoContainer gif={gif} />}
 

@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
+import useMetaTags from "react-metatags-hook";
 import { FeedList } from "../components/FeedList";
+import { META_LINKS, META_METAS } from "../constants/meta";
 import { NewTweet } from "../components/Tweet";
 import { useFeedQuery } from "../generated/graphql";
 
@@ -12,6 +14,17 @@ export const Home: React.FC = () => {
     },
     fetchPolicy: "network-only",
   });
+
+  useMetaTags(
+    {
+      metas: [...META_METAS],
+      links: [
+        { rel: "canonical", href: window.location.origin },
+        ...META_LINKS,
+      ],
+    },
+    []
+  );
 
   const handleScroll = () => {
     const bottom =
