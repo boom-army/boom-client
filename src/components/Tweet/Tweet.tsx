@@ -19,7 +19,7 @@ import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { useReaction } from "../../hooks/useReaction";
-import { Loader } from "../Loader";
+import boomLogo from 'logo.png'
 
 const Wrapper = styled.div`
   display: flex;
@@ -145,7 +145,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }) => {
   const { handleReaction } = useReaction({ tweetId: id });
   const handle = user && user.handle;
 
-  let heroImage = `${window.location.origin}/logo.png`;
+  let heroImage = boomLogo;
   if (files.length) heroImage = files[0].url;
   if (nft?.image) heroImage = nft.image;
 
