@@ -1,44 +1,28 @@
-import styled, { css } from "styled-components";
+import { styled } from '@mui/material/styles';
 
-export default styled.button`
-  padding: ${(props) => (props.sm ? "0.4rem 1rem" : "0.4rem 1.8rem")};
-  color: ${(props) => (props.outline ? props.theme.accentColor : "#FFF")};
-  background: ${(props) =>
-    props.outline ? "inherit" : props.theme.accentColor};
-  border: 1px solid ${(props) => props.theme.accentColor};
-  border-radius: 50px;
-  font-size: ${(props) => (props.sm ? "0.8rem" : "1rem")};
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-bottom: 0.5rem;
-  width: ${(props) => (props.xl ? "100%" : "none")};
+export default styled('button')(props=>({
+  padding: (props.sm ? "0.4rem 1rem" : "0.4rem 1.8rem"),
+  color: (props.outline ? props.theme.accentColor : "#FFF"),
+  background: `${props.outline ? "inherit" : props.theme.accentColor}`,
+  border: `1px solid ${props.theme.accentColor}`,
+  borderRadius: '50px',
+  fontSize: (props.sm ? "0.8rem" : "1rem"),
+  letterSpacing: '1px',
+  textTransform: 'uppercase',
+  cursor: 'pointer',
+  marginBottom: '0.5rem',
+  width:props.xl && "100%",
+  position:props.relative && 'relative',
+  left:props.relative && '52%',
 
-  ${(props) =>
-    props.relative &&
-    css`
-			position: relative;
-			left: 52%;
-			}
-	`}
+  '@media screen and (max-width: 530px)': {
+    fontSize: '0.8rem',
+    position:props.relative && 'relative',
+    left:props.relative && '32%',
+  },
 
-  @media screen and (max-width: 530px) {
-    font-size: 0.8rem;
-
-    ${(props) =>
-      props.relative &&
-      css`
-        position: relative;
-        left: 32%;
-      `}
-  }
-
-  @media screen and (max-width: 430px) {
-    ${(props) =>
-      props.relative &&
-      css`
-        position: relative;
-        left: 17%;
-      `}
-  }
-`;
+  '@media screen and (max-width: 430px)': {
+    position:props.relative && 'relative',
+    left:props.relative && '17%',
+  },
+}))

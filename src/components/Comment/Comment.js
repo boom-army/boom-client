@@ -1,60 +1,59 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import UserAvatar from "../UserAvatar";
 import DeleteComment from "./DeleteComment";
 import { setDate } from "../../utils";
 import { Box } from "@mui/system";
+import { styled } from '@mui/material/styles';
 
-const Wrapper = styled.div`
-  display: flex;
-  border-bottom: 1px solid ${(props) => props.theme.tertiaryColor};
-  padding: 1.5rem 1rem 1rem 1rem;
+const Wrapper = styled('div')(props=>({
+  display: 'flex',
+  borderBottom: `1px solid ${props.theme.tertiaryColor}`,
+  padding: '1.5rem 1rem 1rem 1rem',
 
-  .comment-info-user {
-    display: flex;
+  '.comment-info-user' :{
+    display: 'flex',
 
-    svg {
-      margin-left: 0.6rem;
-      position: relative;
-      top: 3px;
+    'svg': {
+      marginLeft: '0.6rem',
+      position: 'relative',
+      top: '3px',
     }
-  }
+  },
 
-  .comment-info-user span.username {
-    font-weight: 500;
-  }
+  '.comment-info-user span.username' :{
+    fontWeight: '500',
+  },
 
-  .comment-info-user span.secondary {
-    padding-left: 0.5rem;
-    color: ${(props) => props.theme.secondaryColor};
-  }
+  '.comment-info-user span.secondary':{
+    paddingLeft: '0.5rem',
+    color: `${props.theme.secondaryColor}`,
+  },
 
-  @media screen and (max-width: 430px) {
-    flex-direction: column;
+ '@media screen and (max-width: 430px)' :{
+    flexDirection: 'column',
 
-    .comment-info-user {
-      font-size: 0.83rem;
-    }
+    '.comment-info-user':{
+      fontSize: '0.83rem',
+    },
 
-    .avatar {
-      display: none;
-    }
+    '.avatar':{
+      display: 'none',
+    },
 
-    .username {
-      display: none;
-    }
+    '.username' :{
+      display: 'none',
+    },
 
-    .comment-info-user span.secondary {
-      padding-left: 0;
-
-      :first-child {
-        padding-right: 0.6rem;
+    '.comment-info-user span.secondary':{
+      paddingLeft: '0',
+      ':first-child':{
+        paddingRight: '0.6rem',
       }
     }
   }
-`;
+}));
 
 const Comment = ({ comment }) => {
   const { id, text, isCommentMine, user, createdAt } = comment;

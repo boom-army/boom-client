@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
 import { ShowTweet } from "../components/Tweet";
-import styled from "styled-components";
 import { MENTIONS } from "../queries/others";
 import { useQuery } from "@apollo/client";
+import { styled } from '@mui/material/styles';
 
-const Wrapper = styled.div``;
+const Wrapper = styled('div')({});
 
 export const Notifications = ({ refetchProfile }) => {
   const { loading, data } = useQuery(MENTIONS);
@@ -14,9 +14,7 @@ export const Notifications = ({ refetchProfile }) => {
   useEffect(() => {
     refetchProfile();
   }, [data, refetchProfile]);
-
   if (loading) return <Loader />;
-
   return (
     <Wrapper>
       {data?.mentions?.length ? (

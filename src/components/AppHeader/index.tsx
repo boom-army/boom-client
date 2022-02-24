@@ -18,6 +18,7 @@ import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { UserContext } from '../../contexts/user';
 
+
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
   // const { account } = useNativeAccount();

@@ -1,15 +1,15 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import styled from "styled-components";
 import { TWEET } from "../../queries/tweet";
 import { Loader } from "../Loader";
 import { NewTweet, ParentTweet, ShowTweet } from ".";
 import { CustomResponse } from "../CustomResponse";
+import { styled } from '@mui/material/styles';
 
-const Wrapper = styled.div`
-  margin-bottom: 7rem;
-`;
+const Wrapper  = styled('div')({
+  marginBottom: '7rem',
+});
 
 export const MasterTweet = () => {
   const { tweetId } = useParams();
@@ -18,8 +18,7 @@ export const MasterTweet = () => {
     variables: { id: tweetId },
   });
 
-  const comments =
-    data?.tweet?.childTweets?.length > 0 ? data.tweet.childTweets : [];
+  const comments = data?.tweet?.childTweets?.length > 0 ? data.tweet.childTweets : [];
   const exists = !!data?.tweet?.id;
   const hasParent = !!data?.tweet?.parentTweet?.id;
 

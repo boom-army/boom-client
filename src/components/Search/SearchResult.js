@@ -1,27 +1,27 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import SearchResultTweets from "./SearchResultTweets";
 import SearchResultTags from "./SearchResultTags";
 import SearchResultUsers from "./SearchResultUsers";
+import { styled } from '@mui/material/styles';
 
-const Wrapper = styled.div`
-	.tabs {
-		display: flex;
-		justify-content: space-around;
-		border-bottom: 2px solid ${props => props.theme.tertiaryColor};
-	}
+const Wrapper = styled('div')(props=>({
+	'.tabs':{
+		display: 'flex',
+		justifyContent: 'space-around',
+		borderBottom: `2px solid ${props.theme.tertiaryColor}`,
+	},
 
-	span {
-		cursor: pointer;
-		margin-bottom: 0.4rem;
-	}
+	'span': {
+		cursor: 'pointer',
+		marginBottom: '0.4rem',
+	},
 
-	span.active {
-		border-bottom: 2px solid ${props => props.theme.accentColor};
-		font-weight: 500;
-		color: ${props => props.theme.accentColor};
-	}
-`;
+	'span.active':{
+		borderBottom: `2px solid ${props.theme.accentColor}`,
+		fontWeight: '500',
+		color: props.theme.accentColor,
+	},
+}));
 
 const SearchResult = ({
 	searchTweetLoading,

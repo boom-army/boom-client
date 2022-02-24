@@ -17,14 +17,19 @@ import { USER_FOLLOW } from "../queries/follow";
 import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
 
-const Demo = styled("div")(({ theme }) => ({
-  backgroundColor: "#313d48",
+const Demo = styled("div")(props => ({
+    background:  props.theme.background,
+    'p':{
+      color:props.theme.secondaryColor
+    },
+    font : props.theme.font
 }));
 
 export const User = ({ user }) => (
   <Box sx={{ flexGrow: 1 }}>
     <Grid item xs={12}>
       <Demo>
+      <p>Who To Follow</p>
         <List dense={false}>
           <ListItem
             secondaryAction={

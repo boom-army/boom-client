@@ -1,5 +1,4 @@
 import "emoji-mart/css/emoji-mart.css";
-import styled from "styled-components";
 import { Emoji } from "emoji-mart";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { MENTIONS } from "../../queries/others";
@@ -17,30 +16,32 @@ import { useSosolProgram } from "../../hooks";
 import { useState, useCallback } from "react";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
+import { styled } from '@mui/material/styles';
 
-const ReactionWrapper = styled.div`
-  display: flex;
-  margin-right: 4em;
+const ReactionWrapper = styled('div')(props=>({
+  
+  display: 'flex',
+  marginRight: '4em',
 
-  .emoji-count {
-    border-radius: 7px;
-    padding: 4px 4px 0;
-    margin-right: 8px;
-    cursor: pointer;
+  '.emoji-count': {
+    borderRadius: '7px',
+    padding: '4px 4px 0',
+    marginRight: '8px',
+    cursor: 'pointer',
+  },
+
+  '.emoji-count.mine':{
+    border: `1px solid ${props.theme.tertiaryColor}`,
+    background:  props.theme.tertiaryColor2,
+  },
+
+  '.emoji-number': {
+    fontSize: '14px',
+    marginLeft: '2px',
+    verticalAlign: 'text-bottom',
+    color: props.theme.secondaryColor,
   }
-
-  .emoji-count.mine {
-    border: 1px solid ${(props) => props.theme.tertiaryColor};
-    background: ${(props) => props.theme.tertiaryColor2};
-  }
-
-  .emoji-number {
-    font-size: 14px;
-    margin-left: 2px;
-    vertical-align: text-bottom;
-    color: ${(props) => props.theme.secondaryColor};
-  }
-`;
+}));
 
 export const EmojiTweet = ({ tweetId, userPubKey, reactions, parentTweetId }) => {
   const { sosolProgram } = useSosolProgram();

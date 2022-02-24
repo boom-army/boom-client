@@ -1,25 +1,9 @@
-import React from 'react'
-import styled from 'styled-components';
+import React, { useContext } from 'react';
+import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-
-const VideoBoxWrapper = styled.div`
-  display: flex;
-  border-radius: 16px;
-  border: 1px solid ${(props) => props.theme.secondaryColor};
-  overflow: hidden;
-  width: 90%;
-  flex-wrap: wrap;
-  margin: 0 0 0.75rem;
-  position: relative;
-
-  > video {
-    width: 100%;
-    cursor: pointer;
-  }
-}
-`;
+import { ThemeContext } from '../../contexts/theme';
 
 interface Gif {
   id: string,
@@ -35,6 +19,24 @@ interface videoProps {
 
 export const VideoContainer: React.FC<videoProps> = ({ gif, onClose }) => {
   const { fixedHeightUrl, title } = gif;
+  const { theme } = useContext(ThemeContext);
+  
+  const VideoBoxWrapper = styled('div')({
+    display: 'flex',
+    borderRadius: '16px',
+    border: `1px solid ${theme.secondaryColor}`,
+    overflow: 'hidden',
+    width: '90%',
+    flexWrap: 'wrap',
+    margin: '0 0 0.75rem',
+    position: 'relative',
+
+    '> video': {
+      width: '100%',
+      cursor: 'pointer',
+    }
+  })
+
 
   const handleVideoPlayerClick = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.paused ? e.currentTarget.play() : e.currentTarget.pause();

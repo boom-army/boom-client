@@ -1,12 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import { User } from "../WhoToFollow";
 import { CustomResponse } from "../CustomResponse";
 import { Loader } from "../Loader";
+import { styled } from '@mui/material/styles';
 
-const Wrapper = styled.div`
-	padding-top: 0.4rem;
-`;
+ const Wrapper = styled('div')({
+  paddingTop: '0.4rem',
+ });
 
 const SearchResultUsers = ({ loading, users }) => {
 	if (loading) return <Loader />;

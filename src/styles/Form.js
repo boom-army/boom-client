@@ -1,45 +1,34 @@
-import styled, { css } from "styled-components";
+import { styled } from '@mui/material/styles';
 
-export default styled.form`
-  width: 380px;
-  border: 1px solid ${(props) => props.theme.tertiaryColor};
-  padding: 2rem;
-  border-radius: 10px;
+export default styled('form')(props => ({
+    width: (props.lg && '98%') || ('380px'),
+    border: (props.lg && 'none') || `1px solid ${props.theme.tertiaryColor}`,
+    padding: '2rem',
+    borderRadius: (props.lg && 'none') || '10px',
 
-  span {
-    text-align: center;
-    display: block;
-    margin-bottom: 0.5rem;
-    color: ${(props) => props.theme.secondaryColor};
-  }
+    'span': {
+        textAlign: 'center',
+        display: 'block',
+        marginBottom: '0.5rem',
+        color: props.theme.secondaryColor,
+    },
 
-  .group-input {
-    display: flex;
-    justify-content: space-between;
+    '.group-input': {
+        display: 'flex',
+        justifyContent: 'space-between',
 
-    div:nth-child(1) {
-      margin-right: 1rem;
+        'div:nth-child(1)': {
+            marginRight: '1rem',
+        }
+    },
+
+
+    position: props.center && 'absolute',
+    top: props.center && '50%',
+    left: props.center && '50%',
+    transform: props.center && 'translate(-50%, -50%)',
+
+    '@media screen and (max-width: 400px)': {
+        width: '360px',
     }
-  }
-
-  ${(props) =>
-    props.lg &&
-    css`
-      width: 98%;
-      border: none;
-      border-radius: none;
-    `}
-
-  ${(props) =>
-    props.center &&
-    css`
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    `}
-
-@media screen and (max-width: 400px) {
-    width: 360px;
-  }
-`;
+}))

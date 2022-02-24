@@ -1,46 +1,46 @@
 import { SRLWrapper } from "simple-react-lightbox";
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 
-const ImageBoxWrapper = styled.div`
-  > div {
-    display: flex;
-    border-radius: 16px;
-    border: 1px solid ${(props) => props.theme.secondaryColor};
-    overflow: hidden;
-    width: 90%;
-    flex-wrap: wrap;
-    margin: 0 0 0.75rem;
+const ImageBoxWrapper = styled('div')(props=>({
+  '> div': {
+    display: 'flex',
+    borderRadius: '16px',
+    border: `1px solid ${props.theme.secondaryColor}`,
+    overflow: 'hidden',
+    width: '90%',
+    flexWrap: 'wrap',
+    margin:'0 0 0.75rem',
+  },
+
+  '> div > .tweet-image-col':{
+    display: 'flex',
+    flex: '50%',
+    width: '100%',
   }
+}));
 
-  > div > .tweet-image-col {
-    display: flex;
-    flex: 50%;
-    width: 100%;
-  }
-`;
+const ImageColumn =  styled('div')(props=>({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  flex: '50%',
+  marginRight: props.filesLength > 1 ? '2px;' : '0;'
+}));
 
-const ImageColumn = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  flex: 50%;
-  margin-right: ${props => props.filesLength > 1 ? '2px;' : '0;'}
-`;
+const ImageWrapper = styled('div')(props=>({
+  lineHeight: '0',
+  height: '100%',
+  marginBottom:  props.hasBottomMargin ? '2px;' : '0;'
+}));
 
-const ImageWrapper = styled.div`
-  line-height: 0;
-  height: 100%;
-  margin-bottom: ${props => props.hasBottomMargin ? '2px;' : '0;'}
-`;
-
-const Image = styled.img`
-  object-fit: cover;
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  cursor: ${props => props.disableLightbox ? 'inherit' : 'pointer'}
-`;
+const Image = styled('img')(props=>({
+  objectFit: 'cover',
+  maxWidth: '100%',
+  width: '100%',
+  height: '100%',
+  position: 'relative',
+  cursor:props.disableLightbox ? 'inherit' : 'pointer'
+}));
 
 const ImageColumnContainer = ({ files, isLeftCol, disableLightbox }) => {
   const className = `tweet-image-col ${isLeftCol ? 'tweet-image-left-col' : 'tweet-image-right-col'}`

@@ -1,54 +1,56 @@
-import styled from "styled-components";
+
 import { Loader } from "../Loader";
 import { EditProfileForm } from "./EditProfileForm";
+import { styled } from '@mui/material/styles';
 
-const Wrapper = styled.div`
-  padding-bottom: 5rem;
 
-  .flex-wrapper {
-    display: flex;
-    justify-content: center;
+const Wrapper = styled('div')(props => ({
+  paddingBottom: '5rem',
 
-    form {
-      .cover-photo {
-        margin-bottom: 1rem;
-        cursor: pointer;
-      }
+  '.flex-wrapper': {
+    display: 'flex',
+    justifyContent: 'center',
 
-      .avatar-input {
-        margin-top: -100px;
-        margin-left: 1rem;
-        cursor: pointer;
-      }
+    'form': { 
+      '.cover-photo': {
+        marginBottom: '1rem',
+        cursor: 'pointer',
+      },
 
-      div.bio-wrapper {
-        background: ${(props) => props.theme.tertiaryColor2};
-        margin-bottom: 1.4rem;
-        border-bottom: 1px solid ${(props) => props.theme.accentColor};
-        padding: 0.5rem;
+      '.avatar-input': {
+        marginTop: '-100px',
+        marginLeft: '1rem',
+        cursor: 'pointer',
+      },
 
-        label {
-          color: ${(props) => props.theme.secondaryColor};
-          margin-bottom: 0.4rem;
-        }
+      'div.bio-wrapper': {
+        background: props.theme.tertiaryColor2,
+        marginBottom: '1.4rem',
+        borderBottom: `1px solid ${props.theme.accentColor}`,
+        padding: '0.5rem',
 
-        textarea {
-          font-size: 1rem;
-          width: 100%;
-          background: ${(props) => props.theme.tertiaryColor2};
-          border: none;
-          font-family: ${(props) => props.theme.font};
-          color: ${(props) => props.theme.primaryColor};
+        'label': {
+          color: props.theme.secondaryColor,
+          marginBottom: '0.4rem',
+        },
+
+        'textarea': {
+          fontSize: '1rem',
+          width: '100%',
+          background: props.theme.tertiaryColor2,
+          border: 'none',
+          fontFamily: props.theme.font,
+          color: props.theme.primaryColor,
         }
       }
     }
+  },
+  '@media screen and (max-width: 760px)': {
+    '.flex-wrapper': {
+      display: 'block',
+    },
   }
-  @media screen and (max-width: 760px) {
-    .flex-wrapper {
-      display: block;
-    }
-  }
-`;
+}));
 
 export const EditProfile = ({ data, loading, setUser }) => {
   if (loading) return <Loader />;

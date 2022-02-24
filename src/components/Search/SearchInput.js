@@ -1,6 +1,5 @@
 import React from "react";
 import SearchResult from "./SearchResult";
-import styled from "styled-components";
 import { useInput } from "../../hooks/useInput";
 import {
   SEARCH_BY_TAG,
@@ -10,29 +9,30 @@ import {
 import { displayError } from "../../utils";
 import { useLazyQuery } from "@apollo/client";
 import { useSnackbar } from "notistack";
+import { styled } from '@mui/material/styles';
 
-const Wrapper = styled.div`
-  margin: 1rem 0;
-  margin-left: 1rem;
+const Wrapper = styled('div')(props=>({
+  margin: '1rem 0',
+  marginLeft: '1rem',
 
-  input {
-    height: 40px;
-    width: 70%;
-    border-radius: 30px;
-    background: ${(props) => props.theme.tertiaryColor2};
-    border: ${(props) => props.theme.tertiaryColor2};
-    color: ${(props) => props.theme.secondaryColor};
-    font-family: ${(props) => props.theme.font};
-    font-size: 1rem;
-    padding-left: 1.2rem;
-  }
+  'input': {
+    height: '40px',
+    width: '70%',
+    borderRadius: '30px',
+    background:  props.theme.tertiaryColor2,
+    border: props.theme.tertiaryColor2,
+    color:  props.theme.secondaryColor,
+    fontFamily:props.theme.font,
+    fontSize: '1rem',
+    paddingLeft: '1.2rem',
+  },
 
-  @media screen and (max-width: 530px) {
-    input {
-      font-size: 0.9rem;
+  '@media screen and (max-width: 530px)':{
+    'input':{
+      fontSize: '0.9rem',
     }
-  }
-`;
+  },
+}));
 
 const SearchInput = () => {
   const term = useInput("");

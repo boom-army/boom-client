@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
-import { styled } from "@mui/system";
+import { styled } from '@mui/material/styles';
 import { useConnection } from "@solana/wallet-adapter-react";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { useSnackbar } from "notistack";
@@ -55,31 +55,33 @@ import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 //   share: number;
 // }
 
-const StyledModal = styled(ModalUnstyled)`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  & .MuiInputBase-input {
-    padding: 10px 12px;
-    width: 100%;
-  }
-`;
 
-const Backdrop = styled("div")`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-tap-highlight-color: transparent;
-`;
+const StyledModal = styled(ModalUnstyled)({
+  position: 'fixed',
+  zIndex: '1300',
+  right: '0',
+  bottom: '0',
+  top: '0',
+  left: '0',
+  display: 'flex',
+  justifyContent: 'center',
+  '& .MuiInputBase-input' :{
+    padding: '10px 12px',
+    width: '100%',
+  }
+});
+
+const Backdrop = styled("div")({
+  zIndex: '-1',
+  position: 'fixed',
+  right: '0',
+  bottom: '0',
+  top: '0',
+  left: '0',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  WebkitTapHighlightColor: 'transparent',
+})
+
 
 export const NFTPicker: React.FC<{
   setNftData: React.Dispatch<React.SetStateAction<any>>;
@@ -158,21 +160,23 @@ export const NFTPicker: React.FC<{
     })();
   }, [nftInput, validKey, connection, enqueueSnackbar, fetchSetMeta]);
 
-  const Wrapper = styled("span")`
-    & .nft-pick {
-      margin-right: 2rem;
-      width: 26px;
-      height: 26px;
-      display: inline-block;
-      & svg {
-        width: 26px;
-        cursor: pointer;
-        & path {
-          fill: ${theme.accentColor};
+
+  const Wrapper = styled("span")({
+    '& .nft-pick' :{
+      marginRight: '2rem',
+      width: '26px',
+      height: '26px',
+      display: 'inline-block',
+      '& svg':{
+        width: '26px',
+        cursor: 'pointer',
+        '& path': {
+          fill: `${theme.accentColor}`,
         }
       }
     }
-  `;
+  });
+
 
   return (
     <Wrapper>
