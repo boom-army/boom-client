@@ -21,6 +21,7 @@ import { camelizeKeys, displayError } from "../../utils";
 import { styled } from "@mui/system";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "notistack";
+import cuid from 'cuid';
 
 // export interface NFTObject {
 //   publicKey: string;
@@ -99,6 +100,7 @@ export const NFTPicker: React.FC<{
   };
   const { connection } = useConnection();
   const { enqueueSnackbar } = useSnackbar();
+  const nftKey = cuid();
 
   const handleSelect = () => {
     setNftInput("");
@@ -221,12 +223,14 @@ export const NFTPicker: React.FC<{
                   NFT Public Key
                 </InputLabel>
                 <InputBase
+                  key={nftKey}
                   placeholder="eg. 43QrHJ2csgLsRUhXW7WHQecZhRLFHW88sazGvUT65vYj"
                   id="nft-input"
                   value={nftInput}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setNftInput(e.currentTarget.value);
                   }}
+                  autoFocus
                   endAdornment={
                     validKey !== null && (
                       <InputAdornment
