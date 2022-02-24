@@ -141,8 +141,8 @@ export const NFTPicker: React.FC<{
         setLoading(true);
         const key = new PublicKey(nftInput);
         const acc = await connection.getParsedAccountInfo(key);
-        console.log(acc);
 
+        if (!acc) throw new Error("No NFT found with that public key");
         // @ts-ignore: error in types
         if (acc && acc?.value?.data?.parsed.info.mint) {
           // @ts-ignore: error in types
