@@ -10,7 +10,7 @@ import { CommentIcon } from "../Icons";
 import { EmojiTweet, Retweet } from "./index";
 import { ImageBox } from "../ImageBox";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
-import { META_LINKS, META_METAS } from "../../constants/meta";
+import { META_METAS, META_LINKS } from "../../constants/meta";
 import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
@@ -19,7 +19,7 @@ import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { useReaction } from "../../hooks/useReaction";
-import boomLogo from 'logo.png'
+import boomLogo from "../../images/logo.png"
 
 const Wrapper = styled.div`
   display: flex;
@@ -152,7 +152,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }) => {
   useMetaTags(
     {
       metas: [...META_METAS],
-      links: [...META_LINKS],
+      links: [ ...META_LINKS ],
       twitter: {
         title: `Meep on app.boom.army by ${handle}`,
         description: text,

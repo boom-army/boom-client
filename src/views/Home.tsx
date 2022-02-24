@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import useMetaTags from "react-metatags-hook";
 import { FeedList } from "../components/FeedList";
-import { META_LINKS, META_METAS } from "../constants/meta";
+import { META_METAS, META_LINKS } from "../constants/meta";
 import { NewTweet } from "../components/Tweet";
 import { useFeedQuery } from "../generated/graphql";
 
