@@ -56,18 +56,18 @@ export const AppRoutes: React.FC = () => {
         <meta name="title" content="Boom" />
         <meta name="description" content="NFT Driven Communities on Solana." />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.origin} />
-        <meta property="og:title" content="Boom" />
-        <meta property="og:description" content="NFT Driven Communities on Solana." />
-        <meta property="og:image" content={BoomArmy}  />
+        <meta name="og:type" content="website" />
+        <meta name="og:url" content={window.location.origin} />
+        <meta name="og:title" content="Boom" />
+        <meta name="og:description" content="NFT Driven Communities on Solana." />
+        <meta name="og:image" content={BoomArmy}  />
 
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={window.location.origin} />
-        <meta property="twitter:title" content="Boom" />
-        <meta property="twitter:description" content="NFT Driven Communities on Solana." />
-        <meta property="twitter:image" content={BoomArmy} />
-        <meta property="twitter:creator" content="@boom_army_" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={window.location.origin} />
+        <meta name="twitter:title" content="Boom" />
+        <meta name="twitter:description" content="NFT Driven Communities on Solana." />
+        <meta name="twitter:image" content={BoomArmy} />
+        <meta name="twitter:creator" content="@boom_army_" />
       </Helmet>
       <BrowserRouter basename={"/"}>
         <Wallet>

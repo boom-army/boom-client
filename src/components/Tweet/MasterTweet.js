@@ -36,15 +36,15 @@ export const MasterTweet = () => {
         <meta name="title" content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`} />
         <meta name="description" content={data?.tweet?.text} />
 
-        <meta property="og:url" content={window.location.href} />
-        <meta property="og:title" content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`} />
-        <meta property="og:description" content={data?.tweet?.text} />
-        <meta property="og:image" content={heroImage}  />
+        <meta name="og:url" content={window.location.href} />
+        <meta name="og:title" content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`} />
+        <meta name="og:description" content={data?.tweet?.text} />
+        <meta name="og:image" content={heroImage}  />
 
-        <meta property="twitter:url" content={window.location.href} />
-        <meta property="twitter:title" content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`} />
-        <meta property="twitter:description" content={data?.tweet?.text} />
-        <meta property="twitter:image" content={heroImage} />
+        <meta name="twitter:url" content={window.location.href} />
+        <meta name="twitter:title" content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`} />
+        <meta name="twitter:description" content={data?.tweet?.text} />
+        <meta name="twitter:image" content={heroImage} />
       </Helmet>
       {loading ? (
         <Loader />
