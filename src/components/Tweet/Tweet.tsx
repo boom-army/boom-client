@@ -190,8 +190,6 @@ export const ShowTweet: React.FC<Props> = ({ tweet }) => {
           <p className="tweet-body">{text}</p>
         </Linkify>
 
-        <Loader />
-
         {gif && <VideoContainer gif={gif} />}
 
         {nft && <NFTTweet nftData={nft} />}
