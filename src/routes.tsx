@@ -8,7 +8,6 @@ import {
   Home,
   Nav,
   Notifications,
-  OGMint,
   Suggestion,
 } from "./views";
 import { Container, Grid } from "@mui/material";
@@ -22,7 +21,8 @@ import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileLazyQuery } from "./generated/graphql";
-
+import { Helmet } from "react-helmet";
+import BoomArmy from "./images/raise-the-boomarmy.png";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -31,9 +31,10 @@ export const AppRoutes: React.FC = () => {
   const [getHandle, { loading, data, refetch }] = useProfileLazyQuery();
 
   useEffect(() => {
-    if (user?.handle) getHandle({
-      variables: { handle: user?.handle },
-    })
+    if (user?.handle)
+      getHandle({
+        variables: { handle: user?.handle },
+      });
   }, [getHandle, user]);
 
   const middleColStyles = {
@@ -43,6 +44,29 @@ export const AppRoutes: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="canonical" href="http://app.boom.army" />
+
+        <title>Boom</title>
+        <meta name="title" content="Boom" />
+        <meta name="description" content="NFT Driven Communities on Solana." />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.origin} />
+        <meta property="og:title" content="Boom" />
+        <meta property="og:description" content="NFT Driven Communities on Solana." />
+        <meta property="og:image" content={BoomArmy}  />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={window.location.origin} />
+        <meta property="twitter:title" content="Boom" />
+        <meta property="twitter:description" content="NFT Driven Communities on Solana." />
+        <meta property="twitter:image" content={BoomArmy} />
+        <meta property="twitter:creator" content="@boom_army_" />
+      </Helmet>
       <BrowserRouter basename={"/"}>
         <Wallet>
           <AccountsProvider>
@@ -52,7 +76,12 @@ export const AppRoutes: React.FC = () => {
                 <Container maxWidth="lg">
                   <Grid container>
                     <Grid item xs={2} sm={1} md={2}>
-                      {user?.handle && <Nav user={user} newMentionsCount={data?.profile?.newMentionsCount} />}
+                      {user?.handle && (
+                        <Nav
+                          user={user}
+                          newMentionsCount={data?.profile?.newMentionsCount}
+                        />
+                      )}
                     </Grid>
                     <Grid item xs={10} sm={11} md={7} sx={middleColStyles}>
                       <Routes>

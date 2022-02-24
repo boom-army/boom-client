@@ -1,10 +1,9 @@
 import React from "react";
 import boomLogo from "../../images/logo.png"
 import styled from "styled-components";
-import useMetaTags from "react-metatags-hook";
 import { CustomResponse } from "../CustomResponse";
+import { Helmet } from "react-helmet";
 import { Loader } from "../Loader";
-import { META_METAS, META_LINKS, META_OG } from "../../constants/meta";
 import { NewTweet, ParentTweet, ShowTweet } from ".";
 import { TWEET } from "../../queries/tweet";
 import { useParams } from "react-router-dom";
@@ -29,23 +28,24 @@ export const MasterTweet = () => {
   let heroImage = boomLogo;
   if (data?.tweet?.files?.length) heroImage = data.tweet.files[0].url;
   if (data?.tweet?.nft?.image) heroImage = data.tweet.nft.image;
-
-  useMetaTags(
-    {
-      metas: [...META_METAS],
-      links: [ ...META_LINKS ],
-      openGraph: META_OG,
-      twitter: {
-        title: `Meep on app.boom.army by ${data?.tweet?.user?.handle}`,
-        description: data?.tweet?.text,
-        image: heroImage,
-      },
-    },
-    [data]
-  );
   
   return (
     <Wrapper>
+      <Helmet>        
+        <title>Boom</title>
+        <meta name="title" content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`} />
+        <meta name="description" content={data?.tweet?.text} />
+
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`} />
+        <meta property="og:description" content={data?.tweet?.text} />
+        <meta property="og:image" content={heroImage}  />
+
+        <meta property="twitter:url" content={window.location.href} />
+        <meta property="twitter:title" content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`} />
+        <meta property="twitter:description" content={data?.tweet?.text} />
+        <meta property="twitter:image" content={heroImage} />
+      </Helmet>
       {loading ? (
         <Loader />
       ) : (

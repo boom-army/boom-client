@@ -5,8 +5,8 @@ import { CssBaseline } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import { ThemeContext } from "./contexts/theme";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
-import { useContext } from "react";
 import { UserContextProvider } from "./contexts/user";
+import { useContext } from "react";
 
 export const App = () => {
   const { theme } = useContext(ThemeContext);
