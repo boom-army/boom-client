@@ -23,6 +23,7 @@ import { Wallet } from "./contexts/wallet";
 import { useProfileLazyQuery } from "./generated/graphql";
 import { Helmet } from "react-helmet";
 import BoomArmy from "./images/raise-the-boomarmy.png";
+import BoomLogo from "./images/logo.png";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -49,6 +50,7 @@ export const AppRoutes: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
         <link rel="canonical" href="http://app.boom.army" />
+        <link rel="apple-touch-icon" href={BoomLogo} />
 
         <title>Boom</title>
         <meta name="title" content="Boom" />
