@@ -44,7 +44,6 @@ export const MasterTweet = () => {
     [data]
   );
   
-
   return (
     <Wrapper>
       {loading ? (
