@@ -12,6 +12,7 @@
     "localnet:logs": "solana logs -u localhost",
     "predeploy": "git pull --ff-only && yarn && yarn build",
     "deploy:prod": "bash ./scripts/prod-deploy.sh",
+    "deploy:maint": "bash ./scripts/maintenance-deploy.sh",
     "deploy:ar": "arweave deploy-dir build --key-file ",
     "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
     "gen:graphql": "graphql-codegen --config codegen.yml"
