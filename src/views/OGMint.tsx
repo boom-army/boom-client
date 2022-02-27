@@ -65,9 +65,11 @@ function createData(serial: string, cost: number, minting: string) {
 
 const MintContainer = styled.div``; // add your owns styles here
 
-const candyMachineId = new anchor.web3.PublicKey(
-  process.env.REACT_APP_CANDY_MACHINE_ID as PublicKeyInitData
-);
+const candyMachineId = process.env.REACT_APP_CANDY_MACHINE_ID
+  ? new anchor.web3.PublicKey(
+      process.env.REACT_APP_CANDY_MACHINE_ID as PublicKeyInitData
+    )
+  : null;
 const txTimeoutInMilliseconds: number = 30000;
 
 export const OGMint = () => {
