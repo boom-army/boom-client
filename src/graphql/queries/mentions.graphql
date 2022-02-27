@@ -1,0 +1,31 @@
+query mentions($offset: Int, $limit: Int) {
+  mentions(offset: $offset, limit: $limit) {
+    id
+    text
+    tags
+    isTweetMine
+    commentsCount
+    retweetsCount
+    isRetweet
+    tipsCount
+    reactions {
+      id
+      emojiId
+      skin
+      isMine
+      count
+    }
+    files {
+      id
+      url
+    }
+    user {
+      id
+      avatar
+      publicAddress
+      handle
+      consumerName
+    }
+    createdAt
+  }
+}
