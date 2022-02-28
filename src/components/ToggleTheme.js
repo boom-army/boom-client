@@ -41,7 +41,7 @@ const ToggleTheme = () => {
 
   return (
     <Wrapper onClick={toggleTheme}>
-      <ThemeIcon sm color={theme.accentColor} />
+      <ThemeIcon sm="true" color={theme.accentColor} />
       <p>Theme</p>
     </Wrapper>
   );

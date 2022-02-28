@@ -26,7 +26,7 @@ const Logout = () => {
 
 	return (
 		<Wrapper onClick={handleLogout}>
-			<UserIcon sm color={theme.accentColor} />
+			<UserIcon sm="true" color={theme.accentColor} />
 			<p>Logout</p>
 		</Wrapper>
 	);

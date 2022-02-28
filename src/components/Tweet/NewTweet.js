@@ -224,7 +224,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
                 <NFTPicker setNftData={setNftData} />
               )}
             </div>
-            <Button sm disabled={loading}>
+            <Button sm="true" disabled={loading}>
               Post
             </Button>
           </div>
