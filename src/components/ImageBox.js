@@ -24,13 +24,13 @@ const ImageColumn =  styled('div')(props=>({
   display: 'flex',
   flexDirection: 'column',
   flex: '50%',
-  marginRight: props.filesLength > 1 ? '2px;' : '0;'
+  marginRight: props.fileslength > 1 ? '2px;' : '0;'
 }));
 
 const ImageWrapper = styled('div')(props=>({
   lineHeight: '0',
   height: '100%',
-  marginBottom:  props.hasBottomMargin ? '2px;' : '0;'
+  marginBottom:  props.hasbottommargin ? '2px;' : '0;'
 }));
 
 const Image = styled('img')(props=>({
@@ -39,17 +39,17 @@ const Image = styled('img')(props=>({
   width: '100%',
   height: '100%',
   position: 'relative',
-  cursor:props.disableLightbox ? 'inherit' : 'pointer'
+  cursor:props.disablelightbox ? 'inherit' : 'pointer'
 }));
 
-const ImageColumnContainer = ({ files, isLeftCol, disableLightbox }) => {
+const ImageColumnContainer = ({ files, isLeftCol, disablelightbox }) => {
   const className = `tweet-image-col ${isLeftCol ? 'tweet-image-left-col' : 'tweet-image-right-col'}`
   return (
     <div className={className}>
-      <ImageColumn filesLength={files.length}>
+      <ImageColumn fileslength={files.length}>
         {files.map((file, index, arr) => (
-          <ImageWrapper key={file.id} hasFullHeight={arr.length === 1} hasBottomMargin={arr.length > 1 && index === 0} fileIndex={index}>
-            <Image disableLightbox={disableLightbox} key={file.id} src={file.url} alt="tweet-file" />
+          <ImageWrapper key={file.id} hasfullheight={arr.length === 1 ? "true" : "false"} hasbottommargin={arr.length > 1 && index === 0 ? "true" : "false"} fileindex={index}>
+            <Image disablelightbox={disablelightbox} key={file.id} src={file.url} alt="tweet-file" />
           </ImageWrapper>
         ))}
       </ImageColumn>
@@ -57,7 +57,7 @@ const ImageColumnContainer = ({ files, isLeftCol, disableLightbox }) => {
   );
 };
 
-export const ImageBox = ({ files, disableLightbox }) => {
+export const ImageBox = ({ files, disablelightbox }) => {
   const options = {
     settings: {
       lightboxTransitionSpeed: 0,
@@ -77,12 +77,12 @@ export const ImageBox = ({ files, disableLightbox }) => {
     return index === 1 || (arr.length === 3 && index === 2) || (arr.length === 4 && index === 3);
   });
 
-  if (disableLightbox) return (
+  if (disablelightbox) return (
     <ImageBoxWrapper>
       {!!files.length && (
         <div>
-          {!!leftColumnFiles.length && <ImageColumnContainer disableLightbox files={leftColumnFiles} isLeftCol={true} />}
-          {!!rightColumnFiles.length && <ImageColumnContainer disableLightbox files={rightColumnFiles} isLeftCol={false} />}
+          {!!leftColumnFiles.length && <ImageColumnContainer disablelightbox files={leftColumnFiles} isLeftCol={true} />}
+          {!!rightColumnFiles.length && <ImageColumnContainer disablelightbox files={rightColumnFiles} isLeftCol={false} />}
         </div>
       )}
     </ImageBoxWrapper>

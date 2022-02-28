@@ -176,7 +176,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }) => {
 
         {nft && <NFTTweet nftData={nft} />}
 
-        {!!files.length && <ImageBox files={files} disableLightbox={false} />}
+        {!!files.length && <ImageBox files={files} disablelightbox={false} />}
 
         {reactions.length > 0 && (
           <ReactionsList

@@ -1,8 +1,6 @@
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
 import { ShowTweet } from "../components/Tweet";
-import { MENTIONS } from "../queries/others";
-import { useQuery } from "@apollo/client";
 import { styled } from '@mui/material/styles';
 import { useEffect } from "react";
 import { useMentionsQuery } from "../generated/graphql";
