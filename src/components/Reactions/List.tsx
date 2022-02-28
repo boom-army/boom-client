@@ -84,7 +84,7 @@ export const List: React.FC<{
   }, [data]);
 
   return (
-    <Box sx={{ marginBottom: 1.5, display: "inline-flex" }}>
+    <Box sx={{ marginBottom: 1.5, display: "inline-flex", flexWrap: "wrap" }}>
       {reactionsWithCount
         .sort((a, b) => a.emojiId.localeCompare(b.emojiId))
         .map(({ emojiId, count, isMine }) => {
