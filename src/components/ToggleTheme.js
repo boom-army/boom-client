@@ -1,20 +1,19 @@
 import React, { useState, useContext } from "react";
-import styled from "styled-components";
 import { ThemeContext } from "../contexts/theme";
 import { lightTheme, darkTheme } from "../styles/themes";
 import { ThemeIcon } from "./Icons";
+import { styled } from '@mui/material/styles';
 
-export const Wrapper = styled.div`
-  display: flex;
-  align-items: baseline;
-  margin-left: 0.7rem;
-  margin-bottom: 1rem;
-  cursor: pointer;
-
-  p {
-    margin-left: 0.4rem;
+export const Wrapper = styled('div')({
+  display: 'flex',
+  alignItems: 'baseline',
+  marginLeft: '0.7rem',
+  marginBottom: '1rem',
+  cursor: 'pointer',
+  'p':{
+    marginLeft: '0.4rem',
   }
-`;
+});
 
 const ToggleTheme = () => {
   const localSt = localStorage.getItem("theme");
@@ -42,7 +41,7 @@ const ToggleTheme = () => {
 
   return (
     <Wrapper onClick={toggleTheme}>
-      <ThemeIcon sm color={theme.accentColor} />
+      <ThemeIcon sm="true" color={theme.accentColor} />
       <p>Theme</p>
     </Wrapper>
   );

@@ -2,66 +2,66 @@
 import { useEffect, useState, useContext } from "react";
 import { SmileIcon } from "../Icons";
 import { Picker } from "emoji-mart";
-import { ThemeContext } from "styled-components";
-import styled from "styled-components";
+import { ThemeContext } from '../../contexts/theme';
 import "emoji-mart/css/emoji-mart.css";
+import { styled } from '@mui/material/styles';
 
-const PickerWrapper = styled.span`
-  .emoji-mart {
-    position: absolute;
-    z-index: 1;
-  }
-  .emoji-mart-bar.emoji-mart-bar,
-  .emoji-mart-scroll.emoji-mart-scroll {
-    margin-right: 0;
-  }
-  .emoji-mart-bar svg,
-  .emoji-mart-bar svg path {
-    fill: ${(props) => props.theme.accentColor}
-  }
-  .emoji-mart .emoji-mart-anchor-bar {
-    background-color: ${(props) => props.theme.accentColor}!important;
-  }
-  .emoji-mart-preview {
-    display: none;
-  }
-  .emoji-mart-dark {
-    border-color: ${(props) => props.theme.secondaryColor};
-    background-color: ${(props) => props.theme.background};
-  }
-  .emoji-mart-category {
-    margin-top: 0.75rem;
-  }
-  .emoji-mart-dark .emoji-mart-category-label span {
-    background-color: ${(props) => props.theme.background};
-    color: #fff;
-  }
-  .emoji-mart-scroll::-webkit-scrollbar {
-    width: 0.25rem;
-  }
-  .emoji-mart-scroll::-webkit-scrollbar-track {
-    background: ${(props) => props.theme.background};
-  }
-  .emoji-mart-scroll::-webkit-scrollbar-thumb {
-    background: ${(props) => props.theme.accentColor};
-  }
-  .emoji-pick {
-    cursor: pointer;
-  }
-  .emoji-pick:hover svg path {
-    fill: ${(props) => props.theme.accentColor};
-  }
-  @media screen and (max-width: 430px) {
-    .emoji-mart {
-      position: fixed;
-      bottom: 5em;
+const PickerWrapper = styled('span')(props => ({
+  '.emoji-mart': {
+    position: 'absolute',
+    zIndex: '1',
+  },
+  '.emoji-mart-bar.emoji-mart-bar,.emoji-mart-scroll.emoji-mart-scroll': {
+    marginRight: '0',
+  },
+  '.emoji-mart-bar svg,.emoji-mart-bar svg path': {
+    fill: props.theme.accentColor
+  },
+  '.emoji-mart .emoji-mart-anchor-bar': {
+    backgroundColor: `${props.theme.accentColor} !important`,
+  },
+  '.emoji-mart-preview': {
+    display: 'none',
+  },
+  '.emoji-mart-dark': {
+    borderColor: props.theme.secondaryColor,
+    backgroundColor: props.theme.background,
+  },
+  '.emoji-mart-category': {
+    marginTop: '0.75rem',
+  },
+  '.emoji-mart-dark .emoji-mart-category-label span': {
+    backgroundColor: props.theme.background,
+    color: '#fff',
+  },
+  '.emoji-mart-scroll::WebkitScrollbar': {
+    width: '0.25rem',
+  },
+  '.emoji-mart-scroll::WebkitScrollbarTrack': {
+    background: props.theme.background,
+  },
+  '.emoji-mart-scroll::WebkitScrollbarThumb': {
+    background: props.theme.accentColor,
+  },
+  '.emoji-pick': {
+    cursor: 'pointer',
+  },
+  '.emoji-pick:hover svg path': {
+    fill: props.theme.accentColor,
+  },
+  '@media screen and (max-width: 430px)': {
+    '.emoji-mart': {
+      position: 'fixed',
+      bottom: '5em',
     }
   }
-`;
+}));
 
-export const EmojiPicker = ({ emojiHandler, customIcon, dismissOnClick }) => {
+
+
+export const EmojiPicker = ({ emojiHandler, customIcon, dismissOnClick, props }) => {
   const [picker, togglePicker] = useState(false);
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const handleDocumentClick = event => {
     let isEmojiClassFound = false;

@@ -8,9 +8,9 @@ import Language from '@mui/icons-material/Language';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Badge, Stack, Typography } from '@mui/material';
-import { ThemeContext } from 'styled-components';
-import { ThemeVars } from '../styles/themes';
 import { User as StoreUser } from '../contexts/user';
+import { ThemeContext } from '../contexts/theme';
+
 
 interface Props {
   newMentionsCount: Number | undefined;
@@ -18,14 +18,14 @@ interface Props {
 }
 
 export const Nav = ({ newMentionsCount, user }: Props) => {
-  const theme = useContext<ThemeVars>(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const displayProps = { xs: 'none', sm: 'none', md: 'block', lg: 'block' };
   const iconProps = {
     color: theme.accentColor,
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
-    color: isActive ? theme.accentColor : theme.primaryColor,
+    color: isActive ? theme.accentColor  : theme.primaryColor,
   });
 
   const stackProps = {

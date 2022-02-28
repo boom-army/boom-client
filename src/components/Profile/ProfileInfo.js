@@ -1,90 +1,90 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import CoverPhoto from "../../styles/CoverPhoto";
 import UserAvatar from "../UserAvatar";
 import { Button, Box, Grid } from "@mui/material";
 import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
+import { styled } from '@mui/material/styles';
 
-const Wrapper = styled.div`
-  border-bottom: 1px solid ${(props) => props.theme.tertiaryColor};
-  position: relative;
+const Wrapper = styled('div')(props=>({
+  borderBottom: `1px solid ${props.theme.tertiaryColor}`,
+  position: 'relative',
 
-  .row {
-    padding-bottom: 1rem;
-  }
+  '.row':{
+    paddingBottom: '1rem',
+  },
 
-  .avatar {
-    margin-left: 1.4rem;
-    margin-top: -4rem;
-  }
+  '.avatar' : {
+    marginLeft: '1.4rem',
+    marginTop: '-4rem',
+  },
 
-  .profile-name-handle {
-    margin-left: 1.4rem;
+  '.profile-name-handle' :{
+    marginLeft: '1.4rem',
 
-    span.consumerName {
-      font-weight: bold;
+    'span.consumerName': {
+      fontWeight: 'bold',
+    },
+
+    'span.wallet' : {
+      marginTop: '0.1rem',
+       color:  props.theme.secondaryColor,
+    },
+
+    'span.handle': {
+      marginTop: '0.1rem',
+      color:props.theme.secondaryColor,
     }
+  },
 
-    span.wallet {
-      margin-top: 0.1rem;
-      color: ${(props) => props.theme.secondaryColor};
+  '.profile-info': {
+    padding: '0 1.4rem 1rem',
+
+    '.bio': {
+      width: '90%',
     }
+  },
 
-    span.handle {
-      margin-top: 0.1rem;
-      color: ${(props) => props.theme.secondaryColor};
+  '.action-btn' : {
+    position: 'absolute',
+    right: '1rem',
+  },
+
+  'div.loc-dob-web': {
+    display: 'flex',
+     color: props.theme.secondaryColor,
+    margin: '0.6rem 0',
+
+    'span' :{
+      marginRight: '1.5rem',
+    },
+
+    'svg': {
+      marginRight: '0.2rem',
+      position: 'relative',
+      top: '3px',
+    },
+  },
+
+  'div.follow-following' : {
+     color:  props.theme.secondaryColor,
+    'span': {
+      marginRight: '1.3rem',
     }
-  }
+  },
 
-  .profile-info {
-    padding: 0 1.4rem 1rem;
+  '@media screen and (max-width: 530px)' : {
+    'div.loc-dob-web': {
+      display: 'flex',
+      flexDirection: 'column',
 
-    .bio {
-      width: 90%;
-    }
-  }
-
-  .action-btn {
-    position: absolute;
-    right: 1rem;
-  }
-
-  div.loc-dob-web {
-    display: flex;
-    color: ${(props) => props.theme.secondaryColor};
-    margin: 0.6rem 0;
-
-    span {
-      margin-right: 1.5rem;
-    }
-
-    svg {
-      margin-right: 0.2rem;
-      position: relative;
-      top: 3px;
-    }
-  }
-
-  div.follow-following {
-    color: ${(props) => props.theme.secondaryColor};
-    span {
-      margin-right: 1.3rem;
-    }
-  }
-
-  @media screen and (max-width: 530px) {
-    div.loc-dob-web {
-      display: flex;
-      flex-direction: column;
-
-      span {
-        margin-bottom: 0.7rem;
-      }
+      'span': {
+        marginBottom: '0.7rem'
+      },
     }
   }
-`;
+}));
 
 const ProfileInfo = ({ profile }) => {
   const {

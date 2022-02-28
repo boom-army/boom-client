@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Link from '@mui/material/Link';
 import { styled } from '@mui/system';
 import { ThemeContext } from '../../contexts/theme';
-import { darkTheme, lightTheme } from '../../styles/themes';
+import { darkTheme} from '../../styles/themes';
 
 export const AttributionLink: React.FC<({ src: string })> = ({ src }) => {
   const { theme } = useContext(ThemeContext);
@@ -13,7 +13,7 @@ export const AttributionLink: React.FC<({ src: string })> = ({ src }) => {
     borderBottom: "2px solid transparent",
     paddingBottom: "3px",
     '&:hover': {
-      borderBottom: `2px solid ${isDarkTheme ? darkTheme.tertiaryColor : lightTheme.tertiaryColor}`,
+      borderBottom: `2px solid ${theme.tertiaryColor}`,
     }
   });
 

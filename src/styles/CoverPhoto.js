@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import { styled } from '@mui/material/styles';
 
-export default styled.img`
-  height: 200px;
-  width: 100%;
-  object-fit: cover;
-`;
+export default styled('img')({
+  height: '200px',
+  width: '100%',
+  objectFit: 'cover',
+});

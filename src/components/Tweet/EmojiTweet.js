@@ -1,12 +1,12 @@
 import "emoji-mart/css/emoji-mart.css";
-import styled from "styled-components";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { SmilePlusIcon } from "../Icons";
+import { styled } from '@mui/material/styles';
 
-const ReactionWrapper = styled.div`
-  display: flex;
-  margin-right: 4em;
-`;
+const ReactionWrapper = styled('div')({
+  display: 'flex',
+  marginRight: '4em'
+});
 
 export const EmojiTweet = ({ handleReaction }) => {
   return (

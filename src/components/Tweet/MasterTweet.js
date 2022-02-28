@@ -1,6 +1,6 @@
 import React from "react";
 import boomLogo from "../../images/logo.png"
-import styled from "styled-components";
+import { styled } from '@mui/material/styles';
 import { CustomResponse } from "../CustomResponse";
 import { Helmet } from "react-helmet";
 import { Loader } from "../Loader";
@@ -9,9 +9,9 @@ import { TWEET } from "../../queries/tweet";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
-const Wrapper = styled.div`
-  margin-bottom: 7rem;
-`;
+const Wrapper  = styled('div')({
+  marginBottom: '7rem',
+});
 
 export const MasterTweet = () => {
   const { tweetId } = useParams();
@@ -20,8 +20,7 @@ export const MasterTweet = () => {
     variables: { id: tweetId },
   });
 
-  const comments =
-    data?.tweet?.childTweets?.length > 0 ? data.tweet.childTweets : [];
+  const comments = data?.tweet?.childTweets?.length > 0 ? data.tweet.childTweets : [];
   const exists = !!data?.tweet?.id;
   const hasParent = !!data?.tweet?.parentTweet?.id;
 

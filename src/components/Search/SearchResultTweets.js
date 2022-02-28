@@ -1,12 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import { CustomResponse } from "../CustomResponse";
 import { ShowTweet } from "../Tweet";
 import { Loader } from "../Loader";
+import { styled } from '@mui/material/styles';
 
-const Wrapper = styled.div`
-  position: relative;
-`;
+ const Wrapper = styled('div')({
+  position: 'relative',
+ });
 
 const SearchResultTweets = ({ tweets, loading }) => {
   if (loading) return <Loader />;

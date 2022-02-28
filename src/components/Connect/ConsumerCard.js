@@ -13,11 +13,11 @@ import { Follow } from "../Profile/Follow";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
-const CardStyled = styled(Card)`
-  & .MuiButtonBase-root {
-    display: block;
+const CardStyled = styled(Card)({
+  '& .MuiButtonBase-root' :{
+    display: 'block',
   }
-`;
+});
 
 export const ConsumerCard = ({ consumer }) => {
   const navigate = useNavigate();

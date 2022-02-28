@@ -1,18 +1,20 @@
 import React, { useContext } from 'react';
-import { ThemeContext } from 'styled-components';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 import Popup from 'reactjs-popup';
 import ToggleTheme from './ToggleTheme';
 import Logout from './Auth/Logout';
 import { ChangeColor } from './ChangeColor';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Stack, Typography } from '@mui/material';
+import { ThemeContext } from '../contexts/theme';
 
-const Wrapper = styled.div`
-  .btn {
-    cursor: pointer;
+const Wrapper = styled('div')({
+  '.btn':{
+    cursor: 'pointer',
   }
-`;
+});
+
+
 
 const MoreBtn = React.forwardRef(
   ({ open, iconProps, stackProps, ...props }, ref) => {
@@ -33,7 +35,7 @@ const MoreBtn = React.forwardRef(
 );
 
 export const MorePopUp = ({ iconProps, stackProps }) => {
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
 
   const contentStyle = {
     width: '160px',

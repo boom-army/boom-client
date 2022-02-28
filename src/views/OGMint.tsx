@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState, useCallback, useContext } from "react";
 import * as anchor from "@project-serum/anchor";
-
-import styled from "styled-components";
 import { Container, Snackbar } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
-import Alert from "@material-ui/lab/Alert";
+import Paper from "@mui/material/Paper";
+import Alert from "@mui/material/Alert";
+import { styled } from '@mui/material/styles';
 import { PublicKey, PublicKeyInitData } from "@solana/web3.js";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
@@ -34,18 +33,19 @@ import {
 import Tilt from "react-parallax-tilt";
 import { ThemeContext } from "../contexts/theme";
 
-const ConnectButton = styled(WalletDialogButton)`
-  width: 100%;
-  height: 60px;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  background: #fd0069;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-`;
 
-const TiltStyled = styled(Tilt)(({ theme }) => ({
+const ConnectButton = styled(WalletDialogButton)({
+  width: '100%',
+  height: '60px',
+  marginTop: '10px',
+  marginBottom: '5px',
+  background: '#fd0069',
+  color: 'white',
+  fontSize: '16px',
+  fontWeight: 'bold',
+});
+ 
+const TiltStyled = styled(Tilt)({
   backgroundImage: "url(/assets/outer.png)",
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
@@ -55,15 +55,14 @@ const TiltStyled = styled(Tilt)(({ theme }) => ({
   alignItems: "center",
   width: "260px",
   height: "260px",
-
   transformStyle: "preserve-3d",
-}));
+});
 
 function createData(serial: string, cost: number, minting: string) {
   return { serial, cost, minting };
 }
 
-const MintContainer = styled.div``; // add your owns styles here
+const MintContainer = styled("div")({}); // add your owns styles here
 
 const candyMachineId = process.env.REACT_APP_CANDY_MACHINE_ID
   ? new anchor.web3.PublicKey(

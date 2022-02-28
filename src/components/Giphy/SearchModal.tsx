@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react'
 import { ThemeContext } from "../../contexts/theme";
-import { styled, Box } from '@mui/system';
+import {  Box } from '@mui/system';
 import ModalUnstyled from '@mui/core/ModalUnstyled';
 import { GIFObject } from 'giphy-api';
 import Stack from '@mui/material/Stack';
@@ -11,39 +11,42 @@ import { ImageGrid } from './ImageGrid';
 import { ImageSuggestionGrid } from './ImageSuggestionGrid';
 import { Loader } from '../Loader';
 import { SearchModalHeader } from './SearchModalHeader';
+import { styled } from '@mui/material/styles';
 
-const StyledModal = styled(ModalUnstyled)`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-`;
+const StyledModal = styled(ModalUnstyled)({
+  // position: 'fixed',
+  // zIndex: '1300',
+  right: '0',
+  bottom: '0',
+  top: '0',
+  left: '0',
+  display: 'flex',
+  justifyContent: 'center',
+});
+ 
+const Backdrop = styled('div')(
+  {
+    // zIndex: '-1',
+    position: 'fixed',
+    right: '0',
+    bottom: '0',
+    top: '0',
+    left: '0',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+   WebkitTapHighlightColor: 'transparent',
+  }
+)
 
-const Backdrop = styled('div')`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-tap-highlight-color: transparent;
-`;
-
-const GifButton = styled('button')`
-  background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-`;
-
+const GifButton = styled('button')({
+  background: 'none',
+	color: 'inherit',
+	border: 'none',
+	padding: '0',
+	font: 'inherit',
+	cursor: 'pointer',
+	outline: 'inherit',
+})
+ 
 const GIPHY_API = process.env.REACT_APP_GIPHY_KEY as string;
 
 const queryGiphy = async (query: string, offset: number = 0): Promise<Search> => {

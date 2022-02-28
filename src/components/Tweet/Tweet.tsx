@@ -4,7 +4,6 @@ import "linkify-plugin-mention";
 import Linkify from "linkify-react";
 import UserAvatar from "../UserAvatar";
 import moment from "moment";
-import styled from "styled-components";
 import { CommentIcon } from "../Icons";
 import { EmojiTweet, Retweet } from "./index";
 import { ImageBox } from "../ImageBox";
@@ -13,109 +12,113 @@ import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { TipCreator } from "../TipCreator";
+import { styled } from '@mui/material/styles';
 import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { useReaction } from "../../hooks/useReaction";
 
-const Wrapper = styled.div`
-  display: flex;
-  border-bottom: 1px solid ${(props) => props.theme.tertiaryColor};
-  padding: 1.5rem 1rem 1rem 1rem;
 
-  .avatar {
-    margin-right: 1em;
-    margin-bottom: 1em;
-  }
+const Wrapper = styled('div')(props=>({
+  display:'flex',
+   borderBottom: `1px solid ${props.theme.tertiaryColor}`,
+  padding: '1.5rem 1rem 1rem 1rem',
 
-  .tweet-info {
-    width: 100%;
-  }
+  '.avatar': {
+    marginRight: '1em',
+    marginBottom: '1em',
+  },
 
-  .tweet-info-user {
-    display: flex;
-  }
+  '.tweet-info':{
+    width: '100%',
+  },
 
-  .tweet-info-user span.username {
-    font-weight: 500;
-  }
+  '.tweet-info-user': {
+    display: 'flex',
+  },
 
-  .tweet-info-user span.secondary {
-    padding-left: 0.5rem;
-    color: ${(props) => props.theme.secondaryColor};
-  }
+  '.tweet-info-user span.username' :{
+    fontWeight: 500,
+  },
 
-  .tweet-body {
-    margin-bottom: 0.75rem;
-    word-break: break-word;
-  }
+  '.tweet-info-user span.secondary':{
+    paddingLeft: '0.5rem',
+   color: props.theme.secondaryColor ,
+  },
 
-  .tags {
-    display: flex;
-  }
+  '.tweet-body':{
+    marginBottom: '0.75rem',
+    wordBreak: 'break-word',
+  },
 
-  a.body {
-    color: ${(props) => props.theme.accentColor};
-  }
+  '.tags': {
+    display: 'flex',
+  },
 
-  div.tweet-stats {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
+  'a.body': {
+    color: props.theme.accentColor,
+  },
 
-    div {
-      color: ${(props) => props.theme.secondaryColor};
-    }
+  'div.tweet-stats': {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
 
-    .controls {
-      margin-right: 4rem;
-    }
+    'div': {
+      color:props.theme.secondaryColor,
+    },
 
-    svg {
-      margin-right: 0.5rem;
-    }
+    '.controls': {
+      marginRight: '4rem',
+    },
 
-    span {
-      display: flex;
-      align-items: center;
-    }
+    'svg':{
+      marginRight: '0.5rem',
+    },
 
-    span.comment {
-      svg {
-        position: relative;
-        top: 4px;
+    'span' :{
+      display: 'flex',
+      alignItems: 'center',
+    },
+
+    'span.comment' :{
+      'svg': {
+        position: 'relative',
+        top: '4px',
       }
     }
-  }
+  },
 
-  @media screen and (max-width: 470px) {
-    div.tweet-stats {
-      div {
-        margin-right: 1.5rem;
+  '@media screen and (max-width: 470px)' :{
+    'div.tweet-stats': {
+      'div':{
+        marginRight: '1.5rem',
+      },
+      '.controls': {
+        marginRight: '1.5rem',
       }
-      .controls {
-        margin-right: 1.5rem;
-      }
+    }
+  },
+
+  '@media screen and (max-width: 430px)':{
+    flexDirection: 'column',
+
+    '.username': {
+      display: 'none',
+    },
+
+    '.avatar': {
+      display: 'none',
+    },
+
+    '.tweet-info-user span.secondary': {
+      paddingLeft: '0',
+      paddingRight: '0.5rem',
     }
   }
+}));
 
-  @media screen and (max-width: 430px) {
-    flex-direction: column;
 
-    .username {
-      display: none;
-    }
-
-    .avatar {
-      display: none;
-    }
-
-    .tweet-info-user span.secondary {
-      padding-left: 0;
-      padding-right: 0.5rem;
-    }
-  }
-`;
 
 interface Props {
   tweet: Tweet;
@@ -147,7 +150,6 @@ export const ShowTweet: React.FC<Props> = ({ tweet }) => {
     target: { url: "_blank" },
     formatHref: { hashtag: (href: any) => `explore?=${href.substring(1)}` },
   };
-
   return (
     <Wrapper>
       <Link to={`/${handle}`}>
@@ -174,7 +176,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }) => {
 
         {nft && <NFTTweet nftData={nft} />}
 
-        {!!files.length && <ImageBox files={files} disableLightbox={false} />}
+        {!!files.length && <ImageBox files={files} disablelightbox={false} />}
 
         {reactions.length > 0 && (
           <ReactionsList

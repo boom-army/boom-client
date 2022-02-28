@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TipIcon2 } from "../Icons";
 import { TipInput } from "./tipInput";
-import { styled } from "@mui/system";
+import { styled } from '@mui/material/styles';
+import { ThemeContext } from "../../contexts/theme";
 
 export const TipCreator = ({ tipAmount, userPubKey, tweetId, userId }) => {
+  const { theme } = useContext(ThemeContext);
   const [showTip, setShowTip] = useState(false);
 
-  const Wrapper = styled("span")`
-    color: #657786;
-    position: relative;
-  `;
+  const Wrapper = styled('span')({
+    color: theme.secondaryColor,
+    position: 'relative',
+  });
+
   return (
     <Wrapper>
       <TipIcon2 onClick={() => setShowTip(!showTip)} userPubKey={userPubKey} />

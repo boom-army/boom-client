@@ -1,5 +1,4 @@
 import { useContext } from "react";
-
 import { Box, Typography } from "@mui/material";
 import { Loader } from "./Loader";
 import { ThemeContext } from "../contexts/theme";
