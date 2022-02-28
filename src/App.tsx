@@ -73,7 +73,7 @@ export const App = () => {
           color: `${theme.primaryColor} !important`,
         },
         '.MuiListItemIcon-root': {
-          color: '#657786 !important'
+          color: `${theme.secondaryColor} !important`,
         },
         'h1, h2, h3, h4, h5, h6': {
           fontWeight: 'normal',

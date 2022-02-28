@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Reaction, useTweetReactionsLazyQuery } from "../../generated/graphql";
 import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
@@ -7,6 +7,7 @@ import { Emoji } from "emoji-mart";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
+import { ThemeContext } from "../../contexts/theme";
 
 export interface Accumulator
   extends Record<
@@ -67,6 +68,7 @@ export const List: React.FC<{
   handleReaction: HandleReaction;
   tweetId: string;
 }> = ({ reactions, handleReaction, tweetId }) => {
+  const { theme } = useContext(ThemeContext);
   const [getTweetReactions, { data, loading }] = useTweetReactionsLazyQuery({
     variables: { tweetId: tweetId },
   });
@@ -105,7 +107,7 @@ export const List: React.FC<{
                   padding: "4px 10px",
                   minWidth: "auto",
                   marginRight: "8px",
-                  color: "#657786",
+                  color: theme.secondaryColor,
                   borderColor: isMine ? "#3f51b5" : "inherit",
                   lineHeight: "1.2",
                 }}
