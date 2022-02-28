@@ -1,4 +1,3 @@
-import { MENTIONS } from "../queries/others";
 import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
 import { displayError } from "../utils";
 import { useMutation } from "@apollo/client";
@@ -10,7 +9,6 @@ export const useReaction = ({ tweetId }) => {
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
     refetchQueries: [
-      { query: MENTIONS },
       { query: TWEET, variables: { id: tweetId } }
     ],
   });
