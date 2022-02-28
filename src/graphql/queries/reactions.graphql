@@ -1,0 +1,13 @@
+query tweetReactions($tweetId: ID!) {
+  tweet(id: $tweetId) {
+    reactions {
+      user {
+        handle
+        avatar
+      }
+      emojiId
+      id
+      isMine
+    }
+  }
+}

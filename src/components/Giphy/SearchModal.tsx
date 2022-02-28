@@ -14,8 +14,8 @@ import { SearchModalHeader } from './SearchModalHeader';
 import { styled } from '@mui/material/styles';
 
 const StyledModal = styled(ModalUnstyled)({
-  position: 'fixed',
-  zIndex: '1300',
+  // position: 'fixed',
+  // zIndex: '1300',
   right: '0',
   bottom: '0',
   top: '0',
@@ -26,7 +26,7 @@ const StyledModal = styled(ModalUnstyled)({
  
 const Backdrop = styled('div')(
   {
-    zIndex: '-1',
+    // zIndex: '-1',
     position: 'fixed',
     right: '0',
     bottom: '0',
@@ -47,8 +47,6 @@ const GifButton = styled('button')({
 	outline: 'inherit',
 })
  
-
-
 const GIPHY_API = process.env.REACT_APP_GIPHY_KEY as string;
 
 const queryGiphy = async (query: string, offset: number = 0): Promise<Search> => {

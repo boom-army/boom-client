@@ -32,6 +32,7 @@ export const USER_FOLLOW = gql`
     userFollow(offset: $offset, limit: $limit) {
       id
       handle
+      avatar
       isFollowing
       isSelf
       consumerName

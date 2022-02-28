@@ -5,3 +5,4 @@ export { Nav } from "./Nav";
 export { Notifications } from "./Notifications";
 export { Suggestion } from "./Suggestion";
 export { Following } from "./Following";
+export { OGMint } from "./OGMint";

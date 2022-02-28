@@ -9,7 +9,7 @@ export const TipCreator = ({ tipAmount, userPubKey, tweetId, userId }) => {
   const Wrapper = styled('span')({
     color: '#657786',
     position: 'relative',
-  })
+  });
 
   return (
     <Wrapper>

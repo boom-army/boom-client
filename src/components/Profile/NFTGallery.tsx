@@ -1,14 +1,14 @@
-import React, { useState, useContext, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Metadata,
-  MetadataData,
+  MetadataDataData,
 } from "@metaplex-foundation/mpl-token-metadata";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { Box } from "@mui/system";
-import { Link, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import { currentCluster } from "../../utils/utils";
-import { ThemeContext } from "../../contexts/theme";
+// import { ThemeContext } from "../../contexts/theme";
 import { useSnackbar } from "notistack";
 import { displayError } from "../../utils";
 import { Loader } from "../Loader";
@@ -18,7 +18,7 @@ interface NFTGalleryProps {
 }
 
 interface NFTTileProps {
-  data: MetadataData;
+  data: MetadataDataData;
   cluster: string;
 }
 
@@ -29,21 +29,21 @@ interface URIData {
 }
 
 const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
-  const { theme } = useContext(ThemeContext);
+  // const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
 
   const [uRIData, setURIData] = useState<URIData>();
-  const [explorerLink, setExplorerLink] = useState("");
+  // const [explorerLink, setExplorerLink] = useState("");
 
   useMemo(() => {
     (async () => {
       try {
-        const response = await fetch(data.data.uri);
+        const response = await fetch(data.uri);
         const json = await response.json();
         setURIData(json);
-        setExplorerLink(
-          `https://explorer.solana.com/address/${data?.mint}?cluster=${cluster}`
-        );
+        // setExplorerLink(
+        //   `https://explorer.solana.com/address/${data?.mint}?cluster=${cluster}`
+        // );
       } catch (error) {
         displayError(error, enqueueSnackbar);
       }
@@ -61,12 +61,12 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
           minWidth: "140px",
         }}
       >
-        <Link
+        {/* <Link
           href={explorerLink}
           target="_blank"
           color={theme.secondaryColor}
           underline="hover"
-        >
+        > */}
           <Box>
             {uRIData?.image ? (
               <img src={uRIData?.image} alt={uRIData?.name} width="120" />
@@ -77,7 +77,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
           <Box>
             <Typography sx={{ fontSize: "0.8em", maxWidth: "120px" }}>{uRIData?.name}</Typography>
           </Box>
-        </Link>
+        {/* </Link> */}
       </Box>
     </>
   );
@@ -88,15 +88,17 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
   const { name } = currentCluster();
   const { enqueueSnackbar } = useSnackbar();
 
-  const [nfts, setNfts] = useState<MetadataData[]>();
+  const [nfts, setNfts] = useState<MetadataDataData[]>();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        const nftMeta = await Metadata.findByOwnerV2(connection, publicAddress);
+        // const nftMeta = await Metadata.findByOwnerV2(connection, publicAddress);
+        const nftMeta = await Metadata.findDataByOwner(connection, publicAddress);
         const nftData = nftMeta.map((meta) => meta.data);
+        
         setNfts(nftData);
       } catch (error) {
         displayError(error, enqueueSnackbar);
@@ -120,8 +122,8 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
           }}
         >
           {nfts &&
-            nfts.map((nft: MetadataData) => (
-              <NFTTile data={nft} key={nft.mint} cluster={name} />
+            nfts.map((nft: MetadataDataData) => (
+              <NFTTile data={nft} key={nft.uri} cluster={name} />
             ))}
         </Stack>
       ) : (

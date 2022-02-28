@@ -7,14 +7,16 @@ import moment from "moment";
 import { CommentIcon } from "../Icons";
 import { EmojiTweet, Retweet } from "./index";
 import { ImageBox } from "../ImageBox";
-import { Link } from "react-router-dom";
-import { setDate } from "../../utils";
-import { VideoContainer } from "../Giphy/VideoContainer";
-import { NFTTweet } from "../NFT/NFTTweet";
-import { Tweet } from "../../generated/graphql";
-import { TipCreator } from "../TipCreator";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
+import { Link } from "react-router-dom";
+import { List as ReactionsList } from "../Reactions/List";
+import { NFTTweet } from "../NFT/NFTTweet";
+import { TipCreator } from "../TipCreator";
 import { styled } from '@mui/material/styles';
+import { Tweet } from "../../generated/graphql";
+import { VideoContainer } from "../Giphy/VideoContainer";
+import { setDate } from "../../utils";
+import { useReaction } from "../../hooks/useReaction";
 
 
 const Wrapper = styled('div')(props=>({
@@ -91,6 +93,9 @@ const Wrapper = styled('div')(props=>({
     'div.tweet-stats': {
       'div':{
         marginRight: '1.5rem',
+      },
+      '.controls': {
+        marginRight: '1.5rem',
       }
     }
   },
@@ -117,16 +122,9 @@ const Wrapper = styled('div')(props=>({
 
 interface Props {
   tweet: Tweet;
-  offset: Number;
-  parentTweetId: String | undefined;
 }
 
-
-export const ShowTweet: React.FC<Props> = ({
-  tweet,
-  offset,
-  parentTweetId,
-}) => {
+export const ShowTweet: React.FC<Props> = ({ tweet }) => {
   const {
     id,
     text,
@@ -144,7 +142,9 @@ export const ShowTweet: React.FC<Props> = ({
     createdAt,
   } = tweet;
 
+  const { handleReaction } = useReaction({ tweetId: id });
   const handle = user && user.handle;
+
   const linkifyOptions = {
     className: "body",
     target: { url: "_blank" },
@@ -178,13 +178,16 @@ export const ShowTweet: React.FC<Props> = ({
 
         {!!files.length && <ImageBox files={files} disableLightbox={false} />}
 
-        <div className="tweet-stats">
-          <EmojiTweet
-            parentTweetId={parentTweetId}
-            tweetId={id}
-            userPubKey={user?.publicAddress}
+        {reactions.length > 0 && (
+          <ReactionsList
             reactions={reactions}
+            handleReaction={handleReaction}
+            tweetId={id}
           />
+        )}
+
+        <div className="tweet-stats">
+          <EmojiTweet handleReaction={handleReaction} />
 
           <div className="controls">
             <span className="comment">

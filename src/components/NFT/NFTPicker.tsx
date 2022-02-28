@@ -12,14 +12,16 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Connection, PublicKey } from "@solana/web3.js";
+import { CircularProgress } from "@mui/material";
+import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
 import { styled } from '@mui/material/styles';
-import { useConnection } from "@solana/wallet-adapter-react";
-import { Connection, PublicKey } from "@solana/web3.js";
-import { useSnackbar } from "notistack";
 import { camelizeKeys, displayError } from "../../utils";
-import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
+import { useConnection } from "@solana/wallet-adapter-react";
+import { useSnackbar } from "notistack";
+import cuid from 'cuid';
 
 // export interface NFTObject {
 //   publicKey: string;
@@ -57,8 +59,8 @@ import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 
 
 const StyledModal = styled(ModalUnstyled)({
-  position: 'fixed',
-  zIndex: '1300',
+  // position: 'fixed',
+  // zIndex: '1300',
   right: '0',
   bottom: '0',
   top: '0',
@@ -72,7 +74,7 @@ const StyledModal = styled(ModalUnstyled)({
 });
 
 const Backdrop = styled("div")({
-  zIndex: '-1',
+  // zIndex: '-1',
   position: 'fixed',
   right: '0',
   bottom: '0',
@@ -80,7 +82,7 @@ const Backdrop = styled("div")({
   left: '0',
   backgroundColor: 'rgba(0, 0, 0, 0.5)',
   WebkitTapHighlightColor: 'transparent',
-})
+});
 
 
 export const NFTPicker: React.FC<{
@@ -90,6 +92,7 @@ export const NFTPicker: React.FC<{
   const [nftInput, setNftInput] = useState("");
   const [metadata, setMetadata] = useState<any>(null);
   const [validKey, setValidKey] = useState<null | Boolean>(null);
+  const [loading, setLoading] = useState(false);
   const { theme } = useContext(ThemeContext);
   const handleClose = () => {
     setNftInput("");
@@ -99,6 +102,7 @@ export const NFTPicker: React.FC<{
   };
   const { connection } = useConnection();
   const { enqueueSnackbar } = useSnackbar();
+  const nftKey = cuid();
 
   const handleSelect = () => {
     setNftInput("");
@@ -138,10 +142,13 @@ export const NFTPicker: React.FC<{
     (async () => {
       try {
         if (!nftInput) return;
+        setLoading(true);
         const key = new PublicKey(nftInput);
         const acc = await connection.getParsedAccountInfo(key);
+
+        if (!acc) throw new Error("No NFT found with that public key");
         // @ts-ignore: error in types
-        if (acc && acc.value.data.parsed.info.mint) {
+        if (acc && acc?.value?.data?.parsed.info.mint) {
           // @ts-ignore: error in types
           const mintKey = new PublicKey(acc.value.data.parsed.info.mint);
           await fetchSetMeta(connection, mintKey);
@@ -156,6 +163,8 @@ export const NFTPicker: React.FC<{
         if (nftInput.length > 42) {
           displayError(error, enqueueSnackbar);
         }
+      } finally {
+        setLoading(false);
       }
     })();
   }, [nftInput, validKey, connection, enqueueSnackbar, fetchSetMeta]);
@@ -218,23 +227,29 @@ export const NFTPicker: React.FC<{
                   NFT Public Key
                 </InputLabel>
                 <InputBase
+                  key={nftKey}
                   placeholder="eg. 43QrHJ2csgLsRUhXW7WHQecZhRLFHW88sazGvUT65vYj"
                   id="nft-input"
                   value={nftInput}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setNftInput(e.currentTarget.value);
                   }}
+                  autoFocus
                   endAdornment={
                     validKey !== null && (
                       <InputAdornment
                         position="end"
                         sx={{ paddingRight: "0.5rem" }}
                       >
-                        {validKey === true ? (
-                          <CheckIcon color="success" />
-                        ) : (
-                          <ClearIcon color="error" />
+                        {loading && (
+                          <CircularProgress size={16} color="secondary" />
                         )}
+                        {!loading &&
+                          (validKey === true ? (
+                            <CheckIcon color="success" />
+                          ) : (
+                            <ClearIcon color="error" />
+                          ))}
                       </InputAdornment>
                     )
                   }

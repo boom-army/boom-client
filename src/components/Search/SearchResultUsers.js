@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "../WhoToFollow";
+import { User } from "../User";
 import { CustomResponse } from "../CustomResponse";
 import { Loader } from "../Loader";
 import { styled } from '@mui/material/styles';

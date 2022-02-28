@@ -16,7 +16,7 @@ export let SWAP_PROGRAM_ID = new PublicKey(
 );
 
 export let SOSOL_TOKEN_ID = new PublicKey(
-  "soso1vCmdxwEZqU47M4NZ4MxZH19ppgqF1auG7dP3wz"
+  "boomh1LQnwDnHtKxWTFgxcbdRjPypRSjdwxkAEJkFSH"
 );
 
 export let METADATA_PROGRAM_ID = new PublicKey(

@@ -1,6 +1,6 @@
 export const LABELS = {
   ACCOUNT_FUNDED: "Account funded.",
-  APP_TITLE: "Sosol",
+  APP_TITLE: "Boom",
   AUDIT_WARNING:
     "Oyster is an unaudited software project used for internal purposes at the Solana Foundation. This app is not for public use.",
   BORROWED_VALUE: "You borrowed",
