@@ -1,5 +1,4 @@
 import "emoji-mart/css/emoji-mart.css";
-// import styled from "styled-components";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { SmilePlusIcon } from "../Icons";
 import { styled } from '@mui/material/styles';
