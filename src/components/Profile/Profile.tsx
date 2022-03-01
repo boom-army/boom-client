@@ -36,7 +36,7 @@ export const Profile: React.FC = () => {
   return (
     <>
       <ProfileInfo profile={data && data.profile} />
-      <Box sx={{ width: "100%", typography: "body1" }}>
+      <Box sx={{ typography: "body1" }}>
         <TabContext value={tabValue}>
           <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
             <TabList
