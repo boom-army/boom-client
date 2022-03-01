@@ -59,7 +59,7 @@ const Wrapper = styled("div")((props) => ({
   },
 
   "div.tweet-stats": {
-    display: "flex",
+    display: "inline-flex",
     flexWrap: "wrap",
     alignItems: "center",
 
