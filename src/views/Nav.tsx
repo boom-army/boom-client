@@ -19,7 +19,6 @@ interface Props {
 
 export const Nav = ({ newMentionsCount, user }: Props) => {
   const {theme} = useContext(ThemeContext);
-  const displayProps = { xs: 'none', sm: 'none', md: 'block', lg: 'block' };
   const iconProps = {
     color: theme.accentColor,
   };
@@ -49,7 +48,7 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
       <NavLink style={applyActiveStyles} to="/">
         <Stack direction="row" {...stackProps}>
           <Language style={iconProps} />
-          <Typography variant="body1" display={displayProps}>
+          <Typography variant="body1">
             Community
           </Typography>
         </Stack>
@@ -57,7 +56,7 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
       <NavLink style={applyActiveStyles} to="/mint-nft">
         <Stack direction="row" {...stackProps}>
           <StyleIcon sx={iconProps} />
-          <Typography variant="body1" display={displayProps}>
+          <Typography variant="body1">
             Mint NFT
           </Typography>
         </Stack>
@@ -73,7 +72,7 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
       <NavLink style={applyActiveStyles} to="/connect">
         <Stack direction="row" {...stackProps}>
           <GroupIcon sx={iconProps} />
-          <Typography variant="body1" display={displayProps}>
+          <Typography variant="body1">
             Creators
           </Typography>
         </Stack>
@@ -92,7 +91,7 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
           >
             <NotificationsIcon sx={iconProps} />
           </Badge>
-          <Typography variant="body1" display={displayProps}>
+          <Typography variant="body1">
             Notifications
           </Typography>
         </Stack>
@@ -101,7 +100,7 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
         <NavLink style={applyActiveStyles} to={`/${user?.handle}`}>
           <Stack direction="row" {...stackProps}>
             <AccountCircleIcon sx={iconProps} />
-            <Typography variant="body1" display={displayProps}>
+            <Typography variant="body1">
               Profile
             </Typography>
           </Stack>

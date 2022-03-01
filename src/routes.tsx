@@ -4,7 +4,7 @@ import BoomLogo from "./images/logo.png";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import RestoreIcon from "@mui/icons-material/Restore";
 import { AccountsProvider } from "./contexts/accounts";
@@ -18,7 +18,7 @@ import {
   Notifications,
   Suggestion,
 } from "./views";
-import { Container, Grid, Paper } from "@mui/material";
+import { Badge, Container, Grid, Paper, SwipeableDrawer } from "@mui/material";
 import { EditProfile } from "./components/Profile/EditProfile";
 import { GiphyContextProvider } from "./contexts/giphy";
 import { Helmet } from "react-helmet";
@@ -30,20 +30,22 @@ import { Profile } from "./components/Profile/Profile";
 import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
-import { styled } from "@mui/system";
+import { Box, styled } from "@mui/system";
 import { useProfileLazyQuery } from "./generated/graphql";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { user, setUser } = useContext(UserContext);
   const [value, setValue] = React.useState("recents");
+  const [drawer, setDrawer] = React.useState(false);
 
   const StyledBottomNavigation = styled(BottomNavigation)({
     width: "auto",
     backgroundColor: theme.background,
     borderTop: `1px solid ${theme.tertiaryColor}`,
     "& .MuiButtonBase-root": {
-      color: theme.secondaryColor,
+      color: `${theme.secondaryColor} !important`,
+      paddingTop: "1em",
     },
     "& .Mui-selected": {
       color: theme.accentColor,
@@ -53,6 +55,19 @@ export const AppRoutes: React.FC = () => {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event &&
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+      setDrawer(open);
+    };
 
   const [getHandle, { loading, data, refetch }] = useProfileLazyQuery();
 
@@ -186,13 +201,22 @@ export const AppRoutes: React.FC = () => {
                         icon={<RestoreIcon />}
                         to="/"
                       />
-                      <BottomNavigationAction
-                        component={NavLink}
-                        label="Notifications"
-                        value="notifications"
-                        icon={<NotificationsIcon />}
-                        to="/notifications"
-                      />
+                      {user?.handle && (
+                        <BottomNavigationAction
+                          component={NavLink}
+                          label="Notifications"
+                          value="notifications"
+                          icon={
+                            <Badge
+                              badgeContent={data?.profile?.newMentionsCount}
+                              sx={{ color: theme.accentColor }}
+                            >
+                              <NotificationsIcon />
+                            </Badge>
+                          }
+                          to="/notifications"
+                        />
+                      )}
                       {user?.handle && (
                         <BottomNavigationAction
                           component={NavLink}
@@ -202,15 +226,32 @@ export const AppRoutes: React.FC = () => {
                           to={`/${user?.handle}`}
                         />
                       )}
-
                       <BottomNavigationAction
                         label="Menu"
                         value="menu"
                         icon={<MenuIcon />}
+                        onClick={toggleDrawer(true)}
                       />
                     </StyledBottomNavigation>
                   </Paper>
                 </Container>
+                <SwipeableDrawer
+                  open={drawer}
+                  onClose={toggleDrawer(false)}
+                  onOpen={toggleDrawer(true)}
+                >
+                  <Box
+                    role="presentation"
+                    onClick={toggleDrawer(false)}
+                    onKeyDown={toggleDrawer(false)}
+                    sx={{ paddingLeft: "1em" }}
+                  >
+                    <Nav
+                      user={user}
+                      newMentionsCount={data?.profile?.newMentionsCount}
+                    />
+                  </Box>
+                </SwipeableDrawer>
               </GiphyContextProvider>
             </MarketProvider>
           </AccountsProvider>
