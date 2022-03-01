@@ -149,7 +149,7 @@ export const AppRoutes: React.FC = () => {
                       sm={12}
                       md={7}
                       sx={middleColStyles}
-                      elevation={2}
+                      elevation={0}
                     >
                       <Routes>
                         <Route path="/" element={<Home />} />
@@ -195,7 +195,7 @@ export const AppRoutes: React.FC = () => {
                       right: 0,
                     }}
                     display={{ xs: "block", sm: "block", md: "none" }}
-                    elevation={3}
+                    elevation={1}
                   >
                     <StyledBottomNavigation
                       value={value}

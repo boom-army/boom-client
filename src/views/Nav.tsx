@@ -10,6 +10,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Badge, Stack, Typography } from "@mui/material";
 import { User as StoreUser } from "../contexts/user";
 import { ThemeContext } from "../contexts/theme";
+import { styled } from "@mui/material/styles";
 
 interface Props {
   newMentionsCount: Number | undefined;
@@ -33,16 +34,17 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
     marginRight: "2rem",
   };
 
+  const StyledStack = styled(Stack)({
+    minHeight: "100vh",
+    marginTop: "1.3rem",
+    fontWeight: 500,
+    alignItems: "flex-start",
+  });
+
   return (
-    <Stack
+    <StyledStack
       direction="column"
       spacing={4.5}
-      alignItems={{ sm: "space-around", md: "flex-start" }}
-      sx={{
-        minHeight: "100vh",
-        marginTop: "1.3rem",
-        fontWeight: 500,
-      }}
     >
       <NavLink style={applyActiveStyles} to="/">
         <Stack direction="row" {...stackProps}>
@@ -96,6 +98,6 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
         </NavLink>
       )}
       <MorePopUp iconProps={iconProps} stackProps={stackProps} />
-    </Stack>
+    </StyledStack>
   );
 };

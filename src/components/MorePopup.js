@@ -14,6 +14,15 @@ const Wrapper = styled("div")({
   },
 });
 
+const StyledPopup = styled(Popup)({
+  "@media (max-width: 899px)": {
+    position: "absolute",
+    right: "13em",
+    top: "3em",
+    zIndex: 9999,
+  },
+});
+
 const MoreBtn = React.forwardRef(
   ({ open, iconProps, stackProps, ...props }, ref) => {
     return (
@@ -50,7 +59,7 @@ export const MorePopUp = ({ iconProps, stackProps }) => {
 
   return (
     <Wrapper>
-      <Popup
+      <StyledPopup
         className="btn"
         trigger={(open) => (
           <MoreBtn open={open} iconProps={iconProps} stackProps={stackProps} />
@@ -64,7 +73,7 @@ export const MorePopUp = ({ iconProps, stackProps }) => {
         <ToggleTheme />
         <ChangeColor />
         <Logout />
-      </Popup>
+      </StyledPopup>
     </Wrapper>
   );
 };
