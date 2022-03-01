@@ -1,23 +1,18 @@
 import React, { useCallback, useEffect, useMemo, useContext } from "react";
-import base58 from "bs58";
-import { CurrentUser } from "../CurrentUser";
+// import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 // import { formatNumber } from "../../utils/utils";
 // import { useNativeAccount } from "../../contexts/accounts";
-// import { LAMPORTS_PER_SOL } from "@solana/web3.js";
-import DisconnectIcon from "@mui/icons-material/LinkOff";
-import {
-  WalletDisconnectButton,
-  WalletMultiButton,
-} from "@solana/wallet-adapter-material-ui";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { AppBar, Box, Container, Grid, Toolbar } from "@mui/material";
+import base58 from "bs58";
+import { AppBar, Container, Grid, Toolbar } from "@mui/material";
+import { CurrentUser } from "../CurrentUser";
 import { FEED } from "../../queries/others";
-import { USER_FOLLOW } from "../../queries/follow";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
+import { USER_FOLLOW } from "../../queries/follow";
+import { UserContext } from "../../contexts/user";
+import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { UserContext } from '../../contexts/user';
-
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
@@ -32,7 +27,7 @@ export const AppHeader = () => {
     refetchQueries: [{ query: FEED }, { query: USER_FOLLOW }],
     onCompleted({ loginRegister }) {
       if (localStorage) {
-        setUser(loginRegister.user)
+        setUser(loginRegister.user);
         localStorage.setItem("token", loginRegister.token);
       }
     },
@@ -89,10 +84,10 @@ export const AppHeader = () => {
     if (wallet && !token && connected) signin();
   }, [wallet, signin, token, connected]);
 
-  const logout = () => {
-    localStorage.clear();
-    window.location.replace('/');
-  };
+  // const logout = () => {
+  //   localStorage.clear();
+  //   window.location.replace('/');
+  // };
 
   const TopBar = (
     <AppBar
@@ -111,23 +106,6 @@ export const AppHeader = () => {
             justifyContent="flex-end"
             alignItems="flex-end"
           >
-            {wallet && (
-              <>
-                {/* <Box mr={1} mb={0.5}>
-                  {formatNumber.format(
-                    (account?.lamports || 0) / LAMPORTS_PER_SOL
-                  )}{" "}
-                  SOL
-                </Box> */}
-                <Box mr={1}>
-                  <WalletDisconnectButton
-                    onClick={logout}
-                    startIcon={<DisconnectIcon />}
-                    style={{ marginLeft: 8 }}
-                  />
-                </Box>
-              </>
-            )}
             <WalletMultiButton />
           </Grid>
         </Toolbar>
