@@ -1,4 +1,12 @@
 import React, { useContext, useEffect } from "react";
+import BoomArmy from "./images/raise-the-boomarmy.png";
+import BoomLogo from "./images/logo.png";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import RestoreIcon from "@mui/icons-material/Restore";
 import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
@@ -10,24 +18,41 @@ import {
   Notifications,
   Suggestion,
 } from "./views";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Paper } from "@mui/material";
 import { EditProfile } from "./components/Profile/EditProfile";
 import { GiphyContextProvider } from "./contexts/giphy";
+import { Helmet } from "react-helmet";
 import { MarketProvider } from "./contexts/market";
 import { MasterTweet } from "./components/Tweet/MasterTweet";
 import { NFTMint } from "./components/Mint/NFTMint";
+import { NavLink } from "react-router-dom";
 import { Profile } from "./components/Profile/Profile";
 import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
+import { styled } from "@mui/system";
 import { useProfileLazyQuery } from "./generated/graphql";
-import { Helmet } from "react-helmet";
-import BoomArmy from "./images/raise-the-boomarmy.png";
-import BoomLogo from "./images/logo.png";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { user, setUser } = useContext(UserContext);
+  const [value, setValue] = React.useState("recents");
+
+  const StyledBottomNavigation = styled(BottomNavigation)({
+    width: "auto",
+    backgroundColor: theme.background,
+    borderTop: `1px solid ${theme.tertiaryColor}`,
+    "& .MuiButtonBase-root": {
+      color: theme.secondaryColor,
+    },
+    "& .Mui-selected": {
+      color: theme.accentColor,
+    },
+  });
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
 
   const [getHandle, { loading, data, refetch }] = useProfileLazyQuery();
 
@@ -59,13 +84,19 @@ export const AppRoutes: React.FC = () => {
         <meta name="og:type" content="website" />
         <meta name="og:url" content={window.location.origin} />
         <meta name="og:title" content="Boom" />
-        <meta name="og:description" content="NFT Driven Communities on Solana." />
-        <meta name="og:image" content={BoomArmy}  />
+        <meta
+          name="og:description"
+          content="NFT Driven Communities on Solana."
+        />
+        <meta name="og:image" content={BoomArmy} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content={window.location.origin} />
         <meta name="twitter:title" content="Boom" />
-        <meta name="twitter:description" content="NFT Driven Communities on Solana." />
+        <meta
+          name="twitter:description"
+          content="NFT Driven Communities on Solana."
+        />
         <meta name="twitter:image" content={BoomArmy} />
         <meta name="twitter:creator" content="@boom_army_" />
       </Helmet>
@@ -77,15 +108,27 @@ export const AppRoutes: React.FC = () => {
                 <AppHeader />
                 <Container maxWidth="lg">
                   <Grid container>
-                    <Grid item xs={2} sm={1} md={2}>
+                    <Paper
+                      component={Grid}
+                      item
+                      md={2}
+                      display={{ xs: "none", sm: "none", md: "block" }}
+                    >
                       {user?.handle && (
                         <Nav
                           user={user}
                           newMentionsCount={data?.profile?.newMentionsCount}
                         />
                       )}
-                    </Grid>
-                    <Grid item xs={10} sm={11} md={7} sx={middleColStyles}>
+                    </Paper>
+                    <Paper
+                      component={Grid}
+                      item
+                      sm={12}
+                      md={7}
+                      sx={middleColStyles}
+                      elevation={2}
+                    >
                       <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="following" element={<Following />} />
@@ -112,7 +155,7 @@ export const AppRoutes: React.FC = () => {
                         <Route path="mint-nft" element={<NFTMint />} />
                         <Route path="*" element={<Navigate replace to="/" />} />
                       </Routes>
-                    </Grid>
+                    </Paper>
                     <Grid
                       item
                       md={3}
@@ -121,6 +164,52 @@ export const AppRoutes: React.FC = () => {
                       <Suggestion />
                     </Grid>
                   </Grid>
+                  <Paper
+                    component={Grid}
+                    sx={{
+                      position: "fixed",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                    }}
+                    display={{ xs: "block", sm: "block", md: "none" }}
+                    elevation={3}
+                  >
+                    <StyledBottomNavigation
+                      value={value}
+                      onChange={handleChange}
+                    >
+                      <BottomNavigationAction
+                        component={NavLink}
+                        label="Community"
+                        value="community"
+                        icon={<RestoreIcon />}
+                        to="/"
+                      />
+                      <BottomNavigationAction
+                        component={NavLink}
+                        label="Notifications"
+                        value="notifications"
+                        icon={<NotificationsIcon />}
+                        to="/notifications"
+                      />
+                      {user?.handle && (
+                        <BottomNavigationAction
+                          component={NavLink}
+                          label="Profile"
+                          value="profile"
+                          icon={<AccountCircleIcon />}
+                          to={`/${user?.handle}`}
+                        />
+                      )}
+
+                      <BottomNavigationAction
+                        label="Menu"
+                        value="menu"
+                        icon={<MenuIcon />}
+                      />
+                    </StyledBottomNavigation>
+                  </Paper>
                 </Container>
               </GiphyContextProvider>
             </MarketProvider>
