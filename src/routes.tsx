@@ -49,6 +49,13 @@ export const AppRoutes: React.FC = () => {
     },
     "& .Mui-selected": {
       color: theme.accentColor,
+      "& .MuiSvgIcon-root": {
+        color: theme.accentColor,
+      },
+    },
+    "& .MuiBadge-badge": {
+      color: theme.primaryColor,
+      backgroundColor: theme.accentColor,
     },
   });
 
@@ -209,7 +216,6 @@ export const AppRoutes: React.FC = () => {
                           icon={
                             <Badge
                               badgeContent={data?.profile?.newMentionsCount}
-                              sx={{ color: theme.accentColor }}
                             >
                               <NotificationsIcon />
                             </Badge>
