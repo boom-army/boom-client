@@ -103,7 +103,7 @@ export const interactionInstruction = async (
   );
 
   const creator = new web3.PublicKey(creatorAcc);
-  // TODO: when we start using other storage hosts we'll need to create a BMA 
+  // TODO: when we start using other storage hosts we'll need to create a BMA
   // token account for them otherwise the tx will fail
   const storage = new web3.PublicKey(storageAcc);
 
@@ -113,7 +113,7 @@ export const interactionInstruction = async (
     findAssociatedTokenAddress(storage, BOOMARMY_MINT),
   ]);
 
-  assertProgramProvider(program);  
+  assertProgramProvider(program);
 
   try {
     return await program.rpc.interaction(new BN(interactionFee), {

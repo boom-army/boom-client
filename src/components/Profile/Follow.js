@@ -6,7 +6,7 @@ import { FEED } from "../../queries/others";
 import { USER_FOLLOW } from "../../queries/follow";
 import { FOLLOW, UNFOLLOW } from "../../queries/follow";
 import { displayError } from "../../utils";
-import { useMutation } from '@apollo/client';
+import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 
 export const Follow = ({ isFollowing, id, sm = false, relative = false }) => {
@@ -44,7 +44,7 @@ export const Follow = ({ isFollowing, id, sm = false, relative = false }) => {
 
   return (
     <Box>
-      <Link onClick={handleFollow} sx={{ cursor: "pointer"}}>
+      <Link onClick={handleFollow} sx={{ cursor: "pointer" }}>
         {followState ? <PersonRemoveIcon /> : <PersonAddIcon />}
       </Link>
     </Box>

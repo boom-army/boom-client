@@ -8,18 +8,18 @@ export const Meeps: React.FC<{
 }> = ({ data }) => {
   return (
     <>
-      {data && data.profile && data.profile.tweets && data.profile.tweets.length
-        ? data.profile.tweets.map((tweet) => (
-            <ShowTweet
-              key={tweet.id}
-              tweet={tweet as Tweet}
-            />
-          ))
-        : (
-          <Box pt={10} sx={{ display: "flex", justifyContent: "center" }}>
-            <Typography>You haven't Meeped yet</Typography>
-          </Box>
-        )}
+      {data &&
+      data.profile &&
+      data.profile.tweets &&
+      data.profile.tweets.length ? (
+        data.profile.tweets.map((tweet) => (
+          <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
+        ))
+      ) : (
+        <Box pt={10} sx={{ display: "flex", justifyContent: "center" }}>
+          <Typography>You haven't Meeped yet</Typography>
+        </Box>
+      )}
     </>
   );
 };

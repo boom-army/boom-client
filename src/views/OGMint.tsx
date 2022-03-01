@@ -3,7 +3,7 @@ import * as anchor from "@project-serum/anchor";
 import { Container, Snackbar } from "@material-ui/core";
 import Paper from "@mui/material/Paper";
 import Alert from "@mui/material/Alert";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import { PublicKey, PublicKeyInitData } from "@solana/web3.js";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
@@ -33,18 +33,17 @@ import {
 import Tilt from "react-parallax-tilt";
 import { ThemeContext } from "../contexts/theme";
 
-
 const ConnectButton = styled(WalletDialogButton)({
-  width: '100%',
-  height: '60px',
-  marginTop: '10px',
-  marginBottom: '5px',
-  background: '#fd0069',
-  color: 'white',
-  fontSize: '16px',
-  fontWeight: 'bold',
+  width: "100%",
+  height: "60px",
+  marginTop: "10px",
+  marginBottom: "5px",
+  background: "#fd0069",
+  color: "white",
+  fontSize: "16px",
+  fontWeight: "bold",
 });
- 
+
 const TiltStyled = styled(Tilt)({
   backgroundImage: "url(/assets/outer.png)",
   backgroundSize: "cover",

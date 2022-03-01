@@ -18,19 +18,22 @@ export const User = ({ user }: Props) => {
     <>
       <Grid container sx={{ paddingBottom: "3em" }}>
         <Grid item xs={10}>
-          <Box sx={{ display: "flex"}}>
-          <Box>
-            <Avatar
-              sx={{ width: 30, height: 30 }}
-              src={user?.avatar as string}
-            />
-          </Box>
-          <Box ml={2}>
-            <Typography noWrap sx={{ width: "10em" }}>{user && user.consumerName}</Typography>
-            <Typography noWrap sx={{ color: theme.secondaryColor, width: "10em" }}>{`@${
-              user && user.handle
-            }`}</Typography>
-          </Box>
+          <Box sx={{ display: "flex" }}>
+            <Box>
+              <Avatar
+                sx={{ width: 30, height: 30 }}
+                src={user?.avatar as string}
+              />
+            </Box>
+            <Box ml={2}>
+              <Typography noWrap sx={{ width: "10em" }}>
+                {user && user.consumerName}
+              </Typography>
+              <Typography
+                noWrap
+                sx={{ color: theme.secondaryColor, width: "10em" }}
+              >{`@${user && user.handle}`}</Typography>
+            </Box>
           </Box>
         </Grid>
         <Grid item xs={2}>

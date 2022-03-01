@@ -18,46 +18,47 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError, uploadFile } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
-const Wrapper = styled('div')(props =>({
-  display: 'flex',
-  padding: '1rem 0',
+const Wrapper = styled("div")((props) => ({
+  display: "flex",
+  padding: "1rem 0",
   borderBottom: `7px solid ${props.theme.tertiaryColor}`,
   form: {
-    width: '100%',
+    width: "100%",
   },
 
   textarea: {
-    width: '100%',
-    background: 'inherit',
-    border: 'none',
-    fontSize: '1.23rem',
-    fontFamily:  props.theme.font,
-    color:  props.theme.primaryColor,
-    marginBottom: '0.75rem',
-    padding: '0.75rem 0',
+    width: "100%",
+    background: "inherit",
+    border: "none",
+    fontSize: "1.23rem",
+    fontFamily: props.theme.font,
+    color: props.theme.primaryColor,
+    marginBottom: "0.75rem",
+    padding: "0.75rem 0",
   },
 
-  '.new-tweet': {
-    display: 'flex',
-    flexDirection: 'column',
+  ".new-tweet": {
+    display: "flex",
+    flexDirection: "column",
   },
 
-  '.new-tweet-action': {
-    display: 'flex',
-    alignItems: 'center',
+  ".new-tweet-action": {
+    display: "flex",
+    alignItems: "center",
   },
 
-  '.svg-input .emoji-pick svg, .svg-input .tweet-gif svg, .svg-input .file-upload-icon svg': {
-    width: '24px',
-    height: '24px',
-    fill:props.theme.accentColor,
-    marginRight: '2rem',
-    cursor: 'pointer',
-  },
-  '.avatar': {
-    margin: '0 1rem',
+  ".svg-input .emoji-pick svg, .svg-input .tweet-gif svg, .svg-input .file-upload-icon svg":
+    {
+      width: "24px",
+      height: "24px",
+      fill: props.theme.accentColor,
+      marginRight: "2rem",
+      cursor: "pointer",
+    },
+  ".avatar": {
+    margin: "0 1rem",
   },
 }));
 

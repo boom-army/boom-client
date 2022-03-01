@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 import { shortenAddress } from "../../utils/utils";
 import { PublicKey } from "@solana/web3.js";
 
@@ -32,9 +32,7 @@ export const ExplorerLink = (props: {
       rel="noreferrer"
     >
       {code ? (
-        <Typography>
-          {shortenAddress(address, length)}
-        </Typography>
+        <Typography>{shortenAddress(address, length)}</Typography>
       ) : (
         shortenAddress(address, length)
       )}

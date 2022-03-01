@@ -2,7 +2,7 @@ import React from "react";
 import { DELETE_COMMENT } from "../../queries/comment";
 import { TWEET } from "../../queries/tweet";
 import { TrashIcon } from "../Icons";
-import { useMutation } from '@apollo/client';
+import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
 

@@ -173,7 +173,7 @@ export function WalletProvider({ children = null as any }) {
         wallet.disconnect();
       }
     };
-  }, [wallet, getNonce, setLogin,enqueueSnackbar]);
+  }, [wallet, getNonce, setLogin, enqueueSnackbar]);
 
   useEffect(() => {
     if (wallet && autoConnect) {

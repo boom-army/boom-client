@@ -1,66 +1,77 @@
-import React, { useState, useEffect, useContext, useCallback, useRef } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useCallback,
+  useRef,
+} from "react";
 import { ThemeContext } from "../../contexts/theme";
-import {  Box } from '@mui/system';
-import ModalUnstyled from '@mui/core/ModalUnstyled';
-import { GIFObject } from 'giphy-api';
-import Stack from '@mui/material/Stack';
+import { Box } from "@mui/system";
+import ModalUnstyled from "@mui/core/ModalUnstyled";
+import { GIFObject } from "giphy-api";
+import Stack from "@mui/material/Stack";
 import { GifIcon } from "../Icons";
 import { GiphyContext, Search } from "../../contexts/giphy";
-import { debounce } from 'lodash';
-import { ImageGrid } from './ImageGrid';
-import { ImageSuggestionGrid } from './ImageSuggestionGrid';
-import { Loader } from '../Loader';
-import { SearchModalHeader } from './SearchModalHeader';
-import { styled } from '@mui/material/styles';
+import { debounce } from "lodash";
+import { ImageGrid } from "./ImageGrid";
+import { ImageSuggestionGrid } from "./ImageSuggestionGrid";
+import { Loader } from "../Loader";
+import { SearchModalHeader } from "./SearchModalHeader";
+import { styled } from "@mui/material/styles";
 
 const StyledModal = styled(ModalUnstyled)({
   // position: 'fixed',
   // zIndex: '1300',
-  right: '0',
-  bottom: '0',
-  top: '0',
-  left: '0',
-  display: 'flex',
-  justifyContent: 'center',
+  right: "0",
+  bottom: "0",
+  top: "0",
+  left: "0",
+  display: "flex",
+  justifyContent: "center",
 });
- 
-const Backdrop = styled('div')(
-  {
-    // zIndex: '-1',
-    position: 'fixed',
-    right: '0',
-    bottom: '0',
-    top: '0',
-    left: '0',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-   WebkitTapHighlightColor: 'transparent',
-  }
-)
 
-const GifButton = styled('button')({
-  background: 'none',
-	color: 'inherit',
-	border: 'none',
-	padding: '0',
-	font: 'inherit',
-	cursor: 'pointer',
-	outline: 'inherit',
-})
- 
+const Backdrop = styled("div")({
+  // zIndex: '-1',
+  position: "fixed",
+  right: "0",
+  bottom: "0",
+  top: "0",
+  left: "0",
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  WebkitTapHighlightColor: "transparent",
+});
+
+const GifButton = styled("button")({
+  background: "none",
+  color: "inherit",
+  border: "none",
+  padding: "0",
+  font: "inherit",
+  cursor: "pointer",
+  outline: "inherit",
+});
+
 const GIPHY_API = process.env.REACT_APP_GIPHY_KEY as string;
 
-const queryGiphy = async (query: string, offset: number = 0): Promise<Search> => {
+const queryGiphy = async (
+  query: string,
+  offset: number = 0
+): Promise<Search> => {
   const queryParams = new URLSearchParams({
     api_key: GIPHY_API,
     offset: offset.toString(),
-    q: query
+    q: query,
   });
-  const response = await fetch(`https://api.giphy.com/v1/gifs/search?${queryParams}`);
+  const response = await fetch(
+    `https://api.giphy.com/v1/gifs/search?${queryParams}`
+  );
   const json = await response.json();
   return { query, gif: json.data };
 };
 
-export const SearchModal: React.FC<({ setGif: React.Dispatch<React.SetStateAction<GIFObject>> })> = ({ setGif }) => {
+export const SearchModal: React.FC<{
+  setGif: React.Dispatch<React.SetStateAction<GIFObject>>;
+}> = ({ setGif }) => {
   const [input, setInput] = useState("");
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -97,7 +108,7 @@ export const SearchModal: React.FC<({ setGif: React.Dispatch<React.SetStateActio
 
       if (!result?.gif.length) return;
 
-      const updatedSearchCache = searchGiphyCache.map(cache => {
+      const updatedSearchCache = searchGiphyCache.map((cache) => {
         if (cache.query === result.query) {
           return {
             query: cache.query,
@@ -105,10 +116,11 @@ export const SearchModal: React.FC<({ setGif: React.Dispatch<React.SetStateActio
           };
         }
         return cache;
-      })
+      });
 
       setSearchGiphyCache(updatedSearchCache);
-      const updatedGifs = updatedSearchCache.find(cache => cache.query === query) || null;
+      const updatedGifs =
+        updatedSearchCache.find((cache) => cache.query === query) || null;
       setSearchResults(updatedGifs);
     } finally {
       setIsLoadingMore(false);
@@ -116,7 +128,11 @@ export const SearchModal: React.FC<({ setGif: React.Dispatch<React.SetStateActio
   }, 300);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const memoDebouncedScrollHandler = useCallback(handleScroll, [searchResults, searchGiphyCache, input]);
+  const memoDebouncedScrollHandler = useCallback(handleScroll, [
+    searchResults,
+    searchGiphyCache,
+    input,
+  ]);
 
   useEffect(() => {
     const imageListNode = imageBoxRef.current;
@@ -129,37 +145,37 @@ export const SearchModal: React.FC<({ setGif: React.Dispatch<React.SetStateActio
     };
   }, [memoDebouncedScrollHandler]);
 
-  const handleInputQuery = debounce(async (
-    value: string,
-    searchGiphyCache: Search[],
-  ) => {
-    setError(false);
-
-    const query = value.toLowerCase();
-
-    if (!query) {
-      setIsLoading(false);
-      return setSearchResults(null);
-    }
-
-    const cachedGif = searchGiphyCache.find(gif => gif.query === query);
-
-    if (cachedGif) {
-      setIsLoading(false);
-      return setSearchResults(cachedGif);
-    }
-
-    try {
-      const searchResult = await queryGiphy(query);
-      setSearchGiphyCache([...searchGiphyCache, searchResult]);
-      setSearchResults(searchResult);
+  const handleInputQuery = debounce(
+    async (value: string, searchGiphyCache: Search[]) => {
       setError(false);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  }, 800);
+
+      const query = value.toLowerCase();
+
+      if (!query) {
+        setIsLoading(false);
+        return setSearchResults(null);
+      }
+
+      const cachedGif = searchGiphyCache.find((gif) => gif.query === query);
+
+      if (cachedGif) {
+        setIsLoading(false);
+        return setSearchResults(cachedGif);
+      }
+
+      try {
+        const searchResult = await queryGiphy(query);
+        setSearchGiphyCache([...searchGiphyCache, searchResult]);
+        setSearchResults(searchResult);
+        setError(false);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    800
+  );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const memoDebouncedQuery = useCallback(handleInputQuery, []);
@@ -178,37 +194,55 @@ export const SearchModal: React.FC<({ setGif: React.Dispatch<React.SetStateActio
         onClose={handleClose}
         BackdropComponent={Backdrop}
       >
-        <Box sx={{
-          position: 'absolute',
-          minWidth: 600,
-          maxWidth: 600,
-          overflowX: 'hidden',
-          overflowY: 'hidden',
-          maxHeight: '90vh',
-          height: 650,
-          top: '5%',
-          color: theme.primaryColor,
-          background: theme.background,
-        }}>
-          <Stack
-            direction="column"
-            sx={{ height: "100%" }}
-          >
+        <Box
+          sx={{
+            position: "absolute",
+            minWidth: 600,
+            maxWidth: 600,
+            overflowX: "hidden",
+            overflowY: "hidden",
+            maxHeight: "90vh",
+            height: 650,
+            top: "5%",
+            color: theme.primaryColor,
+            background: theme.background,
+          }}
+        >
+          <Stack direction="column" sx={{ height: "100%" }}>
             <SearchModalHeader
               input={input}
               setIsLoading={setIsLoading}
               setInput={setInput}
               handleClose={handleClose}
             />
-            <Box ref={imageBoxRef} sx={{ height: "100%", overflowY: "auto", overflowX: "hidden" }}>
+            <Box
+              ref={imageBoxRef}
+              sx={{ height: "100%", overflowY: "auto", overflowX: "hidden" }}
+            >
               {isLoading || error ? (
                 <Box sx={{ margin: 2, position: "relative" }}>
-                  {isLoading ? <Loader /> : <p>There was an error while searching.</p>}
+                  {isLoading ? (
+                    <Loader />
+                  ) : (
+                    <p>There was an error while searching.</p>
+                  )}
                 </Box>
               ) : (
                 <>
-                  {searchResults && <ImageGrid gifArr={searchResults.gif} setGif={setGif} setOpen={setOpen} isLoadingMore={isLoadingMore} />}
-                  {!searchResults && <ImageSuggestionGrid setInput={setInput} setIsLoading={setIsLoading} />}
+                  {searchResults && (
+                    <ImageGrid
+                      gifArr={searchResults.gif}
+                      setGif={setGif}
+                      setOpen={setOpen}
+                      isLoadingMore={isLoadingMore}
+                    />
+                  )}
+                  {!searchResults && (
+                    <ImageSuggestionGrid
+                      setInput={setInput}
+                      setIsLoading={setIsLoading}
+                    />
+                  )}
                 </>
               )}
             </Box>

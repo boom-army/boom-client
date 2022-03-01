@@ -1,7 +1,7 @@
 // TODO: This should be JSON
 import { Idl } from "@project-serum/anchor";
 
-export const idl: Idl  = {
+export const idl: Idl = {
   version: "0.0.0",
   name: "sosol",
   instructions: [

@@ -2,17 +2,17 @@ import React, { useState, useContext } from "react";
 import { ThemeContext } from "../contexts/theme";
 import { lightTheme, darkTheme } from "../styles/themes";
 import { ThemeIcon } from "./Icons";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
-export const Wrapper = styled('div')({
-  display: 'flex',
-  alignItems: 'baseline',
-  marginLeft: '0.7rem',
-  marginBottom: '1rem',
-  cursor: 'pointer',
-  'p':{
-    marginLeft: '0.4rem',
-  }
+export const Wrapper = styled("div")({
+  display: "flex",
+  alignItems: "baseline",
+  marginLeft: "0.7rem",
+  marginBottom: "1rem",
+  cursor: "pointer",
+  p: {
+    marginLeft: "0.4rem",
+  },
 });
 
 const ToggleTheme = () => {

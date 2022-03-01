@@ -1,72 +1,74 @@
-
 import { useEffect, useState, useContext } from "react";
 import { SmileIcon } from "../Icons";
 import { Picker } from "emoji-mart";
-import { ThemeContext } from '../../contexts/theme';
+import { ThemeContext } from "../../contexts/theme";
 import "emoji-mart/css/emoji-mart.css";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
-const PickerWrapper = styled('span')(props => ({
-  '.emoji-mart': {
-    position: 'absolute',
-    zIndex: '1',
+const PickerWrapper = styled("span")((props) => ({
+  ".emoji-mart": {
+    position: "absolute",
+    zIndex: "1",
   },
-  '.emoji-mart-bar.emoji-mart-bar,.emoji-mart-scroll.emoji-mart-scroll': {
-    marginRight: '0',
+  ".emoji-mart-bar.emoji-mart-bar,.emoji-mart-scroll.emoji-mart-scroll": {
+    marginRight: "0",
   },
-  '.emoji-mart-bar svg,.emoji-mart-bar svg path': {
-    fill: props.theme.accentColor
+  ".emoji-mart-bar svg,.emoji-mart-bar svg path": {
+    fill: props.theme.accentColor,
   },
-  '.emoji-mart .emoji-mart-anchor-bar': {
+  ".emoji-mart .emoji-mart-anchor-bar": {
     backgroundColor: `${props.theme.accentColor} !important`,
   },
-  '.emoji-mart-preview': {
-    display: 'none',
+  ".emoji-mart-preview": {
+    display: "none",
   },
-  '.emoji-mart-dark': {
+  ".emoji-mart-dark": {
     borderColor: props.theme.secondaryColor,
     backgroundColor: props.theme.background,
   },
-  '.emoji-mart-category': {
-    marginTop: '0.75rem',
+  ".emoji-mart-category": {
+    marginTop: "0.75rem",
   },
-  '.emoji-mart-dark .emoji-mart-category-label span': {
+  ".emoji-mart-dark .emoji-mart-category-label span": {
     backgroundColor: props.theme.background,
-    color: '#fff',
+    color: "#fff",
   },
-  '.emoji-mart-scroll::WebkitScrollbar': {
-    width: '0.25rem',
+  ".emoji-mart-scroll::WebkitScrollbar": {
+    width: "0.25rem",
   },
-  '.emoji-mart-scroll::WebkitScrollbarTrack': {
+  ".emoji-mart-scroll::WebkitScrollbarTrack": {
     background: props.theme.background,
   },
-  '.emoji-mart-scroll::WebkitScrollbarThumb': {
+  ".emoji-mart-scroll::WebkitScrollbarThumb": {
     background: props.theme.accentColor,
   },
-  '.emoji-pick': {
-    cursor: 'pointer',
+  ".emoji-pick": {
+    cursor: "pointer",
   },
-  '.emoji-pick:hover svg path': {
+  ".emoji-pick:hover svg path": {
     fill: props.theme.accentColor,
   },
-  '@media screen and (max-width: 430px)': {
-    '.emoji-mart': {
-      position: 'fixed',
-      bottom: '5em',
-    }
-  }
+  "@media screen and (max-width: 430px)": {
+    ".emoji-mart": {
+      position: "fixed",
+      bottom: "5em",
+    },
+  },
 }));
 
-
-
-export const EmojiPicker = ({ emojiHandler, customIcon, dismissOnClick, props }) => {
+export const EmojiPicker = ({
+  emojiHandler,
+  customIcon,
+  dismissOnClick,
+  props,
+}) => {
   const [picker, togglePicker] = useState(false);
   const { theme } = useContext(ThemeContext);
 
-  const handleDocumentClick = event => {
+  const handleDocumentClick = (event) => {
     let isEmojiClassFound = false;
 
-    event?.path?.forEach(elem => {
+    event?.path?.forEach((elem) => {
       if (elem && elem.classList) {
         const data = elem.classList.value;
         if (data.includes("emoji")) {
@@ -74,17 +76,18 @@ export const EmojiPicker = ({ emojiHandler, customIcon, dismissOnClick, props })
         }
       }
     });
-    if (isEmojiClassFound === false && event.target.id !== "emojis-btn") togglePicker(false);
+    if (isEmojiClassFound === false && event.target.id !== "emojis-btn")
+      togglePicker(false);
   };
 
   useEffect(() => {
     document.addEventListener("click", handleDocumentClick, false);
     return () => {
       document.removeEventListener("click", handleDocumentClick, false);
-    }
+    };
   });
 
-  const handleEmojiSelect = pickedEmoji => {
+  const handleEmojiSelect = (pickedEmoji) => {
     emojiHandler(pickedEmoji);
     if (dismissOnClick) togglePicker(!picker);
   };
@@ -105,4 +108,4 @@ export const EmojiPicker = ({ emojiHandler, customIcon, dismissOnClick, props })
       )}
     </PickerWrapper>
   );
-}
+};

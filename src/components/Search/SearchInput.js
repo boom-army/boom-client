@@ -9,28 +9,28 @@ import {
 import { displayError } from "../../utils";
 import { useLazyQuery } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
-const Wrapper = styled('div')(props=>({
-  margin: '1rem 0',
-  marginLeft: '1rem',
+const Wrapper = styled("div")((props) => ({
+  margin: "1rem 0",
+  marginLeft: "1rem",
 
-  'input': {
-    height: '40px',
-    width: '70%',
-    borderRadius: '30px',
-    background:  props.theme.tertiaryColor2,
+  input: {
+    height: "40px",
+    width: "70%",
+    borderRadius: "30px",
+    background: props.theme.tertiaryColor2,
     border: props.theme.tertiaryColor2,
-    color:  props.theme.secondaryColor,
-    fontFamily:props.theme.font,
-    fontSize: '1rem',
-    paddingLeft: '1.2rem',
+    color: props.theme.secondaryColor,
+    fontFamily: props.theme.font,
+    fontSize: "1rem",
+    paddingLeft: "1.2rem",
   },
 
-  '@media screen and (max-width: 530px)':{
-    'input':{
-      fontSize: '0.9rem',
-    }
+  "@media screen and (max-width: 530px)": {
+    input: {
+      fontSize: "0.9rem",
+    },
   },
 }));
 

@@ -20,7 +20,11 @@ export const Header = ({ candyMachine }: HeaderProps) => {
         {candyMachine && (
           <Grid container direction="row" wrap="nowrap">
             <Grid container direction="column">
-              <Typography variant="body2" color="textSecondary" style={{ color: theme.secondaryColor }}>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                style={{ color: theme.secondaryColor }}
+              >
                 Remaining
               </Typography>
               <Typography
@@ -35,7 +39,11 @@ export const Header = ({ candyMachine }: HeaderProps) => {
               </Typography>
             </Grid>
             <Grid container direction="column">
-              <Typography variant="body2" color="textPrimary" style={{ color: theme.secondaryColor }}>
+              <Typography
+                variant="body2"
+                color="textPrimary"
+                style={{ color: theme.secondaryColor }}
+              >
                 Price
               </Typography>
               <Typography

@@ -2,7 +2,7 @@ import React from "react";
 import { DELETE_TWEET } from "../../queries/tweet";
 import { FEED } from "../../queries/others";
 import { TrashIcon } from "../Icons";
-import { useMutation } from '@apollo/client';
+import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 
 export const DeleteTweet = ({ id }) => {

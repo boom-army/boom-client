@@ -1,19 +1,19 @@
-import BigNumber from 'bignumber.js';
+import BigNumber from "bignumber.js";
 import { ENDPOINTS } from "../contexts/connection";
 import { MintInfo, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { TokenAccount } from "../models";
 import { TokenInfo } from "@solana/spl-token-registry";
 // import { WAD } from "../package/constants";
-import { ZERO } from '../constants/math'
+import { ZERO } from "../constants/math";
 import { useCallback, useState } from "react";
-import * as anchor from '@project-serum/anchor';
-import { SystemProgram } from '@solana/web3.js';
+import * as anchor from "@project-serum/anchor";
+import { SystemProgram } from "@solana/web3.js";
 import {
   LAMPORTS_PER_SOL,
   SYSVAR_RENT_PUBKEY,
   TransactionInstruction,
   PublicKey,
-} from '@solana/web3.js';
+} from "@solana/web3.js";
 
 const WAD = new BigNumber("1e+18");
 
@@ -222,8 +222,6 @@ export const formatPct = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 
-
-
 export const formatNumber = {
   format: (val?: number, useSmall?: boolean) => {
     if (!val) {
@@ -270,7 +268,7 @@ export function currentCluster() {
 export interface AlertState {
   open: boolean;
   message: string;
-  severity: 'success' | 'info' | 'warning' | 'error' | undefined;
+  severity: "success" | "info" | "warning" | "error" | undefined;
 }
 
 export const toDate = (value?: anchor.BN) => {
@@ -282,43 +280,43 @@ export const toDate = (value?: anchor.BN) => {
 };
 
 export const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID =
-  new anchor.web3.PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL');
+  new anchor.web3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
 
 export const CIVIC = new anchor.web3.PublicKey(
-  'gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs',
+  "gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs"
 );
 
 export const getAtaForMint = async (
   mint: anchor.web3.PublicKey,
-  buyer: anchor.web3.PublicKey,
+  buyer: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
   return await anchor.web3.PublicKey.findProgramAddress(
     [buyer.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
-    SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+    SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID
   );
 };
 
 export const getNetworkExpire = async (
-  gatekeeperNetwork: anchor.web3.PublicKey,
+  gatekeeperNetwork: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
   return await anchor.web3.PublicKey.findProgramAddress(
-    [gatekeeperNetwork.toBuffer(), Buffer.from('expire')],
-    CIVIC,
+    [gatekeeperNetwork.toBuffer(), Buffer.from("expire")],
+    CIVIC
   );
 };
 
 export const getNetworkToken = async (
   wallet: anchor.web3.PublicKey,
-  gatekeeperNetwork: anchor.web3.PublicKey,
+  gatekeeperNetwork: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
   return await anchor.web3.PublicKey.findProgramAddress(
     [
       wallet.toBuffer(),
-      Buffer.from('gateway'),
+      Buffer.from("gateway"),
       Buffer.from([0, 0, 0, 0, 0, 0, 0, 0]),
       gatekeeperNetwork.toBuffer(),
     ],
-    CIVIC,
+    CIVIC
   );
 };
 
@@ -326,7 +324,7 @@ export function createAssociatedTokenAccountInstruction(
   associatedTokenAddress: anchor.web3.PublicKey,
   payer: anchor.web3.PublicKey,
   walletAddress: anchor.web3.PublicKey,
-  splTokenMintAddress: anchor.web3.PublicKey,
+  splTokenMintAddress: anchor.web3.PublicKey
 ) {
   const keys = [
     {

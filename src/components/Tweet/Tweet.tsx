@@ -12,113 +12,110 @@ import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { TipCreator } from "../TipCreator";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { useReaction } from "../../hooks/useReaction";
 
+const Wrapper = styled("div")((props) => ({
+  display: "flex",
+  borderBottom: `1px solid ${props.theme.tertiaryColor}`,
+  padding: "1.5rem 1rem 1rem 1rem",
 
-const Wrapper = styled('div')(props=>({
-  display:'flex',
-   borderBottom: `1px solid ${props.theme.tertiaryColor}`,
-  padding: '1.5rem 1rem 1rem 1rem',
-
-  '.avatar': {
-    marginRight: '1em',
-    marginBottom: '1em',
+  ".avatar": {
+    marginRight: "1em",
+    marginBottom: "1em",
   },
 
-  '.tweet-info':{
-    width: '100%',
+  ".tweet-info": {
+    width: "100%",
   },
 
-  '.tweet-info-user': {
-    display: 'flex',
+  ".tweet-info-user": {
+    display: "flex",
   },
 
-  '.tweet-info-user span.username' :{
+  ".tweet-info-user span.username": {
     fontWeight: 500,
   },
 
-  '.tweet-info-user span.secondary':{
-    paddingLeft: '0.5rem',
-   color: props.theme.secondaryColor ,
+  ".tweet-info-user span.secondary": {
+    paddingLeft: "0.5rem",
+    color: props.theme.secondaryColor,
   },
 
-  '.tweet-body':{
-    marginBottom: '0.75rem',
-    wordBreak: 'break-word',
+  ".tweet-body": {
+    marginBottom: "0.75rem",
+    wordBreak: "break-word",
   },
 
-  '.tags': {
-    display: 'flex',
+  ".tags": {
+    display: "flex",
   },
 
-  'a.body': {
+  "a.body": {
     color: props.theme.accentColor,
   },
 
-  'div.tweet-stats': {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+  "div.tweet-stats": {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
 
-    'div': {
-      color:props.theme.secondaryColor,
+    div: {
+      color: props.theme.secondaryColor,
     },
 
-    '.controls': {
-      marginRight: '4rem',
+    ".controls": {
+      marginRight: "4rem",
     },
 
-    'svg':{
-      marginRight: '0.5rem',
+    svg: {
+      marginRight: "0.5rem",
     },
 
-    'span' :{
-      display: 'flex',
-      alignItems: 'center',
+    span: {
+      display: "flex",
+      alignItems: "center",
     },
 
-    'span.comment' :{
-      'svg': {
-        position: 'relative',
-        top: '4px',
-      }
-    }
-  },
-
-  '@media screen and (max-width: 470px)' :{
-    'div.tweet-stats': {
-      'div':{
-        marginRight: '1.5rem',
+    "span.comment": {
+      svg: {
+        position: "relative",
+        top: "4px",
       },
-      '.controls': {
-        marginRight: '1.5rem',
-      }
-    }
+    },
   },
 
-  '@media screen and (max-width: 430px)':{
-    flexDirection: 'column',
+  "@media screen and (max-width: 470px)": {
+    "div.tweet-stats": {
+      div: {
+        marginRight: "1.5rem",
+      },
+      ".controls": {
+        marginRight: "1.5rem",
+      },
+    },
+  },
 
-    '.username': {
-      display: 'none',
+  "@media screen and (max-width: 430px)": {
+    flexDirection: "column",
+
+    ".username": {
+      display: "none",
     },
 
-    '.avatar': {
-      display: 'none',
+    ".avatar": {
+      display: "none",
     },
 
-    '.tweet-info-user span.secondary': {
-      paddingLeft: '0',
-      paddingRight: '0.5rem',
-    }
-  }
+    ".tweet-info-user span.secondary": {
+      paddingLeft: "0",
+      paddingRight: "0.5rem",
+    },
+  },
 }));
-
-
 
 interface Props {
   tweet: Tweet;

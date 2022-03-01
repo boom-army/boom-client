@@ -1,48 +1,48 @@
-import { Paper } from '@material-ui/core';
-import Countdown from 'react-countdown';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import { Paper } from "@material-ui/core";
+import Countdown from "react-countdown";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'flex',
+      display: "flex",
       padding: theme.spacing(0),
-      '& > *': {
+      "& > *": {
         margin: theme.spacing(0.5),
         marginRight: 0,
         width: theme.spacing(6),
         height: theme.spacing(6),
-        display: 'flex',
-        flexDirection: 'column',
-        alignContent: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#15202b',
-        color: 'white',
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#15202b",
+        color: "white",
         borderRadius: 5,
         fontSize: 10,
       },
     },
     done: {
-      display: 'flex',
+      display: "flex",
       margin: theme.spacing(1),
       marginRight: 0,
       padding: theme.spacing(1),
-      flexDirection: 'column',
-      alignContent: 'center',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: '#15202b',
-      color: 'white',
+      flexDirection: "column",
+      alignContent: "center",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "#15202b",
+      color: "white",
       borderRadius: 5,
-      fontWeight: 'bold',
+      fontWeight: "bold",
       fontSize: 16,
     },
     item: {
-      fontWeight: 'bold',
+      fontWeight: "bold",
       fontSize: 18,
     },
-  }),
+  })
 );
 
 interface MintCountdownProps {

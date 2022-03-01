@@ -43,11 +43,7 @@ export const Profile: React.FC = () => {
               onChange={handleChange}
               aria-label="Profile tablist select"
             >
-              <Tab
-                sx={{ minWidth: 150 }}
-                label="NFT Gallery"
-                value="1"
-              />
+              <Tab sx={{ minWidth: 150 }} label="NFT Gallery" value="1" />
               <Tab label="Meeps" value="2" />
             </TabList>
           </Box>

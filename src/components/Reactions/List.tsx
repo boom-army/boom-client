@@ -37,16 +37,19 @@ const createUserReactionTooltip = (
       spacing={1}
       sx={{ m: 0.5 }}
     >
-      {users.map((user) => (
-        user && <Stack key={user.handle} direction="row" spacing={1}>
-          <Avatar
-            alt={user.handle}
-            src={user.avatar}
-            sx={{ width: 20, height: 20 }}
-          />
-          <span>@{user.handle}</span>
-        </Stack>
-      ))}
+      {users.map(
+        (user) =>
+          user && (
+            <Stack key={user.handle} direction="row" spacing={1}>
+              <Avatar
+                alt={user.handle}
+                src={user.avatar}
+                sx={{ width: 20, height: 20 }}
+              />
+              <span>@{user.handle}</span>
+            </Stack>
+          )
+      )}
     </Stack>
   );
 };

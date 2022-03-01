@@ -7,9 +7,9 @@ export interface User {
 }
 
 export interface UserContextType {
-  user: User | null,
-  setUser: ((user: User | null) => User | void),
-};
+  user: User | null;
+  setUser: (user: User | null) => User | void;
+}
 
 export const UserContext = React.createContext<UserContextType>({
   user: null,
@@ -20,7 +20,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   const [user, _setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const userFromStore = localStorage.getItem('user');
+    const userFromStore = localStorage.getItem("user");
 
     if (userFromStore) {
       _setUser(JSON.parse(userFromStore));
@@ -29,7 +29,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
 
   const setUser = (user: User | null) => {
     if (!user) return;
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
     _setUser(user);
     return user;
   };

@@ -8,15 +8,15 @@ export const useReaction = ({ tweetId }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
-    refetchQueries: [
-      { query: TWEET, variables: { id: tweetId } }
-    ],
+    refetchQueries: [{ query: TWEET, variables: { id: tweetId } }],
   });
 
   const handleReaction = useCallback(
     async ({ emojiId, skin }) => {
       try {
-        await toggleReactionMutation({ variables: { id: tweetId, emojiId, skin } });
+        await toggleReactionMutation({
+          variables: { id: tweetId, emojiId, skin },
+        });
         enqueueSnackbar(`Emoji updated`, { variant: "success" });
       } catch (err) {
         console.log(err);

@@ -70,7 +70,7 @@ export const NFTMint: React.FC = (props) => {
       category: MetadataCategory.Image,
       creators: [{ address: SOSOL_HOST_ID.toBase58(), share: 100 }],
     },
-  }
+  };
   const [attributes, setAttributes] = useState(defaultAttrState);
 
   const handleImageUpload = async (e: any) => {

@@ -1,4 +1,4 @@
-import BigNumber from 'bignumber.js';
+import BigNumber from "bignumber.js";
 
 export const TEN = new BigNumber(10);
 export const HALF_WAD = TEN.pow(new BigNumber(18));

@@ -17,11 +17,11 @@ import { CircularProgress } from "@mui/material";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "notistack";
-import cuid from 'cuid';
+import cuid from "cuid";
 
 // export interface NFTObject {
 //   publicKey: string;
@@ -57,33 +57,31 @@ import cuid from 'cuid';
 //   share: number;
 // }
 
-
 const StyledModal = styled(ModalUnstyled)({
   // position: 'fixed',
   // zIndex: '1300',
-  right: '0',
-  bottom: '0',
-  top: '0',
-  left: '0',
-  display: 'flex',
-  justifyContent: 'center',
-  '& .MuiInputBase-input' :{
-    padding: '10px 12px',
-    width: '100%',
-  }
+  right: "0",
+  bottom: "0",
+  top: "0",
+  left: "0",
+  display: "flex",
+  justifyContent: "center",
+  "& .MuiInputBase-input": {
+    padding: "10px 12px",
+    width: "100%",
+  },
 });
 
 const Backdrop = styled("div")({
   // zIndex: '-1',
-  position: 'fixed',
-  right: '0',
-  bottom: '0',
-  top: '0',
-  left: '0',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  WebkitTapHighlightColor: 'transparent',
+  position: "fixed",
+  right: "0",
+  bottom: "0",
+  top: "0",
+  left: "0",
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  WebkitTapHighlightColor: "transparent",
 });
-
 
 export const NFTPicker: React.FC<{
   setNftData: React.Dispatch<React.SetStateAction<any>>;
@@ -169,23 +167,21 @@ export const NFTPicker: React.FC<{
     })();
   }, [nftInput, validKey, connection, enqueueSnackbar, fetchSetMeta]);
 
-
   const Wrapper = styled("span")({
-    '& .nft-pick' :{
-      marginRight: '2rem',
-      width: '26px',
-      height: '26px',
-      display: 'inline-block',
-      '& svg':{
-        width: '26px',
-        cursor: 'pointer',
-        '& path': {
+    "& .nft-pick": {
+      marginRight: "2rem",
+      width: "26px",
+      height: "26px",
+      display: "inline-block",
+      "& svg": {
+        width: "26px",
+        cursor: "pointer",
+        "& path": {
           fill: `${theme.accentColor}`,
-        }
-      }
-    }
+        },
+      },
+    },
   });
-
 
   return (
     <Wrapper>

@@ -67,16 +67,18 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
           color={theme.secondaryColor}
           underline="hover"
         > */}
-          <Box>
-            {uRIData?.image ? (
-              <img src={uRIData?.image} alt={uRIData?.name} width="120" />
-            ) : (
-              <DoNotDisturbOnIcon fontSize="large" />
-            )}
-          </Box>
-          <Box>
-            <Typography sx={{ fontSize: "0.8em", maxWidth: "120px" }}>{uRIData?.name}</Typography>
-          </Box>
+        <Box>
+          {uRIData?.image ? (
+            <img src={uRIData?.image} alt={uRIData?.name} width="120" />
+          ) : (
+            <DoNotDisturbOnIcon fontSize="large" />
+          )}
+        </Box>
+        <Box>
+          <Typography sx={{ fontSize: "0.8em", maxWidth: "120px" }}>
+            {uRIData?.name}
+          </Typography>
+        </Box>
         {/* </Link> */}
       </Box>
     </>
@@ -96,9 +98,12 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
       try {
         setLoading(true);
         // const nftMeta = await Metadata.findByOwnerV2(connection, publicAddress);
-        const nftMeta = await Metadata.findDataByOwner(connection, publicAddress);
+        const nftMeta = await Metadata.findDataByOwner(
+          connection,
+          publicAddress
+        );
         const nftData = nftMeta.map((meta) => meta.data);
-        
+
         setNfts(nftData);
       } catch (error) {
         displayError(error, enqueueSnackbar);

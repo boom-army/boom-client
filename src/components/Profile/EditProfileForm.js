@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '../../styles/Button';
-import CoverPhoto from '../../styles/CoverPhoto';
-import Form from '../../styles/Form';
-import Input from '../Input';
+import { useState } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "../../styles/Button";
+import CoverPhoto from "../../styles/CoverPhoto";
+import Form from "../../styles/Form";
+import Input from "../Input";
 import { TextareaAutosize } from "@mui/material";
-import { useInput } from '../../hooks/useInput';
-import { useEditProfileMutation } from '../../generated/graphql';
-import { ProfileDocument } from "../../generated/graphql"
-import { SIGN_FILE } from '../../queries/files';
-import { displayError, uploadFile } from '../../utils';
-import { useMutation } from '@apollo/client';
-import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { useInput } from "../../hooks/useInput";
+import { useEditProfileMutation } from "../../generated/graphql";
+import { ProfileDocument } from "../../generated/graphql";
+import { SIGN_FILE } from "../../queries/files";
+import { displayError, uploadFile } from "../../utils";
+import { useMutation } from "@apollo/client";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 export const EditProfileForm = ({ profile, setUser }) => {
   const navigate = useNavigate();
-  const [avatarState, setAvatar] = useState('');
-  const [coverPhotoState, setCoverPhoto] = useState('');
+  const [avatarState, setAvatar] = useState("");
+  const [coverPhotoState, setCoverPhoto] = useState("");
 
   const handle = useInput(profile && profile.handle);
   const consumerName = useInput(profile && profile.consumerName);
@@ -29,7 +29,9 @@ export const EditProfileForm = ({ profile, setUser }) => {
   const coverPhoto = useInput(profile && profile.coverPhoto);
 
   const [editProfileMutation, { loading }] = useEditProfileMutation({
-    refetchQueries: [{ query: ProfileDocument, variables: { handle: handle.value } }],
+    refetchQueries: [
+      { query: ProfileDocument, variables: { handle: handle.value } },
+    ],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 
@@ -39,8 +41,8 @@ export const EditProfileForm = ({ profile, setUser }) => {
     e.preventDefault();
 
     if (!consumerName.value) {
-      return enqueueSnackbar('You cannot leave name empty', {
-        variant: 'error',
+      return enqueueSnackbar("You cannot leave name empty", {
+        variant: "error",
       });
     }
 
@@ -66,8 +68,8 @@ export const EditProfileForm = ({ profile, setUser }) => {
 
       navigate(`/${data.editProfile.handle}`);
 
-      enqueueSnackbar('Your profile has been updated 🥳.', {
-        variant: 'success',
+      enqueueSnackbar("Your profile has been updated 🥳.", {
+        variant: "success",
       });
     } catch (err) {
       return displayError(err, enqueueSnackbar);
@@ -85,7 +87,7 @@ export const EditProfileForm = ({ profile, setUser }) => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
-      const imageUrl = imageData?.config?.url?.split('?')[0];
+      const imageUrl = imageData?.config?.url?.split("?")[0];
       setCoverPhoto(imageUrl);
     } catch (error) {
       console.log(error);
@@ -103,7 +105,7 @@ export const EditProfileForm = ({ profile, setUser }) => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
-      const imageUrl = imageData?.config?.url?.split('?')[0];
+      const imageUrl = imageData?.config?.url?.split("?")[0];
       setAvatar(imageUrl);
     } catch (error) {
       console.log(error);
@@ -182,7 +184,7 @@ export const EditProfileForm = ({ profile, setUser }) => {
         onChange={location.onChange}
       />
       <Button outline disabled={loading} type="submit">
-        {loading ? 'Saving' : 'Save'}
+        {loading ? "Saving" : "Save"}
       </Button>
     </Form>
   );

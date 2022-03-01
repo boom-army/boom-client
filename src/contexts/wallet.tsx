@@ -35,7 +35,9 @@ export const Wallet: FC = ({ children = null as any }) => {
       // getLedgerWallet(),
       // getSolletWallet({ network }),
     ],
-    [/*network*/]
+    [
+      /*network*/
+    ]
   );
 
   const { enqueueSnackbar } = useSnackbar();

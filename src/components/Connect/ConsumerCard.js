@@ -14,9 +14,9 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
 const CardStyled = styled(Card)({
-  '& .MuiButtonBase-root' :{
-    display: 'block',
-  }
+  "& .MuiButtonBase-root": {
+    display: "block",
+  },
 });
 
 export const ConsumerCard = ({ consumer }) => {

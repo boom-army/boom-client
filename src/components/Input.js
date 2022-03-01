@@ -1,53 +1,53 @@
 import React from "react";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
-const Wrapper = styled('div')(props=>({
-  width: `${ (props.fullWidth ? '100%' : '315px')||(props.lg && '100%')}`,
+const Wrapper = styled("div")((props) => ({
+  width: `${(props.fullWidth ? "100%" : "315px") || (props.lg && "100%")}`,
   background: `${props.theme.tertiaryColor2}`,
-  padding: '0.2rem 0.4rem',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  borderBottom:`1px solid ${ props.theme.accentColor}`,
-  marginBottom: '2rem',
+  padding: "0.2rem 0.4rem",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  borderBottom: `1px solid ${props.theme.accentColor}`,
+  marginBottom: "2rem",
 
-  'input':{
-    width: '100%',
-    padding: '0.5rem',
-    background: 'inherit',
-    border: 'none',
-    fontSize: '1rem',
+  input: {
+    width: "100%",
+    padding: "0.5rem",
+    background: "inherit",
+    border: "none",
+    fontSize: "1rem",
     fontFamily: props.theme.font,
     color: props.theme.primaryColor,
   },
 
-  'label':{
-    color:  props.theme.secondaryColor,
-    marginBottom: '2px',
+  label: {
+    color: props.theme.secondaryColor,
+    marginBottom: "2px",
   },
 
-  'label.fullWidth': {
-    width: '100%',
+  "label.fullWidth": {
+    width: "100%",
   },
 
-  'label.hideLabel': {
-    border: '0',
-    clip: 'rect(0 0 0 0)',
-    height: '1px',
-    margin: '-1px',
-    overflow: 'hidden',
-    padding: '0',
-    position: 'absolute',
-    width: '1px',
+  "label.hideLabel": {
+    border: "0",
+    clip: "rect(0 0 0 0)",
+    height: "1px",
+    margin: "-1px",
+    overflow: "hidden",
+    padding: "0",
+    position: "absolute",
+    width: "1px",
   },
   // width : props.lg ? '100%' :'none',
- 
+
   // ${(props) =>
   //   props.lg &&
   //   css`
   //     width: 100%;
   //   `}
-}))
+}));
 
 const Input = ({
   lg = false,
@@ -61,7 +61,7 @@ const Input = ({
 }) => {
   return (
     <Wrapper lg={lg} fullWidth={fullWidth}>
-      <label className={hideLabel ? 'hideLabel' : ''}>{text}</label>
+      <label className={hideLabel ? "hideLabel" : ""}>{text}</label>
       <input
         autoComplete="new-password"
         type={type}

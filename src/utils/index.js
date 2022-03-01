@@ -1,10 +1,10 @@
 import axios from "axios";
-import { transform, camelCase, isArray, isObject } from 'lodash';
+import { transform, camelCase, isArray, isObject } from "lodash";
 
 export const displayError = (err, enqueueSnackbar) => {
   let e = err.message.split(":");
   e = e.length === 1 ? e[0] : e[1];
-  enqueueSnackbar(e.trim().replace(".", ""),{ variant:"error" });
+  enqueueSnackbar(e.trim().replace(".", ""), { variant: "error" });
 };
 
 export const sortFn = (a, b) => {
@@ -32,12 +32,13 @@ export const uploadFile = async (file, signedUrl, enqueueSnackbar) => {
     },
   });
   // TODO: probably should replace notistack with https://github.com/fkhadra/react-toastify
-  enqueueSnackbar(`Upload in progress`, { variant: 'info' });
+  enqueueSnackbar(`Upload in progress`, { variant: "info" });
   return data;
 };
 
-export const camelizeKeys = obj => transform(obj, (acc, value, key, target) => {
-  const camelKey = isArray(target) ? key : camelCase(key);
-  
-  acc[camelKey] = isObject(value) ? camelizeKeys(value) : value;
-});
+export const camelizeKeys = (obj) =>
+  transform(obj, (acc, value, key, target) => {
+    const camelKey = isArray(target) ? key : camelCase(key);
+
+    acc[camelKey] = isObject(value) ? camelizeKeys(value) : value;
+  });

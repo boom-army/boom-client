@@ -21,11 +21,11 @@ export let SOSOL_TOKEN_ID = new PublicKey(
 
 export let METADATA_PROGRAM_ID = new PublicKey(
   "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
-)
+);
 
 export let SOSOL_HOST_ID = new PublicKey(
   "hostdMqCRk7o6Lwg1tP7JtmvWBBM5UR6zwbuMA7oeq2"
-)
+);
 
 export const PROGRAM_IDS = [
   {
