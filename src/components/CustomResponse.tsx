@@ -15,7 +15,7 @@ const Wrapper = styled("div")({
   },
 });
 
-export const CustomResponse = ({ text }) => (
+export const CustomResponse = ({ text }:any) => (
   <Wrapper>
     <p>{text}</p>
   </Wrapper>

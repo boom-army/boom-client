@@ -1,9 +1,13 @@
 import { useState } from "react";
 
-export const useInput = (defaultValue) => {
+interface Props {
+  defaultValue: string
+}
+
+export const useInput = (defaultValue:Props) => {
   const [value, setValue] = useState(defaultValue);
 
-  const onChange = (e) => {
+  const onChange = (e:any) => {
     setValue(e.target.value);
   };
 

@@ -1,7 +1,7 @@
 import { SRLWrapper } from "simple-react-lightbox";
 import { styled } from "@mui/material/styles";
 
-const ImageBoxWrapper = styled("div")((props) => ({
+const ImageBoxWrapper = styled("div")((props: any) => ({
   "> div": {
     display: "flex",
     borderRadius: "16px",
@@ -19,37 +19,47 @@ const ImageBoxWrapper = styled("div")((props) => ({
   },
 }));
 
-const ImageColumn = styled("div")((props) => ({
-  height: "100%",
-  display: "flex",
-  flexDirection: "column",
-  flex: "50%",
-  marginRight: props.fileslength > 1 ? "2px;" : "0;",
-}));
+const ImageColumn = styled('div')<{ fileslength?: any, props?: any }>(
+  (props) => ({
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    flex: "50%",
+    marginRight: props.fileslength > 1 ? "2px;" : "0;",
+  }));
 
-const ImageWrapper = styled("div")((props) => ({
-  lineHeight: "0",
-  height: "100%",
-  marginBottom: props.hasbottommargin ? "2px;" : "0;",
-}));
+const ImageWrapper = styled('div')<{ hasfullheight?: any, hasbottommargin?: any, fileindex?: any, props?: any }>(
+  (props) => ({
+    lineHeight: "0",
+    height: "100%",
+    marginBottom: props.hasbottommargin ? "2px;" : "0;",
+  }));
 
-const Image = styled("img")((props) => ({
-  objectFit: "cover",
-  maxWidth: "100%",
-  width: "100%",
-  height: "100%",
-  position: "relative",
-  cursor: props.disablelightbox ? "inherit" : "pointer",
-}));
+const Image = styled('img')<{ disablelightbox?: any, props?: any }>(
+  (props) => ({
+    objectFit: "cover",
+    maxWidth: "100%",
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    cursor: props.disablelightbox ? "inherit" : "pointer",
+  }));
 
-const ImageColumnContainer = ({ files, isLeftCol, disablelightbox }) => {
-  const className = `tweet-image-col ${
-    isLeftCol ? "tweet-image-left-col" : "tweet-image-right-col"
-  }`;
+interface Props {
+  files?: any;
+  isLeftCol?: boolean;
+  disablelightbox?: any
+}
+
+
+const ImageColumnContainer = ({ files, isLeftCol, disablelightbox }: Props) => {
+  const className = `tweet-image-col ${isLeftCol ? "tweet-image-left-col" : "tweet-image-right-col"
+    }`;
+
   return (
     <div className={className}>
       <ImageColumn fileslength={files.length}>
-        {files.map((file, index, arr) => (
+        {files.map((file: any, index: number, arr: any) => (
           <ImageWrapper
             key={file.id}
             hasfullheight={arr.length === 1 ? "true" : "false"}
@@ -69,7 +79,7 @@ const ImageColumnContainer = ({ files, isLeftCol, disablelightbox }) => {
   );
 };
 
-export const ImageBox = ({ files, disablelightbox }) => {
+export const ImageBox = ({ files, disablelightbox }: Props) => {
   const options = {
     settings: {
       lightboxTransitionSpeed: 0,
@@ -81,11 +91,11 @@ export const ImageBox = ({ files, disablelightbox }) => {
     },
   };
 
-  const leftColumnFiles = files.filter((_, index, arr) => {
+  const leftColumnFiles = files.filter((_: any, index: number, arr: any) => {
     return index === 0 || (arr.length === 4 && index === 2);
   });
 
-  const rightColumnFiles = files.filter((_, index, arr) => {
+  const rightColumnFiles = files.filter((_: any, index: number, arr: any) => {
     return (
       index === 1 ||
       (arr.length === 3 && index === 2) ||

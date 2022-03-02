@@ -121,7 +121,7 @@ interface Props {
   tweet: Tweet;
 }
 
-export const ShowTweet: React.FC<Props> = ({ tweet }) => {
+export const ShowTweet: React.FC<Props> = ({ tweet }:Props) => {
   const {
     id,
     text,

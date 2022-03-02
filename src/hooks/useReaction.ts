@@ -4,7 +4,11 @@ import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useCallback } from "react";
 
-export const useReaction = ({ tweetId }) => {
+interface Props {
+  tweetId: string;
+}
+
+export const useReaction = ({ tweetId }:Props) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {

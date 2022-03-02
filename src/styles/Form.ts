@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-export default styled("form")((props) => ({
+export default styled("form")((props:any) => ({
   width: (props.lg && "98%") || "380px",
   border: (props.lg && "none") || `1px solid ${props.theme.tertiaryColor}`,
   padding: "2rem",

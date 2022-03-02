@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import { useEffect } from "react";
 import { useMentionsQuery } from "../generated/graphql";
 
-const Wrapper = styled("div")({});
+const Wrapper = styled("div")({})
 
 export const Notifications = ({ refetchProfile }) => {
   const { loading, data } = useMentionsQuery({
@@ -23,7 +23,7 @@ export const Notifications = ({ refetchProfile }) => {
   return (
     <Wrapper>
       {data?.mentions?.length ? (
-        data.mentions.map((tweet) => <ShowTweet key={tweet.id} tweet={tweet} />)
+        data.mentions.map((tweet) => <ShowTweet key={tweet?.id} tweet={tweet} />)
       ) : (
         <CustomResponse text="Follow some people to get some feed updates" />
       )}

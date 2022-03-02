@@ -1,7 +1,19 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 
-const Wrapper = styled("div")((props) => ({
+interface InputProps{
+  lg ?:boolean;
+  type ?: string;
+  text?:string;
+  value?:string;
+  onChange?:any;
+  placeholder?:string;
+  fullWidth ?:boolean;
+  hideLabel ?:boolean
+}
+
+const Wrapper = styled('div')<{ lg?:boolean,fullWidth?:boolean,props?:any }>(
+  (props) => ({
   width: `${(props.fullWidth ? "100%" : "315px") || (props.lg && "100%")}`,
   background: `${props.theme.tertiaryColor2}`,
   padding: "0.2rem 0.4rem",
@@ -40,25 +52,19 @@ const Wrapper = styled("div")((props) => ({
     position: "absolute",
     width: "1px",
   },
-  // width : props.lg ? '100%' :'none',
-
-  // ${(props) =>
-  //   props.lg &&
-  //   css`
-  //     width: 100%;
-  //   `}
-}));
+  })
+);
 
 const Input = ({
-  lg = false,
+  lg=false,  
   type = "text",
   text,
   value,
   onChange,
   placeholder,
-  fullWidth = false,
+  fullWidth=false,
   hideLabel = false,
-}) => {
+}:InputProps)  => {
   return (
     <Wrapper lg={lg} fullWidth={fullWidth}>
       <label className={hideLabel ? "hideLabel" : ""}>{text}</label>
@@ -74,3 +80,5 @@ const Input = ({
 };
 
 export default Input;
+
+
