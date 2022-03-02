@@ -23,7 +23,7 @@ export const Notifications = ({ refetchProfile }) => {
   return (
     <Wrapper>
       {data?.mentions?.length ? (
-        data.mentions.map((tweet) => <ShowTweet key={tweet?.id} tweet={tweet} />)
+        data.mentions.map((tweet) => <ShowTweet key={tweet.id} tweet={tweet} />)
       ) : (
         <CustomResponse text="Follow some people to get some feed updates" />
       )}
