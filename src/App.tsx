@@ -58,7 +58,6 @@ export const App = () => {
           body: {
             backgroundColor: theme.background,
             color: theme.primaryColor,
-            lineHeight: "1.8",
             overflowX: "hidden",
           },
           "body::WebkitScrollbar": {

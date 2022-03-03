@@ -4,7 +4,7 @@ import { styled } from "@mui/system";
 import { ThemeContext } from "../../contexts/theme";
 import { darkTheme } from "../../styles/themes";
 
-export const AttributionLink: React.FC<{ src: string }> = ({ src }) => {
+export const AttributionLink: React.FC<{ src: any |null}> = ({ src }) => {
   const { theme } = useContext(ThemeContext);
   const isDarkTheme = theme.primaryColor === darkTheme.primaryColor;
 

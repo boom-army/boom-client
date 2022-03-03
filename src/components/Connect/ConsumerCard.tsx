@@ -18,8 +18,11 @@ const CardStyled = styled(Card)({
     display: "block",
   },
 });
+const TypographyStyled =styled(Typography)<{nowrap?:any,sx?:any,component?:any,props?:any }>(
+  (props) => ({
+}));
 
-export const ConsumerCard = ({ consumer }) => {
+export const ConsumerCard = ({ consumer }:any) => {
   const navigate = useNavigate();
   const handleOnClick = () => navigate(`/${consumer.handle}`);
   return (
@@ -42,17 +45,17 @@ export const ConsumerCard = ({ consumer }) => {
               src={consumer.avatar}
             />
             <Stack>
-              <Typography
+              <TypographyStyled
                 variant="body1"
                 component="div"
                 nowrap
                 sx={{ marginTop: -0.7 }}
               >
                 {consumer.consumerName}
-              </Typography>
-              <Typography nowrap variant="body2" component="div">
+              </TypographyStyled>
+              <TypographyStyled nowrap variant="body2" component="div">
                 @{consumer.handle}
-              </Typography>
+              </TypographyStyled>
             </Stack>
           </Stack>
           <Typography variant="body2">{consumer.bio}</Typography>

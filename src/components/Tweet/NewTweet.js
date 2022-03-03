@@ -20,7 +20,8 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { styled } from "@mui/material/styles";
 
-const Wrapper = styled("div")((props) => ({
+const Wrapper = styled("div")(
+  (props) => ({
   display: "flex",
   padding: "1rem 0",
   borderBottom: `7px solid ${props.theme.tertiaryColor}`,
@@ -62,12 +63,17 @@ const Wrapper = styled("div")((props) => ({
   },
 }));
 
+// interface NewTweetProps{
+// feed?:any,
+// parentTweet?:string
+// }
+
 export const NewTweet = ({ feed, parentTweet }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif] = useState(null);
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles] = useState([]);
-  const tweet = useInput("");
+  const tweet= useInput("");
 
   const [newTweetMutation, { loading }] = useMutation(NEW_TWEET, {
     refetchQueries: [
@@ -146,7 +152,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
-      const imageUrl = imageData?.config?.url?.split("?")[0];
+      const imageUrl= imageData?.config?.url?.split("?")[0];
       setTweetFiles([...tweetFiles, imageUrl]);
     } catch (error) {
       console.log(error);

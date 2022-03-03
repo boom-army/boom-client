@@ -14,7 +14,6 @@ import { styled } from "@mui/material/styles";
 const Wrapper = styled("div")((props) => ({
   margin: "1rem 0",
   marginLeft: "1rem",
-
   input: {
     height: "40px",
     width: "70%",
@@ -50,7 +49,7 @@ const SearchInput = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleSearch = async (e) => {
+  const handleSearch = async (e:any) => {
     e.preventDefault();
 
     if (!term.value) {

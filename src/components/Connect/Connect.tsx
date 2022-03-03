@@ -57,7 +57,7 @@ export const Connect = () => {
           spacing={{ md: 2 }}
           sx={{ paddingTop: 3, paddingLeft: 2, paddingRight: 2 }}
         >
-          {data.users.map((consumer) => (
+          {data.users.map((consumer:any) => (
             <StyledGrid item xs={12} md={4} key={`grid-${consumer.id}`}>
               <ConsumerCard key={`card-${consumer.id}`} consumer={consumer} />
             </StyledGrid>

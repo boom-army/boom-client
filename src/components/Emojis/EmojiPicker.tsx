@@ -5,7 +5,10 @@ import { ThemeContext } from "../../contexts/theme";
 import "emoji-mart/css/emoji-mart.css";
 import { styled } from "@mui/material/styles";
 
-const PickerWrapper = styled("span")((props) => ({
+
+const PickerWrapper = styled('div')(
+  (props:any) => ({
+    
   ".emoji-mart": {
     position: "absolute",
     zIndex: "1",
@@ -56,19 +59,28 @@ const PickerWrapper = styled("span")((props) => ({
   },
 }));
 
+
+
+interface EmojiPickerProps{
+  emojiHandler?:any,
+  customIcon?:any,
+  dismissOnClick?:any,
+   props?:any
+}
+
 export const EmojiPicker = ({
   emojiHandler,
   customIcon,
   dismissOnClick,
-  props,
-}) => {
+
+}:EmojiPickerProps) => {
   const [picker, togglePicker] = useState(false);
   const { theme } = useContext(ThemeContext);
 
-  const handleDocumentClick = (event) => {
+  const handleDocumentClick = (event:any) => {
     let isEmojiClassFound = false;
 
-    event?.path?.forEach((elem) => {
+    event?.path?.forEach((elem:any) => {
       if (elem && elem.classList) {
         const data = elem.classList.value;
         if (data.includes("emoji")) {
@@ -87,20 +99,21 @@ export const EmojiPicker = ({
     };
   });
 
-  const handleEmojiSelect = (pickedEmoji) => {
+  const handleEmojiSelect = (pickedEmoji:any) => {
     emojiHandler(pickedEmoji);
     if (dismissOnClick) togglePicker(!picker);
   };
+
 
   return (
     <PickerWrapper>
       <span className="emoji-pick" onClick={() => togglePicker(!picker)}>
         {customIcon ?? <SmileIcon />}
       </span>
-
+      {/* here change `button` to `useButton` bcz we need to add button props in node modules picker file*/}
       {picker && (
         <Picker
-          button={true}
+          useButton={true}
           sheetSize={64}
           theme={theme.background === "#15202b" ? "dark" : "light"}
           onSelect={handleEmojiSelect}

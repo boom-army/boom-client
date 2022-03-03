@@ -70,7 +70,7 @@ const queryGiphy = async (
 };
 
 export const SearchModal: React.FC<{
-  setGif: React.Dispatch<React.SetStateAction<GIFObject>>;
+  setGif: any;
 }> = ({ setGif }) => {
   const [input, setInput] = useState("");
   const [open, setOpen] = useState(false);

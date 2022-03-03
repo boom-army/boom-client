@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 
-export default styled("button")((props:any) => ({
+export default styled("button")<{sm?:any,outline?:any,relative?:any,xl?:any,props?:any }>(
+  (props) => ({
   padding: props.sm ? "0.4rem 1rem" : "0.4rem 1.8rem",
   color: props.outline ? props.theme.accentColor : "#FFF",
   background: `${props.outline ? "inherit" : props.theme.accentColor}`,

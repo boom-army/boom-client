@@ -8,11 +8,11 @@ const ReactionWrapper = styled("div")({
   marginRight: "4em",
 });
 
-export const EmojiTweet = ({ handleReaction }) => {
+export const EmojiTweet = ({ handleReaction }:any) => {
   return (
     <ReactionWrapper>
       <EmojiPicker
-        emojiHandler={({ id: emojiId, skin }) =>
+        emojiHandler={({ id: emojiId, skin }:any) =>
           handleReaction({ emojiId, skin })
         }
         customIcon={<SmilePlusIcon />}

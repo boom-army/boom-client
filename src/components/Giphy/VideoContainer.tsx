@@ -6,10 +6,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ThemeContext } from "../../contexts/theme";
 
 interface Gif {
-  id: string;
-  fixedHeightUrl: string;
-  originalUrl: string;
-  title: string;
+  id?: string;
+  fixedHeightUrl?: string;
+  originalUrl?: string;
+  title?: string;
+  url?:string
 }
 
 interface videoProps {

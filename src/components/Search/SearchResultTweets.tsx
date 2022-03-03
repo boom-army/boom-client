@@ -1,32 +1,32 @@
 import React from "react";
-import { Loader } from "../Loader";
 import { CustomResponse } from "../CustomResponse";
 import { ShowTweet } from "../Tweet";
+import { Loader } from "../Loader";
 import { styled } from "@mui/material/styles";
 
 const Wrapper = styled("div")({
   position: "relative",
 });
 
-const SearchResultTags = ({ loading, tags }) => {
+const SearchResultTweets = ({ tweets, loading }:any) => {
   if (loading) return <Loader />;
 
-  if (tags === undefined)
+  if (tweets === undefined)
     return (
       <CustomResponse text="Use the search bar to find tags, people and tweets" />
     );
 
   return (
     <Wrapper>
-      {tags?.searchByTag?.length ? (
-        tags.searchByTag.map((tweet) => (
+      {tweets?.searchByTweet?.length ? (
+        tweets.searchByTweet.map((tweet:any) => (
           <ShowTweet key={tweet.id} tweet={tweet} />
         ))
       ) : (
-        <CustomResponse text="No tweets found for that tag, try a different search" />
+        <CustomResponse text="No tweets found, try a different search" />
       )}
     </Wrapper>
   );
 };
 
-export default SearchResultTags;
+export default SearchResultTweets;

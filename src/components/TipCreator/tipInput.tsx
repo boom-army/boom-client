@@ -17,7 +17,7 @@ import { useSosolProgram } from "../../hooks";
 import { useTipCreatorMutation } from "../../generated/graphql";
 
 interface Props {
-  userPubKey: PublicKey;
+  userPubKey:string;
   setShowTip: React.Dispatch<React.SetStateAction<boolean>>;
   userId: string;
   tweetId: string;

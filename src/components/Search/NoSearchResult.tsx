@@ -10,7 +10,7 @@ const Wrapper = styled("div")({
   justifyContent: "center",
 });
 
-export default ({ text }) => (
+export default ({ text }:any) => (
   <Wrapper>
     <p>{text}</p>
   </Wrapper>

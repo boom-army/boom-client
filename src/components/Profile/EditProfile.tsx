@@ -50,7 +50,7 @@ const Wrapper = styled("div")((props) => ({
   },
 }));
 
-export const EditProfile = ({ data, loading, setUser }) => {
+export const EditProfile = ({ data, loading, setUser }:any) => {
   if (loading) return <Loader />;
 
   return (

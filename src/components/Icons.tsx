@@ -74,10 +74,11 @@ export const ProfileIcon = () => (
 );
 
 interface IconProps {
-color:string;
+color?:string;
 sm?:any;
 loading?:any;
-onClick?:any
+onClick?:any;
+userPubKey?:any
 }
 
 export const ThemeIcon = ({ color, sm }:IconProps) => (
@@ -126,6 +127,7 @@ export const HeartIcon = ({ onClick }:IconProps) => (
     </g>
   </DimmedSvg>
 );
+
 
 export const RetweetIcon = ({ onClick, loading }:IconProps) => (
   <DimmedSvg
@@ -299,7 +301,7 @@ export const TipIcon = ({ onClick }:IconProps) => (
   </DimmedSvg>
 );
 
-export const TipIcon2 = ({ onClick }:IconProps) => (
+export const TipIcon2 = ({ onClick, userPubKey }:IconProps) => (
   <DimmedSvg viewBox="0 0 24 24" onClick={onClick}>
     <path
       fillRule="evenodd"
