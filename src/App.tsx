@@ -20,6 +20,7 @@ declare module "@mui/material/styles" {
     overlay: string;
     font: string;
     bs1: string;
+    loading:string;
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
@@ -33,13 +34,13 @@ declare module "@mui/material/styles" {
     overlay?: string;
     font?: string;
     bs1?: string;
+    loading?:string;
   }
 }
 
 export const App = () => {
   const { theme } = useContext(ThemeContext);
   const custom_theme = createTheme(theme);
-  const isLoggedIn = localStorage.getItem("user");
   return (
     <ThemeProvider theme={custom_theme}>
       <CssBaseline />
@@ -57,7 +58,6 @@ export const App = () => {
           body: {
             backgroundColor: theme.background,
             color: theme.primaryColor,
-            lineHeight: "1.8",
             overflowX: "hidden",
           },
           "body::WebkitScrollbar": {
