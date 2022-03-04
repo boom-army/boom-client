@@ -20,9 +20,9 @@ export const client = new ApolloClient({
     watchQuery: {
       context: async ({ req }: any) => {
         const token = req?.headers?.authorization || null;
-        const user = token ? (localStorage.getItem("user"))?.toString() : null;
+        const user = token ? localStorage.getItem("user")?.toString() : null;
         return { user, isLoggedIn: !!token };
       },
     },
   },
-})
+});

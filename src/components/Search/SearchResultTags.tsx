@@ -8,7 +8,7 @@ const Wrapper = styled("div")({
   position: "relative",
 });
 
-const SearchResultTags = ({ loading, tags }:any) => {
+const SearchResultTags = ({ loading, tags }: any) => {
   if (loading) return <Loader />;
 
   if (tags === undefined)
@@ -19,7 +19,7 @@ const SearchResultTags = ({ loading, tags }:any) => {
   return (
     <Wrapper>
       {tags?.searchByTag?.length ? (
-        tags.searchByTag.map((tweet:any) => (
+        tags.searchByTag.map((tweet: any) => (
           <ShowTweet key={tweet.id} tweet={tweet} />
         ))
       ) : (

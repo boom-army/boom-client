@@ -17,7 +17,7 @@ const Logout = () => {
         // Silently catch because any errors are caught by the context `onError` handler
       });
       setTimeout(() => {
-      window.location.href = "/";
+        window.location.href = "/";
       }, 2100);
       window.location.reload();
       return enqueueSnackbar("You are logged out", { variant: "success" });

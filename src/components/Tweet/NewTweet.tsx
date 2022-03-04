@@ -20,8 +20,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { styled } from "@mui/material/styles";
 
-const Wrapper = styled("div")(
-  (props) => ({
+const Wrapper = styled("div")((props) => ({
   display: "flex",
   padding: "1rem 0",
   borderBottom: `7px solid ${props.theme.tertiaryColor}`,
@@ -59,35 +58,35 @@ const Wrapper = styled("div")(
       cursor: "pointer",
     },
 
-    ".svg-input":{
-      display:'flex'
-    },
+  ".svg-input": {
+    display: "flex",
+  },
 
-    "@media only screen and (max-width : 390px) ": {
-      ".svg-input .emoji-pick svg, .svg-input .tweet-gif svg, .svg-input .file-upload-icon svg":{
+  "@media only screen and (max-width : 390px) ": {
+    ".svg-input .emoji-pick svg, .svg-input .tweet-gif svg, .svg-input .file-upload-icon svg":
+      {
         marginRight: "1.3rem",
       },
-      ".svg-input":{
-        display:'flex',
-      },
-      
+    ".svg-input": {
+      display: "flex",
     },
+  },
   ".avatar": {
     margin: "0 1rem",
   },
 }));
 
-interface NewTweetProps{
-feed?:any,
-parentTweet?:any
+interface NewTweetProps {
+  feed?: any;
+  parentTweet?: any;
 }
 
-export const NewTweet = ({ feed, parentTweet }:NewTweetProps) => {
+export const NewTweet = ({ feed, parentTweet }: NewTweetProps) => {
   const { enqueueSnackbar } = useSnackbar();
-  const [gif, setGif]:any= useState(null);
+  const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
-  const [tweetFiles, setTweetFiles]:any= useState([]);
-  const tweet= useInput("");
+  const [tweetFiles, setTweetFiles]: any = useState([]);
+  const tweet = useInput("");
 
   const [newTweetMutation, { loading }] = useMutation(NEW_TWEET, {
     refetchQueries: [
@@ -106,14 +105,13 @@ export const NewTweet = ({ feed, parentTweet }:NewTweetProps) => {
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 
-
-  const createGifInput = (gif:any) => ({
+  const createGifInput = (gif: any) => ({
     title: gif.title,
     fixedHeightUrl: gif.images.fixed_height.mp4,
     originalUrl: gif.images.original.mp4,
   });
 
-  const handleNewTweet = async (e:any) => {
+  const handleNewTweet = async (e: any) => {
     e.preventDefault();
 
     // a tweet can have no text body if it has a gif
@@ -150,7 +148,7 @@ export const NewTweet = ({ feed, parentTweet }:NewTweetProps) => {
     setGif(null);
   };
 
-  const handleTweetFiles = async (e:any) => {
+  const handleTweetFiles = async (e: any) => {
     try {
       if (tweetFiles.length >= 4) {
         return enqueueSnackbar("You can only upload a maximum of 4 files", {
@@ -167,7 +165,7 @@ export const NewTweet = ({ feed, parentTweet }:NewTweetProps) => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
-      const imageUrl= imageData?.config?.url?.split("?")[0];
+      const imageUrl = imageData?.config?.url?.split("?")[0];
       setTweetFiles([...tweetFiles, imageUrl]);
     } catch (error) {
       console.log(error);
@@ -179,7 +177,7 @@ export const NewTweet = ({ feed, parentTweet }:NewTweetProps) => {
 
   const { data } = useQuery(USER);
 
-  const mapTweetFiles = (url:string, index:number) => ({
+  const mapTweetFiles = (url: string, index: number) => ({
     url,
     id: `preview-${index}`,
   });
@@ -217,7 +215,7 @@ export const NewTweet = ({ feed, parentTweet }:NewTweetProps) => {
           <div className="new-tweet-action">
             <div className="svg-input">
               <EmojiPicker
-                emojiHandler={(pickedEmoji:any) =>
+                emojiHandler={(pickedEmoji: any) =>
                   tweet.setValue(tweet.value + pickedEmoji.native)
                 }
               />

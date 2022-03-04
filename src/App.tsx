@@ -20,7 +20,7 @@ declare module "@mui/material/styles" {
     overlay: string;
     font: string;
     bs1: string;
-    loading:string;
+    loading: string;
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
@@ -34,7 +34,7 @@ declare module "@mui/material/styles" {
     overlay?: string;
     font?: string;
     bs1?: string;
-    loading?:string;
+    loading?: string;
   }
 }
 

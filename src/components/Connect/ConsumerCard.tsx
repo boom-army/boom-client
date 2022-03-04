@@ -18,11 +18,14 @@ const CardStyled = styled(Card)({
     display: "block",
   },
 });
-const TypographyStyled =styled(Typography)<{nowrap?:any,sx?:any,component?:any,props?:any }>(
-  (props) => ({
-}));
+const TypographyStyled = styled(Typography)<{
+  nowrap?: any;
+  sx?: any;
+  component?: any;
+  props?: any;
+}>((props) => ({}));
 
-export const ConsumerCard = ({ consumer }:any) => {
+export const ConsumerCard = ({ consumer }: any) => {
   const navigate = useNavigate();
   const handleOnClick = () => navigate(`/${consumer.handle}`);
   return (

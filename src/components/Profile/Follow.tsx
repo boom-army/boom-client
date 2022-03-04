@@ -9,14 +9,19 @@ import { displayError } from "../../utils";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 
-interface FollowProps{
-  isFollowing: boolean,
-  id:string,
-  sm?:boolean,
-  relative?:boolean
+interface FollowProps {
+  isFollowing: boolean;
+  id: string;
+  sm?: boolean;
+  relative?: boolean;
 }
 
-export const Follow = ({ isFollowing, id, sm = false, relative = false }:FollowProps) => {
+export const Follow = ({
+  isFollowing,
+  id,
+  sm = false,
+  relative = false,
+}: FollowProps) => {
   const [followState, setFollowState] = useState(isFollowing);
 
   const [followMutation] = useMutation(FOLLOW, {

@@ -14,9 +14,7 @@ import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 
-
-
-export const EditProfileForm = ({ profile, setUser }:any) => {
+export const EditProfileForm = ({ profile, setUser }: any) => {
   const navigate = useNavigate();
   const [avatarState, setAvatar] = useState("");
   const [coverPhotoState, setCoverPhoto] = useState("");
@@ -39,7 +37,7 @@ export const EditProfileForm = ({ profile, setUser }:any) => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleEditProfile = async (e:any) => {
+  const handleEditProfile = async (e: any) => {
     e.preventDefault();
 
     if (!consumerName.value) {
@@ -49,7 +47,7 @@ export const EditProfileForm = ({ profile, setUser }:any) => {
     }
 
     try {
-      const { data }: any= await editProfileMutation({
+      const { data }: any = await editProfileMutation({
         variables: {
           handle: handle.value,
           consumerName: consumerName.value,
@@ -78,7 +76,7 @@ export const EditProfileForm = ({ profile, setUser }:any) => {
     }
   };
 
-  const handleCoverPhoto = async (e:any) => {
+  const handleCoverPhoto = async (e: any) => {
     try {
       const file = e.target.files[0];
       const { data } = await signFileMutation({
@@ -89,14 +87,15 @@ export const EditProfileForm = ({ profile, setUser }:any) => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
-      const imageUrl:string|undefined|any = imageData?.config?.url?.split("?")[0];
+      const imageUrl: string | undefined | any =
+        imageData?.config?.url?.split("?")[0];
       setCoverPhoto(imageUrl);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleAvatar = async (e:any) => {
+  const handleAvatar = async (e: any) => {
     try {
       const file = e.target.files[0];
       const { data } = await signFileMutation({
@@ -107,7 +106,8 @@ export const EditProfileForm = ({ profile, setUser }:any) => {
       });
       const signedUrl = data.signFileUrl;
       const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
-      const imageUrl:string|undefined|any = imageData?.config?.url?.split("?")[0];
+      const imageUrl: string | undefined | any =
+        imageData?.config?.url?.split("?")[0];
       setAvatar(imageUrl);
     } catch (error) {
       console.log(error);

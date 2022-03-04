@@ -8,7 +8,7 @@ interface Props {
   tweetId: string;
 }
 
-export const useReaction = ({ tweetId }:Props) => {
+export const useReaction = ({ tweetId }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {

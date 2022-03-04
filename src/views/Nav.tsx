@@ -42,10 +42,7 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
   });
 
   return (
-    <StyledStack
-      direction="column"
-      spacing={4.5}
-    >
+    <StyledStack direction="column" spacing={4.5}>
       <NavLink style={applyActiveStyles} to="/">
         <Stack direction="row" {...stackProps}>
           <Language style={iconProps} />
