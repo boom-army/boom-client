@@ -16,9 +16,13 @@ export const client = new ApolloClient({
   headers: {
     authorization: localStorage.getItem("token") || "",
   },
-  context: async ({ req }) => {
-    const token = req?.headers?.authorization || null;
-    const user= token ? JSON.parse(localStorage.getItem("user")) : null;
-    return { user, isLoggedIn: !!token };
+  defaultOptions: {
+    watchQuery: {
+      context: async ({ req }: any) => {
+        const token = req?.headers?.authorization || null;
+        const user = token ? (localStorage.getItem("user"))?.toString() : null;
+        return { user, isLoggedIn: !!token };
+      },
+    },
   },
-});
+})

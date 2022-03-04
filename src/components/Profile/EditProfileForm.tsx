@@ -13,7 +13,7 @@ import { displayError, uploadFile } from "../../utils";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import { User, EditProfileMutation  } from "../../generated/graphql";
+
 
 
 export const EditProfileForm = ({ profile, setUser }:any) => {

@@ -5,15 +5,20 @@ import { TrashIcon } from "../Icons";
 import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import { Comment , Tweet} from "../../generated/graphql";
 
-const DeleteComment = ({ id }) => {
+interface DeleteProps{
+  id:string
+}
+
+const DeleteComment = ({ id }:DeleteProps) => {
   const { tweetId } = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
   const [deleteCommentMutation, { loading }] = useMutation(DELETE_COMMENT, {
     variables: { id },
     update: (cache, { data: { deleteComment } }) => {
-      const { tweet } = cache.readQuery({
+      const { tweet }:any = cache.readQuery({
         query: TWEET,
         variables: { id: tweetId },
       });
@@ -25,7 +30,7 @@ const DeleteComment = ({ id }) => {
             ...tweet,
             commentsCount: tweet.commentsCount - 1,
             comments: tweet.comments.filter(
-              (comment) => comment.id !== deleteComment.id
+              (comment:Comment) => comment.id !== deleteComment.id
             ),
           },
         },

@@ -6,7 +6,6 @@ import { Button, Box } from "@mui/material";
 import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
-import { User  } from "../../generated/graphql";
 
 const Wrapper = styled("div")((props) => ({
   borderBottom: `1px solid ${props.theme.tertiaryColor}`,
@@ -65,22 +64,22 @@ const Wrapper = styled("div")((props) => ({
     },
   },
 }));
-//testing needed assign User
-const ProfileInfo = ({id,
-  coverPhoto,
-  avatar,
-  bio,
-  location,
-  website,
-  isSelf,
-  dob,
-  isFollowing,
-  followersCount,
-  followingCount,
-  handle,
-  consumerName,
-  publicAddress}:any
-    ) => {
+
+const ProfileInfo = ({profile}:any ) => {
+      const {id,
+        coverPhoto,
+        avatar,
+        bio,
+        location,
+        website,
+        isSelf,
+        dob,
+        isFollowing,
+        followersCount,
+        followingCount,
+        handle,
+        consumerName,
+        publicAddress} = profile;
 
   return (
     <Wrapper>

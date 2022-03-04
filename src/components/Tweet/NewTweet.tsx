@@ -58,21 +58,35 @@ const Wrapper = styled("div")(
       marginRight: "2rem",
       cursor: "pointer",
     },
+
+    ".svg-input":{
+      display:'flex'
+    },
+
+    "@media only screen and (max-width : 390px) ": {
+      ".svg-input .emoji-pick svg, .svg-input .tweet-gif svg, .svg-input .file-upload-icon svg":{
+        marginRight: "1.3rem",
+      },
+      ".svg-input":{
+        display:'flex',
+      },
+      
+    },
   ".avatar": {
     margin: "0 1rem",
   },
 }));
 
-// interface NewTweetProps{
-// feed?:any,
-// parentTweet?:string
-// }
+interface NewTweetProps{
+feed?:any,
+parentTweet?:any
+}
 
-export const NewTweet = ({ feed, parentTweet }) => {
+export const NewTweet = ({ feed, parentTweet }:NewTweetProps) => {
   const { enqueueSnackbar } = useSnackbar();
-  const [gif, setGif] = useState(null);
+  const [gif, setGif]:any= useState(null);
   const [nftData, setNftData] = useState(null);
-  const [tweetFiles, setTweetFiles] = useState([]);
+  const [tweetFiles, setTweetFiles]:any= useState([]);
   const tweet= useInput("");
 
   const [newTweetMutation, { loading }] = useMutation(NEW_TWEET, {
@@ -92,13 +106,14 @@ export const NewTweet = ({ feed, parentTweet }) => {
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
 
-  const createGifInput = (gif) => ({
+
+  const createGifInput = (gif:any) => ({
     title: gif.title,
     fixedHeightUrl: gif.images.fixed_height.mp4,
     originalUrl: gif.images.original.mp4,
   });
 
-  const handleNewTweet = async (e) => {
+  const handleNewTweet = async (e:any) => {
     e.preventDefault();
 
     // a tweet can have no text body if it has a gif
@@ -135,7 +150,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
     setGif(null);
   };
 
-  const handleTweetFiles = async (e) => {
+  const handleTweetFiles = async (e:any) => {
     try {
       if (tweetFiles.length >= 4) {
         return enqueueSnackbar("You can only upload a maximum of 4 files", {
@@ -164,7 +179,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
 
   const { data } = useQuery(USER);
 
-  const mapTweetFiles = (url, index) => ({
+  const mapTweetFiles = (url:string, index:number) => ({
     url,
     id: `preview-${index}`,
   });
@@ -176,7 +191,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
         <div className="new-tweet">
           <TextareaAutosize
             placeholder="What's happening?"
-            type="text"
+            // type="text"
             value={tweet.value}
             onChange={tweet.onChange}
           />
@@ -202,7 +217,7 @@ export const NewTweet = ({ feed, parentTweet }) => {
           <div className="new-tweet-action">
             <div className="svg-input">
               <EmojiPicker
-                emojiHandler={(pickedEmoji) =>
+                emojiHandler={(pickedEmoji:any) =>
                   tweet.setValue(tweet.value + pickedEmoji.native)
                 }
               />

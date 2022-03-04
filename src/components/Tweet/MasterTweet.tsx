@@ -9,6 +9,7 @@ import { TWEET } from "../../queries/tweet";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
+
 const Wrapper = styled("div")({
   marginBottom: "7rem",
 });
@@ -69,7 +70,7 @@ export const MasterTweet = () => {
           )}
           {exists && <NewTweet parentTweet={data?.tweet?.id} />}
           {comments &&
-            comments.map((comment) => (
+            comments.map((comment:any) => (
               <ShowTweet tweet={comment && comment} key={comment.id} />
             ))}
         </>
