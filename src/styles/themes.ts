@@ -25,7 +25,7 @@ const fontSettings = {
     ].join(","),
     fontSize: 14,
     fontWeight: 400,
-    fontWeightExtraLight: 200,
+    fontWeightLight: 300,
     fontWeightSemiBold: 600,
     fontWeightExtraBold: 800,
   },
