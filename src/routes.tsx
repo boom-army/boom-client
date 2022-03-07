@@ -32,6 +32,7 @@ import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { Box, styled } from "@mui/system";
 import { useProfileLazyQuery } from "./generated/graphql";
+import { ChannelView } from "./views/Channels";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -155,6 +156,7 @@ export const AppRoutes: React.FC = () => {
                         <Route path="/" element={<Home />} />
                         <Route path="following" element={<Following />} />
                         <Route path="connect" element={<ConnectView />} />
+                        <Route path="channels" element={<ChannelView />} />
                         <Route
                           path="notifications"
                           element={<Notifications refetchProfile={refetch} />}

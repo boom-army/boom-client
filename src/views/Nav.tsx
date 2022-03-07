@@ -5,6 +5,7 @@ import { MorePopUp } from "../components/MorePopup";
 import StyleIcon from "@mui/icons-material/Style";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
+import TagIcon from '@mui/icons-material/Tag';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Badge, Stack, Typography } from "@mui/material";
@@ -47,6 +48,12 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
         <Stack direction="row" {...stackProps}>
           <Language style={iconProps} />
           <Typography variant="body1">Community</Typography>
+        </Stack>
+      </NavLink>
+      <NavLink style={applyActiveStyles} to="/channels">
+        <Stack direction="row" {...stackProps}>
+          <TagIcon sx={iconProps} />
+          <Typography variant="body1">Channels</Typography>
         </Stack>
       </NavLink>
       <NavLink style={applyActiveStyles} to="/mint-nft">
