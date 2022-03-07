@@ -7,9 +7,29 @@ export interface ThemeVars {
   tertiaryColor: string;
   tertiaryColor2: string;
   overlay: string;
-  font: string;
   bs1: string;
 }
+
+const fontSettings = {
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Noto Sans Display"',
+      '"Trebuchet MS"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    fontSize: 14,
+    fontWeight: 400,
+    fontWeightExtraLight: 200,
+    fontWeightSemiBold: 600,
+    fontWeightExtraBold: 800,
+  },
+};
 
 export const lightTheme: ThemeVars = {
   background: "#FFF",
@@ -20,8 +40,8 @@ export const lightTheme: ThemeVars = {
   tertiaryColor: "#CCD6DD",
   tertiaryColor2: "#F5F8FA",
   overlay: "rgba(147, 149, 150, 0.4)",
-  font: '"Roboto", sans-serif',
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
+  ...fontSettings,
 };
 
 export const darkTheme: ThemeVars = {
@@ -33,6 +53,6 @@ export const darkTheme: ThemeVars = {
   tertiaryColor: "#38444D",
   tertiaryColor2: "#202E3A",
   overlay: "rgba(110, 118, 125, 0.4)",
-  font: '"Roboto", sans-serif',
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
+  ...fontSettings,
 };
