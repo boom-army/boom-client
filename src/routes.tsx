@@ -6,7 +6,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import RestoreIcon from "@mui/icons-material/Restore";
+import LanguageIcon from "@mui/icons-material/Language";
 import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
@@ -207,7 +207,7 @@ export const AppRoutes: React.FC = () => {
                         component={NavLink}
                         label="Community"
                         value="community"
-                        icon={<RestoreIcon />}
+                        icon={<LanguageIcon />}
                         to="/"
                       />
                       {user?.handle && (
