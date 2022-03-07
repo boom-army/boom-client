@@ -23,7 +23,6 @@ const Wrapper = styled("div")((props) => ({
   },
 }));
 
-
 const SearchResult = ({
   searchTweetLoading,
   searchUserLoading,
@@ -31,7 +30,7 @@ const SearchResult = ({
   tags,
   users,
   tweets,
-}:any) => {
+}: any) => {
   const [searchResultAction, setSearchResultAction] = useState("TWEETS");
 
   const changeToTweets = () => setSearchResultAction("TWEETS");

@@ -10,7 +10,7 @@ interface Gif {
   fixedHeightUrl?: string;
   originalUrl?: string;
   title?: string;
-  url?:string
+  url?: string;
 }
 
 interface videoProps {

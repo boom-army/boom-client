@@ -5,10 +5,7 @@ import { ThemeContext } from "../../contexts/theme";
 import "emoji-mart/css/emoji-mart.css";
 import { styled } from "@mui/material/styles";
 
-
-const PickerWrapper = styled('div')(
-  (props:any) => ({
-    
+const PickerWrapper = styled("div")((props: any) => ({
   ".emoji-mart": {
     position: "absolute",
     zIndex: "1",
@@ -59,28 +56,25 @@ const PickerWrapper = styled('div')(
   },
 }));
 
-
-
-interface EmojiPickerProps{
-  emojiHandler?:any,
-  customIcon?:any,
-  dismissOnClick?:any,
-   props?:any
+interface EmojiPickerProps {
+  emojiHandler?: any;
+  customIcon?: any;
+  dismissOnClick?: any;
+  props?: any;
 }
 
 export const EmojiPicker = ({
   emojiHandler,
   customIcon,
   dismissOnClick,
-
-}:EmojiPickerProps) => {
+}: EmojiPickerProps) => {
   const [picker, togglePicker] = useState(false);
   const { theme } = useContext(ThemeContext);
 
-  const handleDocumentClick = (event:any) => {
+  const handleDocumentClick = (event: any) => {
     let isEmojiClassFound = false;
 
-    event?.path?.forEach((elem:any) => {
+    event?.path?.forEach((elem: any) => {
       if (elem && elem.classList) {
         const data = elem.classList.value;
         if (data.includes("emoji")) {
@@ -99,11 +93,10 @@ export const EmojiPicker = ({
     };
   });
 
-  const handleEmojiSelect = (pickedEmoji:any) => {
+  const handleEmojiSelect = (pickedEmoji: any) => {
     emojiHandler(pickedEmoji);
     if (dismissOnClick) togglePicker(!picker);
   };
-
 
   return (
     <PickerWrapper>

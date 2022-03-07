@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { ThemeContext } from "../contexts/theme";
-import { lightTheme, darkTheme , ThemeVars} from "../styles/themes";
+import { lightTheme, darkTheme, ThemeVars } from "../styles/themes";
 import { ThemeIcon } from "./Icons";
 import { styled } from "@mui/material/styles";
 
@@ -23,14 +23,14 @@ const ToggleTheme = () => {
 
   const toggleTheme = () => {
     if (currentTheme === "dark") {
-      setTheme((theme:ThemeVars) => ({
+      setTheme((theme: ThemeVars) => ({
         ...theme,
         ...lightTheme,
       }));
       localStorage.setItem("theme", "light");
       setCurrentTheme("light");
     } else {
-      setTheme((theme:ThemeVars) => ({
+      setTheme((theme: ThemeVars) => ({
         ...theme,
         ...darkTheme,
       }));

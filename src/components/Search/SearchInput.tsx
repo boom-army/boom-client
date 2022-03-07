@@ -49,7 +49,7 @@ const SearchInput = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleSearch = async (e:any) => {
+  const handleSearch = async (e: any) => {
     e.preventDefault();
 
     if (!term.value) {

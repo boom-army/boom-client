@@ -65,21 +65,23 @@ const Wrapper = styled("div")((props) => ({
   },
 }));
 
-const ProfileInfo = ({profile}:any ) => {
-      const {id,
-        coverPhoto,
-        avatar,
-        bio,
-        location,
-        website,
-        isSelf,
-        dob,
-        isFollowing,
-        followersCount,
-        followingCount,
-        handle,
-        consumerName,
-        publicAddress} = profile;
+const ProfileInfo = ({ profile }: any) => {
+  const {
+    id,
+    coverPhoto,
+    avatar,
+    bio,
+    location,
+    website,
+    isSelf,
+    dob,
+    isFollowing,
+    followersCount,
+    followingCount,
+    handle,
+    consumerName,
+    publicAddress,
+  } = profile;
 
   return (
     <Wrapper>

@@ -4,17 +4,17 @@ import { FEED } from "../../queries/others";
 import { TrashIcon } from "../Icons";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { Tweet} from "../../generated/graphql";
+import { Tweet } from "../../generated/graphql";
 
-export const DeleteTweet = ({ id}:any) => {
+export const DeleteTweet = ({ id }: any) => {
   const [deleteTweetMutation, { loading }] = useMutation(DELETE_TWEET, {
     variables: { id },
     update: (cache, { data: { deleteTweet } }) => {
-      const { feed}:any = cache.readQuery({ query: FEED });
+      const { feed }: any = cache.readQuery({ query: FEED });
       cache.writeQuery({
         query: FEED,
         data: {
-          feed: feed.filter((tweet:Tweet) => tweet.id !== deleteTweet.id),
+          feed: feed.filter((tweet: Tweet) => tweet.id !== deleteTweet.id),
         },
       });
     },

@@ -23,15 +23,17 @@ const StyledPopup = styled(Popup)({
   },
 });
 
-
 interface Props {
   open?: boolean;
-  iconProps?:any;
-  stackProps?:any;
+  iconProps?: any;
+  stackProps?: any;
 }
 
 const MoreBtn = React.forwardRef(
-  ({ open, iconProps, stackProps, ...props }:Props, ref:React.LegacyRef<HTMLDivElement> | undefined) => {
+  (
+    { open, iconProps, stackProps, ...props }: Props,
+    ref: React.LegacyRef<HTMLDivElement> | undefined
+  ) => {
     return (
       <div ref={ref} {...props}>
         <Stack direction="row" {...stackProps} sx={{ cursor: "pointer" }}>
@@ -48,7 +50,7 @@ const MoreBtn = React.forwardRef(
   }
 );
 
-export const MorePopUp = ({ iconProps, stackProps }:Props) => {
+export const MorePopUp = ({ iconProps, stackProps }: Props) => {
   const { theme } = useContext(ThemeContext);
 
   const contentStyle = {

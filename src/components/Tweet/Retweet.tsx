@@ -5,13 +5,13 @@ import { displayError } from "../../utils";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 
-interface RetweetProps{
-  id:string,
-  isRetweet:boolean,
-  retweetsCount:number
+interface RetweetProps {
+  id: string;
+  isRetweet: boolean;
+  retweetsCount: number;
 }
 
-export const Retweet = ({ id, isRetweet, retweetsCount }:RetweetProps) => {
+export const Retweet = ({ id, isRetweet, retweetsCount }: RetweetProps) => {
   const [retweet, setRetweet] = useState(isRetweet);
   const [retweetsCountState, setRetweetsCount] = useState(retweetsCount);
   const [toggleRetweetMutation, { loading }] = useMutation(TOGGLE_RETWEET, {

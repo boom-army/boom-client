@@ -4,14 +4,19 @@ import { TipInput } from "./tipInput";
 import { styled } from "@mui/material/styles";
 import { ThemeContext } from "../../contexts/theme";
 
-interface TipProps{
-  tipAmount?:number|null|string,
+interface TipProps {
+  tipAmount?: number | null | string;
   userPubKey: any;
   userId: any;
   tweetId: string;
 }
 
-export const TipCreator: React.FC<TipProps> = ({ tipAmount, userPubKey, tweetId, userId }) => {
+export const TipCreator: React.FC<TipProps> = ({
+  tipAmount,
+  userPubKey,
+  tweetId,
+  userId,
+}) => {
   const { theme } = useContext(ThemeContext);
   const [showTip, setShowTip] = useState(false);
 

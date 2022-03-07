@@ -56,7 +56,7 @@ const Wrapper = styled("div")((props) => ({
   },
 }));
 
-const Comment = ({ id, text, isCommentMine, user, createdAt }:Comment) => {
+const Comment = ({ id, text, isCommentMine, user, createdAt }: Comment) => {
   // const { id, text, isCommentMine, user, createdAt } = comment;
   const handle = user && user.handle;
 
