@@ -111,8 +111,8 @@ export const NFTPicker: React.FC<{
 
   const fetchSetMeta = useCallback(
     async (connection: Connection, key: PublicKey) => {
-      const mintMeta = await Metadata.findMany(connection, { mint: key });
-      const uri = mintMeta[0].data.data.uri;
+      const mintMeta = await Metadata.findByMint(connection, key);
+      const uri = mintMeta.data.data.uri;
       if (uri) {
         const data: any = await fetch(uri)
           .then((response) => response.json())
@@ -136,15 +136,15 @@ export const NFTPicker: React.FC<{
     []
   );
 
-  useEffect(() => {
+  useEffect(() => {  
+    setLoading(true);
     (async () => {
       try {
         if (!nftInput) return;
-        setLoading(true);
         const key = new PublicKey(nftInput);
         const acc = await connection.getParsedAccountInfo(key);
 
-        if (!acc) throw new Error("No NFT found with that public key");
+        if (!acc.value) throw new Error("No NFT found with that public key");
         // @ts-ignore: error in types
         if (acc && acc?.value?.data?.parsed.info.mint) {
           // @ts-ignore: error in types
