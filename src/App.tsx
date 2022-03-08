@@ -18,6 +18,7 @@ declare module "@mui/material/styles" {
     tertiaryColor: string;
     tertiaryColor2: string;
     overlay: string;
+    success: string;
     font: string;
     bs1: string;
     loading: string;
@@ -32,6 +33,7 @@ declare module "@mui/material/styles" {
     tertiaryColor: string;
     tertiaryColor2?: string;
     overlay?: string;
+    success?: string;
     font?: string;
     bs1?: string;
     loading?: string;

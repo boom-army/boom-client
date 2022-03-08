@@ -1,18 +1,36 @@
-import { Avatar, Box, Typography } from "@mui/material";
 import React, { useContext } from "react";
+import AddIcon from '@mui/icons-material/Add';
+import CheckIcon from "@mui/icons-material/Check";
+import { Avatar, Box, Typography } from "@mui/material";
 import { ThemeContext } from "../contexts/theme";
+import { styled } from "@mui/material/styles";
+
 
 export const ChannelView: React.FC = () => {
   const { theme } = useContext(ThemeContext);
+
+  const BoxStyled = styled(Box)({
+    h3: {
+      fontWeight: 600,
+      fontSize: "16px",
+      lineHeight: "22px",
+      padding: "0.2em 0 0.5em",
+    },
+    "& .MuiTypography-body2": {
+      fontWeight: 300,
+    }
+  });
+
   return (
     <>
-      <Box
+      <BoxStyled
         m={1}
         p={1}
         sx={{
-          backgroundColor: theme.secondaryColor,
+          backgroundColor: true ? theme.primaryColor : theme.background,
           borderRadius: 1,
           display: "flex",
+          border: true ? 0 : `1px solid ${theme.secondaryColor}`,
         }}
       >
         <Box mr={1}>
@@ -22,12 +40,35 @@ export const ChannelView: React.FC = () => {
           />
         </Box>
         <Box sx={{ width: "100%" }}>
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
             <Box>
               <Typography variant="h3">Boom.Army</Typography>
             </Box>
+            <Box>
+              {true ? (
+                <Avatar sx={{ width: 16, height: 16, background: theme.palette.grey[500] }}>
+                  <AddIcon sx={{width: 16}} />
+                </Avatar>
+              ) : (
+                <Avatar sx={{ width: 16, height: 16, background: theme.success }}>
+                  <CheckIcon sx={{width: 14}} />
+                </Avatar>
+              )}
+            </Box>
           </Box>
-          <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
             <Box>
               <Typography variant="body2">Members</Typography>
             </Box>
@@ -36,7 +77,7 @@ export const ChannelView: React.FC = () => {
             </Box>
           </Box>
         </Box>
-      </Box>
+      </BoxStyled>
     </>
   );
 };

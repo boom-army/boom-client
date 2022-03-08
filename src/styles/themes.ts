@@ -7,6 +7,7 @@ export interface ThemeVars {
   tertiaryColor: string;
   tertiaryColor2: string;
   overlay: string;
+  success: string;
   bs1: string;
 }
 
@@ -31,7 +32,15 @@ const fontSettings = {
   },
 };
 
-export const lightTheme: ThemeVars = {
+const paletteLightSettings = {
+  palette: {
+    text: {
+
+    },
+  }
+};
+
+export const lightTheme = {
   background: "#FFF",
   bgHover: "#F5F8FA",
   primaryColor: "#17141A",
@@ -39,12 +48,13 @@ export const lightTheme: ThemeVars = {
   accentColor: "#CA2055",
   tertiaryColor: "#CCD6DD",
   tertiaryColor2: "#F5F8FA",
+  success: "#0DA600",
   overlay: "rgba(147, 149, 150, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
   ...fontSettings,
 };
 
-export const darkTheme: ThemeVars = {
+export const darkTheme = {
   background: "#15202b",
   bgHover: "#192734",
   primaryColor: "#FFF",
@@ -52,6 +62,7 @@ export const darkTheme: ThemeVars = {
   accentColor: "#CA2055",
   tertiaryColor: "#38444D",
   tertiaryColor2: "#202E3A",
+  success: "#0DA600",
   overlay: "rgba(110, 118, 125, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
   ...fontSettings,
