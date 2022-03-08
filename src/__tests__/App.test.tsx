@@ -1,6 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {App} from '../App';
+import React from "react";
+import renderer from "react-test-renderer";
+import { App } from "../App";
 // import renderer from 'react-test-renderer';
 
 // it('renders a snapshot', () => {
@@ -11,5 +11,3 @@ import {App} from '../App';
 it("Jest works", () => {
   expect(true).toBeTruthy();
 });
-
-

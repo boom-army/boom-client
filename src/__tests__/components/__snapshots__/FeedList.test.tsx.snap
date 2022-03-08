@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Feed List Rendering renders correctly when Feed list loading 1`] = `
+<div
+  className="css-zb8ne"
+>
+  <div
+    className="css-15inajd"
+  >
+    <p>
+      Follow some people to get some feed updates
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Feed List Rendering renders correctly when User have Feed list 1`] = `
+<div
+  className="MuiBox-root css-15g2oxy"
+>
+  <div
+    className="MuiBox-root css-1l4w6pd"
+  >
+    <span
+      className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+      role="progressbar"
+      style={
+        Object {
+          "height": 30,
+          "width": 30,
+        }
+      }
+    >
+      <svg
+        className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+          cx={44}
+          cy={44}
+          fill="none"
+          r={20.2}
+          strokeWidth={3.6}
+          style={Object {}}
+        />
+      </svg>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Feed List Rendering renders correctly when User have no Feed list 1`] = `
+<div
+  className="MuiBox-root css-15g2oxy"
+>
+  <div
+    className="MuiBox-root css-1l4w6pd"
+  >
+    <span
+      className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+      role="progressbar"
+      style={
+        Object {
+          "height": 30,
+          "width": 30,
+        }
+      }
+    >
+      <svg
+        className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+          cx={44}
+          cy={44}
+          fill="none"
+          r={20.2}
+          strokeWidth={3.6}
+          style={Object {}}
+        />
+      </svg>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Feed List Rendering renders correctly when error 1`] = `
+<div
+  className="css-15inajd"
+>
+  <p>
+    An error occured
+  </p>
+</div>
+`;
+
+

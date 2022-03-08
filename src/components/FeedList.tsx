@@ -12,8 +12,8 @@ const Wrapper = styled("div")({
 });
 
 interface Props {
-  loading: boolean;
-  error: ApolloError | undefined;
+  loading?: boolean;
+  error?: ApolloError | undefined | any;
   data: FeedQuery | undefined;
 }
 
