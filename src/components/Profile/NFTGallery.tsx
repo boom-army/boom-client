@@ -98,10 +98,9 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
       try {
         setLoading(true);
         // const nftMeta = await Metadata.findByOwnerV2(connection, publicAddress);
-        const nftMeta = await Metadata.findDataByOwner(
-          connection,
-          publicAddress
-        );
+        const nftMeta = publicAddress
+          ? await Metadata.findDataByOwner(connection, publicAddress)
+          : [];
         const nftData = nftMeta.map((meta) => meta.data);
 
         setNfts(nftData);
