@@ -9,6 +9,8 @@ export interface ThemeVars {
   overlay: string;
   success: string;
   bs1: string;
+  bluePrimary: string;
+  blueSecondary: string;
 }
 
 const fontSettings = {
@@ -32,13 +34,10 @@ const fontSettings = {
   },
 };
 
-const paletteLightSettings = {
-  palette: {
-    text: {
-
-    },
-  }
-};
+const themeBlues = {
+  bluePrimary: "#315881",
+  blueSecondary: "#4D97CB"
+}
 
 export const lightTheme = {
   background: "#FFF",
@@ -52,6 +51,7 @@ export const lightTheme = {
   overlay: "rgba(147, 149, 150, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
   ...fontSettings,
+  ...themeBlues,
 };
 
 export const darkTheme = {
@@ -66,4 +66,5 @@ export const darkTheme = {
   overlay: "rgba(110, 118, 125, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
   ...fontSettings,
+  ...themeBlues,
 };

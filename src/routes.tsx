@@ -89,6 +89,10 @@ export const AppRoutes: React.FC = () => {
   const middleColStyles = {
     borderRight: `1px solid ${theme.tertiaryColor}`,
     borderLeft: `1px solid ${theme.tertiaryColor}`,
+
+    "@media screen and (max-width: 530px)": {
+      border: 0
+    },
   };
 
   return (
@@ -147,6 +151,7 @@ export const AppRoutes: React.FC = () => {
                     <Paper
                       component={Grid}
                       item
+                      xs={12}
                       sm={12}
                       md={7}
                       sx={middleColStyles}

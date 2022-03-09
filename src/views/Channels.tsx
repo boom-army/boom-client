@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
-import AddIcon from '@mui/icons-material/Add';
+import React, { useContext, useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
+import VerifiedIcon from "@mui/icons-material/Verified";
 import { Avatar, Box, Typography } from "@mui/material";
 import { ThemeContext } from "../contexts/theme";
 import { styled } from "@mui/material/styles";
 
-
 export const ChannelView: React.FC = () => {
   const { theme } = useContext(ThemeContext);
+  const [channelActive, toggleChannelActive] = useState(false);
+
+  const toggleChannel = () => {
+    toggleChannelActive(!channelActive);
+  };
 
   const BoxStyled = styled(Box)({
     h3: {
@@ -18,20 +23,31 @@ export const ChannelView: React.FC = () => {
     },
     "& .MuiTypography-body2": {
       fontWeight: 300,
-    }
+    },
+    "@media screen and (max-width: 530px)": {
+      margin: 0,
+      marginTop: "1em",
+    },
   });
 
   return (
     <>
+      <Box m={1}>
+        <Typography variant="h2" sx={{ fontSize: "18px" }}>Select channels to display</Typography>
+      </Box>
       <BoxStyled
-        m={1}
-        p={1}
         sx={{
-          backgroundColor: true ? theme.primaryColor : theme.background,
+          backgroundColor: !channelActive
+            ? theme.bluePrimary
+            : theme.background,
           borderRadius: 1,
           display: "flex",
-          border: true ? 0 : `1px solid ${theme.secondaryColor}`,
+          border: !channelActive ? 0 : `1px solid ${theme.secondaryColor}`,
+          cursor: "pointer",
+          margin: 1,
+          padding: 1,
         }}
+        onClick={toggleChannel}
       >
         <Box mr={1}>
           <Avatar
@@ -48,16 +64,27 @@ export const ChannelView: React.FC = () => {
             }}
           >
             <Box>
-              <Typography variant="h3">Boom.Army</Typography>
+              <Typography variant="h3">
+                Boom.Army{" "}
+                <VerifiedIcon sx={{ fontSize: "18px", verticalAlign: "sub" }} />
+              </Typography>
             </Box>
             <Box>
-              {true ? (
-                <Avatar sx={{ width: 16, height: 16, background: theme.palette.grey[500] }}>
-                  <AddIcon sx={{width: 16}} />
+              {!channelActive ? (
+                <Avatar
+                  sx={{
+                    width: 16,
+                    height: 16,
+                    background: theme.blueSecondary,
+                  }}
+                >
+                  <AddIcon sx={{ width: 16 }} />
                 </Avatar>
               ) : (
-                <Avatar sx={{ width: 16, height: 16, background: theme.success }}>
-                  <CheckIcon sx={{width: 14}} />
+                <Avatar
+                  sx={{ width: 16, height: 16, background: theme.success }}
+                >
+                  <CheckIcon sx={{ width: 14 }} />
                 </Avatar>
               )}
             </Box>

@@ -1,12 +1,12 @@
+import GlobalStyles from "@mui/material/GlobalStyles";
 import SimpleReactLightbox from "simple-react-lightbox";
 import { AppRoutes } from "./routes";
 import { CssBaseline } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import { ThemeContext } from "./contexts/theme";
-import { useContext } from "react";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { UserContextProvider } from "./contexts/user";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import GlobalStyles from "@mui/material/GlobalStyles";
+import { useContext } from "react";
 
 declare module "@mui/material/styles" {
   interface Theme {
