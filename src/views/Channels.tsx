@@ -17,13 +17,13 @@ import data from "./data.json";
 // const data: any[] = [];
 
 interface channelData {
-  id: String;
-  avatar: String;
-  label: String;
-  membersCount: Number;
-  mintAuthority: String;
-  verified: Boolean;
-  status: String;
+  id?: string;
+  label: string;
+  avatar: string;
+  membersCount?: number;
+  mintAuthority?: string | undefined;
+  verified?: boolean;
+  status?: string;
 }
 
 export const ChannelView: React.FC = () => {
@@ -37,8 +37,6 @@ export const ChannelView: React.FC = () => {
   const [channels, setChannels] = useState<channelData[] | null>(null);
 
   useEffect(() => {
-    console.log(connection);
-
     (async () => {
       try {
         const nftData = wallet?.publicKey
@@ -51,16 +49,21 @@ export const ChannelView: React.FC = () => {
         const formatChannelData = nftData.map(async (meta, i) => {
           const metaDataFetch = await fetch(meta.data.uri).then((response) =>
             response.json()
-          );
-          console.log("n ", i, metaDataFetch);
-          const name = metaDataFetch?.collection
+          );          
+          const label = metaDataFetch?.collection
             ? `${metaDataFetch?.collection?.family} - ${metaDataFetch?.collection?.name}`
-            : metaDataFetch?.name;
-          return { name, authority: meta.updateAuthority, image: metaDataFetch.image };
+            : metaDataFetch?.name;            
+          return {
+            id: meta.mint,
+            label,
+            avatar: metaDataFetch.image,
+            mintAuthority: meta.updateAuthority
+          };
         });
         const channelData = await Promise.all(formatChannelData);
-        const uniqueChannels = uniqBy(channelData, 'name');
-        console.log("****", uniqueChannels);
+        const uniqueChannels = uniqBy(channelData, "label");
+        console.log(uniqueChannels);
+        setChannels(uniqueChannels);
       } catch (error) {
         console.log(error);
         displayError(error, enqueueSnackbar);
@@ -79,6 +82,9 @@ export const ChannelView: React.FC = () => {
       lineHeight: "22px",
       padding: "0.2em 0 0.5em",
     },
+    ".status": {
+      width: "14px",
+    },
     "& .MuiTypography-body2": {
       fontWeight: 300,
     },
@@ -95,8 +101,8 @@ export const ChannelView: React.FC = () => {
           Select channels to display
         </Typography>
       </Box>
-      {data?.length ? (
-        data.map((d) => (
+      {channels?.length ? (
+        channels.map((d) => (
           <BoxStyled
             sx={{
               backgroundColor: !d.status ? theme.bluePrimary : theme.background,
@@ -111,7 +117,7 @@ export const ChannelView: React.FC = () => {
             key={d.id}
           >
             <Box mr={1}>
-              <Avatar sx={{ width: 60, height: 60 }} src={d.avatar} />
+              <Avatar sx={{ width: "60px", height: "60px" }} src={d.avatar} />
             </Box>
             <Box sx={{ width: "100%" }}>
               <Box
@@ -125,9 +131,7 @@ export const ChannelView: React.FC = () => {
                   <Typography variant="h3">
                     {d.label}{" "}
                     {d.verified && (
-                      <VerifiedIcon
-                        sx={{ fontSize: "18px", verticalAlign: "sub" }}
-                      />
+                      <VerifiedIcon fontSize="small" sx={{ verticalAlign: "sub" }} />
                     )}
                   </Typography>
                 </Box>
@@ -140,13 +144,13 @@ export const ChannelView: React.FC = () => {
                         background: theme.blueSecondary,
                       }}
                     >
-                      <AddIcon sx={{ width: 16 }} />
+                      <AddIcon className="status" />
                     </Avatar>
                   ) : (
                     <Avatar
                       sx={{ width: 16, height: 16, background: theme.success }}
                     >
-                      <CheckIcon sx={{ width: 14 }} />
+                      <CheckIcon className="status" />
                     </Avatar>
                   )}
                 </Box>
@@ -160,12 +164,12 @@ export const ChannelView: React.FC = () => {
               >
                 <Box>
                   <Typography variant="body2">
-                    {d.membersCount} members
+                    {d.membersCount ? d.membersCount : 0} members
                   </Typography>
                 </Box>
                 <Box>
                   <Typography variant="body2">
-                    {shortenAddress(d.mintAuthority)}
+                    {d.mintAuthority ? shortenAddress(d.mintAuthority) : ''}
                   </Typography>
                 </Box>
               </Box>
