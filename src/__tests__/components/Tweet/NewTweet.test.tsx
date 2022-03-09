@@ -356,6 +356,6 @@ const feed: any = {
   },
 };
 
-it("Jest works", () => {
-    expect(true).toBeTruthy();
-  });
+test("Jest works", () => {
+  expect(true).toBeTruthy();
+});

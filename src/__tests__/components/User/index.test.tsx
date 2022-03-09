@@ -22,7 +22,7 @@ const data: any = {
 };
 
 describe("user info", () => {
-  it("renders correctly user", () => {
+  test("renders correctly user", () => {
     const tree = renderer.create(<User user={data} />).toJSON();
     expect(tree).toMatchSnapshot();
   });

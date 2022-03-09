@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Meeps :  User haven't Meeped yet 1`] = `
+<div
+  className="MuiBox-root css-uz95m6"
+>
+  <p
+    className="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+  >
+    You haven't Meeped yet
+  </p>
+</div>
+`;

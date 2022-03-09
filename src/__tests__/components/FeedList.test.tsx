@@ -294,21 +294,21 @@ describe("Feed List Rendering", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders correctly when User have Feed list", () => {
+  test("renders correctly when User have Feed list", () => {
     const tree = renderer
       .create(<FeedList data={feed} loading={true} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders correctly when Feed list loading", () => {
+  test("renders correctly when Feed list loading", () => {
     const tree = renderer
       .create(<FeedList data={feed} loading={false} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders correctly when error", () => {
+  test("renders correctly when error", () => {
     const tree = renderer
       .create(<FeedList data={undefined} error={error} />)
       .toJSON();

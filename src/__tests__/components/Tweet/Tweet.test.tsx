@@ -59,11 +59,11 @@ const Tweet: any = {
   __typename: "Tweet",
 };
 
-it("Jest works", () => {
+test("Jest works", () => {
   expect(true).toBeTruthy();
 });
 
-it("renders correctly", async () => {
+test("renders correctly", async () => {
   const component = renderer.create(
     //   <MockedProvider mocks={__mocks__} addTypename={false}>
     <ShowTweet tweet={Tweet} />
