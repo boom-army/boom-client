@@ -111,7 +111,7 @@ export const NFTPicker: React.FC<{
 
   const fetchSetMeta = useCallback(
     async (connection: Connection, key: PublicKey) => {
-      const mintMeta = await Metadata.findByMint(connection, key);
+      const mintMeta = key && await Metadata.findByMint(connection, key);
       const uri = mintMeta.data.data.uri;
       if (uri) {
         const data: any = await fetch(uri)
