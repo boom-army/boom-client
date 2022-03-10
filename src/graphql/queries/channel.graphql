@@ -1,4 +1,4 @@
-mutation Mutation(
+mutation addChannel(
   $mintAuthority: String!
   $name: String!
   $family: String!
@@ -26,5 +26,20 @@ mutation Mutation(
     updatedAt
     channelParentId
     status
+  }
+}
+
+query channels {
+  channels {
+    id
+    mintAuthority
+    name
+    family
+    description
+    image
+    status
+    channelParentId
+    createdAt
+    updatedAt
   }
 }
