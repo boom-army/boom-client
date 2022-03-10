@@ -1,0 +1,30 @@
+mutation Mutation(
+  $mintAuthority: String!
+  $name: String!
+  $family: String!
+  $description: String
+  $image: String
+  $status: String
+  $channelParentId: String
+) {
+  addChannel(
+    mintAuthority: $mintAuthority
+    name: $name
+    family: $family
+    description: $description
+    image: $image
+    status: $status
+    channelParentId: $channelParentId
+  ) {
+    id
+    mintAuthority
+    name
+    family
+    description
+    image
+    createdAt
+    updatedAt
+    channelParentId
+    status
+  }
+}
