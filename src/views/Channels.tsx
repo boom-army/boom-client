@@ -13,13 +13,10 @@ import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "notistack";
 import { displayError } from "../utils";
 
-import data from "./data.json";
-// const data: any[] = [];
-
 interface channelData {
   id?: string;
   label: string;
-  avatar: string;
+  image: string;
   membersCount?: number;
   mintAuthority?: string | undefined;
   verified?: boolean;
@@ -56,13 +53,12 @@ export const ChannelView: React.FC = () => {
           return {
             id: meta.mint,
             label,
-            avatar: metaDataFetch.image,
+            image: metaDataFetch.image,
             mintAuthority: meta.updateAuthority
           };
         });
         const channelData = await Promise.all(formatChannelData);
         const uniqueChannels = uniqBy(channelData, "label");
-        console.log(uniqueChannels);
         setChannels(uniqueChannels);
       } catch (error) {
         console.log(error);
@@ -117,7 +113,7 @@ export const ChannelView: React.FC = () => {
             key={d.id}
           >
             <Box mr={1}>
-              <Avatar sx={{ width: "60px", height: "60px" }} src={d.avatar} />
+              <Avatar sx={{ width: "60px", height: "60px" }} src={d.image} />
             </Box>
             <Box sx={{ width: "100%" }}>
               <Box
