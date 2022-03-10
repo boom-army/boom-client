@@ -6,37 +6,51 @@ import { Avatar, Box, Typography } from "@mui/material";
 import { shortenAddress } from "../../utils/utils";
 import { useAddChannelMutation } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
+import { useSnackbar } from "notistack";
 import { styled } from "@mui/material/styles";
+import { displayError } from "../../utils";
 
 interface Props {
   nft: NFTData;
 }
 
 interface NFTData {
-  id?: string;
-  label: string;
-  image: string;
+  id: string;
+  mintAuthority: string;
+  name: string;
+  family: string;
+  image?: string;
+  description?: string;
   membersCount?: number;
-  mintAuthority?: string | undefined;
   verified?: boolean;
   status?: string;
 }
 
 export const ChannelTile: React.FC<Props> = ({ nft }) => {
   const { theme } = useContext(ThemeContext);
-  const [addChannelMutation, { data, loading, error }] = useAddChannelMutation({
-    variables: {
-      mintAuthority: "",
-      name: "",
-      family: "",
-      description: "",
-      image: "",
-      status: "",
-      channelParentId: "",
-    },
-  });
+  const [addChannelMutation, { data, loading }] = useAddChannelMutation();
+  const { enqueueSnackbar } = useSnackbar();
 
-  const toggleChannel = async () => {};
+  const toggleChannel = async () => {
+    console.log("boom");
+
+    try {
+      await addChannelMutation({
+        variables: {
+          mintAuthority: nft.mintAuthority,
+          name: nft.name,
+          family: nft.family,
+          description: nft.description,
+          image: nft.image,
+          status: "",
+          channelParentId: "",
+        },
+      });
+    } catch (error) {
+      displayError(error, enqueueSnackbar);
+    }
+    console.log(data);
+  };
 
   const BoxStyled = styled(Box)({
     h3: {
@@ -84,7 +98,7 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
           >
             <Box>
               <Typography variant="h3">
-                {nft.label}{" "}
+                {`${nft.family} - ${nft.name}`}{" "}
                 {nft.verified && (
                   <VerifiedIcon
                     fontSize="small"

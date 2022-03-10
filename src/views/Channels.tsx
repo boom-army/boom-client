@@ -10,11 +10,12 @@ import { useChannelsQuery } from "../generated/graphql";
 import { useSnackbar } from "notistack";
 
 interface channelData {
-  id?: string;
-  label: string;
+  id: string;
+  mintAuthority: string;
+  name: string;
+  family: string;
   image: string;
   membersCount?: number;
-  mintAuthority?: string | undefined;
   verified?: boolean;
   status?: string;
 }
@@ -42,15 +43,14 @@ export const ChannelView: React.FC = () => {
         const formatChannelData = nftData.map(async (meta, i) => {
           const metaDataFetch = await fetch(meta.data.uri).then((response) =>
             response.json()
-          );
-          const label = metaDataFetch?.collection
-            ? `${metaDataFetch?.collection?.family} - ${metaDataFetch?.collection?.name}`
-            : metaDataFetch?.name;
+          );          
           return {
             id: meta.mint,
-            label,
-            image: metaDataFetch.image,
             mintAuthority: meta.updateAuthority,
+            name: metaDataFetch?.collection?.name,
+            family: metaDataFetch?.collection?.family,
+            image: metaDataFetch.image,
+            description: metaDataFetch.description,
           };
         });
         const channelData = await Promise.all(formatChannelData);
@@ -73,7 +73,7 @@ export const ChannelView: React.FC = () => {
       </Box>
       {channels?.length ? (
         channels.map((d) => (
-          <ChannelTile nft={d}/>
+          <ChannelTile key={d.id} nft={d}/>
         ))
       ) : (
         <CustomResponse text="No NFTs in your wallet" />
