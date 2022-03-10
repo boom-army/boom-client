@@ -52,12 +52,40 @@ import { MentionsDocument } from "../../generated/graphql";
 //   expect(tree).toContain('Loading...');
 // });
 
-const data:any= {"data":{"mentions":[{"id":"ckzz3yhuu3478401mnf2zgolb2","text":"Hey @sweet-sky-0445 - is this your first meep! congratulations!!\n","tags":[],"isTweetMine":false,"commentsCount":0,"retweetsCount":0,"isRetweet":false,"tipsCount":"0","reactions":[],"files":[],"user":{"id":"cku97qp1a000301mpyoptpo8e","avatar":"https://i1.sndcdn.com/artworks-gUNkngEJ7WTd043w-kpLWPQ-t500x500.jpg","publicAddress":"BhdKDqh8fMxd9L3ewkBTnZtF22BbTpqZNJxUpJP4W51P","handle":"quiet-salad","consumerName":"QS","__typename":"User"},"createdAt":"1645593628134","__typename":"Tweet"}]}}
+const data: any = {
+  data: {
+    mentions: [
+      {
+        id: "ckzz3yhuu3478401mnf2zgolb2",
+        text: "Hey @sweet-sky-0445 - is this your first meep! congratulations!!\n",
+        tags: [],
+        isTweetMine: false,
+        commentsCount: 0,
+        retweetsCount: 0,
+        isRetweet: false,
+        tipsCount: "0",
+        reactions: [],
+        files: [],
+        user: {
+          id: "cku97qp1a000301mpyoptpo8e",
+          avatar:
+            "https://i1.sndcdn.com/artworks-gUNkngEJ7WTd043w-kpLWPQ-t500x500.jpg",
+          publicAddress: "BhdKDqh8fMxd9L3ewkBTnZtF22BbTpqZNJxUpJP4W51P",
+          handle: "quiet-salad",
+          consumerName: "QS",
+          __typename: "User",
+        },
+        createdAt: "1645593628134",
+        __typename: "Tweet",
+      },
+    ],
+  },
+};
 
-it('displays a loading message when fetching', () => {
+it("displays a loading message when fetching", () => {
   const component = renderer.create(
     // <MockedProvider mocks={__mocks__} addTypename={false}>
-      <Notifications/>
+    <Notifications />
     // </MockedProvider>,
   );
 

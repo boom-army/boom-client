@@ -1,8 +1,6 @@
 import React from "react";
 import ProfileInfo from "../../../components/Profile/ProfileInfo";
-import {
-    BrowserRouter
-  } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 
@@ -162,8 +160,8 @@ describe("user profile info", () => {
     const tree = renderer
       .create(
         <BrowserRouter>
-      <ProfileInfo profile={profile.data.profile} />
-      </BrowserRouter>
+          <ProfileInfo profile={profile.data.profile} />
+        </BrowserRouter>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

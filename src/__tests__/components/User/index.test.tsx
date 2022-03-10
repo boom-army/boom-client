@@ -1,14 +1,9 @@
 import React from "react";
 import { User } from "../../../components/User/index";
-import renderer from "react-test-renderer";
-
-// const data :any= {
-//     "id": "ckzny1iv10031lmn568gj3b3n",
-//     "avatar": "",
-//     "handle": "shy-cloud-4965",
-//     "consumerName": "shy-cloud-4965"
-//     , "__typename": "User"
-// }
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { createMemoryHistory } from "history";
+import { MemoryRouter } from "react-router-dom";
 
 const data: any = {
   id: "ckzny1iv10031lmn568gj3b3n",
@@ -21,9 +16,9 @@ const data: any = {
   __typename: "User",
 };
 
-describe("user info", () => {
-  test("renders correctly user", () => {
-    const tree = renderer.create(<User user={data} />).toJSON();
-    expect(tree).toMatchSnapshot();
+describe("<user/>", () => {
+  test("renders the component", () => {
+    const container = render(<User user={data} />, { wrapper: MemoryRouter });
+    expect(container).toMatchSnapshot();
   });
 });
