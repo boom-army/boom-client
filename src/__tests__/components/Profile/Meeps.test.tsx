@@ -2,7 +2,10 @@ import { Meeps } from "../../../components/Profile/Meeps";
 // import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 import { FOLLOW } from "../../../queries/follow/index";
+import { TWEET } from "../../../queries/tweet/index";
+// import { Tweet } from "../../../generated/graphql";
 import { act, fireEvent, render } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 
 const profile: any = {
   data: {
@@ -155,12 +158,30 @@ const profile: any = {
   },
 };
 
+// export const __mocks__: any = [
+//   {
+//     request: {
+//       query: FOLLOW,
+//       variables: {
+//         id: "ckzny1iv10031lmn568gj3b3n",
+//       },
+//     },
+//     result: {
+//       data: {
+//         mentions: [],
+//       },
+//       errors: "An error occurred",
+//     },
+//   },
+// ];
+
 export const __mocks__: any = [
   {
     request: {
-      query: FOLLOW,
+      query: TWEET,
       variables: {
-        id: "ckzny1iv10031lmn568gj3b3n",
+        // id: "ckzny1iv10031lmn568gj3b3n",
+        id: "cl0c77yow71753s0n5h032nerw"
       },
     },
     result: {
@@ -188,9 +209,10 @@ test("it should ...", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
-      // <MockedProvider mocks={profile.data} addTypename={false}>
+      <MockedProvider mocks={__mocks__} addTypename={false}>
+      
        <Meeps data={profile.data} />
-      // </MockedProvider>
+      </MockedProvider>,{wrapper: MemoryRouter}
     );
   });
   expect(rendered).toMatchSnapshot();

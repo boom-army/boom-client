@@ -1,7 +1,3 @@
-import {
-  useEditProfileMutation,
-  EditProfileDocument,
-} from "../../../generated/graphql";
 import { ProfileDocument } from "../../../generated/graphql";
 import React from "react";
 import { EditProfileForm } from "../../../components/Profile/EditProfileForm";
@@ -13,6 +9,10 @@ import userEvent from "@testing-library/user-event";
 import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 import { act, fireEvent, render } from "@testing-library/react";
+import {
+  useEditProfileMutation,
+  EditProfileDocument,
+} from "../../../generated/graphql";
 // import { MockedProvider } from '@apollo/react-testing'
 
 const values = {
@@ -212,8 +212,8 @@ test("it should ...", async () => {
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
-        {EditProfileForm}
-      </MockedProvider>
+       <EditProfileForm profile={profile.data.profile} />
+      </MockedProvider>,{wrapper: MemoryRouter}
     );
   });
   expect(rendered).toMatchSnapshot();

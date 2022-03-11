@@ -1,6 +1,25 @@
 import React from "react";
 import { EditProfile } from "../../../components/Profile/EditProfile";
-import renderer from "react-test-renderer";
+import userEvent from "@testing-library/user-event";
+import { createMemoryHistory } from "history";
+import { MemoryRouter } from "react-router-dom";
+import { act, fireEvent, render } from "@testing-library/react";
+import { MockedProvider } from "@apollo/client/testing";
+import {
+  useEditProfileMutation,
+  EditProfileDocument,
+} from "../../../generated/graphql";
+// import { MockedProvider } from '@apollo/react-testing'
+
+const values = {
+  handle: "shy-cloud-4965",
+  bio: "full stack developer",
+  consumerName: "shy-cloud-4965",
+  coverPhoto: "/default-cover.png",
+  dob: "d",
+  location: "",
+  website: "abcdfd",
+};
 
 const data = {
   data: {
@@ -157,30 +176,60 @@ const error = {
   message: "An error occured",
 };
 
+export const __mocks__: any = [
+  {
+    request: {
+      query: EditProfileDocument,
+      variables: {
+        values,
+      },
+    },
+    result: {
+      data: {
+        editProfile: {
+          id: "ckzny1iv10031lmn568gj3b3n",
+          handle: "shy-cloud-4965",
+          publicAddress: "JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4",
+          __typename: "User",
+        },
+      },
+      // errors: "An error occurred",
+    },
+  },
+];
+
 describe("Edit Profile : ", () => {
-  test("renders correctly when User have profile", () => {
-    const tree = renderer
-      .create(
-        <EditProfile
+  test("renders correctly when User have profile", async() => {
+
+      let rendered;
+      await act(async () => {
+        rendered = render(
+          <MockedProvider mocks={__mocks__} addTypename={false}>
+           <EditProfile
           data={data.data}
           loading={false}
-          setUser={data.data.profile}
+          
         />
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+          </MockedProvider>,{wrapper: MemoryRouter}
+        );
+      });
+      expect(rendered).toMatchSnapshot();
   });
 
-  test("renders correctly when profile loading", () => {
-    const tree = renderer
-      .create(
-        <EditProfile
+  test("renders correctly when profile loading", async() => {
+    
+      let rendered;
+      await act(async () => {
+        rendered = render(
+          <MockedProvider mocks={__mocks__} addTypename={false}>
+           <EditProfile
           data={data.data}
           loading={true}
-          setUser={data.data.profile}
+         
         />
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+          </MockedProvider>,{wrapper: MemoryRouter}
+        );
+      });
+      expect(rendered).toMatchSnapshot();
   });
 });
