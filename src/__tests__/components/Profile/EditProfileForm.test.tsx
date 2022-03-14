@@ -2,17 +2,15 @@ import { ProfileDocument } from "../../../generated/graphql";
 import React from "react";
 import { EditProfileForm } from "../../../components/Profile/EditProfileForm";
 import { BrowserRouter } from "react-router-dom";
-import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
-// import {render, screen} from '@testing-library/react'
 import userEvent from "@testing-library/user-event";
-import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 import { act, fireEvent, render } from "@testing-library/react";
 import {
   useEditProfileMutation,
   EditProfileDocument,
 } from "../../../generated/graphql";
+import { SnackbarProvider } from "notistack"
 // import { MockedProvider } from '@apollo/react-testing'
 
 const values = {
@@ -212,7 +210,9 @@ test("it should ...", async () => {
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
+        <SnackbarProvider>
        <EditProfileForm profile={profile.data.profile} />
+       </SnackbarProvider>
       </MockedProvider>,{wrapper: MemoryRouter}
     );
   });

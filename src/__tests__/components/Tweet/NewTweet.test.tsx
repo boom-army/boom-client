@@ -4,6 +4,7 @@ import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 // import { MentionsDocument, Tweet } from "../../../generated/graphql";
 import { TWEET } from "../../../queries/tweet/index";
+import { SnackbarProvider } from "notistack"
 
 const feed: any = {
   data: {

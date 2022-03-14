@@ -6,6 +6,7 @@ import { TWEET } from "../../../queries/tweet/index";
 // import { Tweet } from "../../../generated/graphql";
 import { act, fireEvent, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
 
 const profile: any = {
   data: {
@@ -210,8 +211,9 @@ test("it should ...", async () => {
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
-      
+      <SnackbarProvider>
        <Meeps data={profile.data} />
+       </SnackbarProvider>
       </MockedProvider>,{wrapper: MemoryRouter}
     );
   });

@@ -1,5 +1,5 @@
 import React from "react";
-import { ShowTweet } from "../../../components/Tweet/Tweet";
+import { MasterTweet } from "../../../components/Tweet/MasterTweet";
 import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 // import { MentionsDocument, Tweet } from "../../../generated/graphql";
@@ -12,11 +12,11 @@ import { SnackbarProvider } from "notistack"
 export const __mocks__:any= [
     {
       request: {
-       query: TOGGLE_REACTION,
+       query: TWEET,
         variables: {
-         
+             id:"cl084xdy815761s0n5omoxoem0" 
         },
-        refetchQueries: [{ query: TWEET, variables: { id:"cl084xdy815761s0n5omoxoem0" } }],
+      
       },
       result: {
         data: {
@@ -64,13 +64,14 @@ const Tweet: any = {
 };
 
 
-test("Tweet component snapshot testing ...", async () => {
+
+test("Master Tweet Snapshot testing ...", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
         <SnackbarProvider>
-       <ShowTweet tweet={Tweet} />
+       <MasterTweet  />
        </SnackbarProvider>
       </MockedProvider>,{wrapper: MemoryRouter}
     );

@@ -1,10 +1,8 @@
 import React from "react";
-import { ShowTweet } from "../../../components/Tweet/Tweet";
+import { Retweet } from "../../../components/Tweet/Retweet";
 import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
-// import { MentionsDocument, Tweet } from "../../../generated/graphql";
 import {TOGGLE_REACTION, TWEET } from "../../../queries/tweet/index";
-// import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
 import { act, fireEvent, render } from "@testing-library/react"; 
 import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack"
@@ -26,7 +24,9 @@ export const __mocks__:any= [
         errors: "An error occurred",
       },
   }
-  ]
+  ];
+
+ 
 
 const Tweet: any = {
   id: "cl084xdy815761s0n5omoxoem0",
@@ -64,13 +64,13 @@ const Tweet: any = {
 };
 
 
-test("Tweet component snapshot testing ...", async () => {
+test("Retweet component testing", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
         <SnackbarProvider>
-       <ShowTweet tweet={Tweet} />
+       <Retweet id="cl084xdy815761s0n5omoxoem0" isRetweet={true} retweetsCount={1}/>
        </SnackbarProvider>
       </MockedProvider>,{wrapper: MemoryRouter}
     );

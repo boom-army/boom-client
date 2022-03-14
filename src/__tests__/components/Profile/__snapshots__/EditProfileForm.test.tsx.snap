@@ -7,6 +7,7 @@ Object {
     <div>
       <form
         class="css-zbe5z0"
+        lg="true"
       >
         <div
           class="cover-photo"
@@ -166,6 +167,7 @@ Object {
   "container": <div>
     <form
       class="css-zbe5z0"
+      lg="true"
     >
       <div
         class="cover-photo"

@@ -5,6 +5,7 @@ import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 import { act, fireEvent, render } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
+import { SnackbarProvider } from "notistack"
 import {
   useEditProfileMutation,
   EditProfileDocument,
@@ -205,11 +206,13 @@ describe("Edit Profile : ", () => {
       await act(async () => {
         rendered = render(
           <MockedProvider mocks={__mocks__} addTypename={false}>
+            <SnackbarProvider>
            <EditProfile
           data={data.data}
           loading={false}
-          
+  
         />
+        </SnackbarProvider>
           </MockedProvider>,{wrapper: MemoryRouter}
         );
       });
@@ -224,7 +227,7 @@ describe("Edit Profile : ", () => {
           <MockedProvider mocks={__mocks__} addTypename={false}>
            <EditProfile
           data={data.data}
-          loading={true}
+          loading={true && "true"}
          
         />
           </MockedProvider>,{wrapper: MemoryRouter}

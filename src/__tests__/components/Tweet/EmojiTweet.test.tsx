@@ -1,9 +1,9 @@
 import React from "react";
-import { ShowTweet } from "../../../components/Tweet/Tweet";
+import { MasterTweet } from "../../../components/Tweet/MasterTweet";
 import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 // import { MentionsDocument, Tweet } from "../../../generated/graphql";
-import {TOGGLE_REACTION, TWEET } from "../../../queries/tweet/index";
+import {TOGGLE_REACTION, TWEET,DELETE_TWEET } from "../../../queries/tweet/index";
 // import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
 import { act, fireEvent, render } from "@testing-library/react"; 
 import { MemoryRouter } from "react-router-dom";
@@ -12,16 +12,16 @@ import { SnackbarProvider } from "notistack"
 export const __mocks__:any= [
     {
       request: {
-       query: TOGGLE_REACTION,
+       query: DELETE_TWEET,
         variables: {
-         
+             id:"cl084xdy815761s0n5omoxoem0" 
         },
-        refetchQueries: [{ query: TWEET, variables: { id:"cl084xdy815761s0n5omoxoem0" } }],
+      
       },
       result: {
         data: {
-          mentions:[]
-        ,
+          
+        
         },
         errors: "An error occurred",
       },
@@ -64,15 +64,16 @@ const Tweet: any = {
 };
 
 
-test("Tweet component snapshot testing ...", async () => {
+
+test("Delete Tweet Snapshot testing ...", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
         <SnackbarProvider>
-       <ShowTweet tweet={Tweet} />
+       {/* <MasterTweet  /> */}
        </SnackbarProvider>
-      </MockedProvider>,{wrapper: MemoryRouter}
+      </MockedProvider>
     );
   });
   expect(rendered).toMatchSnapshot();
