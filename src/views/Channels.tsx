@@ -5,22 +5,10 @@ import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { displayError } from "../utils";
-import { uniqBy } from "lodash";
+import { merge, uniqBy } from "lodash";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { ChannelsQuery, useChannelsQuery } from "../generated/graphql";
 import { useSnackbar } from "notistack";
-
-interface channelData {
-  id: string;
-  mintAuthority: string;
-  name: string;
-  family: string;
-  membersCount?: number;
-  description?: String
-  image?: String
-  channelParentId?: String
-  status?: string;
-}
 
 export const ChannelView: React.FC = () => {
   const { connection } = useConnection();
@@ -30,9 +18,7 @@ export const ChannelView: React.FC = () => {
 
   const { data, loading, error } = useChannelsQuery();
 
-  const [channels, setChannels] = useState<channelData[] | null>(null);
   const [fullData, setFullData] = useState<ChannelsQuery["channels"]>();
-  console.log('--------', data && data?.channels);
 
   useMemo(()=>{
     setFullData(data?.channels);
@@ -59,11 +45,13 @@ export const ChannelView: React.FC = () => {
             family: metaDataFetch?.collection?.family,
             image: metaDataFetch.image,
             description: metaDataFetch.description,
+            status: "new",
           };
         });
         const channelData = await Promise.all(formatChannelData);
-        const uniqueChannels = uniqBy(channelData, "label");
-        setChannels(uniqueChannels);
+        const mergedChannels = merge(fullData, channelData);
+        const uniqueChannels = uniqBy(mergedChannels, d => [d.mintAuthority, d.name, d.family].join());
+        setFullData(uniqueChannels);
       } catch (error) {
         console.log(error);
         displayError(error, enqueueSnackbar);
