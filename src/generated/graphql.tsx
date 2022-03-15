@@ -43,6 +43,7 @@ export type Channel = {
   name: Scalars['String'];
   status?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['String']>;
+  verified?: Maybe<Scalars['Boolean']>;
 };
 
 export type ChannelInput = {
@@ -53,6 +54,7 @@ export type ChannelInput = {
   mintAuthority: Scalars['String'];
   name: Scalars['String'];
   status?: Maybe<Scalars['String']>;
+  verified?: Maybe<Scalars['Boolean']>;
 };
 
 export type Collection = {
@@ -150,6 +152,7 @@ export type MutationAddChannelArgs = {
   mintAuthority: Scalars['String'];
   name: Scalars['String'];
   status?: Maybe<Scalars['String']>;
+  verified?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -482,15 +485,16 @@ export type AddChannelMutationVariables = Exact<{
   image?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
   channelParentId?: Maybe<Scalars['String']>;
+  verified?: Maybe<Scalars['Boolean']>;
 }>;
 
 
-export type AddChannelMutation = { __typename?: 'Mutation', addChannel: { __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined, channelParentId?: string | null | undefined, status?: string | null | undefined } };
+export type AddChannelMutation = { __typename?: 'Mutation', addChannel: { __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined, channelParentId?: string | null | undefined, status?: string | null | undefined, verified?: boolean | null | undefined } };
 
 export type ChannelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChannelsQuery = { __typename?: 'Query', channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, status?: string | null | undefined, channelParentId?: string | null | undefined }> };
+export type ChannelsQuery = { __typename?: 'Query', channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, status?: string | null | undefined, channelParentId?: string | null | undefined, verified?: boolean | null | undefined }> };
 
 export type FeedQueryVariables = Exact<{
   offset: Scalars['Int'];
@@ -555,7 +559,7 @@ export type TipCreatorMutation = { __typename?: 'Mutation', tipCreator: { __type
 
 
 export const AddChannelDocument = gql`
-    mutation addChannel($mintAuthority: String!, $name: String!, $family: String!, $description: String, $image: String, $status: String, $channelParentId: String) {
+    mutation addChannel($mintAuthority: String!, $name: String!, $family: String!, $description: String, $image: String, $status: String, $channelParentId: String, $verified: Boolean) {
   addChannel(
     mintAuthority: $mintAuthority
     name: $name
@@ -564,6 +568,7 @@ export const AddChannelDocument = gql`
     image: $image
     status: $status
     channelParentId: $channelParentId
+    verified: $verified
   ) {
     id
     mintAuthority
@@ -575,6 +580,7 @@ export const AddChannelDocument = gql`
     updatedAt
     channelParentId
     status
+    verified
   }
 }
     `;
@@ -600,6 +606,7 @@ export type AddChannelMutationFn = Apollo.MutationFunction<AddChannelMutation, A
  *      image: // value for 'image'
  *      status: // value for 'status'
  *      channelParentId: // value for 'channelParentId'
+ *      verified: // value for 'verified'
  *   },
  * });
  */
@@ -621,6 +628,7 @@ export const ChannelsDocument = gql`
     image
     status
     channelParentId
+    verified
   }
 }
     `;
