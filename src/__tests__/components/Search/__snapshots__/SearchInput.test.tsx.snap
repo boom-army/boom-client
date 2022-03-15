@@ -1,12 +1,96 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Delete Tweet Snapshot testing ... 1`] = `
+exports[`Search Input: display <SearchInput/> component when users undefined 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div />
+    <div>
+      <div
+        class="css-1n1p729"
+      >
+        <form>
+          <input
+            placeholder="Search by tags, tweets, people"
+            type="text"
+            value=""
+          />
+        </form>
+      </div>
+      <div
+        class="css-1mw65dx"
+      >
+        <div
+          class="tabs"
+        >
+          <span
+            class="active"
+          >
+            Tweets
+          </span>
+          <span
+            class=""
+          >
+            Tags
+          </span>
+          <span
+            class=""
+          >
+            Users
+          </span>
+        </div>
+        <div
+          class="css-15inajd"
+        >
+          <p>
+            Use the search bar to find tags, people and tweets
+          </p>
+        </div>
+      </div>
+    </div>
   </body>,
-  "container": <div />,
+  "container": <div>
+    <div
+      class="css-1n1p729"
+    >
+      <form>
+        <input
+          placeholder="Search by tags, tweets, people"
+          type="text"
+          value=""
+        />
+      </form>
+    </div>
+    <div
+      class="css-1mw65dx"
+    >
+      <div
+        class="tabs"
+      >
+        <span
+          class="active"
+        >
+          Tweets
+        </span>
+        <span
+          class=""
+        >
+          Tags
+        </span>
+        <span
+          class=""
+        >
+          Users
+        </span>
+      </div>
+      <div
+        class="css-15inajd"
+      >
+        <p>
+          Use the search bar to find tags, people and tweets
+        </p>
+      </div>
+    </div>
+  </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],
