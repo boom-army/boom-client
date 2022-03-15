@@ -6,7 +6,6 @@ mutation addChannel(
   $image: String
   $status: String
   $channelParentId: String
-  $verified: Boolean
 ) {
   addChannel(
     mintAuthority: $mintAuthority
@@ -16,7 +15,6 @@ mutation addChannel(
     image: $image
     status: $status
     channelParentId: $channelParentId
-    verified: $verified
   ) {
     id
     mintAuthority
@@ -28,7 +26,6 @@ mutation addChannel(
     updatedAt
     channelParentId
     status
-    verified
   }
 }
 

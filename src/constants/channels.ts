@@ -1,3 +1,3 @@
 export enum ChannelStatus {
-  NEW = "new",
+  ACTIVE = "active",
 }

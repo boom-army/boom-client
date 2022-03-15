@@ -8,8 +8,9 @@ import { ThemeContext } from "../../contexts/theme";
 import { displayError } from "../../utils";
 import { shortenAddress } from "../../utils/utils";
 import { styled } from "@mui/material/styles";
-import { ChannelsQuery, useAddChannelMutation } from "../../generated/graphql";
+import { ChannelsQuery, useAddChannelMutation, ChannelsDocument } from "../../generated/graphql";
 import { ChannelStatus } from "../../constants";
+import { uniqBy } from "lodash";
 import { useSnackbar } from "notistack";
 
 interface Props {
@@ -20,9 +21,8 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
   const { theme } = useContext(ThemeContext);
   const [addChannelMutation, { data, loading }] = useAddChannelMutation();
   const { enqueueSnackbar } = useSnackbar();
-  console.log("*************", nft);
 
-  const active = nft.status !== ChannelStatus.NEW;
+  const active = nft.status === ChannelStatus.ACTIVE;
 
   const toggleChannel = async () => {
     try {
@@ -33,11 +33,19 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
           family: nft.family,
           description: nft.description,
           image: nft.image,
-          status: "",
-          channelParentId: "",
+          status: ChannelStatus.ACTIVE,
+          channelParentId: null,
+        },
+        update: (cache, { data }) => {
+          const { channels }: any = cache.readQuery({ query: ChannelsDocument });
+          cache.writeQuery({
+            query: ChannelsDocument,
+            data: {
+              channels: uniqBy([...channels, data?.addChannel ], "id"),
+            },
+          });
         },
       });
-      console.log("------------", data);
     } catch (error) {
       displayError(error, enqueueSnackbar);
     }
