@@ -490,7 +490,7 @@ export type AddChannelMutation = { __typename?: 'Mutation', addChannel: { __type
 export type ChannelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChannelsQuery = { __typename?: 'Query', channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, status?: string | null | undefined, channelParentId?: string | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined }> };
+export type ChannelsQuery = { __typename?: 'Query', channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, status?: string | null | undefined, channelParentId?: string | null | undefined }> };
 
 export type FeedQueryVariables = Exact<{
   offset: Scalars['Int'];
@@ -621,8 +621,6 @@ export const ChannelsDocument = gql`
     image
     status
     channelParentId
-    createdAt
-    updatedAt
   }
 }
     `;

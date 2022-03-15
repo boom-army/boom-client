@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Box, Typography } from "@mui/material";
 import { ChannelTile } from "../components/Channel/ChannelTile";
 import { CustomResponse } from "../components/CustomResponse";
+import { Loader } from "../components/Loader";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { displayError } from "../utils";
 import { uniqBy } from "lodash";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import { useChannelsQuery } from "../generated/graphql";
+import { ChannelsQuery, useChannelsQuery } from "../generated/graphql";
 import { useSnackbar } from "notistack";
 
 interface channelData {
@@ -14,9 +15,10 @@ interface channelData {
   mintAuthority: string;
   name: string;
   family: string;
-  image: string;
   membersCount?: number;
-  verified?: boolean;
+  description?: String
+  image?: String
+  channelParentId?: String
   status?: string;
 }
 
@@ -26,9 +28,15 @@ export const ChannelView: React.FC = () => {
   const wallet = anchorWallet;
   const { enqueueSnackbar } = useSnackbar();
 
-  const [channels, setChannels] = useState<channelData[] | null>(null);
-
   const { data, loading, error } = useChannelsQuery();
+
+  const [channels, setChannels] = useState<channelData[] | null>(null);
+  const [fullData, setFullData] = useState<ChannelsQuery["channels"]>();
+  console.log('--------', data && data?.channels);
+
+  useMemo(()=>{
+    setFullData(data?.channels);
+  },[data])
 
   useEffect(() => {
     (async () => {
@@ -43,7 +51,7 @@ export const ChannelView: React.FC = () => {
         const formatChannelData = nftData.map(async (meta, i) => {
           const metaDataFetch = await fetch(meta.data.uri).then((response) =>
             response.json()
-          );          
+          );
           return {
             id: meta.mint,
             mintAuthority: meta.updateAuthority,
@@ -63,6 +71,13 @@ export const ChannelView: React.FC = () => {
     })();
   }, [connection, wallet]);
 
+  if (loading)
+    return (
+      <Box sx={{ marginTop: "1rem" }}>
+        <Loader />
+      </Box>
+    );
+  if (error) return <CustomResponse text={error.message} />;
 
   return (
     <>
@@ -71,12 +86,10 @@ export const ChannelView: React.FC = () => {
           Select channels to display
         </Typography>
       </Box>
-      {channels?.length ? (
-        channels.map((d) => (
-          <ChannelTile key={d.id} nft={d}/>
-        ))
+      {fullData?.length ? (
+        fullData?.map((d) => <ChannelTile key={d.id} nft={d} />)
       ) : (
-        <CustomResponse text="No NFTs in your wallet" />
+        <CustomResponse text="No channels to display" />
       )}
     </>
   );

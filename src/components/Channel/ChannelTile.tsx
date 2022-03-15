@@ -1,29 +1,18 @@
 import React, { useContext } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
+import CircularProgress from "@mui/material/CircularProgress";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import { Avatar, Box, Typography } from "@mui/material";
-import { shortenAddress } from "../../utils/utils";
-import { useAddChannelMutation } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
-import { useSnackbar } from "notistack";
-import { styled } from "@mui/material/styles";
 import { displayError } from "../../utils";
+import { shortenAddress } from "../../utils/utils";
+import { styled } from "@mui/material/styles";
+import { ChannelsQuery, useAddChannelMutation } from "../../generated/graphql";
+import { useSnackbar } from "notistack";
 
 interface Props {
-  nft: NFTData;
-}
-
-interface NFTData {
-  id: string;
-  mintAuthority: string;
-  name: string;
-  family: string;
-  image?: string;
-  description?: string;
-  membersCount?: number;
-  verified?: boolean;
-  status?: string;
+  nft: ChannelsQuery["channels"][0];
 }
 
 export const ChannelTile: React.FC<Props> = ({ nft }) => {
@@ -52,6 +41,10 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
     console.log(data);
   };
 
+  const StyledCircularProgress = styled(CircularProgress)((props: any) => ({
+    color: props.theme.accentColor,
+  }));
+
   const BoxStyled = styled(Box)({
     h3: {
       fontWeight: 600,
@@ -70,6 +63,7 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
       marginTop: "1em",
     },
   });
+
   return (
     <>
       <BoxStyled
@@ -86,7 +80,7 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
         key={nft.id}
       >
         <Box mr={1}>
-          <Avatar sx={{ width: "60px", height: "60px" }} src={nft.image} />
+          <Avatar sx={{ width: "60px", height: "60px" }} src={nft.image as string} />
         </Box>
         <Box sx={{ width: "100%" }}>
           <Box
@@ -99,7 +93,7 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
             <Box>
               <Typography variant="h3">
                 {`${nft.family} - ${nft.name}`}{" "}
-                {nft.verified && (
+                {nft.status === "verified" && (
                   <VerifiedIcon
                     fontSize="small"
                     sx={{ verticalAlign: "sub" }}
@@ -108,7 +102,8 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
               </Typography>
             </Box>
             <Box>
-              {!nft.status ? (
+              {loading && <StyledCircularProgress size={16} />}
+              {!loading && !nft.status ? (
                 <Avatar
                   sx={{
                     width: 16,
@@ -135,9 +130,9 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
             }}
           >
             <Box>
-              <Typography variant="body2">
+              {/* <Typography variant="body2">
                 {nft.membersCount ? nft.membersCount : 0} members
-              </Typography>
+              </Typography> */}
             </Box>
             <Box>
               <Typography variant="body2">

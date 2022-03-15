@@ -39,7 +39,5 @@ query channels {
     image
     status
     channelParentId
-    createdAt
-    updatedAt
   }
 }
