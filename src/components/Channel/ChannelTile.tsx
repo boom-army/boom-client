@@ -174,9 +174,13 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
             }}
           >
             <Box>
-              {/* <Typography variant="body2">
-                {channel.membersCount ? channel.membersCount : 0} members
-              </Typography> */}
+              <Typography variant="body2">
+                {channel.membersCount
+                  ? `${channel.membersCount} ${
+                      channel.membersCount <= 1 ? "member" : "members"
+                    }`
+                  : null}
+              </Typography>
             </Box>
             <Box>
               <Typography variant="body2">

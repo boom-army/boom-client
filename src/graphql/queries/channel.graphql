@@ -22,10 +22,11 @@ mutation addChannel(
     family
     description
     image
-    createdAt
-    updatedAt
     channelParentId
     status
+    membersCount
+    createdAt
+    updatedAt
   }
 }
 
@@ -37,9 +38,10 @@ query channels {
     family
     description
     image
-    status
     channelParentId
+    status
     verified
+    membersCount
   }
 }
 

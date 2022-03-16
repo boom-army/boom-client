@@ -45,6 +45,7 @@ export const ChannelView: React.FC = () => {
             status: "new",
             verified: null,
             channelParentId: null,
+            membersCount: null,
           };
         });
         // Merge the NFT data and channels cache data and restore it

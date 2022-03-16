@@ -39,6 +39,7 @@ export type Channel = {
   family: Scalars['String'];
   id: Scalars['ID'];
   image?: Maybe<Scalars['String']>;
+  membersCount?: Maybe<Scalars['Int']>;
   mintAuthority: Scalars['String'];
   name: Scalars['String'];
   status?: Maybe<Scalars['String']>;
@@ -493,12 +494,12 @@ export type AddChannelMutationVariables = Exact<{
 }>;
 
 
-export type AddChannelMutation = { __typename?: 'Mutation', addChannel: { __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined, channelParentId?: string | null | undefined, status?: string | null | undefined } };
+export type AddChannelMutation = { __typename?: 'Mutation', addChannel: { __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, channelParentId?: string | null | undefined, status?: string | null | undefined, membersCount?: number | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined } };
 
 export type ChannelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChannelsQuery = { __typename?: 'Query', channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, status?: string | null | undefined, channelParentId?: string | null | undefined, verified?: boolean | null | undefined }> };
+export type ChannelsQuery = { __typename?: 'Query', channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, channelParentId?: string | null | undefined, status?: string | null | undefined, verified?: boolean | null | undefined, membersCount?: number | null | undefined }> };
 
 export type ChannelUnlinkMutationVariables = Exact<{
   channelId: Scalars['ID'];
@@ -586,10 +587,11 @@ export const AddChannelDocument = gql`
     family
     description
     image
-    createdAt
-    updatedAt
     channelParentId
     status
+    membersCount
+    createdAt
+    updatedAt
   }
 }
     `;
@@ -634,9 +636,10 @@ export const ChannelsDocument = gql`
     family
     description
     image
-    status
     channelParentId
+    status
     verified
+    membersCount
   }
 }
     `;
