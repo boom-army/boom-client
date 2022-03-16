@@ -54,7 +54,7 @@ import { MentionsDocument } from "../../generated/graphql";
 export const __mocks__: any = [
   {
     request: {
-      query:MentionsDocument,
+      query: MentionsDocument,
       variables: {
         offset: 0,
         limit: 10,
@@ -127,8 +127,8 @@ const data: any = {
 it("displays a loading message when fetching", () => {
   const component = renderer.create(
     <MockedProvider mocks={__mocks__} addTypename={false}>
-       <Notifications />
-     </MockedProvider>
+      <Notifications />
+    </MockedProvider>
   );
 
   const tree = component.toJSON();

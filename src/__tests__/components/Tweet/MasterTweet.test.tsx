@@ -3,30 +3,28 @@ import { MasterTweet } from "../../../components/Tweet/MasterTweet";
 import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 // import { MentionsDocument, Tweet } from "../../../generated/graphql";
-import {TOGGLE_REACTION, TWEET } from "../../../queries/tweet/index";
+import { TOGGLE_REACTION, TWEET } from "../../../queries/tweet/index";
 // import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
-import { act, fireEvent, render } from "@testing-library/react"; 
+import { act, fireEvent, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { SnackbarProvider } from "notistack"
+import { SnackbarProvider } from "notistack";
 
-export const __mocks__:any= [
-    {
-      request: {
-       query: TWEET,
-        variables: {
-             id:"cl084xdy815761s0n5omoxoem0" 
-        },
-      
+export const __mocks__: any = [
+  {
+    request: {
+      query: TWEET,
+      variables: {
+        id: "cl084xdy815761s0n5omoxoem0",
       },
-      result: {
-        data: {
-          mentions:[]
-        ,
-        },
-        errors: "An error occurred",
+    },
+    result: {
+      data: {
+        mentions: [],
       },
-  }
-  ]
+      errors: "An error occurred",
+    },
+  },
+];
 
 const Tweet: any = {
   id: "cl084xdy815761s0n5omoxoem0",
@@ -63,17 +61,16 @@ const Tweet: any = {
   __typename: "Tweet",
 };
 
-
-
 test("Master Tweet Snapshot testing ...", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
         <SnackbarProvider>
-       <MasterTweet  />
-       </SnackbarProvider>
-      </MockedProvider>,{wrapper: MemoryRouter}
+          <MasterTweet />
+        </SnackbarProvider>
+      </MockedProvider>,
+      { wrapper: MemoryRouter }
     );
   });
   expect(rendered).toMatchSnapshot();

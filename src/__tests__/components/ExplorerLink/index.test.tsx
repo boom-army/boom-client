@@ -1,13 +1,17 @@
 import React from "react";
-// import WhoToFollow from '../../components/WhoToFollow';
-import renderer from "react-test-renderer";
 import { ExplorerLink } from "../../../components/ExplorerLink";
+import { act, fireEvent, render } from "@testing-library/react";
 
-// it('renders a snapshot', () => {
-//     const tree = renderer.create(<WhoToFollow/>).toJSON();
-//     expect(tree).toMatchSnapshot();
-// });
-
-it("Jest works", () => {
-  expect(true).toBeTruthy();
+describe("<ExplorerLink/> component :", () => {
+  test("display <ExplorerLink/> component ", async () => {
+    let rendered = render(
+      <ExplorerLink
+        address={"JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4"}
+        type={"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}
+        code={true}
+        length={8}
+      />
+    );
+    expect(rendered).toMatchSnapshot();
+  });
 });

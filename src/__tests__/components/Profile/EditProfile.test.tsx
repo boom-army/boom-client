@@ -5,7 +5,7 @@ import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 import { act, fireEvent, render } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
-import { SnackbarProvider } from "notistack"
+import { SnackbarProvider } from "notistack";
 import {
   useEditProfileMutation,
   EditProfileDocument,
@@ -200,39 +200,31 @@ export const __mocks__: any = [
 ];
 
 describe("Edit Profile : ", () => {
-  test("renders correctly when User have profile", async() => {
-
-      let rendered;
-      await act(async () => {
-        rendered = render(
-          <MockedProvider mocks={__mocks__} addTypename={false}>
-            <SnackbarProvider>
-           <EditProfile
-          data={data.data}
-          loading={false}
-  
-        />
-        </SnackbarProvider>
-          </MockedProvider>,{wrapper: MemoryRouter}
-        );
-      });
-      expect(rendered).toMatchSnapshot();
+  test("renders correctly when User have profile", async () => {
+    let rendered;
+    await act(async () => {
+      rendered = render(
+        <MockedProvider mocks={__mocks__} addTypename={false}>
+          <SnackbarProvider>
+            <EditProfile data={data.data} loading={false} />
+          </SnackbarProvider>
+        </MockedProvider>,
+        { wrapper: MemoryRouter }
+      );
+    });
+    expect(rendered).toMatchSnapshot();
   });
 
-  test("renders correctly when profile loading", async() => {
-    
-      let rendered;
-      await act(async () => {
-        rendered = render(
-          <MockedProvider mocks={__mocks__} addTypename={false}>
-           <EditProfile
-          data={data.data}
-          loading={true && "true"}
-         
-        />
-          </MockedProvider>,{wrapper: MemoryRouter}
-        );
-      });
-      expect(rendered).toMatchSnapshot();
+  test("renders correctly when profile loading", async () => {
+    let rendered;
+    await act(async () => {
+      rendered = render(
+        <MockedProvider mocks={__mocks__} addTypename={false}>
+          <EditProfile data={data.data} loading={true && "true"} />
+        </MockedProvider>,
+        { wrapper: MemoryRouter }
+      );
+    });
+    expect(rendered).toMatchSnapshot();
   });
 });

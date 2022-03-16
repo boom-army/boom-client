@@ -2,31 +2,28 @@ import React from "react";
 import { Retweet } from "../../../components/Tweet/Retweet";
 import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
-import {TOGGLE_REACTION, TWEET } from "../../../queries/tweet/index";
-import { act, fireEvent, render } from "@testing-library/react"; 
+import { TOGGLE_REACTION, TWEET } from "../../../queries/tweet/index";
+import { act, fireEvent, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { SnackbarProvider } from "notistack"
+import { SnackbarProvider } from "notistack";
 
-export const __mocks__:any= [
-    {
-      request: {
-       query: TOGGLE_REACTION,
-        variables: {
-         
-        },
-        refetchQueries: [{ query: TWEET, variables: { id:"cl084xdy815761s0n5omoxoem0" } }],
+export const __mocks__: any = [
+  {
+    request: {
+      query: TOGGLE_REACTION,
+      variables: {},
+      refetchQueries: [
+        { query: TWEET, variables: { id: "cl084xdy815761s0n5omoxoem0" } },
+      ],
+    },
+    result: {
+      data: {
+        mentions: [],
       },
-      result: {
-        data: {
-          mentions:[]
-        ,
-        },
-        errors: "An error occurred",
-      },
-  }
-  ];
-
- 
+      errors: "An error occurred",
+    },
+  },
+];
 
 const Tweet: any = {
   id: "cl084xdy815761s0n5omoxoem0",
@@ -63,16 +60,20 @@ const Tweet: any = {
   __typename: "Tweet",
 };
 
-
 test("Retweet component testing", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
         <SnackbarProvider>
-       <Retweet id="cl084xdy815761s0n5omoxoem0" isRetweet={true} retweetsCount={1}/>
-       </SnackbarProvider>
-      </MockedProvider>,{wrapper: MemoryRouter}
+          <Retweet
+            id="cl084xdy815761s0n5omoxoem0"
+            isRetweet={true}
+            retweetsCount={1}
+          />
+        </SnackbarProvider>
+      </MockedProvider>,
+      { wrapper: MemoryRouter }
     );
   });
   expect(rendered).toMatchSnapshot();

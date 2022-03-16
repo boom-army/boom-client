@@ -20,6 +20,7 @@ import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 import { FOLLOW } from "../../../queries/follow/index";
 import { act, fireEvent, render } from "@testing-library/react";
+import { SnackbarProvider } from "notistack";
 // import {render, screen} from '@testing-library/react'
 
 export const __mocks__: any = [
@@ -50,12 +51,14 @@ export const __mocks__: any = [
 //     });
 // });
 
-test("it should ...", async () => {
+test("display <follow/> component ", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
-        <Follow isFollowing={false} id={"ckzny1iv10031lmn568gj3b3n"} />
+        <SnackbarProvider>
+          <Follow isFollowing={false} id={"ckzny1iv10031lmn568gj3b3n"} />
+        </SnackbarProvider>
       </MockedProvider>
     );
   });

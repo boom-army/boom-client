@@ -12,14 +12,11 @@ import {
   EditProfileDocument,
 } from "../../../generated/graphql";
 
-
 export const __mocks__: any = [
   {
     request: {
-    //   query: EditProfileDocument,
-      variables: {
-       
-      },
+      //   query: EditProfileDocument,
+      variables: {},
     },
     result: {
       data: {
@@ -35,20 +32,16 @@ export const __mocks__: any = [
   },
 ];
 
-
-
 test("NFT Gallery ", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
-    //   <MockedProvider mocks={__mocks__} addTypename={false}>
-    <SnackbarProvider>
-       <NFTGallery publicAddress="JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4" />
-       </SnackbarProvider>
-    //   </MockedProvider>,{wrapper: MemoryRouter}
+      //   <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <NFTGallery publicAddress="JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4" />
+      </SnackbarProvider>
+      //   </MockedProvider>,{wrapper: MemoryRouter}
     );
   });
   expect(rendered).toMatchSnapshot();
 });
-
-

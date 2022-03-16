@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchModal/> component : display <SearchModal/> component  when Search result found  1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <button
+        class="tweet-gif css-185vf5l"
+        type="button"
+      >
+        <svg
+          fill="#C4C4C4"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M3 2H21C21.5523 2 22 2.44772 22 3V21C22 21.5523 21.5523 22 21 22H3C2.44772 22 2 21.5523 2 21V3C2 2.44772 2.44772 2 3 2ZM0 3C0 1.34315 1.34315 0 3 0H21C22.6569 0 24 1.34315 24 3V21C24 22.6569 22.6569 24 21 24H3C1.34315 24 0 22.6569 0 21V3ZM9.61279 15.8228C10.1141 15.633 10.5062 15.3537 10.7891 14.9849V11.9878H7.82422V13.019H9.43555V14.5498C9.14193 14.8649 8.64779 15.0225 7.95312 15.0225C7.31934 15.0225 6.8234 14.7897 6.46533 14.3242C6.11084 13.8551 5.93359 13.1981 5.93359 12.353V11.7515C5.94434 10.9028 6.10726 10.2601 6.42236 9.82324C6.74105 9.38281 7.20475 9.1626 7.81348 9.1626C8.75521 9.1626 9.30127 9.63346 9.45166 10.5752H10.7837C10.6799 9.76595 10.3719 9.14648 9.85986 8.7168C9.34782 8.28711 8.65674 8.07227 7.78662 8.07227C6.77327 8.07227 5.98372 8.40527 5.41797 9.07129C4.85221 9.73372 4.56934 10.6558 4.56934 11.8374V12.4497C4.58008 13.1873 4.72152 13.8337 4.99365 14.3887C5.26937 14.9401 5.65967 15.3644 6.16455 15.6616C6.66943 15.9588 7.24951 16.1074 7.90479 16.1074C8.54216 16.1074 9.11149 16.0125 9.61279 15.8228ZM12.3628 16H13.7163V8.17969H12.3628V16ZM16.7456 12.686H19.8931V11.6011H16.7456V9.27539H20.355V8.17969H15.3867V16H16.7456V12.686Z"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </button>
+    </div>
+  </body>,
+  "container": <div>
+    <button
+      class="tweet-gif css-185vf5l"
+      type="button"
+    >
+      <svg
+        fill="#C4C4C4"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M3 2H21C21.5523 2 22 2.44772 22 3V21C22 21.5523 21.5523 22 21 22H3C2.44772 22 2 21.5523 2 21V3C2 2.44772 2.44772 2 3 2ZM0 3C0 1.34315 1.34315 0 3 0H21C22.6569 0 24 1.34315 24 3V21C24 22.6569 22.6569 24 21 24H3C1.34315 24 0 22.6569 0 21V3ZM9.61279 15.8228C10.1141 15.633 10.5062 15.3537 10.7891 14.9849V11.9878H7.82422V13.019H9.43555V14.5498C9.14193 14.8649 8.64779 15.0225 7.95312 15.0225C7.31934 15.0225 6.8234 14.7897 6.46533 14.3242C6.11084 13.8551 5.93359 13.1981 5.93359 12.353V11.7515C5.94434 10.9028 6.10726 10.2601 6.42236 9.82324C6.74105 9.38281 7.20475 9.1626 7.81348 9.1626C8.75521 9.1626 9.30127 9.63346 9.45166 10.5752H10.7837C10.6799 9.76595 10.3719 9.14648 9.85986 8.7168C9.34782 8.28711 8.65674 8.07227 7.78662 8.07227C6.77327 8.07227 5.98372 8.40527 5.41797 9.07129C4.85221 9.73372 4.56934 10.6558 4.56934 11.8374V12.4497C4.58008 13.1873 4.72152 13.8337 4.99365 14.3887C5.26937 14.9401 5.65967 15.3644 6.16455 15.6616C6.66943 15.9588 7.24951 16.1074 7.90479 16.1074C8.54216 16.1074 9.11149 16.0125 9.61279 15.8228ZM12.3628 16H13.7163V8.17969H12.3628V16ZM16.7456 12.686H19.8931V11.6011H16.7456V9.27539H20.355V8.17969H15.3867V16H16.7456V12.686Z"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

@@ -1,50 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`display <follow/> component  1`] = `
+exports[`<VideoContainer/> component : display <VideoContainer/> component  1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="MuiBox-root css-0"
+        class="css-1lw4aow"
       >
-        <a
-          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-y6wiud-MuiTypography-root-MuiLink-root"
+        <video
+          aria-label="Will Smith Yes GIF by Bad Boys For Life"
+          autoplay=""
+          loop=""
+          preload="auto"
+        />
+        <div
+          class="MuiBox-root css-1wald98"
         >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-            data-testid="PersonAddIcon"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-            />
-          </svg>
-        </a>
+          GIF
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="MuiBox-root css-0"
+      class="css-1lw4aow"
     >
-      <a
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-y6wiud-MuiTypography-root-MuiLink-root"
+      <video
+        aria-label="Will Smith Yes GIF by Bad Boys For Life"
+        autoplay=""
+        loop=""
+        preload="auto"
+      />
+      <div
+        class="MuiBox-root css-1wald98"
       >
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-          data-testid="PersonAddIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-          />
-        </svg>
-      </a>
+        GIF
+      </div>
     </div>
   </div>,
   "debug": [Function],

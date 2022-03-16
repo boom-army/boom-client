@@ -182,7 +182,7 @@ export const __mocks__: any = [
       query: TWEET,
       variables: {
         // id: "ckzny1iv10031lmn568gj3b3n",
-        id: "cl0c77yow71753s0n5h032nerw"
+        id: "cl0c77yow71753s0n5h032nerw",
       },
     },
     result: {
@@ -211,12 +211,12 @@ test("it should ...", async () => {
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
-      <SnackbarProvider>
-       <Meeps data={profile.data} />
-       </SnackbarProvider>
-      </MockedProvider>,{wrapper: MemoryRouter}
+        <SnackbarProvider>
+          <Meeps data={profile.data} />
+        </SnackbarProvider>
+      </MockedProvider>,
+      { wrapper: MemoryRouter }
     );
   });
   expect(rendered).toMatchSnapshot();
 });
-

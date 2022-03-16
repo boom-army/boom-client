@@ -1,0 +1,340 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImageGrid/> component : display <ImageGrid/> component  when gifArr have list 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="css-nen11g-MuiStack-root"
+      >
+        <ul
+          class="MuiImageList-root MuiImageList-masonry css-1q4nuxj-MuiImageList-root"
+          style="column-count: 3; column-gap: 8px;"
+        >
+          <button
+            class="MuiImageListItem-root MuiImageListItem-masonry css-1awhfnr-MuiImageListItem-root"
+            style="height: auto; margin-bottom: 8px;"
+          >
+            <img
+              alt="Will Smith Yes GIF by Bad Boys For Life"
+              class="MuiImageListItem-img"
+              src="https://media4.giphy.com/media/YOvOkaS5ZKfimDIgwJ/200w_d.gif?cid=e0fc1889ila69xrbm6kvpj1jlybb6ekm6rlldv3rgul4jvxn&rid=200w_d.gif&ct=g"
+            />
+          </button>
+        </ul>
+        <div
+          class="MuiBox-root css-16kb41"
+        />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="css-nen11g-MuiStack-root"
+    >
+      <ul
+        class="MuiImageList-root MuiImageList-masonry css-1q4nuxj-MuiImageList-root"
+        style="column-count: 3; column-gap: 8px;"
+      >
+        <button
+          class="MuiImageListItem-root MuiImageListItem-masonry css-1awhfnr-MuiImageListItem-root"
+          style="height: auto; margin-bottom: 8px;"
+        >
+          <img
+            alt="Will Smith Yes GIF by Bad Boys For Life"
+            class="MuiImageListItem-img"
+            src="https://media4.giphy.com/media/YOvOkaS5ZKfimDIgwJ/200w_d.gif?cid=e0fc1889ila69xrbm6kvpj1jlybb6ekm6rlldv3rgul4jvxn&rid=200w_d.gif&ct=g"
+          />
+        </button>
+      </ul>
+      <div
+        class="MuiBox-root css-16kb41"
+      />
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`<ImageGrid/> component : display <ImageGrid/> component  when loading 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="css-nen11g-MuiStack-root"
+      >
+        <ul
+          class="MuiImageList-root MuiImageList-masonry css-1q4nuxj-MuiImageList-root"
+          style="column-count: 3; column-gap: 8px;"
+        >
+          <button
+            class="MuiImageListItem-root MuiImageListItem-masonry css-1awhfnr-MuiImageListItem-root"
+            style="height: auto; margin-bottom: 8px;"
+          >
+            <img
+              alt="Will Smith Yes GIF by Bad Boys For Life"
+              class="MuiImageListItem-img"
+              src="https://media4.giphy.com/media/YOvOkaS5ZKfimDIgwJ/200w_d.gif?cid=e0fc1889ila69xrbm6kvpj1jlybb6ekm6rlldv3rgul4jvxn&rid=200w_d.gif&ct=g"
+            />
+          </button>
+        </ul>
+        <div
+          class="MuiBox-root css-16kb41"
+        >
+          <div
+            class="MuiBox-root css-1l4w6pd"
+          >
+            <span
+              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+              role="progressbar"
+              style="width: 30px; height: 30px;"
+            >
+              <svg
+                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                viewBox="22 22 44 44"
+              >
+                <circle
+                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                  cx="44"
+                  cy="44"
+                  fill="none"
+                  r="20.2"
+                  stroke-width="3.6"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="css-nen11g-MuiStack-root"
+    >
+      <ul
+        class="MuiImageList-root MuiImageList-masonry css-1q4nuxj-MuiImageList-root"
+        style="column-count: 3; column-gap: 8px;"
+      >
+        <button
+          class="MuiImageListItem-root MuiImageListItem-masonry css-1awhfnr-MuiImageListItem-root"
+          style="height: auto; margin-bottom: 8px;"
+        >
+          <img
+            alt="Will Smith Yes GIF by Bad Boys For Life"
+            class="MuiImageListItem-img"
+            src="https://media4.giphy.com/media/YOvOkaS5ZKfimDIgwJ/200w_d.gif?cid=e0fc1889ila69xrbm6kvpj1jlybb6ekm6rlldv3rgul4jvxn&rid=200w_d.gif&ct=g"
+          />
+        </button>
+      </ul>
+      <div
+        class="MuiBox-root css-16kb41"
+      >
+        <div
+          class="MuiBox-root css-1l4w6pd"
+        >
+          <span
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+            role="progressbar"
+            style="width: 30px; height: 30px;"
+          >
+            <svg
+              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="20.2"
+                stroke-width="3.6"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`<ImageGrid/> component : display <ImageGrid/> component when gifArr undefined 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiBox-root css-1c5ij41"
+      >
+        <p>
+          No gifs were found
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiBox-root css-1c5ij41"
+    >
+      <p>
+        No gifs were found
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

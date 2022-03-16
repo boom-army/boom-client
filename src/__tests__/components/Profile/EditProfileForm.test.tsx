@@ -10,7 +10,7 @@ import {
   useEditProfileMutation,
   EditProfileDocument,
 } from "../../../generated/graphql";
-import { SnackbarProvider } from "notistack"
+import { SnackbarProvider } from "notistack";
 // import { MockedProvider } from '@apollo/react-testing'
 
 const values = {
@@ -211,9 +211,10 @@ test("it should ...", async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
         <SnackbarProvider>
-       <EditProfileForm profile={profile.data.profile} />
-       </SnackbarProvider>
-      </MockedProvider>,{wrapper: MemoryRouter}
+          <EditProfileForm profile={profile.data.profile} />
+        </SnackbarProvider>
+      </MockedProvider>,
+      { wrapper: MemoryRouter }
     );
   });
   expect(rendered).toMatchSnapshot();
