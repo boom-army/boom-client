@@ -24,28 +24,32 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
 
   const active = nft.status === ChannelStatus.ACTIVE;
 
-  const toggleChannel = async () => {
+  const toggleChannel = async (nft: ChannelsQuery["channels"][0]) => {
     try {
-      await addChannelMutation({
-        variables: {
-          mintAuthority: nft.mintAuthority,
-          name: nft.name,
-          family: nft.family,
-          description: nft.description,
-          image: nft.image,
-          status: ChannelStatus.ACTIVE,
-          channelParentId: null,
-        },
-        update: (cache, { data }) => {
-          const { channels }: any = cache.readQuery({ query: ChannelsDocument });
-          cache.writeQuery({
-            query: ChannelsDocument,
-            data: {
-              channels: uniqBy([...channels, data?.addChannel ], "id"),
-            },
-          });
-        },
-      });
+      if (nft.status === ChannelStatus.ACTIVE) {
+        console.log(nft);
+      } else {
+        await addChannelMutation({
+          variables: {
+            mintAuthority: nft.mintAuthority,
+            name: nft.name,
+            family: nft.family,
+            description: nft.description,
+            image: nft.image,
+            status: ChannelStatus.ACTIVE,
+            channelParentId: null,
+          },
+          update: (cache, { data }) => {
+            const { channels }: any = cache.readQuery({ query: ChannelsDocument });
+            cache.writeQuery({
+              query: ChannelsDocument,
+              data: {
+                channels: uniqBy([...channels, data?.addChannel ], "id"),
+              },
+            });          
+          },
+        });
+      }
     } catch (error) {
       displayError(error, enqueueSnackbar);
     }
@@ -86,7 +90,7 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
           margin: 1,
           padding: 1,
         }}
-        onClick={toggleChannel}
+        onClick={() => toggleChannel(nft)}
         key={nft.id}
       >
         <Box mr={1}>
