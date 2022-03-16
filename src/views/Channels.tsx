@@ -1,28 +1,24 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { ChannelTile } from "../components/Channel/ChannelTile";
+import { ChannelsDocument, useChannelsQuery } from "../generated/graphql";
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
+import { concat, uniqBy } from "lodash";
 import { displayError } from "../utils";
-import { merge, uniqBy } from "lodash";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import { ChannelsQuery, useChannelsQuery } from "../generated/graphql";
+import { useApolloClient } from '@apollo/client';
 import { useSnackbar } from "notistack";
 
 export const ChannelView: React.FC = () => {
   const { connection } = useConnection();
+  const client = useApolloClient();
   const anchorWallet = useAnchorWallet();
   const wallet = anchorWallet;
   const { enqueueSnackbar } = useSnackbar();
 
   const { data, loading, error } = useChannelsQuery();
-
-  const [fullData, setFullData] = useState<ChannelsQuery["channels"]>();
-
-  useMemo(()=>{
-    setFullData(data?.channels);
-  },[data])
 
   useEffect(() => {
     (async () => {
@@ -39,6 +35,7 @@ export const ChannelView: React.FC = () => {
             response.json()
           );
           return {
+            __typename: "Channel" as "Channel",
             id: meta.mint,
             mintAuthority: meta.updateAuthority,
             name: metaDataFetch?.collection?.name,
@@ -46,18 +43,26 @@ export const ChannelView: React.FC = () => {
             image: metaDataFetch.image,
             description: metaDataFetch.description,
             status: "new",
+            verified: null,
+            channelParentId: null,
           };
         });
         const channelData = await Promise.all(formatChannelData);
-        const mergedChannels = merge(fullData, channelData);
-        const uniqueChannels = uniqBy(mergedChannels, d => [d.mintAuthority, d.name, d.family].join());
-        setFullData(uniqueChannels);
+        const validChannels = channelData.filter(channel => channel?.name || channel?.family);
+        const mergedChannels = concat(data?.channels, validChannels);
+        const uniqueChannels = uniqBy(mergedChannels, d => [d?.mintAuthority, d?.name, d?.family].join());
+        client.writeQuery({
+          query: ChannelsDocument,
+          data: {
+            channels: uniqueChannels,
+          },
+        });
       } catch (error) {
         console.log(error);
         displayError(error, enqueueSnackbar);
       }
     })();
-  }, [connection, wallet]);
+  }, [connection, wallet, client, data]);
 
   if (loading)
     return (
@@ -74,8 +79,8 @@ export const ChannelView: React.FC = () => {
           Select channels to display
         </Typography>
       </Box>
-      {fullData?.length ? (
-        fullData?.map((d) => <ChannelTile key={d.id} nft={d} />)
+      {data && data?.channels?.length ? (
+        data?.channels?.map((d) => <ChannelTile key={d.id} nft={d} />)
       ) : (
         <CustomResponse text="No channels to display" />
       )}
