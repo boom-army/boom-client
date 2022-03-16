@@ -1,16 +1,16 @@
-import { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { MorePopUp } from "../components/MorePopup";
-// import Person from '@mui/icons-material/Person';
-import StyleIcon from "@mui/icons-material/Style";
+import React, { useContext } from "react";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
-import TagIcon from '@mui/icons-material/Tag';
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Badge, Stack, Typography } from "@mui/material";
-import { User as StoreUser } from "../contexts/user";
+import StyleIcon from "@mui/icons-material/Style";
+import TagIcon from "@mui/icons-material/Tag";
+import { Avatar, Badge, Stack, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { MorePopUp } from "../components/MorePopup";
+import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme";
+import { User as StoreUser } from "../contexts/user";
 import { styled } from "@mui/material/styles";
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
   user: StoreUser | null;
 }
 
-export const Nav = ({ newMentionsCount, user }: Props) => {
+export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   const { theme } = useContext(ThemeContext);
   const iconProps = {
     color: theme.accentColor,
@@ -30,39 +30,59 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
 
   const stackProps = {
     justifyContent: "flex-end",
-    spacing: 3,
+    spacing: 2,
     alignItems: "center",
-    marginRight: "2rem",
+    marginRight: "5rem",
   };
 
   const StyledStack = styled(Stack)({
     minHeight: "100vh",
-    marginTop: "1.3rem",
+    paddingTop: "1.3rem",
+    marginLeft: "0.5em",
     fontWeight: 500,
     alignItems: "flex-start",
   });
 
+  const StyledStack2 = styled(Stack)({
+    minHeight: "100vh",
+    paddingTop: "1.3rem",
+    borderLeft: `1px solid ${theme.tertiaryColor}`,
+    width: "5rem",
+    overflowY: "scroll",
+    scrollbarWidth: "none",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+  });
+
   return (
-    <StyledStack direction="column" spacing={4.5}>
-      <NavLink style={applyActiveStyles} to="/">
-        <Stack direction="row" {...stackProps}>
-          <Language style={iconProps} />
-          <Typography variant="body1">Community</Typography>
-        </Stack>
-      </NavLink>
-      <NavLink style={applyActiveStyles} to="/channels">
-        <Stack direction="row" {...stackProps}>
-          <TagIcon sx={iconProps} />
-          <Typography variant="body1">Channels</Typography>
-        </Stack>
-      </NavLink>
-      <NavLink style={applyActiveStyles} to="/mint-nft">
-        <Stack direction="row" {...stackProps}>
-          <StyleIcon sx={iconProps} />
-          <Typography variant="body1">Mint NFT</Typography>
-        </Stack>
-      </NavLink>
-      {/* <NavLink style={applyActiveStyles} to="/following">
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          position: "fixed",
+        }}
+      >
+        <StyledStack direction="column" spacing={4.5}>
+          <NavLink style={applyActiveStyles} to="/">
+            <Stack direction="row" {...stackProps}>
+              <Language style={iconProps} />
+              <Typography variant="body1">Community</Typography>
+            </Stack>
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/channels">
+            <Stack direction="row" {...stackProps}>
+              <TagIcon sx={iconProps} />
+              <Typography variant="body1">Channels</Typography>
+            </Stack>
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/mint-nft">
+            <Stack direction="row" {...stackProps}>
+              <StyleIcon sx={iconProps} />
+              <Typography variant="body1">Mint NFT</Typography>
+            </Stack>
+          </NavLink>
+          {/* <NavLink style={applyActiveStyles} to="/following">
         <Stack direction="row" {...stackProps}>
           <Person sx={iconProps} />
           <Typography variant="body1" display={displayProps}>
@@ -70,38 +90,48 @@ export const Nav = ({ newMentionsCount, user }: Props) => {
           </Typography>
         </Stack>
       </NavLink> */}
-      <NavLink style={applyActiveStyles} to="/connect">
-        <Stack direction="row" {...stackProps}>
-          <GroupIcon sx={iconProps} />
-          <Typography variant="body1">Creators</Typography>
-        </Stack>
-      </NavLink>
-      <NavLink style={applyActiveStyles} to="/notifications">
-        <Stack direction="row" {...stackProps}>
-          <Badge
-            max={99}
-            badgeContent={newMentionsCount ?? 0}
-            sx={{
-              "& .MuiBadge-badge": {
-                color: "#FFFFFF",
-                backgroundColor: theme.accentColor,
-              },
-            }}
-          >
-            <NotificationsIcon sx={iconProps} />
-          </Badge>
-          <Typography variant="body1">Notifications</Typography>
-        </Stack>
-      </NavLink>
-      {user?.handle && (
-        <NavLink style={applyActiveStyles} to={`/${user?.handle}`}>
-          <Stack direction="row" {...stackProps}>
-            <AccountCircleIcon sx={iconProps} />
-            <Typography variant="body1">Profile</Typography>
+          <NavLink style={applyActiveStyles} to="/connect">
+            <Stack direction="row" {...stackProps}>
+              <GroupIcon sx={iconProps} />
+              <Typography variant="body1">Creators</Typography>
+            </Stack>
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/notifications">
+            <Stack direction="row" {...stackProps}>
+              <Badge
+                max={99}
+                badgeContent={newMentionsCount ?? 0}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    color: "#FFFFFF",
+                    backgroundColor: theme.accentColor,
+                  },
+                }}
+              >
+                <NotificationsIcon sx={iconProps} />
+              </Badge>
+              <Typography variant="body1">Notifications</Typography>
+            </Stack>
+          </NavLink>
+          {user?.handle && (
+            <NavLink style={applyActiveStyles} to={`/${user?.handle}`}>
+              <Stack direction="row" {...stackProps}>
+                <AccountCircleIcon sx={iconProps} />
+                <Typography variant="body1">Profile</Typography>
+              </Stack>
+            </NavLink>
+          )}
+          <MorePopUp iconProps={iconProps} stackProps={stackProps} />
+        </StyledStack>
+        <StyledStack2>
+          <Stack direction="row" sx={{ justifyContent: "center" }}>
+            <Avatar
+              sx={{ width: 60, height: 60, cursor: "pointer" }}
+              src="https://sosol-prod.s3.us-west-2.amazonaws.com/images/HERIDOS-TIROTEO.jpeg"
+            />
           </Stack>
-        </NavLink>
-      )}
-      <MorePopUp iconProps={iconProps} stackProps={stackProps} />
-    </StyledStack>
+        </StyledStack2>
+      </Box>
+    </>
   );
 };

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useContext } from "react";
 // import { formatNumber } from "../../utils/utils";
 // import { useNativeAccount } from "../../contexts/accounts";
 import base58 from "bs58";
-import { AppBar, Box, Grid, Toolbar } from "@mui/material";
+import { AppBar, Grid, Slide, Toolbar, useScrollTrigger } from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
 import { FEED } from "../../queries/others";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
@@ -19,6 +19,7 @@ export const AppHeader = () => {
   // const { account } = useNativeAccount();
   const { enqueueSnackbar } = useSnackbar();
   const { setUser } = useContext(UserContext);
+  const trigger = useScrollTrigger();
 
   const token = localStorage.getItem("token");
 
@@ -90,13 +91,11 @@ export const AppHeader = () => {
   // };
 
   const TopBar = (
-    <Box sx={{ flexGrow: 1 }}>
+    <Slide appear={false} direction="down" in={!trigger} >
       <AppBar
-        position="static"
         sx={{
-          // position: "relative",
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
-          padding: "0 0.5em"
+          padding: "0 0.5em",
         }}
       >
         <Toolbar variant="dense" disableGutters={true}>
@@ -111,7 +110,7 @@ export const AppHeader = () => {
           </Grid>
         </Toolbar>
       </AppBar>
-    </Box>
+      </Slide>   
   );
 
   return TopBar;

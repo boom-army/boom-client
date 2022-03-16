@@ -133,7 +133,7 @@ export const AppRoutes: React.FC = () => {
             <MarketProvider>
               <GiphyContextProvider>
                 <AppHeader />
-                <Grid container>
+                <Grid container mt={6}>
                   <Paper
                     component={Grid}
                     item
