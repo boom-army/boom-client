@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useContext } from "react";
 // import { formatNumber } from "../../utils/utils";
 // import { useNativeAccount } from "../../contexts/accounts";
 import base58 from "bs58";
-import { AppBar, Container, Grid, Toolbar } from "@mui/material";
+import { AppBar, Box, Grid, Toolbar } from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
 import { FEED } from "../../queries/others";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
@@ -90,14 +90,15 @@ export const AppHeader = () => {
   // };
 
   const TopBar = (
-    <AppBar
-      position="absolute"
-      sx={{
-        position: "relative",
-        borderBottom: (t) => `1px solid ${t.palette.divider}`,
-      }}
-    >
-      <Container maxWidth="lg">
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="static"
+        sx={{
+          // position: "relative",
+          borderBottom: (t) => `1px solid ${t.palette.divider}`,
+          padding: "0 0.5em"
+        }}
+      >
         <Toolbar variant="dense" disableGutters={true}>
           <CurrentUser />
           <Grid
@@ -109,8 +110,8 @@ export const AppHeader = () => {
             <WalletMultiButton />
           </Grid>
         </Toolbar>
-      </Container>
-    </AppBar>
+      </AppBar>
+    </Box>
   );
 
   return TopBar;

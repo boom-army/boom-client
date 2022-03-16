@@ -91,7 +91,7 @@ export const AppRoutes: React.FC = () => {
     borderLeft: `1px solid ${theme.tertiaryColor}`,
 
     "@media screen and (max-width: 530px)": {
-      border: 0
+      border: 0,
     },
   };
 
@@ -133,121 +133,114 @@ export const AppRoutes: React.FC = () => {
             <MarketProvider>
               <GiphyContextProvider>
                 <AppHeader />
-                <Container maxWidth="lg">
-                  <Grid container>
-                    <Paper
-                      component={Grid}
-                      item
-                      md={2}
-                      display={{ xs: "none", sm: "none", md: "block" }}
-                    >
-                      {user?.handle && (
-                        <Nav
-                          user={user}
-                          newMentionsCount={data?.profile?.newMentionsCount}
-                        />
-                      )}
-                    </Paper>
-                    <Paper
-                      component={Grid}
-                      item
-                      xs={12}
-                      sm={12}
-                      md={7}
-                      sx={middleColStyles}
-                      elevation={0}
-                    >
-                      <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="following" element={<Following />} />
-                        <Route path="connect" element={<ConnectView />} />
-                        <Route path="channels" element={<ChannelView />} />
-                        <Route
-                          path="notifications"
-                          element={<Notifications refetchProfile={refetch} />}
-                        />
-                        <Route
-                          path=":handle/status/:tweetId"
-                          element={<MasterTweet />}
-                        />
-                        <Route
-                          path="settings/profile"
-                          element={
-                            <EditProfile
-                              loading={loading}
-                              data={data}
-                              setUser={setUser}
-                            />
-                          }
-                        />
-                        <Route path=":handle" element={<Profile />} />
-                        <Route path="mint-nft" element={<NFTMint />} />
-                        <Route path="*" element={<Navigate replace to="/" />} />
-                      </Routes>
-                    </Paper>
-                    <Grid
-                      item
-                      md={3}
-                      display={{ xs: "none", sm: "none", md: "block" }}
-                    >
-                      <Suggestion />
-                    </Grid>
-                  </Grid>
+                <Grid container>
                   <Paper
                     component={Grid}
-                    sx={{
-                      position: "fixed",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                    }}
-                    display={{ xs: "block", sm: "block", md: "none" }}
-                    elevation={1}
+                    item
+                    md={2}
+                    display={{ xs: "none", sm: "none", md: "block" }}
                   >
-                    <StyledBottomNavigation
-                      value={value}
-                      onChange={handleChange}
-                    >
+                    {user?.handle && (
+                      <Nav
+                        user={user}
+                        newMentionsCount={data?.profile?.newMentionsCount}
+                      />
+                    )}
+                  </Paper>
+                  <Paper
+                    component={Grid}
+                    item
+                    xs={12}
+                    sm={12}
+                    md={7}
+                    sx={middleColStyles}
+                    elevation={0}
+                  >
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="following" element={<Following />} />
+                      <Route path="connect" element={<ConnectView />} />
+                      <Route path="channels" element={<ChannelView />} />
+                      <Route
+                        path="notifications"
+                        element={<Notifications refetchProfile={refetch} />}
+                      />
+                      <Route
+                        path=":handle/status/:tweetId"
+                        element={<MasterTweet />}
+                      />
+                      <Route
+                        path="settings/profile"
+                        element={
+                          <EditProfile
+                            loading={loading}
+                            data={data}
+                            setUser={setUser}
+                          />
+                        }
+                      />
+                      <Route path=":handle" element={<Profile />} />
+                      <Route path="mint-nft" element={<NFTMint />} />
+                      <Route path="*" element={<Navigate replace to="/" />} />
+                    </Routes>
+                  </Paper>
+                  <Grid
+                    item
+                    md={3}
+                    display={{ xs: "none", sm: "none", md: "block" }}
+                  >
+                    <Suggestion />
+                  </Grid>
+                </Grid>
+                <Paper
+                  component={Grid}
+                  sx={{
+                    position: "fixed",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                  }}
+                  display={{ xs: "block", sm: "block", md: "none" }}
+                  elevation={1}
+                >
+                  <StyledBottomNavigation value={value} onChange={handleChange}>
+                    <BottomNavigationAction
+                      component={NavLink}
+                      label="Community"
+                      value="community"
+                      icon={<LanguageIcon />}
+                      to="/"
+                    />
+                    {user?.handle && (
                       <BottomNavigationAction
                         component={NavLink}
-                        label="Community"
-                        value="community"
-                        icon={<LanguageIcon />}
-                        to="/"
+                        label="Notifications"
+                        value="notifications"
+                        icon={
+                          <Badge badgeContent={data?.profile?.newMentionsCount}>
+                            <NotificationsIcon />
+                          </Badge>
+                        }
+                        to="/notifications"
                       />
-                      {user?.handle && (
-                        <BottomNavigationAction
-                          component={NavLink}
-                          label="Notifications"
-                          value="notifications"
-                          icon={
-                            <Badge
-                              badgeContent={data?.profile?.newMentionsCount}
-                            >
-                              <NotificationsIcon />
-                            </Badge>
-                          }
-                          to="/notifications"
-                        />
-                      )}
-                      {user?.handle && (
-                        <BottomNavigationAction
-                          component={NavLink}
-                          label="Profile"
-                          value="profile"
-                          icon={<AccountCircleIcon />}
-                          to={`/${user?.handle}`}
-                        />
-                      )}
+                    )}
+                    {user?.handle && (
                       <BottomNavigationAction
-                        label="Menu"
-                        value="menu"
-                        icon={<MenuIcon />}
-                        onClick={toggleDrawer(true)}
+                        component={NavLink}
+                        label="Profile"
+                        value="profile"
+                        icon={<AccountCircleIcon />}
+                        to={`/${user?.handle}`}
                       />
-                    </StyledBottomNavigation>
-                  </Paper>
-                </Container>
+                    )}
+                    <BottomNavigationAction
+                      label="Menu"
+                      value="menu"
+                      icon={<MenuIcon />}
+                      onClick={toggleDrawer(true)}
+                    />
+                  </StyledBottomNavigation>
+                </Paper>
                 <SwipeableDrawer
                   open={drawer}
                   onClose={toggleDrawer(false)}
