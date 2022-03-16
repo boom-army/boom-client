@@ -42,3 +42,7 @@ query channels {
     verified
   }
 }
+
+mutation channelUnlink($channelId: ID!) {
+  channelUnlink(channelId: $channelId)
+}

@@ -4,49 +4,76 @@ import CheckIcon from "@mui/icons-material/Check";
 import CircularProgress from "@mui/material/CircularProgress";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import { Avatar, Box, Typography } from "@mui/material";
+import { ChannelStatus } from "../../constants";
+import {
+  ChannelsDocument,
+  ChannelsQuery,
+  useAddChannelMutation,
+  useChannelUnlinkMutation,
+} from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { displayError } from "../../utils";
+import { gql } from "@apollo/client";
 import { shortenAddress } from "../../utils/utils";
 import { styled } from "@mui/material/styles";
-import { ChannelsQuery, useAddChannelMutation, ChannelsDocument } from "../../generated/graphql";
-import { ChannelStatus } from "../../constants";
 import { uniqBy } from "lodash";
 import { useSnackbar } from "notistack";
 
 interface Props {
-  nft: ChannelsQuery["channels"][0];
+  channel: ChannelsQuery["channels"][0];
 }
 
-export const ChannelTile: React.FC<Props> = ({ nft }) => {
+export const ChannelTile: React.FC<Props> = ({ channel }) => {
   const { theme } = useContext(ThemeContext);
-  const [addChannelMutation, { data, loading }] = useAddChannelMutation();
+  const [addChannelMutation, { loading }] = useAddChannelMutation();
+  const [channelUnlinkMutation] = useChannelUnlinkMutation({
+    variables: {
+      channelId: channel.id,
+    },
+  });
   const { enqueueSnackbar } = useSnackbar();
 
-  const active = nft.status === ChannelStatus.ACTIVE;
+  const active = channel.status === ChannelStatus.ACTIVE;
 
-  const toggleChannel = async (nft: ChannelsQuery["channels"][0]) => {
+  const toggleChannel = async () => {
     try {
-      if (nft.status === ChannelStatus.ACTIVE) {
-        console.log(nft);
+      if (channel.status === ChannelStatus.ACTIVE) {
+        await channelUnlinkMutation({
+          update: (cache) => {
+            cache.writeFragment({
+              id: `Channel:${channel.id}`,
+              fragment: gql`
+                fragment ChannelStatus on Channel {
+                  status
+                }
+              `,
+              data: {
+                status: null,
+              },
+            });
+          },
+        });
       } else {
         await addChannelMutation({
           variables: {
-            mintAuthority: nft.mintAuthority,
-            name: nft.name,
-            family: nft.family,
-            description: nft.description,
-            image: nft.image,
+            mintAuthority: channel.mintAuthority,
+            name: channel.name,
+            family: channel.family,
+            description: channel.description,
+            image: channel.image,
             status: ChannelStatus.ACTIVE,
             channelParentId: null,
           },
           update: (cache, { data }) => {
-            const { channels }: any = cache.readQuery({ query: ChannelsDocument });
+            const { channels }: any = cache.readQuery({
+              query: ChannelsDocument,
+            });
             cache.writeQuery({
               query: ChannelsDocument,
               data: {
-                channels: uniqBy([...channels, data?.addChannel ], "id"),
+                channels: uniqBy([...channels, data?.addChannel], "id"),
               },
-            });          
+            });
           },
         });
       }
@@ -90,13 +117,13 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
           margin: 1,
           padding: 1,
         }}
-        onClick={() => toggleChannel(nft)}
-        key={nft.id}
+        onClick={toggleChannel}
+        key={channel.id}
       >
         <Box mr={1}>
           <Avatar
             sx={{ width: "60px", height: "60px" }}
-            src={nft.image as string}
+            src={channel.image as string}
           />
         </Box>
         <Box sx={{ width: "100%" }}>
@@ -109,8 +136,8 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
           >
             <Box>
               <Typography variant="h3">
-                {`${nft.family} - ${nft.name}`}{" "}
-                {nft.verified && (
+                {`${channel.family} - ${channel.name}`}{" "}
+                {channel.verified && (
                   <VerifiedIcon
                     fontSize="small"
                     sx={{ verticalAlign: "sub" }}
@@ -148,12 +175,14 @@ export const ChannelTile: React.FC<Props> = ({ nft }) => {
           >
             <Box>
               {/* <Typography variant="body2">
-                {nft.membersCount ? nft.membersCount : 0} members
+                {channel.membersCount ? channel.membersCount : 0} members
               </Typography> */}
             </Box>
             <Box>
               <Typography variant="body2">
-                {nft.mintAuthority ? shortenAddress(nft.mintAuthority) : ""}
+                {channel.mintAuthority
+                  ? shortenAddress(channel.mintAuthority)
+                  : ""}
               </Typography>
             </Box>
           </Box>

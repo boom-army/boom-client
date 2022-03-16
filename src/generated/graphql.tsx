@@ -129,6 +129,7 @@ export type Mutation = {
   addChannel: Channel;
   addComment: Comment;
   address: Nonce;
+  channelUnlink: Scalars['Boolean'];
   deleteComment: Comment;
   deleteTweet?: Maybe<Tweet>;
   editProfile: User;
@@ -163,6 +164,11 @@ export type MutationAddCommentArgs = {
 
 export type MutationAddressArgs = {
   publicAddress: Scalars['String'];
+};
+
+
+export type MutationChannelUnlinkArgs = {
+  channelId: Scalars['ID'];
 };
 
 
@@ -494,6 +500,13 @@ export type ChannelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ChannelsQuery = { __typename?: 'Query', channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, status?: string | null | undefined, channelParentId?: string | null | undefined, verified?: boolean | null | undefined }> };
 
+export type ChannelUnlinkMutationVariables = Exact<{
+  channelId: Scalars['ID'];
+}>;
+
+
+export type ChannelUnlinkMutation = { __typename?: 'Mutation', channelUnlink: boolean };
+
 export type FeedQueryVariables = Exact<{
   offset: Scalars['Int'];
   limit?: Maybe<Scalars['Int']>;
@@ -654,6 +667,37 @@ export function useChannelsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<C
 export type ChannelsQueryHookResult = ReturnType<typeof useChannelsQuery>;
 export type ChannelsLazyQueryHookResult = ReturnType<typeof useChannelsLazyQuery>;
 export type ChannelsQueryResult = Apollo.QueryResult<ChannelsQuery, ChannelsQueryVariables>;
+export const ChannelUnlinkDocument = gql`
+    mutation channelUnlink($channelId: ID!) {
+  channelUnlink(channelId: $channelId)
+}
+    `;
+export type ChannelUnlinkMutationFn = Apollo.MutationFunction<ChannelUnlinkMutation, ChannelUnlinkMutationVariables>;
+
+/**
+ * __useChannelUnlinkMutation__
+ *
+ * To run a mutation, you first call `useChannelUnlinkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useChannelUnlinkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [channelUnlinkMutation, { data, loading, error }] = useChannelUnlinkMutation({
+ *   variables: {
+ *      channelId: // value for 'channelId'
+ *   },
+ * });
+ */
+export function useChannelUnlinkMutation(baseOptions?: Apollo.MutationHookOptions<ChannelUnlinkMutation, ChannelUnlinkMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ChannelUnlinkMutation, ChannelUnlinkMutationVariables>(ChannelUnlinkDocument, options);
+      }
+export type ChannelUnlinkMutationHookResult = ReturnType<typeof useChannelUnlinkMutation>;
+export type ChannelUnlinkMutationResult = Apollo.MutationResult<ChannelUnlinkMutation>;
+export type ChannelUnlinkMutationOptions = Apollo.BaseMutationOptions<ChannelUnlinkMutation, ChannelUnlinkMutationVariables>;
 export const FeedDocument = gql`
     query feed($offset: Int!, $limit: Int, $global: Boolean) {
   feed(offset: $offset, limit: $limit, global: $global) {

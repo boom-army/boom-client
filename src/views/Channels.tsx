@@ -84,7 +84,7 @@ export const ChannelView: React.FC = () => {
         </Typography>
       </Box>
       {data && data?.channels?.length ? (
-        data?.channels?.map((d) => <ChannelTile key={d.id} nft={d} />)
+        data?.channels?.map((d) => <ChannelTile key={d.id} channel={d} />)
       ) : (
         <CustomResponse text="No channels to display" />
       )}
