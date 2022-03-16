@@ -47,16 +47,20 @@ export const ChannelView: React.FC = () => {
             channelParentId: null,
           };
         });
+        // Merge the NFT data and channels cache data and restore it
+        // in the Apollo cache
         const channelData = await Promise.all(formatChannelData);
         const validChannels = channelData.filter(channel => channel?.name || channel?.family);
         const mergedChannels = concat(data?.channels, validChannels);
         const uniqueChannels = uniqBy(mergedChannels, d => [d?.mintAuthority, d?.name, d?.family].join());
-        client.writeQuery({
-          query: ChannelsDocument,
-          data: {
-            channels: uniqueChannels,
-          },
-        });
+        if (uniqueChannels[0]) {
+          client.writeQuery({
+            query: ChannelsDocument,
+            data: {
+              channels: uniqueChannels,
+            },
+          });
+        }
       } catch (error) {
         console.log(error);
         displayError(error, enqueueSnackbar);
