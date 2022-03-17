@@ -186,7 +186,7 @@ export const AppRoutes: React.FC = () => {
                   </Paper>
                   <Grid
                     item
-                    md={3}
+                    md={2}
                     display={{ xs: "none", sm: "none", md: "block" }}
                   >
                     <Suggestion />
