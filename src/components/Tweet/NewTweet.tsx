@@ -192,9 +192,9 @@ export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
         <div className="new-tweet">
           <TextareaAutosize
             placeholder="What's happening?"
-            // type="text"
             value={tweet.value}
             onChange={tweet.onChange}
+            style={{ fontFamily: '"Noto Sans Display", "Trebuchet MS", sans-serif' }}
           />
 
           {gif && (
