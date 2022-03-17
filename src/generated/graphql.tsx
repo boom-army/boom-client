@@ -207,6 +207,7 @@ export type MutationLoginRegisterArgs = {
 
 
 export type MutationNewTweetArgs = {
+  channelId?: Maybe<Scalars['String']>;
   files?: Maybe<Array<Scalars['String']>>;
   gif?: Maybe<GifInput>;
   mentions?: Maybe<Array<Scalars['String']>>;
@@ -438,6 +439,7 @@ export type TipInput = {
 
 export type Tweet = {
   __typename?: 'Tweet';
+  channelId?: Maybe<Scalars['String']>;
   childTweets?: Maybe<Array<Maybe<Tweet>>>;
   comments: Array<Comment>;
   commentsCount: Scalars['Int'];
@@ -585,6 +587,20 @@ export type TipCreatorMutationVariables = Exact<{
 
 
 export type TipCreatorMutation = { __typename?: 'Mutation', tipCreator: { __typename?: 'Tip', id: string } };
+
+export type NewTweetMutationVariables = Exact<{
+  text: Scalars['String'];
+  files: Array<Scalars['String']> | Scalars['String'];
+  tags: Array<Scalars['String']> | Scalars['String'];
+  mentions: Array<Scalars['String']> | Scalars['String'];
+  gif?: Maybe<GifInput>;
+  nft?: Maybe<NftInput>;
+  parentTweet?: Maybe<Scalars['String']>;
+  channelId?: Maybe<Scalars['String']>;
+}>;
+
+
+export type NewTweetMutation = { __typename?: 'Mutation', newTweet: { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, mentions?: Array<string> | null | undefined, commentsCount: number, createdAt?: string | null | undefined } };
 
 
 export const AddChannelDocument = gql`
@@ -1237,3 +1253,57 @@ export function useTipCreatorMutation(baseOptions?: Apollo.MutationHookOptions<T
 export type TipCreatorMutationHookResult = ReturnType<typeof useTipCreatorMutation>;
 export type TipCreatorMutationResult = Apollo.MutationResult<TipCreatorMutation>;
 export type TipCreatorMutationOptions = Apollo.BaseMutationOptions<TipCreatorMutation, TipCreatorMutationVariables>;
+export const NewTweetDocument = gql`
+    mutation newTweet($text: String!, $files: [String!]!, $tags: [String!]!, $mentions: [String!]!, $gif: GifInput, $nft: NFTInput, $parentTweet: String, $channelId: String) {
+  newTweet(
+    text: $text
+    files: $files
+    tags: $tags
+    mentions: $mentions
+    gif: $gif
+    nft: $nft
+    parentTweet: $parentTweet
+    channelId: $channelId
+  ) {
+    id
+    text
+    tags
+    mentions
+    commentsCount
+    createdAt
+  }
+}
+    `;
+export type NewTweetMutationFn = Apollo.MutationFunction<NewTweetMutation, NewTweetMutationVariables>;
+
+/**
+ * __useNewTweetMutation__
+ *
+ * To run a mutation, you first call `useNewTweetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useNewTweetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [newTweetMutation, { data, loading, error }] = useNewTweetMutation({
+ *   variables: {
+ *      text: // value for 'text'
+ *      files: // value for 'files'
+ *      tags: // value for 'tags'
+ *      mentions: // value for 'mentions'
+ *      gif: // value for 'gif'
+ *      nft: // value for 'nft'
+ *      parentTweet: // value for 'parentTweet'
+ *      channelId: // value for 'channelId'
+ *   },
+ * });
+ */
+export function useNewTweetMutation(baseOptions?: Apollo.MutationHookOptions<NewTweetMutation, NewTweetMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<NewTweetMutation, NewTweetMutationVariables>(NewTweetDocument, options);
+      }
+export type NewTweetMutationHookResult = ReturnType<typeof useNewTweetMutation>;
+export type NewTweetMutationResult = Apollo.MutationResult<NewTweetMutation>;
+export type NewTweetMutationOptions = Apollo.BaseMutationOptions<NewTweetMutation, NewTweetMutationVariables>;

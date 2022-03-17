@@ -38,7 +38,7 @@ export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
           <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
         ))
       ) : (
-        <CustomResponse text="Follow some people to get some feed updates" />
+        <CustomResponse text="No tweets exist to display in this feed. Let everyone know what's happening." />
       )}
       {data?.length && loading && (
         <Box sx={{ marginTop: "1rem" }}>

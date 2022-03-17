@@ -7,7 +7,7 @@ import { Box } from "@mui/system";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { FEED } from "../../queries/others";
 import { ImageBox } from "../ImageBox";
-import { NEW_TWEET, TWEET } from "../../queries/tweet";
+import { TWEET } from "../../queries/tweet";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { SIGN_FILE } from "../../queries/files";
@@ -19,6 +19,7 @@ import { displayError, uploadFile } from "../../utils";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { styled } from "@mui/material/styles";
+import { useNewTweetMutation } from "../../generated/graphql";
 
 const Wrapper = styled("div")((props) => ({
   display: "flex",
@@ -79,16 +80,17 @@ const Wrapper = styled("div")((props) => ({
 interface NewTweetProps {
   feed?: any;
   parentTweet?: any;
+  channelId?: any;
 }
 
-export const NewTweet = ({ feed, parentTweet }: NewTweetProps) => {
+export const NewTweet = ({ feed, parentTweet, channelId }: NewTweetProps) => {
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles]: any = useState([]);
   const tweet = useInput("");
 
-  const [newTweetMutation, { loading }] = useMutation(NEW_TWEET, {
+  const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
       {
         query: FEED,
@@ -133,6 +135,7 @@ export const NewTweet = ({ feed, parentTweet }: NewTweetProps) => {
           nft: nftData,
           files: tweetFiles,
           parentTweet,
+          channelId,
         },
       });
 
