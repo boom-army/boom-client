@@ -11,6 +11,8 @@ import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import {
+  ChannelFeed,
+  Channels,
   ConnectView,
   Following,
   Home,
@@ -32,8 +34,6 @@ import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { Box, styled } from "@mui/system";
 import { useProfileLazyQuery } from "./generated/graphql";
-import { ChannelView } from "./views/Channels";
-import { ChannelFeed } from "./views/ChannelFeed";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -161,7 +161,7 @@ export const AppRoutes: React.FC = () => {
                       <Route path="/" element={<Home />} />
                       <Route path="following" element={<Following />} />
                       <Route path="connect" element={<ConnectView />} />
-                      <Route path="channels" element={<ChannelView />} />
+                      <Route path="channels" element={<Channels />} />
                       <Route path="channels/:channelId" element={<ChannelFeed />} />
                       <Route
                         path="notifications"

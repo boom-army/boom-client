@@ -11,7 +11,7 @@ import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useApolloClient } from '@apollo/client';
 import { useSnackbar } from "notistack";
 
-export const ChannelView: React.FC = () => {
+export const Channels: React.FC = () => {
   const { connection } = useConnection();
   const client = useApolloClient();
   const anchorWallet = useAnchorWallet();
