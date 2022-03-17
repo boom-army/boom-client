@@ -14,7 +14,7 @@ const Wrapper = styled("div")({
 interface Props {
   loading: boolean;
   error: ApolloError | undefined;
-  data: FeedQuery | undefined;
+  data: FeedQuery["feed"] | undefined;
 }
 
 export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
@@ -33,14 +33,14 @@ export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
 
   return (
     <Wrapper>
-      {data?.feed?.length ? (
-        data.feed.map((tweet) => (
+      {data?.length ? (
+        data.map((tweet) => (
           <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
         ))
       ) : (
         <CustomResponse text="Follow some people to get some feed updates" />
       )}
-      {data?.feed?.length && loading && (
+      {data?.length && loading && (
         <Box sx={{ marginTop: "1rem" }}>
           <Loader />
         </Box>
