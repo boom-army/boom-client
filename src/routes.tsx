@@ -18,7 +18,7 @@ import {
   Notifications,
   Suggestion,
 } from "./views";
-import { Badge, Container, Grid, Paper, SwipeableDrawer } from "@mui/material";
+import { Badge, Grid, Paper, SwipeableDrawer } from "@mui/material";
 import { EditProfile } from "./components/Profile/EditProfile";
 import { GiphyContextProvider } from "./contexts/giphy";
 import { Helmet } from "react-helmet";
@@ -33,6 +33,7 @@ import { Wallet } from "./contexts/wallet";
 import { Box, styled } from "@mui/system";
 import { useProfileLazyQuery } from "./generated/graphql";
 import { ChannelView } from "./views/Channels";
+import { ChannelFeed } from "./views/ChannelFeed";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -161,6 +162,7 @@ export const AppRoutes: React.FC = () => {
                       <Route path="following" element={<Following />} />
                       <Route path="connect" element={<ConnectView />} />
                       <Route path="channels" element={<ChannelView />} />
+                      <Route path="channels/:channelId" element={<ChannelFeed />} />
                       <Route
                         path="notifications"
                         element={<Notifications refetchProfile={refetch} />}

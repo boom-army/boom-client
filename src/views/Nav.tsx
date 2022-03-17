@@ -151,7 +151,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               {data &&
                 data.channels.map((channel) => (
                   <>
-                    <NavLink to={`/${user?.handle}`}>
+                    <NavLink to={`channels/${channel?.id}`}>
                       <Avatar
                         sx={{ width: 60, height: 60, cursor: "pointer" }}
                         src={channel?.image as string}

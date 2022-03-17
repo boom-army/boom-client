@@ -48,3 +48,73 @@ query channels {
 mutation channelUnlink($channelId: ID!) {
   channelUnlink(channelId: $channelId)
 }
+
+query channelFeed($channelId: ID!, $offset: Int, $limit: Int) {
+  channelFeed(channelId: $channelId, offset: $offset, limit: $limit) {
+    id
+    text
+    tags
+    isTweetMine
+    commentsCount
+    retweetsCount
+    isRetweet
+    tipsCount
+    createdAt
+    parentTweet {
+      id
+    }
+    files {
+      id
+      url
+    }
+    gif {
+      id
+      title
+      fixedHeightUrl
+      originalUrl
+    }
+    nft {
+      id
+      publicKey
+      name
+      symbol
+      description
+      sellerFeeBasisPoints
+      externalUrl
+      image
+      attributes {
+        traitType
+        value
+      }
+      collection {
+        name
+        family
+      }
+      properties {
+        files {
+          uri
+          type
+        }
+        category
+        creators {
+          address
+          share
+        }
+      }
+    }
+    user {
+      id
+      publicAddress
+      avatar
+      handle
+      consumerName
+    }
+    reactions {
+      id
+      emojiId
+      skin
+      isMine
+      count
+    }
+  }
+}
