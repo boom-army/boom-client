@@ -82,7 +82,9 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
       <Box
         sx={{
           display: "flex",
-          position: "fixed",
+          "@media screen and (min-width: 900px)": {
+            position: "fixed",
+          },
         }}
       >
         <StyledStack direction="column" spacing={4.5}>
