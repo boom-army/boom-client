@@ -29,9 +29,11 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   const { data } = useChannelsQuery();
 
   const hasActiveChannels = () => {
-    const activeChannels = data?.channels?.filter(c => c.status === ChannelStatus.ACTIVE);
+    const activeChannels = data?.channels?.filter(
+      (c) => c.status === ChannelStatus.ACTIVE
+    );
     return activeChannels?.length ? true : false;
-  }
+  };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
     color: isActive ? theme.accentColor : theme.primaryColor,
@@ -59,8 +61,19 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     width: "5rem",
     overflowY: "scroll",
     scrollbarWidth: "none",
+    ".active": {
+      "& .MuiAvatar-root": {
+        border: `3px solid ${theme.accentColor}`,
+      },
+    },
     "&::-webkit-scrollbar": {
       display: "none",
+    },
+    "& .MuiAvatar-root": {
+      "&:hover": {
+        border: `3px solid ${theme.accentColor}`,
+        filter: "saturate(150%)",
+      },
     },
   });
 
@@ -138,7 +151,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               {data &&
                 data.channels.map((channel) => (
                   <>
-                    <NavLink to={"#"}>
+                    <NavLink to={`/${user?.handle}`}>
                       <Avatar
                         sx={{ width: 60, height: 60, cursor: "pointer" }}
                         src={channel?.image as string}
