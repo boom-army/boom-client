@@ -4,11 +4,11 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { Box } from "@mui/system";
 import {
   Button,
-  FormControl,
-  FormGroup,
-  FormLabel,
   TextField,
   styled,
+  Container,
+  Typography,
+  Grid,
 } from "@mui/material";
 import { SIGN_FILE } from "../../queries/files";
 import { SOSOL_HOST_ID } from "../../utils/ids";
@@ -161,100 +161,121 @@ export const NFTMint: React.FC = (props) => {
 
   return (
     <>
-      <Box>
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-          <FormLabel
-            sx={{ color: theme.primaryColor, marginBottom: 2 }}
-            component="legend"
+      <Container component="main" maxWidth="sm">
+        <Box
+          sx={{
+            marginTop: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Mint your own NFT Collection
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            sx={{ mt: 3 }}
           >
-            Create an NFT
-          </FormLabel>
-          <FormGroup>
-            <Box mb={2}>
-              <label htmlFor="contained-button-file">
-                <ImageInput
-                  accept="image/*"
-                  id="contained-button-file"
-                  multiple
-                  type="file"
-                  onChange={handleImageUpload}
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Box>
+                  <label htmlFor="contained-button-file">
+                    <ImageInput
+                      accept="image/*"
+                      id="contained-button-file"
+                      multiple
+                      type="file"
+                      onChange={handleImageUpload}
+                    />
+                    <Button
+                      variant="contained"
+                      component="span"
+                      fullWidth
+                      endIcon={<PhotoCamera />}
+                    >
+                      Upload NFT Image
+                    </Button>
+                  </label>
+                </Box>
+                <Box mt={2} mb={2}>
+                  {attributes.image && (
+                    <img
+                      src={attributes.image}
+                      alt="Preview for NFT upload"
+                      width="100%"
+                    />
+                  )}
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="Name"
+                  required
+                  fullWidth
+                  autoFocus
+                  id="input-name"
+                  label="Name"
+                  InputLabelProps={{
+                    shrink: true,
+                    style: { color: theme.secondaryColor },
+                  }}
+                  InputProps={{
+                    style: { color: theme.secondaryColor },
+                  }}
+                  value={attributes.name}
+                  onChange={(e) => {
+                    // setInputError(false);
+                    setAttributes((attr) => ({
+                      ...attr,
+                      name: e.target.value,
+                    }));
+                  }}
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="Description"
+                  required
+                  fullWidth
+                  id="input-description"
+                  label="Description"
+                  multiline={true}
+                  rows={4}
+                  InputLabelProps={{
+                    shrink: true,
+                    style: { color: theme.secondaryColor },
+                  }}
+                  InputProps={{
+                    style: { color: theme.secondaryColor },
+                  }}
+                  value={attributes.description}
+                  onChange={(e) => {
+                    // setInputError(false);
+                    setAttributes((attr) => ({
+                      ...attr,
+                      description: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <Button
+                  disabled={isMinting}
+                  fullWidth
+                  sx={{ mt: 3, mb: 2 }}
+                  type="submit"
                   variant="contained"
-                  component="span"
-                  endIcon={<PhotoCamera />}
+                  onClick={() => mint()}
                 >
-                  Upload NFT Image
+                  Mint your NFT
                 </Button>
-              </label>
-            </Box>
-            <Box mb={2}>
-              {attributes.image && (
-                <img
-                  src={attributes.image}
-                  alt="Preview for NFT upload"
-                  width="250"
-                />
-              )}
-            </Box>
-            <Box mb={2}>
-              <TextField
-                // error={inputError}
-                required
-                id="input-name"
-                label="Name"
-                InputLabelProps={{
-                  shrink: true,
-                  style: { color: theme.secondaryColor },
-                }}
-                InputProps={{
-                  style: { color: theme.secondaryColor },
-                }}
-                value={attributes.name}
-                size="small"
-                onChange={(e) => {
-                  // setInputError(false);
-                  setAttributes((attr) => ({ ...attr, name: e.target.value }));
-                }}
-              />
-            </Box>
-            <Box mb={2}>
-              <TextField
-                // error={inputError}
-                required
-                id="input-description"
-                label="Description"
-                rows={4}
-                InputLabelProps={{
-                  shrink: true,
-                  style: { color: theme.secondaryColor },
-                }}
-                InputProps={{
-                  style: { color: theme.secondaryColor },
-                }}
-                value={attributes.description}
-                size="small"
-                onChange={(e) => {
-                  // setInputError(false);
-                  setAttributes((attr) => ({
-                    ...attr,
-                    description: e.target.value,
-                  }));
-                }}
-              />
-            </Box>
-            <Box mb={2}>
-              <Button
-                disabled={isMinting}
-                variant="contained"
-                onClick={() => mint()}
-              >
-                Mint NFT
-              </Button>
-            </Box>
-          </FormGroup>
-        </FormControl>
-      </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
     </>
   );
 };
