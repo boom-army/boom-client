@@ -34,7 +34,7 @@ const Wrapper = styled("div")((props) => ({
     background: "inherit",
     border: "none",
     fontSize: "1.23rem",
-    fontFamily: props.theme.font,
+    fontFamily: '"Noto Sans Display", "Trebuchet MS", sans-serif',
     color: props.theme.primaryColor,
     marginBottom: "0.75rem",
     padding: "0.75rem 0",
@@ -194,7 +194,6 @@ export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
             placeholder="What's happening?"
             value={tweet.value}
             onChange={tweet.onChange}
-            style={{ fontFamily: '"Noto Sans Display", "Trebuchet MS", sans-serif' }}
           />
 
           {gif && (
