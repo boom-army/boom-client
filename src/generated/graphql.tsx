@@ -207,7 +207,7 @@ export type MutationLoginRegisterArgs = {
 
 
 export type MutationNewTweetArgs = {
-  channelId?: Maybe<Scalars['String']>;
+  channel?: Maybe<Scalars['String']>;
   files?: Maybe<Array<Scalars['String']>>;
   gif?: Maybe<GifInput>;
   mentions?: Maybe<Array<Scalars['String']>>;
@@ -439,7 +439,7 @@ export type TipInput = {
 
 export type Tweet = {
   __typename?: 'Tweet';
-  channelId?: Maybe<Scalars['String']>;
+  channel?: Maybe<Channel>;
   childTweets?: Maybe<Array<Maybe<Tweet>>>;
   comments: Array<Comment>;
   commentsCount: Scalars['Int'];
@@ -596,7 +596,7 @@ export type NewTweetMutationVariables = Exact<{
   gif?: Maybe<GifInput>;
   nft?: Maybe<NftInput>;
   parentTweet?: Maybe<Scalars['String']>;
-  channelId?: Maybe<Scalars['String']>;
+  channel?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -1254,7 +1254,7 @@ export type TipCreatorMutationHookResult = ReturnType<typeof useTipCreatorMutati
 export type TipCreatorMutationResult = Apollo.MutationResult<TipCreatorMutation>;
 export type TipCreatorMutationOptions = Apollo.BaseMutationOptions<TipCreatorMutation, TipCreatorMutationVariables>;
 export const NewTweetDocument = gql`
-    mutation newTweet($text: String!, $files: [String!]!, $tags: [String!]!, $mentions: [String!]!, $gif: GifInput, $nft: NFTInput, $parentTweet: String, $channelId: String) {
+    mutation newTweet($text: String!, $files: [String!]!, $tags: [String!]!, $mentions: [String!]!, $gif: GifInput, $nft: NFTInput, $parentTweet: String, $channel: String) {
   newTweet(
     text: $text
     files: $files
@@ -1263,7 +1263,7 @@ export const NewTweetDocument = gql`
     gif: $gif
     nft: $nft
     parentTweet: $parentTweet
-    channelId: $channelId
+    channel: $channel
   ) {
     id
     text
@@ -1296,7 +1296,7 @@ export type NewTweetMutationFn = Apollo.MutationFunction<NewTweetMutation, NewTw
  *      gif: // value for 'gif'
  *      nft: // value for 'nft'
  *      parentTweet: // value for 'parentTweet'
- *      channelId: // value for 'channelId'
+ *      channel: // value for 'channel'
  *   },
  * });
  */

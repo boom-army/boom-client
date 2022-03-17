@@ -6,7 +6,7 @@ mutation newTweet(
   $gif: GifInput
   $nft: NFTInput
   $parentTweet: String
-  $channelId: String
+  $channel: String
 ) {
   newTweet(
     text: $text
@@ -16,7 +16,7 @@ mutation newTweet(
     gif: $gif
     nft: $nft
     parentTweet: $parentTweet
-    channelId: $channelId
+    channel: $channel
   ) {
     id
     text

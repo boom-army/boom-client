@@ -37,7 +37,7 @@ export const Following: React.FC = () => {
 
   return (
     <>
-      <NewTweet feed={data?.feed} parentTweet={null} />
+      <NewTweet feed={data?.feed} />
       <FeedList loading={loading} error={error} data={data?.feed} />
     </>
   );

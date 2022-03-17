@@ -40,7 +40,7 @@ export const ChannelFeed: React.FC = () => {
 
   return (
     <>
-      <NewTweet feed={data?.channelFeed} parentTweet={null} />
+      <NewTweet feed={data?.channelFeed} channel={channelId} />
       <FeedList loading={loading} error={error} data={data?.channelFeed} />
     </>
   );

@@ -79,11 +79,11 @@ const Wrapper = styled("div")((props) => ({
 
 interface NewTweetProps {
   feed?: any;
-  parentTweet?: any;
-  channelId?: any;
+  parentTweet?: string | undefined;
+  channel?: string | undefined;
 }
 
-export const NewTweet = ({ feed, parentTweet, channelId }: NewTweetProps) => {
+export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
@@ -135,7 +135,7 @@ export const NewTweet = ({ feed, parentTweet, channelId }: NewTweetProps) => {
           nft: nftData,
           files: tweetFiles,
           parentTweet,
-          channelId,
+          channel,
         },
       });
 
