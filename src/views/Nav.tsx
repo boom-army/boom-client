@@ -12,6 +12,8 @@ import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme";
 import { User as StoreUser } from "../contexts/user";
 import { styled } from "@mui/material/styles";
+import { useChannelsQuery } from "../generated/graphql";
+import { ChannelStatus } from "../constants";
 
 interface Props {
   newMentionsCount: Number | undefined;
@@ -23,6 +25,13 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   const iconProps = {
     color: theme.accentColor,
   };
+
+  const { data } = useChannelsQuery();
+
+  const hasActiveChannels = () => {
+    const activeChannels = data?.channels?.filter(c => c.status === ChannelStatus.ACTIVE);
+    return activeChannels?.length ? true : false;
+  }
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
     color: isActive ? theme.accentColor : theme.primaryColor,
@@ -123,14 +132,23 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           )}
           <MorePopUp iconProps={iconProps} stackProps={stackProps} />
         </StyledStack>
-        <StyledStack2>
-          <Stack direction="row" sx={{ justifyContent: "center" }}>
-            <Avatar
-              sx={{ width: 60, height: 60, cursor: "pointer" }}
-              src="https://sosol-prod.s3.us-west-2.amazonaws.com/images/HERIDOS-TIROTEO.jpeg"
-            />
-          </Stack>
-        </StyledStack2>
+        {data && hasActiveChannels() && (
+          <StyledStack2>
+            <Stack direction="row" sx={{ justifyContent: "center" }}>
+              {data &&
+                data.channels.map((channel) => (
+                  <>
+                    <NavLink to={"#"}>
+                      <Avatar
+                        sx={{ width: 60, height: 60, cursor: "pointer" }}
+                        src={channel?.image as string}
+                      />
+                    </NavLink>
+                  </>
+                ))}
+            </Stack>
+          </StyledStack2>
+        )}
       </Box>
     </>
   );
