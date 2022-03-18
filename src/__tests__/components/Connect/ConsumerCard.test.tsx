@@ -7,15 +7,19 @@ import { MockedProvider } from "@apollo/client/testing";
 import { MemoryRouter } from "react-router-dom";
 import { USERS } from "../../../queries/follow/index";
 
-describe("<ConsumerCard/> component :", () => {
-  test("display <ConsumerCard/> component ", async () => {
-    let rendered = render(
-    <SnackbarProvider>
-    <ConsumerCard />
-    </SnackbarProvider>);
-    expect(rendered).toMatchSnapshot();
-  });
-});
+
+const consumer ={
+    id: "ckzny1iv10031lmn568gj3b3n",
+    handle: "shy-cloud-4965",
+    avatar: "",
+    isFollowing: false,
+    isSelf: true,
+    coverPhoto: "https://my.sosol.app/default-cover.png",
+    consumerName: "shy-cloud-4965",
+    bio: "full stack developer",
+    __typename: "User",
+  }
+
 
   export const __mocks__: any = [
     {
@@ -55,22 +59,22 @@ describe("<ConsumerCard/> component :", () => {
     },
   ];
 
-describe("<Connect/> component :", () => {
-  test("display <Connect/> component ", async () => {
+describe("<ConsumerCArd/> component :", () => {
+  test("display <ConsumerCArd/> component ", async () => {
    
   let rendered;
-//   await act(async () => {
+  await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
         <SnackbarProvider>
    
-    <ConsumerCard  consumer={consumer}/>
+         <ConsumerCard  consumer={consumer}/>
   
         </SnackbarProvider>
       </MockedProvider>,
       { wrapper: MemoryRouter }
     );
-//   });
+  });
   expect(rendered).toMatchSnapshot();
  
 });

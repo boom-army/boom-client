@@ -1,13 +1,21 @@
 import React from "react";
-import renderer from "react-test-renderer";
 import { App } from "../App";
-// import renderer from 'react-test-renderer';
+import { act, fireEvent, render } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 
-// test('renders a snapshot', () => {
-//   const tree = renderer.create(<App/>).toJSON();
-//   expect(tree).toMatchSnapshot();
+// describe("<Home/> component :", () => {
+//   test("display <Home/> component ", async () => {
+//     let rendered = render(
+//       <Home
+//       />,
+//       { wrapper: MemoryRouter }
+//     );
+//     expect(rendered).toMatchSnapshot();
+//   });
 // });
 
-test("Jest works", () => {
-  expect(true).toBeTruthy();
+test('renders a snapshot', () => {
+  const tree = render(<App/>)
+  expect(tree).toMatchSnapshot();
 });
+
