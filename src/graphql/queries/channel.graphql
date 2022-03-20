@@ -24,7 +24,10 @@ mutation addChannel(
     image
     channelParentId
     status
-    membersCount
+    membersCount {
+      count
+      avatars
+    }
     createdAt
     updatedAt
   }
@@ -41,7 +44,10 @@ query channels {
     channelParentId
     status
     verified
-    membersCount
+    membersCount {
+      count
+      avatars
+    }
   }
 }
 

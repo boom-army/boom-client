@@ -39,7 +39,7 @@ export type Channel = {
   family: Scalars['String'];
   id: Scalars['ID'];
   image?: Maybe<Scalars['String']>;
-  membersCount?: Maybe<Scalars['Int']>;
+  membersCount?: Maybe<MembersCount>;
   mintAuthority: Scalars['String'];
   name: Scalars['String'];
   status?: Maybe<Scalars['String']>;
@@ -123,6 +123,12 @@ export type GifInput = {
   fixedHeightUrl: Scalars['String'];
   originalUrl: Scalars['String'];
   title: Scalars['String'];
+};
+
+export type MembersCount = {
+  __typename?: 'MembersCount';
+  avatars?: Maybe<Array<Maybe<Scalars['String']>>>;
+  count?: Maybe<Scalars['Int']>;
 };
 
 export type Mutation = {
@@ -504,12 +510,12 @@ export type AddChannelMutationVariables = Exact<{
 }>;
 
 
-export type AddChannelMutation = { __typename?: 'Mutation', addChannel: { __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, channelParentId?: string | null | undefined, status?: string | null | undefined, membersCount?: number | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined } };
+export type AddChannelMutation = { __typename?: 'Mutation', addChannel: { __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, channelParentId?: string | null | undefined, status?: string | null | undefined, createdAt?: string | null | undefined, updatedAt?: string | null | undefined, membersCount?: { __typename?: 'MembersCount', count?: number | null | undefined, avatars?: Array<string | null | undefined> | null | undefined } | null | undefined } };
 
 export type ChannelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChannelsQuery = { __typename?: 'Query', channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, channelParentId?: string | null | undefined, status?: string | null | undefined, verified?: boolean | null | undefined, membersCount?: number | null | undefined }> };
+export type ChannelsQuery = { __typename?: 'Query', channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null | undefined, image?: string | null | undefined, channelParentId?: string | null | undefined, status?: string | null | undefined, verified?: boolean | null | undefined, membersCount?: { __typename?: 'MembersCount', count?: number | null | undefined, avatars?: Array<string | null | undefined> | null | undefined } | null | undefined }> };
 
 export type ChannelUnlinkMutationVariables = Exact<{
   channelId: Scalars['ID'];
@@ -622,7 +628,10 @@ export const AddChannelDocument = gql`
     image
     channelParentId
     status
-    membersCount
+    membersCount {
+      count
+      avatars
+    }
     createdAt
     updatedAt
   }
@@ -672,7 +681,10 @@ export const ChannelsDocument = gql`
     channelParentId
     status
     verified
-    membersCount
+    membersCount {
+      count
+      avatars
+    }
   }
 }
     `;
