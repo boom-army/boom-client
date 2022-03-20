@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import { Box, Link } from "@mui/material";
-import { FEED } from "../../queries/others";
 import { USER_FOLLOW } from "../../queries/follow";
 import { FOLLOW, UNFOLLOW } from "../../queries/follow";
 import { displayError } from "../../utils";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
+import { FeedDocument } from "../../generated/graphql";
 
 interface FollowProps {
   isFollowing: boolean;
@@ -26,12 +26,12 @@ export const Follow = ({
 
   const [followMutation] = useMutation(FOLLOW, {
     variables: { id },
-    refetchQueries: [{ query: FEED }, { query: USER_FOLLOW }],
+    refetchQueries: [{ query: FeedDocument }, { query: USER_FOLLOW }],
   });
 
   const [unfollowMutation] = useMutation(UNFOLLOW, {
     variables: { id },
-    refetchQueries: [{ query: FEED }, { query: USER_FOLLOW }],
+    refetchQueries: [{ query: FeedDocument }, { query: USER_FOLLOW }],
   });
 
   const { enqueueSnackbar } = useSnackbar();

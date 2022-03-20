@@ -7,6 +7,7 @@ export const client = new ApolloClient({
       Query: {
         fields: {
           feed: offsetLimitPagination(),
+          channelFeed: offsetLimitPagination(),
           users: offsetLimitPagination(),
         },
       },

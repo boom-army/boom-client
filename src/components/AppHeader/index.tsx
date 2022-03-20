@@ -5,7 +5,6 @@ import React, { useCallback, useEffect, useMemo, useContext } from "react";
 import base58 from "bs58";
 import { AppBar, Grid, Slide, Toolbar, useScrollTrigger } from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
-import { FEED } from "../../queries/others";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { USER_FOLLOW } from "../../queries/follow";
 import { UserContext } from "../../contexts/user";
@@ -13,6 +12,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { FeedDocument } from "../../generated/graphql";
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
@@ -25,7 +25,7 @@ export const AppHeader = () => {
 
   const [getNonce] = useMutation(PUBLIC_ADDRESS);
   const [setLogin] = useMutation(LOGIN_REGISTER, {
-    refetchQueries: [{ query: FEED }, { query: USER_FOLLOW }],
+    refetchQueries: [{ query: FeedDocument }, { query: USER_FOLLOW }],
     onCompleted({ loginRegister }) {
       if (localStorage) {
         setUser(loginRegister.user);

@@ -1,25 +1,28 @@
-import { useState } from "react";
 import Button from "../../styles/Button";
-import { Stack, Avatar, TextareaAutosize } from "@mui/material";
-import { useInput } from "../../hooks/useInput";
 import { AttributionLink } from "../Giphy/AttributionLink";
 import { Box } from "@mui/system";
+import {
+  ChannelFeedDocument,
+  FeedDocument,
+  useNewTweetMutation,
+} from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
-import { FEED } from "../../queries/others";
 import { ImageBox } from "../ImageBox";
-import { TWEET } from "../../queries/tweet";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { SIGN_FILE } from "../../queries/files";
 import { SearchModal } from "../Giphy/SearchModal";
+import { Stack, Avatar, TextareaAutosize } from "@mui/material";
+import { TWEET } from "../../queries/tweet";
 import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError, uploadFile } from "../../utils";
+import { styled } from "@mui/material/styles";
+import { useInput } from "../../hooks/useInput";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { styled } from "@mui/material/styles";
-import { useNewTweetMutation } from "../../generated/graphql";
+import { useState } from "react";
 
 const Wrapper = styled("div")((props) => ({
   display: "flex",
@@ -92,13 +95,8 @@ export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
-      {
-        query: FEED,
-        variables: {
-          offset: 0,
-          limit: feed?.length + 1, // current tweet length + 1 for the new tweet
-        },
-      },
+      FeedDocument,
+      ChannelFeedDocument,
       {
         query: TWEET,
         variables: { id: parentTweet },
