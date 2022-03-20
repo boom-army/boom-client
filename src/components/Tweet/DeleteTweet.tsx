@@ -5,7 +5,11 @@ import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import { FeedDocument, Tweet } from "../../generated/graphql";
 
-export const DeleteTweet = ({ id }: any) => {
+interface Props {
+  id: string
+}
+
+export const DeleteTweet: React.FC<Props> = ({ id }) => {
   const [deleteTweetMutation, { loading }] = useMutation(DELETE_TWEET, {
     variables: { id },
     update: (cache, { data: { deleteTweet } }) => {
