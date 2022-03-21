@@ -169,14 +169,15 @@ export const NFTMint: React.FC = (props) => {
   };
 
   const addAttr = () => {
-    fields.attributes = [...fields.attributes, { trait_type: "", value: "" }];
-    setFields(fields);
-    console.log(fields);
+    const values = {...fields};
+    values.attributes = [...values.attributes, { trait_type: "", value: "" }];
+    setFields(values);
   };
 
   const removeAttr = (i: number) => {
-    fields.attributes = fields.attributes.splice(i, 1);
-    setFields(fields);
+    const values = {...fields};
+    values.attributes = values.attributes.splice(i, 1);
+    setFields(values);
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
