@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { Box } from "@mui/system";
 import {
@@ -8,6 +9,8 @@ import {
   Container,
   Typography,
   Grid,
+  IconButton,
+  InputAdornment,
 } from "@mui/material";
 import { SIGN_FILE } from "../../queries/files";
 import { SOSOL_HOST_ID } from "../../utils/ids";
@@ -145,8 +148,8 @@ export const NFTMint: React.FC = (props) => {
       if (!fields.collection.name || !fields.collection.family)
         throw new Error("You need to add a collection name and family");
 
-      const uri = (await handleURIUpload()) as string;        
-    
+      const uri = (await handleURIUpload()) as string;
+
       const _nft = await mintNFT({
         connection,
         wallet,
@@ -167,18 +170,20 @@ export const NFTMint: React.FC = (props) => {
   };
 
   const addAttr = () => {
-    const values = {...fields};
+    const values = { ...fields };
     values.attributes = [...values.attributes, { trait_type: "", value: "" }];
     setFields(values);
   };
 
   const removeAttr = (i: number) => {
-    const values = {...fields};
-    values.attributes = values.attributes.splice(i, 1);
+    const values = { ...fields };
+    values.attributes.splice(i, 1);
     setFields(values);
   };
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setFields((attr) => ({
       ...attr,
       [e.target.name]: e.target.value,
@@ -325,20 +330,6 @@ export const NFTMint: React.FC = (props) => {
                 />
               </Grid>
               <>
-                <Grid item xs={12}>
-                  <Box
-                    sx={{
-                      marginTop: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Typography component="h2" variant="h6">
-                      Add attributes
-                    </Typography>
-                  </Box>
-                </Grid>
                 {fields.attributes.map((attr, i) => (
                   <>
                     <Grid item key={`atrribute-trait-${i}`} md={6} xs={12}>
@@ -381,6 +372,16 @@ export const NFTMint: React.FC = (props) => {
                         }}
                         InputProps={{
                           style: { color: theme.secondaryColor },
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="Remove attribute field"
+                                onClick={() => removeAttr(i)}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
                         }}
                         value={fields?.attributes[i]?.value}
                         onChange={(e) => {
@@ -402,7 +403,7 @@ export const NFTMint: React.FC = (props) => {
                     variant="text"
                     onClick={addAttr}
                   >
-                    + Add an attribute
+                    + Add an NFT attribute
                   </Button>
                 </Grid>
               </>
