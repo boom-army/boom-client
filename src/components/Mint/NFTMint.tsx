@@ -62,17 +62,19 @@ export const NFTMint: React.FC = (props) => {
 
   const [isMinting, setMinting] = useState<boolean>(false);
   const [fileName, setFileName] = useState("");
+  const [nftCount, setNFTCount] = useState(1);
 
   const defaultFieldsState = {
-    name: "",
+    name: "a",
     symbol: "",
-    description: "",
+    description: "b",
     external_url: "",
-    image: "",
+    image:
+      "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmV3JTIwemVhbGFuZCUyMHBlb3BsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
     animation_url: undefined,
     attributes: [] as Attributes[],
     seller_fee_basis_points: 500,
-    collection: { name: "", family: "" },
+    collection: { name: "c", family: "d" },
     properties: {
       files: [] as FileObj[],
       category: MetadataCategory.Image,
@@ -420,6 +422,34 @@ export const NFTMint: React.FC = (props) => {
                   </Button>
                 </Grid>
               </>
+              <Grid item xs={12}>
+                <TextField
+                  name="nft-number"
+                  required
+                  fullWidth
+                  id="nft-number"
+                  label="Number of NFTs to mint"
+                  type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                    style: { color: theme.secondaryColor },
+                  }}
+                  InputProps={{
+                    style: { color: theme.secondaryColor },
+                  }}
+                  value={nftCount}
+                  onChange={(e) => {
+                    // setInputError(false);
+                    const n = Number(e.target.value);
+                    if (n > 100)
+                      return displayError(
+                        new Error("Minting limited to 100 max for beta."),
+                        enqueueSnackbar
+                      );
+                    setNFTCount(n);
+                  }}
+                />
+              </Grid>
               <Grid item xs={12} mb={12}>
                 <Button
                   disabled={isMinting}
