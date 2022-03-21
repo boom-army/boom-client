@@ -169,7 +169,6 @@ export const NFTMint: React.FC = (props) => {
   };
 
   const addAttr = () => {
-    console.log(fields);
     fields.attributes = [...fields.attributes, { trait_type: "", value: "" }];
     setFields(fields);
     console.log(fields);
@@ -181,6 +180,7 @@ export const NFTMint: React.FC = (props) => {
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    console.log(e.target.name, e.target.value);
     setFields((attr) => ({
       ...attr,
       [e.target.name]: e.target.value,
@@ -361,7 +361,12 @@ export const NFTMint: React.FC = (props) => {
                         value={fields?.attributes[i]?.trait_type}
                         onChange={(e) => {
                           // setInputError(false);
-                          handleFormChange(e);
+                          fields.attributes[i].trait_type = e.target.value;
+                          const attributes = fields.attributes;
+                          setFields((attr) => ({
+                            ...attr,
+                            attributes,
+                          }));
                         }}
                       />
                     </Grid>
@@ -382,7 +387,12 @@ export const NFTMint: React.FC = (props) => {
                         value={fields?.attributes[i]?.value}
                         onChange={(e) => {
                           // setInputError(false);
-                          handleFormChange(e);
+                          fields.attributes[i].value = e.target.value;
+                          const attributes = fields.attributes;
+                          setFields((attr) => ({
+                            ...attr,
+                            attributes,
+                          }));
                         }}
                       />
                     </Grid>
@@ -392,7 +402,7 @@ export const NFTMint: React.FC = (props) => {
                   <Button
                     sx={{ mt: 3, mb: 2 }}
                     variant="text"
-                    onClick={addAttr}
+                    onClick={() => addAttr()}
                   >
                     + Add an attribute
                   </Button>
