@@ -65,16 +65,16 @@ export const NFTMint: React.FC = (props) => {
   // const [nftCount, setNFTCount] = useState(1);
 
   const defaultFieldsState = {
-    name: "a",
+    name: "",
     symbol: "",
-    description: "b",
+    description: "",
     external_url: "",
     image:
-      "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmV3JTIwemVhbGFuZCUyMHBlb3BsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
+      "",
     animation_url: undefined,
     attributes: [] as Attributes[],
     seller_fee_basis_points: 500,
-    collection: { name: "c", family: "d" },
+    collection: { name: "", family: "" },
     properties: {
       files: [] as FileObj[],
       category: MetadataCategory.Image,
