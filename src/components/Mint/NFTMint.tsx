@@ -65,7 +65,7 @@ export const NFTMint: React.FC = (props) => {
     symbol: "",
     description: "",
     external_url: "",
-    image: "https://sosol-dev.s3.us-west-2.amazonaws.com/nft/G1p59D3CScwE9r31RNFsGm3q5xZapt6EXHmtHV7Jq5AS-image_2022-02-22_161154.png",
+    image: "",
     animation_url: undefined,
     attributes: [] as Attributes[],
     seller_fee_basis_points: 500,
@@ -145,21 +145,19 @@ export const NFTMint: React.FC = (props) => {
       if (!fields.collection.name || !fields.collection.family)
         throw new Error("You need to add a collection name and family");
 
-      console.log(fields);
+      const uri = (await handleURIUpload()) as string;        
+    
+      const _nft = await mintNFT({
+        connection,
+        wallet,
+        uri,
+        maxSupply: 1,
+      });
 
-      // const uri = (await handleURIUpload()) as string;
-
-      // const _nft = await mintNFT({
-      //   connection,
-      //   wallet,
-      //   uri,
-      //   maxSupply: 1,
-      // });
-
-      // setFields(defaultAttrState);
-      // enqueueSnackbar(`Successful mint: ${_nft.txId}`, {
-      //   variant: "success",
-      // });
+      setFields(defaultFieldsState);
+      enqueueSnackbar(`Successful mint: ${_nft.txId}`, {
+        variant: "success",
+      });
     } catch (e: any) {
       console.log(e);
       displayError(e, enqueueSnackbar);
@@ -181,7 +179,6 @@ export const NFTMint: React.FC = (props) => {
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    console.log(e.target.name, e.target.value);
     setFields((attr) => ({
       ...attr,
       [e.target.name]: e.target.value,
