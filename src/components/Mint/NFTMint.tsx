@@ -62,7 +62,7 @@ export const NFTMint: React.FC = (props) => {
 
   const [isMinting, setMinting] = useState<boolean>(false);
   const [fileName, setFileName] = useState("");
-  const [nftCount, setNFTCount] = useState(1);
+  // const [nftCount, setNFTCount] = useState(1);
 
   const defaultFieldsState = {
     name: "a",
@@ -422,7 +422,8 @@ export const NFTMint: React.FC = (props) => {
                   </Button>
                 </Grid>
               </>
-              <Grid item xs={12}>
+              {/* TODO: investigate alpha/node_modules/@metaplex-foundation/mpl-token-metadata/dist/src/transactions/MintNewEditionFromMasterEditionViaToken.d.ts for editions */}
+              {/* <Grid item xs={12}>
                 <TextField
                   name="nft-number"
                   required
@@ -449,13 +450,13 @@ export const NFTMint: React.FC = (props) => {
                     setNFTCount(n);
                   }}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} mb={12}>
                 <Button
                   disabled={isMinting}
                   fullWidth
                   sx={{ mt: 3, mb: 2 }}
-                  // type="submit"
+                  type="submit"
                   variant="contained"
                   onClick={mint}
                 >
