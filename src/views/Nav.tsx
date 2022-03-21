@@ -87,7 +87,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           },
         }}
       >
-        <StyledStack direction="column" spacing={4.5}>
+        <StyledStack key="main-stack" direction="column" spacing={4.5}>
           <NavLink style={applyActiveStyles} to="/">
             <Stack direction="row" {...stackProps}>
               <Language style={iconProps} />
@@ -148,13 +148,14 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           <MorePopUp iconProps={iconProps} stackProps={stackProps} />
         </StyledStack>
         {data && hasActiveChannels() && (
-          <StyledStack2>
+          <StyledStack2 key="channel-stack">
             <Stack direction="row" sx={{ justifyContent: "center" }}>
               {data &&
                 data.channels.map((channel) => (
                   <>
                     <NavLink to={`channels/${channel?.id}`}>
                       <Avatar
+                        key={channel.id}
                         sx={{ width: 60, height: 60, cursor: "pointer" }}
                         src={channel?.image as string}
                       />
