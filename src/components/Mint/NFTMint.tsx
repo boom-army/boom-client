@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ClearIcon from '@mui/icons-material/Clear';
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { Box } from "@mui/system";
 import {
@@ -378,7 +378,7 @@ export const NFTMint: React.FC = (props) => {
                                 aria-label="Remove attribute field"
                                 onClick={() => removeAttr(i)}
                               >
-                                <DeleteIcon />
+                                <ClearIcon sx={{ color: theme.accentColor }} />
                               </IconButton>
                             </InputAdornment>
                           ),
