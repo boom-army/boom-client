@@ -1,4 +1,3 @@
-// TODO: add attributes fiels for NFT minting
 import React, { useState, useContext } from "react";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { Box } from "@mui/system";
@@ -42,6 +41,11 @@ interface FileObj {
   type: String;
 }
 
+interface Attributes {
+  trait_type?: String;
+  value?: String;
+}
+
 export const NFTMint: React.FC = (props) => {
   const { theme } = useContext(ThemeContext);
   const { connection } = useConnection();
@@ -55,23 +59,24 @@ export const NFTMint: React.FC = (props) => {
 
   const [isMinting, setMinting] = useState<boolean>(false);
   const [fileName, setFileName] = useState("");
-  const defaultAttrState = {
+
+  const defaultFieldsState = {
     name: "",
     symbol: "",
     description: "",
     external_url: "",
-    image: "",
+    image: "https://sosol-dev.s3.us-west-2.amazonaws.com/nft/G1p59D3CScwE9r31RNFsGm3q5xZapt6EXHmtHV7Jq5AS-image_2022-02-22_161154.png",
     animation_url: undefined,
-    attributes: undefined,
+    attributes: [] as Attributes[],
     seller_fee_basis_points: 500,
-    // collection: { name: "", family: "BoomArmy" },
+    collection: { name: "", family: "" },
     properties: {
       files: [] as FileObj[],
       category: MetadataCategory.Image,
       creators: [{ address: SOSOL_HOST_ID.toBase58(), share: 100 }],
     },
   };
-  const [attributes, setAttributes] = useState(defaultAttrState);
+  const [fields, setFields] = useState(defaultFieldsState);
 
   const handleImageUpload = async (e: any) => {
     try {
@@ -96,7 +101,7 @@ export const NFTMint: React.FC = (props) => {
       const imageUrl = imageData?.config?.url?.split("?")[0] as string;
 
       setFileName(renamed.name);
-      setAttributes((attr) => {
+      setFields((attr) => {
         attr.properties.files.push({ uri: imageUrl, type: file?.type });
         attr.properties.creators.push({
           address: wallet?.publicKey?.toBase58(),
@@ -115,7 +120,7 @@ export const NFTMint: React.FC = (props) => {
   };
 
   const handleURIUpload = async () => {
-    var JSONAttr = JSON.stringify(attributes);
+    var JSONAttr = JSON.stringify(fields);
     const blob = new Blob([JSONAttr], { type: "application/json" });
     const blobFile = new File([blob], `${fileName}.json`);
     const { data } = await signFileMutation({
@@ -134,29 +139,52 @@ export const NFTMint: React.FC = (props) => {
   const mint = async () => {
     setMinting(true);
     try {
-      if (!attributes.image) throw new Error("You need to upload an image");
-      if (!attributes.name) throw new Error("You need to add a name");
-      if (!attributes.description)
-        throw new Error("You need to add a description");
-      const uri = (await handleURIUpload()) as string;
+      if (!fields.image) throw new Error("You need to upload an image");
+      if (!fields.name) throw new Error("You need to add a name");
+      if (!fields.description) throw new Error("You need to add a description");
+      if (!fields.collection.name || !fields.collection.family)
+        throw new Error("You need to add a collection name and family");
 
-      const _nft = await mintNFT({
-        connection,
-        wallet,
-        uri,
-        maxSupply: 1,
-      });
+      console.log(fields);
 
-      setAttributes(defaultAttrState);
-      enqueueSnackbar(`Successful mint: ${_nft.txId}`, {
-        variant: "success",
-      });
+      // const uri = (await handleURIUpload()) as string;
+
+      // const _nft = await mintNFT({
+      //   connection,
+      //   wallet,
+      //   uri,
+      //   maxSupply: 1,
+      // });
+
+      // setFields(defaultAttrState);
+      // enqueueSnackbar(`Successful mint: ${_nft.txId}`, {
+      //   variant: "success",
+      // });
     } catch (e: any) {
       console.log(e);
       displayError(e, enqueueSnackbar);
     } finally {
       setMinting(false);
     }
+  };
+
+  const addAttr = () => {
+    console.log(fields);
+    fields.attributes = [...fields.attributes, { trait_type: "", value: "" }];
+    setFields(fields);
+    console.log(fields);
+  };
+
+  const removeAttr = (i: number) => {
+    fields.attributes = fields.attributes.splice(i, 1);
+    setFields(fields);
+  };
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    setFields((attr) => ({
+      ...attr,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (
@@ -173,11 +201,7 @@ export const NFTMint: React.FC = (props) => {
           <Typography component="h1" variant="h5">
             Mint your own NFT Collection
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Box>
@@ -200,9 +224,9 @@ export const NFTMint: React.FC = (props) => {
                   </label>
                 </Box>
                 <Box mt={2} mb={2}>
-                  {attributes.image && (
+                  {fields.image && (
                     <img
-                      src={attributes.image}
+                      src={fields.image}
                       alt="Preview for NFT upload"
                       width="100%"
                     />
@@ -211,11 +235,11 @@ export const NFTMint: React.FC = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  name="Name"
+                  name="name"
                   required
                   fullWidth
                   autoFocus
-                  id="input-name"
+                  id="name"
                   label="Name"
                   InputLabelProps={{
                     shrink: true,
@@ -224,22 +248,70 @@ export const NFTMint: React.FC = (props) => {
                   InputProps={{
                     style: { color: theme.secondaryColor },
                   }}
-                  value={attributes.name}
+                  value={fields.name}
+                  onChange={handleFormChange}
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  name="collection.family"
+                  required
+                  fullWidth
+                  id="input-collection-family"
+                  label="Collection Family"
+                  InputLabelProps={{
+                    shrink: true,
+                    style: { color: theme.secondaryColor },
+                  }}
+                  InputProps={{
+                    style: { color: theme.secondaryColor },
+                  }}
+                  value={fields.collection.family}
                   onChange={(e) => {
                     // setInputError(false);
-                    setAttributes((attr) => ({
+                    setFields((attr) => ({
                       ...attr,
-                      name: e.target.value,
+                      collection: {
+                        family: e.target.value,
+                        name: attr.collection.name,
+                      },
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  name="collection.name"
+                  required
+                  fullWidth
+                  id="input-collection-name"
+                  label="Collection Name"
+                  InputLabelProps={{
+                    shrink: true,
+                    style: { color: theme.secondaryColor },
+                  }}
+                  InputProps={{
+                    style: { color: theme.secondaryColor },
+                  }}
+                  value={fields.collection.name}
+                  onChange={(e) => {
+                    // setInputError(false);
+                    setFields((attr) => ({
+                      ...attr,
+                      collection: {
+                        family: attr.collection.family,
+                        name: e.target.value,
+                      },
                     }));
                   }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  name="Description"
+                  name="description"
                   required
                   fullWidth
-                  id="input-description"
+                  id="description"
                   label="Description"
                   multiline={true}
                   rows={4}
@@ -250,24 +322,90 @@ export const NFTMint: React.FC = (props) => {
                   InputProps={{
                     style: { color: theme.secondaryColor },
                   }}
-                  value={attributes.description}
-                  onChange={(e) => {
-                    // setInputError(false);
-                    setAttributes((attr) => ({
-                      ...attr,
-                      description: e.target.value,
-                    }));
-                  }}
+                  value={fields.description}
+                  onChange={handleFormChange}
                 />
               </Grid>
+              <>
+                <Grid item xs={12}>
+                  <Box
+                    sx={{
+                      marginTop: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography component="h2" variant="h6">
+                      Add attributes
+                    </Typography>
+                  </Box>
+                </Grid>
+                {fields?.attributes?.map((attr, i) => (
+                  <>
+                    <Grid item key={`atrribute-trait-${i}`} md={6} xs={12}>
+                      <TextField
+                        name={`attributes[${i}].trait_type`}
+                        required
+                        fullWidth
+                        autoFocus
+                        id={`trait${i}`}
+                        label="Trait type"
+                        InputLabelProps={{
+                          shrink: true,
+                          style: { color: theme.secondaryColor },
+                        }}
+                        InputProps={{
+                          style: { color: theme.secondaryColor },
+                        }}
+                        value={fields?.attributes[i]?.trait_type}
+                        onChange={(e) => {
+                          // setInputError(false);
+                          handleFormChange(e);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item key={`atrribute-value-${i}`} md={6} xs={12}>
+                      <TextField
+                        name={`attributes[${i}].value`}
+                        required
+                        fullWidth
+                        id={`value${i}`}
+                        label="Value"
+                        InputLabelProps={{
+                          shrink: true,
+                          style: { color: theme.secondaryColor },
+                        }}
+                        InputProps={{
+                          style: { color: theme.secondaryColor },
+                        }}
+                        value={fields?.attributes[i]?.value}
+                        onChange={(e) => {
+                          // setInputError(false);
+                          handleFormChange(e);
+                        }}
+                      />
+                    </Grid>
+                  </>
+                ))}
+                <Grid item xs={12}>
+                  <Button
+                    sx={{ mt: 3, mb: 2 }}
+                    variant="text"
+                    onClick={addAttr}
+                  >
+                    + Add an attribute
+                  </Button>
+                </Grid>
+              </>
               <Grid item xs={12}>
                 <Button
                   disabled={isMinting}
                   fullWidth
                   sx={{ mt: 3, mb: 2 }}
-                  type="submit"
+                  // type="submit"
                   variant="contained"
-                  onClick={() => mint()}
+                  onClick={mint}
                 >
                   Mint your NFT
                 </Button>
