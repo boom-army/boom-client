@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { FeedList } from "../components/FeedList";
+import { MeepFeed } from "../components/MeepFeed";
 import { NewTweet } from "../components/Tweet";
 import { useChannelFeedQuery } from "../generated/graphql";
 
@@ -41,7 +41,7 @@ export const ChannelFeed: React.FC = () => {
   return (
     <>
       <NewTweet feed={data?.channelFeed} channel={channelId} />
-      <FeedList loading={loading} error={error} data={data?.channelFeed} />
+      <MeepFeed loading={loading} error={error} data={data?.channelFeed} />
     </>
   );
 };

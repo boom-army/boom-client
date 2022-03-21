@@ -17,7 +17,7 @@ interface Props {
   data: FeedQuery["feed"] | undefined;
 }
 
-export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
+export const MeepFeed: React.FC<Props> = ({ loading, error, data }) => {
   if (loading)
     return (
       <Box sx={{ marginTop: "1rem" }}>
