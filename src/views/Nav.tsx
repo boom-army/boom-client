@@ -28,11 +28,8 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
 
   const { data } = useChannelsQuery();
 
-  const hasActiveChannels = () => {
-    const activeChannels = data?.channels?.filter(
-      (c) => c.status === ChannelStatus.ACTIVE
-    );
-    return activeChannels?.length ? true : false;
+  const activeChannels = () => {
+    return data?.channels?.filter((c) => c.status === ChannelStatus.ACTIVE);
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
@@ -147,24 +144,31 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           )}
           <MorePopUp iconProps={iconProps} stackProps={stackProps} />
         </StyledStack>
-        {data && hasActiveChannels() && (
+        {activeChannels()?.length ? (
           <StyledStack2 key="channel-stack">
-            <Stack direction="row" sx={{ justifyContent: "center" }}>
-              {data &&
-                data.channels.map((channel) => (
-                  <>
-                    <NavLink to={`channels/${channel?.id}`}>
-                      <Avatar
-                        key={channel.id}
-                        sx={{ width: 60, height: 60, cursor: "pointer" }}
-                        src={channel?.image as string}
-                      />
-                    </NavLink>
-                  </>
-                ))}
+            <Stack
+              key="channel-stack-child"
+              direction="column"
+              sx={{ justifyContent: "center" }}
+            >
+              {activeChannels()?.map((channel) => (
+                <Box
+                  key={channel.id}
+                  mb={2}
+                  display={"flex"}
+                  sx={{ justifyContent: "center" }}
+                >
+                  <NavLink to={`channels/${channel?.id}`}>
+                    <Avatar
+                      sx={{ width: 60, height: 60, cursor: "pointer" }}
+                      src={channel?.image as string}
+                    />
+                  </NavLink>
+                </Box>
+              ))}
             </Stack>
           </StyledStack2>
-        )}
+        ) : null}
       </Box>
     </>
   );
