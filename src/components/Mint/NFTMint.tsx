@@ -332,6 +332,19 @@ export const NFTMint: React.FC = (props) => {
               <>
                 {fields.attributes.map((attr, i) => (
                   <>
+                    <Grid item xs={12}>
+                    <Box
+                      sx={{
+                        marginTop: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <Typography component="p">
+                        Attribute {i+1}
+                      </Typography>
+                    </Box>
+                  </Grid>
                     <Grid item key={`atrribute-trait-${i}`} md={6} xs={12}>
                       <TextField
                         name={`attributes[${i}].trait_type`}
@@ -407,7 +420,7 @@ export const NFTMint: React.FC = (props) => {
                   </Button>
                 </Grid>
               </>
-              <Grid item xs={12}>
+              <Grid item xs={12} mb={12}>
                 <Button
                   disabled={isMinting}
                   fullWidth
