@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import ClearIcon from '@mui/icons-material/Clear';
+import ClearIcon from "@mui/icons-material/Clear";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { Box } from "@mui/system";
 import {
@@ -330,9 +330,8 @@ export const NFTMint: React.FC = (props) => {
                 />
               </Grid>
               <>
-                {fields.attributes.map((attr, i) => (
-                  <>
-                    <Grid item xs={12}>
+                {fields.attributes.length ? (
+                  <Grid item xs={12}>
                     <Box
                       sx={{
                         marginTop: 1,
@@ -340,11 +339,12 @@ export const NFTMint: React.FC = (props) => {
                         flexDirection: "column",
                       }}
                     >
-                      <Typography component="p">
-                        Attribute {i+1}
-                      </Typography>
+                      <Typography component="p">Attributes</Typography>
                     </Box>
                   </Grid>
+                ) : null}
+                {fields.attributes.map((attr, i) => (
+                  <>
                     <Grid item key={`atrribute-trait-${i}`} md={6} xs={12}>
                       <TextField
                         name={`attributes[${i}].trait_type`}
