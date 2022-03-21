@@ -341,7 +341,7 @@ export const NFTMint: React.FC = (props) => {
                     </Typography>
                   </Box>
                 </Grid>
-                {fields?.attributes?.map((attr, i) => (
+                {fields.attributes.map((attr, i) => (
                   <>
                     <Grid item key={`atrribute-trait-${i}`} md={6} xs={12}>
                       <TextField
@@ -402,7 +402,7 @@ export const NFTMint: React.FC = (props) => {
                   <Button
                     sx={{ mt: 3, mb: 2 }}
                     variant="text"
-                    onClick={() => addAttr()}
+                    onClick={addAttr}
                   >
                     + Add an attribute
                   </Button>
