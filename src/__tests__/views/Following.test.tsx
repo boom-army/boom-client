@@ -7,32 +7,30 @@ import { MockedProvider } from "@apollo/client/testing";
 import { SnackbarProvider } from "notistack";
 
 export const __mocks__: any = [
-    {
-      request: {
-        query: FeedDocument,
-        variables: {},
-        
-      },
-      result: {
-        data: {
-          mentions: [],
-        },
-        errors: "An error occurred",
-      },
+  {
+    request: {
+      query: FeedDocument,
+      variables: {},
     },
-  ];
+    result: {
+      data: {
+        mentions: [],
+      },
+      errors: "An error occurred",
+    },
+  },
+];
 
 describe("<Following/> component :", () => {
-    test("display <Following/> component ", async () => {
-      let rendered = render(
-          <MockedProvider mocks={__mocks__} addTypename={false}>
-              <SnackbarProvider>
-        <Following
-        />
+  test("display <Following/> component ", async () => {
+    let rendered = render(
+      <MockedProvider mocks={__mocks__} addTypename={false}>
+        <SnackbarProvider>
+          <Following />
         </SnackbarProvider>
-         </MockedProvider>,
-        { wrapper: MemoryRouter }
-      );
-      expect(rendered).toMatchSnapshot();
-    });
+      </MockedProvider>,
+      { wrapper: MemoryRouter }
+    );
+    expect(rendered).toMatchSnapshot();
   });
+});

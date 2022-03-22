@@ -6,7 +6,6 @@ import { USER_FOLLOW } from "../../queries/follow/index";
 import { MockedProvider } from "@apollo/client/testing";
 // import {render, screen} from '@testing-library/react'
 
-
 export const __mocks__: any = [
   {
     request: {
@@ -68,9 +67,8 @@ export const __mocks__: any = [
 describe("<Suggestion/> component :", () => {
   test("display <Suggestion/> component ", async () => {
     let rendered = render(
-        <MockedProvider mocks={__mocks__} addTypename={false}>
-      <Suggestion
-      />
+      <MockedProvider mocks={__mocks__} addTypename={false}>
+        <Suggestion />
       </MockedProvider>,
       { wrapper: MemoryRouter }
     );

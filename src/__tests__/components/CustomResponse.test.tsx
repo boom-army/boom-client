@@ -5,11 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 describe("<CustomResponse/> component :", () => {
   test("display <CustomResponse/> component ", async () => {
-    let rendered = render(
-      <CustomResponse
-      />,
-      { wrapper: MemoryRouter }
-    );
+    let rendered = render(<CustomResponse />, { wrapper: MemoryRouter });
     expect(rendered).toMatchSnapshot();
   });
 });

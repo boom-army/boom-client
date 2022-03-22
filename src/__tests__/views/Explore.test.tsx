@@ -8,7 +8,7 @@ describe("<Explore/> component :", () => {
   test("display <Explore/> component ", async () => {
     let rendered = render(
       <SnackbarProvider>
-      <Explore/>
+        <Explore />
       </SnackbarProvider>,
       { wrapper: MemoryRouter }
     );

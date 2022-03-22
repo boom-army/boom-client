@@ -5,11 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 describe("<MorePopup/> component :", () => {
   test("display <MorePopup/> component ", async () => {
-    let rendered = render(
-      <MorePopUp
-      />,
-      { wrapper: MemoryRouter }
-    );
+    let rendered = render(<MorePopUp />, { wrapper: MemoryRouter });
     expect(rendered).toMatchSnapshot();
   });
 });

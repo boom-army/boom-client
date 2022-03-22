@@ -5,11 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 describe("<ImageBox/> component :", () => {
   test("display <ImageBox/> component ", async () => {
-    let rendered = render(
-      <ImageBox
-      />,
-      { wrapper: MemoryRouter }
-    );
+    let rendered = render(<ImageBox files={[]} />, { wrapper: MemoryRouter });
     expect(rendered).toMatchSnapshot();
   });
 });

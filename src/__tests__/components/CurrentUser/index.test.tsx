@@ -5,11 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 describe("<CurrentUser/> component :", () => {
   test("display <CurrentUser/> component ", async () => {
-    let rendered = render(
-      <CurrentUser
-      />,
-      { wrapper: MemoryRouter }
-    );
+    let rendered = render(<CurrentUser />, { wrapper: MemoryRouter });
     expect(rendered).toMatchSnapshot();
   });
 });
