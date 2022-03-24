@@ -131,6 +131,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
     gif,
     nft,
     // isTweetMine,
+    parentTweet,
     isRetweet,
     retweetsCount,
     reactions,
@@ -173,9 +174,9 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
 
         {nft && <NFTTweet nftData={nft} />}
 
-        {!!files.length && <ImageBox files={files} disablelightbox={false} />}
+        {files && !!files.length && <ImageBox files={files} disablelightbox={false} />}
 
-        {reactions.length > 0 && (
+        {reactions && reactions.length > 0 && (
           <ReactionsList
             reactions={reactions}
             handleReaction={handleReaction}
