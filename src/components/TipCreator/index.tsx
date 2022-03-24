@@ -3,6 +3,7 @@ import { TipIcon2 } from "../Icons";
 import { TipInput } from "./tipInput";
 import { styled } from "@mui/material/styles";
 import { ThemeContext } from "../../contexts/theme";
+import { Box, Stack, Typography } from "@mui/material";
 
 interface TipProps {
   tipAmount?: number | null | string;
@@ -20,15 +21,21 @@ export const TipCreator: React.FC<TipProps> = ({
   const { theme } = useContext(ThemeContext);
   const [showTip, setShowTip] = useState(false);
 
-  const Wrapper = styled("span")({
-    color: theme.secondaryColor,
-    position: "relative",
-  });
-
   return (
-    <Wrapper>
-      <TipIcon2 onClick={() => setShowTip(!showTip)} userPubKey={userPubKey} />
-      {tipAmount ? tipAmount : null}
+    <>
+      <Stack
+        direction={"row"}
+        spacing={0.5}
+        sx={{ justifyContent: "center", alignItems: "center" }}
+      >
+        <TipIcon2
+          onClick={() => setShowTip(!showTip)}
+          userPubKey={userPubKey}
+        />
+        <Typography sx={{ color: theme.secondaryColor }}>
+          {tipAmount ? tipAmount : null}
+        </Typography>
+      </Stack>
       {showTip ? (
         <TipInput
           userPubKey={userPubKey}
@@ -37,6 +44,6 @@ export const TipCreator: React.FC<TipProps> = ({
           tweetId={tweetId}
         />
       ) : null}
-    </Wrapper>
+    </>
   );
 };

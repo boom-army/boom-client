@@ -50,7 +50,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
     className: "body",
     target: { url: "_blank" },
     formatHref: { hashtag: (href: any) => `explore?=${href.substring(1)}` },
-  };  
+  };
 
   return (
     <Grid item xs={12} mt={2}>
@@ -143,23 +143,29 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
             justifyContent={"flex-start"}
           >
             {reactions && reactions.length > 0 && (
-              <ReactionsList
-                reactions={reactions}
-                handleReaction={handleReaction}
-                tweetId={id}
-              />
+              <>
+                <ReactionsList
+                  reactions={reactions}
+                  handleReaction={handleReaction}
+                  tweetId={id}
+                />
+                <Box>
+                  <EmojiTweet handleReaction={handleReaction} />
+                </Box>
+              </>
             )}
-            <Box>
-              <EmojiTweet handleReaction={handleReaction} />
-            </Box>
-            <Box pt={"2px"}>
-              <TipCreator
-                userPubKey={user?.publicAddress}
-                tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
-                tweetId={id}
-                userId={user?.id}
-              />
-            </Box>
+            {tipsCount && parseInt(tipsCount) ? (
+              <Box>
+                <TipCreator
+                  userPubKey={user?.publicAddress}
+                  tipAmount={
+                    tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL
+                  }
+                  tweetId={id}
+                  userId={user?.id}
+                />
+              </Box>
+            ) : null}
           </Stack>
         </Box>
       </Box>
