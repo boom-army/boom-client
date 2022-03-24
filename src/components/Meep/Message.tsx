@@ -133,22 +133,23 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
               <ImageBox files={files} disablelightbox={false} />
             )}
           </Box>
-          <Box display={"flex"}>
-            {reactions && (
-              <Box mr={1}>
-                {reactions.length > 0 && (
-                  <ReactionsList
-                    reactions={reactions}
-                    handleReaction={handleReaction}
-                    tweetId={id}
-                  />
-                )}
-              </Box>
+          <Stack
+            direction={"row"}
+            spacing={2}
+            alignItems="center"
+            justifyContent={"flex-start"}
+          >
+            {reactions && reactions.length > 0 && (
+              <ReactionsList
+                reactions={reactions}
+                handleReaction={handleReaction}
+                tweetId={id}
+              />
             )}
-            <Box mr={1}>
+            <Box>
               <EmojiTweet handleReaction={handleReaction} />
             </Box>
-            <Box mr={1}>
+            <Box pt={"2px"}>
               <TipCreator
                 userPubKey={user?.publicAddress}
                 tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
@@ -156,7 +157,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
                 userId={user?.id}
               />
             </Box>
-          </Box>
+          </Stack>
         </Box>
       </Box>
     </Grid>
