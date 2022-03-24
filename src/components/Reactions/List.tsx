@@ -88,8 +88,7 @@ export const List: React.FC<{
 
   return (
     <Box
-      mr={1}
-      sx={{ marginBottom: 1.5, display: "inline-flex", flexWrap: "wrap" }}
+      sx={{ marginBottom: 1, display: "inline-flex", flexWrap: "wrap" }}
     >
       {reactionsWithCount
         .sort((a, b) => a.emojiId.localeCompare(b.emojiId))
@@ -106,15 +105,13 @@ export const List: React.FC<{
             >
               <Button
                 onClick={() => handleReaction({ emojiId })}
-                variant="outlined"
                 startIcon={<Emoji emoji={emojiId} size={16} />}
                 style={{
-                  borderWidth: "1px",
-                  padding: "4px 10px",
+                  padding: "2px 10px 0",
+                  borderRadius: "30px",
                   minWidth: "auto",
-                  marginRight: "8px",
                   color: theme.secondaryColor,
-                  borderColor: isMine ? "#3f51b5" : "inherit",
+                  backgroundColor: isMine ? theme.background2 : "inherit",
                   lineHeight: "1.2",
                 }}
               >

@@ -1,5 +1,6 @@
 export interface ThemeVars {
   background: string;
+  background2: string;
   bgHover: string;
   primaryColor: string;
   secondaryColor: string;
@@ -41,6 +42,7 @@ const themeBlues = {
 
 export const lightTheme = {
   background: "#FFF",
+  background2: "#F5F8FA",
   bgHover: "#F5F8FA",
   primaryColor: "#17141A",
   secondaryColor: "#657786",
@@ -56,6 +58,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   background: "#15202b",
+  background2: "#0E1B25",
   bgHover: "#192734",
   primaryColor: "#FFF",
   secondaryColor: "#657786",
