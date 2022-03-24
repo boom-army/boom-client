@@ -162,6 +162,7 @@
     "@types/react-dom": "^17.0.8",
     "@types/react-helmet": "^6.1.5",
     "@types/react-router-dom": "^5.3.2",
+    "@types/react-router-hash-link": "^2.4.5",
     "@types/simple-react-lightbox": "^3.6.1",
     "arweave-deploy": "^1.9.1",
     "babel-preset-env": "^1.7.0",
