@@ -21,6 +21,23 @@ import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
 
+const ReplyBox = styled(Box)((props) => ({
+  "&:before": {
+    width: "1.5em",
+    height: "0.7em",
+    borderLeft: `solid 2px ${props.theme.accentColor}`,
+    borderTop: `solid 2px ${props.theme.accentColor}`,
+    borderColor: `${props.theme.accentColor} transparent transparent ${props.theme.accentColor}`,
+    borderRadius: "1em 0 0 1em",
+    content: '""',
+    display: "block",
+    position: "absolute",
+    WebkitBoxSizing: "border-box",
+    boxSizing: "border-box",
+    top: "30%",
+    left: "0.7em",
+  },
+}));
 interface Props {
   tweet: Tweet;
 }
@@ -55,44 +72,51 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
   return (
     <Grid item xs={12} mt={2}>
       {parentTweet && (
-        <HashLink to={`/channels/${channel?.id}#${parentTweet?.id}`}>
-          <Stack direction="row" pl={5}>
-            <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
-              <UserAvatar
-                sx={{
-                  width: "16px",
-                  height: "16px",
-                  border: `1px solid ${theme.tertiaryColor}`,
-                }}
-                avatar={parentTweet?.user?.avatar as string}
-              />
-            </Box>
-            <Box mr={1}>
-              <Typography variant="body2" sx={{ color: theme.secondaryColor }}>
-                @{parentTweet?.user?.handle}
-              </Typography>
-            </Box>
-            <Box
-              pr={2}
-              sx={{
-                flex: 1,
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
-              <Typography
-                variant="body2"
-                sx={{
-                  fontWeight: "300",
-                  color: theme.secondaryColor,
-                }}
-              >
-                {parentTweet?.text}
-              </Typography>
-            </Box>
-          </Stack>
-        </HashLink>
+        <Box sx={{ position: "relative" }}>
+          <ReplyBox>
+            <HashLink to={`/channels/${channel?.id}#${parentTweet?.id}`}>
+              <Stack direction="row" pl={5}>
+                <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
+                  <UserAvatar
+                    sx={{
+                      width: "16px",
+                      height: "16px",
+                      border: `1px solid ${theme.tertiaryColor}`,
+                    }}
+                    avatar={parentTweet?.user?.avatar as string}
+                  />
+                </Box>
+                <Box mr={1}>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: theme.secondaryColor }}
+                  >
+                    @{parentTweet?.user?.handle}
+                  </Typography>
+                </Box>
+                <Box
+                  pr={2}
+                  sx={{
+                    flex: 1,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: "300",
+                      color: theme.secondaryColor,
+                    }}
+                  >
+                    {parentTweet?.text}
+                  </Typography>
+                </Box>
+              </Stack>
+            </HashLink>
+          </ReplyBox>
+        </Box>
       )}
       <Box id={tweet?.id} display={"flex"}>
         <Box>
