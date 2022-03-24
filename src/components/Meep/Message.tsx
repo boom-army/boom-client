@@ -17,7 +17,7 @@ import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { useReaction } from "../../hooks/useReaction";
-import { Avatar, Box, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Grid, Stack, Typography } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
 
 interface Props {
@@ -51,11 +51,11 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
   };
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} mt={2}>
       {parentTweet && (
         <Link to={`#`}>
-          <Box display={"flex"}>
-            <Box>
+          <Stack direction="row" pl={5}>
+            <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
               <UserAvatar
                 sx={{
                   width: "16px",
@@ -65,13 +65,30 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
                 avatar={parentTweet?.user?.avatar as string}
               />
             </Box>
-            <Box>
-              <Typography>@{parentTweet?.user?.handle}</Typography>
+            <Box mr={1}>
+              <Typography variant="body2" sx={{ color: theme.secondaryColor }}>
+                @{parentTweet?.user?.handle}
+              </Typography>
             </Box>
-            <Box>
-              <Typography>{parentTweet?.text}</Typography>
+            <Box
+              pr={2}
+              sx={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{
+                  fontWeight: "300",
+                  color: theme.secondaryColor,
+                }}
+              >
+                {parentTweet?.text}
+              </Typography>
             </Box>
-          </Box>
+          </Stack>
         </Link>
       )}
       <Box display={"flex"}>
@@ -87,14 +104,22 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
             />
           </Link>
         </Box>
-        <Box ml={2}>
-          <Box display={"flex"}>
-            <Link to={`/${handle}`}>{user && user.consumerName}</Link>
+        <Box ml={1} pt={0.5}>
+          <Stack direction="row">
+            <Box mr={1}>
+              <Link to={`/${handle}`}>
+                <Typography sx={{ fontWeight: "600" }}>
+                  {user && user.consumerName}
+                </Typography>
+              </Link>
+            </Box>
             <Link to={`/${handle}/status/${id}`}>
-              {moment(setDate(createdAt)).fromNow()}
+              <Typography sx={{ color: theme.secondaryColor }}>
+                {moment(setDate(createdAt)).fromNow()}
+              </Typography>
             </Link>
-          </Box>
-          <Box>
+          </Stack>
+          <Box mb={0.5} pr={2}>
             <Linkify options={linkifyOptions}>
               <Typography>{text}</Typography>
             </Linkify>
@@ -109,21 +134,28 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
             )}
           </Box>
           <Box display={"flex"}>
-            {reactions && reactions.length > 0 && (
-              <ReactionsList
-                reactions={reactions}
-                handleReaction={handleReaction}
-                tweetId={id}
-              />
+            {reactions && (
+              <Box mr={1}>
+                {reactions.length > 0 && (
+                  <ReactionsList
+                    reactions={reactions}
+                    handleReaction={handleReaction}
+                    tweetId={id}
+                  />
+                )}
+              </Box>
             )}
-            <EmojiTweet handleReaction={handleReaction} />
-
-            <TipCreator
-              userPubKey={user?.publicAddress}
-              tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
-              tweetId={id}
-              userId={user?.id}
-            />
+            <Box mr={1}>
+              <EmojiTweet handleReaction={handleReaction} />
+            </Box>
+            <Box mr={1}>
+              <TipCreator
+                userPubKey={user?.publicAddress}
+                tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
+                tweetId={id}
+                userId={user?.id}
+              />
+            </Box>
           </Box>
         </Box>
       </Box>

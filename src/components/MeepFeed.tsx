@@ -29,7 +29,7 @@ export const MeepFeed: React.FC<Props> = ({ loading, error, data }) => {
   }
 
   return (
-    <Grid container component={Box} m={2}>
+    <Grid container component={Box} p={2}>
       {data?.length ? (
         data.map((tweet) => (
           <ShowMessage key={tweet.id} tweet={tweet as Tweet} />

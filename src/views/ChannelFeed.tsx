@@ -48,9 +48,9 @@ export const ChannelFeed: React.FC = () => {
   });
 
   return (
-    <Box>
+    <>
       <MeepFeed loading={loading} error={error} data={data?.channelFeed} />
       <NewMessage feed={data?.channelFeed} channel={channelId} ref={scrollRef}/>
-    </Box>
+    </>
   );
 };
