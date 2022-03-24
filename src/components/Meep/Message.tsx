@@ -38,6 +38,7 @@ const ReplyBox = styled(Box)((props) => ({
     left: "0.7em",
   },
 }));
+
 interface Props {
   tweet: Tweet;
 }
