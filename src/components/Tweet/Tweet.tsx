@@ -131,7 +131,6 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
     gif,
     nft,
     // isTweetMine,
-    parentTweet,
     isRetweet,
     retweetsCount,
     reactions,

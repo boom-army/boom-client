@@ -1,15 +1,12 @@
 import React from "react";
 import { CustomResponse } from "./CustomResponse";
 import { Loader } from "./Loader";
-import { ShowTweet } from "./Tweet";
 import { ApolloError } from "@apollo/client";
 import { FeedQuery, Tweet } from "../generated/graphql";
 import { Box } from "@mui/system";
 import { styled } from "@mui/material/styles";
-
-const Wrapper = styled("div")({
-  marginBottom: "7rem",
-});
+import { ShowMessage } from "./Meep/Message";
+import { Grid } from "@mui/material";
 
 interface Props {
   loading: boolean;
@@ -32,10 +29,10 @@ export const MeepFeed: React.FC<Props> = ({ loading, error, data }) => {
   }
 
   return (
-    <Wrapper>
+    <Grid container component={Box} m={2}>
       {data?.length ? (
         data.map((tweet) => (
-          <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
+          <ShowMessage key={tweet.id} tweet={tweet as Tweet} />
         ))
       ) : (
         <CustomResponse text="No tweets exist to display in this feed. Let everyone know what's happening." />
@@ -45,6 +42,6 @@ export const MeepFeed: React.FC<Props> = ({ loading, error, data }) => {
           <Loader />
         </Box>
       )}
-    </Wrapper>
+    </Grid>
   );
 };
