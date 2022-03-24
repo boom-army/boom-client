@@ -65,6 +65,9 @@ fragment TweetData on Tweet {
   isRetweet
   tipsCount
   createdAt
+  channel {
+    id
+  }
   parentTweet {
     id
     text

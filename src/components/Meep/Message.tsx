@@ -4,21 +4,22 @@ import "linkify-plugin-mention";
 import Linkify from "linkify-react";
 import UserAvatar from "../UserAvatar";
 import moment from "moment";
+import { Avatar, Box, Grid, Stack, Typography } from "@mui/material";
 import { CommentIcon } from "../Icons";
 import { EmojiTweet, Retweet } from "../Tweet/index";
+import { HashLink } from "react-router-hash-link";
 import { ImageBox } from "../ImageBox";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
 import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
+import { ThemeContext } from "../../contexts/theme";
 import { TipCreator } from "../TipCreator";
-import { styled } from "@mui/material/styles";
 import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
+import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
-import { Avatar, Box, Grid, Stack, Typography } from "@mui/material";
-import { ThemeContext } from "../../contexts/theme";
 
 interface Props {
   tweet: Tweet;
@@ -28,6 +29,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
   const {
     id,
     text,
+    channel,
     // tags,
     user,
     files,
@@ -48,12 +50,12 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
     className: "body",
     target: { url: "_blank" },
     formatHref: { hashtag: (href: any) => `explore?=${href.substring(1)}` },
-  };
+  };  
 
   return (
     <Grid item xs={12} mt={2}>
       {parentTweet && (
-        <Link to={`#`}>
+        <HashLink to={`/channels/${channel?.id}#${parentTweet?.id}`}>
           <Stack direction="row" pl={5}>
             <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
               <UserAvatar
@@ -73,6 +75,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
             <Box
               pr={2}
               sx={{
+                flex: 1,
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
@@ -89,9 +92,9 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
               </Typography>
             </Box>
           </Stack>
-        </Link>
+        </HashLink>
       )}
-      <Box display={"flex"}>
+      <Box id={tweet?.id} display={"flex"}>
         <Box>
           <Link to={`/${handle}`}>
             <UserAvatar
