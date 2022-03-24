@@ -51,7 +51,7 @@ export const ConsumerCard = ({ consumer }: any) => {
               <TypographyStyled
                 variant="body1"
                 component="div"
-                nowrap
+                nowrap="true"
                 sx={{ marginTop: -0.7 }}
               >
                 {consumer.consumerName}
