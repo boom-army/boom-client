@@ -126,11 +126,5 @@ fragment TweetData on Tweet {
 query channelFeed($channelId: ID!, $offset: Int, $limit: Int) {
   channelFeed(channelId: $channelId, offset: $offset, limit: $limit) {
     ...TweetData
-    childTweets {
-      ...TweetData
-      childTweets {
-        ...TweetData
-      }
-    }
   }
 }
