@@ -67,6 +67,12 @@ fragment TweetData on Tweet {
   createdAt
   parentTweet {
     id
+    text
+    user {
+      id
+      handle
+      avatar
+    }
   }
   files {
     id

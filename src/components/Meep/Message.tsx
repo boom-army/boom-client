@@ -35,10 +35,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
     nft,
     // isTweetMine,
     parentTweet,
-    isRetweet,
-    retweetsCount,
     reactions,
-    commentsCount,
     tipsCount,
     createdAt,
   } = tweet;
@@ -55,11 +52,31 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
 
   return (
     <Grid item xs={12}>
+      {parentTweet && (
+        
+          <Link to={`#`}><Box display={"flex"}>
+            <Box><UserAvatar
+              sx={{
+                width: "16px",
+                height: "16px",
+                border: `1px solid ${theme.tertiaryColor}`,
+              }}
+              avatar={parentTweet?.user?.avatar as string}
+            /></Box>
+            <Box><Typography>@{parentTweet?.user?.handle}</Typography></Box>
+            <Box><Typography>{parentTweet?.text}</Typography></Box>
+        </Box>
+          </Link>
+      )}
       <Box display={"flex"}>
         <Box>
           <Link to={`/${handle}`}>
             <UserAvatar
-              sx={{ width: "30px", height: "30px", border: `1px solid ${theme.tertiaryColor}` }}
+              sx={{
+                width: "30px",
+                height: "30px",
+                border: `1px solid ${theme.tertiaryColor}`,
+              }}
               avatar={user?.avatar as string}
             />
           </Link>
