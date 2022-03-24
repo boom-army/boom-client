@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { TipIcon2 } from "../Icons";
+import { TipIcon } from "../Icons";
 import { TipInput } from "./tipInput";
 import { styled } from "@mui/material/styles";
 import { ThemeContext } from "../../contexts/theme";
@@ -23,18 +23,13 @@ export const TipCreator: React.FC<TipProps> = ({
 
   return (
     <>
-      <Stack
-        direction={"row"}
-        spacing={0.5}
-        sx={{ justifyContent: "center", alignItems: "center" }}
-      >
-        <TipIcon2
-          onClick={() => setShowTip(!showTip)}
-          userPubKey={userPubKey}
-        />
-        <Typography sx={{ color: theme.secondaryColor }}>
-          {tipAmount ? tipAmount : null}
-        </Typography>
+      <Stack direction={"row"} spacing={0.5} sx={{ alignItems: "center" }}>
+        <TipIcon onClick={() => setShowTip(!showTip)} userPubKey={userPubKey} />
+        <Box display={"flex"}>
+          <Typography sx={{ color: theme.secondaryColor, textAlign: "center" }}>
+            {tipAmount ? tipAmount : null}
+          </Typography>
+        </Box>
       </Stack>
       {showTip ? (
         <TipInput

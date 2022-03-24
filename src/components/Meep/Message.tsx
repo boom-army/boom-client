@@ -164,8 +164,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
           <Stack
             direction={"row"}
             spacing={2}
-            alignItems="center"
-            justifyContent={"flex-start"}
+            alignItems="baseline"
           >
             {reactions && reactions.length > 0 && (
               <>
@@ -180,7 +179,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
               </>
             )}
             {tipsCount && parseInt(tipsCount) ? (
-              <Box>
+              <Box sx={{ alignContent: "baseline"}}>
                 <TipCreator
                   userPubKey={user?.publicAddress}
                   tipAmount={
