@@ -1,20 +1,29 @@
-import React, { useEffect } from "react";
+import { Box } from "@mui/material";
+import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { NewMessage } from "../components/Meep/NewMessage";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewTweet } from "../components/Tweet";
 import { useChannelFeedQuery } from "../generated/graphql";
 
 export const ChannelFeed: React.FC = () => {
   const { channelId } = useParams();
+  const scrollRef = useRef<HTMLDivElement>();
 
   const { loading, error, data, fetchMore } = useChannelFeedQuery({
     variables: {
       channelId: channelId as string,
       offset: 0,
-      limit: 10,
+      limit: 15,
     },
     fetchPolicy: "network-only",
   });
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView();
+    }
+  }, [data]);
 
   const handleScroll = () => {
     const bottom =
@@ -39,9 +48,9 @@ export const ChannelFeed: React.FC = () => {
   });
 
   return (
-    <>
-      <NewTweet feed={data?.channelFeed} channel={channelId} />
+    <Box>
       <MeepFeed loading={loading} error={error} data={data?.channelFeed} />
-    </>
+      <NewMessage feed={data?.channelFeed} channel={channelId} ref={scrollRef}/>
+    </Box>
   );
 };

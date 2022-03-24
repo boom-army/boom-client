@@ -33,7 +33,7 @@ export const MeepFeed: React.FC<Props> = ({ loading, error, data }) => {
       {data?.length ? (
         data.map((tweet) => (
           <ShowMessage key={tweet.id} tweet={tweet as Tweet} />
-        ))
+        )).reverse()
       ) : (
         <CustomResponse text="No tweets exist to display in this feed. Let everyone know what's happening." />
       )}
