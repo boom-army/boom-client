@@ -28,6 +28,7 @@ Object {
         </button>
         <div
           class="css-1lkj0jt"
+          lg="false"
         >
           <label
             class="hideLabel"
@@ -68,6 +69,7 @@ Object {
       </button>
       <div
         class="css-1lkj0jt"
+        lg="false"
       >
         <label
           class="hideLabel"
@@ -162,6 +164,7 @@ exports[`<SearchModalHeader/> component : display <SearchModalHeader/> component
     </button>
     <div
       class="css-1lkj0jt"
+      lg="false"
     >
       <label
         class="hideLabel"

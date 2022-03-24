@@ -36,7 +36,7 @@ export const ChangeColor = () => {
 
   return (
     <Wrapper onClick={changeColor}>
-      <ColorIcon sm color={theme.accentColor} />
+      <ColorIcon sm={true && "true"} color={theme.accentColor} />
       <p>Color</p>
     </Wrapper>
   );

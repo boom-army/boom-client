@@ -63,7 +63,7 @@ const profile: any = {
           retweetsCount: 0,
           isRetweet: false,
           tipsCount: "0",
-          createdAt: "1646385168992",
+          createdAt: "",
           __typename: "Tweet",
         },
         {
@@ -95,7 +95,7 @@ const profile: any = {
           retweetsCount: 0,
           isRetweet: false,
           tipsCount: "0",
-          createdAt: "1646139451616",
+          createdAt: "",
           __typename: "Tweet",
         },
         {
@@ -118,7 +118,7 @@ const profile: any = {
           retweetsCount: 0,
           isRetweet: false,
           tipsCount: "0",
-          createdAt: "1646134470431",
+          createdAt: "",
           __typename: "Tweet",
         },
         {
@@ -141,7 +141,7 @@ const profile: any = {
           retweetsCount: 0,
           isRetweet: false,
           tipsCount: "0",
-          createdAt: "1646045242515",
+          createdAt: "",
           __typename: "Tweet",
         },
         {
@@ -164,11 +164,11 @@ const profile: any = {
           retweetsCount: 0,
           isRetweet: false,
           tipsCount: "0",
-          createdAt: "1645614021678",
+          createdAt: "",
           __typename: "Tweet",
         },
       ],
-      createdAt: "1644918563773",
+      createdAt: "",
       __typename: "User",
     },
   },
@@ -196,16 +196,7 @@ export const __mocks__: any = [
   },
 ];
 
-// describe("useHome", () => {
-//   describe("handleClientChanged", () => {
-//     it("should  navigate to a new client page", () => {
-//       const  tree  = render(<EditProfileForm profile={profile.data.profile} />);
-//       expect(tree).toMatchSnapshot();
-//     });
-//   });
-// });
-
-test("it should ...", async () => {
+test("Display <EditProfileForm/> component", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
@@ -219,16 +210,3 @@ test("it should ...", async () => {
   });
   expect(rendered).toMatchSnapshot();
 });
-
-// describe("Edit Profile : ", () => {
-//   test("renders correctly when User have profile", () => {
-
-//     const tree = render(
-//       // <MockedProvider addTypename={false} >
-//       <EditProfileForm profile={profile.data.profile} />,{wrapper: MemoryRouter});
-
-//     // </MockedProvider>
-//     // .toJSON();
-//     expect(tree).toMatchSnapshot();
-//   });
-// });

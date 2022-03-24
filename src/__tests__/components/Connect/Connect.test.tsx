@@ -57,16 +57,16 @@ export const __mocks__: any = [
 describe("<Connect/> component :", () => {
   test("display <Connect/> component ", async () => {
     let rendered;
-    //   await act(async () => {
-    rendered = render(
-      <MockedProvider mocks={__mocks__} addTypename={false}>
-        <SnackbarProvider>
-          <Connect />
-        </SnackbarProvider>
-      </MockedProvider>,
-      { wrapper: MemoryRouter }
-    );
-    //   });
+    await act(async () => {
+      rendered = render(
+        <MockedProvider mocks={__mocks__} addTypename={false}>
+          <SnackbarProvider>
+            <Connect />
+          </SnackbarProvider>
+        </MockedProvider>,
+        { wrapper: MemoryRouter }
+      );
+    });
     expect(rendered).toMatchSnapshot();
   });
 });

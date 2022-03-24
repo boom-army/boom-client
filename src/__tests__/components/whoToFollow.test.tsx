@@ -14,9 +14,7 @@ export const __mocks__: any = [
   {
     request: {
       query: USER_FOLLOW,
-      variables: {
-        // id: 'ckzny1iv10031lmn568gj3b3n'
-      },
+      variables: {},
     },
     result: {
       data: {
@@ -68,12 +66,7 @@ export const __mocks__: any = [
   },
 ];
 
-// test("renders <whotofollow/> a snapshot", () => {
-//   const tree = render(<WhoToFollow />);
-//   expect(tree).toMatchSnapshot();
-// });
-
-test("it should ...", async () => {
+test("display <WhoToFollow /> component", async () => {
   let rendered;
   await act(async () => {
     rendered = render(

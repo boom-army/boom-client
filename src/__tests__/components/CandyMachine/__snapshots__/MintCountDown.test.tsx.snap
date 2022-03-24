@@ -1,40 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Input/> component : display <Input/> component  1`] = `
+exports[`<MintCountDown/> component : display <MintCountDown/> component  1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div>
-      <div
-        class="css-1lkj0jt"
-        lg="false"
-      >
-        <label
-          class=""
-        />
-        <input
-          autocomplete="new-password"
-          type="text"
-          value=""
-        />
-      </div>
-    </div>
+    <div />
   </body>,
-  "container": <div>
-    <div
-      class="css-1lkj0jt"
-      lg="false"
-    >
-      <label
-        class=""
-      />
-      <input
-        autocomplete="new-password"
-        type="text"
-        value=""
-      />
-    </div>
-  </div>,
+  "container": <div />,
   "debug": [Function],
   "findAllByAltText": [Function],
   "findAllByDisplayValue": [Function],

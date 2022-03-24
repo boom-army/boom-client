@@ -45,11 +45,13 @@ Object {
               >
                 <div
                   class="MuiTypography-root MuiTypography-body1 css-1gec8ec-MuiTypography-root"
+                  nowrap="true"
                 >
                   shy-cloud-4965
                 </div>
                 <div
                   class="MuiTypography-root MuiTypography-body2 css-pc18se-MuiTypography-root"
+                  nowrap="true"
                 >
                   @
                   shy-cloud-4965
@@ -136,11 +138,13 @@ Object {
             >
               <div
                 class="MuiTypography-root MuiTypography-body1 css-1gec8ec-MuiTypography-root"
+                nowrap="true"
               >
                 shy-cloud-4965
               </div>
               <div
                 class="MuiTypography-root MuiTypography-body2 css-pc18se-MuiTypography-root"
+                nowrap="true"
               >
                 @
                 shy-cloud-4965

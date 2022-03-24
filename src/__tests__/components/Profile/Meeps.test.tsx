@@ -159,29 +159,11 @@ const profile: any = {
   },
 };
 
-// export const __mocks__: any = [
-//   {
-//     request: {
-//       query: FOLLOW,
-//       variables: {
-//         id: "ckzny1iv10031lmn568gj3b3n",
-//       },
-//     },
-//     result: {
-//       data: {
-//         mentions: [],
-//       },
-//       errors: "An error occurred",
-//     },
-//   },
-// ];
-
 export const __mocks__: any = [
   {
     request: {
       query: TWEET,
       variables: {
-        // id: "ckzny1iv10031lmn568gj3b3n",
         id: "cl0c77yow71753s0n5h032nerw",
       },
     },
@@ -194,29 +176,34 @@ export const __mocks__: any = [
   },
 ];
 
-// describe("Meeps : ", () => {
-//   test("renders correctly user Meeps", () => {
-//     const tree = renderer.create(<Meeps data={profile.data} />).toJSON();
-//     expect(tree).toMatchSnapshot();
-//   });
-
-//   test("User haven't Meeped yet", () => {
-//     const tree = renderer.create(<Meeps data={undefined} />).toJSON();
-//     expect(tree).toMatchSnapshot();
-//   });
-// });
-
-test("it should ...", async () => {
-  let rendered;
-  await act(async () => {
-    rendered = render(
-      <MockedProvider mocks={__mocks__} addTypename={false}>
-        <SnackbarProvider>
-          <Meeps data={profile.data} />
-        </SnackbarProvider>
-      </MockedProvider>,
-      { wrapper: MemoryRouter }
-    );
+describe("display <Meep/> component", () => {
+  test("User have Meep", async () => {
+    let rendered;
+    await act(async () => {
+      rendered = render(
+        <MockedProvider mocks={__mocks__} addTypename={false}>
+          <SnackbarProvider>
+            <Meeps data={profile.data} />
+          </SnackbarProvider>
+        </MockedProvider>,
+        { wrapper: MemoryRouter }
+      );
+    });
+    expect(rendered).toMatchSnapshot();
   });
-  expect(rendered).toMatchSnapshot();
+
+  test("User haven't Meeped yet", async () => {
+    let rendered;
+    await act(async () => {
+      rendered = render(
+        <MockedProvider mocks={__mocks__} addTypename={false}>
+          <SnackbarProvider>
+            <Meeps data={profile.data} />
+          </SnackbarProvider>
+        </MockedProvider>,
+        { wrapper: MemoryRouter }
+      );
+    });
+    expect(rendered).toMatchSnapshot();
+  });
 });

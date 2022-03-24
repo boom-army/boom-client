@@ -51,12 +51,16 @@ export const ConsumerCard = ({ consumer }: any) => {
               <TypographyStyled
                 variant="body1"
                 component="div"
-                nowrap
+                nowrap={true && "true"}
                 sx={{ marginTop: -0.7 }}
               >
                 {consumer.consumerName}
               </TypographyStyled>
-              <TypographyStyled nowrap variant="body2" component="div">
+              <TypographyStyled
+                nowrap={true && "true"}
+                variant="body2"
+                component="div"
+              >
                 @{consumer.handle}
               </TypographyStyled>
             </Stack>

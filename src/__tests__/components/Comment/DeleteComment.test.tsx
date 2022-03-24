@@ -1,13 +1,10 @@
 import React from "react";
-
 import { MemoryRouter } from "react-router-dom";
 import { act, fireEvent, render } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 import { SnackbarProvider } from "notistack";
-
 import { DELETE_COMMENT } from "../../../queries/comment";
 import DeleteComment from "../../../components/Comment/DeleteComment";
-// import { MockedProvider } from '@apollo/react-testing'
 
 const values = {
   handle: "shy-cloud-4965",

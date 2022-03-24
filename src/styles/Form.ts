@@ -18,7 +18,7 @@ export default styled("form")<{ lg?: any; center?: any; props?: any }>(
       display: "flex",
       justifyContent: "space-between",
 
-      "div:nth-child(1)": {
+      "div:nth-of-type(1)": {
         marginRight: "1rem",
       },
     },

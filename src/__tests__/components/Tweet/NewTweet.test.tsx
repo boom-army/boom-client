@@ -1,11 +1,9 @@
 import React from "react";
-import { ShowTweet } from "../../../components/Tweet/Tweet";
-import renderer from "react-test-renderer";
+import { NewTweet } from "../../../components/Tweet/NewTweet";
 import { MockedProvider } from "@apollo/client/testing";
-// import { MentionsDocument, Tweet } from "../../../generated/graphql";
-import { TWEET } from "../../../queries/tweet/index";
+import { TWEET, NEW_TWEET } from "../../../queries/tweet/index";
 import { SnackbarProvider } from "notistack";
-
+import { act, fireEvent, render } from "@testing-library/react";
 const feed: any = {
   data: {
     feed: [
@@ -357,6 +355,35 @@ const feed: any = {
   },
 };
 
-test("Jest works", () => {
-  expect(true).toBeTruthy();
+export const __mocks__: any = [
+  {
+    request: {
+      query: NEW_TWEET,
+      variables: {},
+      refetchQueries: [
+        // { query: TWEET, variables: { id: "cl084xdy815761s0n5omoxoem0" } },
+      ],
+    },
+    result: {
+      data: {
+        // mentions: [],
+      },
+      errors: "An error occurred",
+    },
+  },
+];
+
+test("display <NewTweet/> component", async () => {
+  let rendered;
+  await act(async () => {
+    rendered = render(
+      <MockedProvider mocks={__mocks__} addTypename={false}>
+        <SnackbarProvider>
+          <NewTweet feed={[]} parentTweet={[]} />
+        </SnackbarProvider>
+      </MockedProvider>
+      // { wrapper: MemoryRouter }
+    );
+  });
+  expect(rendered).toMatchSnapshot();
 });

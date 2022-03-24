@@ -144,6 +144,7 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.17.7",
     "@graphql-codegen/cli": "2.2.2",
     "@graphql-codegen/typescript": "2.3.0",
     "@graphql-codegen/typescript-operations": "^2.2.0",
@@ -216,15 +217,15 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js",
       "^.+\\.js": "<rootDir>/node_modules/babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!@agm)"
-    ],
+
+   },
+   "transformIgnorePatterns": ["<rootDir>/node_modules/(?!((@solana/wallet-adapter-*)|(@project-serum/sol-wallet-adapter)|@agm))"],
     "modulePaths": [],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
       "\\.(css|sass|scss)$": "identity-obj-proxy"
     },
+  
     "moduleFileExtensions": [
       "web.js",
       "js",
