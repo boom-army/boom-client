@@ -91,7 +91,6 @@ export const NewMessage: React.FC<Props> = ({
       }
     `,
   });
-  console.log(channelData);
 
   const createGifInput = (gif: any) => ({
     title: gif.title,
