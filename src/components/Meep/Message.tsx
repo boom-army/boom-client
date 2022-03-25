@@ -132,12 +132,15 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
           }}
         >
           <ReplyIcon sx={{ color: theme.secondaryColor }} />
-          <EmojiTweet handleReaction={handleReaction} />
+          <Box pt={"3px"}>
+            <EmojiTweet handleReaction={handleReaction} />
+          </Box>
           <TipCreator
             userPubKey={user?.publicAddress}
             tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
             tweetId={id}
             userId={user?.id}
+            hideAmount={true}
           />
         </Stack>
       </Box>

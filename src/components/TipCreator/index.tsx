@@ -10,6 +10,7 @@ interface TipProps {
   userPubKey: any;
   userId: any;
   tweetId: string;
+  hideAmount?: boolean;
 }
 
 export const TipCreator: React.FC<TipProps> = ({
@@ -17,6 +18,7 @@ export const TipCreator: React.FC<TipProps> = ({
   userPubKey,
   tweetId,
   userId,
+  hideAmount,
 }) => {
   const { theme } = useContext(ThemeContext);
   const [showTip, setShowTip] = useState(false);
@@ -25,11 +27,11 @@ export const TipCreator: React.FC<TipProps> = ({
     <>
       <Stack direction={"row"} spacing={0.5} sx={{ alignItems: "center" }}>
         <TipIcon onClick={() => setShowTip(!showTip)} userPubKey={userPubKey} />
-        <Box display={"flex"}>
+        {!hideAmount && <Box display={"flex"}>
           <Typography sx={{ color: theme.secondaryColor, textAlign: "center" }}>
             {tipAmount ? tipAmount : null}
           </Typography>
-        </Box>
+        </Box>}
       </Stack>
       {showTip ? (
         <TipInput
