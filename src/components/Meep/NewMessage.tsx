@@ -175,7 +175,12 @@ export const NewMessage: React.FC<Props> = ({
       <Grid
         container
         p={2}
-        sx={{ borderTop: `2px solid ${theme.tertiaryColor}` }}
+        sx={{
+          borderTop: `2px solid ${theme.tertiaryColor}`,
+          "@media (max-width: 900px)": {
+            marginBottom: "4em",
+          },
+        }}
       >
         <Grid item xs={12} pb={2}>
           <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
