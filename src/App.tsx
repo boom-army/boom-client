@@ -4,7 +4,7 @@ import { AppRoutes } from "./routes";
 import { CssBaseline } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import { ThemeContext } from "./contexts/theme";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { UserContextProvider } from "./contexts/user";
 import { useContext } from "react";
 
