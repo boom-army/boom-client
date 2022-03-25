@@ -9,6 +9,7 @@ const PickerWrapper = styled("div")((props: any) => ({
   ".emoji-mart": {
     position: "absolute",
     zIndex: "1",
+    right: 0,
   },
   ".emoji-mart-bar.emoji-mart-bar,.emoji-mart-scroll.emoji-mart-scroll": {
     marginRight: "0",

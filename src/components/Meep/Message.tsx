@@ -4,9 +4,9 @@ import "linkify-plugin-mention";
 import Linkify from "linkify-react";
 import UserAvatar from "../UserAvatar";
 import moment from "moment";
-import { Avatar, Box, Grid, Stack, Typography } from "@mui/material";
-import { CommentIcon } from "../Icons";
-import { EmojiTweet, Retweet } from "../Tweet/index";
+import { Box, Grid, Stack, Typography } from "@mui/material";
+import ReplyIcon from "@mui/icons-material/Reply";
+import { EmojiTweet } from "../Tweet/index";
 import { HashLink } from "react-router-hash-link";
 import { ImageBox } from "../ImageBox";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
@@ -71,7 +71,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
   };
 
   return (
-    <Grid item xs={12} mt={2}>
+    <Grid item xs={12} mt={2} sx={{ position: "relative" }}>
       {parentTweet && (
         <Box sx={{ position: "relative" }}>
           <ReplyBox>
@@ -119,6 +119,28 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
           </ReplyBox>
         </Box>
       )}
+      <Box sx={{ position: "absolute", right: 0, top: -4 }}>
+        <Stack
+          direction={"row"}
+          spacing={2}
+          sx={{
+            background: theme.background2,
+            border: `1px solid ${theme.tertiaryColor}`,
+            padding: "0.2em 1em",
+            borderRadius: "5px",
+            alignContent: "baseline",
+          }}
+        >
+          <ReplyIcon sx={{ color: theme.secondaryColor }} />
+          <EmojiTweet handleReaction={handleReaction} />
+          <TipCreator
+            userPubKey={user?.publicAddress}
+            tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
+            tweetId={id}
+            userId={user?.id}
+          />
+        </Stack>
+      </Box>
       <Box id={tweet?.id} display={"flex"}>
         <Box>
           <Link to={`/${handle}`}>
@@ -161,11 +183,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
               <ImageBox files={files} disablelightbox={false} />
             )}
           </Box>
-          <Stack
-            direction={"row"}
-            spacing={2}
-            alignItems="baseline"
-          >
+          <Stack direction={"row"} spacing={2} alignItems="baseline">
             {reactions && reactions.length > 0 && (
               <>
                 <ReactionsList
@@ -179,7 +197,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
               </>
             )}
             {tipsCount && parseInt(tipsCount) ? (
-              <Box sx={{ alignContent: "baseline"}}>
+              <Box sx={{ alignContent: "baseline" }}>
                 <TipCreator
                   userPubKey={user?.publicAddress}
                   tipAmount={
