@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { MeepFeed } from "../components/MeepFeed";
+import { FeedList } from "../components/FeedList";
 import { NewTweet } from "../components/Tweet";
 import { useFeedQuery } from "../generated/graphql";
 
@@ -38,7 +38,7 @@ export const Home: React.FC = () => {
   return (
     <>
       <NewTweet feed={data?.feed} />
-      <MeepFeed loading={loading} error={error} data={data?.feed} />
+      <FeedList loading={loading} error={error} data={data?.feed} />
     </>
   );
 };
