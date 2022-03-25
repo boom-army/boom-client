@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
 import Linkify from "linkify-react";
+import ReplyIcon from "@mui/icons-material/Reply";
 import UserAvatar from "../UserAvatar";
 import moment from "moment";
-import { Box, Grid, Stack, Typography } from "@mui/material";
-import ReplyIcon from "@mui/icons-material/Reply";
+import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { EmojiTweet } from "../Tweet/index";
 import { HashLink } from "react-router-hash-link";
 import { ImageBox } from "../ImageBox";
@@ -13,6 +13,7 @@ import { LAMPORTS_PER_SOL } from "../../constants/math";
 import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
+import { RecoilState, useSetRecoilState } from "recoil";
 import { ThemeContext } from "../../contexts/theme";
 import { TipCreator } from "../TipCreator";
 import { Tweet } from "../../generated/graphql";
@@ -41,9 +42,13 @@ const ReplyBox = styled(Box)((props) => ({
 
 interface Props {
   tweet: Tweet;
+  parentTweetState: RecoilState<string>;
 }
 
-export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
+export const ShowMessage: React.FC<Props> = ({
+  tweet,
+  parentTweetState,
+}: Props) => {
   const {
     id,
     text,
@@ -62,6 +67,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
 
   const { theme } = useContext(ThemeContext);
   const { handleReaction } = useReaction({ tweetId: id });
+  const setParentTweetState = useSetRecoilState(parentTweetState);
   const handle = user && user.handle;
 
   const linkifyOptions = {
@@ -131,7 +137,9 @@ export const ShowMessage: React.FC<Props> = ({ tweet }: Props) => {
             alignContent: "baseline",
           }}
         >
-          <ReplyIcon sx={{ color: theme.secondaryColor }} />
+          <IconButton onClick={() => setParentTweetState(id)}>
+            <ReplyIcon sx={{ color: theme.secondaryColor }} />
+          </IconButton>
           <Box pt={"3px"}>
             <EmojiTweet handleReaction={handleReaction} />
           </Box>

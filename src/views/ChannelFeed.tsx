@@ -1,14 +1,17 @@
-import { Box } from "@mui/material";
 import React, { useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
-import { NewMessage } from "../components/Meep/NewMessage";
 import { MeepFeed } from "../components/MeepFeed";
-import { NewTweet } from "../components/Tweet";
+import { NewMessage } from "../components/Meep/NewMessage";
+import { atom } from "recoil";
 import { useChannelFeedQuery } from "../generated/graphql";
+import { useParams } from "react-router-dom";
 
 export const ChannelFeed: React.FC = () => {
   const { channelId } = useParams();
-  const scrollRef = useRef<HTMLDivElement>();
+  // const scrollRef = useRef<HTMLDivElement>();
+  const parentTweetState = atom({
+    key: "parentTweetState",
+    default: "",
+  });
 
   const { loading, error, data, fetchMore } = useChannelFeedQuery({
     variables: {
@@ -19,11 +22,11 @@ export const ChannelFeed: React.FC = () => {
     fetchPolicy: "network-only",
   });
 
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView();
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (scrollRef.current) {
+  //     scrollRef.current.scrollIntoView();
+  //   }
+  // }, [data]);
 
   const handleScroll = () => {
     const bottom =
@@ -49,8 +52,18 @@ export const ChannelFeed: React.FC = () => {
 
   return (
     <>
-      <MeepFeed loading={loading} error={error} data={data?.channelFeed} />
-      <NewMessage feed={data?.channelFeed} channel={channelId} ref={scrollRef}/>
+      <MeepFeed
+        loading={loading}
+        error={error}
+        data={data?.channelFeed}
+        parentTweetState={parentTweetState}
+      />
+      <NewMessage
+        feed={data?.channelFeed}
+        channel={channelId}
+        parentTweetState={parentTweetState}
+        // ref={scrollRef}
+      />
     </>
   );
 };

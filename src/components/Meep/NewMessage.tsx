@@ -10,6 +10,7 @@ import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { ImageBox } from "../ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
+import { RecoilState, useRecoilValue } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
 import { SearchModal } from "../Giphy/SearchModal";
 import { Stack, Avatar, TextareaAutosize } from "@mui/material";
@@ -26,17 +27,23 @@ import { useState } from "react";
 
 interface Props {
   feed?: any;
-  parentTweet?: string | undefined;
   channel?: string | undefined;
-  ref: React.MutableRefObject<HTMLDivElement | undefined>;
+  parentTweetState: RecoilState<string>;
 }
 
-export const NewMessage: React.FC<Props> = ({ feed, parentTweet, channel }) => {
+export const NewMessage: React.FC<Props> = ({
+  feed,
+  channel,
+  parentTweetState,
+}) => {
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles]: any = useState([]);
   const tweet = useInput("");
+
+  const parentTweet = useRecoilValue(parentTweetState);
+  console.log('---------', parentTweet);
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
