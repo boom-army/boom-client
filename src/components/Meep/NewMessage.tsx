@@ -12,7 +12,7 @@ import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { RecoilState, useRecoilValue } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
-import { SearchModal } from "../Giphy/SearchModal";
+import { GifyModal } from "../Giphy/GifyModal";
 import {
   Stack,
   Avatar,
@@ -193,7 +193,7 @@ export const NewMessage: React.FC<Props> = ({
           </Stack>
         </Grid>
 
-        <Grid item xs={6} pl={1}>
+        <Grid item xs={6} pl={6}>
           {gif && (
             <Box sx={{ marginBottom: 2 }}>
               <Stack direction="column">
@@ -212,7 +212,7 @@ export const NewMessage: React.FC<Props> = ({
             <ImageBox files={tweetFiles.map(mapTweetFiles)} />
           )}
 
-          {!tweetFiles.length && !nftData && <SearchModal setGif={setGif} />}
+          {!tweetFiles.length && !nftData && <GifyModal setGif={setGif} />}
 
           {!gif && !nftData && (
             <>

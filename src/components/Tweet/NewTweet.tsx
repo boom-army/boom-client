@@ -11,7 +11,7 @@ import { ImageBox } from "../ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { SIGN_FILE } from "../../queries/files";
-import { SearchModal } from "../Giphy/SearchModal";
+import { GifyModal } from "../Giphy/GifyModal";
 import { Stack, Avatar, TextareaAutosize } from "@mui/material";
 import { TWEET } from "../../queries/tweet";
 import { USER } from "../../queries/client";
@@ -221,7 +221,7 @@ export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
               />
 
               {!tweetFiles.length && !nftData && (
-                <SearchModal setGif={setGif} />
+                <GifyModal setGif={setGif} />
               )}
 
               {!gif && !nftData && (

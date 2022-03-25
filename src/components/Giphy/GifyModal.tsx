@@ -5,29 +5,24 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import { ThemeContext } from "../../contexts/theme";
-import { Box } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
-import { GIFObject } from "giphy-api";
 import Stack from "@mui/material/Stack";
+import { Box } from "@mui/system";
 import { GifIcon } from "../Icons";
 import { GiphyContext, Search } from "../../contexts/giphy";
-import { debounce } from "lodash";
 import { ImageGrid } from "./ImageGrid";
 import { ImageSuggestionGrid } from "./ImageSuggestionGrid";
 import { Loader } from "../Loader";
 import { SearchModalHeader } from "./SearchModalHeader";
+import { ThemeContext } from "../../contexts/theme";
+import { debounce } from "lodash";
 import { styled } from "@mui/material/styles";
 
 const StyledModal = styled(ModalUnstyled)({
-  // position: 'fixed',
-  // zIndex: '1300',
-  right: "0",
-  bottom: "0",
-  top: "0",
-  left: "0",
-  display: "flex",
-  justifyContent: "center",
+  position: 'absolute',
+  top: "28%",
+  left: "25%",
+  height: "80%"
 });
 
 const Backdrop = styled("div")({
@@ -69,7 +64,7 @@ const queryGiphy = async (
   return { query, gif: json.data };
 };
 
-export const SearchModal: React.FC<{
+export const GifyModal: React.FC<{
   setGif: any;
 }> = ({ setGif }) => {
   const [input, setInput] = useState("");

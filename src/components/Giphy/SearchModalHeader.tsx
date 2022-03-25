@@ -1,8 +1,10 @@
-import React from "react";
-import Stack from "@mui/material/Stack";
-import IconButton from "@mui/material/IconButton";
+import React, { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import Input from "../Input";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+import { FormControl, InputAdornment } from "@mui/material";
+import { TextField } from "@material-ui/core";
+import { ThemeContext } from "../../contexts/theme";
 
 interface Props {
   input: string;
@@ -17,28 +19,35 @@ export const SearchModalHeader: React.FC<Props> = ({
   setInput,
   handleClose,
 }) => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <Stack direction="row" spacing={2} sx={{ margin: "10px 16px" }}>
-      <IconButton
-        onClick={handleClose}
-        aria-label="close"
-        size="medium"
-        disableRipple={true}
-      >
-        <CloseIcon />
-      </IconButton>
-      <Input
-        hideLabel
+    <FormControl fullWidth={true}>
+      <TextField
+        hiddenLabel={true}
         fullWidth={true}
-        text="Search for gif"
         type="text"
-        placeholder="Search"
+        placeholder="Search for GIF"
         value={input}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setIsLoading(true);
           setInput(e.target.value);
         }}
+        InputProps={{
+          style: { color: theme.primaryColor, padding: 10 },
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={handleClose}
+                aria-label="close"
+                size="medium"
+                disableRipple={true}
+              >
+                <CloseIcon sx={{ color: theme.accentColor }} />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
-    </Stack>
+    </FormControl>
   );
 };

@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   Chip,
+  IconButton,
   InputAdornment,
   InputBase,
   InputLabel,
@@ -23,43 +24,7 @@ import { useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "notistack";
 import cuid from "cuid";
 
-// export interface NFTObject {
-//   publicKey: string;
-//   name: string;
-//   externalUrl: string;
-//   symbol: string;
-//   description: string;
-//   sellerFeeBasisPoints: number;
-//   image: string;
-//   attributes?: AttributesEntity[] | null;
-//   collection: Collection;
-//   properties: Properties;
-// }
-// interface AttributesEntity {
-//   traitType: string;
-//   value: string;
-// }
-// interface Collection {
-//   name: string;
-//   family: string;
-// }
-// interface Properties {
-//   files?: FilesEntity[] | null;
-//   category: string;
-//   creators?: CreatorsEntity[] | null;
-// }
-// interface FilesEntity {
-//   uri: string;
-//   type: string;
-// }
-// interface CreatorsEntity {
-//   address: string;
-//   share: number;
-// }
-
 const StyledModal = styled(ModalUnstyled)({
-  // position: 'fixed',
-  // zIndex: '1300',
   right: "0",
   bottom: "0",
   top: "0",
@@ -73,7 +38,6 @@ const StyledModal = styled(ModalUnstyled)({
 });
 
 const Backdrop = styled("div")({
-  // zIndex: '-1',
   position: "fixed",
   right: "0",
   bottom: "0",
@@ -111,7 +75,7 @@ export const NFTPicker: React.FC<{
 
   const fetchSetMeta = useCallback(
     async (connection: Connection, key: PublicKey) => {
-      const mintMeta = key && await Metadata.findByMint(connection, key);
+      const mintMeta = key && (await Metadata.findByMint(connection, key));
       const uri = mintMeta.data.data.uri;
       if (uri) {
         const data: any = await fetch(uri)
@@ -136,7 +100,7 @@ export const NFTPicker: React.FC<{
     []
   );
 
-  useEffect(() => {  
+  useEffect(() => {
     setLoading(true);
     (async () => {
       try {
@@ -167,27 +131,11 @@ export const NFTPicker: React.FC<{
     })();
   }, [nftInput, validKey, connection, enqueueSnackbar, fetchSetMeta]);
 
-  const Wrapper = styled("span")({
-    "& .nft-pick": {
-      marginRight: "2rem",
-      width: "26px",
-      height: "26px",
-      display: "inline-block",
-      "& svg": {
-        width: "26px",
-        cursor: "pointer",
-        "& path": {
-          fill: `${theme.accentColor}`,
-        },
-      },
-    },
-  });
-
   return (
-    <Wrapper>
-      <span className="nft-pick" onClick={() => toggleNftForm(!nftForm)}>
+    <>
+      <IconButton onClick={() => toggleNftForm(!nftForm)}>
         <NFTIcon />
-      </span>
+      </IconButton>
 
       {nftForm && (
         <>
@@ -348,6 +296,6 @@ export const NFTPicker: React.FC<{
           </StyledModal>
         </>
       )}
-    </Wrapper>
+    </>
   );
 };
