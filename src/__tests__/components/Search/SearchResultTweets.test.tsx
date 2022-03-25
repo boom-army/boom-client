@@ -87,6 +87,8 @@ describe("Search tweets:", () => {
   });
 
   test("display <SearchResultTweets/> component when tweets list found", () => {
+    Date.now = jest.fn(() => 1482363367071);
+    tweets.searchByTweet[0].createdAt = Date.now().toString();
     const tree = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
         <SnackbarProvider>

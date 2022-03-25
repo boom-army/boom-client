@@ -1,131 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Search : TAGS Result: display <SearchResult/> component when Tags loading 1`] = `
-<DocumentFragment>
-  <div
-    class="css-1mw65dx"
-  >
-    <div
-      class="tabs"
-    >
-      <span
-        class=""
-      >
-        Tweets
-      </span>
-      <span
-        class="active"
-      >
-        Tags
-      </span>
-      <span
-        class=""
-      >
-        Users
-      </span>
-    </div>
-    <div
-      class="MuiBox-root css-1l4w6pd"
-    >
-      <span
-        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
-        role="progressbar"
-        style="width: 30px; height: 30px;"
-      >
-        <svg
-          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
-          viewBox="22 22 44 44"
-        >
-          <circle
-            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
-            cx="44"
-            cy="44"
-            fill="none"
-            r="20.2"
-            stroke-width="3.6"
-          />
-        </svg>
-      </span>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`Search : TAGS Result: display <SearchResult/> component when Tags not found 1`] = `
-<DocumentFragment>
-  <div
-    class="css-1mw65dx"
-  >
-    <div
-      class="tabs"
-    >
-      <span
-        class=""
-      >
-        Tweets
-      </span>
-      <span
-        class="active"
-      >
-        Tags
-      </span>
-      <span
-        class=""
-      >
-        Users
-      </span>
-    </div>
-    <div
-      class="css-79elbk"
-    >
-      <div
-        class="css-15inajd"
-      >
-        <p>
-          No tweets found for that tag, try a different search
-        </p>
-      </div>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`Search : TAGS Result: display <SearchResult/> component when Tags undefined 1`] = `
-<DocumentFragment>
-  <div
-    class="css-1mw65dx"
-  >
-    <div
-      class="tabs"
-    >
-      <span
-        class=""
-      >
-        Tweets
-      </span>
-      <span
-        class="active"
-      >
-        Tags
-      </span>
-      <span
-        class=""
-      >
-        Users
-      </span>
-    </div>
-    <div
-      class="css-15inajd"
-    >
-      <p>
-        Use the search bar to find tags, people and tweets
-      </p>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`Search : TAGS Result: display <SearchResult/> component when tweets list found 1`] = `
+exports[`Search : TAGS Result: display <SearchResult/> component when Tags list found 1`] = `
 <DocumentFragment>
   <div
     class="css-1mw65dx"
@@ -199,7 +74,7 @@ exports[`Search : TAGS Result: display <SearchResult/> component when tweets lis
               class="secondary"
               href="/shy-cloud-4965/status/cl084xdy815761s0n5omoxoem0"
             >
-              23 days ago
+              a few seconds ago
             </a>
           </div>
           <p
@@ -322,6 +197,131 @@ exports[`Search : TAGS Result: display <SearchResult/> component when tweets lis
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Search : TAGS Result: display <SearchResult/> component when Tags loading 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1mw65dx"
+  >
+    <div
+      class="tabs"
+    >
+      <span
+        class=""
+      >
+        Tweets
+      </span>
+      <span
+        class="active"
+      >
+        Tags
+      </span>
+      <span
+        class=""
+      >
+        Users
+      </span>
+    </div>
+    <div
+      class="MuiBox-root css-1l4w6pd"
+    >
+      <span
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+        role="progressbar"
+        style="width: 30px; height: 30px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20.2"
+            stroke-width="3.6"
+          />
+        </svg>
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Search : TAGS Result: display <SearchResult/> component when Tags not found 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1mw65dx"
+  >
+    <div
+      class="tabs"
+    >
+      <span
+        class=""
+      >
+        Tweets
+      </span>
+      <span
+        class="active"
+      >
+        Tags
+      </span>
+      <span
+        class=""
+      >
+        Users
+      </span>
+    </div>
+    <div
+      class="css-79elbk"
+    >
+      <div
+        class="css-15inajd"
+      >
+        <p>
+          No tweets found for that tag, try a different search
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Search : TAGS Result: display <SearchResult/> component when Tags undefined 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1mw65dx"
+  >
+    <div
+      class="tabs"
+    >
+      <span
+        class=""
+      >
+        Tweets
+      </span>
+      <span
+        class="active"
+      >
+        Tags
+      </span>
+      <span
+        class=""
+      >
+        Users
+      </span>
+    </div>
+    <div
+      class="css-15inajd"
+    >
+      <p>
+        Use the search bar to find tags, people and tweets
+      </p>
     </div>
   </div>
 </DocumentFragment>
@@ -526,7 +526,7 @@ exports[`Search : TWEETS Result: display <SearchResult/> component when tweets l
               class="secondary"
               href="/shy-cloud-4965/status/cl084xdy815761s0n5omoxoem0"
             >
-              23 days ago
+              a few seconds ago
             </a>
           </div>
           <p

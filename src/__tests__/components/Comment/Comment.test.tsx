@@ -66,6 +66,7 @@ export const __mocks__: any = [
 
 describe("<Comment/> component :", () => {
   test("display <Comment/> component ", async () => {
+    Date.now = jest.fn(() => 1482363367071);
     let rendered;
     await act(async () => {
       rendered = render(
@@ -76,7 +77,7 @@ describe("<Comment/> component :", () => {
               text="testing after changes in input converted to ts"
               isCommentMine={true}
               user={user}
-              createdAt="1646139451616"
+              createdAt={Date.now().toString()}
             />
           </SnackbarProvider>
         </MockedProvider>,

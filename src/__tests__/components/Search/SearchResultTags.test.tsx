@@ -83,6 +83,8 @@ describe("Search tags:", () => {
   });
 
   test("display <SearchResultTags/> component when tags list found", () => {
+    Date.now = jest.fn(() => 1482363367071);
+    tags.searchByTag[0].createdAt = Date.now().toString();
     const tree = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
         <SnackbarProvider>

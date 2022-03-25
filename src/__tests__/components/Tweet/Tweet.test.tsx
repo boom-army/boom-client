@@ -36,7 +36,7 @@ const Tweet: any = {
   retweetsCount: 0,
   isRetweet: false,
   tipsCount: "0",
-  createdAt: "1646139451616",
+  createdAt: "",
   parentTweet: null,
   files: [],
   gif: null,
@@ -63,6 +63,8 @@ const Tweet: any = {
 };
 
 test("Tweet component snapshot testing ...", async () => {
+  Date.now = jest.fn(() => 1482363367071);
+  Tweet.createdAt = Date.now().toString();
   let rendered;
   await act(async () => {
     rendered = render(

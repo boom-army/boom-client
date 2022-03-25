@@ -178,6 +178,10 @@ export const __mocks__: any = [
 
 describe("display <Meep/> component", () => {
   test("User have Meep", async () => {
+    profile.data.profile.tweets.map(
+      (item: any) => (item.createdAt = Date.now().toString())
+    );
+
     let rendered;
     await act(async () => {
       rendered = render(
