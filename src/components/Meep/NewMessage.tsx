@@ -21,6 +21,7 @@ import {
   TextField,
   InputAdornment,
   Grid,
+  Input,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { TWEET } from "../../queries/tweet";
@@ -41,6 +42,21 @@ interface Props {
   channel?: string | undefined;
   parentTweetState: RecoilState<string>;
 }
+
+const IconsGrid = styled(Grid)((props) => ({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "row",
+  "& svg": {
+    fill: props.theme.accentColor,
+    width: "20px",
+    height: "20px",
+    marginRight: "1em",
+    "& path": {
+      fill: props.theme.accentColor,
+    },
+  },
+}));
 
 export const NewMessage: React.FC<Props> = ({
   feed,
@@ -160,8 +176,12 @@ export const NewMessage: React.FC<Props> = ({
 
   return (
     <>
-      <Grid container p={2} sx={{ borderTop: `2px solid ${theme.tertiaryColor}`}}>
-        <Grid item xs={12}>
+      <Grid
+        container
+        p={2}
+        sx={{ borderTop: `2px solid ${theme.tertiaryColor}` }}
+      >
+        <Grid item xs={12} pb={2}>
           <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
             <Avatar
               src={data?.me?.avatar}
@@ -171,29 +191,36 @@ export const NewMessage: React.FC<Props> = ({
                 border: `1px solid ${theme.tertiaryColor}`,
               }}
             />
-            <TextField
-              id="outlined-basic"
+
+            <Input
               value={tweet.value}
               onChange={tweet.onChange}
               placeholder={`Meep in # ${channelData?.family} ${channelData?.name}`}
               fullWidth={true}
-              InputProps={{
-                style: { color: theme.secondaryColor },
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <EmojiPicker
-                      emojiHandler={(pickedEmoji: any) =>
-                        tweet.setValue(tweet.value + pickedEmoji.native)
-                      }
-                    />
-                  </InputAdornment>
-                ),
+              sx={{
+                color: theme.primaryColor,
+                padding: "1em 1em 1em 0",
+                "&:before": {
+                  borderColor: theme.tertiaryColor2,
+                },
+                "&:hover:not(.Mui-disabled):before": {
+                  borderColor: theme.tertiaryColor2,
+                }
               }}
+              endAdornment={
+                <InputAdornment position="end">
+                  <EmojiPicker
+                    emojiHandler={(pickedEmoji: any) =>
+                      tweet.setValue(tweet.value + pickedEmoji.native)
+                    }
+                  />
+                </InputAdornment>
+              }
             />
           </Stack>
         </Grid>
 
-        <Grid item xs={6} pl={6}>
+        <IconsGrid item xs={6} pl={6}>
           {gif && (
             <Box sx={{ marginBottom: 2 }}>
               <Stack direction="column">
@@ -217,7 +244,9 @@ export const NewMessage: React.FC<Props> = ({
           {!gif && !nftData && (
             <>
               <label htmlFor="file-input">
-                <UploadFileIcon />
+                <IconButton>
+                  <UploadFileIcon />
+                </IconButton>
               </label>
               <Box display={"none"}>
                 <input
@@ -231,11 +260,11 @@ export const NewMessage: React.FC<Props> = ({
           )}
 
           {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
-        </Grid>
+        </IconsGrid>
         <Grid item xs={6} pr={1}>
           <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
-            <IconButton disabled={loading}>
-              <SendIcon />
+            <IconButton disabled={loading} onClick={handleNewTweet}>
+              <SendIcon sx={{ color: theme.accentColor }} />
             </IconButton>
           </Box>
         </Grid>

@@ -17,12 +17,13 @@ import { SearchModalHeader } from "./SearchModalHeader";
 import { ThemeContext } from "../../contexts/theme";
 import { debounce } from "lodash";
 import { styled } from "@mui/material/styles";
+import { IconButton } from "@mui/material";
 
 const StyledModal = styled(ModalUnstyled)({
-  position: 'absolute',
+  position: "absolute",
   top: "28%",
   left: "25%",
-  height: "80%"
+  height: "80%",
 });
 
 const Backdrop = styled("div")({
@@ -34,16 +35,6 @@ const Backdrop = styled("div")({
   left: "0",
   backgroundColor: "rgba(0, 0, 0, 0.5)",
   WebkitTapHighlightColor: "transparent",
-});
-
-const GifButton = styled("button")({
-  background: "none",
-  color: "inherit",
-  border: "none",
-  padding: "0",
-  font: "inherit",
-  cursor: "pointer",
-  outline: "inherit",
 });
 
 const GIPHY_API = process.env.REACT_APP_GIPHY_KEY as string;
@@ -181,9 +172,9 @@ export const GifyModal: React.FC<{
 
   return (
     <>
-      <GifButton type="button" className="tweet-gif" onClick={handleOpen}>
+      <IconButton onClick={handleOpen}>
         <GifIcon />
-      </GifButton>
+      </IconButton>
       <StyledModal
         open={open}
         onClose={handleClose}
