@@ -1,5 +1,13 @@
-import ClearIcon from "@mui/icons-material/Clear";
+import SendIcon from "@mui/icons-material/Send";
 import { AttributionLink } from "../Giphy/AttributionLink";
+import {
+  Avatar,
+  Grid,
+  IconButton,
+  Input,
+  InputAdornment,
+  Stack,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import {
   ChannelFeedDocument,
@@ -7,35 +15,24 @@ import {
   useNewTweetMutation,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
+import { GifyModal } from "../Giphy/GifyModal";
 import { ImageBox } from "../ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { RecoilState, useRecoilValue } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
-import { GifyModal } from "../Giphy/GifyModal";
-import {
-  Stack,
-  Avatar,
-  IconButton,
-  FormControl,
-  TextField,
-  InputAdornment,
-  Grid,
-  Input,
-} from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
 import { TWEET } from "../../queries/tweet";
+import { ThemeContext } from "../../contexts/theme";
 import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
+import { client } from "../../apollo/client";
 import { displayError, uploadFile } from "../../utils";
 import { styled } from "@mui/material/styles";
+import { useContext, useState } from "react";
 import { useInput } from "../../hooks/useInput";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { client } from "../../apollo/client";
-import { ThemeContext } from "../../contexts/theme";
-import { useContext, useState } from "react";
 
 interface Props {
   feed?: any;
@@ -205,7 +202,7 @@ export const NewMessage: React.FC<Props> = ({
                 },
                 "&:hover:not(.Mui-disabled):before": {
                   borderColor: theme.tertiaryColor2,
-                }
+                },
               }}
               endAdornment={
                 <InputAdornment position="end">
