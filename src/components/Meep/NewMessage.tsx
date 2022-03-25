@@ -1,4 +1,4 @@
-import Button from "../../styles/Button";
+import ClearIcon from "@mui/icons-material/Clear";
 import { AttributionLink } from "../Giphy/AttributionLink";
 import { Box } from "@mui/system";
 import {
@@ -13,7 +13,16 @@ import { NFTTweet } from "../NFT/NFTTweet";
 import { RecoilState, useRecoilValue } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
 import { SearchModal } from "../Giphy/SearchModal";
-import { Stack, Avatar, TextareaAutosize } from "@mui/material";
+import {
+  Stack,
+  Avatar,
+  IconButton,
+  FormControl,
+  TextField,
+  InputAdornment,
+  Grid,
+} from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 import { TWEET } from "../../queries/tweet";
 import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
@@ -21,9 +30,11 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError, uploadFile } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useInput } from "../../hooks/useInput";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { useState } from "react";
+import { client } from "../../apollo/client";
+import { ThemeContext } from "../../contexts/theme";
+import { useContext, useState } from "react";
 
 interface Props {
   feed?: any;
@@ -36,6 +47,7 @@ export const NewMessage: React.FC<Props> = ({
   channel,
   parentTweetState,
 }) => {
+  const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
@@ -43,7 +55,7 @@ export const NewMessage: React.FC<Props> = ({
   const tweet = useInput("");
 
   const parentTweet = useRecoilValue(parentTweetState);
-  console.log('---------', parentTweet);
+  console.log("---------", parentTweet);
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
@@ -56,6 +68,17 @@ export const NewMessage: React.FC<Props> = ({
     ],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
+  const channelData = client.readFragment({
+    id: `Channel:${channel}`,
+    fragment: gql`
+      fragment TweetChannel on Channel {
+        id
+        name
+        family
+      }
+    `,
+  });
+  console.log(channelData);
 
   const createGifInput = (gif: any) => ({
     title: gif.title,
@@ -136,62 +159,87 @@ export const NewMessage: React.FC<Props> = ({
   });
 
   return (
-    <Box>
-      <Avatar src={data?.me?.avatar} />
-      <form onSubmit={handleNewTweet}>
-        <TextareaAutosize
-          placeholder="What's happening?"
-          value={tweet.value}
-          onChange={tweet.onChange}
-        />
-
-        {gif && (
-          <Box sx={{ marginBottom: 2 }}>
-            <Stack direction="column">
-              <VideoContainer
-                gif={createGifInput(gif)}
-                onClose={() => setGif(null)}
-              />
-              <AttributionLink src={gif.url} />
-            </Stack>
-          </Box>
-        )}
-
-        {nftData && <NFTTweet nftData={nftData} />}
-
-        {!!tweetFiles.length && (
-          <ImageBox files={tweetFiles.map(mapTweetFiles)} />
-        )}
-
-        <EmojiPicker
-          emojiHandler={(pickedEmoji: any) =>
-            tweet.setValue(tweet.value + pickedEmoji.native)
-          }
-        />
-
-        {!tweetFiles.length && !nftData && <SearchModal setGif={setGif} />}
-
-        {!gif && !nftData && (
-          <>
-            <label htmlFor="file-input">
-              <span className="file-upload-icon">
-                <UploadFileIcon />
-              </span>
-            </label>
-            <input
-              id="file-input"
-              accept="image/*"
-              type="file"
-              onChange={handleTweetFiles}
+    <>
+      <Grid container p={2} sx={{ borderTop: `2px solid ${theme.tertiaryColor}`}}>
+        <Grid item xs={12}>
+          <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
+            <Avatar
+              src={data?.me?.avatar}
+              sx={{
+                width: 30,
+                height: 30,
+                border: `1px solid ${theme.tertiaryColor}`,
+              }}
             />
-          </>
-        )}
+            <TextField
+              id="outlined-basic"
+              value={tweet.value}
+              onChange={tweet.onChange}
+              placeholder={`Meep in # ${channelData?.family} ${channelData?.name}`}
+              fullWidth={true}
+              InputProps={{
+                style: { color: theme.secondaryColor },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <EmojiPicker
+                      emojiHandler={(pickedEmoji: any) =>
+                        tweet.setValue(tweet.value + pickedEmoji.native)
+                      }
+                    />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Stack>
+        </Grid>
 
-        {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
-        <Button sm="true" disabled={loading}>
-          Post
-        </Button>
-      </form>
-    </Box>
+        <Grid item xs={6} pl={1}>
+          {gif && (
+            <Box sx={{ marginBottom: 2 }}>
+              <Stack direction="column">
+                <VideoContainer
+                  gif={createGifInput(gif)}
+                  onClose={() => setGif(null)}
+                />
+                <AttributionLink src={gif.url} />
+              </Stack>
+            </Box>
+          )}
+
+          {nftData && <NFTTweet nftData={nftData} />}
+
+          {!!tweetFiles.length && (
+            <ImageBox files={tweetFiles.map(mapTweetFiles)} />
+          )}
+
+          {!tweetFiles.length && !nftData && <SearchModal setGif={setGif} />}
+
+          {!gif && !nftData && (
+            <>
+              <label htmlFor="file-input">
+                <UploadFileIcon />
+              </label>
+              <Box display={"none"}>
+                <input
+                  id="file-input"
+                  accept="image/*"
+                  type="file"
+                  onChange={handleTweetFiles}
+                />
+              </Box>
+            </>
+          )}
+
+          {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
+        </Grid>
+        <Grid item xs={6} pr={1}>
+          <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
+            <IconButton disabled={loading}>
+              <SendIcon />
+            </IconButton>
+          </Box>
+        </Grid>
+      </Grid>
+    </>
   );
 };

@@ -36,7 +36,7 @@ export const MeepFeed: React.FC<Props> = ({
   }
 
   return (
-    <Grid container component={Box} p={2}>
+    <Grid container p={2}>
       {data?.length ? (
         data
           .map((tweet) => <ShowMessage key={tweet.id} tweet={tweet as Tweet} parentTweetState={parentTweetState} />)

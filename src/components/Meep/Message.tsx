@@ -86,8 +86,8 @@ export const ShowMessage: React.FC<Props> = ({
                 <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
                   <UserAvatar
                     sx={{
-                      width: "16px",
-                      height: "16px",
+                      width: 16,
+                      height: 16,
                       border: `1px solid ${theme.tertiaryColor}`,
                     }}
                     avatar={parentTweet?.user?.avatar as string}
