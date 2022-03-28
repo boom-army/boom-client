@@ -1,6 +1,6 @@
 import React from "react";
 import { ImageGrid } from "../../../components/Giphy/ImageGrid";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render , screen} from "@testing-library/react";
 
 let data: any = [
   {
@@ -447,5 +447,51 @@ describe("<ImageGrid/> component :", () => {
       />
     );
     expect(rendered).toMatchSnapshot();
+  });
+});
+
+describe("Assertion testing of <ImageGrid/> component  :", () => {
+  test("When gifArr undefined", () => {
+  render(
+      <ImageGrid
+        gifArr={[]}
+        setGif={gif}
+        setOpen={setOpen}
+        isLoadingMore={false}
+      />
+    );
+   expect(screen.getByText('No gifs were found')).toBeInTheDocument();
+  });
+
+  test("When loading", async () => {
+    render(
+      <ImageGrid
+        gifArr={data}
+        setGif={gif}
+        setOpen={setOpen}
+        isLoadingMore={true}
+      />
+    );
+  
+     expect(screen.getByRole('img', { name: 'Will Smith Yes GIF by Bad Boys For Life' })).toHaveAttribute('src', 'https://media4.giphy.com/media/YOvOkaS5ZKfimDIgwJ/200w_d.gif?cid=e0fc1889ila69xrbm6kvpj1jlybb6ekm6rlldv3rgul4jvxn&rid=200w_d.gif&ct=g');
+     expect(screen.getByRole('progressbar')).toBeInTheDocument();
+     expect(screen.getByRole('list')).toBeInTheDocument();
+     expect(screen.getByRole('button', { name: 'Will Smith Yes GIF by Bad Boys For Life' })).toBeInTheDocument();
+  });
+
+  test("When gifArr have list", async () => {
+   render(
+      <ImageGrid
+        gifArr={data}
+        setGif={gif}
+        setOpen={setOpen}
+        isLoadingMore={false}
+      />
+    );
+   
+    expect(screen.getByRole('list')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Will Smith Yes GIF by Bad Boys For Life' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Will Smith Yes GIF by Bad Boys For Life' })).toHaveAttribute('src', 'https://media4.giphy.com/media/YOvOkaS5ZKfimDIgwJ/200w_d.gif?cid=e0fc1889ila69xrbm6kvpj1jlybb6ekm6rlldv3rgul4jvxn&rid=200w_d.gif&ct=g');
+  
   });
 });
