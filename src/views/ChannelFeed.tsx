@@ -17,7 +17,7 @@ export const ChannelFeed: React.FC = () => {
     variables: {
       channelId: channelId as string,
       offset: 0,
-      limit: 5,
+      limit: 10,
     },
     fetchPolicy: "network-only",
   });
@@ -26,35 +26,13 @@ export const ChannelFeed: React.FC = () => {
     scrollRef?.current?.scrollIntoView();
   }, []);
 
-  const handleScroll = () => {
-    // const bottom =
-    //   Math.ceil(window.innerHeight + window.scrollY) >=
-    //   document.documentElement.scrollHeight;\
-    const top = Math.ceil(window.innerHeight + window.scrollY) === window.innerHeight;
-    if (top) {
-      fetchMore({
-        variables: {
-          offset: data?.channelFeed?.length ?? 0,
-        },
-      });
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
-
   return (
     <>
       <MeepFeed
         loading={loading}
         error={error}
         data={data?.channelFeed}
+        fetchMore={fetchMore}
         parentTweetState={parentTweetState}
         scrollRef={scrollRef}
       />
