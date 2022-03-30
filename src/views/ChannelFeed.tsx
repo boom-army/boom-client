@@ -17,22 +17,21 @@ export const ChannelFeed: React.FC = () => {
     variables: {
       channelId: channelId as string,
       offset: 0,
-      limit: 15,
+      limit: 5,
     },
     fetchPolicy: "network-only",
   });
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView();
-    }
-  }, [data]);
+    scrollRef?.current?.scrollIntoView();
+  }, []);
 
   const handleScroll = () => {
-    const bottom =
-      Math.ceil(window.innerHeight + window.scrollY) >=
-      document.documentElement.scrollHeight;
-    if (bottom) {
+    // const bottom =
+    //   Math.ceil(window.innerHeight + window.scrollY) >=
+    //   document.documentElement.scrollHeight;\
+    const top = Math.ceil(window.innerHeight + window.scrollY) === window.innerHeight;
+    if (top) {
       fetchMore({
         variables: {
           offset: data?.channelFeed?.length ?? 0,
