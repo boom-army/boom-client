@@ -3,6 +3,7 @@ import ProfileInfo from "../../../components/Profile/ProfileInfo";
 import { BrowserRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 
 const profile: any = {
   data: {
@@ -166,4 +167,15 @@ describe("user profile info", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of <ProfileInfo/> component", () => {
+  render(<BrowserRouter>
+    <ProfileInfo profile={profile.data.profile} />
+  </BrowserRouter>);
+
+  // screen.getByRole('');
+  expect(screen.getByRole('img', { name: 'cover' })).toHaveAttribute('src', '/default-cover.png');
+  expect(screen.getByRole('link', { name: 'Edit Profile' })).toHaveAttribute('href', '/settings/profile');
+
 });

@@ -68,9 +68,11 @@ test("Delete Tweet Snapshot testing ...", async () => {
   await act(async () => {
     rendered = render(
       <MockedProvider mocks={__mocks__} addTypename={false}>
-        <SnackbarProvider>{/* <MasterTweet  /> */}</SnackbarProvider>
+        <SnackbarProvider><MasterTweet  /></SnackbarProvider>
       </MockedProvider>
     );
   });
   expect(rendered).toMatchSnapshot();
 });
+
+

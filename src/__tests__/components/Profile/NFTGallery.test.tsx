@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { MockedProvider } from "@apollo/client/testing";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render , screen} from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
 import {
   useEditProfileMutation,

@@ -1,7 +1,7 @@
 import React from "react";
 import { User as UserProps } from "../../../generated/graphql";
 import SearchResultTweets from "../../../components/Search/SearchResultTweets";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import { MockedProvider } from "@apollo/client/testing";
@@ -100,3 +100,20 @@ describe("Search tweets:", () => {
     expect(tree).toMatchSnapshot();
   });
 });
+
+test("Assertion testing of <SearchResultTweets/> component", () => {
+  Date.now = jest.fn(() => 1482363367071);
+  tweets.searchByTweet[0].createdAt = Date.now().toString();
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+    <SnackbarProvider>
+      <SearchResultTweets loading={false} tweets={tweets} />
+    </SnackbarProvider>
+  </MockedProvider>,
+  { wrapper: MemoryRouter }
+  );
+
+expect(screen.getByRole('link', { name: 'shy-cloud-4965 @shy-cloud-4965' })).toHaveAttribute('href', '/shy-cloud-4965');
+expect(screen.getByRole('link', { name: 'a few seconds ago' })).toHaveAttribute('href', '/shy-cloud-4965/status/cl084xdy815761s0n5omoxoem0');
+  
+ });

@@ -9,7 +9,7 @@ import {
   DELETE_TWEET,
 } from "../../../queries/tweet/index";
 // import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render} from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 

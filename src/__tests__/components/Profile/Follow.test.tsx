@@ -51,7 +51,7 @@ export const __mocks__: any = [
 //     });
 // });
 
-test("display <follow/> component ", async () => {
+test("display <follow/> component when isfollowing false ", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
@@ -64,3 +64,20 @@ test("display <follow/> component ", async () => {
   });
   expect(rendered).toMatchSnapshot();
 });
+
+test("display <follow/> component  When isfollowing true", async () => {
+  let rendered;
+  await act(async () => {
+    rendered = render(
+      <MockedProvider mocks={__mocks__} addTypename={false}>
+        <SnackbarProvider>
+          <Follow isFollowing={true} id={"ckzny1iv10031lmn568gj3b3n"} />
+        </SnackbarProvider>
+      </MockedProvider>
+    );
+  });
+  expect(rendered).toMatchSnapshot();
+});
+
+
+

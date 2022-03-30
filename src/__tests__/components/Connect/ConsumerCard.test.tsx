@@ -45,7 +45,7 @@ export const __mocks__: any = [
             avatar: "",
             bio: "",
             consumerName: "shiny-silence-3873",
-            coverPhoto: "https://my.s osol.app/default-cover.png",
+            coverPhoto: "https://my.sosol.app/default-cover.png",
             handle: "shiny-silence-3873",
             id: "cl0tpyv2k22515001mp1vbzhegs",
             isFollowing: false,

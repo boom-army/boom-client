@@ -5,7 +5,7 @@ import { MockedProvider } from "@apollo/client/testing";
 // import { MentionsDocument, Tweet } from "../../../generated/graphql";
 import { TOGGLE_REACTION, TWEET } from "../../../queries/tweet/index";
 // import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render ,screen} from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 // import { SnackbarProvider } from "notistack"
 
@@ -38,3 +38,12 @@ test("parent tweet snapshot testing", async () => {
   });
   expect(rendered).toMatchSnapshot();
 });
+
+test("Assertion testing of <ParentTweet/> component", () => {
+  render(
+    <ParentTweet parentTweet={"cl084xdy815761s0n5omoxoem0"} />,
+    { wrapper: MemoryRouter }
+  );
+   expect(screen.getByRole('link', { name: 'Go up thread to parent ⤴' })).toHaveAttribute('href', '/undefined/status/cl084xdy815761s0n5omoxoem0');
+ 
+ });
