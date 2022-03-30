@@ -38,6 +38,7 @@ interface Props {
   feed?: any;
   channel?: string | undefined;
   parentTweetState: RecoilState<string>;
+  scrollRef: React.MutableRefObject<HTMLDivElement | undefined>
 }
 
 const IconsGrid = styled(Grid)((props) => ({
@@ -59,6 +60,7 @@ export const NewMessage: React.FC<Props> = ({
   feed,
   channel,
   parentTweetState,
+  scrollRef,
 }) => {
   const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
@@ -198,6 +200,8 @@ export const NewMessage: React.FC<Props> = ({
               onChange={tweet.onChange}
               placeholder={`Meep in # ${channelData?.family} ${channelData?.name}`}
               fullWidth={true}
+              autoFocus={true}
+              ref={scrollRef}
               sx={{
                 color: theme.primaryColor,
                 padding: "1em 1em 1em 0",

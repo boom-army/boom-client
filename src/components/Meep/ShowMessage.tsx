@@ -43,11 +43,13 @@ const ReplyBox = styled(Box)((props) => ({
 interface Props {
   tweet: Tweet;
   parentTweetState: RecoilState<string>;
+  scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
 
 export const ShowMessage: React.FC<Props> = ({
   tweet,
   parentTweetState,
+  scrollRef,
 }: Props) => {
   const {
     id,
@@ -137,9 +139,6 @@ export const ShowMessage: React.FC<Props> = ({
             alignContent: "baseline",
           }}
         >
-          <IconButton onClick={() => setParentTweetState(id)}>
-            <ReplyIcon sx={{ color: theme.secondaryColor }} />
-          </IconButton>
           <Box pt={"3px"}>
             <EmojiTweet handleReaction={handleReaction} />
           </Box>
@@ -150,6 +149,14 @@ export const ShowMessage: React.FC<Props> = ({
             userId={user?.id}
             hideAmount={true}
           />
+          <IconButton
+            onClick={() => {
+              setParentTweetState(id);
+              scrollRef?.current?.scrollIntoView();
+            }}
+          >
+            <ReplyIcon sx={{ color: theme.secondaryColor }} />
+          </IconButton>
         </Stack>
       </Box>
       <Box id={tweet?.id} display={"flex"}>

@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 export const ChannelFeed: React.FC = () => {
   const { channelId } = useParams();
-  // const scrollRef = useRef<HTMLDivElement>();
+  const scrollRef = useRef<HTMLDivElement>();
   const parentTweetState = atom({
     key: "parentTweetState",
     default: "",
@@ -22,11 +22,11 @@ export const ChannelFeed: React.FC = () => {
     fetchPolicy: "network-only",
   });
 
-  // useEffect(() => {
-  //   if (scrollRef.current) {
-  //     scrollRef.current.scrollIntoView();
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView();
+    }
+  }, [data]);
 
   const handleScroll = () => {
     const bottom =
@@ -57,12 +57,13 @@ export const ChannelFeed: React.FC = () => {
         error={error}
         data={data?.channelFeed}
         parentTweetState={parentTweetState}
+        scrollRef={scrollRef}
       />
       <NewMessage
         feed={data?.channelFeed}
         channel={channelId}
         parentTweetState={parentTweetState}
-        // ref={scrollRef}
+        scrollRef={scrollRef}
       />
     </>
   );
