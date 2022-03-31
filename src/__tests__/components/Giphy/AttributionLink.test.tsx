@@ -9,6 +9,11 @@ test("<AttributionLink/> component  Snapshot testing ...", async () => {
 
 test("Assertion testing of <AttributionLink/>  component ", async () => {
   render(<AttributionLink src={"https://abc.com"} />);
-   expect(screen.getByRole('link', { name: 'Powered by Giphy' })).toHaveAttribute('href', 'https://abc.com');
-   expect(screen.getByRole('img', { name: 'Powered by Giphy' })).toHaveAttribute('src', '/assets/giphy-dark.png');
+  expect(
+    screen.getByRole("link", { name: "Powered by Giphy" })
+  ).toHaveAttribute("href", "https://abc.com");
+  expect(screen.getByRole("img", { name: "Powered by Giphy" })).toHaveAttribute(
+    "src",
+    "/assets/giphy-dark.png"
+  );
 });

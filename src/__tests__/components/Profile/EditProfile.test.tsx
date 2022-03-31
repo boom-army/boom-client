@@ -1,16 +1,12 @@
-import React from "react";
 import { EditProfile } from "../../../components/Profile/EditProfile";
-import userEvent from "@testing-library/user-event";
-import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
-import { act, fireEvent, render, screen} from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 import { SnackbarProvider } from "notistack";
 import {
   useEditProfileMutation,
   EditProfileDocument,
 } from "../../../generated/graphql";
-// import { MockedProvider } from '@apollo/react-testing'
 
 const values = {
   handle: "shy-cloud-4965",
@@ -239,15 +235,18 @@ describe("Edit Profile : ", () => {
       </MockedProvider>,
       { wrapper: MemoryRouter }
     );
-  
-    expect(screen.getByText('Bio')).toBeInTheDocument();
-    expect(screen.getByText('Location')).toBeInTheDocument();
-    expect(screen.getByText('Date of Birth')).toBeInTheDocument();
-    expect(screen.getByText('Website')).toBeInTheDocument();
-    expect(screen.getByText('Bio')).toBeInTheDocument();
-    expect(screen.getByText('Handle')).toBeInTheDocument();
-    expect(screen.getByText('Name')).toBeInTheDocument();
-    expect(screen.getByRole('img', { name: 'cover' })).toHaveAttribute('src', '/default-cover.png');
+
+    expect(screen.getByText("Bio")).toBeInTheDocument();
+    expect(screen.getByText("Location")).toBeInTheDocument();
+    expect(screen.getByText("Date of Birth")).toBeInTheDocument();
+    expect(screen.getByText("Website")).toBeInTheDocument();
+    expect(screen.getByText("Bio")).toBeInTheDocument();
+    expect(screen.getByText("Handle")).toBeInTheDocument();
+    expect(screen.getByText("Name")).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "cover" })).toHaveAttribute(
+      "src",
+      "/default-cover.png"
+    );
   });
 
   test("Assertion testing when profile loading", async () => {
@@ -257,7 +256,6 @@ describe("Edit Profile : ", () => {
       </MockedProvider>,
       { wrapper: MemoryRouter }
     );
-    expect(screen.getByRole('progressbar')).toBeInTheDocument();
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
   });
 });
-

@@ -70,5 +70,3 @@ describe("<Connect/> component :", () => {
     expect(rendered).toMatchSnapshot();
   });
 });
-
-

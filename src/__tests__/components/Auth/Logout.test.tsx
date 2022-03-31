@@ -16,11 +16,9 @@ describe("<Logout/> component :", () => {
 
 test("Assertion testing of  <Logout/> component ", async () => {
   render(
-     <SnackbarProvider>
-        <Logout />
-      </SnackbarProvider>
+    <SnackbarProvider>
+      <Logout />
+    </SnackbarProvider>
   );
-  expect(screen.getByText('Logout')).toBeInTheDocument();
-
+  expect(screen.getByText("Logout")).toBeInTheDocument();
 });
-

@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchModalHeader } from "../../../components/Giphy/SearchModalHeader";
-import { act, fireEvent, render , screen} from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 
 let setIsLoading: any = false;
 let setInput: any = "";
@@ -34,7 +34,6 @@ describe("<SearchModalHeader/> component :", () => {
 });
 
 test("Assertion testing of<SearchModalHeader/> component ", () => {
- 
   render(
     <SearchModalHeader
       input={"anger"}
@@ -43,7 +42,6 @@ test("Assertion testing of<SearchModalHeader/> component ", () => {
       handleClose={handleClose}
     />
   );
-    expect(screen.getByRole('button', {name:"close"})).toBeInTheDocument();
-    expect(screen.getByText('Search for gif')).toBeInTheDocument();
- });
-
+  expect(screen.getByRole("button", { name: "close" })).toBeInTheDocument();
+  expect(screen.getByText("Search for gif")).toBeInTheDocument();
+});

@@ -11,7 +11,6 @@ describe("<SearchModal/> component :", () => {
   });
 });
 test("Assertion testing of <SearchModal/>  component when Search result found", async () => {
- 
   render(<SearchModal setGif={setGif} />);
-    expect(screen.getByRole('button')).toBeInTheDocument();
- });
+  expect(screen.getByRole("button")).toBeInTheDocument();
+});

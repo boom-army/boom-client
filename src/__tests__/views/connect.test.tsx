@@ -1,6 +1,6 @@
 import React from "react";
 import { ConnectView } from "../../views/Connect";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
 import { MockedProvider } from "@apollo/client/testing";
 import { MemoryRouter } from "react-router-dom";
@@ -69,4 +69,17 @@ describe("<Connect/> component :", () => {
     });
     expect(rendered).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of <Connect/> component", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <ConnectView />,
+      </SnackbarProvider>
+    </MockedProvider>,
+    { wrapper: MemoryRouter }
+  );
+
+  expect(screen.getByRole("progressbar")).toBeInTheDocument();
 });

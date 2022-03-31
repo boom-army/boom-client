@@ -1,6 +1,6 @@
 import React from "react";
 import { ExplorerLink } from "../../../components/ExplorerLink";
-import { act, fireEvent, render, screen} from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 
 describe("<ExplorerLink/> component :", () => {
   test("display <ExplorerLink/> component ", async () => {
@@ -25,6 +25,13 @@ test("Assertion testing of <ExplorerLink/>  component ", async () => {
       length={8}
     />
   );
-  expect(screen.getByRole('link', { name: 'JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4' })).toHaveAttribute('href', 'https://explorer.solana.com/TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA/JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4');
-  expect(screen.getByText('JBZ52cKh...')).toBeInTheDocument();
+  expect(
+    screen.getByRole("link", {
+      name: "JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4",
+    })
+  ).toHaveAttribute(
+    "href",
+    "https://explorer.solana.com/TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA/JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4"
+  );
+  expect(screen.getByText("JBZ52cKh...")).toBeInTheDocument();
 });

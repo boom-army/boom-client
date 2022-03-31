@@ -105,6 +105,7 @@ test("Assertion testing of  <Comment/>  component ", async () => {
     { wrapper: MemoryRouter }
   );
 
-expect(screen.getByRole('link', { name: '@shy-cloud-4965 a few seconds ago' })).toHaveAttribute('href', '/shy-cloud-4965');
-
+  expect(
+    screen.getByRole("link", { name: "@shy-cloud-4965 a few seconds ago" })
+  ).toHaveAttribute("href", "/shy-cloud-4965");
 });

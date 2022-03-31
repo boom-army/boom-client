@@ -1,6 +1,6 @@
 import React from "react";
 import { ConsumerCard } from "../../../components/Connect/ConsumerCard";
-import { act, fireEvent, render , screen} from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
 
 import { MockedProvider } from "@apollo/client/testing";
@@ -55,7 +55,7 @@ export const __mocks__: any = [
         ],
       },
     },
-  }, 
+  },
 ];
 
 describe("<ConsumerCArd/> component :", () => {
@@ -66,7 +66,7 @@ describe("<ConsumerCArd/> component :", () => {
         <MockedProvider mocks={__mocks__} addTypename={false}>
           <SnackbarProvider>
             <ConsumerCard consumer={consumer} />
-          </SnackbarProvider> 
+          </SnackbarProvider>
         </MockedProvider>,
         { wrapper: MemoryRouter }
       );
@@ -75,9 +75,7 @@ describe("<ConsumerCArd/> component :", () => {
   });
 });
 
-
 test("Assertion testing of  <ConsumerCard/>  component ", async () => {
-  
   render(
     <MockedProvider mocks={__mocks__} addTypename={false}>
       <SnackbarProvider>
@@ -86,5 +84,7 @@ test("Assertion testing of  <ConsumerCard/>  component ", async () => {
     </MockedProvider>,
     { wrapper: MemoryRouter }
   );
-expect(screen.getByRole('img', { name: 'shy-cloud-4965 cover photo' })).toHaveAttribute('src', 'https://my.sosol.app/default-cover.png');
+  expect(
+    screen.getByRole("img", { name: "shy-cloud-4965 cover photo" })
+  ).toHaveAttribute("src", "https://my.sosol.app/default-cover.png");
 });

@@ -1,10 +1,6 @@
-import React from "react";
 import { App } from "../App";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-
-// import { MentionsDocument, Tweet } from "../../../generated/graphql";
-
 import { FEED } from "../queries/others";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../queries/auth";
 import { USER_FOLLOW } from "../queries/follow";
@@ -36,4 +32,34 @@ test("renders a snapshot testing ...", async () => {
     );
   });
   expect(rendered).toMatchSnapshot();
+});
+
+test("Assertion testing of <Suggestion/> component", async () => {
+  await act(async () => {
+    render(
+      <MockedProvider mocks={__mocks__} addTypename={false}>
+        <SnackbarProvider>
+          <App />
+        </SnackbarProvider>
+      </MockedProvider>
+    );
+  });
+  expect(screen.getByRole("link", { name: "Boom β" })).toHaveAttribute(
+    "href",
+    "/"
+  );
+  expect(screen.getByRole("link", { name: "Community" })).toHaveAttribute(
+    "href",
+    "/"
+  );
+  expect(screen.getByRole("heading", { name: "Boom β" })).toBeInTheDocument();
+  expect(
+    screen.getByRole("button", { name: "Select Wallet" })
+  ).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Post" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Menu" })).toBeInTheDocument();
+  expect(screen.getByRole("textbox", { name: "" })).toHaveAttribute(
+    "placeholder",
+    "What's happening?"
+  );
 });

@@ -2,14 +2,12 @@ import React from "react";
 import { MasterTweet } from "../../../components/Tweet/MasterTweet";
 import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
-// import { MentionsDocument, Tweet } from "../../../generated/graphql";
 import {
   TOGGLE_REACTION,
   TWEET,
   DELETE_TWEET,
 } from "../../../queries/tweet/index";
-// import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
-import { act, fireEvent, render} from "@testing-library/react";
+import { act, fireEvent, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 

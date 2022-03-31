@@ -49,7 +49,6 @@ describe("Search Input:", () => {
 });
 
 test("Assertion testing of <SearchInput/> component", () => {
- 
   render(
     <MockedProvider mocks={__mocks__} addTypename={false}>
       <SnackbarProvider>
@@ -59,6 +58,8 @@ test("Assertion testing of <SearchInput/> component", () => {
     { wrapper: MemoryRouter }
   );
 
-  expect(screen.getByRole('textbox', { name: '' })).toHaveAttribute('placeholder', 'Search by tags, tweets, people');
-  
- });
+  expect(screen.getByRole("textbox", { name: "" })).toHaveAttribute(
+    "placeholder",
+    "Search by tags, tweets, people"
+  );
+});

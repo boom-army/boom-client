@@ -48,12 +48,9 @@ describe("Search Users:", () => {
 });
 
 test("Assertion testing of <searchResultUsers/> component", () => {
- 
-  render(
-    <SearchResultUsers loading={false} users={users} />,
-  { wrapper: MemoryRouter }
-  );
+  render(<SearchResultUsers loading={false} users={users} />, {
+    wrapper: MemoryRouter,
+  });
 
-     expect(screen.getByRole('button', { name: 'delete' })).toBeInTheDocument();
-  
- });
+  expect(screen.getByRole("button", { name: "delete" })).toBeInTheDocument();
+});

@@ -1,6 +1,6 @@
 import React from "react";
 import { CurrentUser } from "../../../components/CurrentUser/index";
-import { act, fireEvent, render , screen} from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 describe("<CurrentUser/> component :", () => {
@@ -11,6 +11,9 @@ describe("<CurrentUser/> component :", () => {
 });
 
 test("Assertion testing of  <CurrentUser/> component ", async () => {
-  render(<CurrentUser />, { wrapper: MemoryRouter })
-  expect(screen.getByRole('link', { name: 'Boom β' })).toHaveAttribute('href', '/');
+  render(<CurrentUser />, { wrapper: MemoryRouter });
+  expect(screen.getByRole("link", { name: "Boom β" })).toHaveAttribute(
+    "href",
+    "/"
+  );
 });

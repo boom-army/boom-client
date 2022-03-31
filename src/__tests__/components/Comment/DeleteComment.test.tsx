@@ -1,6 +1,6 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
-import { act, fireEvent, render,screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 import { SnackbarProvider } from "notistack";
 import { DELETE_COMMENT } from "../../../queries/comment";
@@ -48,7 +48,7 @@ describe("<DeleteComponent/>: ", () => {
 });
 
 // test("Assertion testing of  <Logout/> component ", async () => {
-  
+
 //   render(
 //     <MockedProvider mocks={__mocks__} addTypename={false}>
 //       <SnackbarProvider>

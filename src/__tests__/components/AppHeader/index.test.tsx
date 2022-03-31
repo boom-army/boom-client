@@ -1,6 +1,6 @@
 import React from "react";
 import { AppHeader } from "../../../components/AppHeader/index";
-import { act, fireEvent, render,screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 
@@ -32,8 +32,7 @@ export const __mocks__: any = [
 
 describe("<AppHeader/> component :", () => {
   test("display <AppHeader/> component ", async () => {
-
-    //snapshot testing 
+    //snapshot testing
     let rendered;
     await act(async () => {
       rendered = render(
@@ -46,26 +45,26 @@ describe("<AppHeader/> component :", () => {
       );
     });
     expect(rendered).toMatchSnapshot();
-   
+  });
+
+  //assertion testing
+
+  test("Assertion testing of <AppHeader/> component ", async () => {
+    render(
+      <MockedProvider mocks={__mocks__} addTypename={false}>
+        <SnackbarProvider>
+          <AppHeader />
+        </SnackbarProvider>
+      </MockedProvider>,
+      { wrapper: MemoryRouter }
+    );
+    expect(screen.getByText("Boom β")).toBeInTheDocument();
+
+    expect(screen.getByText("Select Wallet")).toBeInTheDocument();
+
+    expect(screen.getByRole("link", { name: "Boom β" })).toHaveAttribute(
+      "href",
+      "/"
+    );
+  });
 });
-
-//assertion testing
-
-test("Assertion testing of <AppHeader/> component ", async () => {
-  render(
-    <MockedProvider mocks={__mocks__} addTypename={false}>
-      <SnackbarProvider>
-        <AppHeader />
-      </SnackbarProvider>
-    </MockedProvider>,
-    { wrapper: MemoryRouter }
-  );
-  expect(screen.getByText('Boom β')).toBeInTheDocument();
-
-  expect(screen.getByText('Select Wallet')).toBeInTheDocument();
-
-  expect(screen.getByRole('link', { name: 'Boom β' })).toHaveAttribute('href', '/')
-});
-});
-
-
