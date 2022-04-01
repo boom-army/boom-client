@@ -13,4 +13,3 @@ describe("<ImageSuggestionGrid/> component :", () => {
     expect(rendered).toMatchSnapshot();
   });
 });
-

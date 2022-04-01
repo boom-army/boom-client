@@ -57,8 +57,9 @@ test("Assertion testing of  <follow/> component  When isfollowing true", () => {
       </SnackbarProvider>
     </MockedProvider>
   );
+
   expect(screen.getByTestId("PersonRemoveIcon")).toBeInTheDocument();
-});
+ });
 
 test("Assertion testing of  <follow/> component  When isfollowing false", () => {
   render(
@@ -68,5 +69,7 @@ test("Assertion testing of  <follow/> component  When isfollowing false", () => 
       </SnackbarProvider>
     </MockedProvider>
   );
+
   expect(screen.getByTestId("PersonAddIcon")).toBeInTheDocument();
+
 });
