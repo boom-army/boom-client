@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 
 interface InputProps {
-  lg?: boolean;
+  lg?: any;
   type?: string;
   text?: string;
   value?: string;
@@ -13,8 +13,8 @@ interface InputProps {
 }
 
 const Wrapper = styled("div")<{
-  lg?: boolean;
-  fullWidth?: boolean;
+  lg?: any;
+  fullWidth?: any;
   props?: any;
 }>((props) => ({
   width: `${(props.fullWidth ? "100%" : "315px") || (props.lg && "100%")}`,
@@ -68,7 +68,7 @@ const Input = ({
   hideLabel = false,
 }: InputProps) => {
   return (
-    <Wrapper lg={lg} fullWidth={fullWidth}>
+    <Wrapper lg={lg == false ? "false" : "true"} {...fullWidth}>
       <label className={hideLabel ? "hideLabel" : ""}>{text}</label>
       <input
         autoComplete="new-password"

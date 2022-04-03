@@ -1,0 +1,378 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Display <EditProfileForm/> component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <form
+        class="css-zbe5z0"
+        lg="true"
+      >
+        <div
+          class="cover-photo"
+        >
+          <label
+            for="cover-photo-input"
+          >
+            <img
+              alt="cover"
+              class="css-3y6f34"
+              src="/default-cover.png"
+            />
+          </label>
+          <input
+            accept="image/*"
+            id="cover-photo-input"
+            type="file"
+          />
+        </div>
+        <div
+          class="avatar-input"
+        >
+          <label
+            for="avatar-input-file"
+          >
+            <div
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-2s90m6-MuiAvatar-root"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                data-testid="PersonIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+          </label>
+          <input
+            accept="image/*"
+            id="avatar-input-file"
+            type="file"
+          />
+        </div>
+        <div
+          class="css-1lkj0jt"
+          lg="true"
+        >
+          <label
+            class=""
+          >
+            Handle
+          </label>
+          <input
+            autocomplete="new-password"
+            type="text"
+            value="shy-cloud-4965"
+          />
+        </div>
+        <div
+          class="css-1lkj0jt"
+          lg="true"
+        >
+          <label
+            class=""
+          >
+            Name
+          </label>
+          <input
+            autocomplete="new-password"
+            type="text"
+            value="shy-cloud-4965"
+          />
+        </div>
+        <div
+          class="bio-wrapper"
+        >
+          <label
+            class="bio"
+            for="bio"
+          >
+            Bio
+          </label>
+          <textarea
+            id="bio"
+            placeholder="Bio"
+            rows="1"
+            style="height: 0px; overflow: hidden;"
+          >
+            full stack developer
+          </textarea>
+          <textarea
+            aria-hidden="true"
+            readonly=""
+            style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px;"
+            tabindex="-1"
+          />
+        </div>
+        <div
+          class="css-1lkj0jt"
+          lg="true"
+        >
+          <label
+            class=""
+          >
+            Website
+          </label>
+          <input
+            autocomplete="new-password"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="css-1lkj0jt"
+          lg="true"
+        >
+          <label
+            class=""
+          >
+            Date of Birth
+          </label>
+          <input
+            autocomplete="new-password"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="css-1lkj0jt"
+          lg="true"
+        >
+          <label
+            class=""
+          >
+            Location
+          </label>
+          <input
+            autocomplete="new-password"
+            type="text"
+            value=""
+          />
+        </div>
+        <button
+          class="css-b0ogej"
+          outline="true"
+          type="submit"
+        >
+          Save
+        </button>
+      </form>
+    </div>
+  </body>,
+  "container": <div>
+    <form
+      class="css-zbe5z0"
+      lg="true"
+    >
+      <div
+        class="cover-photo"
+      >
+        <label
+          for="cover-photo-input"
+        >
+          <img
+            alt="cover"
+            class="css-3y6f34"
+            src="/default-cover.png"
+          />
+        </label>
+        <input
+          accept="image/*"
+          id="cover-photo-input"
+          type="file"
+        />
+      </div>
+      <div
+        class="avatar-input"
+      >
+        <label
+          for="avatar-input-file"
+        >
+          <div
+            class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-2s90m6-MuiAvatar-root"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+              data-testid="PersonIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+              />
+            </svg>
+          </div>
+        </label>
+        <input
+          accept="image/*"
+          id="avatar-input-file"
+          type="file"
+        />
+      </div>
+      <div
+        class="css-1lkj0jt"
+        lg="true"
+      >
+        <label
+          class=""
+        >
+          Handle
+        </label>
+        <input
+          autocomplete="new-password"
+          type="text"
+          value="shy-cloud-4965"
+        />
+      </div>
+      <div
+        class="css-1lkj0jt"
+        lg="true"
+      >
+        <label
+          class=""
+        >
+          Name
+        </label>
+        <input
+          autocomplete="new-password"
+          type="text"
+          value="shy-cloud-4965"
+        />
+      </div>
+      <div
+        class="bio-wrapper"
+      >
+        <label
+          class="bio"
+          for="bio"
+        >
+          Bio
+        </label>
+        <textarea
+          id="bio"
+          placeholder="Bio"
+          rows="1"
+          style="height: 0px; overflow: hidden;"
+        >
+          full stack developer
+        </textarea>
+        <textarea
+          aria-hidden="true"
+          readonly=""
+          style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px;"
+          tabindex="-1"
+        />
+      </div>
+      <div
+        class="css-1lkj0jt"
+        lg="true"
+      >
+        <label
+          class=""
+        >
+          Website
+        </label>
+        <input
+          autocomplete="new-password"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="css-1lkj0jt"
+        lg="true"
+      >
+        <label
+          class=""
+        >
+          Date of Birth
+        </label>
+        <input
+          autocomplete="new-password"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="css-1lkj0jt"
+        lg="true"
+      >
+        <label
+          class=""
+        >
+          Location
+        </label>
+        <input
+          autocomplete="new-password"
+          type="text"
+          value=""
+        />
+      </div>
+      <button
+        class="css-b0ogej"
+        outline="true"
+        type="submit"
+      >
+        Save
+      </button>
+    </form>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

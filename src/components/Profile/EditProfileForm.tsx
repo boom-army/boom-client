@@ -115,7 +115,7 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
   };
 
   return (
-    <Form lg onSubmit={handleEditProfile}>
+    <Form lg={true && "true"} onSubmit={handleEditProfile}>
       <div className="cover-photo">
         <label htmlFor="cover-photo-input">
           <CoverPhoto
@@ -144,14 +144,14 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
       </div>
 
       <Input
-        lg={true}
+        lg={true && "true"}
         text="Handle"
         value={handle.value}
         onChange={handle.onChange}
       />
 
       <Input
-        lg={true}
+        lg={true && "true"}
         text="Name"
         value={consumerName.value}
         onChange={consumerName.onChange}
@@ -168,24 +168,24 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
         />
       </div>
       <Input
-        lg={true}
+        lg={true && "true"}
         text="Website"
         value={website.value}
         onChange={website.onChange}
       />
       <Input
-        lg={true}
+        lg={true && "true"}
         text="Date of Birth"
         value={dob.value}
         onChange={dob.onChange}
       />
       <Input
-        lg={true}
+        lg={true && "true"}
         text="Location"
         value={location.value}
         onChange={location.onChange}
       />
-      <Button outline disabled={loading} type="submit">
+      <Button outline={true && "true"} disabled={loading} type="submit">
         {loading ? "Saving" : "Save"}
       </Button>
     </Form>
