@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`user profile info renders correctly user 1`] = `
+<div
+  className="css-1jg57c8"
+>
+  <div
+    className="MuiBox-root css-i3pbo"
+  >
+    <img
+      alt="cover"
+      className="css-3y6f34"
+      src="/default-cover.png"
+    />
+    <div
+      className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="PersonIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    className="MuiBox-root css-1ns5f5t"
+  >
+    <div
+      className="MuiBox-root css-0"
+    >
+      <a
+        className="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButtonBase-root  css-1k23hlb-MuiButtonBase-root-MuiButton-root"
+        href="/settings/profile"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+      >
+        Edit Profile
+      </a>
+    </div>
+    <div
+      className="MuiBox-root css-133i6oc"
+    >
+      <div
+        className="profile-name-handle"
+      >
+        <span
+          className="consumerName"
+        >
+          shy-cloud-4965
+        </span>
+        <br />
+        <span
+          className="wallet"
+        >
+          <strong>
+            wallet: 
+          </strong>
+          JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4
+        </span>
+        <br />
+        <span
+          className="handle"
+        >
+          @shy-cloud-4965
+        </span>
+      </div>
+    </div>
+    <div
+      className="MuiBox-root css-4cxybv"
+    >
+      <p
+        className="bio"
+      >
+        full stack developer
+      </p>
+      <div
+        className="follow-following"
+      >
+        <span>
+          No followers
+        </span>
+        <span>
+          Not following anyone
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

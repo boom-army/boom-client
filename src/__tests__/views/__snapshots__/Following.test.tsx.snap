@@ -1,0 +1,384 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Following/> component : display <Following/> component  1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="css-t3w3s0"
+      >
+        <div
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+            data-testid="PersonIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
+        </div>
+        <form>
+          <div
+            class="new-tweet"
+          >
+            <textarea
+              placeholder="What's happening?"
+              rows="1"
+              style="height: 0px; overflow: hidden;"
+            />
+            <textarea
+              aria-hidden="true"
+              readonly=""
+              style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
+              tabindex="-1"
+            />
+            <div
+              class="new-tweet-action"
+            >
+              <div
+                class="svg-input"
+              >
+                <div
+                  class="css-s5gg9u"
+                >
+                  <span
+                    class="emoji-pick"
+                  >
+                    <svg
+                      fill="#637584"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      width="18"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 18C4.03702 18 0 13.963 0 9C0 4.03702 4.03702 0 9 0C13.963 0 18 4.03702 18 9C18 13.963 13.963 18 9 18ZM9 1.25581C4.73024 1.25581 1.25581 4.73024 1.25581 9C1.25581 13.2697 4.73024 16.7442 9 16.7442C13.2697 16.7442 16.7442 13.2697 16.7442 9C16.7442 4.73024 13.2697 1.25581 9 1.25581Z"
+                      />
+                      <path
+                        d="M8.99985 13.2824C7.41588 13.2824 5.95829 12.4871 5.10183 11.1525C4.91429 10.8611 4.99886 10.4744 5.29104 10.286C5.58239 10.0968 5.97086 10.1822 6.15839 10.4752C6.78379 11.4481 7.8462 12.0282 9.00075 12.0282C10.1552 12.0282 11.2177 11.4481 11.8439 10.4761C12.0314 10.1831 12.4199 10.0993 12.7112 10.2877C13.0043 10.4752 13.088 10.8637 12.9005 11.1551C12.0423 12.4895 10.5848 13.2857 9.00075 13.2857L8.99985 13.2824Z"
+                      />
+                      <path
+                        d="M11.2923 8.10923C11.9756 8.10923 12.5296 7.5552 12.5296 6.87183C12.5296 6.18843 11.9756 5.63443 11.2923 5.63443C10.6089 5.63443 10.0549 6.18843 10.0549 6.87183C10.0549 7.5552 10.6089 8.10923 11.2923 8.10923Z"
+                      />
+                      <path
+                        d="M6.70767 8.10923C7.39106 8.10923 7.94505 7.5552 7.94505 6.87183C7.94505 6.18843 7.39106 5.63443 6.70767 5.63443C6.02428 5.63443 5.47028 6.18843 5.47028 6.87183C5.47028 7.5552 6.02428 8.10923 6.70767 8.10923Z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                <button
+                  class="tweet-gif css-185vf5l"
+                  type="button"
+                >
+                  <svg
+                    fill="#C4C4C4"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M3 2H21C21.5523 2 22 2.44772 22 3V21C22 21.5523 21.5523 22 21 22H3C2.44772 22 2 21.5523 2 21V3C2 2.44772 2.44772 2 3 2ZM0 3C0 1.34315 1.34315 0 3 0H21C22.6569 0 24 1.34315 24 3V21C24 22.6569 22.6569 24 21 24H3C1.34315 24 0 22.6569 0 21V3ZM9.61279 15.8228C10.1141 15.633 10.5062 15.3537 10.7891 14.9849V11.9878H7.82422V13.019H9.43555V14.5498C9.14193 14.8649 8.64779 15.0225 7.95312 15.0225C7.31934 15.0225 6.8234 14.7897 6.46533 14.3242C6.11084 13.8551 5.93359 13.1981 5.93359 12.353V11.7515C5.94434 10.9028 6.10726 10.2601 6.42236 9.82324C6.74105 9.38281 7.20475 9.1626 7.81348 9.1626C8.75521 9.1626 9.30127 9.63346 9.45166 10.5752H10.7837C10.6799 9.76595 10.3719 9.14648 9.85986 8.7168C9.34782 8.28711 8.65674 8.07227 7.78662 8.07227C6.77327 8.07227 5.98372 8.40527 5.41797 9.07129C4.85221 9.73372 4.56934 10.6558 4.56934 11.8374V12.4497C4.58008 13.1873 4.72152 13.8337 4.99365 14.3887C5.26937 14.9401 5.65967 15.3644 6.16455 15.6616C6.66943 15.9588 7.24951 16.1074 7.90479 16.1074C8.54216 16.1074 9.11149 16.0125 9.61279 15.8228ZM12.3628 16H13.7163V8.17969H12.3628V16ZM16.7456 12.686H19.8931V11.6011H16.7456V9.27539H20.355V8.17969H15.3867V16H16.7456V12.686Z"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+                <label
+                  for="file-input"
+                >
+                  <span
+                    class="file-upload-icon"
+                  >
+                    <svg
+                      class="css-1do0qis"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      width="24"
+                    >
+                      <path
+                        d="M21.3 0H2.7C1.212 0 0 1.212 0 2.7V21.3C0 22.788 1.212 24 2.7 24H21.3C22.788 24 24 22.788 24 21.3V2.7C24 1.212 22.788 0 21.3 0ZM2.7 1.8H21.3C21.7956 1.8 22.2 2.2044 22.2 2.7V14.3112L17.5704 9.6816C17.4024 9.5136 17.1744 9.4176 16.9344 9.4176H16.9308C16.6908 9.4176 16.4592 9.5136 16.2924 9.6864L11.112 14.9472L8.9364 12.78C8.7684 12.612 8.5404 12.516 8.3004 12.516C8.0688 12.48 7.8264 12.612 7.6584 12.7884L1.8 18.7704V2.7C1.8 2.2044 2.2044 1.8 2.7 1.8ZM1.8072 21.336L8.3088 14.6952L15.8472 22.2H2.7C2.2176 22.2 1.8276 21.8136 1.8072 21.336ZM21.3 22.2H18.396L12.3876 16.2156L16.938 11.5956L22.2 16.8564V21.3C22.2 21.7956 21.7956 22.2 21.3 22.2Z"
+                      />
+                      <path
+                        d="M8.2416 9.42126C9.26355 9.42126 10.092 8.59281 10.092 7.57086C10.092 6.54891 9.26355 5.72046 8.2416 5.72046C7.21966 5.72046 6.3912 6.54891 6.3912 7.57086C6.3912 8.59281 7.21966 9.42126 8.2416 9.42126Z"
+                      />
+                    </svg>
+                  </span>
+                </label>
+                <input
+                  accept="image/*"
+                  id="file-input"
+                  type="file"
+                />
+                <span
+                  class="css-1wpxgnf"
+                >
+                  <span
+                    class="nft-pick"
+                  >
+                    <svg>
+                      nft.svg
+                    </svg>
+                  </span>
+                </span>
+              </div>
+              <button
+                class="css-1ib0c8s"
+                sm="true"
+              >
+                Post
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div
+        class="MuiBox-root css-15g2oxy"
+      >
+        <div
+          class="MuiBox-root css-1l4w6pd"
+        >
+          <span
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+            role="progressbar"
+            style="width: 30px; height: 30px;"
+          >
+            <svg
+              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="20.2"
+                stroke-width="3.6"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="css-t3w3s0"
+    >
+      <div
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+          data-testid="PersonIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+          />
+        </svg>
+      </div>
+      <form>
+        <div
+          class="new-tweet"
+        >
+          <textarea
+            placeholder="What's happening?"
+            rows="1"
+            style="height: 0px; overflow: hidden;"
+          />
+          <textarea
+            aria-hidden="true"
+            readonly=""
+            style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding: 0px; width: 100%;"
+            tabindex="-1"
+          />
+          <div
+            class="new-tweet-action"
+          >
+            <div
+              class="svg-input"
+            >
+              <div
+                class="css-s5gg9u"
+              >
+                <span
+                  class="emoji-pick"
+                >
+                  <svg
+                    fill="#637584"
+                    height="18"
+                    viewBox="0 0 18 18"
+                    width="18"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9 18C4.03702 18 0 13.963 0 9C0 4.03702 4.03702 0 9 0C13.963 0 18 4.03702 18 9C18 13.963 13.963 18 9 18ZM9 1.25581C4.73024 1.25581 1.25581 4.73024 1.25581 9C1.25581 13.2697 4.73024 16.7442 9 16.7442C13.2697 16.7442 16.7442 13.2697 16.7442 9C16.7442 4.73024 13.2697 1.25581 9 1.25581Z"
+                    />
+                    <path
+                      d="M8.99985 13.2824C7.41588 13.2824 5.95829 12.4871 5.10183 11.1525C4.91429 10.8611 4.99886 10.4744 5.29104 10.286C5.58239 10.0968 5.97086 10.1822 6.15839 10.4752C6.78379 11.4481 7.8462 12.0282 9.00075 12.0282C10.1552 12.0282 11.2177 11.4481 11.8439 10.4761C12.0314 10.1831 12.4199 10.0993 12.7112 10.2877C13.0043 10.4752 13.088 10.8637 12.9005 11.1551C12.0423 12.4895 10.5848 13.2857 9.00075 13.2857L8.99985 13.2824Z"
+                    />
+                    <path
+                      d="M11.2923 8.10923C11.9756 8.10923 12.5296 7.5552 12.5296 6.87183C12.5296 6.18843 11.9756 5.63443 11.2923 5.63443C10.6089 5.63443 10.0549 6.18843 10.0549 6.87183C10.0549 7.5552 10.6089 8.10923 11.2923 8.10923Z"
+                    />
+                    <path
+                      d="M6.70767 8.10923C7.39106 8.10923 7.94505 7.5552 7.94505 6.87183C7.94505 6.18843 7.39106 5.63443 6.70767 5.63443C6.02428 5.63443 5.47028 6.18843 5.47028 6.87183C5.47028 7.5552 6.02428 8.10923 6.70767 8.10923Z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <button
+                class="tweet-gif css-185vf5l"
+                type="button"
+              >
+                <svg
+                  fill="#C4C4C4"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    d="M3 2H21C21.5523 2 22 2.44772 22 3V21C22 21.5523 21.5523 22 21 22H3C2.44772 22 2 21.5523 2 21V3C2 2.44772 2.44772 2 3 2ZM0 3C0 1.34315 1.34315 0 3 0H21C22.6569 0 24 1.34315 24 3V21C24 22.6569 22.6569 24 21 24H3C1.34315 24 0 22.6569 0 21V3ZM9.61279 15.8228C10.1141 15.633 10.5062 15.3537 10.7891 14.9849V11.9878H7.82422V13.019H9.43555V14.5498C9.14193 14.8649 8.64779 15.0225 7.95312 15.0225C7.31934 15.0225 6.8234 14.7897 6.46533 14.3242C6.11084 13.8551 5.93359 13.1981 5.93359 12.353V11.7515C5.94434 10.9028 6.10726 10.2601 6.42236 9.82324C6.74105 9.38281 7.20475 9.1626 7.81348 9.1626C8.75521 9.1626 9.30127 9.63346 9.45166 10.5752H10.7837C10.6799 9.76595 10.3719 9.14648 9.85986 8.7168C9.34782 8.28711 8.65674 8.07227 7.78662 8.07227C6.77327 8.07227 5.98372 8.40527 5.41797 9.07129C4.85221 9.73372 4.56934 10.6558 4.56934 11.8374V12.4497C4.58008 13.1873 4.72152 13.8337 4.99365 14.3887C5.26937 14.9401 5.65967 15.3644 6.16455 15.6616C6.66943 15.9588 7.24951 16.1074 7.90479 16.1074C8.54216 16.1074 9.11149 16.0125 9.61279 15.8228ZM12.3628 16H13.7163V8.17969H12.3628V16ZM16.7456 12.686H19.8931V11.6011H16.7456V9.27539H20.355V8.17969H15.3867V16H16.7456V12.686Z"
+                    fill-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <label
+                for="file-input"
+              >
+                <span
+                  class="file-upload-icon"
+                >
+                  <svg
+                    class="css-1do0qis"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path
+                      d="M21.3 0H2.7C1.212 0 0 1.212 0 2.7V21.3C0 22.788 1.212 24 2.7 24H21.3C22.788 24 24 22.788 24 21.3V2.7C24 1.212 22.788 0 21.3 0ZM2.7 1.8H21.3C21.7956 1.8 22.2 2.2044 22.2 2.7V14.3112L17.5704 9.6816C17.4024 9.5136 17.1744 9.4176 16.9344 9.4176H16.9308C16.6908 9.4176 16.4592 9.5136 16.2924 9.6864L11.112 14.9472L8.9364 12.78C8.7684 12.612 8.5404 12.516 8.3004 12.516C8.0688 12.48 7.8264 12.612 7.6584 12.7884L1.8 18.7704V2.7C1.8 2.2044 2.2044 1.8 2.7 1.8ZM1.8072 21.336L8.3088 14.6952L15.8472 22.2H2.7C2.2176 22.2 1.8276 21.8136 1.8072 21.336ZM21.3 22.2H18.396L12.3876 16.2156L16.938 11.5956L22.2 16.8564V21.3C22.2 21.7956 21.7956 22.2 21.3 22.2Z"
+                    />
+                    <path
+                      d="M8.2416 9.42126C9.26355 9.42126 10.092 8.59281 10.092 7.57086C10.092 6.54891 9.26355 5.72046 8.2416 5.72046C7.21966 5.72046 6.3912 6.54891 6.3912 7.57086C6.3912 8.59281 7.21966 9.42126 8.2416 9.42126Z"
+                    />
+                  </svg>
+                </span>
+              </label>
+              <input
+                accept="image/*"
+                id="file-input"
+                type="file"
+              />
+              <span
+                class="css-1wpxgnf"
+              >
+                <span
+                  class="nft-pick"
+                >
+                  <svg>
+                    nft.svg
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <button
+              class="css-1ib0c8s"
+              sm="true"
+            >
+              Post
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div
+      class="MuiBox-root css-15g2oxy"
+    >
+      <div
+        class="MuiBox-root css-1l4w6pd"
+      >
+        <span
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 30px; height: 30px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

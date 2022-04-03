@@ -6,7 +6,7 @@ import DeleteComment from "./DeleteComment";
 import { setDate } from "../../utils";
 import { Box } from "@mui/system";
 import { styled } from "@mui/material/styles";
-import { Comment } from "../../generated/graphql";
+// import { Comment } from "../../generated/graphql";
 
 const Wrapper = styled("div")((props) => ({
   display: "flex",
@@ -49,14 +49,28 @@ const Wrapper = styled("div")((props) => ({
 
     ".comment-info-user span.secondary": {
       paddingLeft: "0",
-      ":first-child": {
+      ":first-of-type": {
         paddingRight: "0.6rem",
       },
     },
   },
 }));
 
-const Comment = ({ id, text, isCommentMine, user, createdAt }: Comment) => {
+interface CommentProps {
+  id: string;
+  text?: string;
+  isCommentMine?: boolean;
+  user?: any;
+  createdAt?: string;
+}
+
+const Comment = ({
+  id,
+  text,
+  isCommentMine,
+  user,
+  createdAt,
+}: CommentProps) => {
   // const { id, text, isCommentMine, user, createdAt } = comment;
   const handle = user && user.handle;
 
