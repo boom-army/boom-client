@@ -1,6 +1,6 @@
 import React from "react";
 import { Suggestion } from "../../views/Suggestion";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { USER_FOLLOW } from "../../queries/follow/index";
 import { MockedProvider } from "@apollo/client/testing";
@@ -74,4 +74,14 @@ describe("<Suggestion/> component :", () => {
     );
     expect(rendered).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of <Suggestion/> component", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <Suggestion />
+    </MockedProvider>,
+    { wrapper: MemoryRouter }
+  );
+  expect(screen.getByRole("progressbar")).toBeInTheDocument();
 });

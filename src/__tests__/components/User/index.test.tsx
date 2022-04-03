@@ -1,8 +1,6 @@
 import React from "react";
 import { User } from "../../../components/User/index";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 
 const data: any = {
@@ -21,4 +19,14 @@ describe("<user/>", () => {
     const container = render(<User user={data} />, { wrapper: MemoryRouter });
     expect(container).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of <user/> component", () => {
+  render(<User user={data} />, { wrapper: MemoryRouter });
+
+  expect(screen.getByRole("button", { name: "delete" })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "" })).toHaveAttribute(
+    "href",
+    "/settings/profile"
+  );
 });

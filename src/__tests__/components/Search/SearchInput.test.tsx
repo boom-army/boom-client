@@ -10,7 +10,7 @@ import SearchInput from "../../../components/Search/SearchInput";
 
 import { User as UserProps } from "../../../generated/graphql";
 import SearchResult from "../../../components/Search/SearchResult";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import { MockedProvider } from "@apollo/client/testing";
@@ -46,4 +46,20 @@ describe("Search Input:", () => {
     // fireEvent.click(tree.getByText("Users"));
     expect(tree).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of <SearchInput/> component", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <SearchInput />
+      </SnackbarProvider>
+    </MockedProvider>,
+    { wrapper: MemoryRouter }
+  );
+
+  expect(screen.getByRole("textbox", { name: "" })).toHaveAttribute(
+    "placeholder",
+    "Search by tags, tweets, people"
+  );
 });

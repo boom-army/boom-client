@@ -3,7 +3,8 @@ import { NewTweet } from "../../../components/Tweet/NewTweet";
 import { MockedProvider } from "@apollo/client/testing";
 import { TWEET, NEW_TWEET } from "../../../queries/tweet/index";
 import { SnackbarProvider } from "notistack";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+
 const feed: any = {
   data: {
     feed: [
@@ -382,8 +383,23 @@ test("display <NewTweet/> component", async () => {
           <NewTweet feed={[]} parentTweet={[]} />
         </SnackbarProvider>
       </MockedProvider>
-      // { wrapper: MemoryRouter }
     );
   });
   expect(rendered).toMatchSnapshot();
+});
+
+test("Assertion testing of <NewTweet/> component", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <NewTweet feed={[]} parentTweet={[]} />
+      </SnackbarProvider>
+    </MockedProvider>
+  );
+
+  expect(screen.getByRole("button", { name: "Post" })).toBeInTheDocument();
+  expect(screen.getByRole("textbox", { name: "" })).toHaveAttribute(
+    "placeholder",
+    "What's happening?"
+  );
 });

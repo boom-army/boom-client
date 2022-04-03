@@ -1,6 +1,6 @@
 import React from "react";
 import { Home } from "../../views/Home";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { FeedDocument } from "../../generated/graphql";
 import { MockedProvider } from "@apollo/client/testing";
@@ -33,4 +33,19 @@ describe("<Home/> component :", () => {
     );
     expect(rendered).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of <Home/> component", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <Home />
+      </SnackbarProvider>
+    </MockedProvider>,
+    { wrapper: MemoryRouter }
+  );
+
+  expect(screen.getByRole("textbox")).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Post" })).toBeInTheDocument();
+  expect(screen.getByRole("progressbar")).toBeInTheDocument();
 });

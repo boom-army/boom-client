@@ -5,7 +5,7 @@ import { MockedProvider } from "@apollo/client/testing";
 // import { MentionsDocument, Tweet } from "../../../generated/graphql";
 import { TOGGLE_REACTION, TWEET } from "../../../queries/tweet/index";
 // import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 
@@ -77,4 +77,18 @@ test("Tweet component snapshot testing ...", async () => {
     );
   });
   expect(rendered).toMatchSnapshot();
+});
+
+test("Assertion testing of <ReTweet/> component", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <ShowTweet tweet={Tweet} />
+      </SnackbarProvider>
+    </MockedProvider>,
+    { wrapper: MemoryRouter }
+  );
+  expect(
+    screen.getByRole("link", { name: "shy-cloud-4965 @shy-cloud-4965" })
+  ).toHaveAttribute("href", "/shy-cloud-4965");
 });

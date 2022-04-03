@@ -1,7 +1,7 @@
 import React from "react";
 import { User as UserProps } from "../../../generated/graphql";
 import SearchResult from "../../../components/Search/SearchResult";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import { MockedProvider } from "@apollo/client/testing";

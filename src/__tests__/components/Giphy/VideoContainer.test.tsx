@@ -1,6 +1,6 @@
 import React from "react";
 import { VideoContainer } from "../../../components/Giphy/VideoContainer";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 
 let gif: any = {
   type: "gif",
@@ -214,4 +214,9 @@ describe("<VideoContainer/> component :", () => {
     let rendered = render(<VideoContainer gif={gif} />);
     expect(rendered).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of<VideoContainer/> component", () => {
+  render(<VideoContainer gif={gif} />);
+  expect(screen.getByText("GIF")).toBeInTheDocument();
 });

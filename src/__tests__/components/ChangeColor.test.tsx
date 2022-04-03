@@ -1,6 +1,5 @@
-import React from "react";
 import { ChangeColor } from "../../components/ChangeColor";
-import { act, fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 describe("<ChangeColor/> component :", () => {

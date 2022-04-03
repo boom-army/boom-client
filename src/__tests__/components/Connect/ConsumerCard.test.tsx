@@ -1,6 +1,6 @@
 import React from "react";
 import { ConsumerCard } from "../../../components/Connect/ConsumerCard";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
 
 import { MockedProvider } from "@apollo/client/testing";
@@ -73,4 +73,18 @@ describe("<ConsumerCArd/> component :", () => {
     });
     expect(rendered).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of  <ConsumerCard/>  component ", async () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <ConsumerCard consumer={consumer} />
+      </SnackbarProvider>
+    </MockedProvider>,
+    { wrapper: MemoryRouter }
+  );
+  expect(
+    screen.getByRole("img", { name: "shy-cloud-4965 cover photo" })
+  ).toHaveAttribute("src", "https://my.sosol.app/default-cover.png");
 });

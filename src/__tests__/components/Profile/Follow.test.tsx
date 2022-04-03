@@ -1,27 +1,8 @@
-import React from "react";
 import { Follow } from "../../../components/Profile/Follow";
-import { BrowserRouter } from "react-router-dom";
-
-// import React, { useEffect, useState } from "react";
-// import ProfileInfo from "./ProfileInfo";
-// import { Box, Tab } from "@mui/material";
-// import { Loader } from "../Loader";
-// import { Meeps } from "./Meeps";
-import { TabContext, TabPanel, TabList } from "@mui/lab";
-import { useParams } from "react-router-dom";
-import { useProfileLazyQuery } from "../../../generated/graphql";
-
-import userEvent from "@testing-library/user-event";
-import { createMemoryHistory } from "history";
-import { MemoryRouter } from "react-router-dom";
-// import { NFTGallery } from "./NFTGallery";
-// import { CustomResponse } from "../CustomResponse";
-import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 import { FOLLOW } from "../../../queries/follow/index";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
-// import {render, screen} from '@testing-library/react'
 
 export const __mocks__: any = [
   {
@@ -40,18 +21,7 @@ export const __mocks__: any = [
   },
 ];
 
-// describe("user profile : ", () => {
-//     it("doesn't exist", () => {
-//         const tree = render
-//             (
-//                 <Follow isFollowing={false} id={'ckzny1iv10031lmn568gj3b3n'} />
-//             )
-
-//         expect(tree).toMatchSnapshot();
-//     });
-// });
-
-test("display <follow/> component ", async () => {
+test("display <follow/> component when isfollowing false ", async () => {
   let rendered;
   await act(async () => {
     rendered = render(
@@ -63,4 +33,43 @@ test("display <follow/> component ", async () => {
     );
   });
   expect(rendered).toMatchSnapshot();
+});
+
+test("display <follow/> component  When isfollowing true", async () => {
+  let rendered;
+  await act(async () => {
+    rendered = render(
+      <MockedProvider mocks={__mocks__} addTypename={false}>
+        <SnackbarProvider>
+          <Follow isFollowing={true} id={"ckzny1iv10031lmn568gj3b3n"} />
+        </SnackbarProvider>
+      </MockedProvider>
+    );
+  });
+  expect(rendered).toMatchSnapshot();
+});
+
+test("Assertion testing of  <follow/> component  When isfollowing true", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <Follow isFollowing={true} id={"ckzny1iv10031lmn568gj3b3n"} />
+      </SnackbarProvider>
+    </MockedProvider>
+  );
+
+  expect(screen.getByTestId("PersonRemoveIcon")).toBeInTheDocument();
+ });
+
+test("Assertion testing of  <follow/> component  When isfollowing false", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <Follow isFollowing={false} id={"ckzny1iv10031lmn568gj3b3n"} />
+      </SnackbarProvider>
+    </MockedProvider>
+  );
+
+  expect(screen.getByTestId("PersonAddIcon")).toBeInTheDocument();
+
 });

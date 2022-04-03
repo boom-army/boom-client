@@ -1,14 +1,7 @@
-import React from "react";
-// import WhoToFollow from '../../components/WhoToFollow';
-
 import { WhoToFollow } from "../../components/WhoToFollow";
 import { USER_FOLLOW } from "../../queries/follow/index";
 import { MockedProvider } from "@apollo/client/testing";
-// import {render, screen} from '@testing-library/react'
-import userEvent from "@testing-library/user-event";
-import { createMemoryHistory } from "history";
-import { MemoryRouter } from "react-router-dom";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 
 export const __mocks__: any = [
   {
@@ -76,4 +69,13 @@ test("display <WhoToFollow /> component", async () => {
     );
   });
   expect(rendered).toMatchSnapshot();
+});
+
+test("Assertion testing of <WhoToFollow /> component", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <WhoToFollow />
+    </MockedProvider>
+  );
+  expect(screen.getByRole("progressbar")).toBeInTheDocument();
 });

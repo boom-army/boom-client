@@ -1,7 +1,7 @@
 import React from "react";
 import { User as UserProps } from "../../../generated/graphql";
 import SearchResultUsers from "../../../components/Search/SearchResultUsers";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 const users = {
@@ -45,4 +45,12 @@ describe("Search Users:", () => {
     });
     expect(tree).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of <searchResultUsers/> component", () => {
+  render(<SearchResultUsers loading={false} users={users} />, {
+    wrapper: MemoryRouter,
+  });
+
+  expect(screen.getByRole("button", { name: "delete" })).toBeInTheDocument();
 });

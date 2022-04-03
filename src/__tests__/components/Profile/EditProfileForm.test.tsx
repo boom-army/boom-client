@@ -1,17 +1,12 @@
-import { ProfileDocument } from "../../../generated/graphql";
-import React from "react";
 import { EditProfileForm } from "../../../components/Profile/EditProfileForm";
-import { BrowserRouter } from "react-router-dom";
 import { MockedProvider } from "@apollo/client/testing";
-import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import {
   useEditProfileMutation,
   EditProfileDocument,
 } from "../../../generated/graphql";
 import { SnackbarProvider } from "notistack";
-// import { MockedProvider } from '@apollo/react-testing'
 
 const values = {
   handle: "shy-cloud-4965",
@@ -209,4 +204,27 @@ test("Display <EditProfileForm/> component", async () => {
     );
   });
   expect(rendered).toMatchSnapshot();
+});
+
+test("Assertion testing of <EditProfileForm/> component", () => {
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <EditProfileForm profile={profile.data.profile} />
+      </SnackbarProvider>
+    </MockedProvider>,
+    { wrapper: MemoryRouter }
+  );
+
+  expect(screen.getByText("Bio")).toBeInTheDocument();
+  expect(screen.getByText("Location")).toBeInTheDocument();
+  expect(screen.getByText("Date of Birth")).toBeInTheDocument();
+  expect(screen.getByText("Website")).toBeInTheDocument();
+  expect(screen.getByText("Bio")).toBeInTheDocument();
+  expect(screen.getByText("Handle")).toBeInTheDocument();
+  expect(screen.getByText("Name")).toBeInTheDocument();
+  expect(screen.getByRole("img", { name: "cover" })).toHaveAttribute(
+    "src",
+    "/default-cover.png"
+  );
 });

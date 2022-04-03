@@ -1,6 +1,6 @@
 import React from "react";
 import { Loader } from "../../components/Loader";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 describe("<Loader/> component :", () => {
@@ -8,4 +8,9 @@ describe("<Loader/> component :", () => {
     let rendered = render(<Loader />, { wrapper: MemoryRouter });
     expect(rendered).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of <Loader/> component", () => {
+  render(<Loader />, { wrapper: MemoryRouter });
+  expect(screen.getByRole("progressbar")).toBeInTheDocument();
 });

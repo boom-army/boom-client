@@ -1,6 +1,6 @@
 import React from "react";
 import Comment from "../../../components/Comment/Comment";
-import { act, fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import { DELETE_COMMENT } from "../../../queries/comment";
@@ -86,4 +86,26 @@ describe("<Comment/> component :", () => {
     });
     expect(rendered).toMatchSnapshot();
   });
+});
+
+test("Assertion testing of  <Comment/>  component ", async () => {
+  Date.now = jest.fn(() => 1482363367071);
+  render(
+    <MockedProvider mocks={__mocks__} addTypename={false}>
+      <SnackbarProvider>
+        <Comment
+          id="cl084xdy815761s0n5omoxoem0"
+          text="testing after changes in input converted to ts"
+          isCommentMine={true}
+          user={user}
+          createdAt={Date.now().toString()}
+        />
+      </SnackbarProvider>
+    </MockedProvider>,
+    { wrapper: MemoryRouter }
+  );
+
+  expect(
+    screen.getByRole("link", { name: "@shy-cloud-4965 a few seconds ago" })
+  ).toHaveAttribute("href", "/shy-cloud-4965");
 });
