@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
 import Linkify from "linkify-react";
@@ -21,6 +21,7 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
+import { Popover } from "@material-ui/core";
 
 const ReplyBox = styled(Box)((props) => ({
   "&:before": {
@@ -70,6 +71,17 @@ export const ShowMessage: React.FC<Props> = ({
   const { theme } = useContext(ThemeContext);
   const { handleReaction } = useReaction({ tweetId: id });
   const setParentTweetState = useSetRecoilState(parentTweetState);
+  const [popAnchor, setPopAnchor] = useState<HTMLElement | null>(null);
+
+  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setPopAnchor(event.currentTarget);
+  };
+  const handlePopoverClose = () => {
+    console.log("------boom");
+
+    setPopAnchor(null);
+  };
+  const popOpen = Boolean(popAnchor);
   const handle = user && user.handle;
 
   const linkifyOptions = {
@@ -127,7 +139,21 @@ export const ShowMessage: React.FC<Props> = ({
           </ReplyBox>
         </Box>
       )}
-      <Box sx={{ position: "absolute", right: 0, top: -4 }}>
+      <Popover
+        id="mouse-over-popover"
+        open={popOpen}
+        anchorEl={popAnchor}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus={true}
+      >
         <Stack
           direction={"row"}
           spacing={2}
@@ -158,8 +184,20 @@ export const ShowMessage: React.FC<Props> = ({
             <ReplyIcon sx={{ color: theme.secondaryColor }} />
           </IconButton>
         </Stack>
-      </Box>
-      <Box id={tweet?.id} display={"flex"}>
+      </Popover>
+      <Box
+        id={tweet?.id}
+        display={"flex"}
+        aria-owns={popOpen ? "mouse-over-popover" : undefined}
+        aria-haspopup="true"
+        onClick={handlePopoverOpen}
+        sx={{
+          "&:hover": {
+            backgroundColor: theme.tertiaryColor2,
+            cursor: "pointer",
+          },
+        }}
+      >
         <Box>
           <Link to={`/${handle}`}>
             <UserAvatar
