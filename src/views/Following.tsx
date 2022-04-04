@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FeedList } from "../components/FeedList";
 import { NewTweet } from "../components/Tweet";
 import { useFeedQuery } from "../generated/graphql";

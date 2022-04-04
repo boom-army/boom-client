@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ApolloError } from "@apollo/client";
 import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
@@ -6,7 +6,6 @@ import { FeedQuery, Tweet } from "../generated/graphql";
 import { Grid } from "@mui/material";
 import { Loader } from "./Loader";
 import { RecoilState } from "recoil";
-import { FetchMoreOptions } from "@apollo/client";
 import { ShowMessage } from "./Meep/ShowMessage";
 import InfiniteScroll from "react-infinite-scroll-component";
 
