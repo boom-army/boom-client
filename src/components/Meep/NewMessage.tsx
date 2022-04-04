@@ -38,7 +38,7 @@ interface Props {
   feed?: any;
   channel?: string | undefined;
   parentTweetState: RecoilState<string>;
-  scrollRef: React.MutableRefObject<HTMLDivElement | undefined>
+  scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
 
 const IconsGrid = styled(Grid)((props) => ({
@@ -55,6 +55,10 @@ const IconsGrid = styled(Grid)((props) => ({
     },
   },
 }));
+
+const ImageInput = styled('input')({
+  display: 'none',
+});
 
 export const NewMessage: React.FC<Props> = ({
   feed,
@@ -247,19 +251,17 @@ export const NewMessage: React.FC<Props> = ({
 
           {!gif && !nftData && (
             <>
-              <label htmlFor="file-input">
-                <IconButton>
-                  <UploadFileIcon />
-                </IconButton>
-              </label>
-              <Box display={"none"}>
-                <input
-                  id="file-input"
+              <label htmlFor="icon-button-file">
+                <ImageInput
                   accept="image/*"
+                  id="icon-button-file"
                   type="file"
                   onChange={handleTweetFiles}
                 />
-              </Box>
+                <IconButton aria-label="upload image" component="span">
+                  <UploadFileIcon />
+                </IconButton>
+              </label>
             </>
           )}
 

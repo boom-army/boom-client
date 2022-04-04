@@ -79,7 +79,7 @@ export const ShowMessage: React.FC<Props> = ({
   };
 
   return (
-    <Grid item xs={12} mt={2} sx={{ position: "relative" }}>
+    <Grid item xs={12} mt={2} sx={{ position: "relative", padding: "0 1em" }}>
       {parentTweet && (
         <Box sx={{ position: "relative" }}>
           <ReplyBox>
