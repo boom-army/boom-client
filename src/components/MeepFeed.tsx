@@ -79,7 +79,7 @@ export const MeepFeed: React.FC<Props> = ({
             />
           ))
         ) : (
-          <CustomResponse text="No tweets exist to display in this feed. Let everyone know what's happening." />
+          <CustomResponse text="No Meeps exist to display in this feed. Let everyone know what's happening." />
         )}
       </InfiniteScroll>
     </Grid>

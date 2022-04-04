@@ -67,7 +67,7 @@ export const FeedList: React.FC<Props> = ({
             <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
           ))
         ) : (
-          <CustomResponse text="No tweets exist to display in this feed. Let everyone know what's happening." />
+          <CustomResponse text="No Meeps exist to display in this feed. Let everyone know what's happening." />
         )}
       </InfiniteScroll>
     </Box>

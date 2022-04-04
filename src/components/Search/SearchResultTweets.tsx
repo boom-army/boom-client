@@ -13,7 +13,7 @@ const SearchResultTweets = ({ tweets, loading }: any) => {
 
   if (tweets === undefined)
     return (
-      <CustomResponse text="Use the search bar to find tags, people and tweets" />
+      <CustomResponse text="Use the search bar to find tags, people and meeps" />
     );
 
   return (
@@ -23,7 +23,7 @@ const SearchResultTweets = ({ tweets, loading }: any) => {
           <ShowTweet key={tweet.id} tweet={tweet} />
         ))
       ) : (
-        <CustomResponse text="No tweets found, try a different search" />
+        <CustomResponse text="No Meeps found, try a different search" />
       )}
     </Wrapper>
   );
