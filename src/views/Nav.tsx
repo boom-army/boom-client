@@ -40,24 +40,30 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     justifyContent: "flex-end",
     spacing: 2,
     alignItems: "center",
-    marginRight: "5rem",
   };
 
   const StyledStack = styled(Stack)({
     minHeight: "100vh",
     paddingTop: "1.3rem",
+    width: "70%",
     marginLeft: "0.5em",
     fontWeight: 500,
     alignItems: "flex-start",
+    "@media screen and (max-width: 900px)": {
+      minWidth: "150px",
+    },
   });
 
   const StyledStack2 = styled(Stack)({
     minHeight: "100vh",
     paddingTop: "1.3rem",
     borderLeft: `1px solid ${theme.tertiaryColor}`,
-    width: "5rem",
     overflowY: "scroll",
     scrollbarWidth: "none",
+    width: "30%",
+    "@media screen and (max-width: 900px)": {
+      minWidth: "70px",
+    },
     ".active": {
       "& .MuiAvatar-root": {
         border: `3px solid ${theme.accentColor}`,
@@ -74,14 +80,32 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     },
   });
 
+  const DynamicAvatar = styled(Avatar)`
+    cursor: "pointer";
+    ${(props) => props.theme.breakpoints.up("sm")} {
+      width: 30px;
+      height: 30px;
+    }
+    ${(props) => props.theme.breakpoints.up("md")} {
+      width: 40px;
+      height: 40px;
+    }
+    ${(props) => props.theme.breakpoints.up("lg")} {
+      width: 50px;
+      height: 50px;
+    }
+    ${(props) => props.theme.breakpoints.up("xl")} {
+      width: 60px;
+      height: 60px;
+    }
+  `;
+
   return (
     <>
       <Box
         sx={{
-          display: "flex",
-          "@media screen and (min-width: 900px)": {
-            position: "fixed",
-          },
+          display: "inline-flex",
+          width: "100%",
         }}
       >
         <StyledStack key="main-stack" direction="column" spacing={4.5}>
@@ -159,10 +183,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   sx={{ justifyContent: "center" }}
                 >
                   <NavLink to={`channels/${channel?.id}`}>
-                    <Avatar
-                      sx={{ width: 60, height: 60, cursor: "pointer" }}
-                      src={channel?.image as string}
-                    />
+                    <DynamicAvatar src={channel?.image as string} />
                   </NavLink>
                 </Box>
               ))}
