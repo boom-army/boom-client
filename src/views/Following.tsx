@@ -13,32 +13,10 @@ export const Following: React.FC = () => {
     fetchPolicy: "network-only",
   });
 
-  const handleScroll = () => {
-    const bottom =
-      Math.ceil(window.innerHeight + window.scrollY) >=
-      document.documentElement.scrollHeight;
-    if (bottom) {
-      fetchMore({
-        variables: {
-          offset: data?.feed?.length ?? 0,
-        },
-      });
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
-
   return (
     <>
       <NewTweet feed={data?.feed} />
-      <FeedList loading={loading} error={error} data={data} />
+      <FeedList loading={loading} error={error} data={data?.feed} fetchMore={fetchMore} />
     </>
   );
 };
