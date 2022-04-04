@@ -20,6 +20,7 @@ export const ChannelFeed: React.FC = () => {
       limit: 10,
     },
     fetchPolicy: "network-only",
+    pollInterval: 10000,
   });
 
   useEffect(() => {
