@@ -70,7 +70,6 @@ export const NewMessage: React.FC<Props> = ({
   const tweet = useInput("");
 
   const parentTweet = useRecoilValue(parentTweetState);
-  console.log("---------", parentTweet);
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [

@@ -63,7 +63,7 @@ export const MeepFeed: React.FC<Props> = ({
         inverse={true}
         hasMore={true}
         loader={
-          <Box sx={{ marginTop: "1rem" }}>
+          loading && <Box sx={{ marginTop: "1rem" }}>
             <Loader />
           </Box>
         }

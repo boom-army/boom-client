@@ -13,7 +13,7 @@ export const ChannelFeed: React.FC = () => {
     default: "",
   });
 
-  const { loading, error, data, fetchMore } = useChannelFeedQuery({
+  const { loading, error, data, fetchMore, refetch } = useChannelFeedQuery({
     variables: {
       channelId: channelId as string,
       offset: 0,
@@ -23,8 +23,12 @@ export const ChannelFeed: React.FC = () => {
   });
 
   useEffect(() => {
+    refetch({
+      channelId: channelId as string,
+      offset: 0,
+    });
     scrollRef?.current?.scrollIntoView();
-  }, []);
+  }, [channelId]);
 
   return (
     <>

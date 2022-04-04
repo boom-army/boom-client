@@ -57,7 +57,7 @@ export const FeedList: React.FC<Props> = ({
         next={fetchData}
         hasMore={true}
         loader={
-          <Box sx={{ marginTop: "1rem" }}>
+          loading && <Box sx={{ marginTop: "1rem" }}>
             <Loader />
           </Box>
         }
