@@ -77,8 +77,6 @@ export const ShowMessage: React.FC<Props> = ({
     setPopAnchor(event.currentTarget);
   };
   const handlePopoverClose = () => {
-    console.log("------boom");
-
     setPopAnchor(null);
   };
   const popOpen = Boolean(popAnchor);
