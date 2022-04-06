@@ -59,7 +59,7 @@ test("Assertion testing of  <follow/> component  When isfollowing true", () => {
   );
 
   expect(screen.getByTestId("PersonRemoveIcon")).toBeInTheDocument();
- });
+});
 
 test("Assertion testing of  <follow/> component  When isfollowing false", () => {
   render(
@@ -71,5 +71,5 @@ test("Assertion testing of  <follow/> component  When isfollowing false", () => 
   );
 
   expect(screen.getByTestId("PersonAddIcon")).toBeInTheDocument();
-
+  
 });

@@ -38,7 +38,7 @@ export const Profile: React.FC = () => {
       <ProfileInfo profile={data && data.profile} />
       <Box sx={{ typography: "body1" }}>
         <TabContext value={tabValue}>
-          <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
+          <Box sx={{ borderBottom: 2, borderColor: "#374148" }}>
             <TabList
               onChange={handleChange}
               aria-label="Profile tablist select"
