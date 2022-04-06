@@ -31,7 +31,7 @@
     "@metaplex-foundation/mpl-token-metadata": "^1.2.5",
     "@metaplex/js": "^4.10.1",
     "@mui/core": "^5.0.0-alpha.54",
-    "@mui/icons-material": "^5.0.0",
+    "@mui/icons-material": "^5.5.1",
     "@mui/lab": "^5.0.0-alpha.70",
     "@mui/material": "^5.4.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
@@ -220,15 +220,15 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js",
       "^.+\\.js": "<rootDir>/node_modules/babel-jest"
-
-   },
-   "transformIgnorePatterns": ["<rootDir>/node_modules/(?!((@solana/wallet-adapter-*)|(@project-serum/sol-wallet-adapter)|@agm))"],
+    },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!((@solana/wallet-adapter-*)|(@project-serum/sol-wallet-adapter)|@agm))"
+    ],
     "modulePaths": [],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
       "\\.(css|sass|scss)$": "identity-obj-proxy"
     },
-  
     "moduleFileExtensions": [
       "web.js",
       "js",
