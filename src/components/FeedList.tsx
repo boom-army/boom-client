@@ -1,11 +1,12 @@
+import InfiniteScroll from "react-infinite-scroll-component";
 import React from "react";
+import { ApolloError } from "@apollo/client";
+import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
+import { Grid } from "@mui/material";
 import { Loader } from "./Loader";
 import { ShowTweet } from "./Tweet";
-import { ApolloError } from "@apollo/client";
 import { Tweet, FeedQuery } from "../generated/graphql";
-import { Box } from "@mui/system";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
   loading?: boolean;
@@ -41,7 +42,13 @@ export const FeedList: React.FC<Props> = ({
     });
 
   return (
-    <Box mb={7}>
+    <Grid
+      id="scrollableDiv"
+      sx={{
+        height: "80vh",
+        overflow: "auto",
+      }}
+    >
       {data?.length ? (
         data.map((tweet) => <ShowTweet key={tweet.id} tweet={tweet as Tweet} />)
       ) : (
@@ -56,10 +63,13 @@ export const FeedList: React.FC<Props> = ({
         dataLength={data?.length as number}
         next={fetchData}
         hasMore={true}
+        scrollableTarget="scrollableDiv"
         loader={
-          loading && <Box sx={{ marginTop: "1rem" }}>
-            <Loader />
-          </Box>
+          loading && (
+            <Box sx={{ marginTop: "1rem" }}>
+              <Loader />
+            </Box>
+          )
         }
       >
         {data?.length ? (
@@ -70,6 +80,6 @@ export const FeedList: React.FC<Props> = ({
           <CustomResponse text="No Meeps exist to display in this feed. Let everyone know what's happening." />
         )}
       </InfiniteScroll>
-    </Box>
+    </Grid>
   );
 };
