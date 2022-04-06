@@ -142,18 +142,7 @@ export const TipInput: React.FC<Props> = ({
   );
 
   return (
-    <Box
-      sx={{
-        position: "absolute",
-        bottom: "2em",
-        left: "-12em",
-        background: theme.background,
-        padding: "1em",
-        borderRadius: "5px",
-        border: `1px solid ${theme.secondaryColor}`,
-        minWidth: "400px",
-      }}
-    >
+    <Box>
       <Box sx={{ position: "relative" }}>
         <Box
           sx={{
