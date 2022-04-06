@@ -1,5 +1,5 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { ApolloError } from "@apollo/client";
 import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
@@ -35,8 +35,6 @@ export const FeedList: React.FC<Props> = ({
   }
 
   const fetchData = () => {
-    console.log(data?.length);
-
     fetchMore({
       variables: {
         offset: data?.length ?? 0,
@@ -46,7 +44,8 @@ export const FeedList: React.FC<Props> = ({
 
   return (
     <Grid
-      id="scrollableDiv"
+      container
+      id="scrollBox"
       sx={{
         height: "80vh",
         overflow: "auto",
@@ -62,27 +61,29 @@ export const FeedList: React.FC<Props> = ({
           <Loader />
         </Box>
       )}
-      <InfiniteScroll
-        dataLength={data?.length as number}
-        next={fetchData}
-        hasMore={true}
-        scrollableTarget="scrollableDiv"
-        loader={
-          loading && (
-            <Box sx={{ marginTop: "1rem" }}>
-              <Loader />
-            </Box>
-          )
-        }
-      >
-        {data?.length ? (
-          data?.map((tweet) => (
-            <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
-          ))
-        ) : (
-          <CustomResponse text="No Meeps exist to display in this feed. Let everyone know what's happening." />
-        )}
-      </InfiniteScroll>
+      {data && (
+        <InfiniteScroll
+          dataLength={data?.length}
+          next={fetchData}
+          hasMore={true}
+          scrollableTarget="scrollBox"
+          loader={
+            loading && (
+              <Box sx={{ marginTop: "1rem" }}>
+                <Loader />
+              </Box>
+            )
+          }
+        >
+          {data?.length ? (
+            data?.map((tweet) => (
+              <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
+            ))
+          ) : (
+            <CustomResponse text="No Meeps exist to display in this feed. Let everyone know what's happening." />
+          )}
+        </InfiniteScroll>
+      )}
     </Grid>
   );
 };
