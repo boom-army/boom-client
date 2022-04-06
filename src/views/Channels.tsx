@@ -41,7 +41,7 @@ export const Channels: React.FC = () => {
             name: metaDataFetch?.collection?.name,
             family: metaDataFetch?.collection?.family,
             image: metaDataFetch.image,
-            description: metaDataFetch.description,
+            description: metaDataFetch.description ?? "",
             status: "new",
             verified: null,
             channelParentId: null,
