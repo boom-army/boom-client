@@ -217,11 +217,9 @@ export const ShowMessage: React.FC<Props> = ({
                 </Typography>
               </Link>
             </Box>
-            <Link to={`/${handle}/status/${id}`}>
-              <Typography sx={{ color: theme.secondaryColor }}>
-                {moment(setDate(createdAt)).fromNow()}
-              </Typography>
-            </Link>
+            <Typography sx={{ color: theme.secondaryColor }}>
+              {moment(setDate(createdAt)).fromNow()}
+            </Typography>
           </Stack>
           <Box mb={0.5} pr={2}>
             <Linkify options={linkifyOptions}>

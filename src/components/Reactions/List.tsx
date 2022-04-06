@@ -113,6 +113,7 @@ export const List: React.FC<{
                   color: theme.secondaryColor,
                   backgroundColor: isMine ? theme.background2 : "inherit",
                   lineHeight: "1.2",
+                  marginRight: "0.3em",
                 }}
               >
                 {count > 0 && (
