@@ -42,6 +42,9 @@ const PickerWrapper = styled(Box)((props: any) => ({
 
 const PickerIcon = styled('span')((props: any) => ({
   cursor: "pointer",
+  "& svg path": {
+    fill: props.theme.secondaryColor,
+  },
   "&:hover svg path": {
     fill: props.theme.accentColor,
   },
