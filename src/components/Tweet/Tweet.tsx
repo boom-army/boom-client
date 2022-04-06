@@ -102,7 +102,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
             <ImageBox files={files} disablelightbox={false} />
           )}
         </Box>
-        <Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "baseline" }}>
+        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           {reactions && reactions.length > 0 && (
             <ReactionsList
               reactions={reactions}
@@ -110,11 +110,13 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
               tweetId={id}
             />
           )}
-          <IconsStack spacing={3} direction="row" alignItems="baseline">
+          <IconsStack ml={0.7} spacing={3} direction="row" alignItems={"center"}>
+            <Box pt={0.6}>
             <EmojiTweet handleReaction={handleReaction} />
+            </Box>
 
             <Link to={`/${handle}/status/${id}`}>
-              <Box display="flex" sx={{ alignItems: "center" }}>
+              <Box display="flex" alignItems={"center"}>
                 <CommentIcon />
                 <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
                   {commentsCount ? commentsCount : null}

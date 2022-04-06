@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { SmileIcon } from "../Icons";
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import { Picker } from "emoji-mart";
 import { ThemeContext } from "../../contexts/theme";
 import "emoji-mart/css/emoji-mart.css";
@@ -12,7 +12,6 @@ const PickerWrapper = styled(Box)((props: any) => ({
   left: "50%",
   transform: "translate(-50%, -50%)",
   bgcolor: "background.paper",
-  p: 4,
   ".emoji-mart-bar svg,.emoji-mart-bar svg path": {
     fill: props.theme.accentColor,
   },
@@ -71,7 +70,7 @@ export const EmojiPicker = ({
   return (
     <Box>
       <PickerIcon onClick={() => togglePicker(true)}>
-        {customIcon ?? <SmileIcon />}
+        {customIcon ?? <InsertEmoticonIcon />}
       </PickerIcon>
       <Modal
         open={picker}

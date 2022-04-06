@@ -7,6 +7,7 @@ import { Emoji } from "emoji-mart";
 import { Reaction, useTweetReactionsLazyQuery } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 export interface Accumulator
   extends Record<
@@ -91,33 +92,34 @@ export const List: React.FC<{
         .sort((a, b) => a.emojiId.localeCompare(b.emojiId))
         .map(({ emojiId, count, isMine }) => {
           return (
-            <Tooltip
-              onOpen={() => getTweetReactions()}
-              key={emojiId}
-              title={
-                reactionsWithUsers && !loading
-                  ? createUserReactionTooltip(reactionsWithUsers, emojiId)
-                  : ""
-              }
-            >
-              <Button
-                onClick={() => handleReaction({ emojiId })}
-                startIcon={<Emoji emoji={emojiId} size={16} />}
-                style={{
-                  padding: "2px 10px 0",
-                  borderRadius: "30px",
-                  minWidth: "auto",
-                  color: theme.secondaryColor,
-                  backgroundColor: isMine ? theme.tertiaryColor2 : "inherit",
-                  lineHeight: "1.2",
-                  margin: "0 0.3em 0.3em 0",
-                }}
+            <Box mr={0.3} mb={0.3}>
+              <Tooltip
+                onOpen={() => getTweetReactions()}
+                key={emojiId}
+                title={
+                  reactionsWithUsers && !loading
+                    ? createUserReactionTooltip(reactionsWithUsers, emojiId)
+                    : ""
+                }
               >
-                {count > 0 && (
-                  <Typography sx={{ lineHeight: "1.2" }}>{count}</Typography>
-                )}
-              </Button>
-            </Tooltip>
+                <Button
+                  onClick={() => handleReaction({ emojiId })}
+                  startIcon={<Emoji emoji={emojiId} size={16} />}
+                  style={{
+                    padding: "2px 10px 0",
+                    borderRadius: "30px",
+                    minWidth: "auto",
+                    color: theme.secondaryColor,
+                    backgroundColor: isMine ? theme.tertiaryColor2 : "inherit",
+                    lineHeight: "1.2",
+                  }}
+                >
+                  {count > 0 && (
+                    <Typography sx={{ lineHeight: "1.2" }}>{count}</Typography>
+                  )}
+                </Button>
+              </Tooltip>
+            </Box>
           );
         })}
     </>

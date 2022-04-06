@@ -41,6 +41,19 @@ const ReplyBox = styled(Box)((props) => ({
   },
 }));
 
+const IconsBox = styled(Box)((props) => ({
+  "& svg": {
+    width: "18px",
+    height: "18px",
+    "& path": {
+      fill: props.theme.secondaryColor,
+    },
+  },
+  "& :hover svg path": {
+    fill: props.theme.accentColor,
+  },
+}));
+
 interface Props {
   tweet: Tweet;
   parentTweetState: RecoilState<string>;
@@ -235,7 +248,7 @@ export const ShowMessage: React.FC<Props> = ({
               <ImageBox files={files} disablelightbox={false} />
             )}
           </Box>
-          <Stack direction={"row"} spacing={2} alignItems="baseline">
+          <IconsBox display="flex" alignItems="center">
             {reactions && reactions.length > 0 && (
               <>
                 <ReactionsList
@@ -243,13 +256,13 @@ export const ShowMessage: React.FC<Props> = ({
                   handleReaction={handleReaction}
                   tweetId={id}
                 />
-                <Box>
+                <Box ml={1} pt={0.7}>
                   <EmojiTweet handleReaction={handleReaction} />
                 </Box>
               </>
             )}
             {tipsCount && parseInt(tipsCount) ? (
-              <Box sx={{ alignContent: "baseline" }}>
+              <Box ml={2}>
                 <TipCreator
                   userPubKey={user?.publicAddress}
                   tipAmount={
@@ -260,7 +273,7 @@ export const ShowMessage: React.FC<Props> = ({
                 />
               </Box>
             ) : null}
-          </Stack>
+          </IconsBox>
         </Box>
       </Box>
     </Grid>
