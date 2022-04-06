@@ -1,6 +1,6 @@
 import "emoji-mart/css/emoji-mart.css";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
-import { SmilePlusIcon } from "../Icons";
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 
 export const EmojiTweet = ({ handleReaction }: any) => {
   return (
@@ -9,7 +9,7 @@ export const EmojiTweet = ({ handleReaction }: any) => {
         emojiHandler={({ id: emojiId, skin }: any) =>
           handleReaction({ emojiId, skin })
         }
-        customIcon={<SmilePlusIcon />}
+        customIcon={<InsertEmoticonIcon />}
         dismissOnClick={true}
       />
     </>

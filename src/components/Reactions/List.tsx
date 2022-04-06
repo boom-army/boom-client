@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Reaction, useTweetReactionsLazyQuery } from "../../generated/graphql";
-import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
-import { Emoji } from "emoji-mart";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/system";
-import { Typography } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
+import { Emoji } from "emoji-mart";
+import { Reaction, useTweetReactionsLazyQuery } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
+import { Typography } from "@mui/material";
 
 export interface Accumulator
   extends Record<
@@ -87,9 +86,7 @@ export const List: React.FC<{
   }, [data]);
 
   return (
-    <Box
-      sx={{ marginBottom: 1, display: "inline-flex", flexWrap: "wrap" }}
-    >
+    <>
       {reactionsWithCount
         .sort((a, b) => a.emojiId.localeCompare(b.emojiId))
         .map(({ emojiId, count, isMine }) => {
@@ -111,9 +108,9 @@ export const List: React.FC<{
                   borderRadius: "30px",
                   minWidth: "auto",
                   color: theme.secondaryColor,
-                  backgroundColor: isMine ? theme.background2 : "inherit",
+                  backgroundColor: isMine ? theme.tertiaryColor2 : "inherit",
                   lineHeight: "1.2",
-                  marginRight: "0.3em",
+                  margin: "0 0.3em 0.3em 0",
                 }}
               >
                 {count > 0 && (
@@ -123,6 +120,6 @@ export const List: React.FC<{
             </Tooltip>
           );
         })}
-    </Box>
+    </>
   );
 };
