@@ -12,73 +12,18 @@ import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { SIGN_FILE } from "../../queries/files";
 import { GifyModal } from "../Giphy/GifyModal";
-import { Stack, Avatar, TextareaAutosize } from "@mui/material";
+import { Stack, Avatar, Grid, InputAdornment, Input, IconButton } from "@mui/material";
 import { TWEET } from "../../queries/tweet";
 import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError, uploadFile } from "../../utils";
-import { styled } from "@mui/material/styles";
 import { useInput } from "../../hooks/useInput";
 import { useQuery, useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
-import { useState } from "react";
-
-const Wrapper = styled("div")((props) => ({
-  display: "flex",
-  padding: "1rem 0",
-  borderBottom: `7px solid ${props.theme.tertiaryColor}`,
-  form: {
-    width: "100%",
-  },
-
-  textarea: {
-    width: "100%",
-    background: "inherit",
-    border: "none",
-    fontSize: "1.23rem",
-    fontFamily: '"Noto Sans Display", "Trebuchet MS", sans-serif',
-    color: props.theme.primaryColor,
-    marginBottom: "0.75rem",
-    padding: "0.75rem 0",
-  },
-
-  ".new-tweet": {
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  ".new-tweet-action": {
-    display: "flex",
-    alignItems: "center",
-  },
-
-  ".svg-input .emoji-pick svg, .svg-input .tweet-gif svg, .svg-input .file-upload-icon svg":
-    {
-      width: "24px",
-      height: "24px",
-      fill: props.theme.accentColor,
-      marginRight: "2rem",
-      cursor: "pointer",
-    },
-
-  ".svg-input": {
-    display: "flex",
-  },
-
-  "@media only screen and (max-width : 390px) ": {
-    ".svg-input .emoji-pick svg, .svg-input .tweet-gif svg, .svg-input .file-upload-icon svg":
-      {
-        marginRight: "1.3rem",
-      },
-    ".svg-input": {
-      display: "flex",
-    },
-  },
-  ".avatar": {
-    margin: "0 1rem",
-  },
-}));
+import { ThemeContext } from "../../contexts/theme";
+import { useState, useContext } from "react";
+import { styled } from "@mui/material/styles";
 
 interface NewTweetProps {
   feed?: any;
@@ -86,7 +31,27 @@ interface NewTweetProps {
   channel?: string | undefined;
 }
 
+const IconsGrid = styled(Grid)((props) => ({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "row",
+  "& svg": {
+    fill: props.theme.accentColor,
+    width: "20px",
+    height: "20px",
+    marginRight: "1em",
+    "& path": {
+      fill: props.theme.accentColor,
+    },
+  },
+}));
+
+const ImageInput = styled("input")({
+  display: "none",
+});
+
 export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
+  const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
@@ -184,72 +149,96 @@ export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
   });
 
   return (
-    <Wrapper>
-      <Avatar className="avatar" src={data?.me?.avatar} />
-      <form onSubmit={handleNewTweet}>
-        <div className="new-tweet">
-          <TextareaAutosize
-            placeholder="What's happening?"
+    <Grid
+      container
+      p={2}
+      sx={{
+        borderBottom: `2px solid ${theme.tertiaryColor}`,
+      }}
+    >
+      <Grid item xs={12} pb={2}>
+        <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
+          <Avatar
+            sx={{
+              width: 40,
+              height: 40,
+            }}
+            src={data?.me?.avatar}
+          />
+          <Input
             value={tweet.value}
             onChange={tweet.onChange}
-          />
-
-          {gif && (
-            <Box sx={{ marginBottom: 2 }}>
-              <Stack direction="column">
-                <VideoContainer
-                  gif={createGifInput(gif)}
-                  onClose={() => setGif(null)}
+            placeholder={"What's happening?"}
+            fullWidth={true}
+            autoFocus={true}
+            sx={{
+              color: theme.primaryColor,
+              padding: "1em 1em 1em 0",
+              "&:before": {
+                borderColor: theme.tertiaryColor2,
+              },
+              "&:hover:not(.Mui-disabled):before": {
+                borderColor: theme.tertiaryColor2,
+              },
+            }}
+            endAdornment={
+              <InputAdornment position="end">
+                <EmojiPicker
+                  emojiHandler={(pickedEmoji: any) =>
+                    tweet.setValue(tweet.value + pickedEmoji.native)
+                  }
                 />
-                <AttributionLink src={gif.url} />
-              </Stack>
-            </Box>
-          )}
-
-          {nftData && <NFTTweet nftData={nftData} />}
-
-          {!!tweetFiles.length && (
-            <ImageBox files={tweetFiles.map(mapTweetFiles)} />
-          )}
-
-          <div className="new-tweet-action">
-            <div className="svg-input">
-              <EmojiPicker
-                emojiHandler={(pickedEmoji: any) =>
-                  tweet.setValue(tweet.value + pickedEmoji.native)
-                }
+              </InputAdornment>
+            }
+          />
+        </Stack>
+      </Grid>
+      <IconsGrid item xs={6} pl={6}>
+        {gif && (
+          <Box sx={{ marginBottom: 2 }}>
+            <Stack direction="column">
+              <VideoContainer
+                gif={createGifInput(gif)}
+                onClose={() => setGif(null)}
               />
+              <AttributionLink src={gif.url} />
+            </Stack>
+          </Box>
+        )}
 
-              {!tweetFiles.length && !nftData && (
-                <GifyModal setGif={setGif} />
-              )}
+        {nftData && <NFTTweet nftData={nftData} />}
 
-              {!gif && !nftData && (
-                <>
-                  <label htmlFor="file-input">
-                    <span className="file-upload-icon">
-                      <UploadFileIcon />
-                    </span>
-                  </label>
-                  <input
-                    id="file-input"
-                    accept="image/*"
-                    type="file"
-                    onChange={handleTweetFiles}
-                  />
-                </>
-              )}
+        {!!tweetFiles.length && (
+          <ImageBox files={tweetFiles.map(mapTweetFiles)} />
+        )}
 
-              {!tweetFiles.length && !gif && (
-                <NFTPicker setNftData={setNftData} />
-              )}
-            </div>
-            <Button sm="true" disabled={loading}>
-              Post
-            </Button>
-          </div>
-        </div>
-      </form>
-    </Wrapper>
+        {!tweetFiles.length && !nftData && <GifyModal setGif={setGif} />}
+
+        {!gif && !nftData && (
+          <>
+            <label htmlFor="icon-button-file">
+              <ImageInput
+                accept="image/*"
+                id="icon-button-file"
+                type="file"
+                onChange={handleTweetFiles}
+              />
+              <IconButton aria-label="upload image" component="span">
+                <UploadFileIcon />
+              </IconButton>
+            </label>
+          </>
+        )}
+
+        {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
+      </IconsGrid>
+      <Grid item xs={6} pr={1}>
+        <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
+          <Button sm="true" disabled={loading} onClick={handleNewTweet}>
+            Post
+          </Button>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };

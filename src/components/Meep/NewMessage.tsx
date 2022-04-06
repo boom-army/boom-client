@@ -56,8 +56,8 @@ const IconsGrid = styled(Grid)((props) => ({
   },
 }));
 
-const ImageInput = styled('input')({
-  display: 'none',
+const ImageInput = styled("input")({
+  display: "none",
 });
 
 export const NewMessage: React.FC<Props> = ({
@@ -176,105 +176,103 @@ export const NewMessage: React.FC<Props> = ({
   });
 
   return (
-    <>
-      <Grid
-        container
-        p={2}
-        sx={{
-          borderTop: `2px solid ${theme.tertiaryColor}`,
-          "@media (max-width: 900px)": {
-            marginBottom: "4em",
-          },
-        }}
-      >
-        <Grid item xs={12} pb={2}>
-          <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
-            <Avatar
-              src={data?.me?.avatar}
-              sx={{
-                width: 30,
-                height: 30,
-                border: `1px solid ${theme.tertiaryColor}`,
-              }}
-            />
+    <Grid
+      container
+      p={2}
+      sx={{
+        borderTop: `2px solid ${theme.tertiaryColor}`,
+        "@media (max-width: 900px)": {
+          marginBottom: "4em",
+        },
+      }}
+    >
+      <Grid item xs={12} pb={2}>
+        <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
+          <Avatar
+            src={data?.me?.avatar}
+            sx={{
+              width: 30,
+              height: 30,
+              border: `1px solid ${theme.tertiaryColor}`,
+            }}
+          />
 
-            <Input
-              value={tweet.value}
-              onChange={tweet.onChange}
-              placeholder={`Meep in # ${channelData?.family} ${channelData?.name}`}
-              fullWidth={true}
-              autoFocus={true}
-              ref={scrollRef}
-              sx={{
-                color: theme.primaryColor,
-                padding: "1em 1em 1em 0",
-                "&:before": {
-                  borderColor: theme.tertiaryColor2,
-                },
-                "&:hover:not(.Mui-disabled):before": {
-                  borderColor: theme.tertiaryColor2,
-                },
-              }}
-              endAdornment={
-                <InputAdornment position="end">
-                  <EmojiPicker
-                    emojiHandler={(pickedEmoji: any) =>
-                      tweet.setValue(tweet.value + pickedEmoji.native)
-                    }
-                  />
-                </InputAdornment>
-              }
-            />
-          </Stack>
-        </Grid>
-
-        <IconsGrid item xs={6} pl={6}>
-          {gif && (
-            <Box sx={{ marginBottom: 2 }}>
-              <Stack direction="column">
-                <VideoContainer
-                  gif={createGifInput(gif)}
-                  onClose={() => setGif(null)}
+          <Input
+            value={tweet.value}
+            onChange={tweet.onChange}
+            placeholder={`Meep in # ${channelData?.family} ${channelData?.name}`}
+            fullWidth={true}
+            autoFocus={true}
+            ref={scrollRef}
+            sx={{
+              color: theme.primaryColor,
+              padding: "1em 1em 1em 0",
+              "&:before": {
+                borderColor: theme.tertiaryColor2,
+              },
+              "&:hover:not(.Mui-disabled):before": {
+                borderColor: theme.tertiaryColor2,
+              },
+            }}
+            endAdornment={
+              <InputAdornment position="end">
+                <EmojiPicker
+                  emojiHandler={(pickedEmoji: any) =>
+                    tweet.setValue(tweet.value + pickedEmoji.native)
+                  }
                 />
-                <AttributionLink src={gif.url} />
-              </Stack>
-            </Box>
-          )}
-
-          {nftData && <NFTTweet nftData={nftData} />}
-
-          {!!tweetFiles.length && (
-            <ImageBox files={tweetFiles.map(mapTweetFiles)} />
-          )}
-
-          {!tweetFiles.length && !nftData && <GifyModal setGif={setGif} />}
-
-          {!gif && !nftData && (
-            <>
-              <label htmlFor="icon-button-file">
-                <ImageInput
-                  accept="image/*"
-                  id="icon-button-file"
-                  type="file"
-                  onChange={handleTweetFiles}
-                />
-                <IconButton aria-label="upload image" component="span">
-                  <UploadFileIcon />
-                </IconButton>
-              </label>
-            </>
-          )}
-
-          {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
-        </IconsGrid>
-        <Grid item xs={6} pr={1}>
-          <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
-            <IconButton disabled={loading} onClick={handleNewTweet}>
-              <SendIcon sx={{ color: theme.accentColor }} />
-            </IconButton>
-          </Box>
-        </Grid>
+              </InputAdornment>
+            }
+          />
+        </Stack>
       </Grid>
-    </>
+
+      <IconsGrid item xs={6} pl={6}>
+        {gif && (
+          <Box sx={{ marginBottom: 2 }}>
+            <Stack direction="column">
+              <VideoContainer
+                gif={createGifInput(gif)}
+                onClose={() => setGif(null)}
+              />
+              <AttributionLink src={gif.url} />
+            </Stack>
+          </Box>
+        )}
+
+        {nftData && <NFTTweet nftData={nftData} />}
+
+        {!!tweetFiles.length && (
+          <ImageBox files={tweetFiles.map(mapTweetFiles)} />
+        )}
+
+        {!tweetFiles.length && !nftData && <GifyModal setGif={setGif} />}
+
+        {!gif && !nftData && (
+          <>
+            <label htmlFor="icon-button-file">
+              <ImageInput
+                accept="image/*"
+                id="icon-button-file"
+                type="file"
+                onChange={handleTweetFiles}
+              />
+              <IconButton aria-label="upload image" component="span">
+                <UploadFileIcon />
+              </IconButton>
+            </label>
+          </>
+        )}
+
+        {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
+      </IconsGrid>
+      <Grid item xs={6} pr={1}>
+        <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
+          <IconButton disabled={loading} onClick={handleNewTweet}>
+            <SendIcon sx={{ color: theme.accentColor }} />
+          </IconButton>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
