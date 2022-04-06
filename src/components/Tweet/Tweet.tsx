@@ -32,6 +32,9 @@ const IconsStack = styled(Stack)((props) => ({
       fill: props.theme.secondaryColor,
     },
   },
+  "& :hover svg path": {
+    fill: props.theme.accentColor,
+  },
 }));
 
 export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
@@ -102,7 +105,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
             <ImageBox files={files} disablelightbox={false} />
           )}
         </Box>
-        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+        <Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
           {reactions && reactions.length > 0 && (
             <ReactionsList
               reactions={reactions}
@@ -110,9 +113,14 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
               tweetId={id}
             />
           )}
-          <IconsStack ml={0.7} spacing={3} direction="row" alignItems={"center"}>
+          <IconsStack
+            ml={0.7}
+            spacing={3}
+            direction="row"
+            alignItems={"baseline"}
+          >
             <Box pt={0.6}>
-            <EmojiTweet handleReaction={handleReaction} />
+              <EmojiTweet handleReaction={handleReaction} />
             </Box>
 
             <Link to={`/${handle}/status/${id}`}>

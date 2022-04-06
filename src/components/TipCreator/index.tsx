@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { TipInput } from "./tipInput";
 import { ThemeContext } from "../../contexts/theme";
-import { Box, IconButton, Modal, Stack, Typography } from "@mui/material";
-import PaidIcon from '@mui/icons-material/Paid';
+import { Box, IconButton, Modal, Typography } from "@mui/material";
+import PaidIcon from "@mui/icons-material/Paid";
 
 interface TipProps {
   tipAmount?: number | null | string;
@@ -24,20 +24,20 @@ export const TipCreator: React.FC<TipProps> = ({
 
   return (
     <>
-      <Stack direction={"row"} spacing={0.5} sx={{ alignItems: "center" }}>
-        <IconButton aria-label="tip" onClick={() => setShowTip(!showTip)}>
+      <Box display={"flex"} alignItems={"center"}>
+        <IconButton
+          sx={{ p: 0 }}
+          aria-label="tip"
+          onClick={() => setShowTip(!showTip)}
+        >
           <PaidIcon />
-        </IconButton>
-        {!hideAmount && (
-          <Box display={"flex"}>
-            <Typography
-              sx={{ color: theme.secondaryColor, textAlign: "center" }}
-            >
+          {!hideAmount && (
+            <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
               {tipAmount ? tipAmount : null}
             </Typography>
-          </Box>
-        )}
-      </Stack>
+          )}
+        </IconButton>
+      </Box>
       <Modal
         open={showTip}
         onClose={() => setShowTip(false)}
