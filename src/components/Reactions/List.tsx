@@ -90,9 +90,9 @@ export const List: React.FC<{
     <>
       {reactionsWithCount
         .sort((a, b) => a.emojiId.localeCompare(b.emojiId))
-        .map(({ emojiId, count, isMine }) => {
+        .map(({ emojiId, count, isMine }, i) => {
           return (
-            <Box mr={0.3} mb={0.3}>
+            <Box mr={0.3} mb={0.3} key={`${emojiId}-${i}`}>
               <Tooltip
                 onOpen={() => getTweetReactions()}
                 key={emojiId}

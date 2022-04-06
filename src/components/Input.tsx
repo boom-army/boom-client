@@ -68,7 +68,7 @@ const Input = ({
   hideLabel = false,
 }: InputProps) => {
   return (
-    <Wrapper lg={lg == false ? "false" : "true"} {...fullWidth}>
+    <Wrapper lg={lg === false ? "false" : "true"} {...fullWidth}>
       <label className={hideLabel ? "hideLabel" : ""}>{text}</label>
       <input
         autoComplete="new-password"

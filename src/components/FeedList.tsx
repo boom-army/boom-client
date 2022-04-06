@@ -34,12 +34,15 @@ export const FeedList: React.FC<Props> = ({
     localStorage.clear();
   }
 
-  const fetchData = () =>
+  const fetchData = () => {
+    console.log(data?.length);
+
     fetchMore({
       variables: {
         offset: data?.length ?? 0,
       },
     });
+  };
 
   return (
     <Grid

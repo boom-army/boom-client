@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
 import { FormControl, InputAdornment } from "@mui/material";
 import { TextField } from "@material-ui/core";
 import { ThemeContext } from "../../contexts/theme";
