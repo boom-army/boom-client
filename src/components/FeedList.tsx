@@ -1,5 +1,5 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import React, { useEffect, useCallback } from "react";
+import React from "react";
 import { ApolloError } from "@apollo/client";
 import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
@@ -51,11 +51,6 @@ export const FeedList: React.FC<Props> = ({
         overflow: "auto",
       }}
     >
-      {data?.length ? (
-        data.map((tweet) => <ShowTweet key={tweet.id} tweet={tweet as Tweet} />)
-      ) : (
-        <CustomResponse text="Follow some people to get some feed updates" />
-      )}
       {data?.length && loading && (
         <Box sx={{ marginTop: "1rem" }}>
           <Loader />
