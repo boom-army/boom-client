@@ -9,14 +9,12 @@ import { useProfileLazyQuery } from "../../generated/graphql";
 import { NFTGallery } from "./NFTGallery";
 import { CustomResponse } from "../CustomResponse";
 import { styled } from "@mui/material/styles";
-const Wrapper = styled("div")((props) => ({
 
-}));
 let style = {
   ".MuiTabs-flexContainer": {
-    borderBottom: "2px solid #374148"
-  }
-}
+    borderBottom: "2px solid #374148",
+  },
+};
 
 export const Profile: React.FC = () => {
   const [tabValue, setTabValue] = useState("1");
@@ -48,14 +46,14 @@ export const Profile: React.FC = () => {
       <Box sx={{ typography: "body1" }}>
         <TabContext value={tabValue}>
           <Box>
-        <Grid className="tabGrid" sx={style}>
-            <TabList
-              onChange={handleChange}
-              aria-label="Profile tablist select"
-            >
-              <Tab sx={{ minWidth: 150 }} label="NFT Gallery" value="1" />
-              <Tab label="Meeps" value="2" />
-            </TabList>
+            <Grid className="tabGrid" sx={style}>
+              <TabList
+                onChange={handleChange}
+                aria-label="Profile tablist select"
+              >
+                <Tab sx={{ minWidth: 150 }} label="NFT Gallery" value="1" />
+                <Tab label="Meeps" value="2" />
+              </TabList>
             </Grid>
           </Box>
           <TabPanel value="1">

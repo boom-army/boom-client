@@ -12,7 +12,7 @@ const Wrapper = styled("div")((props) => ({
   // borderBottom: `1px solid ${props.theme.tertiaryColor}`,
 
   ".avatar": {
-    marginLeft: "1.4rem",
+    // marginLeft: "1.4rem",
     // marginTop: "-4rem",
   },
 
@@ -91,6 +91,7 @@ const Wrapper = styled("div")((props) => ({
     display: "flex",
     alignItems: "center",
     gap: "10px",
+    marginLeft: "1.4rem",
   },
   ".profile-Button": {
     borderRadius: "25px",
@@ -102,11 +103,27 @@ const Wrapper = styled("div")((props) => ({
   },
   ".userImg": {
     position: "relative",
+    ".userChipBdr": {
+      backgroundColor: "#315981",
+      display: "flex",
+      flexShrink: "0",
+      height: "calc(40px + 8px)",
+      width: "calc(40px + 8px)",
+      clipPath:
+        "polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%)",
+    },
     ".MuiAvatar-root": {
-      clipPath: "polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);",
-      "img": {
-        width: "40px",
-        height: "40px",
+      width: "calc(25px + 19px)",
+      height: "calc(25px + 19px)",
+      position: "relative",
+      top: "2px",
+      left: "2px",
+      clipPath:
+        "polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);",
+      borderRadius: "0px",
+      img: {
+        width: "100%",
+        height: "100%",
         objectFit: "cover",
       },
     },
@@ -123,7 +140,7 @@ const Wrapper = styled("div")((props) => ({
     },
   },
   ".bio": {
-    color: "#b2b2b2",
+    color: props.theme.secondaryColor,
   },
 
   "@media screen and (max-width: 767px)": {
@@ -203,7 +220,9 @@ const ProfileInfo = ({ profile }: any) => {
         <Grid item xs={8}>
           <div className="userimage-section">
             <span className="userImg">
-              <UserAvatar avatar={avatar} />
+              <span className="userChipBdr">
+                <UserAvatar avatar={avatar} />
+              </span>
               <span className="tokenImg">
                 <img src="https://ec4meandtybfo3zpqizry3nes5efdzazxhucv6jrjvc5n4igcy.arweave.net/ILjCAaOeAldvL4IzHG2k_l0hR5Bm56Cr5MU1F1vEGFo?ext=png" />
               </span>

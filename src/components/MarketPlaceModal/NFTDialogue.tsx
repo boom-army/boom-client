@@ -1,120 +1,141 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useContext, useMemo, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 // import Button from '@mui/material/Button';
 import Modal from "@mui/material/Modal";
 import { Button, Box, Grid } from "@mui/material";
-// import { ThemeContext } from "../../contexts/theme";
+import TextField from "@mui/material/TextField";
+import { color } from "@mui/system";
+import { ThemeContext } from "../../contexts/theme";
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 350,
-  bgcolor: "#152a37",
-  border: "2px solid #4d97cb",
-  borderRadius: 2,
-  boxShadow: 24,
-  p: 1,
-  ".modalHeader": {
-    display: "flex",
-    gap: "10px",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "10px",
-    ".userImg": {
-      img: {
-        width: "30px",
-        height: "30px",
-        borderRadius: "50%",
-      },
-    },
-    ".businessName": {
-      fontWeight: "600",
-      fontSize: "14px",
-    },
-    ".cancel-btn": {
-      background: "transparent",
-      border: "none",
-    },
-  },
-  ".detailSection": {
-    ".userImg": {
-      img: {
-        width: "105px",
-        height: "105px",
-        objectFit: "cover",
-      },
-    },
-    ".veridied": {
-      textTransform: "uppercase",
-      fontSize: "12px",
-      display: "flex",
-      alignItems: "center",
-      gap: "10px",
-      svg: {
-        background: "#35a600",
-        borderRadius: "50%",
-      },
-    },
-  },
-  ".tags": {
-    span: {
-      color: "#949a9e",
-      border: "1px solid #949a9e",
-      padding: "2px 10px",
-      display: "inline-block",
-      fontSize: "13px",
-      borderRadius: "25px",
-      marginBottom: "10px",
-    },
-    ".btn-explore": {
-      border: "1px solid #4d97cb",
-      color: "#4d97cb",
-      background: "#152a37",
-      padding: "4px 10px",
-      borderRadius: "25px",
-      cursor: "pointer",
-    },
-  },
-  ".btn-section": {
-    marginTop: "10px",
-    ".btn": {
-      textTransform: "uppercase",
-      color: "#fff",
-      width: "100%",
-      border: "1px solid",
-      borderRadius: "5px",
-      padding: "8px 0",
-      margin: "5px 0",
-      fontWeight: "600",
-      cursor: "pointer",
-    },
-    ".btn-profilepic": {
-      background: "#4d97cb",
-      borderColor: "#4d97cb",
-    },
-    ".btn-order": {
-      background: "#f20769",
-      borderColor: "#f20769",
-    },
-    ".btn-list": {
-      background: "#35a600",
-      borderColor: "#35a600",
-    },
-    ".btn-cancel": {
-      background: "transparent",
-      borderColor: "#4d97cb",
-      color: "#4d97cb",
-      textTransform: "capitalize",
-      fontWeight: "500",
-    },
-  },
-};
+// interface BasicModal {
+//     onClose: () => void;
+// }
 
-export default function BasicModal() {
+const BasicModal = ({ isClicked }: any) => {
   const [open, setOpen] = useState(true);
-  const handleClose = () => setOpen(false);
+
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const handleClose = () => {
+    setOpen(false);
+    isClicked(false);
+  };
+
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 350,
+    bgcolor: theme.background,
+    border: "2px solid #4d97cb",
+    borderRadius: 2,
+    boxShadow: 24,
+    outline: "none",
+    p: 1,
+    ".modalHeader": {
+      display: "flex",
+      gap: "10px",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: "10px",
+      ".userImg": {
+        img: {
+          width: "30px",
+          height: "30px",
+          borderRadius: "50%",
+        },
+      },
+      ".businessName": {
+        fontWeight: "600",
+        fontSize: "14px",
+      },
+      ".cancel-btn": {
+        background: "transparent",
+        border: "none",
+      },
+    },
+    ".detailSection": {
+      ".userImg": {
+        img: {
+          width: "105px",
+          height: "105px",
+          objectFit: "cover",
+        },
+      },
+      ".veridied": {
+        textTransform: "uppercase",
+        fontSize: "12px",
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        svg: {
+          background: "#35a600",
+          borderRadius: "50%",
+        },
+      },
+    },
+    ".tags": {
+      span: {
+        color: "#949a9e",
+        border: "1px solid #949a9e",
+        padding: "2px 10px",
+        display: "inline-block",
+        fontSize: "13px",
+        borderRadius: "25px",
+        marginBottom: "10px",
+      },
+      ".btn-explore": {
+        border: "1px solid #4d97cb",
+        color: "#4d97cb",
+        background: theme.background,
+        padding: "4px 10px",
+        borderRadius: "25px",
+        cursor: "pointer",
+      },
+    },
+    ".btn-section": {
+      marginTop: "20px",
+      ".btn": {
+        textTransform: "uppercase",
+        color: "#fff",
+        width: "100%",
+        border: "1px solid",
+        borderRadius: "5px",
+        padding: "8px 0",
+        margin: "5px 0",
+        fontWeight: "600",
+        cursor: "pointer",
+      },
+     
+   
+      ".btn-cancel": {
+        background: "transparent",
+        borderColor: "#4d97cb",
+        color: "#4d97cb",
+        textTransform: "capitalize",
+        fontWeight: "500",
+      },
+ 
+    },
+    fieldset: {
+      border: "1px solid #838689 !important",
+      borderRadius: "5px",
+      color: "#838689",
+      height: "50px",
+    },
+    input: {
+      padding: "0 10px",
+      height: "45px",
+      color: "#838689",
+      marginBottom: "6px",
+    },
+    label: {
+      color: "#838689 !important",
+      lineHeight: "1em",
+    },
+   
+  };
 
   return (
     <>
@@ -122,7 +143,6 @@ export default function BasicModal() {
         <div>
           <Modal
             open={open}
-            onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
@@ -137,7 +157,7 @@ export default function BasicModal() {
                     <span className="businessName">
                       Solana Monkey Business #619
                     </span>
-                    <button className="cancel-btn">
+                    <button className="cancel-btn" onClick={handleClose}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
@@ -191,12 +211,9 @@ export default function BasicModal() {
                 </Grid>
 
                 <Grid xs={12} className="btn-section">
-                  <button className="btn btn-profilepic">
-                    Set Profile Picture
-                  </button>
-                  <button className="btn btn-order">Order Print</button>
-                  <button className="btn btn-list">List For Sale</button>
-                  <button className="btn btn-cancel">Cancel</button>
+                  <Button className="btn btn-cancel" onClick={handleClose}>
+                    CANCEL
+                  </Button>
                 </Grid>
               </Grid>
             </Box>
@@ -207,4 +224,5 @@ export default function BasicModal() {
       )}
     </>
   );
-}
+};
+export default BasicModal;

@@ -35,7 +35,7 @@ const Wrapper = styled("div")((props) => ({
       bottom: "0",
       img: {
         borderRadius: "50%",
-        border: "5px solid #15202b",
+        border: `5px solid ${props.theme.background}`,
       },
     },
     ".tokenPrice": {
@@ -90,26 +90,21 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
   // const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
   const uRIData = {
-    name: "Rene Descartes",
-    description: "The New Press",
-    symbol: "SOLTYPE",
-    image:
-      "https://www.arweave.net/ILjCAaOeAldvL4IzHG2k_l0hR5Bm56Cr5MU1F1vEGFo?ext=png",
-    properties: {
-      files: [
-        {
-          uri: "https://www.arweave.net/ILjCAaOeAldvL4IzHG2k_l0hR5Bm56Cr5MU1F1vEGFo?ext=png",
-          type: "image/png",
-        },
-      ],
-      category: "image",
-      creators: [
-        { address: "DpFSXTEGgKWULT4tSAQk51cZrTnDj1LXgYJVDbkE2Koq", share: 100 },
-      ],
-    },
-    seller_fee_basis_points: 500,
-    attributes: [{ trait_type: "Author", value: "Rene Descartes" }],
-    collection: {},
+    id: "ckwd3peba137601lds92ku4kn",
+    publicKey: "4SdtiwQdE245Vd1JHb1C2TJsCB4msSjMkLUezFN1Seqz",
+    name: "J1QmGAEabgZzFxSzEMGWCp7DT",
+    symbol: "4ES",
+    description: "Component of 4E+6020 dynamic collection",
+    sellerFeeBasisPoints: 0,
+    image: "https://o.vengit.com/nft/7.png",
+    attributes: '[{"value":"Moss","traitType":"Name"}]',
+    collection: '{"name":"4E+6020 Substances","family":"Substances"}',
+    properties:
+      '{"files":[{"uri":"https://o.vengit.com/nft/7.png","type":"image/png"}],"category":"image","creators":[{"share":100,"address":"ASx6b7ptFRqh8KebrvnGhhRBxzJWwuSzP9shTSeiBdbS"}]}',
+    createdAt: "2021-11-24 05:43:20.758",
+    updatedAt: "2021-11-24 05:43:20.759",
+    tweetId: "ckwd3peb4136601ld6fxh4b5y",
+    externalUrl: null,
   };
 
   // const [uRIData, setURIData] = useState<URIData>();
@@ -134,6 +129,11 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
       }
     })();
   }, [data, cluster]);
+
+  // const setDataTYpe = (data: any)  => {
+  //   console.log("asdasdsadasd", data)
+  //   setIsClicked(false);
+  // }
 
   return (
     <>
@@ -185,13 +185,29 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
               </div>
             </Box>
             <Box>
-              <Typography sx={{ fontSize: "0.8em", maxWidth: "120px" }}>
+              <Typography
+                sx={{
+                  fontSize: "0.8em",
+                  maxWidth: "120px",
+                  wordBreak: "break-all",
+                }}
+              >
                 {uRIData?.name}
               </Typography>
             </Box>
           </div>
         </Wrapper>
-        {isClicked ? <BasicModal /> : ""}
+
+        {isClicked ? (
+          <BasicModal
+            isClicked={() => {
+              setIsClicked(false);
+            }}
+          />
+        ) : (
+          ""
+        )}
+
         {/* </Link> */}
       </Box>
     </>
@@ -205,29 +221,55 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
 
   const nfts = [
     {
-      name: "Rene Descartes",
-      description: "The New Press",
-      symbol: "SOLTYPE",
-      image:
-        "https://www.arweave.net/ILjCAaOeAldvL4IzHG2k_l0hR5Bm56Cr5MU1F1vEGFo?ext=png",
-      properties: {
-        files: [
-          {
-            uri: "https://www.arweave.net/ILjCAaOeAldvL4IzHG2k_l0hR5Bm56Cr5MU1F1vEGFo?ext=png",
-            type: "image/png",
-          },
-        ],
-        category: "image",
-        creators: [
-          {
-            address: "DpFSXTEGgKWULT4tSAQk51cZrTnDj1LXgYJVDbkE2Koq",
-            share: 100,
-          },
-        ],
-      },
-      seller_fee_basis_points: 500,
-      attributes: [{ trait_type: "Author", value: "Rene Descartes" }],
-      collection: {},
+      id: "ckwd3peba137601lds92ku4kn",
+      publicKey: "4SdtiwQdE245Vd1JHb1C2TJsCB4msSjMkLUezFN1Seqz",
+      name: "J1QmGAEabgZzFxSzEMGWCp7DT",
+      symbol: "4ES",
+      description: "Component of 4E+6020 dynamic collection",
+      sellerFeeBasisPoints: 0,
+      image: "https://o.vengit.com/nft/7.png",
+      attributes: '[{"value":"Moss","traitType":"Name"}]',
+      collection: '{"name":"4E+6020 Substances","family":"Substances"}',
+      properties:
+        '{"files":[{"uri":"https://o.vengit.com/nft/7.png","type":"image/png"}],"category":"image","creators":[{"share":100,"address":"ASx6b7ptFRqh8KebrvnGhhRBxzJWwuSzP9shTSeiBdbS"}]}',
+      createdAt: "2021-11-24 05:43:20.758",
+      updatedAt: "2021-11-24 05:43:20.759",
+      tweetId: "ckwd3peb4136601ld6fxh4b5y",
+      externalUrl: null,
+    },
+    {
+      id: "ckwd3peba137601lds92ku4kn",
+      publicKey: "4SdtiwQdE245Vd1JHb1C2TJsCB4msSjMkLUezFN1Seqz",
+      name: "J1QmGAEabgZzFxSzEMGWCp7DT",
+      symbol: "4ES",
+      description: "Component of 4E+6020 dynamic collection",
+      sellerFeeBasisPoints: 0,
+      image: "https://o.vengit.com/nft/7.png",
+      attributes: '[{"value":"Moss","traitType":"Name"}]',
+      collection: '{"name":"4E+6020 Substances","family":"Substances"}',
+      properties:
+        '{"files":[{"uri":"https://o.vengit.com/nft/7.png","type":"image/png"}],"category":"image","creators":[{"share":100,"address":"ASx6b7ptFRqh8KebrvnGhhRBxzJWwuSzP9shTSeiBdbS"}]}',
+      createdAt: "2021-11-24 05:43:20.758",
+      updatedAt: "2021-11-24 05:43:20.759",
+      tweetId: "ckwd3peb4136601ld6fxh4b5y",
+      externalUrl: null,
+    },
+    {
+      id: "ckwd3peba137601lds92ku4kn",
+      publicKey: "4SdtiwQdE245Vd1JHb1C2TJsCB4msSjMkLUezFN1Seqz",
+      name: "J1QmGAEabgZzFxSzEMGWCp7DT",
+      symbol: "4ES",
+      description: "Component of 4E+6020 dynamic collection",
+      sellerFeeBasisPoints: 0,
+      image: "https://o.vengit.com/nft/7.png",
+      attributes: '[{"value":"Moss","traitType":"Name"}]',
+      collection: '{"name":"4E+6020 Substances","family":"Substances"}',
+      properties:
+        '{"files":[{"uri":"https://o.vengit.com/nft/7.png","type":"image/png"}],"category":"image","creators":[{"share":100,"address":"ASx6b7ptFRqh8KebrvnGhhRBxzJWwuSzP9shTSeiBdbS"}]}',
+      createdAt: "2021-11-24 05:43:20.758",
+      updatedAt: "2021-11-24 05:43:20.759",
+      tweetId: "ckwd3peb4136601ld6fxh4b5y",
+      externalUrl: null,
     },
   ];
   // const [nfts, setNfts] = useState<MetadataDataData[]>();
