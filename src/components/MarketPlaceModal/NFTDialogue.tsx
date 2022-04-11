@@ -6,15 +6,18 @@ import { Button, Box, Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { color } from "@mui/system";
 import { ThemeContext } from "../../contexts/theme";
-
-// interface BasicModal {
-//     onClose: () => void;
-// }
+import { darkTheme } from "../../styles/themes";
 
 const BasicModal = ({ isClicked }: any) => {
   const [open, setOpen] = useState(true);
-
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
+  const isDarkTheme = theme.primaryColor === darkTheme.primaryColor;
+  const [defaultProfile, setDefaultProfile] = useState({
+    isdefault: true,
+    isList: false,
+    isWithdraw: false,
+    isBuyNow: false,
+  });
 
   const handleClose = () => {
     setOpen(false);
@@ -48,7 +51,7 @@ const BasicModal = ({ isClicked }: any) => {
       },
       ".businessName": {
         fontWeight: "600",
-        fontSize: "14px",
+        fontSize: "15px",
       },
       ".cancel-btn": {
         background: "transparent",
@@ -107,8 +110,18 @@ const BasicModal = ({ isClicked }: any) => {
         fontWeight: "600",
         cursor: "pointer",
       },
-     
-   
+      ".btn-profilepic": {
+        background: "#4d97cb",
+        borderColor: "#4d97cb",
+      },
+      ".btn-order": {
+        background: "#f20769",
+        borderColor: "#f20769",
+      },
+      ".btn-list": {
+        background: "#35a600",
+        borderColor: "#35a600",
+      },
       ".btn-cancel": {
         background: "transparent",
         borderColor: "#4d97cb",
@@ -116,7 +129,12 @@ const BasicModal = ({ isClicked }: any) => {
         textTransform: "capitalize",
         fontWeight: "500",
       },
- 
+      ".solBtn": {
+        color: "#35a600",
+        border: "1px solid #35a600",
+        borderRadius: "25px",
+        height: "45px",
+      },
     },
     fieldset: {
       border: "1px solid #838689 !important",
@@ -134,7 +152,16 @@ const BasicModal = ({ isClicked }: any) => {
       color: "#838689 !important",
       lineHeight: "1em",
     },
-   
+    ".solText": {
+      background: isDarkTheme ? "#0e1b25" : "#ffff",
+      border: `2px solid  ${isDarkTheme ? "#374148" : "#838689"}`,
+      width: "100%",
+      fontWeight: "600",
+      height: "42px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
   };
 
   return (
@@ -210,11 +237,88 @@ const BasicModal = ({ isClicked }: any) => {
                   <button className="btn-explore">View in explore</button>
                 </Grid>
 
-                <Grid xs={12} className="btn-section">
-                  <Button className="btn btn-cancel" onClick={handleClose}>
-                    CANCEL
-                  </Button>
-                </Grid>
+                {defaultProfile.isdefault && (
+                  <Grid xs={12} className="btn-section">
+                    <Button className="btn btn-profilepic">
+                      SET PROFILE PICTURE
+                    </Button>
+                    <Button className="btn btn-order">ORDER PRINT</Button>
+                    <Button
+                      className="btn btn-list"
+                      onClick={() => {
+                        setDefaultProfile({
+                          isdefault: false,
+                          isList: true,
+                          isWithdraw: false,
+                          isBuyNow: false,
+                        });
+                      }}
+                    >
+                      LIST FOR SALE
+                    </Button>
+                    <Button className="btn btn-cancel" onClick={handleClose}>
+                      CANCEL
+                    </Button>
+                  </Grid>
+                )}
+                {defaultProfile.isList && (
+                  <Grid container className="btn-section">
+                    <Grid xs={9}>
+                      <TextField id="outlined-basic" label="List Price" />
+                    </Grid>
+
+                    <Grid xs={3}>
+                      <Button className="solBtn">SOL</Button>
+                    </Grid>
+                    <Button
+                      className="btn btn-list"
+                      onClick={() => {
+                        setDefaultProfile({
+                          isdefault: false,
+                          isList: false,
+                          isWithdraw: true,
+                          isBuyNow: false,
+                        });
+                      }}
+                    >
+                      LIST NOW
+                    </Button>
+                    <Button className="btn btn-cancel" onClick={handleClose}>
+                      Cancel Listing
+                    </Button>
+                  </Grid>
+                )}
+
+                {defaultProfile.isWithdraw && (
+                  <Grid container className="btn-section">
+                    <span className="solText">3.4 SOL</span>
+                    <Button
+                      className="btn btn-list"
+                      onClick={() => {
+                        setDefaultProfile({
+                          isdefault: false,
+                          isList: false,
+                          isWithdraw: false,
+                          isBuyNow: true,
+                        });
+                      }}
+                    >
+                      WITHDRAW LISTING
+                    </Button>
+                    <Button className="btn btn-cancel" onClick={handleClose}>
+                      CANCEL
+                    </Button>
+                  </Grid>
+                )}
+                {defaultProfile.isBuyNow && (
+                  <Grid container className="btn-section">
+                    <span className="solText">3.4 SOL</span>
+                    <Button className="btn btn-list">BUY NOW</Button>
+                    <Button className="btn btn-cancel" onClick={handleClose}>
+                      CANCEL
+                    </Button>
+                  </Grid>
+                )}
               </Grid>
             </Box>
           </Modal>
