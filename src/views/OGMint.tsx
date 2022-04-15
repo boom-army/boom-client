@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useState, useCallback, useContext } from "react";
 import * as anchor from "@project-serum/anchor";
 import { Container, Snackbar } from "@material-ui/core";
+import CheckIcon from "@mui/icons-material/Check";
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import CableIcon from '@mui/icons-material/Cable';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import Paper from "@mui/material/Paper";
 import Alert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
@@ -19,10 +24,18 @@ import { AlertState } from "../utils/utils";
 import { Header } from "../components/CandyMachine/Header";
 import { MintButton } from "../components/CandyMachine/MintButton";
 import { GatewayProvider } from "@civic/solana-gateway-react";
-import { Box, Grid, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Grid,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import Tilt from "react-parallax-tilt";
 import { ThemeContext } from "../contexts/theme";
-import { grey } from "@mui/material/colors";
 
 const ConnectButton = styled(WalletDialogButton)({
   width: "100%",
@@ -47,6 +60,12 @@ const TiltStyled = styled(Tilt)({
   height: "260px",
   transformStyle: "preserve-3d",
 });
+
+const ThemeListItemText = styled(ListItemText)((props) => ({
+  "& p": {
+    color: props.theme.secondaryColor,
+  },
+}));
 
 const MintContainer = styled("div")({}); // add your owns styles here
 
@@ -281,6 +300,76 @@ export const OGMint = () => {
           in perpetuity. If you have a White List (WL) token or two lucky you -
           you're obviously an OG 1303! All WL hero...ETHP tokens mint FOR FREE!!
         </Typography>
+      </Box>
+      <Box mt={4}>
+        <img
+          src={"/assets/Tips for minting.png"}
+          width="180"
+          alt="Minting Schedule"
+        />
+        <Typography mb={1}>
+          We're hoping the minting process goes as smoothly as possible. Here's
+          some pro-tips to help you out:
+        </Typography>
+        <List>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ background: theme.accentColor }}>
+                <CheckIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ThemeListItemText
+              primary="How to connect"
+              secondary="Use the connect button on the top right in the Nav for full access to
+              Boom.Army. You'll have to sign a wallet popup message to verify your Boom.Army account."
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ background: theme.accentColor }}>
+                <CableIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ThemeListItemText
+              primary="Connecting via the mint interface"
+              secondary="If you use the connect button in the mint interface, you'll get an error popup. 
+              Don't worry about it, it's just letting you know you only have access to mint, but not to post on Boom.Army."
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ background: theme.accentColor }}>
+                <AccountBalanceWalletIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ThemeListItemText
+              primary="Have enough Wallet SOL"
+              secondary="Make sure you have enough SOL to pay for TX and Arweave fees especially if you're minting with a WL token. They should be less than 0.02 SOL."
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ background: theme.accentColor }}>
+                <TwitterIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ThemeListItemText
+              primary="Show off your Boom Hero"
+              secondary="Once you've minted post your avatar on Boom.Army and Twitter with the #BoomHeroes tag. There'll be an Easter Egg for one lucky poster!"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ background: theme.accentColor }}>
+                <SupportAgentIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ThemeListItemText
+              primary="If all else fails"
+              secondary="In the world of Mainnet Beta sometimes things don't always go as planned. We'll be in discord at https://discord.gg/RqbcwKphDr if you need us."
+            />
+          </ListItem>
+        </List>
       </Box>
       <Box mt={4}>
         <img
