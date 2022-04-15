@@ -16,10 +16,9 @@ export const CTAButton = styled(Button)((props) => ({
     fontSize: "16px",
     fontWeight: "bold",
   },
-  "&.Mui-disabled": {
-    backgroundColor: props.theme.tertiaryColor2,
-    opacity: "0.3",
-    color: "white",
+  "&.MuiButton-contained.Mui-disabled": {
+    backgroundColor: props.theme.tertiaryColor,
+    color: props.theme.primaryColor,
   },
 }));
 

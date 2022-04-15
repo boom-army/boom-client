@@ -142,12 +142,10 @@ export const AppRoutes: React.FC = () => {
                     md={2}
                     display={{ xs: "none", sm: "none", md: "block" }}
                   >
-                    {user?.handle && (
-                      <Nav
-                        user={user}
-                        newMentionsCount={data?.profile?.newMentionsCount}
-                      />
-                    )}
+                    <Nav
+                      user={user}
+                      newMentionsCount={data?.profile?.newMentionsCount}
+                    />
                   </Paper>
                   <Paper
                     component={Grid}
@@ -163,7 +161,10 @@ export const AppRoutes: React.FC = () => {
                       <Route path="following" element={<Following />} />
                       <Route path="connect" element={<ConnectView />} />
                       <Route path="channels" element={<Channels />} />
-                      <Route path="channels/:channelId" element={<ChannelFeed />} />
+                      <Route
+                        path="channels/:channelId"
+                        element={<ChannelFeed />}
+                      />
                       <Route
                         path="notifications"
                         element={<Notifications refetchProfile={refetch} />}

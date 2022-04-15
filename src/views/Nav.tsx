@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -116,18 +116,21 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               <Typography variant="body1">Community</Typography>
             </Stack>
           </NavLink>
-          <NavLink style={applyActiveStyles} to="/channels">
-            <Stack direction="row" {...stackProps}>
-              <TagIcon sx={iconProps} />
-              <Typography variant="body1">Channels</Typography>
-            </Stack>
-          </NavLink>
+
           <NavLink style={applyActiveStyles} to="/mint-boom-hero">
             <Stack direction="row" {...stackProps}>
               <AutoGraphIcon sx={iconProps} />
               <Typography variant="body1">Mint Boom Hero</Typography>
             </Stack>
           </NavLink>
+          {user?.handle && (
+            <NavLink style={applyActiveStyles} to="/channels">
+              <Stack direction="row" {...stackProps}>
+                <TagIcon sx={iconProps} />
+                <Typography variant="body1">Channels</Typography>
+              </Stack>
+            </NavLink>
+          )}
           {/* <NavLink style={applyActiveStyles} to="/mint-nft">
             <Stack direction="row" {...stackProps}>
               <StyleIcon sx={iconProps} />
@@ -142,36 +145,39 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           </Typography>
         </Stack>
       </NavLink> */}
-          <NavLink style={applyActiveStyles} to="/connect">
-            <Stack direction="row" {...stackProps}>
-              <GroupIcon sx={iconProps} />
-              <Typography variant="body1">Creators</Typography>
-            </Stack>
-          </NavLink>
-          <NavLink style={applyActiveStyles} to="/notifications">
-            <Stack direction="row" {...stackProps}>
-              <Badge
-                max={99}
-                badgeContent={newMentionsCount ?? 0}
-                sx={{
-                  "& .MuiBadge-badge": {
-                    color: "#FFFFFF",
-                    backgroundColor: theme.accentColor,
-                  },
-                }}
-              >
-                <NotificationsIcon sx={iconProps} />
-              </Badge>
-              <Typography variant="body1">Notifications</Typography>
-            </Stack>
-          </NavLink>
+
           {user?.handle && (
-            <NavLink style={applyActiveStyles} to={`/${user?.handle}`}>
-              <Stack direction="row" {...stackProps}>
-                <AccountCircleIcon sx={iconProps} />
-                <Typography variant="body1">Profile</Typography>
-              </Stack>
-            </NavLink>
+            <>
+              <NavLink style={applyActiveStyles} to="/connect">
+                <Stack direction="row" {...stackProps}>
+                  <GroupIcon sx={iconProps} />
+                  <Typography variant="body1">Creators</Typography>
+                </Stack>
+              </NavLink>
+              <NavLink style={applyActiveStyles} to="/notifications">
+                <Stack direction="row" {...stackProps}>
+                  <Badge
+                    max={99}
+                    badgeContent={newMentionsCount ?? 0}
+                    sx={{
+                      "& .MuiBadge-badge": {
+                        color: "#FFFFFF",
+                        backgroundColor: theme.accentColor,
+                      },
+                    }}
+                  >
+                    <NotificationsIcon sx={iconProps} />
+                  </Badge>
+                  <Typography variant="body1">Notifications</Typography>
+                </Stack>
+              </NavLink>
+              <NavLink style={applyActiveStyles} to={`/${user?.handle}`}>
+                <Stack direction="row" {...stackProps}>
+                  <AccountCircleIcon sx={iconProps} />
+                  <Typography variant="body1">Profile</Typography>
+                </Stack>
+              </NavLink>
+            </>
           )}
           <MorePopUp iconProps={iconProps} stackProps={stackProps} />
         </StyledStack>

@@ -19,13 +19,10 @@ import { AlertState } from "../utils/utils";
 import { Header } from "../components/CandyMachine/Header";
 import { MintButton } from "../components/CandyMachine/MintButton";
 import { GatewayProvider } from "@civic/solana-gateway-react";
-import {
-  Box,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Tilt from "react-parallax-tilt";
 import { ThemeContext } from "../contexts/theme";
+import { grey } from "@mui/material/colors";
 
 const ConnectButton = styled(WalletDialogButton)({
   width: "100%",
