@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -7,13 +8,13 @@ import StyleIcon from "@mui/icons-material/Style";
 import TagIcon from "@mui/icons-material/Tag";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { ChannelStatus } from "../constants";
 import { MorePopUp } from "../components/MorePopup";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme";
 import { User as StoreUser } from "../contexts/user";
 import { styled } from "@mui/material/styles";
 import { useChannelsQuery } from "../generated/graphql";
-import { ChannelStatus } from "../constants";
 
 interface Props {
   newMentionsCount: Number | undefined;
@@ -121,12 +122,18 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               <Typography variant="body1">Channels</Typography>
             </Stack>
           </NavLink>
-          <NavLink style={applyActiveStyles} to="/mint-nft">
+          <NavLink style={applyActiveStyles} to="/mint-boom-hero">
+            <Stack direction="row" {...stackProps}>
+              <AutoGraphIcon sx={iconProps} />
+              <Typography variant="body1">Mint Boom Hero</Typography>
+            </Stack>
+          </NavLink>
+          {/* <NavLink style={applyActiveStyles} to="/mint-nft">
             <Stack direction="row" {...stackProps}>
               <StyleIcon sx={iconProps} />
               <Typography variant="body1">Mint NFT</Typography>
             </Stack>
-          </NavLink>
+          </NavLink> */}
           {/* <NavLink style={applyActiveStyles} to="/following">
         <Stack direction="row" {...stackProps}>
           <Person sx={iconProps} />

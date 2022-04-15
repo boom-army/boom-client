@@ -23,12 +23,6 @@ import {
   Box,
   Grid,
   Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
 } from "@mui/material";
 import Tilt from "react-parallax-tilt";
 import { ThemeContext } from "../contexts/theme";
@@ -56,10 +50,6 @@ const TiltStyled = styled(Tilt)({
   height: "260px",
   transformStyle: "preserve-3d",
 });
-
-function createData(serial: string, cost: number, minting: string) {
-  return { serial, cost, minting };
-}
 
 const MintContainer = styled("div")({}); // add your owns styles here
 
@@ -188,15 +178,6 @@ export const OGMint = () => {
     refreshCandyMachineState();
   }, [anchorWallet, connection, refreshCandyMachineState]);
 
-  const rows = [
-    createData("#1 - 100 | Legendary", 1.303, `Pre-sale: SOLD OUT`),
-    createData("#101 - 250 | Ultra Rare", 1.6, `LOCKED`),
-    createData("#251 - 500 | Rare", 2, "LOCKED"),
-    createData("#501 - 750 | Rare", 2.3, "LOCKED"),
-    createData("#751 - 1000 | Regular", 2.5, "LOCKED"),
-    createData("#1001 - 1303 | Regular", 3, "LOCKED"),
-  ];
-
   return (
     <Container style={{ marginTop: 20 }}>
       <Box
@@ -207,7 +188,11 @@ export const OGMint = () => {
           marginBottom: "2em",
         }}
       >
-        <img src={"/assets/boom-og.png"} alt="Boom OG NFT Mint" width="300em" />
+        <img
+          src={"/assets/Boom Heros Season Challenge Mint.png"}
+          alt="Boom OG NFT Mint"
+          width="500em"
+        />
       </Box>
       <Grid container spacing={2}>
         <Grid item sm={7} xs={12}>
@@ -282,10 +267,10 @@ export const OGMint = () => {
                 }}
               >
                 <img
-                  src={"/assets/inner.png"}
-                  width="120"
+                  src={"/assets/animated-200.gif"}
+                  width="160"
                   className="inner-element"
-                  alt="1303 OG NFT Card"
+                  alt="Boom Heroes #420"
                 />
               </Box>
             </TiltStyled>
@@ -294,85 +279,38 @@ export const OGMint = () => {
       </Grid>
       <Box>
         <Typography>
-          To commemorate the official launch of Boom.Army Beta, we're launching
-          1303 OG NFTs for everyone who is early. There are 1303 NFTs available,
-          and they will receive a 1303 split share of 20% of our Market Place
-          fees in perpetuity. All White List i3o3...3bos tokens mint at 1.303
-          SOL discount.
+          You're about to mint a piece of Solana history - a #BoomHeroes Season
+          Challenge Pass that will unlock all future Season Challenges on Boom
+          in perpetuity. If you have a White List (WL) token or two lucky you -
+          you're obviously an OG 1303! All WL hero...ETHP tokens mint FOR FREE!!
         </Typography>
       </Box>
       <Box mt={4}>
-        <img src={"/assets/minting.png"} width="184" alt="Minting Schedule" />
+        <img
+          src={"/assets/The future of Boom heroes.png"}
+          width="300"
+          alt="Minting Schedule"
+        />
+        <Typography mb={1}>
+          Aside from looking dope AF Boom has big plans for this NFT. Its the
+          first Season Challenge Pass, something we've been talking about for
+          several weeks and are currently building out. We want to keep things
+          simple for this mint, and we're still ironing out the details for the
+          Season Challenges to make them easier to understand. But there's a
+          link at the bottom outlining the plan so far, if you're hungry to know
+          more.
+        </Typography>
+        <Typography mb={1} sx={{ color: theme.accentColor }}>
+          <a
+            href="https://boom.army/docs/docs/prologue/season-challenges/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            A full breakdown of the Season Challenges plan to date.
+          </a>
+        </Typography>
+        <Typography mb={1}>HAPPY MINTING FRENS!</Typography>
       </Box>
-      <Box>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell sx={{ border: "none" }}>
-                  <Typography
-                    sx={{ color: theme.secondaryColor, fontSize: "8px" }}
-                    variant="body2"
-                  >
-                    Serial
-                  </Typography>
-                </TableCell>
-                <TableCell sx={{ border: "none" }} align="right">
-                  <Typography
-                    variant="body2"
-                    sx={{ color: theme.secondaryColor, fontSize: "10px" }}
-                  >
-                    Cost (SOL)
-                  </Typography>
-                </TableCell>
-                <TableCell sx={{ border: "none" }} align="right">
-                  <Typography
-                    sx={{ color: theme.secondaryColor, fontSize: "10px" }}
-                    variant="body2"
-                  >
-                    Minting (EST)
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.serial}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell
-                    sx={{ borderBottom: "1px solid #0071AA" }}
-                    component="th"
-                    scope="row"
-                  >
-                    <Typography sx={{ color: theme.primaryColor }}>
-                      {row.serial}
-                    </Typography>
-                  </TableCell>
-                  <TableCell
-                    sx={{ borderBottom: "1px solid #0071AA" }}
-                    align="right"
-                  >
-                    <Typography sx={{ color: theme.primaryColor }}>
-                      {row.cost}
-                    </Typography>
-                  </TableCell>
-                  <TableCell
-                    sx={{ borderBottom: "1px solid #0071AA" }}
-                    align="right"
-                  >
-                    <Typography sx={{ color: theme.primaryColor }}>
-                      {row.minting}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-
       <Snackbar
         open={alertState.open}
         autoHideDuration={6000}
