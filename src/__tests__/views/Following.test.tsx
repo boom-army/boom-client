@@ -5,6 +5,17 @@ import { MemoryRouter } from "react-router-dom";
 import { FeedDocument } from "../../generated/graphql";
 import { MockedProvider } from "@apollo/client/testing";
 import { SnackbarProvider } from "notistack";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
+
 
 export const __mocks__: any = [
   {

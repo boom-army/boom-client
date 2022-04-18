@@ -3,13 +3,38 @@
 exports[`<ToggleTheme/> component : display <ToggleTheme/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  margin-left: 0.7rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.css-0 p {
+  margin-left: 0.4rem;
+}
+
+.css-1 {
+  fill: #CA2055;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+<body>
     <div>
       <div
-        class="css-1qx74l9"
+        class="css-0"
       >
         <svg
-          class="css-3qrrh5"
+          class="css-1"
           color="#CA2055"
           height="24"
           sm="true"
@@ -27,12 +52,37 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  margin-left: 0.7rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.css-0 p {
+  margin-left: 0.4rem;
+}
+
+.css-1 {
+  fill: #CA2055;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+<div>
     <div
-      class="css-1qx74l9"
+      class="css-0"
     >
       <svg
-        class="css-3qrrh5"
+        class="css-1"
         color="#CA2055"
         height="24"
         sm="true"

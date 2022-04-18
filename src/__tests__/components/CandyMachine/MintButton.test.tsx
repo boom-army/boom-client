@@ -2,6 +2,17 @@ import React from "react";
 import { MintButton } from "../../../components/CandyMachine/MintButton";
 import { act, fireEvent, render } from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
+
 
 describe("<MintButton/> component :", () => {
   test("display <MintButton/> component when isMinting true", async () => {

@@ -1,6 +1,17 @@
 import React from "react";
 import { ExplorerLink } from "../../../components/ExplorerLink";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
+
 
 describe("<ExplorerLink/> component :", () => {
   test("display <ExplorerLink/> component ", async () => {

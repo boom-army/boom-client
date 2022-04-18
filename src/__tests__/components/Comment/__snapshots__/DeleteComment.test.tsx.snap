@@ -3,10 +3,21 @@
 exports[`<DeleteComponent/>:  renders correctly when User have profile 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  width: 18px;
+  height: 18px;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.css-0:hover {
+  fill: #e0245e;
+}
+
+<body>
     <div>
       <svg
-        class="css-1csj31"
+        class="css-0"
         loading=""
         viewBox="0 0 24 24"
       >
@@ -21,9 +32,20 @@ Object {
       </svg>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  width: 18px;
+  height: 18px;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.css-0:hover {
+  fill: #e0245e;
+}
+
+<div>
     <svg
-      class="css-1csj31"
+      class="css-0"
       loading=""
       viewBox="0 0 24 24"
     >

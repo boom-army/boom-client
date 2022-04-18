@@ -3,10 +3,51 @@
 exports[`<EmojiPicker/> component : display <EmojiPicker/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 .emoji-mart {
+  position: absolute;
+  z-index: 1;
+}
+
+.css-0 .emoji-mart-bar.emoji-mart-bar,
+.css-0 .emoji-mart-scroll.emoji-mart-scroll {
+  margin-right: 0;
+}
+
+.css-0 .emoji-mart .emoji-mart-anchor-bar {
+  background-color: undefined!important;
+}
+
+.css-0 .emoji-mart-preview {
+  display: none;
+}
+
+.css-0 .emoji-mart-category {
+  margin-top: 0.75rem;
+}
+
+.css-0 .emoji-mart-dark .emoji-mart-category-label span {
+  color: #fff;
+}
+
+.css-0 .emoji-mart-scroll::WebkitScrollbar {
+  width: 0.25rem;
+}
+
+.css-0 .emoji-pick {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+  .css-0 .emoji-mart {
+    position: fixed;
+    bottom: 5em;
+  }
+}
+
+<body>
     <div>
       <div
-        class="css-s5gg9u"
+        class="css-0"
       >
         <span
           class="emoji-pick"
@@ -35,9 +76,50 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 .emoji-mart {
+  position: absolute;
+  z-index: 1;
+}
+
+.css-0 .emoji-mart-bar.emoji-mart-bar,
+.css-0 .emoji-mart-scroll.emoji-mart-scroll {
+  margin-right: 0;
+}
+
+.css-0 .emoji-mart .emoji-mart-anchor-bar {
+  background-color: undefined!important;
+}
+
+.css-0 .emoji-mart-preview {
+  display: none;
+}
+
+.css-0 .emoji-mart-category {
+  margin-top: 0.75rem;
+}
+
+.css-0 .emoji-mart-dark .emoji-mart-category-label span {
+  color: #fff;
+}
+
+.css-0 .emoji-mart-scroll::WebkitScrollbar {
+  width: 0.25rem;
+}
+
+.css-0 .emoji-pick {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+  .css-0 .emoji-mart {
+    position: fixed;
+    bottom: 5em;
+  }
+}
+
+<div>
     <div
-      class="css-s5gg9u"
+      class="css-0"
     >
       <span
         class="emoji-pick"

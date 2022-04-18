@@ -7,6 +7,17 @@ import {
   useEditProfileMutation,
   EditProfileDocument,
 } from "../../../generated/graphql";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+    // includeStyles: false 
+  }
+));
+
 
 const values = {
   handle: "shy-cloud-4965",

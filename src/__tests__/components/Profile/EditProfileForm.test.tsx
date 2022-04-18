@@ -7,6 +7,17 @@ import {
   EditProfileDocument,
 } from "../../../generated/graphql";
 import { SnackbarProvider } from "notistack";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
+
 
 const values = {
   handle: "shy-cloud-4965",

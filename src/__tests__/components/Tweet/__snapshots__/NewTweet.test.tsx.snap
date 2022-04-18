@@ -3,17 +3,238 @@
 exports[`display <NewTweet/> component 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 7px solid undefined;
+}
+
+.css-0 form {
+  width: 100%;
+}
+
+.css-0 textarea {
+  width: 100%;
+  background: inherit;
+  border: none;
+  font-size: 1.23rem;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 0;
+}
+
+.css-0 .new-tweet {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.css-0 .new-tweet-action {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-0 .svg-input .emoji-pick svg,
+.css-0 .svg-input .tweet-gif svg,
+.css-0 .svg-input .file-upload-icon svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.css-0 .svg-input {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media only screen and (max-width : 390px) {
+  .css-0 .svg-input .emoji-pick svg,
+  .css-0 .svg-input .tweet-gif svg,
+  .css-0 .svg-input .file-upload-icon svg {
+    margin-right: 1.3rem;
+  }
+
+  .css-0 .svg-input {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.css-0 .avatar {
+  margin: 0 1rem;
+}
+
+.css-1 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-2 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+  width: 75%;
+  height: 75%;
+}
+
+.css-3 .emoji-mart {
+  position: absolute;
+  z-index: 1;
+}
+
+.css-3 .emoji-mart-bar.emoji-mart-bar,
+.css-3 .emoji-mart-scroll.emoji-mart-scroll {
+  margin-right: 0;
+}
+
+.css-3 .emoji-mart .emoji-mart-anchor-bar {
+  background-color: undefined!important;
+}
+
+.css-3 .emoji-mart-preview {
+  display: none;
+}
+
+.css-3 .emoji-mart-category {
+  margin-top: 0.75rem;
+}
+
+.css-3 .emoji-mart-dark .emoji-mart-category-label span {
+  color: #fff;
+}
+
+.css-3 .emoji-mart-scroll::WebkitScrollbar {
+  width: 0.25rem;
+}
+
+.css-3 .emoji-pick {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+  .css-3 .emoji-mart {
+    position: fixed;
+    bottom: 5em;
+  }
+}
+
+.css-4 {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.css-5 {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.css-6 .nft-pick {
+  margin-right: 2rem;
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+}
+
+.css-6 .nft-pick svg {
+  width: 26px;
+  cursor: pointer;
+}
+
+.css-6 .nft-pick svg path {
+  fill: #CA2055;
+}
+
+.css-7 {
+  padding: 0.4rem 1rem;
+  color: #FFF;
+  background: undefined;
+  border: 1px solid undefined;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-7 {
+    font-size: 0.8rem;
+  }
+}
+
+<body>
     <div>
       <div
-        class="css-t3w3s0"
+        class="css-0"
       >
         <div
-          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-1"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-2"
             data-testid="PersonIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -45,7 +266,7 @@ Object {
                 class="svg-input"
               >
                 <div
-                  class="css-s5gg9u"
+                  class="css-3"
                 >
                   <span
                     class="emoji-pick"
@@ -73,7 +294,7 @@ Object {
                   </span>
                 </div>
                 <button
-                  class="tweet-gif css-185vf5l"
+                  class="tweet-gif css-4"
                   type="button"
                 >
                   <svg
@@ -97,7 +318,7 @@ Object {
                     class="file-upload-icon"
                   >
                     <svg
-                      class="css-1do0qis"
+                      class="css-5"
                       height="24"
                       viewBox="0 0 24 24"
                       width="24"
@@ -117,7 +338,7 @@ Object {
                   type="file"
                 />
                 <span
-                  class="css-1wpxgnf"
+                  class="css-6"
                 >
                   <span
                     class="nft-pick"
@@ -129,7 +350,7 @@ Object {
                 </span>
               </div>
               <button
-                class="css-1ib0c8s"
+                class="css-7"
                 sm="true"
               >
                 Post
@@ -140,16 +361,237 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 7px solid undefined;
+}
+
+.css-0 form {
+  width: 100%;
+}
+
+.css-0 textarea {
+  width: 100%;
+  background: inherit;
+  border: none;
+  font-size: 1.23rem;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 0;
+}
+
+.css-0 .new-tweet {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.css-0 .new-tweet-action {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-0 .svg-input .emoji-pick svg,
+.css-0 .svg-input .tweet-gif svg,
+.css-0 .svg-input .file-upload-icon svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.css-0 .svg-input {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media only screen and (max-width : 390px) {
+  .css-0 .svg-input .emoji-pick svg,
+  .css-0 .svg-input .tweet-gif svg,
+  .css-0 .svg-input .file-upload-icon svg {
+    margin-right: 1.3rem;
+  }
+
+  .css-0 .svg-input {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.css-0 .avatar {
+  margin: 0 1rem;
+}
+
+.css-1 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-2 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+  width: 75%;
+  height: 75%;
+}
+
+.css-3 .emoji-mart {
+  position: absolute;
+  z-index: 1;
+}
+
+.css-3 .emoji-mart-bar.emoji-mart-bar,
+.css-3 .emoji-mart-scroll.emoji-mart-scroll {
+  margin-right: 0;
+}
+
+.css-3 .emoji-mart .emoji-mart-anchor-bar {
+  background-color: undefined!important;
+}
+
+.css-3 .emoji-mart-preview {
+  display: none;
+}
+
+.css-3 .emoji-mart-category {
+  margin-top: 0.75rem;
+}
+
+.css-3 .emoji-mart-dark .emoji-mart-category-label span {
+  color: #fff;
+}
+
+.css-3 .emoji-mart-scroll::WebkitScrollbar {
+  width: 0.25rem;
+}
+
+.css-3 .emoji-pick {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+  .css-3 .emoji-mart {
+    position: fixed;
+    bottom: 5em;
+  }
+}
+
+.css-4 {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.css-5 {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.css-6 .nft-pick {
+  margin-right: 2rem;
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+}
+
+.css-6 .nft-pick svg {
+  width: 26px;
+  cursor: pointer;
+}
+
+.css-6 .nft-pick svg path {
+  fill: #CA2055;
+}
+
+.css-7 {
+  padding: 0.4rem 1rem;
+  color: #FFF;
+  background: undefined;
+  border: 1px solid undefined;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-7 {
+    font-size: 0.8rem;
+  }
+}
+
+<div>
     <div
-      class="css-t3w3s0"
+      class="css-0"
     >
       <div
-        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-1"
       >
         <svg
           aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-2"
           data-testid="PersonIcon"
           focusable="false"
           viewBox="0 0 24 24"
@@ -181,7 +623,7 @@ Object {
               class="svg-input"
             >
               <div
-                class="css-s5gg9u"
+                class="css-3"
               >
                 <span
                   class="emoji-pick"
@@ -209,7 +651,7 @@ Object {
                 </span>
               </div>
               <button
-                class="tweet-gif css-185vf5l"
+                class="tweet-gif css-4"
                 type="button"
               >
                 <svg
@@ -233,7 +675,7 @@ Object {
                   class="file-upload-icon"
                 >
                   <svg
-                    class="css-1do0qis"
+                    class="css-5"
                     height="24"
                     viewBox="0 0 24 24"
                     width="24"
@@ -253,7 +695,7 @@ Object {
                 type="file"
               />
               <span
-                class="css-1wpxgnf"
+                class="css-6"
               >
                 <span
                   class="nft-pick"
@@ -265,7 +707,7 @@ Object {
               </span>
             </div>
             <button
-              class="css-1ib0c8s"
+              class="css-7"
               sm="true"
             >
               Post

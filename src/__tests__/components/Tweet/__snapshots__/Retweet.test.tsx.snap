@@ -3,11 +3,18 @@
 exports[`Retweet component testing 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  fill: #17BF63;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+<body>
     <div>
       <span>
         <svg
-          class="css-1mks5ej"
+          class="css-0"
           color="#17BF63"
           loading=""
           viewBox="0 0 24 24"
@@ -22,10 +29,17 @@ Object {
       </span>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  fill: #17BF63;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+<div>
     <span>
       <svg
-        class="css-1mks5ej"
+        class="css-0"
         color="#17BF63"
         loading=""
         viewBox="0 0 24 24"

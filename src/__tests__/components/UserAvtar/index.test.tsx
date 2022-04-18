@@ -2,6 +2,17 @@ import React from "react";
 import PersonAvatar from "../../../components/UserAvatar/index";
 import renderer from "react-test-renderer";
 import { render, screen } from "@testing-library/react";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+       // includeStyles: false 
+  }
+));
+
 
 const avatar: string = `https://sosol-prod.s3.us-west-2.amazonaws.com/images/Screenshot%20from%202022-02-01%2018-34-57.png`;
 

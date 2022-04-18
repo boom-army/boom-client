@@ -3,6 +3,17 @@ import { User as UserProps } from "../../../generated/graphql";
 import SearchResultUsers from "../../../components/Search/SearchResultUsers";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
+
 
 const users = {
   searchByUser: [

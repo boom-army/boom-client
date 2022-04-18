@@ -1,41 +1,662 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`user profile info renders correctly user 1`] = `
+.cass-0 .profile-name-handle {
+  word-break: break-all;
+}
+
+.cass-0 .profile-name-handle span.consumerName {
+  font-weight: bold;
+}
+
+.cass-0 .profile-name-handle span.wallet {
+  margin-top: 0.1rem;
+}
+
+.cass-0 .profile-name-handle span.handle {
+  margin-top: 0.1rem;
+}
+
+.cass-0 .profile-info {
+  padding: 0 1.4rem 1rem;
+}
+
+.cass-0 .profile-info .bio {
+  width: 100%;
+}
+
+.cass-0 div.loc-dob-web {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0.6rem 0;
+}
+
+.cass-0 div.loc-dob-web span {
+  margin-right: 1.5rem;
+}
+
+.cass-0 div.loc-dob-web svg {
+  margin-right: 0.2rem;
+  position: relative;
+  top: 3px;
+}
+
+.cass-0 div.follow-following span {
+  margin-right: 1.3rem;
+  color: #4d97cb;
+  border-bottom: 1px solid #4d97cb;
+  text-transform: capitalize;
+  padding: 0 0 3px 0;
+}
+
+.cass-0 .wallet-topbar {
+  background-color: #4d97cb;
+  color: #0e1b25;
+  padding: 7px;
+  font-size: 13px;
+}
+
+.cass-0 .wallet-topbar .wallet {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.cass-0 .wallet-topbar .wallet svg {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.cass-0 .wallet-topbar .wallet .copyIcon svg {
+  margin-left: 10px;
+}
+
+.cass-0 .userimage-section {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px;
+  margin-left: 1.4rem;
+}
+
+.cass-0 .profile-Button {
+  border-radius: 25px;
+  padding: 4px 5px;
+  font-size: 12px;
+  color: #4d97cb;
+  border-color: #4d97cb;
+  text-transform: capitalize;
+}
+
+.cass-0 .userImg {
+  position: relative;
+}
+
+.cass-0 .userImg .userChipBdr {
+  background-color: #315981;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  height: calc(40px + 8px);
+  width: calc(40px + 8px);
+  -webkit-clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+  clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+}
+
+.cass-0 .userImg .MuiAvatar-root {
+  width: calc(25px + 19px);
+  height: calc(25px + 19px);
+  position: relative;
+  top: 2px;
+  left: 2px;
+  -webkit-clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+  clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+  border-radius: 0px;
+}
+
+.cass-0 .userImg .MuiAvatar-root img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cass-0 .userImg .tokenImg img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  border: 3px solid #15202b;
+}
+
+@media screen and (max-width: 767px) {
+  .cass-0 .wallet-topbar {
+    white-space: nowrap;
+  }
+
+  .cass-0 .wallet-topbar .wallet {
+    font-size: 10px;
+  }
+}
+
+.cass-1 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.cass-2 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  max-width: 100%;
+}
+
+@media (min-width:600px) {
+  .cass-2 {
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+}
+
+@media (min-width:900px) {
+  .cass-2 {
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+}
+
+@media (min-width:1200px) {
+  .cass-2 {
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+}
+
+@media (min-width:1536px) {
+  .cass-2 {
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+}
+
+.cass-3 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding-top: 16px;
+}
+
+.cass-4 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-basis: 66.666667%;
+  -ms-flex-preferred-size: 66.666667%;
+  flex-basis: 66.666667%;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  max-width: 66.666667%;
+}
+
+@media (min-width:600px) {
+  .cass-4 {
+    -webkit-flex-basis: 66.666667%;
+    -ms-flex-preferred-size: 66.666667%;
+    flex-basis: 66.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 66.666667%;
+  }
+}
+
+@media (min-width:900px) {
+  .cass-4 {
+    -webkit-flex-basis: 66.666667%;
+    -ms-flex-preferred-size: 66.666667%;
+    flex-basis: 66.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 66.666667%;
+  }
+}
+
+@media (min-width:1200px) {
+  .cass-4 {
+    -webkit-flex-basis: 66.666667%;
+    -ms-flex-preferred-size: 66.666667%;
+    flex-basis: 66.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 66.666667%;
+  }
+}
+
+@media (min-width:1536px) {
+  .cass-4 {
+    -webkit-flex-basis: 66.666667%;
+    -ms-flex-preferred-size: 66.666667%;
+    flex-basis: 66.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 66.666667%;
+  }
+}
+
+.cass-5 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.cass-6 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.cass-7 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-basis: 33.333333%;
+  -ms-flex-preferred-size: 33.333333%;
+  flex-basis: 33.333333%;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  max-width: 33.333333%;
+  padding-right: 24px;
+  text-align: right;
+}
+
+@media (min-width:600px) {
+  .cass-7 {
+    -webkit-flex-basis: 33.333333%;
+    -ms-flex-preferred-size: 33.333333%;
+    flex-basis: 33.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 33.333333%;
+  }
+}
+
+@media (min-width:900px) {
+  .cass-7 {
+    -webkit-flex-basis: 33.333333%;
+    -ms-flex-preferred-size: 33.333333%;
+    flex-basis: 33.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 33.333333%;
+  }
+}
+
+@media (min-width:1200px) {
+  .cass-7 {
+    -webkit-flex-basis: 33.333333%;
+    -ms-flex-preferred-size: 33.333333%;
+    flex-basis: 33.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 33.333333%;
+  }
+}
+
+@media (min-width:1536px) {
+  .cass-7 {
+    -webkit-flex-basis: 33.333333%;
+    -ms-flex-preferred-size: 33.333333%;
+    flex-basis: 33.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 33.333333%;
+  }
+}
+
+.cass-8 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border: 1px solid rgba(25, 118, 210, 0.5);
+  color: #1976d2;
+}
+
+.cass-8::-moz-focus-inner {
+  border-style: none;
+}
+
+.cass-8.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .cass-8 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.cass-8:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: rgba(25, 118, 210, 0.04);
+  border: 1px solid #1976d2;
+}
+
+@media (hover: none) {
+  .cass-8:hover {
+    background-color: transparent;
+  }
+}
+
+.cass-8.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.cass-9 {
+  padding-left: 24px;
+}
+
+.cass-10 {
+  margin-top: 8px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.cass-11 {
+  padding-bottom: 8px;
+}
+
 <div
-  className="css-1jg57c8"
+  className="cass-0"
 >
   <div
-    className="MuiBox-root css-i3pbo"
+    className="MuiGrid-root MuiGrid-container cass-1"
   >
-    <img
-      alt="cover"
-      className="css-3y6f34"
-      src="/default-cover.png"
-    />
     <div
-      className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 cass-2"
     >
-      <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-        data-testid="PersonIcon"
-        focusable="false"
-        viewBox="0 0 24 24"
+      <div
+        className="wallet-topbar"
       >
-        <path
-          d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-        />
-      </svg>
+        <span
+          className="wallet"
+        >
+          <span>
+            <svg
+              aria-hidden="true"
+              height="18px"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 256 256"
+              width="18px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M164 144a16 16 0 1 1 16 16a16 16 0 0 1-16-16Zm72-48v104a20.1 20.1 0 0 1-20 20H56a28.1 28.1 0 0 1-28-28V68.2A32.1 32.1 0 0 1 60 36h132a12 12 0 0 1 0 24H60a8.4 8.4 0 0 0-5.8 2.4A8.2 8.2 0 0 0 52 68v.2a8.4 8.4 0 0 0 8.5 7.8H216a20.1 20.1 0 0 1 20 20Zm-24 4H60.5a33.5 33.5 0 0 1-8.5-1.1V192a4 4 0 0 0 4 4h156Z"
+                fill="currentColor"
+              />
+            </svg>
+            JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4
+          </span>
+          <span
+            className="copyIcon"
+          >
+            <svg
+              aria-hidden="true"
+              height="15px"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 24 24"
+              width="15px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zM5.003 8L5 20h10V8H5.003zM9 6h8v10h2V4H9v2z"
+                fill="#316081"
+              />
+            </svg>
+          </span>
+        </span>
+      </div>
     </div>
   </div>
   <div
-    className="MuiBox-root css-1ns5f5t"
+    className="MuiGrid-root MuiGrid-container cass-3"
   >
     <div
-      className="MuiBox-root css-0"
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8 cass-4"
+    >
+      <div
+        className="userimage-section"
+      >
+        <span
+          className="userImg"
+        >
+          <span
+            className="userChipBdr"
+          >
+            <div
+              className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar cass-5"
+            >
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cass-6"
+                data-testid="PersonIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+          </span>
+          <span
+            className="tokenImg"
+          >
+            <img
+              alt="cover"
+              src="https://ec4meandtybfo3zpqizry3nes5efdzazxhucv6jrjvc5n4igcy.arweave.net/ILjCAaOeAldvL4IzHG2k_l0hR5Bm56Cr5MU1F1vEGFo?ext=png"
+            />
+          </span>
+        </span>
+        <div
+          className="profile-name-handle"
+        >
+          <span
+            className="consumerName"
+          >
+            shy-cloud-4965
+          </span>
+          <br />
+          <span
+            className="handle"
+          >
+            @shy-cloud-4965
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 cass-7"
     >
       <a
-        className="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButtonBase-root  css-1k23hlb-MuiButtonBase-root-MuiButton-root"
+        className="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButtonBase-root profile-Button cass-8"
         href="/settings/profile"
         onBlur={[Function]}
         onClick={[Function]}
@@ -55,36 +676,19 @@ exports[`user profile info renders correctly user 1`] = `
         Edit Profile
       </a>
     </div>
+  </div>
+  <div
+    className="MuiBox-root cass-9"
+  >
     <div
-      className="MuiBox-root css-133i6oc"
+      className="MuiBox-root cass-10"
     >
       <div
         className="profile-name-handle"
-      >
-        <span
-          className="consumerName"
-        >
-          shy-cloud-4965
-        </span>
-        <br />
-        <span
-          className="wallet"
-        >
-          <strong>
-            wallet: 
-          </strong>
-          JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4
-        </span>
-        <br />
-        <span
-          className="handle"
-        >
-          @shy-cloud-4965
-        </span>
-      </div>
+      />
     </div>
     <div
-      className="MuiBox-root css-4cxybv"
+      className="MuiBox-root cass-11"
     >
       <p
         className="bio"

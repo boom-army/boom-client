@@ -6,6 +6,17 @@ import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../queries/auth";
 import { USER_FOLLOW } from "../queries/follow";
 import { SnackbarProvider } from "notistack";
 import { MockedProvider } from "@apollo/client/testing";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+    // includeStyles: false 
+  }
+));
+
 
 export const __mocks__: any = [
   {

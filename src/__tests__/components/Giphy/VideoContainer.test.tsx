@@ -1,6 +1,16 @@
 import React from "react";
 import { VideoContainer } from "../../../components/Giphy/VideoContainer";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
 
 let gif: any = {
   type: "gif",

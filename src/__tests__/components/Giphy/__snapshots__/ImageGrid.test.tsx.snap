@@ -3,17 +3,61 @@
 exports[`<ImageGrid/> component : display <ImageGrid/> component  when gifArr have list 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.css-1 {
+  display: block;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+.css-2 {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  margin: 0px;
+  padding: 0px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  line-height: 0;
+}
+
+.css-2 .MuiImageListItem-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.css-3 {
+  height: 50px;
+}
+
+<body>
     <div>
       <div
-        class="css-nen11g-MuiStack-root"
+        class="css-0"
       >
         <ul
-          class="MuiImageList-root MuiImageList-masonry css-1q4nuxj-MuiImageList-root"
+          class="MuiImageList-root MuiImageList-masonry css-1"
           style="column-count: 3; column-gap: 8px;"
         >
           <button
-            class="MuiImageListItem-root MuiImageListItem-masonry css-1awhfnr-MuiImageListItem-root"
+            class="MuiImageListItem-root MuiImageListItem-masonry css-2"
             style="height: auto; margin-bottom: 8px;"
           >
             <img
@@ -24,21 +68,65 @@ Object {
           </button>
         </ul>
         <div
-          class="MuiBox-root css-16kb41"
+          class="MuiBox-root css-3"
         />
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.css-1 {
+  display: block;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+.css-2 {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  margin: 0px;
+  padding: 0px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  line-height: 0;
+}
+
+.css-2 .MuiImageListItem-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.css-3 {
+  height: 50px;
+}
+
+<div>
     <div
-      class="css-nen11g-MuiStack-root"
+      class="css-0"
     >
       <ul
-        class="MuiImageList-root MuiImageList-masonry css-1q4nuxj-MuiImageList-root"
+        class="MuiImageList-root MuiImageList-masonry css-1"
         style="column-count: 3; column-gap: 8px;"
       >
         <button
-          class="MuiImageListItem-root MuiImageListItem-masonry css-1awhfnr-MuiImageListItem-root"
+          class="MuiImageListItem-root MuiImageListItem-masonry css-2"
           style="height: auto; margin-bottom: 8px;"
         >
           <img
@@ -49,7 +137,7 @@ Object {
         </button>
       </ul>
       <div
-        class="MuiBox-root css-16kb41"
+        class="MuiBox-root css-3"
       />
     </div>
   </div>,
@@ -110,17 +198,124 @@ Object {
 exports[`<ImageGrid/> component : display <ImageGrid/> component  when loading 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": @keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-1 {
+  0% {
+    stroke-dasharray: 1px,200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+.css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.css-1 {
+  display: block;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+.css-2 {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  margin: 0px;
+  padding: 0px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  line-height: 0;
+}
+
+.css-2 .MuiImageListItem-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.css-3 {
+  height: 50px;
+}
+
+.css-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-5 {
+  display: inline-block;
+  color: #1976d2;
+  -webkit-animation: animation-0 1.4s linear infinite;
+  animation: animation-0 1.4s linear infinite;
+}
+
+.css-6 {
+  display: block;
+}
+
+.css-7 {
+  stroke: currentColor;
+  stroke-dasharray: 80px,200px;
+  stroke-dashoffset: 0;
+  -webkit-animation: animation-1 1.4s ease-in-out infinite;
+  animation: animation-1 1.4s ease-in-out infinite;
+}
+
+<body>
     <div>
       <div
-        class="css-nen11g-MuiStack-root"
+        class="css-0"
       >
         <ul
-          class="MuiImageList-root MuiImageList-masonry css-1q4nuxj-MuiImageList-root"
+          class="MuiImageList-root MuiImageList-masonry css-1"
           style="column-count: 3; column-gap: 8px;"
         >
           <button
-            class="MuiImageListItem-root MuiImageListItem-masonry css-1awhfnr-MuiImageListItem-root"
+            class="MuiImageListItem-root MuiImageListItem-masonry css-2"
             style="height: auto; margin-bottom: 8px;"
           >
             <img
@@ -131,22 +326,22 @@ Object {
           </button>
         </ul>
         <div
-          class="MuiBox-root css-16kb41"
+          class="MuiBox-root css-3"
         >
           <div
-            class="MuiBox-root css-1l4w6pd"
+            class="MuiBox-root css-4"
           >
             <span
-              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-5"
               role="progressbar"
               style="width: 30px; height: 30px;"
             >
               <svg
-                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                class="MuiCircularProgress-svg css-6"
                 viewBox="22 22 44 44"
               >
                 <circle
-                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-7"
                   cx="44"
                   cy="44"
                   fill="none"
@@ -160,16 +355,123 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": @keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-1 {
+  0% {
+    stroke-dasharray: 1px,200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+.css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.css-1 {
+  display: block;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+.css-2 {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  margin: 0px;
+  padding: 0px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  line-height: 0;
+}
+
+.css-2 .MuiImageListItem-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.css-3 {
+  height: 50px;
+}
+
+.css-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-5 {
+  display: inline-block;
+  color: #1976d2;
+  -webkit-animation: animation-0 1.4s linear infinite;
+  animation: animation-0 1.4s linear infinite;
+}
+
+.css-6 {
+  display: block;
+}
+
+.css-7 {
+  stroke: currentColor;
+  stroke-dasharray: 80px,200px;
+  stroke-dashoffset: 0;
+  -webkit-animation: animation-1 1.4s ease-in-out infinite;
+  animation: animation-1 1.4s ease-in-out infinite;
+}
+
+<div>
     <div
-      class="css-nen11g-MuiStack-root"
+      class="css-0"
     >
       <ul
-        class="MuiImageList-root MuiImageList-masonry css-1q4nuxj-MuiImageList-root"
+        class="MuiImageList-root MuiImageList-masonry css-1"
         style="column-count: 3; column-gap: 8px;"
       >
         <button
-          class="MuiImageListItem-root MuiImageListItem-masonry css-1awhfnr-MuiImageListItem-root"
+          class="MuiImageListItem-root MuiImageListItem-masonry css-2"
           style="height: auto; margin-bottom: 8px;"
         >
           <img
@@ -180,22 +482,22 @@ Object {
         </button>
       </ul>
       <div
-        class="MuiBox-root css-16kb41"
+        class="MuiBox-root css-3"
       >
         <div
-          class="MuiBox-root css-1l4w6pd"
+          class="MuiBox-root css-4"
         >
           <span
-            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-5"
             role="progressbar"
             style="width: 30px; height: 30px;"
           >
             <svg
-              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              class="MuiCircularProgress-svg css-6"
               viewBox="22 22 44 44"
             >
               <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-7"
                 cx="44"
                 cy="44"
                 fill="none"
@@ -265,10 +567,14 @@ Object {
 exports[`<ImageGrid/> component : display <ImageGrid/> component when gifArr undefined 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  margin: 16px;
+}
+
+<body>
     <div>
       <div
-        class="MuiBox-root css-1c5ij41"
+        class="MuiBox-root css-0"
       >
         <p>
           No gifs were found
@@ -276,9 +582,13 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  margin: 16px;
+}
+
+<div>
     <div
-      class="MuiBox-root css-1c5ij41"
+      class="MuiBox-root css-0"
     >
       <p>
         No gifs were found

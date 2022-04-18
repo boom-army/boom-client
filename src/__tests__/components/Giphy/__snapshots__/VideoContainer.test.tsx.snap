@@ -3,10 +3,43 @@
 exports[`<VideoContainer/> component : display <VideoContainer/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 16px;
+  border: 1px solid #657786;
+  overflow: hidden;
+  width: 90%;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 0 0.75rem;
+  position: relative;
+}
+
+.css-0>video {
+  width: 100%;
+  cursor: pointer;
+}
+
+.css-1 {
+  position: absolute;
+  left: 3%;
+  bottom: 3%;
+  padding: 0 4px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.77);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+<body>
     <div>
       <div
-        class="css-1lw4aow"
+        class="css-0"
       >
         <video
           aria-label="Will Smith Yes GIF by Bad Boys For Life"
@@ -15,16 +48,49 @@ Object {
           preload="auto"
         />
         <div
-          class="MuiBox-root css-1wald98"
+          class="MuiBox-root css-1"
         >
           GIF
         </div>
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 16px;
+  border: 1px solid #657786;
+  overflow: hidden;
+  width: 90%;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 0 0.75rem;
+  position: relative;
+}
+
+.css-0>video {
+  width: 100%;
+  cursor: pointer;
+}
+
+.css-1 {
+  position: absolute;
+  left: 3%;
+  bottom: 3%;
+  padding: 0 4px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.77);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+<div>
     <div
-      class="css-1lw4aow"
+      class="css-0"
     >
       <video
         aria-label="Will Smith Yes GIF by Bad Boys For Life"
@@ -33,7 +99,7 @@ Object {
         preload="auto"
       />
       <div
-        class="MuiBox-root css-1wald98"
+        class="MuiBox-root css-1"
       >
         GIF
       </div>

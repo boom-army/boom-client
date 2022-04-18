@@ -3,20 +3,85 @@
 exports[`<MorePopup/> component : display <MorePopup/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 .btn {
+  cursor: pointer;
+}
+
+.css-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.css-2 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.css-3 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+
+@media (min-width:0px) {
+  .css-3 {
+    display: none;
+  }
+}
+
+@media (min-width:600px) {
+  .css-3 {
+    display: none;
+  }
+}
+
+@media (min-width:900px) {
+  .css-3 {
+    display: block;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-3 {
+    display: block;
+  }
+}
+
+<body>
     <div>
       <div
-        class="css-1vkxm47"
+        class="css-0"
       >
         <div
           aria-describedby="popup-1"
         >
           <div
-            class="css-y5ez7q-MuiStack-root"
+            class="css-1"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-2"
               data-testid="MoreHorizIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -26,7 +91,7 @@ Object {
               />
             </svg>
             <p
-              class="MuiTypography-root MuiTypography-body1 css-6p3zyw-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 css-3"
             >
               More
             </p>
@@ -35,19 +100,84 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 .btn {
+  cursor: pointer;
+}
+
+.css-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.css-2 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.css-3 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+
+@media (min-width:0px) {
+  .css-3 {
+    display: none;
+  }
+}
+
+@media (min-width:600px) {
+  .css-3 {
+    display: none;
+  }
+}
+
+@media (min-width:900px) {
+  .css-3 {
+    display: block;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-3 {
+    display: block;
+  }
+}
+
+<div>
     <div
-      class="css-1vkxm47"
+      class="css-0"
     >
       <div
         aria-describedby="popup-1"
       >
         <div
-          class="css-y5ez7q-MuiStack-root"
+          class="css-1"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-2"
             data-testid="MoreHorizIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -57,7 +187,7 @@ Object {
             />
           </svg>
           <p
-            class="MuiTypography-root MuiTypography-body1 css-6p3zyw-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-3"
           >
             More
           </p>

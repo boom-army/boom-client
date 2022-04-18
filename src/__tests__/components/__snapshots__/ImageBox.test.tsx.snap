@@ -3,16 +3,70 @@
 exports[`<ImageBox/> component : display <ImageBox/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 16px;
+  border: 1px solid undefined;
+  overflow: hidden;
+  width: 90%;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 0 0.75rem;
+}
+
+.css-0>div>.tweet-image-col {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 50%;
+  -ms-flex: 50%;
+  flex: 50%;
+  width: 100%;
+}
+
+<body>
     <div>
       <div
-        class="css-3dg7sw"
+        class="css-0"
       />
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 16px;
+  border: 1px solid undefined;
+  overflow: hidden;
+  width: 90%;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 0 0.75rem;
+}
+
+.css-0>div>.tweet-image-col {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 50%;
+  -ms-flex: 50%;
+  flex: 50%;
+  width: 100%;
+}
+
+<div>
     <div
-      class="css-3dg7sw"
+      class="css-0"
     />
   </div>,
   "debug": [Function],

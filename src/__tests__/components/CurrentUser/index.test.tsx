@@ -2,6 +2,17 @@ import React from "react";
 import { CurrentUser } from "../../../components/CurrentUser/index";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
+
 
 describe("<CurrentUser/> component :", () => {
   test("display <CurrentUser/> component ", async () => {

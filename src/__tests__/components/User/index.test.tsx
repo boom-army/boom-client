@@ -2,6 +2,16 @@ import React from "react";
 import { User } from "../../../components/User/index";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+       // includeStyles: false 
+  }
+));
 
 const data: any = {
   id: "ckzny1iv10031lmn568gj3b3n",

@@ -3,6 +3,21 @@ import ProfileInfo from "../../../components/Profile/ProfileInfo";
 import { BrowserRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import {JssProvider } from 'react-jss';
+// import JssProvider from 'react-jss/lib/JssProvider';
+// import { resetClassNameGenerator } from '@mui/styled-engine';
+// beforeEach(resetClassNameGenerator);
+import { createSerializer } from '@emotion/jest'
+import styled from '@emotion/styled'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `cass-${index}`
+    },
+        // includeStyles: false 
+  }
+));
 
 const profile: any = {
   data: {
@@ -159,9 +174,11 @@ describe("user profile info", () => {
   test("renders correctly user", () => {
     const tree = renderer
       .create(
+        // <JssProvider generateClassName={generateClassName}>
         <BrowserRouter>
           <ProfileInfo profile={profile.data.profile} />
         </BrowserRouter>
+        //  </JssProvider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
@@ -183,3 +200,4 @@ test("Assertion testing of <ProfileInfo/> component", () => {
     "/settings/profile"
   );
 });
+

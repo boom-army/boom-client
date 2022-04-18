@@ -3,7 +3,16 @@
 exports[`<ExplorerLink/> component : display <ExplorerLink/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+
+<body>
     <div>
       <a
         href="https://explorer.solana.com/TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA/JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4"
@@ -12,14 +21,23 @@ Object {
         title="JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-0"
         >
           JBZ52cKh...
         </p>
       </a>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+
+<div>
     <a
       href="https://explorer.solana.com/TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA/JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4"
       rel="noreferrer"
@@ -27,7 +45,7 @@ Object {
       title="JBZ52cKhHiFJdzQBNWnp3Xy2jHgDgkhWwSLWoNgLNxD4"
     >
       <p
-        class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-0"
       >
         JBZ52cKh...
       </p>

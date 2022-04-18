@@ -224,7 +224,7 @@ const ProfileInfo = ({ profile }: any) => {
                 <UserAvatar avatar={avatar} />
               </span>
               <span className="tokenImg">
-                <img src="https://ec4meandtybfo3zpqizry3nes5efdzazxhucv6jrjvc5n4igcy.arweave.net/ILjCAaOeAldvL4IzHG2k_l0hR5Bm56Cr5MU1F1vEGFo?ext=png" />
+                <img alt="cover" src="https://ec4meandtybfo3zpqizry3nes5efdzazxhucv6jrjvc5n4igcy.arweave.net/ILjCAaOeAldvL4IzHG2k_l0hR5Bm56Cr5MU1F1vEGFo?ext=png" />
               </span>
             </span>
             <div className="profile-name-handle">

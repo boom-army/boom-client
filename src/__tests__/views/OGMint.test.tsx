@@ -2,6 +2,17 @@ import React from "react";
 import { OGMint } from "../../views/OGMint";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+       // includeStyles: false 
+  }
+));
+
 
 describe("<OGMint/> component :", () => {
   test("display <OGMint/> component ", async () => {

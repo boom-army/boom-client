@@ -3,18 +3,74 @@
 exports[`<CustomResponse/> component : display <CustomResponse/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-0 {
+    font-size: 1rem;
+  }
+}
+
+<body>
     <div>
       <div
-        class="css-15inajd"
+        class="css-0"
       >
         <p />
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-0 {
+    font-size: 1rem;
+  }
+}
+
+<div>
     <div
-      class="css-15inajd"
+      class="css-0"
     >
       <p />
     </div>

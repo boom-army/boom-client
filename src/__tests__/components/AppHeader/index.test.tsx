@@ -7,6 +7,16 @@ import { SnackbarProvider } from "notistack";
 import { MockedProvider } from "@apollo/client/testing";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../../queries/auth";
 import { USER_FOLLOW } from "../../../queries/follow";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
 
 let user: any = {
   id: "ckzny1iv10031lmn568gj3b3n",

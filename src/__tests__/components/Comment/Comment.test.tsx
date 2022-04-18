@@ -5,6 +5,17 @@ import { MemoryRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import { DELETE_COMMENT } from "../../../queries/comment";
 import { MockedProvider } from "@apollo/client/testing";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
+
 
 const data: any = {
   id: "cl084xdy815761s0n5omoxoem0",

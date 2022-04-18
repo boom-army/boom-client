@@ -3,6 +3,17 @@ import { MockedProvider } from "@apollo/client/testing";
 import { FOLLOW } from "../../../queries/follow/index";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { SnackbarProvider } from "notistack";
+import { createSerializer } from '@emotion/jest'
+import styled from '@emotion/styled'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+     // includeStyles: false 
+  }
+));
 
 export const __mocks__: any = [
   {

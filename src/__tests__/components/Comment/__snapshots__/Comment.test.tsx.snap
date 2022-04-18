@@ -3,20 +3,143 @@
 exports[`<Comment/> component : display <Comment/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid undefined;
+  padding: 1.5rem 1rem 1rem 1rem;
+}
+
+.css-0 .comment-info-user {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.css-0 .comment-info-user svg {
+  margin-left: 0.6rem;
+  position: relative;
+  top: 3px;
+}
+
+.css-0 .comment-info-user span.username {
+  font-weight: 500;
+}
+
+.css-0 .comment-info-user span.secondary {
+  padding-left: 0.5rem;
+  color: undefined;
+}
+
+@media screen and (max-width: 430px) {
+  .css-0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .css-0 .comment-info-user {
+    font-size: 0.83rem;
+  }
+
+  .css-0 .avatar {
+    display: none;
+  }
+
+  .css-0 .username {
+    display: none;
+  }
+
+  .css-0 .comment-info-user span.secondary {
+    padding-left: 0;
+  }
+
+  .css-0 .comment-info-user span.secondary:first-of-type {
+    padding-right: 0.6rem;
+  }
+}
+
+.css-1 {
+  margin-right: 16px;
+}
+
+.css-2 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-3 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.css-4 {
+  width: 18px;
+  height: 18px;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.css-4:hover {
+  fill: #e0245e;
+}
+
+<body>
     <div>
       <div
-        class="css-kvwpwc"
+        class="css-0"
       >
         <div
-          class="MuiBox-root css-1ay9vb9"
+          class="MuiBox-root css-1"
         >
           <div
-            class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+            class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-3"
               data-testid="PersonIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -54,7 +177,7 @@ Object {
             </a>
             <span>
               <svg
-                class="css-1csj31"
+                class="css-4"
                 loading=""
                 viewBox="0 0 24 24"
               >
@@ -76,19 +199,142 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid undefined;
+  padding: 1.5rem 1rem 1rem 1rem;
+}
+
+.css-0 .comment-info-user {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.css-0 .comment-info-user svg {
+  margin-left: 0.6rem;
+  position: relative;
+  top: 3px;
+}
+
+.css-0 .comment-info-user span.username {
+  font-weight: 500;
+}
+
+.css-0 .comment-info-user span.secondary {
+  padding-left: 0.5rem;
+  color: undefined;
+}
+
+@media screen and (max-width: 430px) {
+  .css-0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .css-0 .comment-info-user {
+    font-size: 0.83rem;
+  }
+
+  .css-0 .avatar {
+    display: none;
+  }
+
+  .css-0 .username {
+    display: none;
+  }
+
+  .css-0 .comment-info-user span.secondary {
+    padding-left: 0;
+  }
+
+  .css-0 .comment-info-user span.secondary:first-of-type {
+    padding-right: 0.6rem;
+  }
+}
+
+.css-1 {
+  margin-right: 16px;
+}
+
+.css-2 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-3 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.css-4 {
+  width: 18px;
+  height: 18px;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.css-4:hover {
+  fill: #e0245e;
+}
+
+<div>
     <div
-      class="css-kvwpwc"
+      class="css-0"
     >
       <div
-        class="MuiBox-root css-1ay9vb9"
+        class="MuiBox-root css-1"
       >
         <div
-          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+          class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-3"
             data-testid="PersonIcon"
             focusable="false"
             viewBox="0 0 24 24"
@@ -126,7 +372,7 @@ Object {
           </a>
           <span>
             <svg
-              class="css-1csj31"
+              class="css-4"
               loading=""
               viewBox="0 0 24 24"
             >

@@ -2,6 +2,17 @@ import { WhoToFollow } from "../../components/WhoToFollow";
 import { USER_FOLLOW } from "../../queries/follow/index";
 import { MockedProvider } from "@apollo/client/testing";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+      // includeStyles: false 
+  }
+));
+
 
 export const __mocks__: any = [
   {

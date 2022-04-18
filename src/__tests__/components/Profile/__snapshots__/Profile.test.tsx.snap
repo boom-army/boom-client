@@ -1,13 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`user profile :  doesn't exist 1`] = `
+.css-0 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-0 {
+    font-size: 1rem;
+  }
+}
+
 <div
-  className="css-15inajd"
+  className="css-0"
 >
   <p>
     Oops, you are trying to visit a profile which doesn't exist. Make sure the profile handle exists
   </p>
 </div>
 `;
-
-

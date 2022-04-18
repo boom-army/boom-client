@@ -3,31 +3,75 @@
 exports[`<AttributionLink/> component  Snapshot testing ... 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  margin: 0;
+  color: #1976d2;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 118, 210, 0.4);
+}
+
+.css-0:hover {
+  text-decoration-color: inherit;
+}
+
+.css-1 {
+  box-sizing: content-box;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 3px;
+}
+
+.css-1:hover {
+  border-bottom: 2px solid #38444D;
+}
+
+<body>
     <div>
       <a
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-0"
         href="https://abc.com"
         target="_blank"
       >
         <img
           alt="Powered by Giphy"
-          class="css-rjgloe"
+          class="css-1"
           src="/assets/giphy-dark.png"
           width="150px"
         />
       </a>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  margin: 0;
+  color: #1976d2;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 118, 210, 0.4);
+}
+
+.css-0:hover {
+  text-decoration-color: inherit;
+}
+
+.css-1 {
+  box-sizing: content-box;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 3px;
+}
+
+.css-1:hover {
+  border-bottom: 2px solid #38444D;
+}
+
+<div>
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1iwtne7-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-0"
       href="https://abc.com"
       target="_blank"
     >
       <img
         alt="Powered by Giphy"
-        class="css-rjgloe"
+        class="css-1"
         src="/assets/giphy-dark.png"
         width="150px"
       />

@@ -3,14 +3,454 @@
 exports[`<OGMint/> component : display <OGMint/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.css-1 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: -16px;
+  width: calc(100% + 16px);
+  margin-left: -16px;
+}
+
+.css-1>.MuiGrid-item {
+  padding-top: 16px;
+}
+
+.css-1>.MuiGrid-item {
+  padding-left: 16px;
+}
+
+.css-2 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  max-width: 100%;
+}
+
+@media (min-width:600px) {
+  .css-2 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:900px) {
+  .css-2 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-2 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-2 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+.css-3 {
+  margin-top: 32px;
+}
+
+.css-4 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+.css-5 {
+  width: 100%;
+  height: 60px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  background: #fd0069;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.css-6 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+@media (min-width:600px) {
+  .css-6 {
+    -webkit-flex-basis: 41.666667%;
+    -ms-flex-preferred-size: 41.666667%;
+    flex-basis: 41.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 41.666667%;
+  }
+}
+
+@media (min-width:900px) {
+  .css-6 {
+    -webkit-flex-basis: 41.666667%;
+    -ms-flex-preferred-size: 41.666667%;
+    flex-basis: 41.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 41.666667%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-6 {
+    -webkit-flex-basis: 41.666667%;
+    -ms-flex-preferred-size: 41.666667%;
+    flex-basis: 41.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 41.666667%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-6 {
+    -webkit-flex-basis: 41.666667%;
+    -ms-flex-preferred-size: 41.666667%;
+    flex-basis: 41.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 41.666667%;
+  }
+}
+
+@media (min-width:0px) {
+  .css-7 {
+    display: none;
+  }
+}
+
+@media (min-width:600px) {
+  .css-7 {
+    display: block;
+  }
+}
+
+.css-8 {
+  background-image: url(/assets/outer.png);
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 260px;
+  height: 260px;
+  transform-style: preserve-3d;
+}
+
+.css-9 {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transform: translateZ(30px);
+  -moz-transform: translateZ(30px);
+  -ms-transform: translateZ(30px);
+  transform: translateZ(30px);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.css-11 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+
+.css-14 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+  width: 100%;
+  overflow-x: auto;
+}
+
+.css-15 {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  min-width: 650px;
+}
+
+.css-15 caption {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: left;
+  caption-side: bottom;
+}
+
+.css-16 {
+  display: table-header-group;
+}
+
+.css-17 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.css-17.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.css-17.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.css-17.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.css-18 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  border: none;
+}
+
+.css-19 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  color: #657786;
+  font-size: 8px;
+}
+
+.css-20 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: right;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  border: none;
+}
+
+.css-21 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  color: #657786;
+  font-size: 10px;
+}
+
+.css-24 {
+  display: table-row-group;
+}
+
+.css-25 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.css-25.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.css-25.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.css-25.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.css-25:last-child td,
+.css-25:last-child th {
+  border: 0px solid;
+}
+
+.css-26 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  border-bottom: 1px solid #0071AA;
+}
+
+.css-27 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  color: #FFF;
+}
+
+.css-28 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: right;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  border-bottom: 1px solid #0071AA;
+}
+
+<body>
     <div>
       <div
         class="MuiContainer-root MuiContainer-maxWidthLg"
         style="margin-top: 20px;"
       >
         <div
-          class="MuiBox-root css-7s0ihh"
+          class="MuiBox-root css-10"
         >
           <img
             alt="Boom OG NFT Mint"
@@ -19,20 +459,20 @@ Object {
           />
         </div>
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1"
         >
           <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 css-5n8ohs-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 css-2"
           >
             <div
-              class="MuiBox-root css-h5fkc8"
+              class="MuiBox-root css-3"
             >
               <div
-                class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1ps6pg7-MuiPaper-root"
+                class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-4"
                 style="padding: 24px; background-color: rgb(0, 47, 70); border-radius: 6px; border: 3px solid #005078;"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-contained css-e8az88 MuiButton-containedPrimary"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-contained css-5 MuiButton-containedPrimary"
                   tabindex="0"
                   type="button"
                 >
@@ -49,16 +489,16 @@ Object {
             </div>
           </div>
           <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-5 css-1odrivk-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-5 css-6"
           >
             <div
-              class="MuiBox-root css-130f8nx"
+              class="MuiBox-root css-7"
             >
               <div
-                class="track-on-window css-vktagw"
+                class="track-on-window css-8"
               >
                 <div
-                  class="MuiBox-root css-kb8rte"
+                  class="MuiBox-root css-9"
                 >
                   <img
                     alt="1303 OG NFT Card"
@@ -72,16 +512,16 @@ Object {
           </div>
         </div>
         <div
-          class="MuiBox-root css-0"
+          class="MuiBox-root css-10"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-11"
           >
             To commemorate the official launch of Boom.Army Beta, we're launching 1303 OG NFTs for everyone who is early. There are 1303 NFTs available, and they will receive a 1303 split share of 20% of our Market Place fees in perpetuity. All White List i3o3...3bos tokens mint at 1.303 SOL discount.
           </p>
         </div>
         <div
-          class="MuiBox-root css-h5fkc8"
+          class="MuiBox-root css-3"
         >
           <img
             alt="Minting Schedule"
@@ -90,47 +530,47 @@ Object {
           />
         </div>
         <div
-          class="MuiBox-root css-0"
+          class="MuiBox-root css-10"
         >
           <div
-            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-11xur9t-MuiPaper-root-MuiTableContainer-root"
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-14"
           >
             <table
               aria-label="simple table"
-              class="MuiTable-root css-quj9j6-MuiTable-root"
+              class="MuiTable-root css-15"
             >
               <thead
-                class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+                class="MuiTableHead-root css-16"
               >
                 <tr
-                  class="MuiTableRow-root MuiTableRow-head css-1q1u3t4-MuiTableRow-root"
+                  class="MuiTableRow-root MuiTableRow-head css-17"
                 >
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-a3yr1h-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-18"
                     scope="col"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body2 css-xk1c0y-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body2 css-19"
                     >
                       Serial
                     </p>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o746jm-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-20"
                     scope="col"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body2 css-15muos2-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body2 css-21"
                     >
                       Cost (SOL)
                     </p>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o746jm-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-20"
                     scope="col"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body2 css-15muos2-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body2 css-21"
                     >
                       Minting (EST)
                     </p>
@@ -138,195 +578,195 @@ Object {
                 </tr>
               </thead>
               <tbody
-                class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                class="MuiTableBody-root css-24"
               >
                 <tr
-                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                  class="MuiTableRow-root css-25"
                 >
                   <th
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                     scope="row"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       #1 - 100 | Legendary
                     </p>
                   </th>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       1.303
                     </p>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       Pre-sale: SOLD OUT
                     </p>
                   </td>
                 </tr>
                 <tr
-                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                  class="MuiTableRow-root css-25"
                 >
                   <th
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                     scope="row"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       #101 - 250 | Ultra Rare
                     </p>
                   </th>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       1.6
                     </p>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       LOCKED
                     </p>
                   </td>
                 </tr>
                 <tr
-                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                  class="MuiTableRow-root css-25"
                 >
                   <th
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                     scope="row"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       #251 - 500 | Rare
                     </p>
                   </th>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       2
                     </p>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       LOCKED
                     </p>
                   </td>
                 </tr>
                 <tr
-                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                  class="MuiTableRow-root css-25"
                 >
                   <th
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                     scope="row"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       #501 - 750 | Rare
                     </p>
                   </th>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       2.3
                     </p>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       LOCKED
                     </p>
                   </td>
                 </tr>
                 <tr
-                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                  class="MuiTableRow-root css-25"
                 >
                   <th
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                     scope="row"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       #751 - 1000 | Regular
                     </p>
                   </th>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       2.5
                     </p>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       LOCKED
                     </p>
                   </td>
                 </tr>
                 <tr
-                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                  class="MuiTableRow-root css-25"
                 >
                   <th
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                     scope="row"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       #1001 - 1303 | Regular
                     </p>
                   </th>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       3
                     </p>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                   >
                     <p
-                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-27"
                     >
                       LOCKED
                     </p>
@@ -339,13 +779,453 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.css-1 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: -16px;
+  width: calc(100% + 16px);
+  margin-left: -16px;
+}
+
+.css-1>.MuiGrid-item {
+  padding-top: 16px;
+}
+
+.css-1>.MuiGrid-item {
+  padding-left: 16px;
+}
+
+.css-2 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  max-width: 100%;
+}
+
+@media (min-width:600px) {
+  .css-2 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:900px) {
+  .css-2 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-2 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-2 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+.css-3 {
+  margin-top: 32px;
+}
+
+.css-4 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+.css-5 {
+  width: 100%;
+  height: 60px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  background: #fd0069;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.css-6 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+@media (min-width:600px) {
+  .css-6 {
+    -webkit-flex-basis: 41.666667%;
+    -ms-flex-preferred-size: 41.666667%;
+    flex-basis: 41.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 41.666667%;
+  }
+}
+
+@media (min-width:900px) {
+  .css-6 {
+    -webkit-flex-basis: 41.666667%;
+    -ms-flex-preferred-size: 41.666667%;
+    flex-basis: 41.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 41.666667%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-6 {
+    -webkit-flex-basis: 41.666667%;
+    -ms-flex-preferred-size: 41.666667%;
+    flex-basis: 41.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 41.666667%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-6 {
+    -webkit-flex-basis: 41.666667%;
+    -ms-flex-preferred-size: 41.666667%;
+    flex-basis: 41.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 41.666667%;
+  }
+}
+
+@media (min-width:0px) {
+  .css-7 {
+    display: none;
+  }
+}
+
+@media (min-width:600px) {
+  .css-7 {
+    display: block;
+  }
+}
+
+.css-8 {
+  background-image: url(/assets/outer.png);
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 260px;
+  height: 260px;
+  transform-style: preserve-3d;
+}
+
+.css-9 {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transform: translateZ(30px);
+  -moz-transform: translateZ(30px);
+  -ms-transform: translateZ(30px);
+  transform: translateZ(30px);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.css-11 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+
+.css-14 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+  width: 100%;
+  overflow-x: auto;
+}
+
+.css-15 {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  min-width: 650px;
+}
+
+.css-15 caption {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: left;
+  caption-side: bottom;
+}
+
+.css-16 {
+  display: table-header-group;
+}
+
+.css-17 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.css-17.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.css-17.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.css-17.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.css-18 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  border: none;
+}
+
+.css-19 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  color: #657786;
+  font-size: 8px;
+}
+
+.css-20 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: right;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  border: none;
+}
+
+.css-21 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  color: #657786;
+  font-size: 10px;
+}
+
+.css-24 {
+  display: table-row-group;
+}
+
+.css-25 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.css-25.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.css-25.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.css-25.Mui-selected:hover {
+  background-color: rgba(25, 118, 210, 0.12);
+}
+
+.css-25:last-child td,
+.css-25:last-child th {
+  border: 0px solid;
+}
+
+.css-26 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  border-bottom: 1px solid #0071AA;
+}
+
+.css-27 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  color: #FFF;
+}
+
+.css-28 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: right;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  border-bottom: 1px solid #0071AA;
+}
+
+<div>
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg"
       style="margin-top: 20px;"
     >
       <div
-        class="MuiBox-root css-7s0ihh"
+        class="MuiBox-root css-10"
       >
         <img
           alt="Boom OG NFT Mint"
@@ -354,20 +1234,20 @@ Object {
         />
       </div>
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1"
       >
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 css-5n8ohs-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 css-2"
         >
           <div
-            class="MuiBox-root css-h5fkc8"
+            class="MuiBox-root css-3"
           >
             <div
-              class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1ps6pg7-MuiPaper-root"
+              class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-4"
               style="padding: 24px; background-color: rgb(0, 47, 70); border-radius: 6px; border: 3px solid #005078;"
             >
               <button
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained css-e8az88 MuiButton-containedPrimary"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained css-5 MuiButton-containedPrimary"
                 tabindex="0"
                 type="button"
               >
@@ -384,16 +1264,16 @@ Object {
           </div>
         </div>
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-5 css-1odrivk-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-5 css-6"
         >
           <div
-            class="MuiBox-root css-130f8nx"
+            class="MuiBox-root css-7"
           >
             <div
-              class="track-on-window css-vktagw"
+              class="track-on-window css-8"
             >
               <div
-                class="MuiBox-root css-kb8rte"
+                class="MuiBox-root css-9"
               >
                 <img
                   alt="1303 OG NFT Card"
@@ -407,16 +1287,16 @@ Object {
         </div>
       </div>
       <div
-        class="MuiBox-root css-0"
+        class="MuiBox-root css-10"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-11"
         >
           To commemorate the official launch of Boom.Army Beta, we're launching 1303 OG NFTs for everyone who is early. There are 1303 NFTs available, and they will receive a 1303 split share of 20% of our Market Place fees in perpetuity. All White List i3o3...3bos tokens mint at 1.303 SOL discount.
         </p>
       </div>
       <div
-        class="MuiBox-root css-h5fkc8"
+        class="MuiBox-root css-3"
       >
         <img
           alt="Minting Schedule"
@@ -425,47 +1305,47 @@ Object {
         />
       </div>
       <div
-        class="MuiBox-root css-0"
+        class="MuiBox-root css-10"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-11xur9t-MuiPaper-root-MuiTableContainer-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-14"
         >
           <table
             aria-label="simple table"
-            class="MuiTable-root css-quj9j6-MuiTable-root"
+            class="MuiTable-root css-15"
           >
             <thead
-              class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+              class="MuiTableHead-root css-16"
             >
               <tr
-                class="MuiTableRow-root MuiTableRow-head css-1q1u3t4-MuiTableRow-root"
+                class="MuiTableRow-root MuiTableRow-head css-17"
               >
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-a3yr1h-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-18"
                   scope="col"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body2 css-xk1c0y-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body2 css-19"
                   >
                     Serial
                   </p>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o746jm-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-20"
                   scope="col"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body2 css-15muos2-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body2 css-21"
                   >
                     Cost (SOL)
                   </p>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o746jm-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-20"
                   scope="col"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body2 css-15muos2-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body2 css-21"
                   >
                     Minting (EST)
                   </p>
@@ -473,195 +1353,195 @@ Object {
               </tr>
             </thead>
             <tbody
-              class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+              class="MuiTableBody-root css-24"
             >
               <tr
-                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                class="MuiTableRow-root css-25"
               >
                 <th
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                   scope="row"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     #1 - 100 | Legendary
                   </p>
                 </th>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     1.303
                   </p>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     Pre-sale: SOLD OUT
                   </p>
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                class="MuiTableRow-root css-25"
               >
                 <th
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                   scope="row"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     #101 - 250 | Ultra Rare
                   </p>
                 </th>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     1.6
                   </p>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     LOCKED
                   </p>
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                class="MuiTableRow-root css-25"
               >
                 <th
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                   scope="row"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     #251 - 500 | Rare
                   </p>
                 </th>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     2
                   </p>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     LOCKED
                   </p>
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                class="MuiTableRow-root css-25"
               >
                 <th
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                   scope="row"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     #501 - 750 | Rare
                   </p>
                 </th>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     2.3
                   </p>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     LOCKED
                   </p>
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                class="MuiTableRow-root css-25"
               >
                 <th
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                   scope="row"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     #751 - 1000 | Regular
                   </p>
                 </th>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     2.5
                   </p>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     LOCKED
                   </p>
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                class="MuiTableRow-root css-25"
               >
                 <th
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-26"
                   scope="row"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     #1001 - 1303 | Regular
                   </p>
                 </th>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     3
                   </p>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-28"
                 >
                   <p
-                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-27"
                   >
                     LOCKED
                   </p>

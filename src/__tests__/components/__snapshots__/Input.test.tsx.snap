@@ -3,10 +3,55 @@
 exports[`<Input/> component : display <Input/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  width: 315px;
+  background: undefined;
+  padding: 0.2rem 0.4rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  border-bottom: 1px solid undefined;
+  margin-bottom: 2rem;
+}
+
+.css-0 input {
+  width: 100%;
+  padding: 0.5rem;
+  background: inherit;
+  border: none;
+  font-size: 1rem;
+}
+
+.css-0 label {
+  margin-bottom: 2px;
+}
+
+.css-0 label.fullWidth {
+  width: 100%;
+}
+
+.css-0 label.hideLabel {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+<body>
     <div>
       <div
-        class="css-1lkj0jt"
+        class="css-0"
         lg="false"
       >
         <label
@@ -20,9 +65,54 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  width: 315px;
+  background: undefined;
+  padding: 0.2rem 0.4rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  border-bottom: 1px solid undefined;
+  margin-bottom: 2rem;
+}
+
+.css-0 input {
+  width: 100%;
+  padding: 0.5rem;
+  background: inherit;
+  border: none;
+  font-size: 1rem;
+}
+
+.css-0 label {
+  margin-bottom: 2px;
+}
+
+.css-0 label.fullWidth {
+  width: 100%;
+}
+
+.css-0 label.hideLabel {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+<div>
     <div
-      class="css-1lkj0jt"
+      class="css-0"
       lg="false"
     >
       <label

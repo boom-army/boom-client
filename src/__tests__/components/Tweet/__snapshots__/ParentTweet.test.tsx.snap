@@ -3,10 +3,15 @@
 exports[`parent tweet snapshot testing 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  background: #38444D;
+  padding: 1rem;
+}
+
+<body>
     <div>
       <div
-        class="MuiBox-root css-2z2mwk"
+        class="MuiBox-root css-0"
       >
         <a
           href="/undefined/status/cl084xdy815761s0n5omoxoem0"
@@ -16,9 +21,14 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  background: #38444D;
+  padding: 1rem;
+}
+
+<div>
     <div
-      class="MuiBox-root css-2z2mwk"
+      class="MuiBox-root css-0"
     >
       <a
         href="/undefined/status/cl084xdy815761s0n5omoxoem0"

@@ -5,6 +5,17 @@ import { MockedProvider } from "@apollo/client/testing";
 import { SnackbarProvider } from "notistack";
 import { DELETE_COMMENT } from "../../../queries/comment";
 import DeleteComment from "../../../components/Comment/DeleteComment";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
+
 
 const values = {
   handle: "shy-cloud-4965",

@@ -3,10 +3,79 @@
 exports[`Search Input: display <SearchInput/> component when users undefined 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  margin: 1rem 0;
+  margin-left: 1rem;
+}
+
+.css-0 input {
+  height: 40px;
+  width: 70%;
+  border-radius: 30px;
+  font-size: 1rem;
+  padding-left: 1.2rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-0 input {
+    font-size: 0.9rem;
+  }
+}
+
+.css-1 .tabs {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-around;
+  -ms-flex-pack: space-around;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  border-bottom: 2px solid undefined;
+}
+
+.css-1 span {
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+}
+
+.css-1 span.active {
+  border-bottom: 2px solid undefined;
+  font-weight: 500;
+}
+
+.css-2 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-2 {
+    font-size: 1rem;
+  }
+}
+
+<body>
     <div>
       <div
-        class="css-1n1p729"
+        class="css-0"
       >
         <form>
           <input
@@ -17,7 +86,7 @@ Object {
         </form>
       </div>
       <div
-        class="css-1mw65dx"
+        class="css-1"
       >
         <div
           class="tabs"
@@ -39,7 +108,7 @@ Object {
           </span>
         </div>
         <div
-          class="css-15inajd"
+          class="css-2"
         >
           <p>
             Use the search bar to find tags, people and tweets
@@ -48,9 +117,78 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  margin: 1rem 0;
+  margin-left: 1rem;
+}
+
+.css-0 input {
+  height: 40px;
+  width: 70%;
+  border-radius: 30px;
+  font-size: 1rem;
+  padding-left: 1.2rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-0 input {
+    font-size: 0.9rem;
+  }
+}
+
+.css-1 .tabs {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-around;
+  -ms-flex-pack: space-around;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  border-bottom: 2px solid undefined;
+}
+
+.css-1 span {
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+}
+
+.css-1 span.active {
+  border-bottom: 2px solid undefined;
+  font-weight: 500;
+}
+
+.css-2 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-2 {
+    font-size: 1rem;
+  }
+}
+
+<div>
     <div
-      class="css-1n1p729"
+      class="css-0"
     >
       <form>
         <input
@@ -61,7 +199,7 @@ Object {
       </form>
     </div>
     <div
-      class="css-1mw65dx"
+      class="css-1"
     >
       <div
         class="tabs"
@@ -83,7 +221,7 @@ Object {
         </span>
       </div>
       <div
-        class="css-15inajd"
+        class="css-2"
       >
         <p>
           Use the search bar to find tags, people and tweets

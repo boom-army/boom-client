@@ -4,6 +4,17 @@ import { MockedProvider } from "@apollo/client/testing";
 import { TWEET, NEW_TWEET } from "../../../queries/tweet/index";
 import { SnackbarProvider } from "notistack";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
+
 
 const feed: any = {
   data: {

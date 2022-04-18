@@ -3,16 +3,217 @@
 exports[`Edit Profile :  renders correctly when User have profile 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  padding-bottom: 5rem;
+}
+
+.css-0 .flex-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-0 .flex-wrapper form .cover-photo {
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.css-0 .flex-wrapper form .avatar-input {
+  margin-top: -100px;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.css-0 .flex-wrapper form div.bio-wrapper {
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid undefined;
+  padding: 0.5rem;
+}
+
+.css-0 .flex-wrapper form div.bio-wrapper label {
+  margin-bottom: 0.4rem;
+}
+
+.css-0 .flex-wrapper form div.bio-wrapper textarea {
+  font-size: 1rem;
+  width: 100%;
+  border: none;
+}
+
+@media screen and (max-width: 760px) {
+  .css-0 .flex-wrapper {
+    display: block;
+  }
+}
+
+.css-1 {
+  width: 98%;
+  border: none;
+  padding: 2rem;
+  border-radius: none;
+}
+
+.css-1 span {
+  text-align: center;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.css-1 .group-input {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.css-1 .group-input div:nth-of-type(1) {
+  margin-right: 1rem;
+}
+
+@media screen and (max-width: 400px) {
+  .css-1 {
+    width: 360px;
+  }
+}
+
+.css-2 {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.css-3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-4 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+  width: 75%;
+  height: 75%;
+}
+
+.css-5 {
+  width: 315px;
+  background: undefined;
+  padding: 0.2rem 0.4rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  border-bottom: 1px solid undefined;
+  margin-bottom: 2rem;
+}
+
+.css-5 input {
+  width: 100%;
+  padding: 0.5rem;
+  background: inherit;
+  border: none;
+  font-size: 1rem;
+}
+
+.css-5 label {
+  margin-bottom: 2px;
+}
+
+.css-5 label.fullWidth {
+  width: 100%;
+}
+
+.css-5 label.hideLabel {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.css-10 {
+  padding: 0.4rem 1.8rem;
+  background: inherit;
+  border: 1px solid undefined;
+  border-radius: 50px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-10 {
+    font-size: 0.8rem;
+  }
+}
+
+<body>
     <div>
       <div
-        class="css-1fohflk"
+        class="css-0"
       >
         <div
           class="flex-wrapper"
         >
           <form
-            class="css-zbe5z0"
+            class="css-1"
             lg="true"
           >
             <div
@@ -23,7 +224,7 @@ Object {
               >
                 <img
                   alt="cover"
-                  class="css-3y6f34"
+                  class="css-2"
                   src="/default-cover.png"
                 />
               </label>
@@ -40,11 +241,11 @@ Object {
                 for="avatar-input-file"
               >
                 <div
-                  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-2s90m6-MuiAvatar-root"
+                  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-3"
                 >
                   <svg
                     aria-hidden="true"
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-4"
                     data-testid="PersonIcon"
                     focusable="false"
                     viewBox="0 0 24 24"
@@ -62,7 +263,7 @@ Object {
               />
             </div>
             <div
-              class="css-1lkj0jt"
+              class="css-5"
               lg="true"
             >
               <label
@@ -77,7 +278,7 @@ Object {
               />
             </div>
             <div
-              class="css-1lkj0jt"
+              class="css-5"
               lg="true"
             >
               <label
@@ -116,7 +317,7 @@ Object {
               />
             </div>
             <div
-              class="css-1lkj0jt"
+              class="css-5"
               lg="true"
             >
               <label
@@ -131,7 +332,7 @@ Object {
               />
             </div>
             <div
-              class="css-1lkj0jt"
+              class="css-5"
               lg="true"
             >
               <label
@@ -146,7 +347,7 @@ Object {
               />
             </div>
             <div
-              class="css-1lkj0jt"
+              class="css-5"
               lg="true"
             >
               <label
@@ -161,7 +362,7 @@ Object {
               />
             </div>
             <button
-              class="css-b0ogej"
+              class="css-10"
               outline="true"
               type="submit"
             >
@@ -172,15 +373,216 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  padding-bottom: 5rem;
+}
+
+.css-0 .flex-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-0 .flex-wrapper form .cover-photo {
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.css-0 .flex-wrapper form .avatar-input {
+  margin-top: -100px;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.css-0 .flex-wrapper form div.bio-wrapper {
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid undefined;
+  padding: 0.5rem;
+}
+
+.css-0 .flex-wrapper form div.bio-wrapper label {
+  margin-bottom: 0.4rem;
+}
+
+.css-0 .flex-wrapper form div.bio-wrapper textarea {
+  font-size: 1rem;
+  width: 100%;
+  border: none;
+}
+
+@media screen and (max-width: 760px) {
+  .css-0 .flex-wrapper {
+    display: block;
+  }
+}
+
+.css-1 {
+  width: 98%;
+  border: none;
+  padding: 2rem;
+  border-radius: none;
+}
+
+.css-1 span {
+  text-align: center;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.css-1 .group-input {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.css-1 .group-input div:nth-of-type(1) {
+  margin-right: 1rem;
+}
+
+@media screen and (max-width: 400px) {
+  .css-1 {
+    width: 360px;
+  }
+}
+
+.css-2 {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.css-3 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-4 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+  width: 75%;
+  height: 75%;
+}
+
+.css-5 {
+  width: 315px;
+  background: undefined;
+  padding: 0.2rem 0.4rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  border-bottom: 1px solid undefined;
+  margin-bottom: 2rem;
+}
+
+.css-5 input {
+  width: 100%;
+  padding: 0.5rem;
+  background: inherit;
+  border: none;
+  font-size: 1rem;
+}
+
+.css-5 label {
+  margin-bottom: 2px;
+}
+
+.css-5 label.fullWidth {
+  width: 100%;
+}
+
+.css-5 label.hideLabel {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.css-10 {
+  padding: 0.4rem 1.8rem;
+  background: inherit;
+  border: 1px solid undefined;
+  border-radius: 50px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-10 {
+    font-size: 0.8rem;
+  }
+}
+
+<div>
     <div
-      class="css-1fohflk"
+      class="css-0"
     >
       <div
         class="flex-wrapper"
       >
         <form
-          class="css-zbe5z0"
+          class="css-1"
           lg="true"
         >
           <div
@@ -191,7 +593,7 @@ Object {
             >
               <img
                 alt="cover"
-                class="css-3y6f34"
+                class="css-2"
                 src="/default-cover.png"
               />
             </label>
@@ -208,11 +610,11 @@ Object {
               for="avatar-input-file"
             >
               <div
-                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-2s90m6-MuiAvatar-root"
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-3"
               >
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-4"
                   data-testid="PersonIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -230,7 +632,7 @@ Object {
             />
           </div>
           <div
-            class="css-1lkj0jt"
+            class="css-5"
             lg="true"
           >
             <label
@@ -245,7 +647,7 @@ Object {
             />
           </div>
           <div
-            class="css-1lkj0jt"
+            class="css-5"
             lg="true"
           >
             <label
@@ -284,7 +686,7 @@ Object {
             />
           </div>
           <div
-            class="css-1lkj0jt"
+            class="css-5"
             lg="true"
           >
             <label
@@ -299,7 +701,7 @@ Object {
             />
           </div>
           <div
-            class="css-1lkj0jt"
+            class="css-5"
             lg="true"
           >
             <label
@@ -314,7 +716,7 @@ Object {
             />
           </div>
           <div
-            class="css-1lkj0jt"
+            class="css-5"
             lg="true"
           >
             <label
@@ -329,7 +731,7 @@ Object {
             />
           </div>
           <button
-            class="css-b0ogej"
+            class="css-10"
             outline="true"
             type="submit"
           >
@@ -396,22 +798,85 @@ Object {
 exports[`Edit Profile :  renders correctly when profile loading 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": @keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-1 {
+  0% {
+    stroke-dasharray: 1px,200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+.css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-1 {
+  display: inline-block;
+  color: #1976d2;
+  -webkit-animation: animation-0 1.4s linear infinite;
+  animation: animation-0 1.4s linear infinite;
+}
+
+.css-2 {
+  display: block;
+}
+
+.css-3 {
+  stroke: currentColor;
+  stroke-dasharray: 80px,200px;
+  stroke-dashoffset: 0;
+  -webkit-animation: animation-1 1.4s ease-in-out infinite;
+  animation: animation-1 1.4s ease-in-out infinite;
+}
+
+<body>
     <div>
       <div
-        class="MuiBox-root css-1l4w6pd"
+        class="MuiBox-root css-0"
       >
         <span
-          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1"
           role="progressbar"
           style="width: 30px; height: 30px;"
         >
           <svg
-            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            class="MuiCircularProgress-svg css-2"
             viewBox="22 22 44 44"
           >
             <circle
-              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-3"
               cx="44"
               cy="44"
               fill="none"
@@ -423,21 +888,84 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": @keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-1 {
+  0% {
+    stroke-dasharray: 1px,200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+.css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-1 {
+  display: inline-block;
+  color: #1976d2;
+  -webkit-animation: animation-0 1.4s linear infinite;
+  animation: animation-0 1.4s linear infinite;
+}
+
+.css-2 {
+  display: block;
+}
+
+.css-3 {
+  stroke: currentColor;
+  stroke-dasharray: 80px,200px;
+  stroke-dashoffset: 0;
+  -webkit-animation: animation-1 1.4s ease-in-out infinite;
+  animation: animation-1 1.4s ease-in-out infinite;
+}
+
+<div>
     <div
-      class="MuiBox-root css-1l4w6pd"
+      class="MuiBox-root css-0"
     >
       <span
-        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1"
         role="progressbar"
         style="width: 30px; height: 30px;"
       >
         <svg
-          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          class="MuiCircularProgress-svg css-2"
           viewBox="22 22 44 44"
         >
           <circle
-            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-3"
             cx="44"
             cy="44"
             fill="none"

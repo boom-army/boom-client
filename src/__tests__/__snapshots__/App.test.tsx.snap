@@ -3,28 +3,885 @@
 exports[`renders a snapshot testing ... 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": @keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-1 {
+  0% {
+    stroke-dasharray: 1px,200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+.css-0 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: absolute;
+  z-index: 1100;
+  top: 0;
+  left: auto;
+  right: 0;
+  background-color: #1976d2;
+  color: #fff;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.css-1 {
+  width: 100%;
+  margin-left: auto;
+  box-sizing: border-box;
+  margin-right: auto;
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width:600px) {
+  .css-1 {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-1 {
+    max-width: 1200px;
+  }
+}
+
+.css-2 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 48px;
+}
+
+.css-3 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.css-4 {
+  margin-right: 8px;
+}
+
+.css-5 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+.css-6 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.css-8 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.css-9 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+@media (min-width:900px) {
+  .css-9 {
+    -webkit-flex-basis: 16.666667%;
+    -ms-flex-preferred-size: 16.666667%;
+    flex-basis: 16.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 16.666667%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-9 {
+    -webkit-flex-basis: 16.666667%;
+    -ms-flex-preferred-size: 16.666667%;
+    flex-basis: 16.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 16.666667%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-9 {
+    -webkit-flex-basis: 16.666667%;
+    -ms-flex-preferred-size: 16.666667%;
+    flex-basis: 16.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 16.666667%;
+  }
+}
+
+@media (min-width:0px) {
+  .css-9 {
+    display: none;
+  }
+}
+
+@media (min-width:600px) {
+  .css-9 {
+    display: none;
+  }
+}
+
+@media (min-width:900px) {
+  .css-9 {
+    display: block;
+  }
+}
+
+.css-10 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: none;
+  border-right: 1px solid #38444D;
+  border-left: 1px solid #38444D;
+}
+
+@media (min-width:600px) {
+  .css-10 {
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+}
+
+@media (min-width:900px) {
+  .css-10 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-10 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-10 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+.css-11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 7px solid #38444D;
+}
+
+.css-11 form {
+  width: 100%;
+}
+
+.css-11 textarea {
+  width: 100%;
+  background: inherit;
+  border: none;
+  font-size: 1.23rem;
+  font-family: "Roboto",sans-serif;
+  color: #FFF;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 0;
+}
+
+.css-11 .new-tweet {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.css-11 .new-tweet-action {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-11 .svg-input .emoji-pick svg,
+.css-11 .svg-input .tweet-gif svg,
+.css-11 .svg-input .file-upload-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: #CA2055;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.css-11 .svg-input {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media only screen and (max-width : 390px) {
+  .css-11 .svg-input .emoji-pick svg,
+  .css-11 .svg-input .tweet-gif svg,
+  .css-11 .svg-input .file-upload-icon svg {
+    margin-right: 1.3rem;
+  }
+
+  .css-11 .svg-input {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.css-11 .avatar {
+  margin: 0 1rem;
+}
+
+.css-12 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-13 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+  width: 75%;
+  height: 75%;
+}
+
+.css-14 .emoji-mart {
+  position: absolute;
+  z-index: 1;
+}
+
+.css-14 .emoji-mart-bar.emoji-mart-bar,
+.css-14 .emoji-mart-scroll.emoji-mart-scroll {
+  margin-right: 0;
+}
+
+.css-14 .emoji-mart-bar svg,
+.css-14 .emoji-mart-bar svg path {
+  fill: #CA2055;
+}
+
+.css-14 .emoji-mart .emoji-mart-anchor-bar {
+  background-color: #CA2055!important;
+}
+
+.css-14 .emoji-mart-preview {
+  display: none;
+}
+
+.css-14 .emoji-mart-dark {
+  border-color: #657786;
+  background-color: #15202b;
+}
+
+.css-14 .emoji-mart-category {
+  margin-top: 0.75rem;
+}
+
+.css-14 .emoji-mart-dark .emoji-mart-category-label span {
+  background-color: #15202b;
+  color: #fff;
+}
+
+.css-14 .emoji-mart-scroll::WebkitScrollbar {
+  width: 0.25rem;
+}
+
+.css-14 .emoji-mart-scroll::WebkitScrollbarTrack {
+  background: #15202b;
+}
+
+.css-14 .emoji-mart-scroll::WebkitScrollbarThumb {
+  background: #CA2055;
+}
+
+.css-14 .emoji-pick {
+  cursor: pointer;
+}
+
+.css-14 .emoji-pick:hover svg path {
+  fill: #CA2055;
+}
+
+@media screen and (max-width: 430px) {
+  .css-14 .emoji-mart {
+    position: fixed;
+    bottom: 5em;
+  }
+}
+
+.css-15 {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.css-16 {
+  fill: #FFF;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.css-17 .nft-pick {
+  margin-right: 2rem;
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+}
+
+.css-17 .nft-pick svg {
+  width: 26px;
+  cursor: pointer;
+}
+
+.css-17 .nft-pick svg path {
+  fill: #CA2055;
+}
+
+.css-18 {
+  padding: 0.4rem 1rem;
+  color: #FFF;
+  background: #CA2055;
+  border: 1px solid #CA2055;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-18 {
+    font-size: 0.8rem;
+  }
+}
+
+.css-19 {
+  margin-top: 1rem;
+}
+
+.css-20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-21 {
+  display: inline-block;
+  color: #1976d2;
+  -webkit-animation: animation-0 1.4s linear infinite;
+  animation: animation-0 1.4s linear infinite;
+  color: #CA2055;
+}
+
+.css-22 {
+  display: block;
+}
+
+.css-23 {
+  stroke: currentColor;
+  stroke-dasharray: 80px,200px;
+  stroke-dashoffset: 0;
+  -webkit-animation: animation-1 1.4s ease-in-out infinite;
+  animation: animation-1 1.4s ease-in-out infinite;
+}
+
+.css-24 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+@media (min-width:900px) {
+  .css-24 {
+    -webkit-flex-basis: 25%;
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 25%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-24 {
+    -webkit-flex-basis: 25%;
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 25%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-24 {
+    -webkit-flex-basis: 25%;
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 25%;
+  }
+}
+
+@media (min-width:0px) {
+  .css-24 {
+    display: none;
+  }
+}
+
+@media (min-width:600px) {
+  .css-24 {
+    display: none;
+  }
+}
+
+@media (min-width:900px) {
+  .css-24 {
+    display: block;
+  }
+}
+
+.css-25 {
+  position: relative;
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+.css-30 {
+  box-sizing: border-box;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@media (min-width:0px) {
+  .css-30 {
+    display: block;
+  }
+}
+
+@media (min-width:600px) {
+  .css-30 {
+    display: block;
+  }
+}
+
+@media (min-width:900px) {
+  .css-30 {
+    display: none;
+  }
+}
+
+.css-31 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 56px;
+  background-color: #fff;
+  width: auto;
+  background-color: #15202b;
+  border-top: 1px solid #38444D;
+}
+
+.css-31 .MuiButtonBase-root {
+  color: #657786!important;
+  padding-top: 1em;
+}
+
+.css-31 .Mui-selected {
+  color: #CA2055;
+}
+
+.css-31 .Mui-selected .MuiSvgIcon-root {
+  color: #CA2055;
+}
+
+.css-31 .MuiBadge-badge {
+  color: #FFF;
+  background-color: #CA2055;
+}
+
+.css-32 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  -webkit-transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,padding-top 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,padding-top 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 6px 12px 8px;
+  min-width: 80px;
+  max-width: 168px;
+  color: rgba(0, 0, 0, 0.6);
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding-top: 16px;
+}
+
+.css-32::-moz-focus-inner {
+  border-style: none;
+}
+
+.css-32.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .css-32 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.css-32.Mui-selected {
+  padding-top: 6px;
+  color: #1976d2;
+}
+
+.css-33 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.css-34 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 0.75rem;
+  opacity: 0;
+  -webkit-transition: font-size 0.2s,opacity 0.2s;
+  transition: font-size 0.2s,opacity 0.2s;
+  transition-delay: 0s;
+}
+
+.css-34.Mui-selected {
+  font-size: 0.875rem;
+}
+
+.css-35 {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+.css-40 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1199;
+  right: auto;
+}
+
+<body>
     <div>
       <header
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionAbsolute css-1d8ws7u-MuiPaper-root-MuiAppBar-root"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionAbsolute css-0"
       >
         <div
-          class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+          class="MuiContainer-root MuiContainer-maxWidthLg css-1"
         >
           <div
-            class="MuiToolbar-root MuiToolbar-dense css-lz9mh9-MuiToolbar-root"
+            class="MuiToolbar-root MuiToolbar-dense css-2"
           >
             <div
-              class="MuiGrid-root MuiGrid-container css-1c1ljyi-MuiGrid-root"
+              class="MuiGrid-root MuiGrid-container css-3"
             >
               <div
-                class="MuiBox-root css-12z0wuy"
+                class="MuiBox-root css-4"
               >
                 <a
                   href="/"
                 >
                   <h6
-                    class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h6 css-5"
                   >
                     Boom β
                   </h6>
@@ -32,7 +889,7 @@ Object {
               </div>
             </div>
             <div
-              class="MuiGrid-root MuiGrid-container css-ded95z-MuiGrid-root"
+              class="MuiGrid-root MuiGrid-container css-6"
             >
               <button
                 class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
@@ -53,26 +910,26 @@ Object {
         </div>
       </header>
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1"
       >
         <div
-          class="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container css-8"
         >
           <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-2 MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1co31ji-MuiGrid-root-MuiPaper-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-2 MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-9"
           />
           <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-7 MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-1eepfjg-MuiGrid-root-MuiPaper-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-7 MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-10"
           >
             <div
-              class="css-pbby0v"
+              class="css-11"
             >
               <div
-                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-12"
               >
                 <svg
                   aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-13"
                   data-testid="PersonIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -104,7 +961,7 @@ Object {
                       class="svg-input"
                     >
                       <div
-                        class="css-2aebbg"
+                        class="css-14"
                       >
                         <span
                           class="emoji-pick"
@@ -132,7 +989,7 @@ Object {
                         </span>
                       </div>
                       <button
-                        class="tweet-gif css-185vf5l"
+                        class="tweet-gif css-15"
                         type="button"
                       >
                         <svg
@@ -156,7 +1013,7 @@ Object {
                           class="file-upload-icon"
                         >
                           <svg
-                            class="css-4h21es"
+                            class="css-16"
                             height="24"
                             viewBox="0 0 24 24"
                             width="24"
@@ -176,7 +1033,7 @@ Object {
                         type="file"
                       />
                       <span
-                        class="css-1wpxgnf"
+                        class="css-17"
                       >
                         <span
                           class="nft-pick"
@@ -188,7 +1045,7 @@ Object {
                       </span>
                     </div>
                     <button
-                      class="css-sqnska"
+                      class="css-18"
                       sm="true"
                     >
                       Post
@@ -198,22 +1055,22 @@ Object {
               </form>
             </div>
             <div
-              class="MuiBox-root css-15g2oxy"
+              class="MuiBox-root css-19"
             >
               <div
-                class="MuiBox-root css-1l4w6pd"
+                class="MuiBox-root css-20"
               >
                 <span
-                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1h8g686-MuiCircularProgress-root"
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-21"
                   role="progressbar"
                   style="width: 30px; height: 30px;"
                 >
                   <svg
-                    class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                    class="MuiCircularProgress-svg css-22"
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-23"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -226,25 +1083,25 @@ Object {
             </div>
           </div>
           <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-3 css-eotw2m-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-3 css-24"
           >
             <div
-              class="css-pl79ec"
+              class="css-25"
             >
               <div
-                class="MuiBox-root css-1l4w6pd"
+                class="MuiBox-root css-20"
               >
                 <span
-                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1h8g686-MuiCircularProgress-root"
+                  class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-21"
                   role="progressbar"
                   style="width: 30px; height: 30px;"
                 >
                   <svg
-                    class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                    class="MuiCircularProgress-svg css-22"
                     viewBox="22 22 44 44"
                   >
                     <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-23"
                       cx="44"
                       cy="44"
                       fill="none"
@@ -258,20 +1115,20 @@ Object {
           </div>
         </div>
         <div
-          class="MuiGrid-root MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-17yk9hq-MuiGrid-root-MuiPaper-root"
+          class="MuiGrid-root MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-30"
         >
           <div
-            class="MuiBottomNavigation-root css-1o950vf-MuiBottomNavigation-root"
+            class="MuiBottomNavigation-root css-31"
           >
             <a
               aria-current="page"
-              class="MuiButtonBase-root MuiBottomNavigationAction-root MuiBottomNavigationAction-iconOnly css-b6y1q4-MuiButtonBase-root-MuiBottomNavigationAction-root active"
+              class="MuiButtonBase-root MuiBottomNavigationAction-root MuiBottomNavigationAction-iconOnly css-32 active"
               href="/"
               tabindex="0"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-33"
                 data-testid="RestoreIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -281,22 +1138,22 @@ Object {
                 />
               </svg>
               <span
-                class="MuiBottomNavigationAction-label MuiBottomNavigationAction-iconOnly css-1gh6k7f-MuiBottomNavigationAction-label"
+                class="MuiBottomNavigationAction-label MuiBottomNavigationAction-iconOnly css-34"
               >
                 Community
               </span>
               <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-35"
               />
             </a>
             <button
-              class="MuiButtonBase-root MuiBottomNavigationAction-root MuiBottomNavigationAction-iconOnly css-b6y1q4-MuiButtonBase-root-MuiBottomNavigationAction-root"
+              class="MuiButtonBase-root MuiBottomNavigationAction-root MuiBottomNavigationAction-iconOnly css-32"
               tabindex="0"
               type="button"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-33"
                 data-testid="MenuIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -306,44 +1163,901 @@ Object {
                 />
               </svg>
               <span
-                class="MuiBottomNavigationAction-label MuiBottomNavigationAction-iconOnly css-1gh6k7f-MuiBottomNavigationAction-label"
+                class="MuiBottomNavigationAction-label MuiBottomNavigationAction-iconOnly css-34"
               >
                 Menu
               </span>
               <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-35"
               />
             </button>
           </div>
         </div>
       </div>
       <div
-        class="PrivateSwipeArea-root css-n2n0ek"
+        class="PrivateSwipeArea-root css-40"
         style="width: 20px;"
       />
     </div>
   </body>,
-  "container": <div>
+  "container": @keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-1 {
+  0% {
+    stroke-dasharray: 1px,200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+.css-0 {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: absolute;
+  z-index: 1100;
+  top: 0;
+  left: auto;
+  right: 0;
+  background-color: #1976d2;
+  color: #fff;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.css-1 {
+  width: 100%;
+  margin-left: auto;
+  box-sizing: border-box;
+  margin-right: auto;
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width:600px) {
+  .css-1 {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-1 {
+    max-width: 1200px;
+  }
+}
+
+.css-2 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 48px;
+}
+
+.css-3 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.css-4 {
+  margin-right: 8px;
+}
+
+.css-5 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+.css-6 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.css-8 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.css-9 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+@media (min-width:900px) {
+  .css-9 {
+    -webkit-flex-basis: 16.666667%;
+    -ms-flex-preferred-size: 16.666667%;
+    flex-basis: 16.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 16.666667%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-9 {
+    -webkit-flex-basis: 16.666667%;
+    -ms-flex-preferred-size: 16.666667%;
+    flex-basis: 16.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 16.666667%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-9 {
+    -webkit-flex-basis: 16.666667%;
+    -ms-flex-preferred-size: 16.666667%;
+    flex-basis: 16.666667%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 16.666667%;
+  }
+}
+
+@media (min-width:0px) {
+  .css-9 {
+    display: none;
+  }
+}
+
+@media (min-width:600px) {
+  .css-9 {
+    display: none;
+  }
+}
+
+@media (min-width:900px) {
+  .css-9 {
+    display: block;
+  }
+}
+
+.css-10 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: none;
+  border-right: 1px solid #38444D;
+  border-left: 1px solid #38444D;
+}
+
+@media (min-width:600px) {
+  .css-10 {
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 100%;
+  }
+}
+
+@media (min-width:900px) {
+  .css-10 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-10 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-10 {
+    -webkit-flex-basis: 58.333333%;
+    -ms-flex-preferred-size: 58.333333%;
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+}
+
+.css-11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 7px solid #38444D;
+}
+
+.css-11 form {
+  width: 100%;
+}
+
+.css-11 textarea {
+  width: 100%;
+  background: inherit;
+  border: none;
+  font-size: 1.23rem;
+  font-family: "Roboto",sans-serif;
+  color: #FFF;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 0;
+}
+
+.css-11 .new-tweet {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.css-11 .new-tweet-action {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-11 .svg-input .emoji-pick svg,
+.css-11 .svg-input .tweet-gif svg,
+.css-11 .svg-input .file-upload-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: #CA2055;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.css-11 .svg-input {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media only screen and (max-width : 390px) {
+  .css-11 .svg-input .emoji-pick svg,
+  .css-11 .svg-input .tweet-gif svg,
+  .css-11 .svg-input .file-upload-icon svg {
+    margin-right: 1.3rem;
+  }
+
+  .css-11 .svg-input {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.css-11 .avatar {
+  margin: 0 1rem;
+}
+
+.css-12 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-13 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+  width: 75%;
+  height: 75%;
+}
+
+.css-14 .emoji-mart {
+  position: absolute;
+  z-index: 1;
+}
+
+.css-14 .emoji-mart-bar.emoji-mart-bar,
+.css-14 .emoji-mart-scroll.emoji-mart-scroll {
+  margin-right: 0;
+}
+
+.css-14 .emoji-mart-bar svg,
+.css-14 .emoji-mart-bar svg path {
+  fill: #CA2055;
+}
+
+.css-14 .emoji-mart .emoji-mart-anchor-bar {
+  background-color: #CA2055!important;
+}
+
+.css-14 .emoji-mart-preview {
+  display: none;
+}
+
+.css-14 .emoji-mart-dark {
+  border-color: #657786;
+  background-color: #15202b;
+}
+
+.css-14 .emoji-mart-category {
+  margin-top: 0.75rem;
+}
+
+.css-14 .emoji-mart-dark .emoji-mart-category-label span {
+  background-color: #15202b;
+  color: #fff;
+}
+
+.css-14 .emoji-mart-scroll::WebkitScrollbar {
+  width: 0.25rem;
+}
+
+.css-14 .emoji-mart-scroll::WebkitScrollbarTrack {
+  background: #15202b;
+}
+
+.css-14 .emoji-mart-scroll::WebkitScrollbarThumb {
+  background: #CA2055;
+}
+
+.css-14 .emoji-pick {
+  cursor: pointer;
+}
+
+.css-14 .emoji-pick:hover svg path {
+  fill: #CA2055;
+}
+
+@media screen and (max-width: 430px) {
+  .css-14 .emoji-mart {
+    position: fixed;
+    bottom: 5em;
+  }
+}
+
+.css-15 {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.css-16 {
+  fill: #FFF;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.css-17 .nft-pick {
+  margin-right: 2rem;
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+}
+
+.css-17 .nft-pick svg {
+  width: 26px;
+  cursor: pointer;
+}
+
+.css-17 .nft-pick svg path {
+  fill: #CA2055;
+}
+
+.css-18 {
+  padding: 0.4rem 1rem;
+  color: #FFF;
+  background: #CA2055;
+  border: 1px solid #CA2055;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-18 {
+    font-size: 0.8rem;
+  }
+}
+
+.css-19 {
+  margin-top: 1rem;
+}
+
+.css-20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-21 {
+  display: inline-block;
+  color: #1976d2;
+  -webkit-animation: animation-0 1.4s linear infinite;
+  animation: animation-0 1.4s linear infinite;
+  color: #CA2055;
+}
+
+.css-22 {
+  display: block;
+}
+
+.css-23 {
+  stroke: currentColor;
+  stroke-dasharray: 80px,200px;
+  stroke-dashoffset: 0;
+  -webkit-animation: animation-1 1.4s ease-in-out infinite;
+  animation: animation-1 1.4s ease-in-out infinite;
+}
+
+.css-24 {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+@media (min-width:900px) {
+  .css-24 {
+    -webkit-flex-basis: 25%;
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 25%;
+  }
+}
+
+@media (min-width:1200px) {
+  .css-24 {
+    -webkit-flex-basis: 25%;
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 25%;
+  }
+}
+
+@media (min-width:1536px) {
+  .css-24 {
+    -webkit-flex-basis: 25%;
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    max-width: 25%;
+  }
+}
+
+@media (min-width:0px) {
+  .css-24 {
+    display: none;
+  }
+}
+
+@media (min-width:600px) {
+  .css-24 {
+    display: none;
+  }
+}
+
+@media (min-width:900px) {
+  .css-24 {
+    display: block;
+  }
+}
+
+.css-25 {
+  position: relative;
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+.css-30 {
+  box-sizing: border-box;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@media (min-width:0px) {
+  .css-30 {
+    display: block;
+  }
+}
+
+@media (min-width:600px) {
+  .css-30 {
+    display: block;
+  }
+}
+
+@media (min-width:900px) {
+  .css-30 {
+    display: none;
+  }
+}
+
+.css-31 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 56px;
+  background-color: #fff;
+  width: auto;
+  background-color: #15202b;
+  border-top: 1px solid #38444D;
+}
+
+.css-31 .MuiButtonBase-root {
+  color: #657786!important;
+  padding-top: 1em;
+}
+
+.css-31 .Mui-selected {
+  color: #CA2055;
+}
+
+.css-31 .Mui-selected .MuiSvgIcon-root {
+  color: #CA2055;
+}
+
+.css-31 .MuiBadge-badge {
+  color: #FFF;
+  background-color: #CA2055;
+}
+
+.css-32 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  -webkit-transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,padding-top 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,padding-top 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 6px 12px 8px;
+  min-width: 80px;
+  max-width: 168px;
+  color: rgba(0, 0, 0, 0.6);
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding-top: 16px;
+}
+
+.css-32::-moz-focus-inner {
+  border-style: none;
+}
+
+.css-32.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .css-32 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.css-32.Mui-selected {
+  padding-top: 6px;
+  color: #1976d2;
+}
+
+.css-33 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.css-34 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 0.75rem;
+  opacity: 0;
+  -webkit-transition: font-size 0.2s,opacity 0.2s;
+  transition: font-size 0.2s,opacity 0.2s;
+  transition-delay: 0s;
+}
+
+.css-34.Mui-selected {
+  font-size: 0.875rem;
+}
+
+.css-35 {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+.css-40 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1199;
+  right: auto;
+}
+
+<div>
     <header
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionAbsolute css-1d8ws7u-MuiPaper-root-MuiAppBar-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionAbsolute css-0"
     >
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1"
       >
         <div
-          class="MuiToolbar-root MuiToolbar-dense css-lz9mh9-MuiToolbar-root"
+          class="MuiToolbar-root MuiToolbar-dense css-2"
         >
           <div
-            class="MuiGrid-root MuiGrid-container css-1c1ljyi-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container css-3"
           >
             <div
-              class="MuiBox-root css-12z0wuy"
+              class="MuiBox-root css-4"
             >
               <a
                 href="/"
               >
                 <h6
-                  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h6 css-5"
                 >
                   Boom β
                 </h6>
@@ -351,7 +2065,7 @@ Object {
             </div>
           </div>
           <div
-            class="MuiGrid-root MuiGrid-container css-ded95z-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container css-6"
           >
             <button
               class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
@@ -372,26 +2086,26 @@ Object {
       </div>
     </header>
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-1"
     >
       <div
-        class="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-container css-8"
       >
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-2 MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1co31ji-MuiGrid-root-MuiPaper-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-2 MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-9"
         />
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-7 MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-1eepfjg-MuiGrid-root-MuiPaper-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12 MuiGrid-grid-md-7 MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-10"
         >
           <div
-            class="css-pbby0v"
+            class="css-11"
           >
             <div
-              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-12"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-13"
                 data-testid="PersonIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -423,7 +2137,7 @@ Object {
                     class="svg-input"
                   >
                     <div
-                      class="css-2aebbg"
+                      class="css-14"
                     >
                       <span
                         class="emoji-pick"
@@ -451,7 +2165,7 @@ Object {
                       </span>
                     </div>
                     <button
-                      class="tweet-gif css-185vf5l"
+                      class="tweet-gif css-15"
                       type="button"
                     >
                       <svg
@@ -475,7 +2189,7 @@ Object {
                         class="file-upload-icon"
                       >
                         <svg
-                          class="css-4h21es"
+                          class="css-16"
                           height="24"
                           viewBox="0 0 24 24"
                           width="24"
@@ -495,7 +2209,7 @@ Object {
                       type="file"
                     />
                     <span
-                      class="css-1wpxgnf"
+                      class="css-17"
                     >
                       <span
                         class="nft-pick"
@@ -507,7 +2221,7 @@ Object {
                     </span>
                   </div>
                   <button
-                    class="css-sqnska"
+                    class="css-18"
                     sm="true"
                   >
                     Post
@@ -517,22 +2231,22 @@ Object {
             </form>
           </div>
           <div
-            class="MuiBox-root css-15g2oxy"
+            class="MuiBox-root css-19"
           >
             <div
-              class="MuiBox-root css-1l4w6pd"
+              class="MuiBox-root css-20"
             >
               <span
-                class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1h8g686-MuiCircularProgress-root"
+                class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-21"
                 role="progressbar"
                 style="width: 30px; height: 30px;"
               >
                 <svg
-                  class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                  class="MuiCircularProgress-svg css-22"
                   viewBox="22 22 44 44"
                 >
                   <circle
-                    class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                    class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-23"
                     cx="44"
                     cy="44"
                     fill="none"
@@ -545,25 +2259,25 @@ Object {
           </div>
         </div>
         <div
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-3 css-eotw2m-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-md-3 css-24"
         >
           <div
-            class="css-pl79ec"
+            class="css-25"
           >
             <div
-              class="MuiBox-root css-1l4w6pd"
+              class="MuiBox-root css-20"
             >
               <span
-                class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1h8g686-MuiCircularProgress-root"
+                class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-21"
                 role="progressbar"
                 style="width: 30px; height: 30px;"
               >
                 <svg
-                  class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+                  class="MuiCircularProgress-svg css-22"
                   viewBox="22 22 44 44"
                 >
                   <circle
-                    class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                    class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-23"
                     cx="44"
                     cy="44"
                     fill="none"
@@ -577,20 +2291,20 @@ Object {
         </div>
       </div>
       <div
-        class="MuiGrid-root MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-17yk9hq-MuiGrid-root-MuiPaper-root"
+        class="MuiGrid-root MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-30"
       >
         <div
-          class="MuiBottomNavigation-root css-1o950vf-MuiBottomNavigation-root"
+          class="MuiBottomNavigation-root css-31"
         >
           <a
             aria-current="page"
-            class="MuiButtonBase-root MuiBottomNavigationAction-root MuiBottomNavigationAction-iconOnly css-b6y1q4-MuiButtonBase-root-MuiBottomNavigationAction-root active"
+            class="MuiButtonBase-root MuiBottomNavigationAction-root MuiBottomNavigationAction-iconOnly css-32 active"
             href="/"
             tabindex="0"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-33"
               data-testid="RestoreIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -600,22 +2314,22 @@ Object {
               />
             </svg>
             <span
-              class="MuiBottomNavigationAction-label MuiBottomNavigationAction-iconOnly css-1gh6k7f-MuiBottomNavigationAction-label"
+              class="MuiBottomNavigationAction-label MuiBottomNavigationAction-iconOnly css-34"
             >
               Community
             </span>
             <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-35"
             />
           </a>
           <button
-            class="MuiButtonBase-root MuiBottomNavigationAction-root MuiBottomNavigationAction-iconOnly css-b6y1q4-MuiButtonBase-root-MuiBottomNavigationAction-root"
+            class="MuiButtonBase-root MuiBottomNavigationAction-root MuiBottomNavigationAction-iconOnly css-32"
             tabindex="0"
             type="button"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-33"
               data-testid="MenuIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -625,19 +2339,19 @@ Object {
               />
             </svg>
             <span
-              class="MuiBottomNavigationAction-label MuiBottomNavigationAction-iconOnly css-1gh6k7f-MuiBottomNavigationAction-label"
+              class="MuiBottomNavigationAction-label MuiBottomNavigationAction-iconOnly css-34"
             >
               Menu
             </span>
             <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-35"
             />
           </button>
         </div>
       </div>
     </div>
     <div
-      class="PrivateSwipeArea-root css-n2n0ek"
+      class="PrivateSwipeArea-root css-40"
       style="width: 20px;"
     />
   </div>,

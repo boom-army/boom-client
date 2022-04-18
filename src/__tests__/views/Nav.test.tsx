@@ -2,6 +2,17 @@ import React from "react";
 import { Nav } from "../../views/Nav";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+       // includeStyles: false 
+  }
+));
+
 
 let user: any = {
   id: "ckzny1iv10031lmn568gj3b3n",

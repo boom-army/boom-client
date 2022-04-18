@@ -3,16 +3,167 @@
 exports[`NFT Gallery  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+
+.css-1 {
+  padding-bottom: 24px;
+  padding-right: 24px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: auto;
+}
+
+.css-2 .nft-token-section {
+  margin-bottom: 10px;
+}
+
+.css-2 .nft-gird {
+  position: relative;
+}
+
+.css-2 .nft-gird .nft-img {
+  width: 130px;
+  height: 130px;
+}
+
+.css-2 .nft-gird span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  right: -10px;
+  bottom: 0;
+}
+
+.css-2 .nft-gird span img {
+  border-radius: 50%;
+  border: 5px solid undefined;
+}
+
+.css-2 .nft-gird .tokenPrice {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background-color: #35a600;
+  font-size: 11px;
+  white-space: nowrap;
+  width: auto;
+  height: 21px;
+  border-radius: 25px;
+  padding: 2px 6px;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 767px) {
+  .css-2 .nft-token-section {
+    width: 73px;
+  }
+
+  .css-2 .nft-gird .nft-img {
+    width: 73px;
+    height: 73px;
+  }
+
+  .css-2 .nft-gird span {
+    width: 20px;
+    height: 20px;
+    right: 6px;
+    bottom: 15px;
+  }
+}
+
+.css-5 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  font-size: 0.8em;
+  max-width: 120px;
+  word-break: break-all;
+}
+
+<body>
     <div>
       <div
-        class="MuiBox-root css-uz95m6"
+        class="css-3"
       >
-        <p
-          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        <div
+          class="MuiBox-root css-1"
         >
-          No NFTs in your wallet
-        </p>
+          <div
+            class="css-2"
+          >
+            <div
+              class="nft-token-section"
+            >
+              <div
+                class="MuiBox-root css-3"
+              >
+                <div
+                  class="nft-gird"
+                >
+                  <img
+                    alt="J1QmGAEabgZzFxSzEMGWCp7DT"
+                    class="nft-img"
+                    src="https://o.vengit.com/nft/7.png"
+                    width="120"
+                  />
+                  <span>
+                    <img
+                      alt="J1QmGAEabgZzFxSzEMGWCp7DT"
+                      height="40"
+                      src="https://o.vengit.com/nft/7.png"
+                      width="40"
+                    />
+                  </span>
+                  <span
+                    class="tokenPrice"
+                  >
+                    72 SOL
+                  </span>
+                </div>
+              </div>
+              <div
+                class="MuiBox-root css-3"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 css-5"
+                >
+                  J1QmGAEabgZzFxSzEMGWCp7DT
+                </p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
       </div>
       <div
         class="makeStyles-bottom-4 makeStyles-left-5 makeStyles-root-1"
@@ -53,7 +204,7 @@ Object {
         13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"
                       />
                     </svg>
-                    Cannot read property 'getTokenAccountsByOwner' of undefined
+                    Cannot read properties of undefined (reading 'getTokenAccountsByOwner')
                   </div>
                 </div>
               </div>
@@ -63,15 +214,166 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+
+.css-1 {
+  padding-bottom: 24px;
+  padding-right: 24px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: auto;
+}
+
+.css-2 .nft-token-section {
+  margin-bottom: 10px;
+}
+
+.css-2 .nft-gird {
+  position: relative;
+}
+
+.css-2 .nft-gird .nft-img {
+  width: 130px;
+  height: 130px;
+}
+
+.css-2 .nft-gird span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  right: -10px;
+  bottom: 0;
+}
+
+.css-2 .nft-gird span img {
+  border-radius: 50%;
+  border: 5px solid undefined;
+}
+
+.css-2 .nft-gird .tokenPrice {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background-color: #35a600;
+  font-size: 11px;
+  white-space: nowrap;
+  width: auto;
+  height: 21px;
+  border-radius: 25px;
+  padding: 2px 6px;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 767px) {
+  .css-2 .nft-token-section {
+    width: 73px;
+  }
+
+  .css-2 .nft-gird .nft-img {
+    width: 73px;
+    height: 73px;
+  }
+
+  .css-2 .nft-gird span {
+    width: 20px;
+    height: 20px;
+    right: 6px;
+    bottom: 15px;
+  }
+}
+
+.css-5 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  font-size: 0.8em;
+  max-width: 120px;
+  word-break: break-all;
+}
+
+<div>
     <div
-      class="MuiBox-root css-uz95m6"
+      class="css-3"
     >
-      <p
-        class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+      <div
+        class="MuiBox-root css-1"
       >
-        No NFTs in your wallet
-      </p>
+        <div
+          class="css-2"
+        >
+          <div
+            class="nft-token-section"
+          >
+            <div
+              class="MuiBox-root css-3"
+            >
+              <div
+                class="nft-gird"
+              >
+                <img
+                  alt="J1QmGAEabgZzFxSzEMGWCp7DT"
+                  class="nft-img"
+                  src="https://o.vengit.com/nft/7.png"
+                  width="120"
+                />
+                <span>
+                  <img
+                    alt="J1QmGAEabgZzFxSzEMGWCp7DT"
+                    height="40"
+                    src="https://o.vengit.com/nft/7.png"
+                    width="40"
+                  />
+                </span>
+                <span
+                  class="tokenPrice"
+                >
+                  72 SOL
+                </span>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-3"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-5"
+              >
+                J1QmGAEabgZzFxSzEMGWCp7DT
+              </p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
     <div
       class="makeStyles-bottom-4 makeStyles-left-5 makeStyles-root-1"
@@ -112,7 +414,7 @@ Object {
         13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"
                     />
                   </svg>
-                  Cannot read property 'getTokenAccountsByOwner' of undefined
+                  Cannot read properties of undefined (reading 'getTokenAccountsByOwner')
                 </div>
               </div>
             </div>

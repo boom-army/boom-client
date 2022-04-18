@@ -4,6 +4,17 @@ import renderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 import { MentionsDocument } from "../../generated/graphql";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+       // includeStyles: false 
+  }
+));
+
 
 export const __mocks__: any = [
   {

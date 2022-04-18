@@ -3,23 +3,383 @@
 exports[`Search tags: display <SearchResultTags/> component when tags list found 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  position: relative;
+}
+
+.css-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid undefined;
+  padding: 1.5rem 1rem 1rem 1rem;
+}
+
+.css-1 .avatar {
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.css-1 .tweet-info {
+  width: 100%;
+}
+
+.css-1 .tweet-info-user {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.css-1 .tweet-info-user span.username {
+  font-weight: 500;
+}
+
+.css-1 .tweet-info-user span.secondary {
+  padding-left: 0.5rem;
+}
+
+.css-1 .tweet-body {
+  margin-bottom: 0.75rem;
+  word-break: break-word;
+}
+
+.css-1 .tags {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.css-1 div.tweet-stats {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-1 div.tweet-stats .controls {
+  margin-right: 4rem;
+}
+
+.css-1 div.tweet-stats svg {
+  margin-right: 0.5rem;
+}
+
+.css-1 div.tweet-stats span {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-1 div.tweet-stats span.comment svg {
+  position: relative;
+  top: 4px;
+}
+
+@media screen and (max-width: 470px) {
+  .css-1 div.tweet-stats div {
+    margin-right: 1.5rem;
+  }
+
+  .css-1 div.tweet-stats .controls {
+    margin-right: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .css-1 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .css-1 .username {
+    display: none;
+  }
+
+  .css-1 .avatar {
+    display: none;
+  }
+
+  .css-1 .tweet-info-user span.secondary {
+    padding-left: 0;
+    padding-right: 0.5rem;
+  }
+}
+
+.css-2 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-3 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.css-4 {
+  margin-right: 8px;
+  margin-bottom: 12px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.css-5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 5px 15px;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border: 1px solid rgba(25, 118, 210, 0.5);
+  color: #1976d2;
+}
+
+.css-5::-moz-focus-inner {
+  border-style: none;
+}
+
+.css-5.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .css-5 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.css-5:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: rgba(25, 118, 210, 0.04);
+  border: 1px solid #1976d2;
+}
+
+@media (hover: none) {
+  .css-5:hover {
+    background-color: transparent;
+  }
+}
+
+.css-5.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.css-6 {
+  display: inherit;
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+.css-6>*:nth-of-type(1) {
+  font-size: 20px;
+}
+
+.css-7 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  line-height: 1.2;
+}
+
+.css-8 {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+.css-9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 4em;
+}
+
+.css-10 .emoji-mart {
+  position: absolute;
+  z-index: 1;
+}
+
+.css-10 .emoji-mart-bar.emoji-mart-bar,
+.css-10 .emoji-mart-scroll.emoji-mart-scroll {
+  margin-right: 0;
+}
+
+.css-10 .emoji-mart .emoji-mart-anchor-bar {
+  background-color: undefined!important;
+}
+
+.css-10 .emoji-mart-preview {
+  display: none;
+}
+
+.css-10 .emoji-mart-category {
+  margin-top: 0.75rem;
+}
+
+.css-10 .emoji-mart-dark .emoji-mart-category-label span {
+  color: #fff;
+}
+
+.css-10 .emoji-mart-scroll::WebkitScrollbar {
+  width: 0.25rem;
+}
+
+.css-10 .emoji-pick {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+  .css-10 .emoji-mart {
+    position: fixed;
+    bottom: 5em;
+  }
+}
+
+.css-11 {
+  width: 18px;
+  height: 18px;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.css-11:hover {
+  fill: #e0245e;
+}
+
+.css-13 {
+  color: #657786;
+  position: relative;
+}
+
+<body>
     <div>
       <div
-        class="css-79elbk"
+        class="css-0"
       >
         <div
-          class="css-191cfdg"
+          class="css-1"
         >
           <a
             href="/shy-cloud-4965"
           >
             <div
-              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+              class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2"
             >
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-3"
                 data-testid="PersonIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -64,17 +424,17 @@ Object {
               testing after changes in input converted to ts
             </p>
             <div
-              class="MuiBox-root css-1yt2crv"
+              class="MuiBox-root css-4"
             >
               <button
-                class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+                class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-5"
                 data-mui-internal-clone-element="true"
                 style="border-width: 1px; padding: 4px 10px; min-width: auto; margin-right: 8px; color: rgb(101, 119, 134); border-color: #3f51b5; line-height: 1.2;"
                 tabindex="0"
                 type="button"
               >
                 <span
-                  class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+                  class="MuiButton-startIcon MuiButton-iconSizeMedium css-6"
                 >
                   <span
                     aria-label="👍, +1, thumbsup"
@@ -86,12 +446,12 @@ Object {
                   </span>
                 </span>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 css-k5e2gc-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-7"
                 >
                   1
                 </p>
                 <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  class="MuiTouchRipple-root css-8"
                 />
               </button>
             </div>
@@ -99,10 +459,10 @@ Object {
               class="tweet-stats"
             >
               <div
-                class="css-687ye7"
+                class="css-9"
               >
                 <div
-                  class="css-s5gg9u"
+                  class="css-10"
                 >
                   <span
                     class="emoji-pick"
@@ -131,7 +491,7 @@ Object {
                     href="/shy-cloud-4965/status/cl084xdy815761s0n5omoxoem0"
                   >
                     <svg
-                      class="css-1csj31"
+                      class="css-11"
                       viewBox="0 0 24 24"
                     >
                       <g>
@@ -149,7 +509,7 @@ Object {
               >
                 <span>
                   <svg
-                    class="css-1csj31"
+                    class="css-11"
                     loading=""
                     viewBox="0 0 24 24"
                   >
@@ -162,10 +522,10 @@ Object {
                 </span>
               </div>
               <span
-                class="css-1e2zaxw"
+                class="css-13"
               >
                 <svg
-                  class="css-1csj31"
+                  class="css-11"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -181,22 +541,382 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  position: relative;
+}
+
+.css-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid undefined;
+  padding: 1.5rem 1rem 1rem 1rem;
+}
+
+.css-1 .avatar {
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.css-1 .tweet-info {
+  width: 100%;
+}
+
+.css-1 .tweet-info-user {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.css-1 .tweet-info-user span.username {
+  font-weight: 500;
+}
+
+.css-1 .tweet-info-user span.secondary {
+  padding-left: 0.5rem;
+}
+
+.css-1 .tweet-body {
+  margin-bottom: 0.75rem;
+  word-break: break-word;
+}
+
+.css-1 .tags {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.css-1 div.tweet-stats {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-1 div.tweet-stats .controls {
+  margin-right: 4rem;
+}
+
+.css-1 div.tweet-stats svg {
+  margin-right: 0.5rem;
+}
+
+.css-1 div.tweet-stats span {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-1 div.tweet-stats span.comment svg {
+  position: relative;
+  top: 4px;
+}
+
+@media screen and (max-width: 470px) {
+  .css-1 div.tweet-stats div {
+    margin-right: 1.5rem;
+  }
+
+  .css-1 div.tweet-stats .controls {
+    margin-right: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .css-1 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .css-1 .username {
+    display: none;
+  }
+
+  .css-1 .avatar {
+    display: none;
+  }
+
+  .css-1 .tweet-info-user span.secondary {
+    padding-left: 0;
+    padding-right: 0.5rem;
+  }
+}
+
+.css-2 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #bdbdbd;
+}
+
+.css-3 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.css-4 {
+  margin-right: 8px;
+  margin-bottom: 12px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.css-5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 5px 15px;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border: 1px solid rgba(25, 118, 210, 0.5);
+  color: #1976d2;
+}
+
+.css-5::-moz-focus-inner {
+  border-style: none;
+}
+
+.css-5.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .css-5 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.css-5:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: rgba(25, 118, 210, 0.04);
+  border: 1px solid #1976d2;
+}
+
+@media (hover: none) {
+  .css-5:hover {
+    background-color: transparent;
+  }
+}
+
+.css-5.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.css-6 {
+  display: inherit;
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+.css-6>*:nth-of-type(1) {
+  font-size: 20px;
+}
+
+.css-7 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  line-height: 1.2;
+}
+
+.css-8 {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+.css-9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 4em;
+}
+
+.css-10 .emoji-mart {
+  position: absolute;
+  z-index: 1;
+}
+
+.css-10 .emoji-mart-bar.emoji-mart-bar,
+.css-10 .emoji-mart-scroll.emoji-mart-scroll {
+  margin-right: 0;
+}
+
+.css-10 .emoji-mart .emoji-mart-anchor-bar {
+  background-color: undefined!important;
+}
+
+.css-10 .emoji-mart-preview {
+  display: none;
+}
+
+.css-10 .emoji-mart-category {
+  margin-top: 0.75rem;
+}
+
+.css-10 .emoji-mart-dark .emoji-mart-category-label span {
+  color: #fff;
+}
+
+.css-10 .emoji-mart-scroll::WebkitScrollbar {
+  width: 0.25rem;
+}
+
+.css-10 .emoji-pick {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+  .css-10 .emoji-mart {
+    position: fixed;
+    bottom: 5em;
+  }
+}
+
+.css-11 {
+  width: 18px;
+  height: 18px;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.css-11:hover {
+  fill: #e0245e;
+}
+
+.css-13 {
+  color: #657786;
+  position: relative;
+}
+
+<div>
     <div
-      class="css-79elbk"
+      class="css-0"
     >
       <div
-        class="css-191cfdg"
+        class="css-1"
       >
         <a
           href="/shy-cloud-4965"
         >
           <div
-            class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2s90m6-MuiAvatar-root"
+            class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault avatar css-2"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-3"
               data-testid="PersonIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -241,17 +961,17 @@ Object {
             testing after changes in input converted to ts
           </p>
           <div
-            class="MuiBox-root css-1yt2crv"
+            class="MuiBox-root css-4"
           >
             <button
-              class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+              class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-5"
               data-mui-internal-clone-element="true"
               style="border-width: 1px; padding: 4px 10px; min-width: auto; margin-right: 8px; color: rgb(101, 119, 134); border-color: #3f51b5; line-height: 1.2;"
               tabindex="0"
               type="button"
             >
               <span
-                class="MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+                class="MuiButton-startIcon MuiButton-iconSizeMedium css-6"
               >
                 <span
                   aria-label="👍, +1, thumbsup"
@@ -263,12 +983,12 @@ Object {
                 </span>
               </span>
               <p
-                class="MuiTypography-root MuiTypography-body1 css-k5e2gc-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-7"
               >
                 1
               </p>
               <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-8"
               />
             </button>
           </div>
@@ -276,10 +996,10 @@ Object {
             class="tweet-stats"
           >
             <div
-              class="css-687ye7"
+              class="css-9"
             >
               <div
-                class="css-s5gg9u"
+                class="css-10"
               >
                 <span
                   class="emoji-pick"
@@ -308,7 +1028,7 @@ Object {
                   href="/shy-cloud-4965/status/cl084xdy815761s0n5omoxoem0"
                 >
                   <svg
-                    class="css-1csj31"
+                    class="css-11"
                     viewBox="0 0 24 24"
                   >
                     <g>
@@ -326,7 +1046,7 @@ Object {
             >
               <span>
                 <svg
-                  class="css-1csj31"
+                  class="css-11"
                   loading=""
                   viewBox="0 0 24 24"
                 >
@@ -339,10 +1059,10 @@ Object {
               </span>
             </div>
             <span
-              class="css-1e2zaxw"
+              class="css-13"
             >
               <svg
-                class="css-1csj31"
+                class="css-11"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -414,22 +1134,85 @@ Object {
 exports[`Search tags: display <SearchResultTags/> component when tags loading 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": @keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-1 {
+  0% {
+    stroke-dasharray: 1px,200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+.css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-1 {
+  display: inline-block;
+  color: #1976d2;
+  -webkit-animation: animation-0 1.4s linear infinite;
+  animation: animation-0 1.4s linear infinite;
+}
+
+.css-2 {
+  display: block;
+}
+
+.css-3 {
+  stroke: currentColor;
+  stroke-dasharray: 80px,200px;
+  stroke-dashoffset: 0;
+  -webkit-animation: animation-1 1.4s ease-in-out infinite;
+  animation: animation-1 1.4s ease-in-out infinite;
+}
+
+<body>
     <div>
       <div
-        class="MuiBox-root css-1l4w6pd"
+        class="MuiBox-root css-0"
       >
         <span
-          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1"
           role="progressbar"
           style="width: 30px; height: 30px;"
         >
           <svg
-            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            class="MuiCircularProgress-svg css-2"
             viewBox="22 22 44 44"
           >
             <circle
-              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-3"
               cx="44"
               cy="44"
               fill="none"
@@ -441,21 +1224,84 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": @keyframes animation-0 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animation-1 {
+  0% {
+    stroke-dasharray: 1px,200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px,200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+.css-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.css-1 {
+  display: inline-block;
+  color: #1976d2;
+  -webkit-animation: animation-0 1.4s linear infinite;
+  animation: animation-0 1.4s linear infinite;
+}
+
+.css-2 {
+  display: block;
+}
+
+.css-3 {
+  stroke: currentColor;
+  stroke-dasharray: 80px,200px;
+  stroke-dashoffset: 0;
+  -webkit-animation: animation-1 1.4s ease-in-out infinite;
+  animation: animation-1 1.4s ease-in-out infinite;
+}
+
+<div>
     <div
-      class="MuiBox-root css-1l4w6pd"
+      class="MuiBox-root css-0"
     >
       <span
-        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1tww5sk-MuiCircularProgress-root"
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-1"
         role="progressbar"
         style="width: 30px; height: 30px;"
       >
         <svg
-          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          class="MuiCircularProgress-svg css-2"
           viewBox="22 22 44 44"
         >
           <circle
-            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-3"
             cx="44"
             cy="44"
             fill="none"
@@ -523,13 +1369,45 @@ Object {
 exports[`Search tags: display <SearchResultTags/> component when tags not found 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  position: relative;
+}
+
+.css-1 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-1 {
+    font-size: 1rem;
+  }
+}
+
+<body>
     <div>
       <div
-        class="css-79elbk"
+        class="css-0"
       >
         <div
-          class="css-15inajd"
+          class="css-1"
         >
           <p>
             No tweets found for that tag, try a different search
@@ -538,12 +1416,44 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  position: relative;
+}
+
+.css-1 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-1 {
+    font-size: 1rem;
+  }
+}
+
+<div>
     <div
-      class="css-79elbk"
+      class="css-0"
     >
       <div
-        class="css-15inajd"
+        class="css-1"
       >
         <p>
           No tweets found for that tag, try a different search
@@ -608,10 +1518,38 @@ Object {
 exports[`Search tags: display <SearchResultTags/> component when tags undefined 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-0 {
+    font-size: 1rem;
+  }
+}
+
+<body>
     <div>
       <div
-        class="css-15inajd"
+        class="css-0"
       >
         <p>
           Use the search bar to find tags, people and tweets
@@ -619,9 +1557,37 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-0 {
+    font-size: 1rem;
+  }
+}
+
+<div>
     <div
-      class="css-15inajd"
+      class="css-0"
     >
       <p>
         Use the search bar to find tags, people and tweets

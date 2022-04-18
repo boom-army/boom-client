@@ -3,13 +3,86 @@
 exports[`<Explore/> component : display <Explore/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  padding-bottom: 5rem;
+}
+
+.css-1 {
+  margin: 1rem 0;
+  margin-left: 1rem;
+}
+
+.css-1 input {
+  height: 40px;
+  width: 70%;
+  border-radius: 30px;
+  font-size: 1rem;
+  padding-left: 1.2rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-1 input {
+    font-size: 0.9rem;
+  }
+}
+
+.css-2 .tabs {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-around;
+  -ms-flex-pack: space-around;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  border-bottom: 2px solid undefined;
+}
+
+.css-2 span {
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+}
+
+.css-2 span.active {
+  border-bottom: 2px solid undefined;
+  font-weight: 500;
+}
+
+.css-3 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-3 {
+    font-size: 1rem;
+  }
+}
+
+<body>
     <div>
       <div
-        class="css-pyx88o"
+        class="css-0"
       >
         <div
-          class="css-1n1p729"
+          class="css-1"
         >
           <form>
             <input
@@ -20,7 +93,7 @@ Object {
           </form>
         </div>
         <div
-          class="css-1mw65dx"
+          class="css-2"
         >
           <div
             class="tabs"
@@ -42,7 +115,7 @@ Object {
             </span>
           </div>
           <div
-            class="css-15inajd"
+            class="css-3"
           >
             <p>
               Use the search bar to find tags, people and tweets
@@ -52,12 +125,85 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  padding-bottom: 5rem;
+}
+
+.css-1 {
+  margin: 1rem 0;
+  margin-left: 1rem;
+}
+
+.css-1 input {
+  height: 40px;
+  width: 70%;
+  border-radius: 30px;
+  font-size: 1rem;
+  padding-left: 1.2rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-1 input {
+    font-size: 0.9rem;
+  }
+}
+
+.css-2 .tabs {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-around;
+  -ms-flex-pack: space-around;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  border-bottom: 2px solid undefined;
+}
+
+.css-2 span {
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+}
+
+.css-2 span.active {
+  border-bottom: 2px solid undefined;
+  font-weight: 500;
+}
+
+.css-3 {
+  height: 70vh;
+  font-size: 1.1rem;
+  text-align: justify;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media screen and (max-width: 530px) {
+  .css-3 {
+    font-size: 1rem;
+  }
+}
+
+<div>
     <div
-      class="css-pyx88o"
+      class="css-0"
     >
       <div
-        class="css-1n1p729"
+        class="css-1"
       >
         <form>
           <input
@@ -68,7 +214,7 @@ Object {
         </form>
       </div>
       <div
-        class="css-1mw65dx"
+        class="css-2"
       >
         <div
           class="tabs"
@@ -90,7 +236,7 @@ Object {
           </span>
         </div>
         <div
-          class="css-15inajd"
+          class="css-3"
         >
           <p>
             Use the search bar to find tags, people and tweets

@@ -3,10 +3,20 @@
 exports[`<SearchModal/> component : display <SearchModal/> component  when Search result found  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+<body>
     <div>
       <button
-        class="tweet-gif css-185vf5l"
+        class="tweet-gif css-0"
         type="button"
       >
         <svg
@@ -25,9 +35,19 @@ Object {
       </button>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+<div>
     <button
-      class="tweet-gif css-185vf5l"
+      class="tweet-gif css-0"
       type="button"
     >
       <svg

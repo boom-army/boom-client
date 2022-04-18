@@ -3,19 +3,56 @@
 exports[`<CurrentUser/> component : display <CurrentUser/> component  1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
+  "baseElement": .css-0 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.css-1 {
+  margin-right: 8px;
+}
+
+.css-2 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+<body>
     <div>
       <div
-        class="MuiGrid-root MuiGrid-container css-1c1ljyi-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-container css-0"
       >
         <div
-          class="MuiBox-root css-12z0wuy"
+          class="MuiBox-root css-1"
         >
           <a
             href="/"
           >
             <h6
-              class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-h6 css-2"
             >
               Boom β
             </h6>
@@ -24,18 +61,55 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .css-0 {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.css-1 {
+  margin-right: 8px;
+}
+
+.css-2 {
+  margin: 0;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+<div>
     <div
-      class="MuiGrid-root MuiGrid-container css-1c1ljyi-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container css-0"
     >
       <div
-        class="MuiBox-root css-12z0wuy"
+        class="MuiBox-root css-1"
       >
         <a
           href="/"
         >
           <h6
-            class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h6 css-2"
           >
             Boom β
           </h6>

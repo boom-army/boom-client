@@ -1,6 +1,16 @@
 import React from "react";
 import { SearchModal } from "../../../components/Giphy/SearchModal";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
 
 let setGif: any = "";
 

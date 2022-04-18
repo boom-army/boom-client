@@ -1,6 +1,16 @@
 import React from "react";
 import { SearchModalHeader } from "../../../components/Giphy/SearchModalHeader";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+        // includeStyles: false 
+  }
+));
 
 let setIsLoading: any = false;
 let setInput: any = "";

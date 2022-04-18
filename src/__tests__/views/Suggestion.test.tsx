@@ -4,6 +4,17 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { USER_FOLLOW } from "../../queries/follow/index";
 import { MockedProvider } from "@apollo/client/testing";
+import { createSerializer } from '@emotion/jest'
+
+expect.addSnapshotSerializer(createSerializer(
+  {
+    classNameReplacer(className, index) {
+      return `css-${index}`
+    },
+      // includeStyles: false 
+  }
+));
+
 // import {render, screen} from '@testing-library/react'
 
 export const __mocks__: any = [
