@@ -54,6 +54,10 @@ const IconsBox = styled(Box)((props) => ({
   },
 }));
 
+const MeepBody = styled(Typography)((props) => ({
+  a: { color: props.theme.accentColor },
+}));
+
 interface Props {
   tweet: Tweet;
   parentTweetState: RecoilState<string>;
@@ -236,7 +240,7 @@ export const ShowMessage: React.FC<Props> = ({
           </Stack>
           <Box mb={0.5} pr={2}>
             <Linkify options={linkifyOptions}>
-              <Typography>{text}</Typography>
+              <MeepBody>{text}</MeepBody>
             </Linkify>
           </Box>
           <Box>
