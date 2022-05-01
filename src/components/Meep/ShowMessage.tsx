@@ -196,7 +196,12 @@ export const ShowMessage: React.FC<Props> = ({
               scrollRef?.current?.scrollIntoView();
             }}
           >
-            <ReplyIcon sx={{ color: theme.secondaryColor }} />
+            <ReplyIcon
+              sx={{
+                color: theme.secondaryColor,
+                "&:hover": { color: theme.accentColor },
+              }}
+            />
           </IconButton>
         </Stack>
       </Popover>

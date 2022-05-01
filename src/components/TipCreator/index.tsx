@@ -30,7 +30,12 @@ export const TipCreator: React.FC<TipProps> = ({
           aria-label="tip"
           onClick={() => setShowTip(!showTip)}
         >
-          <PaidIcon />
+          <PaidIcon
+            sx={{
+              color: theme.secondaryColor,
+              "&:hover": { color: theme.accentColor },
+            }}
+          />
           {!hideAmount && (
             <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
               {tipAmount ? tipAmount : null}
