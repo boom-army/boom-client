@@ -37,6 +37,10 @@ const IconsStack = styled(Stack)((props) => ({
   },
 }));
 
+const TweetBody = styled(Typography)((props) => ({
+  a: { color: props.theme.accentColor },
+}));
+
 export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
   const {
     id,
@@ -94,9 +98,9 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
           </Link>
         </Box>
         <Linkify options={linkifyOptions}>
-          <Typography mb={0.75} sx={{ wordBreak: "break-word" }}>
+          <TweetBody mb={0.75} sx={{ wordBreak: "break-word" }}>
             {text}
-          </Typography>
+          </TweetBody>
         </Linkify>
         <Box>
           {gif && <VideoContainer gif={gif} />}
