@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import CoverPhoto from "../../styles/CoverPhoto";
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
+import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import UserAvatar from "../UserAvatar";
-import { Button, Box, Grid } from "@mui/material";
+import { Button, Box, Grid, Typography } from "@mui/material";
 import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
-import { relative } from "path/win32";
+import { ThemeContext } from "../../contexts/theme";
+import { useSnackbar } from "notistack";
 
 const Wrapper = styled("div")((props) => ({
   // borderBottom: `1px solid ${props.theme.tertiaryColor}`,
@@ -66,25 +69,6 @@ const Wrapper = styled("div")((props) => ({
       borderBottom: "1px solid #4d97cb",
       textTransform: "capitalize",
       padding: "0 0 3px 0",
-    },
-  },
-  ".wallet-topbar": {
-    backgroundColor: "#4d97cb",
-    color: "#0e1b25",
-    padding: "7px",
-    fontSize: "13px",
-    ".wallet": {
-      display: "flex",
-      justifyContent: "space-between",
-      svg: {
-        verticalAlign: "middle",
-        marginRight: "5px",
-      },
-      ".copyIcon": {
-        svg: {
-          marginLeft: "10px",
-        },
-      },
     },
   },
   ".userimage-section": {
@@ -154,6 +138,8 @@ const Wrapper = styled("div")((props) => ({
 }));
 
 const ProfileInfo = ({ profile }: any) => {
+  const { theme } = useContext(ThemeContext);
+  const { enqueueSnackbar } = useSnackbar();
   const {
     id,
     coverPhoto,
@@ -175,45 +161,34 @@ const ProfileInfo = ({ profile }: any) => {
     <Wrapper>
       <Grid container>
         <Grid item xs={12}>
-          <div className="wallet-topbar">
-            <span className="wallet">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  role="img"
-                  width="18px"
-                  height="18px"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 256 256"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M164 144a16 16 0 1 1 16 16a16 16 0 0 1-16-16Zm72-48v104a20.1 20.1 0 0 1-20 20H56a28.1 28.1 0 0 1-28-28V68.2A32.1 32.1 0 0 1 60 36h132a12 12 0 0 1 0 24H60a8.4 8.4 0 0 0-5.8 2.4A8.2 8.2 0 0 0 52 68v.2a8.4 8.4 0 0 0 8.5 7.8H216a20.1 20.1 0 0 1 20 20Zm-24 4H60.5a33.5 33.5 0 0 1-8.5-1.1V192a4 4 0 0 0 4 4h156Z"
-                  />
-                </svg>
-
-                {publicAddress}
-              </span>
-
-              <span className="copyIcon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  role="img"
-                  width="15px"
-                  height="15px"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#316081"
-                    d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zM5.003 8L5 20h10V8H5.003zM9 6h8v10h2V4H9v2z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </div>
+          <Box
+            sx={{
+              backgroundColor: theme.blueLight,
+              color: theme.background,
+              cursor: "pointer",
+              "&:hover": {
+                color: theme.tertiaryColor2,
+              }
+            }}
+            onClick={() => {
+              navigator.clipboard.writeText(publicAddress);
+              enqueueSnackbar(`Solana PublicKey Copied to clipboard`, { variant: "success" });
+            }}
+          >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              sx={{ alignItems: "center", padding: "0.5em 1em" }}
+            >
+              <Box display="inline-flex">
+                <AccountBalanceWalletOutlinedIcon />
+                <Typography ml={1} fontWeight="600">
+                  {publicAddress}
+                </Typography>
+              </Box>
+              <ContentCopyOutlinedIcon fontSize="small" />
+            </Box>
+          </Box>
         </Grid>
       </Grid>
       <Grid container pt={2}>

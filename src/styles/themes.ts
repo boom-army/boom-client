@@ -3,6 +3,7 @@ export interface ThemeVars {
   bgHover: string;
   primaryColor: string;
   secondaryColor: string;
+  blueLight: string;
   accentColor: string;
   tertiaryColor: string;
   tertiaryColor2: string;
@@ -16,6 +17,7 @@ export const lightTheme: ThemeVars = {
   bgHover: "#F5F8FA",
   primaryColor: "#17141A",
   secondaryColor: "#657786",
+  blueLight: "#4D97CB",
   accentColor: "#CA2055",
   tertiaryColor: "#CCD6DD",
   tertiaryColor2: "#F5F8FA",
@@ -29,6 +31,7 @@ export const darkTheme: ThemeVars = {
   bgHover: "#192734",
   primaryColor: "#FFF",
   secondaryColor: "#657786",
+  blueLight: "#4D97CB",
   accentColor: "#CA2055",
   tertiaryColor: "#38444D",
   tertiaryColor2: "#202E3A",

@@ -14,6 +14,7 @@ declare module "@mui/material/styles" {
     bgHover: string;
     primaryColor: string;
     secondaryColor: string;
+    blueLight: string;
     accentColor: string;
     tertiaryColor: string;
     tertiaryColor2: string;
@@ -28,6 +29,7 @@ declare module "@mui/material/styles" {
     bgHover?: string;
     primaryColor?: string;
     secondaryColor?: string;
+    blueLight?: string;
     accentColor?: string;
     tertiaryColor: string;
     tertiaryColor2?: string;
