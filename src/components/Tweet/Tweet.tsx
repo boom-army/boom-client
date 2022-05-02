@@ -64,7 +64,6 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
   const handle = user && user.handle;
 
   const linkifyOptions = {
-    className: "body",
     target: { url: "_blank" },
     formatHref: { hashtag: (href: any) => `explore?=${href.substring(1)}` },
   };
