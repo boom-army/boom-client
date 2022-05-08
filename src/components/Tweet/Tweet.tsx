@@ -1,7 +1,8 @@
 import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
+import * as linkify from "linkifyjs";
 import Linkify from "linkify-react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import UserAvatar from "../UserAvatar";
 import moment from "moment";
 import { Box, Grid, Stack, Typography } from "@mui/material";
@@ -18,6 +19,7 @@ import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
+import { unfurl } from 'unfurl.js'
 import { useReaction } from "../../hooks/useReaction";
 
 interface Props {
@@ -62,6 +64,25 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
   const { theme } = useContext(ThemeContext);
   const { handleReaction } = useReaction({ tweetId: id });
   const handle = user && user.handle;
+
+  useEffect(() => {
+    (async () => {
+      const extractUrls = linkify.find(text).filter((u) => u.type === "url");
+      if (extractUrls.length) {
+        try {
+          const targetUrl = extractUrls[0].href;
+          console.log(targetUrl);
+          const result = unfurl('https://github.com/trending');
+          console.log(result);
+          // const { body: html, url } = await got.get(targetUrl);
+          // const metadata = await metascraper({ html, url });
+          // console.log(html, url);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    })();
+  }, []);
 
   const linkifyOptions = {
     target: { url: "_blank" },
