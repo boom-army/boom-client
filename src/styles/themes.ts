@@ -11,15 +11,12 @@ export interface ThemeVars {
   overlay: string;
   success: string;
   bs1: string;
-<<<<<<< HEAD
   greenLight: string;
   borderColor: string;
   textColor: string;
   tagColor: string;
-=======
   bluePrimary: string;
   blueSecondary: string;
->>>>>>> 7642bf7718dc235ca7b07a526c908c500be37e2d
 }
 
 const fontSettings = {
@@ -61,15 +58,12 @@ export const lightTheme = {
   success: "#0DA600",
   overlay: "rgba(147, 149, 150, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
-<<<<<<< HEAD
   greenLight: "#35a600",
   borderColor: "#838689",
   textColor: "#838689",
   tagColor: "#949a9e",
-=======
   ...fontSettings,
   ...themeBlues,
->>>>>>> 7642bf7718dc235ca7b07a526c908c500be37e2d
 };
 
 export const darkTheme = {
@@ -85,13 +79,10 @@ export const darkTheme = {
   success: "#0DA600",
   overlay: "rgba(110, 118, 125, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
-<<<<<<< HEAD
   greenLight: "#35a600",
   borderColor: "#374148",
   textColor: "#838689",
   tagColor: "#949a9e",
-=======
   ...fontSettings,
   ...themeBlues,
->>>>>>> 7642bf7718dc235ca7b07a526c908c500be37e2d
 };
