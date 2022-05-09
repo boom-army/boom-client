@@ -84,6 +84,7 @@ export const EmojiPicker = ({
         {/* here change `button` to `useButton` bcz we need to add button props in node modules picker file*/}
         <PickerWrapper>
           {picker && (
+            // @ts-ignore
             <Picker
               useButton={true}
               sheetSize={64}
