@@ -52,6 +52,11 @@ export const lightTheme = {
   success: "#0DA600",
   overlay: "rgba(147, 149, 150, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
+  palette: {
+    text: {
+      primary: "#17141A",
+    }
+  },
   ...fontSettings,
   ...themeBlues,
 };
@@ -68,6 +73,11 @@ export const darkTheme = {
   success: "#0DA600",
   overlay: "rgba(110, 118, 125, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
+  palette: {
+    text: {
+      primary: "#FFF",
+    }
+  },
   ...fontSettings,
   ...themeBlues,
 };
