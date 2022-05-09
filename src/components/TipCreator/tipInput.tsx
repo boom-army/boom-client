@@ -5,7 +5,7 @@ import { IconButton } from "@material-ui/core";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
 import { TWEET } from "../../queries/tweet";
-import { TextField, Stack, Button } from "@mui/material";
+import { TextField, Stack, Button, Typography } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
@@ -142,24 +142,18 @@ export const TipInput: React.FC<Props> = ({
   );
 
   return (
-    <Box
-      sx={{
-        position: "absolute",
-        bottom: "2em",
-        left: "-12em",
-        background: theme.background,
-        padding: "1em",
-        borderRadius: "5px",
-        border: `1px solid ${theme.secondaryColor}`,
-        minWidth: "400px",
-      }}
-    >
+    <Box>
       <Box sx={{ position: "relative" }}>
+        <Box mb={1}>
+          <Typography>
+            Tip this meep some $BMA
+          </Typography>
+        </Box>
         <Box
           sx={{
             position: "absolute",
-            left: "98.5%",
-            top: "-55%",
+            left: "95.5%",
+            top: "-13%",
           }}
         >
           <IconButton
@@ -178,30 +172,27 @@ export const TipInput: React.FC<Props> = ({
           alignItems="flex-start"
           spacing={1}
         >
-          <div>
-            <Button
-              color="inherit"
-              variant="outlined"
-              onClick={() => {
-                handleTipAction({ txAmount: 1 });
-              }}
-            >
-              1
-            </Button>
-          </div>
-          <div>
-            <Button
-              color="inherit"
-              variant="outlined"
-              onClick={() => {
-                handleTipAction({ txAmount: 3 });
-              }}
-            >
-              3
-            </Button>
-          </div>
+          <Button
+            color="inherit"
+            variant="outlined"
+            onClick={() => {
+              handleTipAction({ txAmount: 1 });
+            }}
+          >
+            1
+          </Button>
+          <Button
+            color="inherit"
+            variant="outlined"
+            onClick={() => {
+              handleTipAction({ txAmount: 3 });
+            }}
+          >
+            3
+          </Button>
           <TextField
             error={inputError}
+            autoFocus={true}
             id="outlined-number"
             label="Custom"
             type="number"
@@ -211,6 +202,9 @@ export const TipInput: React.FC<Props> = ({
             }}
             InputProps={{
               style: { color: theme.secondaryColor },
+              inputMode: "numeric",
+              // @ts-ignore
+              pattern: "[0-9]*",
             }}
             value={txValue}
             size="small"
@@ -219,17 +213,15 @@ export const TipInput: React.FC<Props> = ({
               setTxValue(Number(e.target.value));
             }}
           />
-          <div>
-            <Button
-              color="inherit"
-              variant="outlined"
-              onClick={() => {
-                handleTipAction({ txAmount: txValue });
-              }}
-            >
-              Tip
-            </Button>
-          </div>
+          <Button
+            color="inherit"
+            variant="outlined"
+            onClick={() => {
+              handleTipAction({ txAmount: txValue });
+            }}
+          >
+            Tip
+          </Button>
         </Stack>
       </Box>
     </Box>

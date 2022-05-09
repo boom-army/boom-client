@@ -1,8 +1,10 @@
+export { ChannelFeed } from "./ChannelFeed";
+export { Channels } from "./Channels";
 export { ConnectView } from "./Connect";
 export { Explore } from "./Explore";
+export { Following } from "./Following";
 export { Home } from "./Home";
 export { Nav } from "./Nav";
 export { Notifications } from "./Notifications";
-export { Suggestion } from "./Suggestion";
-export { Following } from "./Following";
 export { OGMint } from "./OGMint";
+export { Suggestion } from "./Suggestion";

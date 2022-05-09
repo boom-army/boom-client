@@ -1,34 +1,5 @@
 import gql from "graphql-tag";
 
-export const NEW_TWEET = gql`
-  mutation newTweet(
-    $text: String!
-    $files: [String!]!
-    $tags: [String!]!
-    $mentions: [String!]!
-    $gif: GifInput
-    $nft: NFTInput
-    $parentTweet: String
-  ) {
-    newTweet(
-      text: $text
-      files: $files
-      tags: $tags
-      mentions: $mentions
-      gif: $gif
-      nft: $nft
-      parentTweet: $parentTweet
-    ) {
-      id
-      text
-      tags
-      mentions
-      commentsCount
-      createdAt
-    }
-  }
-`;
-
 export const DELETE_TWEET = gql`
   mutation deleteTweet($id: ID!) {
     deleteTweet(id: $id) {

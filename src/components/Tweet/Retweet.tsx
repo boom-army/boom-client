@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
+import { Box } from "@mui/system";
 import { RetweetIcon, RtFillIcon } from "../Icons";
 import { TOGGLE_RETWEET } from "../../queries/tweet";
+import { ThemeContext } from "../../contexts/theme";
+import { Typography } from "@mui/material";
 import { displayError } from "../../utils";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "notistack";
@@ -12,6 +15,7 @@ interface RetweetProps {
 }
 
 export const Retweet = ({ id, isRetweet, retweetsCount }: RetweetProps) => {
+  const { theme } = useContext(ThemeContext);
   const [retweet, setRetweet] = useState(isRetweet);
   const [retweetsCountState, setRetweetsCount] = useState(retweetsCount);
   const [toggleRetweetMutation, { loading }] = useMutation(TOGGLE_RETWEET, {
@@ -36,13 +40,13 @@ export const Retweet = ({ id, isRetweet, retweetsCount }: RetweetProps) => {
   };
 
   return (
-    <span>
+    <Box display="flex" sx={{ alignItems: "center"}}>
       {retweet ? (
         <RtFillIcon loading={loading} color="#17BF63" onClick={handleRetweet} />
       ) : (
         <RetweetIcon loading={loading} onClick={handleRetweet} />
       )}
-      {retweetsCountState ? retweetsCountState : null}
-    </span>
+      <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>{retweetsCountState ? retweetsCountState : null}</Typography>
+    </Box>
   );
 };

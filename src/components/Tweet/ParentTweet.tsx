@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { ThemeContext } from "../../contexts/theme";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
-import { Link as MuiLink } from "@mui/material";
 import { UserContext } from "../../contexts/user";
 
 interface Props {

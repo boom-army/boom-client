@@ -1,0 +1,139 @@
+mutation addChannel(
+  $mintAuthority: String!
+  $name: String!
+  $family: String!
+  $description: String
+  $image: String
+  $status: String
+  $channelParentId: String
+) {
+  addChannel(
+    mintAuthority: $mintAuthority
+    name: $name
+    family: $family
+    description: $description
+    image: $image
+    status: $status
+    channelParentId: $channelParentId
+  ) {
+    id
+    mintAuthority
+    name
+    family
+    description
+    image
+    channelParentId
+    status
+    membersCount {
+      count
+      avatars
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+query channels {
+  channels {
+    id
+    mintAuthority
+    name
+    family
+    description
+    image
+    channelParentId
+    status
+    verified
+    membersCount {
+      count
+      avatars
+    }
+  }
+}
+
+mutation channelUnlink($channelId: ID!) {
+  channelUnlink(channelId: $channelId)
+}
+
+fragment TweetData on Tweet {
+  id
+  text
+  tags
+  isTweetMine
+  commentsCount
+  retweetsCount
+  isRetweet
+  tipsCount
+  createdAt
+  channel {
+    id
+  }
+  parentTweet {
+    id
+    text
+    user {
+      id
+      handle
+      avatar
+    }
+  }
+  files {
+    id
+    url
+  }
+  gif {
+    id
+    title
+    fixedHeightUrl
+    originalUrl
+  }
+  nft {
+    id
+    publicKey
+    name
+    symbol
+    description
+    sellerFeeBasisPoints
+    externalUrl
+    image
+    attributes {
+      traitType
+      value
+    }
+    collection {
+      name
+      family
+    }
+    properties {
+      files {
+        uri
+        type
+      }
+      category
+      creators {
+        address
+        share
+      }
+    }
+  }
+  user {
+    id
+    publicAddress
+    avatar
+    handle
+    consumerName
+  }
+  reactions {
+    id
+    emojiId
+    skin
+    isMine
+    count
+  }
+}
+
+query channelFeed($channelId: ID!, $offset: Int, $limit: Int) {
+  channelFeed(channelId: $channelId, offset: $offset, limit: $limit) {
+    ...TweetData
+  }
+}

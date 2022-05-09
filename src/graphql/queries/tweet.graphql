@@ -1,0 +1,28 @@
+mutation newTweet(
+  $text: String!
+  $files: [String!]!
+  $tags: [String!]!
+  $mentions: [String!]!
+  $gif: GifInput
+  $nft: NFTInput
+  $parentTweet: String
+  $channel: String
+) {
+  newTweet(
+    text: $text
+    files: $files
+    tags: $tags
+    mentions: $mentions
+    gif: $gif
+    nft: $nft
+    parentTweet: $parentTweet
+    channel: $channel
+  ) {
+    id
+    text
+    tags
+    mentions
+    commentsCount
+    createdAt
+  }
+}

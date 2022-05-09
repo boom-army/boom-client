@@ -1,18 +1,17 @@
-import { useEffect, useState, useContext } from "react";
-import { SmileIcon } from "../Icons";
+import { useState, useContext } from "react";
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import { Picker } from "emoji-mart";
 import { ThemeContext } from "../../contexts/theme";
 import "emoji-mart/css/emoji-mart.css";
 import { styled } from "@mui/material/styles";
+import { Box, Modal } from "@mui/material";
 
-const PickerWrapper = styled("div")((props: any) => ({
-  ".emoji-mart": {
-    position: "absolute",
-    zIndex: "1",
-  },
-  ".emoji-mart-bar.emoji-mart-bar,.emoji-mart-scroll.emoji-mart-scroll": {
-    marginRight: "0",
-  },
+const PickerWrapper = styled(Box)((props: any) => ({
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
   ".emoji-mart-bar svg,.emoji-mart-bar svg path": {
     fill: props.theme.accentColor,
   },
@@ -25,9 +24,6 @@ const PickerWrapper = styled("div")((props: any) => ({
   ".emoji-mart-dark": {
     borderColor: props.theme.secondaryColor,
     backgroundColor: props.theme.background,
-  },
-  ".emoji-mart-category": {
-    marginTop: "0.75rem",
   },
   ".emoji-mart-dark .emoji-mart-category-label span": {
     backgroundColor: props.theme.background,
@@ -42,17 +38,15 @@ const PickerWrapper = styled("div")((props: any) => ({
   ".emoji-mart-scroll::WebkitScrollbarThumb": {
     background: props.theme.accentColor,
   },
-  ".emoji-pick": {
-    cursor: "pointer",
+}));
+
+const PickerIcon = styled('span')((props: any) => ({
+  cursor: "pointer",
+  "& svg path": {
+    fill: props.theme.secondaryColor,
   },
-  ".emoji-pick:hover svg path": {
+  "&:hover svg path": {
     fill: props.theme.accentColor,
-  },
-  "@media screen and (max-width: 430px)": {
-    ".emoji-mart": {
-      position: "fixed",
-      bottom: "5em",
-    },
   },
 }));
 
@@ -71,47 +65,34 @@ export const EmojiPicker = ({
   const [picker, togglePicker] = useState(false);
   const { theme } = useContext(ThemeContext);
 
-  const handleDocumentClick = (event: any) => {
-    let isEmojiClassFound = false;
-
-    event?.path?.forEach((elem: any) => {
-      if (elem && elem.classList) {
-        const data = elem.classList.value;
-        if (data.includes("emoji")) {
-          isEmojiClassFound = true;
-        }
-      }
-    });
-    if (isEmojiClassFound === false && event.target.id !== "emojis-btn")
-      togglePicker(false);
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleDocumentClick, false);
-    return () => {
-      document.removeEventListener("click", handleDocumentClick, false);
-    };
-  });
-
   const handleEmojiSelect = (pickedEmoji: any) => {
     emojiHandler(pickedEmoji);
-    if (dismissOnClick) togglePicker(!picker);
+    if (dismissOnClick) togglePicker(false);
   };
 
   return (
-    <PickerWrapper>
-      <span className="emoji-pick" onClick={() => togglePicker(!picker)}>
-        {customIcon ?? <SmileIcon />}
-      </span>
-      {/* here change `button` to `useButton` bcz we need to add button props in node modules picker file*/}
-      {picker && (
-        <Picker
-          useButton={true}
-          sheetSize={64}
-          theme={theme.background === "#15202b" ? "dark" : "light"}
-          onSelect={handleEmojiSelect}
-        />
-      )}
-    </PickerWrapper>
+    <Box>
+      <PickerIcon onClick={() => togglePicker(true)}>
+        {customIcon ?? <InsertEmoticonIcon />}
+      </PickerIcon>
+      <Modal
+        open={picker}
+        onClose={() => togglePicker(false)}
+        aria-labelledby="Emoji picker"
+        aria-describedby="Pick and emoji for tweet"
+      >
+        {/* here change `button` to `useButton` bcz we need to add button props in node modules picker file*/}
+        <PickerWrapper>
+          {picker && (
+            <Picker
+              useButton={true}
+              sheetSize={64}
+              theme={theme.background === "#15202b" ? "dark" : "light"}
+              onSelect={handleEmojiSelect}
+            />
+          )}
+        </PickerWrapper>
+      </Modal>
+    </Box>
   );
 };

@@ -1,23 +1,26 @@
+import InfiniteScroll from "react-infinite-scroll-component";
 import React from "react";
+import { ApolloError } from "@apollo/client";
+import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
+import { Grid } from "@mui/material";
 import { Loader } from "./Loader";
 import { ShowTweet } from "./Tweet";
-import { ApolloError } from "@apollo/client";
-import { FeedQuery, Tweet } from "../generated/graphql";
-import { Box } from "@mui/system";
-import { styled } from "@mui/material/styles";
-
-const Wrapper = styled("div")({
-  marginBottom: "7rem",
-});
+import { Tweet, FeedQuery } from "../generated/graphql";
 
 interface Props {
   loading?: boolean;
   error?: ApolloError | undefined | any;
-  data: FeedQuery | undefined;
+  data: FeedQuery["feed"] | undefined;
+  fetchMore: (props: any) => void;
 }
 
-export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
+export const FeedList: React.FC<Props> = ({
+  loading,
+  error,
+  data,
+  fetchMore,
+}) => {
   if (loading)
     return (
       <Box sx={{ marginTop: "1rem" }}>
@@ -31,20 +34,51 @@ export const FeedList: React.FC<Props> = ({ loading, error, data }) => {
     localStorage.clear();
   }
 
+  const fetchData = () => {
+    fetchMore({
+      variables: {
+        offset: data?.length ?? 0,
+      },
+    });
+  };
+
   return (
-    <Wrapper>
-      {data?.feed?.length ? (
-        data.feed.map((tweet) => (
-          <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
-        ))
-      ) : (
-        <CustomResponse text="Follow some people to get some feed updates" />
-      )}
-      {data?.feed?.length && loading && (
+    <Grid
+      container
+      id="scrollBox"
+      sx={{
+        height: "80vh",
+        overflow: "auto",
+      }}
+    >
+      {data?.length && loading && (
         <Box sx={{ marginTop: "1rem" }}>
           <Loader />
         </Box>
       )}
-    </Wrapper>
+      {data && (
+        <InfiniteScroll
+          dataLength={data?.length}
+          next={fetchData}
+          hasMore={true}
+          scrollableTarget="scrollBox"
+          loader={
+            loading && (
+              <Box sx={{ marginTop: "1rem" }}>
+                <Loader />
+              </Box>
+            )
+          }
+        >
+          {data?.length ? (
+            data?.map((tweet) => (
+              <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
+            ))
+          ) : (
+            <CustomResponse text="No Meeps exist to display in this feed. Let everyone know what's happening." />
+          )}
+        </InfiniteScroll>
+      )}
+    </Grid>
   );
 };

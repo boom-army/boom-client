@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Reaction, useTweetReactionsLazyQuery } from "../../generated/graphql";
-import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
-import { Emoji } from "emoji-mart";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/system";
-import { Typography } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
+import { Emoji } from "emoji-mart";
+import { Reaction, useTweetReactionsLazyQuery } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 export interface Accumulator
   extends Record<
@@ -87,44 +87,41 @@ export const List: React.FC<{
   }, [data]);
 
   return (
-    <Box
-      mr={1}
-      sx={{ marginBottom: 1.5, display: "inline-flex", flexWrap: "wrap" }}
-    >
+    <>
       {reactionsWithCount
         .sort((a, b) => a.emojiId.localeCompare(b.emojiId))
-        .map(({ emojiId, count, isMine }) => {
+        .map(({ emojiId, count, isMine }, i) => {
           return (
-            <Tooltip
-              onOpen={() => getTweetReactions()}
-              key={emojiId}
-              title={
-                reactionsWithUsers && !loading
-                  ? createUserReactionTooltip(reactionsWithUsers, emojiId)
-                  : ""
-              }
-            >
-              <Button
-                onClick={() => handleReaction({ emojiId })}
-                variant="outlined"
-                startIcon={<Emoji emoji={emojiId} size={16} />}
-                style={{
-                  borderWidth: "1px",
-                  padding: "4px 10px",
-                  minWidth: "auto",
-                  marginRight: "8px",
-                  color: theme.secondaryColor,
-                  borderColor: isMine ? "#3f51b5" : "inherit",
-                  lineHeight: "1.2",
-                }}
+            <Box mr={0.3} mb={0.3} key={`${emojiId}-${i}`}>
+              <Tooltip
+                onOpen={() => getTweetReactions()}
+                key={emojiId}
+                title={
+                  reactionsWithUsers && !loading
+                    ? createUserReactionTooltip(reactionsWithUsers, emojiId)
+                    : ""
+                }
               >
-                {count > 0 && (
-                  <Typography sx={{ lineHeight: "1.2" }}>{count}</Typography>
-                )}
-              </Button>
-            </Tooltip>
+                <Button
+                  onClick={() => handleReaction({ emojiId })}
+                  startIcon={<Emoji emoji={emojiId} size={16} />}
+                  style={{
+                    padding: "2px 10px 0",
+                    borderRadius: "30px",
+                    minWidth: "auto",
+                    color: theme.secondaryColor,
+                    backgroundColor: isMine ? theme.tertiaryColor2 : "inherit",
+                    lineHeight: "1.2",
+                  }}
+                >
+                  {count > 0 && (
+                    <Typography sx={{ lineHeight: "1.2" }}>{count}</Typography>
+                  )}
+                </Button>
+              </Tooltip>
+            </Box>
           );
         })}
-    </Box>
+    </>
   );
 };
