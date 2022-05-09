@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import CoverPhoto from "../../styles/CoverPhoto";
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
+import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import UserAvatar from "../UserAvatar";
 import { Button, Box, Grid, Typography, Badge, Avatar } from "@mui/material";
 import { Follow } from "./Follow";
@@ -9,8 +11,6 @@ import { styled } from "@mui/material/styles";
 import { relative } from "path/win32";
 import { ThemeContext } from "../../contexts/theme";
 import { useSnackbar } from "notistack";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import PersonIcon from "@mui/icons-material/Person";
 
 const Wrapper = styled("div")((props) => ({
