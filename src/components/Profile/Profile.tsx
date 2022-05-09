@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProfileInfo from "./ProfileInfo";
-import { Box, Tab } from "@mui/material";
+import { Box, Tab, Grid } from "@mui/material";
 import { Loader } from "../Loader";
 import { Meeps } from "./Meeps";
 import { TabContext, TabPanel, TabList } from "@mui/lab";
@@ -8,6 +8,13 @@ import { useParams } from "react-router-dom";
 import { useProfileLazyQuery } from "../../generated/graphql";
 import { NFTGallery } from "./NFTGallery";
 import { CustomResponse } from "../CustomResponse";
+import { styled } from "@mui/material/styles";
+
+let style = {
+  ".MuiTabs-flexContainer": {
+    borderBottom: "2px solid #374148",
+  },
+};
 
 export const Profile: React.FC = () => {
   const [tabValue, setTabValue] = useState("1");
@@ -38,14 +45,16 @@ export const Profile: React.FC = () => {
       <ProfileInfo profile={data && data.profile} />
       <Box sx={{ typography: "body1" }}>
         <TabContext value={tabValue}>
-          <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
-            <TabList
-              onChange={handleChange}
-              aria-label="Profile tablist select"
-            >
-              <Tab sx={{ minWidth: 150 }} label="NFT Gallery" value="1" />
-              <Tab label="Meeps" value="2" />
-            </TabList>
+          <Box>
+            <Grid className="tabGrid" sx={style}>
+              <TabList
+                onChange={handleChange}
+                aria-label="Profile tablist select"
+              >
+                <Tab sx={{ minWidth: 150 }} label="NFT Gallery" value="1" />
+                <Tab label="Meeps" value="2" />
+              </TabList>
+            </Grid>
           </Box>
           <TabPanel value="1">
             {data && <NFTGallery publicAddress={data?.profile.publicAddress} />}

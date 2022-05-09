@@ -1,71 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import CoverPhoto from "../../styles/CoverPhoto";
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
+import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import UserAvatar from "../UserAvatar";
-import { Button, Box } from "@mui/material";
+import { Button, Box, Grid, Typography, Badge, Avatar } from "@mui/material";
 import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
+import { relative } from "path/win32";
+import { ThemeContext } from "../../contexts/theme";
+import { useSnackbar } from "notistack";
+import PersonIcon from "@mui/icons-material/Person";
 
 const Wrapper = styled("div")((props) => ({
-  borderBottom: `1px solid ${props.theme.tertiaryColor}`,
-
-  ".avatar": {
-    marginLeft: "1.4rem",
-    marginTop: "-4rem",
-  },
-
-  ".profile-name-handle": {
-    wordBreak: "break-all",
-
-    "span.consumerName": {
-      fontWeight: "bold",
-    },
-
-    "span.wallet": {
-      marginTop: "0.1rem",
-      color: props.theme.secondaryColor,
-    },
-
-    "span.handle": {
-      marginTop: "0.1rem",
-      color: props.theme.secondaryColor,
-    },
-  },
-
-  ".profile-info": {
-    padding: "0 1.4rem 1rem",
-
-    ".bio": {
-      width: "100%",
-    },
-  },
-
-  "div.loc-dob-web": {
-    display: "flex",
-    color: props.theme.secondaryColor,
-    margin: "0.6rem 0",
-
-    span: {
-      marginRight: "1.5rem",
-    },
-
-    svg: {
-      marginRight: "0.2rem",
-      position: "relative",
-      top: "3px",
-    },
-  },
-
-  "div.follow-following": {
-    color: props.theme.secondaryColor,
-    span: {
-      marginRight: "1.3rem",
-    },
+  ".profile-Button": {
+    borderRadius: "25px",
+    padding: "4px 5px",
+    fontSize: "12px",
+    color: props.theme.blueLight,
+    borderColor: props.theme.blueLight,
+    textTransform: "capitalize",
   },
 }));
 
+const SmallAvatar = styled(Avatar)((props) => ({
+  width: 22,
+  height: 22,
+  border: "2px solid #15202b",
+}));
+
 const ProfileInfo = ({ profile }: any) => {
+  const { theme } = useContext(ThemeContext);
+  const { enqueueSnackbar } = useSnackbar();
   const {
     id,
     coverPhoto,
@@ -85,14 +52,102 @@ const ProfileInfo = ({ profile }: any) => {
 
   return (
     <Wrapper>
-      <Box mb={3}>
-        <CoverPhoto src={coverPhoto} alt="cover" />
-        <UserAvatar avatar={avatar} />
-      </Box>
-      <Box pl={3}>
-        <Box>
+      <Grid container>
+        <Grid item xs={12}>
+          <Box
+            sx={{
+              backgroundColor: theme.blueLight,
+              color: theme.background,
+              cursor: "pointer",
+              "&:hover": {
+                color: theme.tertiaryColor2,
+              },
+            }}
+            onClick={() => {
+              navigator.clipboard.writeText(publicAddress);
+              enqueueSnackbar(`Solana PublicKey Copied to clipboard`, {
+                variant: "success",
+              });
+            }}
+          >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              sx={{ alignItems: "center", padding: "0.5em 1em" }}
+            >
+              <Box display="inline-flex">
+                <AccountBalanceWalletOutlinedIcon />
+                <Typography ml={1} fontWeight="600">
+                  {publicAddress}
+                </Typography>
+              </Box>
+              <ContentCopyOutlinedIcon fontSize="small" />
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+      <Grid container pt={2}>
+        <Grid item xs={8}>
+          <Badge
+            sx={{
+              paddingLeft: "20px",
+            }}
+            overlap="rectangular"
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            badgeContent={
+              <SmallAvatar
+                alt="Remy Sharp"
+                src="https://ec4meandtybfo3zpqizry3nes5efdzazxhucv6jrjvc5n4igcy.arweave.net/ILjCAaOeAldvL4IzHG2k_l0hR5Bm56Cr5MU1F1vEGFo?ext=png"
+              />
+            }
+          >
+            <Box
+              sx={{
+                backgroundColor: "#315981",
+                clipPath:
+                  "polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%)",
+                height: "44px",
+                width: "44px",
+              }}
+            >
+              <Avatar
+                className="avatar"
+                src={avatar}
+                sx={{
+                  clipPath:
+                    "polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%)",
+                  borderRadius: "0",
+                  margin: "2px",
+                }}
+              >
+                {!avatar && <PersonIcon />}
+              </Avatar>
+            </Box>
+          </Badge>
+
+          <Typography
+            m={2}
+            fontWeight="600"
+            sx={{
+              paddingLeft: "8px",
+            }}
+          >
+            {consumerName}
+            <Typography
+              fontWeight="300"
+              sx={{
+                color: theme.secondaryColor,
+              }}
+            >
+              {`@${handle}`}
+            </Typography>
+          </Typography>
+        </Grid>
+
+        <Grid item xs={4} pr={3} sx={{ textAlign: "right" }}>
           {isSelf ? (
             <Button
+              className="profile-Button"
               component={Link}
               to="/settings/profile"
               variant="outlined"
@@ -104,55 +159,77 @@ const ProfileInfo = ({ profile }: any) => {
           ) : (
             <Follow isFollowing={isFollowing} id={id} />
           )}
-        </Box>
-        <Box mt={1} display={"inline-flex"}>
-          <div className="profile-name-handle">
-            <span className="consumerName">{consumerName}</span>
-            <br />
-            <span className="wallet">
-              <strong>wallet: </strong>
-              {publicAddress}
-            </span>
-            <br />
-            <span className="handle">{`@${handle}`}</span>
-          </div>
-        </Box>
+        </Grid>
+      </Grid>
+      <Box pl={3}>
         <Box pb={1}>
-          <p className="bio">{bio}</p>
-
+          <Typography fontWeight="300" sx={{ color: theme.secondaryColor }}>
+            {bio}
+          </Typography>
           {!location && !website && !dob ? null : (
-            <div className="loc-dob-web">
+            <Box
+              sx={{
+                display: "flex",
+                color: theme.secondaryColor,
+                margin: "0.6rem 0",
+              }}
+            >
               {location ? (
-                <span>
+                <Box
+                  sx={{
+                    marginRight: "1.5rem",
+                  }}
+                >
                   <LocationIcon /> {location}
-                </span>
+                </Box>
               ) : null}
 
               {website ? (
-                <span>
+                <Box
+                  sx={{
+                    marginRight: "1.5rem",
+                  }}
+                >
                   <LinkIcon /> {website}
-                </span>
+                </Box>
               ) : null}
 
               {dob ? (
-                <span>
+                <Box
+                  sx={{
+                    marginRight: "1.5rem",
+                  }}
+                >
                   <DobIcon />
                   {dob}
-                </span>
+                </Box>
               ) : null}
-            </div>
+            </Box>
           )}
-
-          <div className="follow-following">
-            <span>
+          <Box
+            sx={{
+              color: theme.blueLight,
+              textTransform: "capitalize",
+            }}
+          >
+            <Typography
+              fontWeight="300"
+              display="inline"
+              sx={{ borderBottom: `1px solid ${theme.blueLight}` }}
+            >
               {followersCount ? `${followersCount} followers` : "No followers"}
-            </span>
-            <span>
+            </Typography>
+            <Typography
+              ml={3}
+              fontWeight="300"
+              display="inline"
+              sx={{ borderBottom: `1px solid ${theme.blueLight}` }}
+            >
               {followingCount
                 ? `${followingCount} following`
                 : "Not following anyone"}
-            </span>
-          </div>
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </Wrapper>

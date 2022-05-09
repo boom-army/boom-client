@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`user profile :  doesn't exist 1`] = `
+<div
+  className="css-15inajd"
+>
+  <p>
+    Oops, you are trying to visit a profile which doesn't exist. Make sure the profile handle exists
+  </p>
+</div>
+`;
+
+

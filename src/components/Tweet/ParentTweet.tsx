@@ -17,7 +17,7 @@ export const ParentTweet: React.FC<Props> = (props) => {
     <>
       <Box sx={{ background: theme.tertiaryColor, padding: "1rem" }}>
         <Link to={`/${user?.handle}/status/${props.parentTweet}`}>
-          <MuiLink>Go up thread to parent &#x2934;</MuiLink>
+          Go up thread to parent &#x2934;
         </Link>
       </Box>
     </>

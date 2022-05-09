@@ -1,0 +1,728 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OGMint/> component : display <OGMint/> component  1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg"
+        style="margin-top: 20px;"
+      >
+        <div
+          class="MuiBox-root css-7s0ihh"
+        >
+          <img
+            alt="Boom OG NFT Mint"
+            src="/assets/boom-og.png"
+            width="300em"
+          />
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 css-5n8ohs-MuiGrid-root"
+          >
+            <div
+              class="MuiBox-root css-h5fkc8"
+            >
+              <div
+                class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1ps6pg7-MuiPaper-root"
+                style="padding: 24px; background-color: rgb(0, 47, 70); border-radius: 6px; border: 3px solid #005078;"
+              >
+                <button
+                  class="MuiButtonBase-root MuiButton-root MuiButton-contained css-e8az88 MuiButton-containedPrimary"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiButton-label"
+                  >
+                    Connect Wallet
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-5 css-1odrivk-MuiGrid-root"
+          >
+            <div
+              class="MuiBox-root css-130f8nx"
+            >
+              <div
+                class="track-on-window css-vktagw"
+              >
+                <div
+                  class="MuiBox-root css-kb8rte"
+                >
+                  <img
+                    alt="1303 OG NFT Card"
+                    class="inner-element"
+                    src="/assets/inner.png"
+                    width="120"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-0"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          >
+            To commemorate the official launch of Boom.Army Beta, we're launching 1303 OG NFTs for everyone who is early. There are 1303 NFTs available, and they will receive a 1303 split share of 20% of our Market Place fees in perpetuity. All White List i3o3...3bos tokens mint at 1.303 SOL discount.
+          </p>
+        </div>
+        <div
+          class="MuiBox-root css-h5fkc8"
+        >
+          <img
+            alt="Minting Schedule"
+            src="/assets/minting.png"
+            width="184"
+          />
+        </div>
+        <div
+          class="MuiBox-root css-0"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-11xur9t-MuiPaper-root-MuiTableContainer-root"
+          >
+            <table
+              aria-label="simple table"
+              class="MuiTable-root css-quj9j6-MuiTable-root"
+            >
+              <thead
+                class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+              >
+                <tr
+                  class="MuiTableRow-root MuiTableRow-head css-1q1u3t4-MuiTableRow-root"
+                >
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-a3yr1h-MuiTableCell-root"
+                    scope="col"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body2 css-xk1c0y-MuiTypography-root"
+                    >
+                      Serial
+                    </p>
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o746jm-MuiTableCell-root"
+                    scope="col"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body2 css-15muos2-MuiTypography-root"
+                    >
+                      Cost (SOL)
+                    </p>
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o746jm-MuiTableCell-root"
+                    scope="col"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body2 css-15muos2-MuiTypography-root"
+                    >
+                      Minting (EST)
+                    </p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                >
+                  <th
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    scope="row"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      #1 - 100 | Legendary
+                    </p>
+                  </th>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      1.303
+                    </p>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      Pre-sale: SOLD OUT
+                    </p>
+                  </td>
+                </tr>
+                <tr
+                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                >
+                  <th
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    scope="row"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      #101 - 250 | Ultra Rare
+                    </p>
+                  </th>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      1.6
+                    </p>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      LOCKED
+                    </p>
+                  </td>
+                </tr>
+                <tr
+                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                >
+                  <th
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    scope="row"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      #251 - 500 | Rare
+                    </p>
+                  </th>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      2
+                    </p>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      LOCKED
+                    </p>
+                  </td>
+                </tr>
+                <tr
+                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                >
+                  <th
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    scope="row"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      #501 - 750 | Rare
+                    </p>
+                  </th>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      2.3
+                    </p>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      LOCKED
+                    </p>
+                  </td>
+                </tr>
+                <tr
+                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                >
+                  <th
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    scope="row"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      #751 - 1000 | Regular
+                    </p>
+                  </th>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      2.5
+                    </p>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      LOCKED
+                    </p>
+                  </td>
+                </tr>
+                <tr
+                  class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+                >
+                  <th
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                    scope="row"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      #1001 - 1303 | Regular
+                    </p>
+                  </th>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      3
+                    </p>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                    >
+                      LOCKED
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg"
+      style="margin-top: 20px;"
+    >
+      <div
+        class="MuiBox-root css-7s0ihh"
+      >
+        <img
+          alt="Boom OG NFT Mint"
+          src="/assets/boom-og.png"
+          width="300em"
+        />
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 css-5n8ohs-MuiGrid-root"
+        >
+          <div
+            class="MuiBox-root css-h5fkc8"
+          >
+            <div
+              class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1ps6pg7-MuiPaper-root"
+              style="padding: 24px; background-color: rgb(0, 47, 70); border-radius: 6px; border: 3px solid #005078;"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained css-e8az88 MuiButton-containedPrimary"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  Connect Wallet
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-sm-5 css-1odrivk-MuiGrid-root"
+        >
+          <div
+            class="MuiBox-root css-130f8nx"
+          >
+            <div
+              class="track-on-window css-vktagw"
+            >
+              <div
+                class="MuiBox-root css-kb8rte"
+              >
+                <img
+                  alt="1303 OG NFT Card"
+                  class="inner-element"
+                  src="/assets/inner.png"
+                  width="120"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-0"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        >
+          To commemorate the official launch of Boom.Army Beta, we're launching 1303 OG NFTs for everyone who is early. There are 1303 NFTs available, and they will receive a 1303 split share of 20% of our Market Place fees in perpetuity. All White List i3o3...3bos tokens mint at 1.303 SOL discount.
+        </p>
+      </div>
+      <div
+        class="MuiBox-root css-h5fkc8"
+      >
+        <img
+          alt="Minting Schedule"
+          src="/assets/minting.png"
+          width="184"
+        />
+      </div>
+      <div
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-11xur9t-MuiPaper-root-MuiTableContainer-root"
+        >
+          <table
+            aria-label="simple table"
+            class="MuiTable-root css-quj9j6-MuiTable-root"
+          >
+            <thead
+              class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+            >
+              <tr
+                class="MuiTableRow-root MuiTableRow-head css-1q1u3t4-MuiTableRow-root"
+              >
+                <th
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-a3yr1h-MuiTableCell-root"
+                  scope="col"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body2 css-xk1c0y-MuiTypography-root"
+                  >
+                    Serial
+                  </p>
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o746jm-MuiTableCell-root"
+                  scope="col"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body2 css-15muos2-MuiTypography-root"
+                  >
+                    Cost (SOL)
+                  </p>
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o746jm-MuiTableCell-root"
+                  scope="col"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body2 css-15muos2-MuiTypography-root"
+                  >
+                    Minting (EST)
+                  </p>
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+            >
+              <tr
+                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+              >
+                <th
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  scope="row"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    #1 - 100 | Legendary
+                  </p>
+                </th>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    1.303
+                  </p>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    Pre-sale: SOLD OUT
+                  </p>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+              >
+                <th
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  scope="row"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    #101 - 250 | Ultra Rare
+                  </p>
+                </th>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    1.6
+                  </p>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    LOCKED
+                  </p>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+              >
+                <th
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  scope="row"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    #251 - 500 | Rare
+                  </p>
+                </th>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    2
+                  </p>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    LOCKED
+                  </p>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+              >
+                <th
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  scope="row"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    #501 - 750 | Rare
+                  </p>
+                </th>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    2.3
+                  </p>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    LOCKED
+                  </p>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+              >
+                <th
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  scope="row"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    #751 - 1000 | Regular
+                  </p>
+                </th>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    2.5
+                  </p>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    LOCKED
+                  </p>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root css-34nofg-MuiTableRow-root"
+              >
+                <th
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-54wz5t-MuiTableCell-root"
+                  scope="row"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    #1001 - 1303 | Regular
+                  </p>
+                </th>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    3
+                  </p>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-ogwbw4-MuiTableCell-root"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 css-1r998hm-MuiTypography-root"
+                  >
+                    LOCKED
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
