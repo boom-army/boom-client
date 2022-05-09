@@ -21,6 +21,11 @@ declare module "@mui/material/styles" {
     font: string;
     bs1: string;
     loading: string;
+    blueLight: string;
+    greenLight: string;
+    borderColor: string;
+    textColor: string;
+    tagColor: string;
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
@@ -35,6 +40,11 @@ declare module "@mui/material/styles" {
     font?: string;
     bs1?: string;
     loading?: string;
+    blueLight: string;
+    greenLight: string;
+    borderColor: string;
+    textColor: string;
+    tagColor: string;
   }
 }
 

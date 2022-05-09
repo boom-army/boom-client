@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useContext } from "react";
 import {
   Metadata,
   MetadataDataData,
@@ -8,12 +8,12 @@ import { Box } from "@mui/system";
 import { Stack, Typography } from "@mui/material";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import { currentCluster } from "../../utils/utils";
-// import { ThemeContext } from "../../contexts/theme";
 import { useSnackbar } from "notistack";
 import { displayError } from "../../utils";
 import { Loader } from "../Loader";
 import { styled } from "@mui/material/styles";
 import BasicModal from "../MarketPlaceModal/NFTDialogue";
+import { ThemeContext } from "../../contexts/theme";
 
 const Wrapper = styled("div")((props) => ({
   ".nft-token-section": {
@@ -24,50 +24,6 @@ const Wrapper = styled("div")((props) => ({
     ".nft-img": {
       width: "130px",
       height: "130px",
-    },
-    span: {
-      display: "inline-block",
-      width: "40px",
-      height: "40px",
-      borderRadius: "50%",
-      position: "absolute",
-      right: "-10px",
-      bottom: "0",
-      img: {
-        borderRadius: "50%",
-        border: `5px solid ${props.theme.background}`,
-      },
-    },
-    ".tokenPrice": {
-      position: "absolute",
-      top: "3px",
-      right: "3px",
-      backgroundColor: "#35a600",
-      fontSize: "11px",
-      whiteSpace: "nowrap",
-      width: "auto",
-      height: "21px",
-      borderRadius: "25px",
-      padding: "2px 6px",
-      textTransform: "uppercase",
-    },
-  },
-
-  "@media screen and (max-width: 767px)": {
-    ".nft-token-section": {
-      width: "73px",
-    },
-    ".nft-gird": {
-      ".nft-img": {
-        width: "73px",
-        height: "73px",
-      },
-      span: {
-        width: "20px",
-        height: "20px",
-        right: "6px",
-        bottom: "15px",
-      },
     },
   },
 }));
@@ -87,7 +43,7 @@ interface URIData {
 }
 
 const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
-  // const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
   const uRIData = {
     id: "ckwd3peba137601lds92ku4kn",
@@ -154,9 +110,9 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
         > */}
 
         <Wrapper onClick={handleModal}>
-          <div className="nft-token-section">
+          <Box className="nft-token-section">
             <Box>
-              <div className="nft-gird">
+              <Box className="nft-gird">
                 {uRIData?.image ? (
                   <img
                     className="nft-img"
@@ -168,7 +124,22 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
                   <DoNotDisturbOnIcon fontSize="large" />
                 )}
 
-                <span>
+                <Box
+                  display="inline-flex"
+                  sx={{
+                    display: "inline-block",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    position: "absolute",
+                    right: "-10px",
+                    bottom: "0",
+                    img: {
+                      borderRadius: "50%",
+                      border: `5px solid ${theme.background}`,
+                    },
+                  }}
+                >
                   {uRIData?.image ? (
                     <img
                       src={uRIData?.image}
@@ -179,10 +150,26 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
                   ) : (
                     <DoNotDisturbOnIcon fontSize="large" />
                   )}
-                </span>
+                </Box>
 
-                <span className="tokenPrice">72 SOL</span>
-              </div>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "3px",
+                    right: "3px",
+                    backgroundColor: theme.greenLight,
+                    fontSize: "11px",
+                    whiteSpace: "nowrap",
+                    width: "auto",
+                    height: "21px",
+                    borderRadius: "25px",
+                    padding: "2px 6px",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  72 SOL
+                </Box>
+              </Box>
             </Box>
             <Box>
               <Typography
@@ -195,7 +182,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
                 {uRIData?.name}
               </Typography>
             </Box>
-          </div>
+          </Box>
         </Wrapper>
 
         {isClicked ? (

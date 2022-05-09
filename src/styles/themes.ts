@@ -9,6 +9,11 @@ export interface ThemeVars {
   overlay: string;
   font: string;
   bs1: string;
+  blueLight: string;
+  greenLight: string;
+  borderColor: string;
+  textColor: string;
+  tagColor: string;
 }
 
 export const lightTheme: ThemeVars = {
@@ -22,6 +27,11 @@ export const lightTheme: ThemeVars = {
   overlay: "rgba(147, 149, 150, 0.4)",
   font: '"Roboto", sans-serif',
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
+  blueLight: "#4D97CB",
+  greenLight: "#35a600",
+  borderColor: "#838689",
+  textColor: "#838689",
+  tagColor: "#949a9e",
 };
 
 export const darkTheme: ThemeVars = {
@@ -35,4 +45,9 @@ export const darkTheme: ThemeVars = {
   overlay: "rgba(110, 118, 125, 0.4)",
   font: '"Roboto", sans-serif',
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
+  blueLight: "#4D97CB",
+  greenLight: "#35a600",
+  borderColor: "#374148",
+  textColor: "#838689",
+  tagColor: "#949a9e",
 };

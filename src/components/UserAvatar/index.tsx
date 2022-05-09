@@ -1,6 +1,7 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
+import { Box } from "@mui/material";
 
 interface IProps {
   avatar?: string;
