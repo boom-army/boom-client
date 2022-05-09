@@ -12,7 +12,7 @@ interface SnackBarContextProviderProps {
   children: React.ReactNode;
 }
 
-const SnackBarProvider: React.FC<SnackBarContextProviderProps> = ({
+const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
   children,
 }) => {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -50,10 +50,10 @@ const useSnackbar = (): SnackBarContextActions => {
   const context = useContext(SnackBarContext);
 
   if (!context) {
-    throw new Error('useSnackbar must be used within the SnackBarProvider');
+    throw new Error('useSnackbar must be used within the SnackbarProvider');
   }
 
   return context;
 };
 
-export { SnackBarProvider, useSnackbar };
+export { SnackbarProvider, useSnackbar };

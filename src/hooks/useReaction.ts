@@ -1,7 +1,7 @@
 import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
 import { displayError } from "../utils";
 import { useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../contexts/snackbar";
 import { useCallback } from "react";
 
 interface Props {

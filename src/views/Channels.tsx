@@ -8,8 +8,8 @@ import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { concat, uniqBy } from "lodash";
 import { displayError } from "../utils";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+import { useSnackbar } from "../contexts/snackbar";
 import { useApolloClient } from '@apollo/client';
-import { useSnackbar } from "notistack";
 
 export const Channels: React.FC = () => {
   const { connection } = useConnection();
