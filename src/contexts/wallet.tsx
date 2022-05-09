@@ -41,7 +41,7 @@ export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} onError={onError} autoConnect>
-        <WalletDialogProvider>{children}</WalletDialogProvider>
+        <WalletDialogProvider title={<>Login with Solana Wallet</>}>{children}</WalletDialogProvider>
       </WalletProvider>
     </ConnectionProvider>
   );
