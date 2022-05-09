@@ -6,7 +6,7 @@ import { USER_FOLLOW } from "../../queries/follow";
 import { FOLLOW, UNFOLLOW } from "../../queries/follow";
 import { displayError } from "../../utils";
 import { useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { FeedDocument } from "../../generated/graphql";
 
 interface FollowProps {

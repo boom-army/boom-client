@@ -21,7 +21,7 @@ import { ThemeContext } from "../../contexts/theme";
 import { styled } from "@mui/material/styles";
 import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import cuid from "cuid";
 
 const StyledModal = styled(ModalUnstyled)({

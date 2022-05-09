@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { ThemeContext } from "../../contexts/theme";
 import { UserIcon } from "../Icons";
 import { Wrapper } from "../ToggleTheme";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 const Logout = () => {

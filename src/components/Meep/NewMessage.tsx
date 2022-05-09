@@ -32,7 +32,7 @@ import { styled } from "@mui/material/styles";
 import { useContext, useState } from "react";
 import { useInput } from "../../hooks/useInput";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 
 interface Props {
   feed?: any;

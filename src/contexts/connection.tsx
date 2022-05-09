@@ -22,7 +22,7 @@ import {
   ENV as ChainID,
   TokenInfo,
 } from "@solana/spl-token-registry";
-// import { useSnackbar } from "notistack";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 
 interface BlockhashAndFeeCalculator {
@@ -34,32 +34,32 @@ export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
 
 export const ENDPOINTS = [
   {
-    name: "mainnet-beta" as ENV,
+    name: WalletAdapterNetwork.Mainnet,
     endpoint: clusterApiUrl("mainnet-beta"),
     chainID: ChainID.MainnetBeta,
   },
   {
-    name: "mainnet-beta" as ENV,
+    name: WalletAdapterNetwork.Mainnet,
     endpoint: "https://ssc-dao.genesysgo.net/",
     chainID: ChainID.MainnetBeta,
   },
   {
-    name: "testnet" as ENV,
+    name: WalletAdapterNetwork.Testnet,
     endpoint: clusterApiUrl("testnet"),
     chainID: ChainID.Testnet,
   },
   {
-    name: "devnet" as ENV,
+    name: WalletAdapterNetwork.Devnet,
     endpoint: clusterApiUrl("devnet"),
     chainID: ChainID.Devnet,
   },
   {
-    name: "devnet" as ENV,
+    name: WalletAdapterNetwork.Devnet,
     endpoint: "https://psytrbhymqlkfrhudd.dev.genesysgo.net:8899/",
     chainID: ChainID.Devnet,
   },
   {
-    name: "localnet" as ENV,
+    name: WalletAdapterNetwork.Devnet,
     endpoint: "http://127.0.0.1:8899",
     chainID: ChainID.Devnet,
   },

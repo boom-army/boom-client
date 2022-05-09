@@ -20,7 +20,7 @@ import { uniqBy } from "lodash";
 import { uploadFile } from "../../utils";
 import { useConnection, useAnchorWallet } from "@solana/wallet-adapter-react";
 import { useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { ThemeContext } from "../../contexts/theme";
 
 const { mintNFT } = actions;

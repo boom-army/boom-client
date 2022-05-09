@@ -17,7 +17,7 @@ import { gql } from "@apollo/client";
 import { shortenAddress } from "../../utils/utils";
 import { styled } from "@mui/material/styles";
 import { uniqBy } from "lodash";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 
 interface Props {
   channel: ChannelsQuery["channels"][0];
