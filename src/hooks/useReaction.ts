@@ -16,7 +16,7 @@ export const useReaction = ({ tweetId }: Props) => {
   });
 
   const handleReaction = useCallback(
-    async ({ emojiId, skin }) => {
+    async ({ emojiId, skin }: { emojiId: string, skin: string }) => {
       try {
         await toggleReactionMutation({
           variables: { id: tweetId, emojiId, skin },

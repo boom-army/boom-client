@@ -1,4 +1,4 @@
-import { web3, BN, Program, Provider } from "@project-serum/anchor";
+import { web3, BN, Program, AnchorProvider } from "@project-serum/anchor";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import {
   TOKEN_PROGRAM_ID,
@@ -24,7 +24,7 @@ export const loadAnchor = async (wallet: AnchorWallet) => {
   const connection = new Connection(process.env.REACT_APP_RPC_URL as string, {
     commitment: "processed",
   });
-  const provider = new Provider(connection, wallet, {
+  const provider = new AnchorProvider(connection, wallet, {
     commitment: "processed",
   });
 

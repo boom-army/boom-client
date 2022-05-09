@@ -99,7 +99,7 @@ export const AppRoutes: React.FC = () => {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
@@ -128,11 +128,12 @@ export const AppRoutes: React.FC = () => {
         />
         <meta name="twitter:image" content={BoomArmy} />
         <meta name="twitter:creator" content="@boom_army_" />
-      </Helmet>
+      </Helmet> */}
       <BrowserRouter basename={"/"}>
         <Wallet>
           <AccountsProvider>
             <MarketProvider>
+              {/* @ts-ignore */}
               <GiphyContextProvider>
                 <AppHeader />
                 <Grid container mt={6}>

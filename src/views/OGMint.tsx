@@ -133,14 +133,12 @@ export const OGMint = () => {
       document.getElementById("#identity")?.click();
 
       if (wallet.connected && candyMachine?.program && wallet.publicKey) {
-        const mintTxId = (
-          await mintOneToken(candyMachine, wallet.publicKey)
-        )[0];
+        const mintResult = await mintOneToken(candyMachine, wallet.publicKey);
 
         let status: any = { err: true };
-        if (mintTxId) {
+        if (mintResult) {
           status = await awaitTransactionSignatureConfirmation(
-            mintTxId,
+            mintResult?.mintTxId,
             txTimeoutInMilliseconds,
             connection,
             true
@@ -231,6 +229,7 @@ export const OGMint = () => {
                     candyMachine?.state.gatekeeper &&
                     wallet.publicKey &&
                     wallet.signTransaction ? (
+                      //@ts-ignore
                       <GatewayProvider
                         wallet={{
                           publicKey:

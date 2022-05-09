@@ -44,7 +44,7 @@ export const TipInput: React.FC<Props> = ({
 
   // TODO: consolodate tx react hook from EmojiTweet and this
   const handleTipAction = useCallback(
-    async ({ txAmount }) => {
+    async ({ txAmount }: { txAmount: number }) => {
       const boomTokens = txAmount * 1000000000;
       try {
         if (txAmount * 1 === 0) {

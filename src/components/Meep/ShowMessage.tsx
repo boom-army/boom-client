@@ -262,6 +262,7 @@ export const ShowMessage: React.FC<Props> = ({
               <>
                 <ReactionsList
                   reactions={reactions}
+                  // @ts-ignore
                   handleReaction={handleReaction}
                   tweetId={id}
                 />

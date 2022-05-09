@@ -17,7 +17,7 @@ import { styled } from "@mui/material/styles";
 import { useChannelsQuery } from "../generated/graphql";
 
 interface Props {
-  newMentionsCount: Number | undefined;
+  newMentionsCount: number | undefined;
   user: StoreUser | null;
 }
 

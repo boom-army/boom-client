@@ -277,7 +277,7 @@ const UseNativeAccount = () => {
   const [nativeAccount, setNativeAccount] = useState<AccountInfo<Buffer>>();
 
   const updateCache = useCallback(
-    (account) => {
+    (account: AccountInfo<Buffer> | undefined) => {
       if (!connection || !publicKey) {
         return;
       }

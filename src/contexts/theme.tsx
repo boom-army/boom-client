@@ -17,7 +17,7 @@ export const ThemeContext = React.createContext<ThemeContextType>({
   setTheme: (theme) => console.warn("no theme provider"),
 });
 
-export const ThemeProvider: React.FC = ({ children }) => {
+export const ThemeProvider: React.FC<{children: JSX.Element}> = ({ children }) => {
   const themeSet =
     localStorage.getItem(Theme.StorageTag) === Theme.Light
       ? lightTheme

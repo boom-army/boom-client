@@ -7,7 +7,7 @@ import { App } from "./App";
 import { Integrations } from "@sentry/tracing";
 import { ThemeProvider } from "./contexts/theme";
 import { client } from "./apollo/client";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 
 if (process.env.REACT_APP_ENV !== "development") {
   Sentry.init({
@@ -31,7 +31,10 @@ const RootApp = () => (
   </React.StrictMode>
 );
 
-render(<RootApp />, document.getElementById("root"));
+const container = document.getElementById("root");
+const root = createRoot(container!);
+
+root.render(<RootApp />);
 
 // // If you want your app to work offline and load faster, you can change
 // // unregister() to register() below. Note this comes with some pitfalls.

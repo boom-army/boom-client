@@ -11,7 +11,7 @@ const Logout = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleLogout = useCallback(
-    (event) => {
+    (event: any) => {
       localStorage.clear();
       disconnect().catch(() => {
         // Silently catch because any errors are caught by the context `onError` handler
