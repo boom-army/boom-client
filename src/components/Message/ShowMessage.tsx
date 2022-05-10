@@ -177,12 +177,10 @@ export const ShowMessage: React.FC<Props> = ({
             border: `1px solid ${theme.tertiaryColor}`,
             padding: "0.2em 1em",
             borderRadius: "5px",
-            alignContent: "baseline",
+            alignItems: "baseline",
           }}
         >
-          <Box pt={"3px"}>
-            <EmojiTweet handleReaction={handleReaction} />
-          </Box>
+          <EmojiTweet handleReaction={handleReaction} />
           <TipCreator
             userPubKey={user?.publicAddress}
             tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
@@ -195,6 +193,7 @@ export const ShowMessage: React.FC<Props> = ({
               setParentTweetState(id);
               scrollRef?.current?.scrollIntoView();
             }}
+            sx={{ padding: "0.2em" }}
           >
             <ReplyIcon
               sx={{

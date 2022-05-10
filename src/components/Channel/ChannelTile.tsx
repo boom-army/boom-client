@@ -109,7 +109,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
     "& .MuiAvatarGroup-root .MuiAvatar-root": {
       border: 0,
     },
-  });
+  });  
 
   return (
     <>

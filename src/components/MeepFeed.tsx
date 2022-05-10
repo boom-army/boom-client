@@ -6,7 +6,7 @@ import { ChannelFeedQuery, Tweet } from "../generated/graphql";
 import { Grid } from "@mui/material";
 import { Loader } from "./Loader";
 import { RecoilState } from "recoil";
-import { ShowMessage } from "./Meep/ShowMessage";
+import { ShowMessage } from "./Message/ShowMessage";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {

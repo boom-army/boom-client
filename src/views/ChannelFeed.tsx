@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { MeepFeed } from "../components/MeepFeed";
-import { NewMessage } from "../components/Meep/NewMessage";
+import { NewMessage } from "../components/Message/NewMessage";
 import { atom } from "recoil";
 import { useChannelFeedQuery } from "../generated/graphql";
 import { useParams } from "react-router-dom";
