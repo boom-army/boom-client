@@ -191,6 +191,7 @@ export const ShowMessage: React.FC<Props> = ({
           <IconButton
             onClick={() => {
               setParentTweetState(id);
+              handlePopoverClose();
               scrollRef?.current?.scrollIntoView();
             }}
             sx={{ padding: "0.2em" }}
