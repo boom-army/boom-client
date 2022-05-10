@@ -206,8 +206,10 @@ export const NewMessage: React.FC<Props> = ({
           <Stack spacing={1} direction="row">
             <ReplyIcon sx={{ color: theme.blueSecondary }} />
             <Box display="flex">
-            <Typography fontWeight={200}>Replying to</Typography>
-            <Typography ml={0.5}>@{parentTweetData?.user.consumerName}</Typography>
+              <Typography fontWeight={200}>Replying to</Typography>
+              <Typography ml={0.5}>
+                @{parentTweetData?.user.consumerName}
+              </Typography>
             </Box>
           </Stack>
           <Box>
@@ -314,7 +316,13 @@ export const NewMessage: React.FC<Props> = ({
         </IconsGrid>
         <Grid item xs={6} pr={1}>
           <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
-            <IconButton disabled={loading} onClick={handleNewTweet}>
+            <IconButton
+              disabled={loading}
+              onClick={() => {
+                setParentTweetState("");
+                handleNewTweet;
+              }}
+            >
               <SendIcon sx={{ color: theme.accentColor }} />
             </IconButton>
           </Box>
