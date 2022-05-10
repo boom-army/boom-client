@@ -4,12 +4,13 @@ import { styled } from "@mui/material/styles";
 const ImageBoxWrapper = styled("div")((props: any) => ({
   "> div": {
     display: "flex",
-    borderRadius: "16px",
+    borderRadius: "0.2em",
     border: `1px solid ${props.theme.secondaryColor}`,
     overflow: "hidden",
-    width: "90%",
+    maxWidth: "400px",
+    width: "100%",
     flexWrap: "wrap",
-    margin: "0 0 0.75rem",
+    margin: "0.75rem 0",
   },
 
   "> div > .tweet-image-col": {
@@ -34,16 +35,15 @@ const ImageWrapper = styled("div")<{
   hasbottommargin?: any;
   fileindex?: any;
   props?: any;
-}>((props) => ({
+}>({
   lineHeight: "0",
   height: "100%",
-  marginBottom: props.hasbottommargin ? "2px;" : "0;",
-}));
+});
 
 const Image = styled("img")<{ disablelightbox?: any; props?: any }>(
   (props) => ({
     objectFit: "cover",
-    maxWidth: "100%",
+    maxWidth: "400px",
     width: "100%",
     height: "100%",
     position: "relative",
