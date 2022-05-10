@@ -318,9 +318,9 @@ export const NewMessage: React.FC<Props> = ({
           <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
             <IconButton
               disabled={loading}
-              onClick={() => {
+              onClick={(e) => {
                 setParentTweetState("");
-                handleNewTweet;
+                handleNewTweet(e);
               }}
             >
               <SendIcon sx={{ color: theme.accentColor }} />
