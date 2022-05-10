@@ -35,7 +35,7 @@ const SpanDone = styled("span")((props) => ({
   alignContent: "center",
   alignItems: "center",
   justifyContent: "center",
-  background: "#15202b",
+  background: props.theme.tertiaryColor2,
   color: "white",
   borderRadius: 5,
   fontWeight: "bold",
