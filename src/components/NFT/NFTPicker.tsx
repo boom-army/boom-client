@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext, useCallback } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
-import ModalUnstyled from "@mui/core/ModalUnstyled";
+import { ModalUnstyled } from '@mui/base';
 import {
   Box,
   Button,

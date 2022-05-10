@@ -21,7 +21,7 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
-import { Popover } from "@material-ui/core";
+import { Popover } from "@mui/material";
 
 const ReplyBox = styled(Box)((props) => ({
   "&:before": {

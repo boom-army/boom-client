@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useCallback, useContext } from "react";
 import * as anchor from "@project-serum/anchor";
-import { Container, Snackbar } from "@material-ui/core";
+import { Container, Snackbar } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CableIcon from '@mui/icons-material/Cable';

@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { Alert, AlertColor } from "@mui/material";
 import { ThemeContext } from "./theme";
-import { Snackbar } from "@material-ui/core";
+import { Snackbar } from "@mui/material";
 
 type SnackBarContextActions = {
   enqueueSnackbar: (text: string, { variant }: { variant: AlertColor }) => void;

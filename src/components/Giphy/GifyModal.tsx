@@ -5,8 +5,6 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import ModalUnstyled from "@mui/core/ModalUnstyled";
-import Stack from "@mui/material/Stack";
 import { Box } from "@mui/system";
 import { GifIcon } from "../Icons";
 import { GiphyContext, Search } from "../../contexts/giphy";
@@ -16,8 +14,8 @@ import { Loader } from "../Loader";
 import { SearchModalHeader } from "./SearchModalHeader";
 import { ThemeContext } from "../../contexts/theme";
 import { debounce } from "lodash";
-import { styled } from "@mui/material/styles";
-import { IconButton } from "@mui/material";
+import { ModalUnstyled } from '@mui/base';
+import { IconButton, Stack, styled } from "@mui/material";
 
 const StyledModal = styled(ModalUnstyled)({
   position: "absolute",

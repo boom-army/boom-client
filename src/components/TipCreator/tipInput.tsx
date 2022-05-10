@@ -1,7 +1,7 @@
-import CloseIcon from "@material-ui/icons/Close";
+import Close from "@mui/icons-material/Close";
 import React, { useContext, useState, useCallback } from "react";
 import { Box } from "@mui/system";
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@mui/material";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
 import { TWEET } from "../../queries/tweet";
@@ -163,7 +163,7 @@ export const TipInput: React.FC<Props> = ({
               setShowTip(false);
             }}
           >
-            <CloseIcon fontSize="small" />
+            <Close fontSize="small" />
           </IconButton>
         </Box>
         <Stack

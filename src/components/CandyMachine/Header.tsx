@@ -1,8 +1,7 @@
 import * as anchor from "@project-serum/anchor";
 import { useContext } from "react";
 
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import { Grid, Typography } from "@mui/material";
 import { MintCountdown } from "./MintCountdown";
 import { toDate, formatNumber } from "../../utils/utils";
 import { CandyMachineAccount } from "../../utils/candy-machine";

@@ -1,8 +1,6 @@
-import Button from "@material-ui/core/Button";
 import { CandyMachineAccount } from "../../utils/candy-machine";
-import { CircularProgress } from "@material-ui/core";
+import { Button, CircularProgress, styled } from "@mui/material";
 import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
-import { styled } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 
 export const CTAButton = styled(Button)((props) => ({
