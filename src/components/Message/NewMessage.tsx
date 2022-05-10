@@ -1,4 +1,6 @@
 import SendIcon from "@mui/icons-material/Send";
+import CloseIcon from "@mui/icons-material/Close";
+import ReplyIcon from "@mui/icons-material/Reply";
 import { AttributionLink } from "../Giphy/AttributionLink";
 import {
   Avatar,
@@ -7,6 +9,7 @@ import {
   Input,
   InputAdornment,
   Stack,
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import {
@@ -19,7 +22,7 @@ import { GifyModal } from "../Giphy/GifyModal";
 import { ImageBox } from "../ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
-import { RecoilState, useRecoilValue } from "recoil";
+import { RecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
 import { TWEET } from "../../queries/tweet";
 import { ThemeContext } from "../../contexts/theme";
@@ -74,6 +77,7 @@ export const NewMessage: React.FC<Props> = ({
   const tweet = useInput("");
 
   const parentTweet = useRecoilValue(parentTweetState);
+  const setParentTweetState = useSetRecoilState(parentTweetState);
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
@@ -96,6 +100,19 @@ export const NewMessage: React.FC<Props> = ({
       }
     `,
   });
+  const parentTweetData =
+    parentTweet &&
+    client.readFragment({
+      id: `Tweet:${parentTweet}`,
+      fragment: gql`
+        fragment ParentTweet on Tweet {
+          text
+          user {
+            consumerName
+          }
+        }
+      `,
+    });
 
   const createGifInput = (gif: any) => ({
     title: gif.title,
@@ -176,103 +193,133 @@ export const NewMessage: React.FC<Props> = ({
   });
 
   return (
-    <Grid
-      container
-      p={2}
-      sx={{
-        borderTop: `2px solid ${theme.tertiaryColor}`,
-        "@media (max-width: 900px)": {
-          marginBottom: "4em",
-        },
-      }}
-    >
-      <Grid item xs={12} pb={2}>
-        <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
-          <Avatar
-            src={data?.me?.avatar}
-            sx={{
-              width: 30,
-              height: 30,
-              border: `1px solid ${theme.tertiaryColor}`,
-            }}
-          />
-
-          <Input
-            value={tweet.value}
-            onChange={tweet.onChange}
-            placeholder={`Meep in # ${channelData?.family} ${channelData?.name}`}
-            fullWidth={true}
-            autoFocus={true}
-            ref={scrollRef}
-            sx={{
-              color: theme.primaryColor,
-              padding: "1em 1em 1em 0",
-              "&:before": {
-                borderColor: theme.tertiaryColor2,
-              },
-              "&:hover:not(.Mui-disabled):before": {
-                borderColor: theme.tertiaryColor2,
-              },
-            }}
-            endAdornment={
-              <InputAdornment position="end">
-                <EmojiPicker
-                  emojiHandler={(pickedEmoji: any) =>
-                    tweet.setValue(tweet.value + pickedEmoji.native)
-                  }
-                />
-              </InputAdornment>
-            }
-          />
-        </Stack>
-      </Grid>
-
-      <IconsGrid item xs={6} pl={6}>
-        {gif && (
-          <Box sx={{ marginBottom: 2 }}>
-            <Stack direction="column">
-              <VideoContainer
-                gif={createGifInput(gif)}
-                onClose={() => setGif(null)}
-              />
-              <AttributionLink src={gif.url} />
-            </Stack>
+    <>
+      {parentTweet && (
+        <Box
+          display={"flex"}
+          justifyContent={"space-between"}
+          sx={{
+            backgroundColor: theme.bluePrimary,
+            padding: "0.5em 2em 0.5em 1em",
+          }}
+        >
+          <Stack spacing={1} direction="row">
+            <ReplyIcon sx={{ color: theme.blueSecondary }} />
+            <Box display="flex">
+            <Typography fontWeight={200}>Replying to</Typography>
+            <Typography ml={0.5}>@{parentTweetData?.user.consumerName}</Typography>
+            </Box>
+          </Stack>
+          <Box>
+            <IconButton
+              onClick={() => {
+                setParentTweetState("");
+              }}
+              sx={{ padding: "0" }}
+            >
+              <CloseIcon sx={{ color: theme.blueSecondary }} />
+            </IconButton>
           </Box>
-        )}
-
-        {nftData && <NFTTweet nftData={nftData} />}
-
-        {!!tweetFiles.length && (
-          <ImageBox files={tweetFiles.map(mapTweetFiles)} />
-        )}
-
-        {!tweetFiles.length && !nftData && <GifyModal setGif={setGif} />}
-
-        {!gif && !nftData && (
-          <>
-            <label htmlFor="icon-button-file">
-              <ImageInput
-                accept="image/*"
-                id="icon-button-file"
-                type="file"
-                onChange={handleTweetFiles}
-              />
-              <IconButton aria-label="upload image" component="span">
-                <UploadFileIcon />
-              </IconButton>
-            </label>
-          </>
-        )}
-
-        {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
-      </IconsGrid>
-      <Grid item xs={6} pr={1}>
-        <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
-          <IconButton disabled={loading} onClick={handleNewTweet}>
-            <SendIcon sx={{ color: theme.accentColor }} />
-          </IconButton>
         </Box>
+      )}
+      <Grid
+        container
+        p={2}
+        sx={{
+          borderTop: `2px solid ${theme.tertiaryColor}`,
+          "@media (max-width: 900px)": {
+            marginBottom: "4em",
+          },
+        }}
+      >
+        <Grid item xs={12} pb={2}>
+          <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
+            <Avatar
+              src={data?.me?.avatar}
+              sx={{
+                width: 30,
+                height: 30,
+                border: `1px solid ${theme.tertiaryColor}`,
+              }}
+            />
+
+            <Input
+              value={tweet.value}
+              onChange={tweet.onChange}
+              placeholder={`Meep in # ${channelData?.family} ${channelData?.name}`}
+              fullWidth={true}
+              autoFocus={true}
+              ref={scrollRef}
+              sx={{
+                color: theme.primaryColor,
+                padding: "1em 1em 1em 0",
+                "&:before": {
+                  borderColor: theme.tertiaryColor2,
+                },
+                "&:hover:not(.Mui-disabled):before": {
+                  borderColor: theme.tertiaryColor2,
+                },
+              }}
+              endAdornment={
+                <InputAdornment position="end">
+                  <EmojiPicker
+                    emojiHandler={(pickedEmoji: any) =>
+                      tweet.setValue(tweet.value + pickedEmoji.native)
+                    }
+                  />
+                </InputAdornment>
+              }
+            />
+          </Stack>
+        </Grid>
+
+        <IconsGrid item xs={6} pl={6}>
+          {gif && (
+            <Box sx={{ marginBottom: 2 }}>
+              <Stack direction="column">
+                <VideoContainer
+                  gif={createGifInput(gif)}
+                  onClose={() => setGif(null)}
+                />
+                <AttributionLink src={gif.url} />
+              </Stack>
+            </Box>
+          )}
+
+          {nftData && <NFTTweet nftData={nftData} />}
+
+          {!!tweetFiles.length && (
+            <ImageBox files={tweetFiles.map(mapTweetFiles)} />
+          )}
+
+          {!tweetFiles.length && !nftData && <GifyModal setGif={setGif} />}
+
+          {!gif && !nftData && (
+            <>
+              <label htmlFor="icon-button-file">
+                <ImageInput
+                  accept="image/*"
+                  id="icon-button-file"
+                  type="file"
+                  onChange={handleTweetFiles}
+                />
+                <IconButton aria-label="upload image" component="span">
+                  <UploadFileIcon />
+                </IconButton>
+              </label>
+            </>
+          )}
+
+          {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
+        </IconsGrid>
+        <Grid item xs={6} pr={1}>
+          <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
+            <IconButton disabled={loading} onClick={handleNewTweet}>
+              <SendIcon sx={{ color: theme.accentColor }} />
+            </IconButton>
+          </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
