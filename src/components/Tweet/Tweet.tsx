@@ -19,7 +19,7 @@ import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
-import { unfurl } from 'unfurl.js'
+import { useGetMetaLazyQuery } from "../../generated/graphql";
 import { useReaction } from "../../hooks/useReaction";
 
 interface Props {
@@ -65,24 +65,25 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
   const { handleReaction } = useReaction({ tweetId: id });
   const handle = user && user.handle;
 
+  const extractUrls = linkify.find(text).filter((u) => u.type === "url");
+  const targetUrl = extractUrls[0]?.href;
+  // 'https://github.com/trending'
+
+  const [GetMeta, { data, loading }] = useGetMetaLazyQuery();
+
   useEffect(() => {
     (async () => {
-      const extractUrls = linkify.find(text).filter((u) => u.type === "url");
-      if (extractUrls.length) {
-        try {
-          const targetUrl = extractUrls[0].href;
-          console.log(targetUrl);
-          const result = unfurl('https://github.com/trending');
-          console.log(result);
-          // const { body: html, url } = await got.get(targetUrl);
-          // const metadata = await metascraper({ html, url });
-          // console.log(html, url);
-        } catch (error) {
-          console.log(error);
-        }
+      if (targetUrl) {
+        console.log("------------------", targetUrl);
+        GetMeta({
+          variables: {
+            url: targetUrl,
+          },
+        });
       }
+      console.log("***************", data);
     })();
-  }, []);
+  }, [targetUrl]);
 
   const linkifyOptions = {
     target: { url: "_blank" },
