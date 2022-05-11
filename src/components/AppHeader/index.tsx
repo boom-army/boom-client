@@ -10,7 +10,7 @@ import { USER_FOLLOW } from "../../queries/follow";
 import { UserContext } from "../../contexts/user";
 import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
 import { useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { FeedDocument } from "../../generated/graphql";
 

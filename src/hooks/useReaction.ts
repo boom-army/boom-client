@@ -1,7 +1,7 @@
 import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
 import { displayError } from "../utils";
 import { useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../contexts/snackbar";
 import { useCallback } from "react";
 
 interface Props {
@@ -16,7 +16,7 @@ export const useReaction = ({ tweetId }: Props) => {
   });
 
   const handleReaction = useCallback(
-    async ({ emojiId, skin }) => {
+    async ({ emojiId, skin }: { emojiId: string, skin: string }) => {
       try {
         await toggleReactionMutation({
           variables: { id: tweetId, emojiId, skin },

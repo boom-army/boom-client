@@ -3,7 +3,7 @@ import SimpleReactLightbox from "simple-react-lightbox";
 import { AppRoutes } from "./routes";
 import { CssBaseline } from "@mui/material";
 import { RecoilRoot } from "recoil";
-import { SnackbarProvider } from "notistack";
+import { SnackbarProvider } from "./contexts/snackbar";
 import { ThemeContext } from "./contexts/theme";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { UserContextProvider } from "./contexts/user";
@@ -110,7 +110,7 @@ export const App = () => {
             },
           }}
         />
-        <SnackbarProvider maxSnack={3}>
+        <SnackbarProvider>
           <SimpleReactLightbox>
             <UserContextProvider>
               <AppRoutes />

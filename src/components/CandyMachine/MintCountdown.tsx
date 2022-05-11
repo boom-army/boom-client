@@ -1,49 +1,46 @@
-import { Paper } from "@material-ui/core";
+import { Paper, styled } from "@mui/material";
 import Countdown from "react-countdown";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      padding: theme.spacing(0),
-      "& > *": {
-        margin: theme.spacing(0.5),
-        marginRight: 0,
-        width: theme.spacing(6),
-        height: theme.spacing(6),
-        display: "flex",
-        flexDirection: "column",
-        alignContent: "center",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#15202b",
-        color: "white",
-        borderRadius: 5,
-        fontSize: 10,
-      },
-    },
-    done: {
-      display: "flex",
-      margin: theme.spacing(1),
-      marginRight: 0,
-      padding: theme.spacing(1),
-      flexDirection: "column",
-      alignContent: "center",
-      alignItems: "center",
-      justifyContent: "center",
-      background: "#15202b",
-      color: "white",
-      borderRadius: 5,
-      fontWeight: "bold",
-      fontSize: 16,
-    },
-    item: {
-      fontWeight: "bold",
-      fontSize: 18,
-    },
-  })
-);
+const RootWrapper = styled("div")((props) => ({
+  display: "flex",
+  padding: props.theme.spacing(0),
+  "& > *": {
+    margin: props.theme.spacing(0.5),
+    marginRight: 0,
+    width: props.theme.spacing(6),
+    height: props.theme.spacing(6),
+    display: "flex",
+    flexDirection: "column",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "#15202b",
+    color: "white",
+    borderRadius: 5,
+    fontSize: 10,
+  },
+}));
+
+const SpanItem = styled("span")({
+  fontWeight: "bold",
+  fontSize: 18,
+});
+
+const SpanDone = styled("span")((props) => ({
+  display: "flex",
+  margin: props.theme.spacing(1),
+  marginRight: 0,
+  padding: props.theme.spacing(1),
+  flexDirection: "column",
+  alignContent: "center",
+  alignItems: "center",
+  justifyContent: "center",
+  background: props.theme.tertiaryColor2,
+  color: "white",
+  borderRadius: 5,
+  fontWeight: "bold",
+  fontSize: 16,
+}));
 
 interface MintCountdownProps {
   date: Date | undefined;
@@ -66,7 +63,6 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
   style,
   onComplete,
 }) => {
-  const classes = useStyles();
   const renderCountdown = ({
     days,
     hours,
@@ -76,29 +72,29 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
   }: MintCountdownRender) => {
     hours += days * 24;
     if (completed) {
-      return status ? <span className={classes.done}>{status}</span> : null;
+      return status ? <SpanDone>{status}</SpanDone> : null;
     } else {
       return (
-        <div className={classes.root} style={style}>
+        <RootWrapper style={style}>
           <Paper elevation={0}>
-            <span className={classes.item}>
+            <SpanItem>
               {hours < 10 ? `0${hours}` : hours}
-            </span>
+            </SpanItem>
             <span>hrs</span>
           </Paper>
           <Paper elevation={0}>
-            <span className={classes.item}>
+            <SpanItem>
               {minutes < 10 ? `0${minutes}` : minutes}
-            </span>
+            </SpanItem>
             <span>mins</span>
           </Paper>
           <Paper elevation={0}>
-            <span className={classes.item}>
+            <SpanItem>
               {seconds < 10 ? `0${seconds}` : seconds}
-            </span>
+            </SpanItem>
             <span>secs</span>
           </Paper>
-        </div>
+        </RootWrapper>
       );
     }
   };

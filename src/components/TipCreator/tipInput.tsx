@@ -1,7 +1,7 @@
-import CloseIcon from "@material-ui/icons/Close";
+import Close from "@mui/icons-material/Close";
 import React, { useContext, useState, useCallback } from "react";
 import { Box } from "@mui/system";
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@mui/material";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
 import { TWEET } from "../../queries/tweet";
@@ -12,7 +12,7 @@ import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { displayError } from "../../utils";
 import { interactionInstruction } from "../../utils/boom-web3";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { useSosolProgram } from "../../hooks";
 import { useTipCreatorMutation } from "../../generated/graphql";
 
@@ -44,7 +44,7 @@ export const TipInput: React.FC<Props> = ({
 
   // TODO: consolodate tx react hook from EmojiTweet and this
   const handleTipAction = useCallback(
-    async ({ txAmount }) => {
+    async ({ txAmount }: { txAmount: number }) => {
       const boomTokens = txAmount * 1000000000;
       try {
         if (txAmount * 1 === 0) {
@@ -163,7 +163,7 @@ export const TipInput: React.FC<Props> = ({
               setShowTip(false);
             }}
           >
-            <CloseIcon fontSize="small" />
+            <Close fontSize="small" />
           </IconButton>
         </Box>
         <Stack

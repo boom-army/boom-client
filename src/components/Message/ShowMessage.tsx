@@ -21,7 +21,7 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
-import { Popover } from "@material-ui/core";
+import { Popover } from "@mui/material";
 
 const ReplyBox = styled(Box)((props) => ({
   "&:before": {
@@ -177,12 +177,10 @@ export const ShowMessage: React.FC<Props> = ({
             border: `1px solid ${theme.tertiaryColor}`,
             padding: "0.2em 1em",
             borderRadius: "5px",
-            alignContent: "baseline",
+            alignItems: "baseline",
           }}
         >
-          <Box pt={"3px"}>
-            <EmojiTweet handleReaction={handleReaction} />
-          </Box>
+          <EmojiTweet handleReaction={handleReaction} />
           <TipCreator
             userPubKey={user?.publicAddress}
             tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
@@ -193,8 +191,10 @@ export const ShowMessage: React.FC<Props> = ({
           <IconButton
             onClick={() => {
               setParentTweetState(id);
+              handlePopoverClose();
               scrollRef?.current?.scrollIntoView();
             }}
+            sx={{ padding: "0.2em" }}
           >
             <ReplyIcon
               sx={{
@@ -262,6 +262,7 @@ export const ShowMessage: React.FC<Props> = ({
               <>
                 <ReactionsList
                   reactions={reactions}
+                  // @ts-ignore
                   handleReaction={handleReaction}
                   tweetId={id}
                 />

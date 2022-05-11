@@ -1,14 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BoomArmy from "./images/raise-the-boomarmy.png";
 import BoomLogo from "./images/logo.png";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import LanguageIcon from "@mui/icons-material/Language";
+import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import React, { useContext, useEffect } from "react";
 import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
+import { Badge, Grid, Paper, SwipeableDrawer } from "@mui/material";
+import { Box, styled } from "@mui/system";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import {
   ChannelFeed,
@@ -21,7 +23,6 @@ import {
   OGMint,
   Suggestion,
 } from "./views";
-import { Badge, Grid, Paper, SwipeableDrawer } from "@mui/material";
 import { EditProfile } from "./components/Profile/EditProfile";
 import { GiphyContextProvider } from "./contexts/giphy";
 import { Helmet } from "react-helmet";
@@ -33,7 +34,6 @@ import { Profile } from "./components/Profile/Profile";
 import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
-import { Box, styled } from "@mui/system";
 import { useProfileLazyQuery } from "./generated/graphql";
 
 export const AppRoutes: React.FC = () => {
@@ -99,7 +99,7 @@ export const AppRoutes: React.FC = () => {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
@@ -128,11 +128,12 @@ export const AppRoutes: React.FC = () => {
         />
         <meta name="twitter:image" content={BoomArmy} />
         <meta name="twitter:creator" content="@boom_army_" />
-      </Helmet>
+      </Helmet> */}
       <BrowserRouter basename={"/"}>
         <Wallet>
           <AccountsProvider>
             <MarketProvider>
+              {/* @ts-ignore */}
               <GiphyContextProvider>
                 <AppHeader />
                 <Grid container mt={6}>

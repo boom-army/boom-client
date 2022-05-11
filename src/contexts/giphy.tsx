@@ -18,7 +18,7 @@ export interface Search {
   gif: Array<GIFObject>;
 }
 
-export const GiphyContextProvider: React.FC = ({ children }) => {
+export const GiphyContextProvider: React.FC<{children: JSX.Element}> = ({ children }) => {
   const [searchGiphyCache, setSearchGiphyCache] = useState<Array<Search>>([]);
 
   return (

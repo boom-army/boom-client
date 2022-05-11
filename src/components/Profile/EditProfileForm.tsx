@@ -11,7 +11,7 @@ import { ProfileDocument } from "../../generated/graphql";
 import { SIGN_FILE } from "../../queries/files";
 import { displayError, uploadFile } from "../../utils";
 import { useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { useNavigate } from "react-router-dom";
 
 export const EditProfileForm = ({ profile, setUser }: any) => {

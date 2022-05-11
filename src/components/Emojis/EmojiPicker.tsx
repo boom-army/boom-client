@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import { Picker } from "emoji-mart";
 import { ThemeContext } from "../../contexts/theme";
 import "emoji-mart/css/emoji-mart.css";
@@ -40,7 +40,7 @@ const PickerWrapper = styled(Box)((props: any) => ({
   },
 }));
 
-const PickerIcon = styled('span')((props: any) => ({
+const PickerIcon = styled("span")((props: any) => ({
   cursor: "pointer",
   "& svg path": {
     fill: props.theme.secondaryColor,
@@ -84,6 +84,7 @@ export const EmojiPicker = ({
         {/* here change `button` to `useButton` bcz we need to add button props in node modules picker file*/}
         <PickerWrapper>
           {picker && (
+            // @ts-ignore
             <Picker
               useButton={true}
               sheetSize={64}

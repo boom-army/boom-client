@@ -8,7 +8,7 @@ import {
 } from "../../queries/search";
 import { displayError } from "../../utils";
 import { useLazyQuery } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { styled } from "@mui/material/styles";
 
 const Wrapper = styled("div")((props) => ({

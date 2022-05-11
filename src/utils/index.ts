@@ -35,7 +35,6 @@ export const uploadFile = async (
       // progress = p.loaded / p.total;
     },
   });
-  // TODO: probably should replace notistack with https://github.com/fkhadra/react-toastify
   enqueueSnackbar(`Upload in progress`, { variant: "info" });
   return data;
 };

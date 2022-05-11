@@ -2,7 +2,7 @@ import React from "react";
 import { DELETE_TWEET } from "../../queries/tweet";
 import { TrashIcon } from "../Icons";
 import { useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { FeedDocument, Tweet } from "../../generated/graphql";
 
 interface Props {

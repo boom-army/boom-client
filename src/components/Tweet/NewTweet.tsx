@@ -20,7 +20,7 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError, uploadFile } from "../../utils";
 import { useInput } from "../../hooks/useInput";
 import { useQuery, useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { ThemeContext } from "../../contexts/theme";
 import { useState, useContext } from "react";
 import { styled } from "@mui/material/styles";

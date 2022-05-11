@@ -9,7 +9,7 @@ import { Stack, Typography } from "@mui/material";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import { currentCluster } from "../../utils/utils";
 // import { ThemeContext } from "../../contexts/theme";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { displayError } from "../../utils";
 import { Loader } from "../Loader";
 

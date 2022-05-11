@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext, useCallback } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
-import ModalUnstyled from "@mui/core/ModalUnstyled";
+import { ModalUnstyled } from '@mui/base';
 import {
   Box,
   Button,
@@ -21,7 +21,7 @@ import { ThemeContext } from "../../contexts/theme";
 import { styled } from "@mui/material/styles";
 import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import cuid from "cuid";
 
 const StyledModal = styled(ModalUnstyled)({

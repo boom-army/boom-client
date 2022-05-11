@@ -6,7 +6,7 @@ import { ThemeContext } from "../../contexts/theme";
 import { Typography } from "@mui/material";
 import { displayError } from "../../utils";
 import { useMutation } from "@apollo/client";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 
 interface RetweetProps {
   id: string;

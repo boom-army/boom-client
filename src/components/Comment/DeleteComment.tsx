@@ -4,7 +4,7 @@ import { TWEET } from "../../queries/tweet";
 import { TrashIcon } from "../Icons";
 import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { useSnackbar } from "notistack";
+import { useSnackbar } from "../../contexts/snackbar";
 import { Comment, Tweet } from "../../generated/graphql";
 
 interface DeleteProps {

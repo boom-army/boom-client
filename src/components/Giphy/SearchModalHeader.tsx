@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { FormControl, InputAdornment } from "@mui/material";
-import { TextField } from "@material-ui/core";
+import { TextField } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
 
 interface Props {

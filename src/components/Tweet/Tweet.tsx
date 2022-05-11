@@ -133,6 +133,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
           {reactions && reactions.length > 0 && (
             <ReactionsList
               reactions={reactions}
+              // @ts-ignore
               handleReaction={handleReaction}
               tweetId={id}
             />

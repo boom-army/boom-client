@@ -31,7 +31,7 @@ export const MasterTweet = () => {
 
   return (
     <Wrapper>
-      <Helmet>
+      {/* <Helmet>
         <title>Boom</title>
         <meta
           name="title"
@@ -54,7 +54,7 @@ export const MasterTweet = () => {
         />
         <meta name="twitter:description" content={data?.tweet?.text} />
         <meta name="twitter:image" content={heroImage} />
-      </Helmet>
+      </Helmet> */}
       {loading ? (
         <Loader />
       ) : (
