@@ -1,3 +1,4 @@
+import { web3 } from "@project-serum/anchor";
 import { useContext } from "react";
 import { Container } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
@@ -42,14 +43,28 @@ const ThemeListItemText = styled(ListItemText)((props) => ({
   },
 }));
 
+const getCandyMachineId = (): web3.PublicKey | undefined => {
+  try {
+    const candyMachineId = new web3.PublicKey(
+      process.env.REACT_APP_CANDY_MACHINE_ID!,
+    );
+
+    return candyMachineId;
+  } catch (e) {
+    console.log('Failed to construct CandyMachineId', e);
+    return undefined;
+  }
+};
+
+const cluster = currentCluster();
+const rpcHost = cluster?.endpoint;
+const network = cluster?.name;
+const txTimeout: number = 30000;
+const candyMachineId = getCandyMachineId();
+
 export const OGMint = () => {
   const { theme } = useContext(ThemeContext);
   const { connection } = useConnection();
-  const cluster = currentCluster();
-  const rpcHost = cluster?.endpoint;
-  const network = cluster?.name;
-  const txTimeout: number = 30000;
-  const candyMachineId = new PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID ?? '');
 
   return (
     <Container style={{ marginTop: 20 }}>

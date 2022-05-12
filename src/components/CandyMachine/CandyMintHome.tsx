@@ -310,8 +310,6 @@ export const CandyMintHome = (props: HomeProps) => {
             message: "Please sign account setup transaction",
             severity: "info",
           });
-          console.log('----------------', candyMachine,
-          wallet.publicKey.toString());
           setupMint = await createAccountsForMint(
             candyMachine,
             wallet.publicKey
