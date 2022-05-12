@@ -3,31 +3,16 @@ import { Button } from "@mui/material";
 import { CandyMachineAccount } from "../../utils/candy-machine";
 import { CircularProgress } from "@mui/material";
 import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
-import { useEffect, useState, useRef } from "react";
+import { ThemeContext } from "../../contexts/theme";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { useContext } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   findGatewayToken,
   getGatewayTokenAddressForOwnerAndGatekeeperNetwork,
   onGatewayTokenChange,
   removeAccountChangeListener,
 } from "@identity.com/solana-gateway-ts";
-
-export const CTAButton = styled(Button)(({ theme }) => ({
-  "&.MuiButton-root": {
-    width: "100%",
-    height: "60px",
-    marginTop: "10px",
-    marginBottom: "5px",
-    backgroundColor: theme.accentColor,
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "bold",
-  },
-  "&.MuiButton-contained.Mui-disabled": {
-    backgroundColor: theme.tertiaryColor,
-    color: theme.primaryColor,
-  },
-}));
 
 export const MintButton = ({
   onMint,
@@ -44,10 +29,30 @@ export const MintButton = ({
 }) => {
   const wallet = useWallet();
   const connection = useConnection();
+  const { theme } = useContext(ThemeContext);
   const [verified, setVerified] = useState(false);
   const { requestGatewayToken, gatewayStatus } = useGateway();
   const [webSocketSubscriptionId, setWebSocketSubscriptionId] = useState(-1);
   const [clicked, setClicked] = useState(false);
+
+  const CTAButton = styled(Button)({
+    width: "100%",
+    height: "60px",
+    marginTop: "10px",
+    marginBottom: "5px",
+    backgroundColor: theme.accentColor,
+    color: "white",
+    fontSize: "16px",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: theme.accentColor,
+      filter: "brightness(0.8)",
+    },
+    "&.MuiButton-contained.Mui-disabled": {
+      backgroundColor: theme.tertiaryColor,
+      color: theme.primaryColor,
+    },
+  });
 
   const getMintButtonContent = () => {
     if (candyMachine?.state.isSoldOut) {
