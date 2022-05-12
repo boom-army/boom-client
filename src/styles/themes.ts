@@ -55,6 +55,7 @@ export const lightTheme = {
   palette: {
     text: {
       primary: "#17141A",
+      secondary: "#F5F8FA",
     }
   },
   ...fontSettings,
@@ -76,6 +77,7 @@ export const darkTheme = {
   palette: {
     text: {
       primary: "#FFF",
+      secondary: "#CCC",
     }
   },
   ...fontSettings,
