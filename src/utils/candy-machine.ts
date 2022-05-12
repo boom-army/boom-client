@@ -12,10 +12,7 @@ import {
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
-import {
-  sendTransactions,
-  SequenceType,
-} from "../contexts/connection";
+import { sendTransactions, SequenceType } from "../contexts/connection";
 
 export const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
   "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ"
@@ -284,7 +281,7 @@ export type SetupState = {
 
 export const createAccountsForMint = async (
   candyMachine: CandyMachineAccount,
-  payer: anchor.web3.PublicKey
+  payer: anchor.web3.PublicKey,
 ): Promise<SetupState> => {
   const mint = anchor.web3.Keypair.generate();
   const userTokenAccountAddress = (
@@ -299,7 +296,7 @@ export const createAccountsForMint = async (
       space: MintLayout.span,
       lamports:
         await candyMachine.program.provider.connection.getMinimumBalanceForRentExemption(
-          MintLayout.span
+          MintLayout.span,
         ),
       programId: TOKEN_PROGRAM_ID,
     }),
@@ -308,13 +305,13 @@ export const createAccountsForMint = async (
       mint.publicKey,
       0,
       payer,
-      payer
+      payer,
     ),
     createAssociatedTokenAccountInstruction(
       userTokenAccountAddress,
       payer,
       payer,
-      mint.publicKey
+      mint.publicKey,
     ),
     Token.createMintToInstruction(
       TOKEN_PROGRAM_ID,
@@ -322,7 +319,7 @@ export const createAccountsForMint = async (
       userTokenAccountAddress,
       payer,
       [],
-      1
+      1,
     ),
   ];
 
@@ -332,14 +329,16 @@ export const createAccountsForMint = async (
     transaction: (
       await sendTransactions(
         candyMachine.program.provider.connection,
-        payer,
+        candyMachine.program.provider.wallet,
         [instructions],
         [signers],
         SequenceType.StopOnFailure,
-        "singleGossip",
+        'singleGossip',
         () => {},
         () => false,
-        undefined
+        undefined,
+        [],
+        [],
       )
     ).txs[0].txid,
   };
