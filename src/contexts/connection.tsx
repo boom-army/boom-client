@@ -32,6 +32,8 @@ interface BlockhashAndFeeCalculator {
 
 export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
 
+export const DEFAULT_TIMEOUT = 60000;
+
 export const ENDPOINTS = [
   {
     name: WalletAdapterNetwork.Mainnet,
@@ -338,12 +340,12 @@ export const sendTransactions = async (
   instructionSet: TransactionInstruction[][],
   signersSet: Keypair[][],
   sequenceType: SequenceType = SequenceType.Parallel,
-  commitment: Commitment = 'singleGossip',
+  commitment: Commitment = "singleGossip",
   successCallback: (txid: string, ind: number) => void = (txid, ind) => {},
   failCallback: (reason: string, ind: number) => boolean = (txid, ind) => false,
   block?: BlockhashAndFeeCalculator,
   beforeTransactions: Transaction[] = [],
-  afterTransactions: Transaction[] = [],
+  afterTransactions: Transaction[] = []
 ): Promise<{ number: number; txs: { txid: string; slot: number }[] }> => {
   if (!wallet.publicKey) throw new WalletNotConnectedError();
 
@@ -362,12 +364,12 @@ export const sendTransactions = async (
     }
 
     let transaction = new Transaction();
-    instructions.forEach(instruction => transaction.add(instruction));
+    instructions.forEach((instruction) => transaction.add(instruction));
     transaction.recentBlockhash = block.blockhash;
     transaction.setSigners(
       // fee payed by the wallet owner
       wallet.publicKey,
-      ...signers.map(s => s.publicKey),
+      ...signers.map((s) => s.publicKey)
     );
 
     if (signers.length > 0) {
@@ -378,23 +380,23 @@ export const sendTransactions = async (
   }
   unsignedTxns.push(...afterTransactions);
 
-  const partiallySignedTransactions = unsignedTxns.filter(t =>
-    t.signatures.find(sig => sig.publicKey.equals(wallet.publicKey)),
+  const partiallySignedTransactions = unsignedTxns.filter((t) =>
+    t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey))
   );
   const fullySignedTransactions = unsignedTxns.filter(
-    t => !t.signatures.find(sig => sig.publicKey.equals(wallet.publicKey)),
+    (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey))
   );
   let signedTxns = await wallet.signAllTransactions(
-    partiallySignedTransactions,
+    partiallySignedTransactions
   );
   signedTxns = fullySignedTransactions.concat(signedTxns);
   const pendingTxns: Promise<{ txid: string; slot: number }>[] = [];
 
   console.log(
-    'Signed txns length',
+    "Signed txns length",
     signedTxns.length,
-    'vs handed in length',
-    instructionSet.length,
+    "vs handed in length",
+    instructionSet.length
   );
   for (let i = 0; i < signedTxns.length; i++) {
     const signedTxnPromise = sendSignedTransaction({
@@ -405,12 +407,12 @@ export const sendTransactions = async (
     if (sequenceType !== SequenceType.Parallel) {
       try {
         await signedTxnPromise.then(({ txid, slot }) =>
-          successCallback(txid, i),
+          successCallback(txid, i)
         );
         pendingTxns.push(signedTxnPromise);
       } catch (e) {
-        console.log('Failed at txn index:', i);
-        console.log('Caught failure:', e);
+        console.log("Failed at txn index:", i);
+        console.log("Caught failure:", e);
 
         failCallback(signedTxns[i], i);
         if (sequenceType === SequenceType.StopOnFailure) {
@@ -436,7 +438,7 @@ export const sendTransactions = async (
 export const sendTransaction = async (
   connection: Connection,
   wallet: any,
-  instructions: TransactionInstruction[],
+  instructions: TransactionInstruction[] | Transaction,
   signers: Keypair[],
   awaitConfirmation = true,
   commitment: Commitment = "singleGossip",
@@ -445,27 +447,32 @@ export const sendTransaction = async (
 ) => {
   if (!wallet.publicKey) throw new WalletNotConnectedError();
 
-  let transaction = new Transaction();
-  instructions.forEach((instruction) => transaction.add(instruction));
-  transaction.recentBlockhash = (
-    block || (await connection.getRecentBlockhash(commitment))
-  ).blockhash;
-
-  if (includesFeePayer) {
-    transaction.setSigners(...signers.map((s) => s.publicKey));
+  let transaction: Transaction;
+  if (instructions instanceof Transaction) {
+    transaction = instructions;
   } else {
-    transaction.setSigners(
-      // fee payed by the wallet owner
-      wallet.publicKey,
-      ...signers.map((s) => s.publicKey)
-    );
-  }
+    transaction = new Transaction();
+    instructions.forEach((instruction) => transaction.add(instruction));
+    transaction.recentBlockhash = (
+      block || (await connection.getRecentBlockhash(commitment))
+    ).blockhash;
 
-  if (signers.length > 0) {
-    transaction.partialSign(...signers);
-  }
-  if (!includesFeePayer) {
-    transaction = await wallet.signTransaction(transaction);
+    if (includesFeePayer) {
+      transaction.setSigners(...signers.map((s) => s.publicKey));
+    } else {
+      transaction.setSigners(
+        // fee payed by the wallet owner
+        wallet.publicKey,
+        ...signers.map((s) => s.publicKey)
+      );
+    }
+
+    if (signers.length > 0) {
+      transaction.partialSign(...signers);
+    }
+    if (!includesFeePayer) {
+      transaction = await wallet.signTransaction(transaction);
+    }
   }
 
   const rawTransaction = transaction.serialize();
@@ -550,8 +557,6 @@ export const sendTransactionWithRetry = async (
 export const getUnixTs = () => {
   return new Date().getTime() / 1000;
 };
-
-const DEFAULT_TIMEOUT = 15000;
 
 export async function sendSignedTransaction({
   signedTransaction,
