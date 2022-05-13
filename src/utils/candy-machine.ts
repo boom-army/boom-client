@@ -1,21 +1,20 @@
 import * as anchor from "@project-serum/anchor";
+
+import { MintLayout, TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
+import {
+  SystemProgram,
+  Transaction,
+  SYSVAR_SLOT_HASHES_PUBKEY,
+} from "@solana/web3.js";
+import { sendTransactions, SequenceType } from "../contexts/connection";
+
 import {
   CIVIC,
-  SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
   getAtaForMint,
   getNetworkExpire,
   getNetworkToken,
+  SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
 } from "./utils";
-import { MintLayout, TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
-import {
-  SYSVAR_SLOT_HASHES_PUBKEY,
-  SystemProgram,
-  Transaction,
-} from "@solana/web3.js";
-import {
-  sendTransactions,
-  SequenceType,
-} from "../contexts/connection";
 
 export const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
   "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ"
@@ -121,11 +120,9 @@ export const awaitTransactionSignatureConfirmation = async (
       await sleep(2000);
     }
   });
-
-  //@ts-ignore
-  if (connection._signatureSubscriptions[subId]) {
-    connection.removeSignatureListener(subId);
-  }
+  // if (connection._signatureSubscriptions[subId]) {
+  //   connection.removeSignatureListener(subId);
+  // }
   done = true;
   console.log("Returning status", status);
   return status;
@@ -332,14 +329,17 @@ export const createAccountsForMint = async (
     transaction: (
       await sendTransactions(
         candyMachine.program.provider.connection,
-        payer,
+        //@ts-ignore
+        candyMachine.program.provider.wallet,
         [instructions],
         [signers],
         SequenceType.StopOnFailure,
         "singleGossip",
         () => {},
         () => false,
-        undefined
+        undefined,
+        [],
+        []
       )
     ).txs[0].txid,
   };
@@ -614,16 +614,19 @@ export const mintOneToken = async (
     const txns = (
       await sendTransactions(
         candyMachine.program.provider.connection,
-        payer,
+        //@ts-ignore
+        candyMachine.program.provider.wallet,
         instructionsMatrix,
         signersMatrix,
         SequenceType.StopOnFailure,
         "singleGossip",
         () => {},
         () => false,
-        undefined
+        undefined,
+        beforeTransactions,
+        afterTransactions
       )
-    ).txs.map((t: any) => t.txid);
+    ).txs.map((t) => t.txid);
     const mintTxn = txns[0];
     return {
       mintTxId: mintTxn,

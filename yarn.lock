@@ -2094,10 +2094,10 @@
     eip1193-provider "^1.0.1"
     js-sha3 "^0.8.0"
 
-"@civic/solana-gateway-react@^0.4.13":
-  version "0.4.13"
-  resolved "https://registry.yarnpkg.com/@civic/solana-gateway-react/-/solana-gateway-react-0.4.13.tgz#c8706e1f398c68fd2b28f4d604716bee56b3b1df"
-  integrity sha512-Hpw90oquM0AAksu5qZebmlzSr4Fe391fpXz2ham8qfWyed9rbDw7WlQxEqVPaXY77zYd1roU1+7tNg+nwAy1GQ==
+"@civic/solana-gateway-react@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@civic/solana-gateway-react/-/solana-gateway-react-0.6.0.tgz#3063f76ddb238358a4cb8522382a59766b7a89e1"
+  integrity sha512-FgX0kwTOCDuizqX+wlqlO6IKP0asCw8cfJ3Jll+dNocK27aTMOKPuAqLzUtXerfCoXs+xq+hojtnh+Q1CsYDAQ==
   dependencies:
     "@identity.com/prove-solana-wallet" "^0.2.3"
     "@identity.com/solana-gateway-ts" "^0.7.0"
@@ -2801,6 +2801,17 @@
     borsh "^0.4.0"
     ramda "^0.27.1"
 
+"@identity.com/solana-gateway-ts@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@identity.com/solana-gateway-ts/-/solana-gateway-ts-0.8.2.tgz#a8de5929e94a98b64cbdc38b4745f3fb20ae58aa"
+  integrity sha512-xFFoZtlF9XLHZ/ZS59QdVTDAtG7GJU2CqpXzwHwG7bPhhhXJ2zTHqlJ9oax2Faf9UKjyzp7F7TWfMScpTeOkEQ==
+  dependencies:
+    "@solana/web3.js" "^1.22.0"
+    async-retry "^1.3.3"
+    bn.js "^5.2.0"
+    borsh "^0.4.0"
+    ramda "^0.27.1"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -3310,7 +3321,7 @@
     "@solana/spl-token" "^0.1.8"
     "@solana/web3.js" "^1.31.0"
 
-"@metaplex-foundation/mpl-token-metadata@^1.2.5":
+"@metaplex-foundation/mpl-token-metadata@^1.1.0", "@metaplex-foundation/mpl-token-metadata@^1.2.5":
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-token-metadata/-/mpl-token-metadata-1.2.5.tgz#1a927b1c7d30cd634a1e4782022712a02f6865c2"
   integrity sha512-pxRG53JsTSwXpiJJMHNulJhH8kO3hHztQ3QxslUoKw2hBYKXsg9TGsiHgNIhN2MPZGBJ2pDeK6kNGv0sd54HhA==
@@ -3328,20 +3339,20 @@
     "@solana/spl-token" "^0.1.8"
     "@solana/web3.js" "^1.31.0"
 
-"@metaplex/js@^4.10.1":
-  version "4.10.1"
-  resolved "https://registry.yarnpkg.com/@metaplex/js/-/js-4.10.1.tgz#bb78382bdd33cce0b58679ab2e3e83accfa9ef31"
-  integrity sha512-f0MBRgZTacj9drM/ANr4gV7Q3NtY+xW6OgP3rfHqrSUCatxHsqeeeAMUwR0bKbiyzdGLwVff9cFGi0muFr9TZA==
+"@metaplex/js@^4.12.0":
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/@metaplex/js/-/js-4.12.0.tgz#1190767a4e69d4e5613002aab3f4c1fb8de07896"
+  integrity sha512-rIUTMXo5gIXFIZt08AEHyqH4oVoLL2dMYiNePQluw9pydesRym4jDayJ5POxEmKmyc6KGqVKw/YWUIivmUY5zg==
   dependencies:
     "@metaplex-foundation/mpl-auction" "^0.0.2"
     "@metaplex-foundation/mpl-core" "^0.0.2"
     "@metaplex-foundation/mpl-metaplex" "^0.0.5"
-    "@metaplex-foundation/mpl-token-metadata" "^0.0.2"
+    "@metaplex-foundation/mpl-token-metadata" "^1.1.0"
     "@metaplex-foundation/mpl-token-vault" "^0.0.2"
     "@solana/spl-token" "^0.1.8"
     "@solana/web3.js" "^1.30.2"
     "@types/bs58" "^4.0.1"
-    axios "^0.21.4"
+    axios "^0.25.0"
     bn.js "^5.2.0"
     borsh "^0.4.0"
     bs58 "^4.0.1"
@@ -5927,12 +5938,19 @@ axios@0.21.1:
   dependencies:
     follow-redirects "^1.10.0"
 
-axios@^0.21.0, axios@^0.21.4:
+axios@^0.21.0:
   version "0.21.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
+
+axios@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.25.0.tgz#349cfbb31331a9b4453190791760a8d35b093e0a"
+  integrity sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==
+  dependencies:
+    follow-redirects "^1.14.7"
 
 axobject-query@^2.2.0:
   version "2.2.0"
@@ -9862,6 +9880,11 @@ follow-redirects@^1.0.0, follow-redirects@^1.10.0, follow-redirects@^1.14.0:
   version "1.14.5"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.5.tgz#f09a5848981d3c772b5392309778523f8d85c381"
   integrity sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==
+
+follow-redirects@^1.14.7:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.0.tgz#06441868281c86d0dda4ad8bdaead2d02dca89d4"
+  integrity sha512-aExlJShTV4qOUOL7yF1U5tvLCB0xQuudbf6toyYA0E/acBNw71mvjFTnLaRp50aQaYocMR0a/RMMBIHeZnGyjQ==
 
 for-in@^1.0.2:
   version "1.0.2"

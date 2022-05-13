@@ -1,70 +1,164 @@
+import styled from "styled-components";
+import { Button } from "@mui/material";
 import { CandyMachineAccount } from "../../utils/candy-machine";
-import { Button, CircularProgress, styled } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
-import { useEffect, useState } from "react";
-
-export const CTAButton = styled(Button)((props) => ({
-  "&.MuiButton-root": {
-    width: "100%",
-    height: "60px",
-    marginTop: "10px",
-    marginBottom: "5px",
-    backgroundColor: props.theme.accentColor,
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "bold",
-  },
-  "&.MuiButton-contained.Mui-disabled": {
-    backgroundColor: props.theme.tertiaryColor,
-    color: props.theme.primaryColor,
-  },
-}));
+import { ThemeContext } from "../../contexts/theme";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { useContext } from "react";
+import { useEffect, useState, useRef } from "react";
+import {
+  findGatewayToken,
+  getGatewayTokenAddressForOwnerAndGatekeeperNetwork,
+  onGatewayTokenChange,
+  removeAccountChangeListener,
+} from "@identity.com/solana-gateway-ts";
 
 export const MintButton = ({
   onMint,
   candyMachine,
   isMinting,
+  setIsMinting,
+  isActive,
 }: {
   onMint: () => Promise<void>;
   candyMachine?: CandyMachineAccount;
   isMinting: boolean;
+  setIsMinting: (val: boolean) => void;
+  isActive: boolean;
 }) => {
+  const wallet = useWallet();
+  const connection = useConnection();
+  const { theme } = useContext(ThemeContext);
+  const [verified, setVerified] = useState(false);
   const { requestGatewayToken, gatewayStatus } = useGateway();
+  const [webSocketSubscriptionId, setWebSocketSubscriptionId] = useState(-1);
   const [clicked, setClicked] = useState(false);
 
-  useEffect(() => {
-    if (gatewayStatus === GatewayStatus.ACTIVE && clicked) {
-      onMint();
-      setClicked(false);
-    }
-  }, [gatewayStatus, clicked, setClicked, onMint]);
+  const CTAButton = styled(Button)({
+    width: "100%",
+    height: "60px",
+    marginTop: "10px",
+    marginBottom: "5px",
+    backgroundColor: theme.accentColor,
+    color: "white",
+    fontSize: "16px",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: theme.accentColor,
+      filter: "brightness(0.8)",
+    },
+    "&.MuiButton-contained.Mui-disabled": {
+      backgroundColor: theme.tertiaryColor,
+      color: theme.primaryColor,
+    },
+  });
 
   const getMintButtonContent = () => {
     if (candyMachine?.state.isSoldOut) {
       return "SOLD OUT";
     } else if (isMinting) {
       return <CircularProgress />;
-    } else if (candyMachine?.state.isPresale) {
-      return "PRESALE MINT";
+    } else if (
+      candyMachine?.state.isPresale ||
+      candyMachine?.state.isWhitelistOnly
+    ) {
+      return "WHITELIST MINT";
     }
 
     return "MINT";
   };
 
+  useEffect(() => {
+    const mint = async () => {
+      await removeAccountChangeListener(
+        connection.connection,
+        webSocketSubscriptionId
+      );
+      await onMint();
+
+      setClicked(false);
+      setVerified(false);
+    };
+    if (verified && clicked) {
+      mint();
+    }
+  }, [
+    verified,
+    clicked,
+    connection.connection,
+    onMint,
+    webSocketSubscriptionId,
+  ]);
+
+  const previousGatewayStatus = usePrevious(gatewayStatus);
+  useEffect(() => {
+    const fromStates = [
+      GatewayStatus.NOT_REQUESTED,
+      GatewayStatus.REFRESH_TOKEN_REQUIRED,
+    ];
+    const invalidToStates = [...fromStates, GatewayStatus.UNKNOWN];
+    if (
+      fromStates.find((state) => previousGatewayStatus === state) &&
+      !invalidToStates.find((state) => gatewayStatus === state)
+    ) {
+      setIsMinting(true);
+    }
+    console.log("change: ", gatewayStatus);
+  }, [setIsMinting, previousGatewayStatus, gatewayStatus]);
+
   return (
     <CTAButton
-      disabled={
-        candyMachine?.state.isSoldOut ||
-        isMinting ||
-        !candyMachine?.state.isActive
-      }
+      disabled={isMinting || !isActive}
       onClick={async () => {
-        setClicked(true);
         if (candyMachine?.state.isActive && candyMachine?.state.gatekeeper) {
-          if (gatewayStatus === GatewayStatus.ACTIVE) {
+          const network =
+            candyMachine.state.gatekeeper.gatekeeperNetwork.toBase58();
+          if (network === "ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6") {
+            if (gatewayStatus === GatewayStatus.ACTIVE) {
+              await onMint();
+            } else {
+              // setIsMinting(true);
+              await requestGatewayToken();
+              console.log("after: ", gatewayStatus);
+            }
+          } else if (
+            network === "ttib7tuX8PTWPqFsmUFQTj78MbRhUmqxidJRDv4hRRE" ||
+            network === "tibePmPaoTgrs929rWpu755EXaxC7M3SthVCf6GzjZt"
+          ) {
             setClicked(true);
+            const gatewayToken = await findGatewayToken(
+              connection.connection,
+              wallet.publicKey!,
+              candyMachine.state.gatekeeper.gatekeeperNetwork
+            );
+
+            if (gatewayToken?.isValid()) {
+              await onMint();
+            } else {
+              window.open(
+                `https://verify.encore.fans/?gkNetwork=${network}`,
+                "_blank"
+              );
+
+              const gatewayTokenAddress =
+                await getGatewayTokenAddressForOwnerAndGatekeeperNetwork(
+                  wallet.publicKey!,
+                  candyMachine.state.gatekeeper.gatekeeperNetwork
+                );
+
+              setWebSocketSubscriptionId(
+                onGatewayTokenChange(
+                  connection.connection,
+                  gatewayTokenAddress,
+                  () => setVerified(true),
+                  "confirmed"
+                )
+              );
+            }
           } else {
-            await requestGatewayToken();
+            setClicked(false);
+            throw new Error(`Unknown Gatekeeper Network: ${network}`);
           }
         } else {
           await onMint();
@@ -77,3 +171,11 @@ export const MintButton = ({
     </CTAButton>
   );
 };
+
+function usePrevious<T>(value: T): T | undefined {
+  const ref = useRef<T>();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
