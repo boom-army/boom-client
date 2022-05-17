@@ -21,7 +21,7 @@ import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useGetMetaQuery } from "../../generated/graphql";
 import { useReaction } from "../../hooks/useReaction";
-import { UrlMetaData } from "./UrlMetaData";
+import { UrlMetaData } from "../UrlMeta/UrlMetaData";
 
 interface Props {
   tweet: Tweet;
