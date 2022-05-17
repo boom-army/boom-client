@@ -27,11 +27,11 @@ export const UrlMetaData: React.FC<Props> = ({ url }: Props) => {
   );
 
   const hasData =
-    heroImage && data?.getMeta?.title && data?.getMeta?.description;
+    heroImage && data?.getMeta?.title && data?.getMeta?.description && url;
 
   return hasData ? (
     <Card sx={{ maxWidth: 400, margin: "1em 0" }}>
-      <CardActionArea>
+      <CardActionArea onClick={() => window.open(url, '_blank')?.focus()}>
         <CardMedia
           component="img"
           height="140"
