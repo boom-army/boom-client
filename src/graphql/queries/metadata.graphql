@@ -1,4 +1,4 @@
-query getMeta($url: String!) {
+query getMeta($url: String) {
   getMeta(url: $url) {
     title
     description

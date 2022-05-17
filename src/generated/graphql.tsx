@@ -486,7 +486,7 @@ export type QueryFeedArgs = {
 
 
 export type QueryGetMetaArgs = {
-  url: Scalars['String'];
+  url?: Maybe<Scalars['String']>;
 };
 
 
@@ -694,7 +694,7 @@ export type MentionsQueryVariables = Exact<{
 export type MentionsQuery = { __typename?: 'Query', mentions: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, user?: { __typename?: 'User', id: string, avatar: string, publicAddress: string, handle: string, consumerName?: string | null | undefined } | null | undefined }> };
 
 export type GetMetaQueryVariables = Exact<{
-  url: Scalars['String'];
+  url?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -1206,7 +1206,7 @@ export type MentionsQueryHookResult = ReturnType<typeof useMentionsQuery>;
 export type MentionsLazyQueryHookResult = ReturnType<typeof useMentionsLazyQuery>;
 export type MentionsQueryResult = Apollo.QueryResult<MentionsQuery, MentionsQueryVariables>;
 export const GetMetaDocument = gql`
-    query getMeta($url: String!) {
+    query getMeta($url: String) {
   getMeta(url: $url) {
     title
     description
@@ -1319,7 +1319,7 @@ export const GetMetaDocument = gql`
  *   },
  * });
  */
-export function useGetMetaQuery(baseOptions: Apollo.QueryHookOptions<GetMetaQuery, GetMetaQueryVariables>) {
+export function useGetMetaQuery(baseOptions?: Apollo.QueryHookOptions<GetMetaQuery, GetMetaQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetMetaQuery, GetMetaQueryVariables>(GetMetaDocument, options);
       }
