@@ -1,0 +1,95 @@
+query getMeta($url: String) {
+  getMeta(url: $url) {
+    title
+    description
+    keywords
+    favicon
+    author
+    oEmbed {
+      type
+      version
+      title
+      author_name
+      author_url
+      provider_name
+      provider_url
+      cache_age
+      thumbnails {
+        url
+        width
+        height
+      }
+    }
+    twitter_card {
+      card
+      site
+      creator
+      creator_id
+      title
+      description
+      players {
+        url
+        stream
+        height
+        width
+      }
+      apps {
+        iphone {
+          id
+          name
+          url
+        }
+        ipad {
+          id
+          name
+          url
+        }
+        googleplay {
+          id
+          name
+          url
+        }
+      }
+      images {
+        url
+        alt
+      }
+    }
+    open_graph {
+      title
+      type
+      images {
+        url
+        secure_url
+        type
+        width
+        height
+      }
+      url
+      audio {
+        url
+        secure_url
+        type
+      }
+      description
+      determiner
+      locale
+      locale_alt
+      videos {
+        url
+        stream
+        height
+        width
+        tags
+      }
+      article {
+        published_time
+        modified_time
+        expiration_time
+        author
+        section
+        tags
+      }
+    }
+  }
+}

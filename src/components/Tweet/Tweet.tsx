@@ -1,7 +1,8 @@
 import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
+import * as linkify from "linkifyjs";
 import Linkify from "linkify-react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UserAvatar from "../UserAvatar";
 import moment from "moment";
 import { Box, Grid, Stack, Typography } from "@mui/material";
@@ -18,7 +19,9 @@ import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
+import { useGetMetaQuery } from "../../generated/graphql";
 import { useReaction } from "../../hooks/useReaction";
+import { UrlMetaData } from "../UrlMeta/UrlMetaData";
 
 interface Props {
   tweet: Tweet;
@@ -63,6 +66,10 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
   const { handleReaction } = useReaction({ tweetId: id });
   const handle = user && user.handle;
 
+  const extractUrls = linkify.find(text).filter((u) => u.type === "url");
+  const targetUrl = extractUrls[0]?.href;
+  // const targetUrl = 'https://github.com/trending'
+
   const linkifyOptions = {
     target: { url: "_blank" },
     formatHref: { hashtag: (href: any) => `explore?=${href.substring(1)}` },
@@ -101,6 +108,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
             {text}
           </TweetBody>
         </Linkify>
+        <UrlMetaData url={targetUrl} />
         <Box>
           {gif && <VideoContainer gif={gif} />}
           {nft && <NFTTweet nftData={nft} />}

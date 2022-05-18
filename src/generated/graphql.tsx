@@ -131,6 +131,123 @@ export type MembersCount = {
   count?: Maybe<Scalars['Int']>;
 };
 
+export enum MetaMediaType {
+  Link = 'link',
+  Photo = 'photo',
+  Rich = 'rich',
+  Video = 'video'
+}
+
+export type MetaOgArticle = {
+  __typename?: 'MetaOGArticle';
+  author?: Maybe<Scalars['String']>;
+  expiration_time?: Maybe<Scalars['String']>;
+  modified_time?: Maybe<Scalars['String']>;
+  published_time?: Maybe<Scalars['String']>;
+  section?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type MetaOgImages = {
+  __typename?: 'MetaOGImages';
+  height?: Maybe<Scalars['Int']>;
+  secure_url?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['Int']>;
+};
+
+export type MetaOgVideos = {
+  __typename?: 'MetaOGVideos';
+  height?: Maybe<Scalars['Int']>;
+  stream?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  url?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['Int']>;
+};
+
+export type MetaOgAudio = {
+  __typename?: 'MetaOgAudio';
+  secure_url?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+export type MetaOpenGraph = {
+  __typename?: 'MetaOpenGraph';
+  article?: Maybe<MetaOgArticle>;
+  audio?: Maybe<Array<Maybe<MetaOgAudio>>>;
+  description?: Maybe<Scalars['String']>;
+  determiner?: Maybe<Scalars['String']>;
+  images?: Maybe<Array<Maybe<MetaOgImages>>>;
+  locale?: Maybe<Scalars['String']>;
+  locale_alt?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  videos?: Maybe<Array<Maybe<MetaOgVideos>>>;
+};
+
+export type MetaThumbnails = {
+  __typename?: 'MetaThumbnails';
+  height?: Maybe<Scalars['Int']>;
+  url?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['Int']>;
+};
+
+export type MetaTwitterAppFields = {
+  __typename?: 'MetaTwitterAppFields';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+export type MetaTwitterApps = {
+  __typename?: 'MetaTwitterApps';
+  googleplay?: Maybe<MetaTwitterAppFields>;
+  ipad?: Maybe<MetaTwitterAppFields>;
+  iphone?: Maybe<MetaTwitterAppFields>;
+};
+
+export type MetaTwitterCard = {
+  __typename?: 'MetaTwitterCard';
+  apps?: Maybe<MetaTwitterApps>;
+  card?: Maybe<Scalars['String']>;
+  creator?: Maybe<Scalars['String']>;
+  creator_id?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  images?: Maybe<Array<Maybe<MetaTwitterImages>>>;
+  players?: Maybe<Array<Maybe<MetaTwitterPlayers>>>;
+  site?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type MetaTwitterImages = {
+  __typename?: 'MetaTwitterImages';
+  alt?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+export type MetaTwitterPlayers = {
+  __typename?: 'MetaTwitterPlayers';
+  height?: Maybe<Scalars['Int']>;
+  stream?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['Int']>;
+};
+
+export type Metadata = {
+  __typename?: 'Metadata';
+  author?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  favicon?: Maybe<Scalars['String']>;
+  keywords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  oEmbed?: Maybe<OEmbed>;
+  open_graph?: Maybe<MetaOpenGraph>;
+  title?: Maybe<Scalars['String']>;
+  twitter_card?: Maybe<MetaTwitterCard>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addChannel: Channel;
@@ -294,6 +411,19 @@ export type Nonce = {
   user?: Maybe<User>;
 };
 
+export type OEmbed = {
+  __typename?: 'OEmbed';
+  author_name?: Maybe<Scalars['String']>;
+  author_url?: Maybe<Scalars['String']>;
+  cache_age?: Maybe<Scalars['Int']>;
+  provider_name?: Maybe<Scalars['String']>;
+  provider_url?: Maybe<Scalars['String']>;
+  thumbnails?: Maybe<Array<Maybe<MetaThumbnails>>>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<MetaMediaType>;
+  version?: Maybe<Scalars['String']>;
+};
+
 export type OneSignal = {
   __typename?: 'OneSignal';
   createdAt?: Maybe<Scalars['String']>;
@@ -325,6 +455,7 @@ export type Query = {
   channelFeed: Array<Tweet>;
   channels: Array<Channel>;
   feed: Array<Tweet>;
+  getMeta?: Maybe<Metadata>;
   healthCheck: Scalars['String'];
   me: User;
   mentions: Array<Tweet>;
@@ -351,6 +482,11 @@ export type QueryFeedArgs = {
   global?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryGetMetaArgs = {
+  url?: Maybe<Scalars['String']>;
 };
 
 
@@ -556,6 +692,13 @@ export type MentionsQueryVariables = Exact<{
 
 
 export type MentionsQuery = { __typename?: 'Query', mentions: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, user?: { __typename?: 'User', id: string, avatar: string, publicAddress: string, handle: string, consumerName?: string | null | undefined } | null | undefined }> };
+
+export type GetMetaQueryVariables = Exact<{
+  url?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetMetaQuery = { __typename?: 'Query', getMeta?: { __typename?: 'Metadata', title?: string | null | undefined, description?: string | null | undefined, keywords?: Array<string | null | undefined> | null | undefined, favicon?: string | null | undefined, author?: string | null | undefined, oEmbed?: { __typename?: 'OEmbed', type?: MetaMediaType | null | undefined, version?: string | null | undefined, title?: string | null | undefined, author_name?: string | null | undefined, author_url?: string | null | undefined, provider_name?: string | null | undefined, provider_url?: string | null | undefined, cache_age?: number | null | undefined, thumbnails?: Array<{ __typename?: 'MetaThumbnails', url?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined, twitter_card?: { __typename?: 'MetaTwitterCard', card?: string | null | undefined, site?: string | null | undefined, creator?: string | null | undefined, creator_id?: string | null | undefined, title?: string | null | undefined, description?: string | null | undefined, players?: Array<{ __typename?: 'MetaTwitterPlayers', url?: string | null | undefined, stream?: string | null | undefined, height?: number | null | undefined, width?: number | null | undefined } | null | undefined> | null | undefined, apps?: { __typename?: 'MetaTwitterApps', iphone?: { __typename?: 'MetaTwitterAppFields', id?: string | null | undefined, name?: string | null | undefined, url?: string | null | undefined } | null | undefined, ipad?: { __typename?: 'MetaTwitterAppFields', id?: string | null | undefined, name?: string | null | undefined, url?: string | null | undefined } | null | undefined, googleplay?: { __typename?: 'MetaTwitterAppFields', id?: string | null | undefined, name?: string | null | undefined, url?: string | null | undefined } | null | undefined } | null | undefined, images?: Array<{ __typename?: 'MetaTwitterImages', url?: string | null | undefined, alt?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined, open_graph?: { __typename?: 'MetaOpenGraph', title?: string | null | undefined, type?: string | null | undefined, url?: string | null | undefined, description?: string | null | undefined, determiner?: string | null | undefined, locale?: string | null | undefined, locale_alt?: string | null | undefined, images?: Array<{ __typename?: 'MetaOGImages', url?: string | null | undefined, secure_url?: string | null | undefined, type?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined } | null | undefined> | null | undefined, audio?: Array<{ __typename?: 'MetaOgAudio', url?: string | null | undefined, secure_url?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, videos?: Array<{ __typename?: 'MetaOGVideos', url?: string | null | undefined, stream?: string | null | undefined, height?: number | null | undefined, width?: number | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined> | null | undefined, article?: { __typename?: 'MetaOGArticle', published_time?: string | null | undefined, modified_time?: string | null | undefined, expiration_time?: string | null | undefined, author?: string | null | undefined, section?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined } | null | undefined };
 
 export type OneSignalQueryVariables = Exact<{
   oneSignalId: Scalars['String'];
@@ -1062,6 +1205,131 @@ export function useMentionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<M
 export type MentionsQueryHookResult = ReturnType<typeof useMentionsQuery>;
 export type MentionsLazyQueryHookResult = ReturnType<typeof useMentionsLazyQuery>;
 export type MentionsQueryResult = Apollo.QueryResult<MentionsQuery, MentionsQueryVariables>;
+export const GetMetaDocument = gql`
+    query getMeta($url: String) {
+  getMeta(url: $url) {
+    title
+    description
+    keywords
+    favicon
+    author
+    oEmbed {
+      type
+      version
+      title
+      author_name
+      author_url
+      provider_name
+      provider_url
+      cache_age
+      thumbnails {
+        url
+        width
+        height
+      }
+    }
+    twitter_card {
+      card
+      site
+      creator
+      creator_id
+      title
+      description
+      players {
+        url
+        stream
+        height
+        width
+      }
+      apps {
+        iphone {
+          id
+          name
+          url
+        }
+        ipad {
+          id
+          name
+          url
+        }
+        googleplay {
+          id
+          name
+          url
+        }
+      }
+      images {
+        url
+        alt
+      }
+    }
+    open_graph {
+      title
+      type
+      images {
+        url
+        secure_url
+        type
+        width
+        height
+      }
+      url
+      audio {
+        url
+        secure_url
+        type
+      }
+      description
+      determiner
+      locale
+      locale_alt
+      videos {
+        url
+        stream
+        height
+        width
+        tags
+      }
+      article {
+        published_time
+        modified_time
+        expiration_time
+        author
+        section
+        tags
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetMetaQuery__
+ *
+ * To run a query within a React component, call `useGetMetaQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMetaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMetaQuery({
+ *   variables: {
+ *      url: // value for 'url'
+ *   },
+ * });
+ */
+export function useGetMetaQuery(baseOptions?: Apollo.QueryHookOptions<GetMetaQuery, GetMetaQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMetaQuery, GetMetaQueryVariables>(GetMetaDocument, options);
+      }
+export function useGetMetaLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMetaQuery, GetMetaQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMetaQuery, GetMetaQueryVariables>(GetMetaDocument, options);
+        }
+export type GetMetaQueryHookResult = ReturnType<typeof useGetMetaQuery>;
+export type GetMetaLazyQueryHookResult = ReturnType<typeof useGetMetaLazyQuery>;
+export type GetMetaQueryResult = Apollo.QueryResult<GetMetaQuery, GetMetaQueryVariables>;
 export const OneSignalDocument = gql`
     query oneSignal($oneSignalId: String!) {
   oneSignal(oneSignalId: $oneSignalId) {
