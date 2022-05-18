@@ -502,7 +502,7 @@ export type QueryOneSignalArgs = {
 
 
 export type QueryProfileArgs = {
-  handle: Scalars['String'];
+  handle?: Maybe<Scalars['String']>;
 };
 
 
@@ -708,7 +708,7 @@ export type OneSignalQueryVariables = Exact<{
 export type OneSignalQuery = { __typename?: 'Query', oneSignal: { __typename?: 'OneSignal', id: string, oneSignalId?: string | null | undefined, user?: { __typename?: 'User', id: string } | null | undefined } };
 
 export type ProfileQueryVariables = Exact<{
-  handle: Scalars['String'];
+  handle?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -1370,7 +1370,7 @@ export type OneSignalQueryHookResult = ReturnType<typeof useOneSignalQuery>;
 export type OneSignalLazyQueryHookResult = ReturnType<typeof useOneSignalLazyQuery>;
 export type OneSignalQueryResult = Apollo.QueryResult<OneSignalQuery, OneSignalQueryVariables>;
 export const ProfileDocument = gql`
-    query profile($handle: String!) {
+    query profile($handle: String) {
   profile(handle: $handle) {
     id
     publicAddress
@@ -1445,7 +1445,7 @@ export const ProfileDocument = gql`
  *   },
  * });
  */
-export function useProfileQuery(baseOptions: Apollo.QueryHookOptions<ProfileQuery, ProfileQueryVariables>) {
+export function useProfileQuery(baseOptions?: Apollo.QueryHookOptions<ProfileQuery, ProfileQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ProfileQuery, ProfileQueryVariables>(ProfileDocument, options);
       }

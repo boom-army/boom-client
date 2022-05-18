@@ -1,4 +1,4 @@
-query profile($handle: String!) {
+query profile($handle: String) {
   profile(handle: $handle) {
     id
     publicAddress

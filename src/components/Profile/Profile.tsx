@@ -5,7 +5,7 @@ import { Loader } from "../Loader";
 import { Meeps } from "./Meeps";
 import { TabContext, TabPanel, TabList } from "@mui/lab";
 import { useParams } from "react-router-dom";
-import { useProfileLazyQuery } from "../../generated/graphql";
+import { useProfileQuery } from "../../generated/graphql";
 import { NFTGallery } from "./NFTGallery";
 import { CustomResponse } from "../CustomResponse";
 
@@ -14,11 +14,7 @@ export const Profile: React.FC = () => {
 
   let { handle } = useParams<string>();
 
-  const [setHandle, { loading, data }] = useProfileLazyQuery();
-
-  useEffect(() => {
-    if (handle) setHandle({ variables: { handle } });
-  }, [handle, setHandle]);
+  const { loading, data } = useProfileQuery({ variables: { handle } });
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
@@ -29,7 +25,7 @@ export const Profile: React.FC = () => {
   }
   if (!loading && !data) {
     return (
-      <CustomResponse text="Oops, you are trying to visit a profile which doesn't exist. Make sure the profile handle exists" />
+      <CustomResponse text="You're unable to view that profile currently" />
     );
   }
 
