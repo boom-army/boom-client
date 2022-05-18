@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-// import StyleIcon from "@mui/icons-material/Style";
+import Person from "@mui/icons-material/Person";
+import React, { useContext } from "react";
+import StyleIcon from "@mui/icons-material/Style";
 import TagIcon from "@mui/icons-material/Tag";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -131,20 +132,20 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               </Stack>
             </NavLink>
           )}
-          {/* <NavLink style={applyActiveStyles} to="/mint-nft">
+          <NavLink style={applyActiveStyles} to="/mint-nft">
             <Stack direction="row" {...stackProps}>
               <StyleIcon sx={iconProps} />
               <Typography variant="body1">Mint NFT</Typography>
             </Stack>
-          </NavLink> */}
-          {/* <NavLink style={applyActiveStyles} to="/following">
-        <Stack direction="row" {...stackProps}>
-          <Person sx={iconProps} />
-          <Typography variant="body1" display={displayProps}>
-            Following
-          </Typography>
-        </Stack>
-      </NavLink> */}
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/following">
+            <Stack direction="row" {...stackProps}>
+              <Person sx={iconProps} />
+              <Typography variant="body1">
+                Following
+              </Typography>
+            </Stack>
+          </NavLink>
 
           {user?.handle && (
             <>
