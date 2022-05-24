@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProfileInfo from "./ProfileInfo";
 import { Box, Tab } from "@mui/material";
 import { Loader } from "../Loader";
