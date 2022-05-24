@@ -19,6 +19,12 @@ export const UrlMetaData: React.FC<Props> = ({ url }: Props) => {
     },
   });
 
+  console.log('-------', data);
+
+  const title = data?.getMeta?.open_graph?.title || data?.getMeta?.title;
+  const description = data?.getMeta?.open_graph?.description || data?.getMeta?.description;
+  
+
   const images = data?.getMeta?.open_graph?.images ||
     data?.getMeta?.twitter_card?.images || [{ url: null }];
   const heroImage = images[0]?.url;
@@ -30,7 +36,7 @@ export const UrlMetaData: React.FC<Props> = ({ url }: Props) => {
   );
 
   const hasData =
-    heroImage && data?.getMeta?.title && data?.getMeta?.description && url;
+    heroImage && title && description && url;
 
   return hasData ? (
     <Card sx={{ maxWidth: 400, margin: "1em 0" }}>
@@ -46,7 +52,7 @@ export const UrlMetaData: React.FC<Props> = ({ url }: Props) => {
             component="img"
             height="140"
             image={heroImage}
-            alt={data?.getMeta?.title || ""}
+            alt={title || ""}
           />
         )}
         <CardContent>
@@ -54,10 +60,10 @@ export const UrlMetaData: React.FC<Props> = ({ url }: Props) => {
             {rootUrl && rootUrl[0]}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            {data?.getMeta?.title}
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {data?.getMeta?.description}
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>
