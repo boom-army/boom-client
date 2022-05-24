@@ -19,8 +19,6 @@ export const UrlMetaData: React.FC<Props> = ({ url }: Props) => {
     },
   });
 
-  console.log('-------', data);
-
   const title = data?.getMeta?.open_graph?.title || data?.getMeta?.title;
   const description = data?.getMeta?.open_graph?.description || data?.getMeta?.description;
   
