@@ -124,7 +124,6 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
           padding: 1,
         }}
         onClick={toggleChannel}
-        key={channel.id}
       >
         <Box mr={1}>
           <Avatar

@@ -7,7 +7,7 @@ import { Loader } from "../components/Loader";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { concat, uniqBy } from "lodash";
 import { displayError } from "../utils";
-import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+import { AnchorWallet, useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../contexts/snackbar";
 import { useApolloClient } from '@apollo/client';
 
@@ -15,7 +15,7 @@ export const Channels: React.FC = () => {
   const { connection } = useConnection();
   const client = useApolloClient();
   const anchorWallet = useAnchorWallet();
-  const wallet = anchorWallet;
+  const wallet = anchorWallet as AnchorWallet;
   const { enqueueSnackbar } = useSnackbar();
 
   const { data, loading, error } = useChannelsQuery();
