@@ -19,7 +19,7 @@ import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { FeedDocument } from "../../generated/graphql";
-import { Box, padding } from "@mui/system";
+import { Box } from "@mui/system";
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
@@ -100,6 +100,7 @@ export const AppHeader = () => {
   const TopBar = (
     <Slide appear={false} direction="down" in={!trigger}>
       <AppBar
+        position="relative"
         sx={{
           borderBottom: (t) => `1px solid ${t.palette.divider}`
         }}
