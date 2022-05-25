@@ -37,7 +37,7 @@ export const ConsumerCard = ({ consumer }: any) => {
           image={
             consumer.coverPhoto
               ? consumer.coverPhoto
-              : `${window.location.origin}/default-cover.png`
+              : '/assets/default-cover.png'
           }
           alt={`${consumer.handle} cover photo`}
         />
