@@ -9,7 +9,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import React, { useContext, useEffect } from "react";
 import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
-import { Badge, Grid, Paper, SwipeableDrawer } from "@mui/material";
+import { Badge, Container, Grid, Paper, SwipeableDrawer } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import {
@@ -129,6 +129,7 @@ export const AppRoutes: React.FC = () => {
         <meta name="twitter:image" content={BoomArmy} />
         <meta name="twitter:creator" content="@boom_army_" />
       </Helmet> */}
+
       <BrowserRouter basename={"/"}>
         <Wallet>
           <AccountsProvider>
@@ -136,134 +137,141 @@ export const AppRoutes: React.FC = () => {
               {/* @ts-ignore */}
               <GiphyContextProvider>
                 <AppHeader />
-                <Grid container mt={6}>
-                  <Paper
-                    component={Grid}
-                    item
-                    md={2}
-                    display={{ xs: "none", sm: "none", md: "block" }}
-                  >
-                    <Nav
-                      user={user}
-                      newMentionsCount={data?.profile?.newMentionsCount}
-                    />
-                  </Paper>
-                  <Paper
-                    component={Grid}
-                    item
-                    xs={12}
-                    sm={12}
-                    md={7}
-                    sx={middleColStyles}
-                    elevation={0}
-                  >
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="following" element={<Following />} />
-                      <Route path="connect" element={<ConnectView />} />
-                      <Route path="channels" element={<Channels />} />
-                      <Route
-                        path="channels/:channelId"
-                        element={<ChannelFeed />}
+                <Container maxWidth="lg" disableGutters={true}>
+                  <Grid container mt={6}>
+                    <Paper
+                      component={Grid}
+                      item
+                      md={3}
+                      display={{ xs: "none", sm: "none", md: "block" }}
+                    >
+                      <Nav
+                        user={user}
+                        newMentionsCount={data?.profile?.newMentionsCount}
                       />
-                      <Route
-                        path="notifications"
-                        element={<Notifications refetchProfile={refetch} />}
-                      />
-                      <Route
-                        path=":handle/status/:tweetId"
-                        element={<MasterTweet />}
-                      />
-                      <Route
-                        path="settings/profile"
-                        element={
-                          <EditProfile
-                            loading={loading}
-                            data={data}
-                            setUser={setUser}
-                          />
-                        }
-                      />
-                      <Route path=":handle" element={<Profile />} />
-                      <Route path="mint-nft" element={<NFTMint />} />
-                      <Route path="mint-boom-hero" element={<OGMint />} />
-                      <Route path="*" element={<Navigate replace to="/" />} />
-                    </Routes>
-                  </Paper>
-                  <Grid
-                    item
-                    md={2}
-                    display={{ xs: "none", sm: "none", md: "block" }}
-                  >
-                    <Suggestion />
+                    </Paper>
+                    <Paper
+                      component={Grid}
+                      item
+                      xs={12}
+                      sm={12}
+                      md={6}
+                      sx={middleColStyles}
+                      elevation={0}
+                    >
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="following" element={<Following />} />
+                        <Route path="connect" element={<ConnectView />} />
+                        <Route path="channels" element={<Channels />} />
+                        <Route
+                          path="channels/:channelId"
+                          element={<ChannelFeed />}
+                        />
+                        <Route
+                          path="notifications"
+                          element={<Notifications refetchProfile={refetch} />}
+                        />
+                        <Route
+                          path=":handle/status/:tweetId"
+                          element={<MasterTweet />}
+                        />
+                        <Route
+                          path="settings/profile"
+                          element={
+                            <EditProfile
+                              loading={loading}
+                              data={data}
+                              setUser={setUser}
+                            />
+                          }
+                        />
+                        <Route path=":handle" element={<Profile />} />
+                        <Route path="mint-nft" element={<NFTMint />} />
+                        <Route path="mint-boom-hero" element={<OGMint />} />
+                        <Route path="*" element={<Navigate replace to="/" />} />
+                      </Routes>
+                    </Paper>
+                    <Grid
+                      item
+                      md={3}
+                      display={{ xs: "none", sm: "none", md: "block" }}
+                    >
+                      <Suggestion />
+                    </Grid>
                   </Grid>
-                </Grid>
-                <Paper
-                  component={Grid}
-                  sx={{
-                    position: "fixed",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                  }}
-                  display={{ xs: "block", sm: "block", md: "none" }}
-                  elevation={1}
-                >
-                  <StyledBottomNavigation value={value} onChange={handleChange}>
-                    <BottomNavigationAction
-                      component={NavLink}
-                      label="Community"
-                      value="community"
-                      icon={<LanguageIcon />}
-                      to="/"
-                    />
-                    {user?.handle && (
-                      <BottomNavigationAction
-                        component={NavLink}
-                        label="Notifications"
-                        value="notifications"
-                        icon={
-                          <Badge badgeContent={data?.profile?.newMentionsCount}>
-                            <NotificationsIcon />
-                          </Badge>
-                        }
-                        to="/notifications"
-                      />
-                    )}
-                    {user?.handle && (
-                      <BottomNavigationAction
-                        component={NavLink}
-                        label="Profile"
-                        value="profile"
-                        icon={<AccountCircleIcon />}
-                        to={`/${user?.handle}`}
-                      />
-                    )}
-                    <BottomNavigationAction
-                      label="Menu"
-                      value="menu"
-                      icon={<MenuIcon />}
-                      onClick={toggleDrawer(true)}
-                    />
-                  </StyledBottomNavigation>
-                </Paper>
-                <SwipeableDrawer
-                  open={drawer}
-                  onClose={toggleDrawer(false)}
-                  onOpen={toggleDrawer(true)}
-                >
-                  <Box
-                    role="presentation"
-                    onClick={toggleDrawer(false)}
-                    onKeyDown={toggleDrawer(false)}
-                    sx={{ paddingLeft: "1em" }}
+                  <Paper
+                    component={Grid}
+                    sx={{
+                      position: "fixed",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                    }}
+                    display={{ xs: "block", sm: "block", md: "none" }}
+                    elevation={1}
                   >
-                    <Nav
-                      user={user}
-                      newMentionsCount={data?.profile?.newMentionsCount}
-                    />
-                  </Box>
-                </SwipeableDrawer>
+                    <StyledBottomNavigation
+                      value={value}
+                      onChange={handleChange}
+                    >
+                      <BottomNavigationAction
+                        component={NavLink}
+                        label="Community"
+                        value="community"
+                        icon={<LanguageIcon />}
+                        to="/"
+                      />
+                      {user?.handle && (
+                        <BottomNavigationAction
+                          component={NavLink}
+                          label="Notifications"
+                          value="notifications"
+                          icon={
+                            <Badge
+                              badgeContent={data?.profile?.newMentionsCount}
+                            >
+                              <NotificationsIcon />
+                            </Badge>
+                          }
+                          to="/notifications"
+                        />
+                      )}
+                      {user?.handle && (
+                        <BottomNavigationAction
+                          component={NavLink}
+                          label="Profile"
+                          value="profile"
+                          icon={<AccountCircleIcon />}
+                          to={`/${user?.handle}`}
+                        />
+                      )}
+                      <BottomNavigationAction
+                        label="Menu"
+                        value="menu"
+                        icon={<MenuIcon />}
+                        onClick={toggleDrawer(true)}
+                      />
+                    </StyledBottomNavigation>
+                  </Paper>
+                  <SwipeableDrawer
+                    open={drawer}
+                    onClose={toggleDrawer(false)}
+                    onOpen={toggleDrawer(true)}
+                  >
+                    <Box
+                      role="presentation"
+                      onClick={toggleDrawer(false)}
+                      onKeyDown={toggleDrawer(false)}
+                      sx={{ paddingLeft: "1em" }}
+                    >
+                      <Nav
+                        user={user}
+                        newMentionsCount={data?.profile?.newMentionsCount}
+                      />
+                    </Box>
+                  </SwipeableDrawer>
+                </Container>
               </GiphyContextProvider>
             </MarketProvider>
           </AccountsProvider>

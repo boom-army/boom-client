@@ -3,7 +3,13 @@ import React, { useCallback, useEffect, useMemo, useContext } from "react";
 // import { formatNumber } from "../../utils/utils";
 // import { useNativeAccount } from "../../contexts/accounts";
 import base58 from "bs58";
-import { AppBar, Grid, Slide, Toolbar, useScrollTrigger } from "@mui/material";
+import {
+  AppBar,
+  Container,
+  Slide,
+  Toolbar,
+  useScrollTrigger,
+} from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { USER_FOLLOW } from "../../queries/follow";
@@ -13,6 +19,7 @@ import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { FeedDocument } from "../../generated/graphql";
+import { Box } from "@mui/system";
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
@@ -91,7 +98,7 @@ export const AppHeader = () => {
   // };
 
   const TopBar = (
-    <Slide appear={false} direction="down" in={!trigger} >
+    <Slide appear={false} direction="down" in={!trigger}>
       <AppBar
         sx={{
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
@@ -99,18 +106,19 @@ export const AppHeader = () => {
         }}
       >
         <Toolbar variant="dense" disableGutters={true}>
-          <CurrentUser />
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="flex-end"
-          >
-            <WalletMultiButton />
-          </Grid>
+          <Container maxWidth="lg" disableGutters={true}>
+            <Box display="flex">
+              <Box sx={{ flexGrow: 1 }}>
+                <CurrentUser />
+              </Box>
+              <Box>
+                <WalletMultiButton />
+              </Box>
+            </Box>
+          </Container>
         </Toolbar>
       </AppBar>
-      </Slide>   
+    </Slide>
   );
 
   return TopBar;
