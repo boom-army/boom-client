@@ -125,30 +125,25 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
             </Stack>
           </NavLink>
           {user?.handle && (
-            <NavLink style={applyActiveStyles} to="/channels">
-              <Stack direction="row" {...stackProps}>
-                <TagIcon sx={iconProps} />
-                <Typography variant="body1">Channels</Typography>
-              </Stack>
-            </NavLink>
-          )}
-          <NavLink style={applyActiveStyles} to="/mint-nft">
-            <Stack direction="row" {...stackProps}>
-              <StyleIcon sx={iconProps} />
-              <Typography variant="body1">Mint NFT</Typography>
-            </Stack>
-          </NavLink>
-          <NavLink style={applyActiveStyles} to="/following">
-            <Stack direction="row" {...stackProps}>
-              <Person sx={iconProps} />
-              <Typography variant="body1">
-                Following
-              </Typography>
-            </Stack>
-          </NavLink>
-
-          {user?.handle && (
             <>
+              <NavLink style={applyActiveStyles} to="/channels">
+                <Stack direction="row" {...stackProps}>
+                  <TagIcon sx={iconProps} />
+                  <Typography variant="body1">Channels</Typography>
+                </Stack>
+              </NavLink>
+              <NavLink style={applyActiveStyles} to="/mint-nft">
+                <Stack direction="row" {...stackProps}>
+                  <StyleIcon sx={iconProps} />
+                  <Typography variant="body1">Mint NFT</Typography>
+                </Stack>
+              </NavLink>
+              <NavLink style={applyActiveStyles} to="/following">
+                <Stack direction="row" {...stackProps}>
+                  <Person sx={iconProps} />
+                  <Typography variant="body1">Following</Typography>
+                </Stack>
+              </NavLink>
               <NavLink style={applyActiveStyles} to="/connect">
                 <Stack direction="row" {...stackProps}>
                   <GroupIcon sx={iconProps} />
