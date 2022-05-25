@@ -137,7 +137,7 @@ export const AppRoutes: React.FC = () => {
               {/* @ts-ignore */}
               <GiphyContextProvider>
                 <AppHeader />
-                <Container maxWidth="lg" disableGutters={true}>
+                <Container maxWidth="lg" disableGutters={true} sx={{ overflow: "hidden"}}>
                   <Grid container mt={6}>
                     <Paper
                       component={Grid}
