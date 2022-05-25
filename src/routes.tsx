@@ -139,9 +139,7 @@ export const AppRoutes: React.FC = () => {
                 <AppHeader />
                 <Container
                   maxWidth="lg"
-                  fixed
                   disableGutters={true}
-                  sx={{ overflow: "hidden", height: "92vh" }}
                 >
                   <Grid container>
                     <Paper
