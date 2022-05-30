@@ -22,7 +22,6 @@ import {
 import Tilt from "react-parallax-tilt";
 import { ThemeContext } from "../contexts/theme";
 import { CandyMintHome } from "../components/CandyMachine/CandyMintHome";
-import { PublicKey } from "@solana/web3.js";
 
 const TiltStyled = styled(Tilt)({
   backgroundImage: "url(/assets/outer.png)",
@@ -32,8 +31,8 @@ const TiltStyled = styled(Tilt)({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  width: "260px",
-  height: "260px",
+  width: "210px",
+  height: "210px",
   transformStyle: "preserve-3d",
 });
 
@@ -46,12 +45,12 @@ const ThemeListItemText = styled(ListItemText)((props) => ({
 const getCandyMachineId = (): web3.PublicKey | undefined => {
   try {
     const candyMachineId = new web3.PublicKey(
-      process.env.REACT_APP_CANDY_MACHINE_ID!,
+      process.env.REACT_APP_CANDY_MACHINE_ID!
     );
 
     return candyMachineId;
   } catch (e) {
-    console.log('Failed to construct CandyMachineId', e);
+    console.log("Failed to construct CandyMachineId", e);
     return undefined;
   }
 };
@@ -69,22 +68,22 @@ export const OGMint = () => {
   return (
     <Container style={{ marginTop: 20 }}>
       <Box
+        mb={2}
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: "2em",
         }}
       >
         <img
           src={"/assets/Boom Heros Season Challenge Mint.png"}
           alt="Boom OG NFT Mint"
-          width="500em"
+          width="100%"
         />
       </Box>
-      <Grid container spacing={2}>
-        <Grid item sm={7} xs={12}>
-          <Box mt={4}>
+      <Grid container mb={2}>
+        <Grid item sm={8} xs={12}>
+          <Box>
             <CandyMintHome
               connection={connection}
               rpcHost={rpcHost}
@@ -94,7 +93,7 @@ export const OGMint = () => {
             />
           </Box>
         </Grid>
-        <Grid item sm={5}>
+        <Grid item sm={4}>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <TiltStyled
               className="track-on-window"
@@ -114,7 +113,7 @@ export const OGMint = () => {
               >
                 <img
                   src={"/assets/animated-200.gif"}
-                  width="160"
+                  width="140"
                   className="inner-element"
                   alt="Boom Heroes #420"
                 />
@@ -125,10 +124,10 @@ export const OGMint = () => {
       </Grid>
       <Box>
         <Typography>
-          You're about to mint a piece of Solana history - a #BoomHeroes Season
-          Challenge Pass that will unlock all future Season Challenges on Boom
-          in perpetuity. If you have a White List (WL) token or two lucky you -
-          you're obviously an OG 1303! All WL hero...ETHP tokens mint FOR FREE!!
+          You're about to mint a #BoomHeroes NFT that will give you immediate
+          access to the Boom Heroes Chat Channel. This is the first NFT secured
+          chat in the world. We're likely going to reduce the supply in the next
+          few days so don't sleep on it.
         </Typography>
       </Box>
       <Box mt={4}>
@@ -137,10 +136,7 @@ export const OGMint = () => {
           width="180"
           alt="Minting Schedule"
         />
-        <Typography mb={1}>
-          We're hoping the minting process goes as smoothly as possible. Here's
-          some pro-tips to help you out:
-        </Typography>
+        <Typography mb={1}>Here's some pro-tips to help you out:</Typography>
         <List>
           <ListItem>
             <ListItemAvatar>
@@ -185,7 +181,7 @@ export const OGMint = () => {
             </ListItemAvatar>
             <ThemeListItemText
               primary="Show off your Boom Hero"
-              secondary="Once you've minted post your avatar on Boom.Army and Twitter with the #BoomHeroes tag. There'll be an Easter Egg for one lucky poster!"
+              secondary="Once you've minted post your avatar on Boom.Army and Twitter with the #BoomHeroes tag."
             />
           </ListItem>
           <ListItem>
@@ -208,13 +204,9 @@ export const OGMint = () => {
           alt="Minting Schedule"
         />
         <Typography mb={1}>
-          Aside from looking dope AF Boom has big plans for this NFT. Its the
-          first Season Challenge Pass, something we've been talking about for
-          several weeks and are currently building out. We want to keep things
-          simple for this mint, and we're still ironing out the details for the
-          Season Challenges to make them easier to understand. But there's a
-          link at the bottom outlining the plan so far, if you're hungry to know
-          more.
+          We're constantly delivering value on this platform. This includes our
+          upcoming Season Challenges idea. To keep up with what's going on see
+          our docs.
         </Typography>
         <Typography mb={1} sx={{ color: theme.accentColor }}>
           <a

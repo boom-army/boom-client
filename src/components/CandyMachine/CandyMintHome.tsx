@@ -483,11 +483,12 @@ export const CandyMintHome = (props: HomeProps) => {
   }, [refreshCandyMachineState]);
 
   return (
-    <Container style={{ marginTop: 20 }}>
-      <Container style={{ position: "relative" }}>
+    <Container style={{ marginTop: 20 }} disableGutters={true}>
+      <Container disableGutters={true} style={{ position: "relative" }}>
         <Paper
           style={{
             padding: 24,
+            marginRight: "1em",
             backgroundColor: "#002F46",
             borderRadius: 6,
             border: "3px solid #005078",
