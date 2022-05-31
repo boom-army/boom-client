@@ -34,7 +34,7 @@ import { Profile } from "./components/Profile/Profile";
 import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
-import { useProfileLazyQuery } from "./generated/graphql";
+import { useProfileQuery } from "./generated/graphql";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -79,14 +79,9 @@ export const AppRoutes: React.FC = () => {
       setDrawer(open);
     };
 
-  const [getHandle, { loading, data, refetch }] = useProfileLazyQuery();
-
-  useEffect(() => {
-    if (user?.handle)
-      getHandle({
-        variables: { handle: user?.handle },
-      });
-  }, [getHandle, user]);
+  const { loading, data, refetch } = useProfileQuery({
+    variables: { handle: user?.handle },
+  });
 
   const middleColStyles = {
     borderRight: `1px solid ${theme.tertiaryColor}`,

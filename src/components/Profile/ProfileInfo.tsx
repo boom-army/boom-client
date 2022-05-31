@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import CoverPhoto from "../../styles/CoverPhoto";
 import UserAvatar from "../UserAvatar";
 import { Button, Box } from "@mui/material";
 import { Follow } from "./Follow";
@@ -86,7 +85,7 @@ const ProfileInfo = ({ profile }: any) => {
   return (
     <Wrapper>
       <Box mb={3}>
-        <CoverPhoto src={coverPhoto} alt="cover" />
+        {/* <CoverPhoto src={coverPhoto} alt="cover" /> */}
         <UserAvatar avatar={avatar} />
       </Box>
       <Box pl={3}>

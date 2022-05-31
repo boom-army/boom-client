@@ -1,23 +1,28 @@
-import { useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "../../styles/Button";
-import CoverPhoto from "../../styles/CoverPhoto";
-import Form from "../../styles/Form";
-import Input from "../Input";
-import { TextareaAutosize } from "@mui/material";
-import { useInput } from "../../hooks/useInput";
-import { useEditProfileMutation } from "../../generated/graphql";
 import { ProfileDocument } from "../../generated/graphql";
 import { SIGN_FILE } from "../../queries/files";
+import {
+  Avatar,
+  Button,
+  Box,
+  Container,
+  TextField,
+  Grid,
+  Badge,
+  Input,
+} from "@mui/material";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { ThemeContext } from "../../contexts/theme";
 import { displayError, uploadFile } from "../../utils";
+import { useEditProfileMutation } from "../../generated/graphql";
+import { useInput } from "../../hooks/useInput";
 import { useMutation } from "@apollo/client";
-import { useSnackbar } from "../../contexts/snackbar";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "../../contexts/snackbar";
+import { useState, useContext } from "react";
 
 export const EditProfileForm = ({ profile, setUser }: any) => {
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
-  const [avatarState, setAvatar] = useState("");
-  const [coverPhotoState, setCoverPhoto] = useState("");
 
   const handle = useInput(profile && profile.handle);
   const consumerName = useInput(profile && profile.consumerName);
@@ -27,6 +32,11 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
   const avatar = useInput(profile && profile.avatar);
   const bio = useInput(profile && profile.bio);
   const coverPhoto = useInput(profile && profile.coverPhoto);
+
+  const [avatarState, setAvatar] = useState(avatar?.value ?? "");
+  const [coverPhotoState, setCoverPhoto] = useState(
+    coverPhoto?.value ?? "/assets/default-cover.png"
+  );
 
   const [editProfileMutation, { loading }] = useEditProfileMutation({
     refetchQueries: [
@@ -55,8 +65,8 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
           bio: bio.value,
           location: location.value,
           website: website.value,
-          avatar: avatarState ? avatarState : avatar.value,
-          coverPhoto: coverPhotoState ? coverPhotoState : coverPhoto.value,
+          avatar: avatarState,
+          coverPhoto: coverPhotoState,
         },
       });
 
@@ -115,79 +125,227 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
   };
 
   return (
-    <Form lg={true && "true"} onSubmit={handleEditProfile}>
-      <div className="cover-photo">
-        <label htmlFor="cover-photo-input">
-          <CoverPhoto
-            src={coverPhotoState ? coverPhotoState : coverPhoto.value}
-            alt="cover"
-          />
-        </label>
-        <input
-          type="file"
-          id="cover-photo-input"
-          accept="image/*"
-          onChange={handleCoverPhoto}
-        />
-      </div>
-
-      <div className="avatar-input">
-        <label htmlFor="avatar-input-file">
-          <Avatar src={avatarState ? avatarState : avatar.value} />
-        </label>
-        <input
-          type="file"
-          accept="image/*"
-          id="avatar-input-file"
-          onChange={handleAvatar}
-        />
-      </div>
-
-      <Input
-        lg={true && "true"}
-        text="Handle"
-        value={handle.value}
-        onChange={handle.onChange}
-      />
-
-      <Input
-        lg={true && "true"}
-        text="Name"
-        value={consumerName.value}
-        onChange={consumerName.onChange}
-      />
-      <div className="bio-wrapper">
-        <label className="bio" htmlFor="bio">
-          Bio
-        </label>
-        <TextareaAutosize
-          id="bio"
-          placeholder="Bio"
-          value={bio.value}
-          onChange={bio.onChange}
-        />
-      </div>
-      <Input
-        lg={true && "true"}
-        text="Website"
-        value={website.value}
-        onChange={website.onChange}
-      />
-      <Input
-        lg={true && "true"}
-        text="Date of Birth"
-        value={dob.value}
-        onChange={dob.onChange}
-      />
-      <Input
-        lg={true && "true"}
-        text="Location"
-        value={location.value}
-        onChange={location.onChange}
-      />
-      <Button outline={true && "true"} disabled={loading} type="submit">
-        {loading ? "Saving" : "Save"}
-      </Button>
-    </Form>
+    <>
+      <Container>
+        <Box
+          component="form"
+          noValidate
+          sx={{ mt: 3 }}
+          onSubmit={handleEditProfile}
+        >
+          <Grid container spacing={2}>
+            <Box
+              position="relative"
+              mb={2}
+              sx={{
+                width: "100%",
+                height: "200px",
+                backgroundImage: `url("${coverPhotoState}")`,
+                backgroundPosition: "center center",
+                backgroundSize: "cover",
+                "&:hover": {
+                  opacity: "80%",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "40%",
+                  left: "45%",
+                }}
+              >
+                <label htmlFor="cover-photo-input">
+                  <Avatar
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      backgroundColor: theme.accentColor,
+                      cursor: "pointer",
+                    }}
+                  >
+                    <AddPhotoAlternateIcon sx={{ width: 22, height: 22 }} />
+                  </Avatar>
+                  <Input
+                    id="cover-photo-input"
+                    type="file"
+                    inputProps={{ accept: "image/*" }}
+                    sx={{ display: "none" }}
+                    onChange={handleCoverPhoto}
+                  />
+                </label>
+              </Box>
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: "1em",
+                  left: "1em",
+                }}
+              >
+                <label htmlFor="avatar-input-file">
+                  <Input
+                    id="avatar-input-file"
+                    type="file"
+                    inputProps={{ accept: "image/*" }}
+                    sx={{ display: "none" }}
+                    onChange={handleAvatar}
+                  />
+                  <Badge
+                    overlap="circular"
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    badgeContent={
+                      <Avatar
+                        sx={{
+                          width: 22,
+                          height: 22,
+                          border: `2px solid ${theme.background}`,
+                          backgroundColor: theme.accentColor,
+                        }}
+                      >
+                        <AddPhotoAlternateIcon sx={{ width: 14, height: 14 }} />
+                      </Avatar>
+                    }
+                  >
+                    <Avatar
+                      src={avatarState}
+                      sx={{
+                        cursor: "pointer",
+                      }}
+                    />
+                  </Badge>
+                </label>
+              </Box>
+            </Box>
+            <Grid item xs={12}>
+              <TextField
+                name="handle"
+                required
+                fullWidth
+                autoFocus
+                id="handle"
+                label="Handle"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { color: theme.secondaryColor },
+                }}
+                InputProps={{
+                  style: { color: theme.secondaryColor },
+                }}
+                value={handle.value}
+                onChange={handle.onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="name"
+                required
+                fullWidth
+                autoFocus
+                id="name"
+                label="Name"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { color: theme.secondaryColor },
+                }}
+                InputProps={{
+                  style: { color: theme.secondaryColor },
+                }}
+                value={consumerName.value}
+                onChange={consumerName.onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="bio"
+                required
+                fullWidth
+                autoFocus
+                rows={4}
+                id="bio"
+                label="Bio"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { color: theme.secondaryColor },
+                }}
+                InputProps={{
+                  style: { color: theme.secondaryColor },
+                }}
+                value={bio.value}
+                onChange={bio.onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="website"
+                required
+                fullWidth
+                autoFocus
+                id="website"
+                label="Website"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { color: theme.secondaryColor },
+                }}
+                InputProps={{
+                  style: { color: theme.secondaryColor },
+                }}
+                value={website.value}
+                onChange={website.onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="dob"
+                required
+                fullWidth
+                autoFocus
+                id="dob"
+                label="Date of Birth"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { color: theme.secondaryColor },
+                }}
+                InputProps={{
+                  style: { color: theme.secondaryColor },
+                }}
+                value={dob.value}
+                onChange={dob.onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="location"
+                required
+                fullWidth
+                autoFocus
+                id="location"
+                label="Location"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { color: theme.secondaryColor },
+                }}
+                InputProps={{
+                  style: { color: theme.secondaryColor },
+                }}
+                value={location.value}
+                onChange={location.onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                sx={{ mt: 3, mb: 2 }}
+                fullWidth
+                variant="contained"
+                type="submit"
+                size="large"
+                disabled={loading}
+              >
+                {loading ? "Saving" : "Save profile"}
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </Container>
+    </>
   );
 };
