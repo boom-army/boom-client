@@ -84,9 +84,33 @@ const ProfileInfo = ({ profile }: any) => {
 
   return (
     <Wrapper>
-      <Box mb={3}>
-        {/* <CoverPhoto src={coverPhoto} alt="cover" /> */}
-        <UserAvatar avatar={avatar} />
+      <Box
+        position="relative"
+        mb={2}
+        sx={{
+          width: "100%",
+          height: "200px",
+          backgroundImage: `url("${coverPhoto}")`,
+          backgroundPosition: "center center",
+          backgroundSize: "cover",
+        }}
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "40%",
+            left: "45%",
+          }}
+        ></Box>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "0.5em",
+            left: "0.5em",
+          }}
+        >
+          <UserAvatar avatar={avatar} />
+        </Box>
       </Box>
       <Box pl={3}>
         <Box>
