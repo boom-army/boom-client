@@ -1,14 +1,14 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useContext, useState, useMemo, useEffect } from "react";
 import {
   Metadata,
   MetadataDataData,
 } from "@metaplex-foundation/mpl-token-metadata";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { Box } from "@mui/system";
-import { Stack, Typography } from "@mui/material";
+import { colors, Link, Modal, Stack, Typography } from "@mui/material";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import { currentCluster } from "../../utils/utils";
-// import { ThemeContext } from "../../contexts/theme";
+import { ThemeContext } from "../../contexts/theme";
 import { useSnackbar } from "../../contexts/snackbar";
 import { displayError } from "../../utils";
 import { Loader } from "../Loader";
@@ -22,16 +22,23 @@ interface NFTTileProps {
   cluster: string;
 }
 
+interface NFTTraits {
+  trait_type: string;
+  value: string;
+}
+
 interface URIData {
   name: string;
   description: string;
   image: string;
+  attributes: NFTTraits[];
 }
 
 const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
-  // const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
 
+  const [nftSelect, toggleNftSelect] = useState(false);
   const [uRIData, setURIData] = useState<URIData>();
   // const [explorerLink, setExplorerLink] = useState("");
 
@@ -39,7 +46,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
     (async () => {
       try {
         const response = await fetch(data.uri);
-        const json = await response.json();
+        const json = await response.json();        
         setURIData(json);
         // setExplorerLink(
         //   `https://explorer.solana.com/address/${data?.mint}?cluster=${cluster}`
@@ -50,6 +57,9 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
     })();
   }, [data, cluster]);
 
+
+  console.log(uRIData);
+
   return (
     <>
       <Box
@@ -59,28 +69,54 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
           display: "flex",
           flexDirection: "column",
           minWidth: "140px",
+          cursor: "pointer",
+          "& a": {
+            color: theme.primaryColor
+          }
         }}
       >
-        {/* <Link
-          href={explorerLink}
-          target="_blank"
-          color={theme.secondaryColor}
+        <Link
+          onClick={() => toggleNftSelect(true)}
+          // color={theme.secondaryColor}
           underline="hover"
-        > */}
-        <Box>
-          {uRIData?.image ? (
-            <img src={uRIData?.image} alt={uRIData?.name} width="120" />
-          ) : (
-            <DoNotDisturbOnIcon fontSize="large" />
-          )}
-        </Box>
-        <Box>
-          <Typography sx={{ fontSize: "0.8em", maxWidth: "120px" }}>
-            {uRIData?.name}
+        >
+          <Box>
+            {uRIData?.image ? (
+              <img src={uRIData?.image} alt={uRIData?.name} width="120" />
+            ) : (
+              <DoNotDisturbOnIcon fontSize="large" />
+            )}
+          </Box>
+          <Box>
+            <Typography sx={{ fontSize: "0.8em", maxWidth: "120px" }}>
+              {uRIData?.name}
+            </Typography>
+          </Box>
+        </Link>
+      </Box>
+      <Modal
+        open={nftSelect}
+        onClose={() => toggleNftSelect(false)}
+        aria-labelledby="NFT action select"
+        aria-describedby="Apply action for given NFT"
+      >
+        <Box sx={{
+          position: "absolute",
+          top: "40%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          padding: 1,
+          bgcolor: theme.background,
+          borderColor: theme.blueSecondary,
+        }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
         </Box>
-        {/* </Link> */}
-      </Box>
+      </Modal>
     </>
   );
 };
