@@ -79,7 +79,7 @@ export const EmojiPicker = ({
         open={picker}
         onClose={() => togglePicker(false)}
         aria-labelledby="Emoji picker"
-        aria-describedby="Pick and emoji for tweet"
+        aria-describedby="Pick an emoji for tweet"
       >
         {/* here change `button` to `useButton` bcz we need to add button props in node modules picker file*/}
         <PickerWrapper>
