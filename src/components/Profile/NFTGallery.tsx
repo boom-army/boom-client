@@ -62,8 +62,6 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
     })();
   }, [data, cluster]);
 
-  console.log(data);
-
   return (
     <>
       <Box

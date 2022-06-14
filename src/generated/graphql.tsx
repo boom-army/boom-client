@@ -612,6 +612,7 @@ export type User = {
   consumerName?: Maybe<Scalars['String']>;
   coverPhoto?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['String']>;
+  data?: Maybe<UserData>;
   dob?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   files: Array<File>;
@@ -633,6 +634,11 @@ export type User = {
   tweetsCount: Scalars['Int'];
   updatedAt?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
+};
+
+export type UserData = {
+  __typename?: 'UserData';
+  avatarIsNFT?: Maybe<Scalars['String']>;
 };
 
 export type AddChannelMutationVariables = Exact<{
@@ -712,7 +718,7 @@ export type ProfileQueryVariables = Exact<{
 }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, user?: { __typename?: 'User', id: string, consumerName?: string | null | undefined, publicAddress: string, handle: string, avatar: string } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> } };
+export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: string | null | undefined } | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, user?: { __typename?: 'User', id: string, consumerName?: string | null | undefined, publicAddress: string, handle: string, avatar: string } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> } };
 
 export type EditProfileMutationVariables = Exact<{
   handle?: Maybe<Scalars['String']>;
@@ -1389,6 +1395,9 @@ export const ProfileDocument = gql`
     tweetsCount
     newMentionsCount
     bio
+    data {
+      avatarIsNFT
+    }
     tweets {
       id
       text

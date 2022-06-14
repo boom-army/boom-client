@@ -17,6 +17,9 @@ query profile($handle: String) {
     tweetsCount
     newMentionsCount
     bio
+    data {
+      avatarIsNFT
+    }
     tweets {
       id
       text
