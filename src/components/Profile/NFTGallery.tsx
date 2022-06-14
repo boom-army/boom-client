@@ -1,24 +1,32 @@
 import React, { useContext, useState, useMemo, useEffect } from "react";
 import {
   Metadata,
-  MetadataDataData,
+  MetadataData,
 } from "@metaplex-foundation/mpl-token-metadata";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { Box } from "@mui/system";
-import { colors, Link, Modal, Stack, Typography } from "@mui/material";
+import {
+  Chip,
+  IconButton,
+  Link,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import { currentCluster } from "../../utils/utils";
 import { ThemeContext } from "../../contexts/theme";
 import { useSnackbar } from "../../contexts/snackbar";
 import { displayError } from "../../utils";
 import { Loader } from "../Loader";
+import Clear from "@mui/icons-material/Clear";
 
 interface NFTGalleryProps {
   publicAddress: string;
 }
 
 interface NFTTileProps {
-  data: MetadataDataData;
+  data: MetadataData;
   cluster: string;
 }
 
@@ -40,25 +48,20 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
 
   const [nftSelect, toggleNftSelect] = useState(false);
   const [uRIData, setURIData] = useState<URIData>();
-  // const [explorerLink, setExplorerLink] = useState("");
 
   useMemo(() => {
     (async () => {
       try {
-        const response = await fetch(data.uri);
-        const json = await response.json();        
+        const response = await fetch(data.data.uri);
+        const json = await response.json();
         setURIData(json);
-        // setExplorerLink(
-        //   `https://explorer.solana.com/address/${data?.mint}?cluster=${cluster}`
-        // );
       } catch (error) {
         displayError(error, enqueueSnackbar);
       }
     })();
   }, [data, cluster]);
 
-
-  console.log(uRIData);
+  console.log(data);
 
   return (
     <>
@@ -70,14 +73,11 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
           flexDirection: "column",
           minWidth: "140px",
           cursor: "pointer",
-          "& a": {
-            color: theme.primaryColor
-          }
         }}
       >
         <Link
           onClick={() => toggleNftSelect(true)}
-          // color={theme.secondaryColor}
+          color={theme.secondaryColor}
           underline="hover"
         >
           <Box>
@@ -100,21 +100,81 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
         aria-labelledby="NFT action select"
         aria-describedby="Apply action for given NFT"
       >
-        <Box sx={{
-          position: "absolute",
-          top: "40%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          padding: 1,
-          bgcolor: theme.background,
-          borderColor: theme.blueSecondary,
-        }}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            padding: 2,
+            bgcolor: theme.background,
+            border: `2px solid ${theme.blueSecondary}`,
+            borderRadius: 1,
+            width: "25em",
+          }}
+        >
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="flex-start"
+          >
+            <Typography id="nft-modal-title" variant="h6" component="h2">
+              {uRIData?.name}
+            </Typography>
+            <IconButton
+              aria-label="close-modal"
+              onClick={() => toggleNftSelect(false)}
+              sx={{
+                padding: 0,
+              }}
+            >
+              <Clear fontSize="small" sx={{ color: theme.bluePrimary }} />
+            </IconButton>
+          </Box>
+          <Box display="flex" mt={2}>
+            <Stack spacing={2}>
+              {uRIData?.image && (
+                <img src={uRIData?.image} alt={uRIData?.name} width="120" />
+              )}
+              {/* Verified */}
+            </Stack>
+            <Box
+              ml={1}
+              display="flex"
+              sx={{
+                overflow: "hidden",
+                flexWrap: "wrap",
+                alignContent: "flex-start",
+              }}
+            >
+              {uRIData?.attributes &&
+                uRIData.attributes.map((nftItem) => (
+                  <Chip
+                    label={`${nftItem.trait_type}: ${nftItem.value}`}
+                    variant="outlined"
+                    size="small"
+                    sx={{
+                      margin: "0 0.5em 0.5em 0",
+                      fontSize: "0.7em",
+                    }}
+                  />
+                ))}
+              <Chip
+                component="a"
+                target="_blank"
+                href={`https://solscan.io/token/${data?.mint}?cluster=${cluster}`}
+                label="View in explorer"
+                variant="outlined"
+                size="small"
+                color="primary"
+                sx={{
+                  margin: "0 0.5em 0.5em 0",
+                  cursor: "pointer",
+                  fontSize: "0.7em",
+                }}
+              />
+            </Box>
+          </Box>
         </Box>
       </Modal>
     </>
@@ -126,7 +186,7 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
   const { name } = currentCluster();
   const { enqueueSnackbar } = useSnackbar();
 
-  const [nfts, setNfts] = useState<MetadataDataData[]>();
+  const [nfts, setNfts] = useState<MetadataData[]>();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -136,9 +196,7 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
         const nftMeta = publicAddress
           ? await Metadata.findDataByOwner(connection, publicAddress)
           : [];
-        const nftData = nftMeta.map((meta) => meta.data);
-
-        setNfts(nftData);
+        setNfts(nftMeta);
       } catch (error) {
         displayError(error, enqueueSnackbar);
       } finally {
@@ -161,8 +219,8 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
           }}
         >
           {nfts &&
-            nfts.map((nft: MetadataDataData) => (
-              <NFTTile data={nft} key={nft.uri} cluster={name} />
+            nfts.map((nft: MetadataData) => (
+              <NFTTile data={nft} key={nft.data.uri} cluster={name} />
             ))}
         </Stack>
       ) : (
