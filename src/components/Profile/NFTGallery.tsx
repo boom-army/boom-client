@@ -4,8 +4,9 @@ import {
   MetadataData,
 } from "@metaplex-foundation/mpl-token-metadata";
 import { useConnection } from "@solana/wallet-adapter-react";
-import { Box } from "@mui/system";
 import {
+  Box,
+  Button,
   Chip,
   IconButton,
   Link,
@@ -175,6 +176,10 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
               />
             </Box>
           </Box>
+          <Stack mt={2} spacing={1}>
+            <Button fullWidth={true} variant="contained">Set Profile Picture</Button>
+            <Button fullWidth={true} variant="outlined" onClick={() => toggleNftSelect(false)}>Cancel</Button>
+          </Stack>
         </Box>
       </Modal>
     </>
