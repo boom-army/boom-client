@@ -46,8 +46,8 @@ export const ConsumerCard = ({ profile }: ProfileQuery) => {
           <Stack direction="row" spacing={2} sx={{ marginBottom: 2 }}>
             <UserAvatar
               sx={{
-                width: "30px",
-                height: "30px",
+                width: 30,
+                height: 30,
               }}
               avatar={profile?.avatar}
               isNFT={profile?.data?.avatarIsNFT ?? false}
