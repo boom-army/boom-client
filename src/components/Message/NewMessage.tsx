@@ -3,7 +3,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import ReplyIcon from "@mui/icons-material/Reply";
 import { AttributionLink } from "../Giphy/AttributionLink";
 import {
-  Avatar,
   Grid,
   IconButton,
   Input,
@@ -15,6 +14,7 @@ import { Box } from "@mui/system";
 import {
   ChannelFeedDocument,
   FeedDocument,
+  useMeQuery,
   useNewTweetMutation,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
@@ -26,7 +26,6 @@ import { RecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
 import { TWEET } from "../../queries/tweet";
 import { ThemeContext } from "../../contexts/theme";
-import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { client } from "../../apollo/client";
@@ -186,7 +185,7 @@ export const NewMessage: React.FC<Props> = ({
     }
   };
 
-  const { data } = useQuery(USER);
+  const { data } = useMeQuery();  
 
   const mapTweetFiles = (url: string, index: number) => ({
     url,

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import UserAvatar from "../UserAvatar";
+import { UserAvatar } from "../UserAvatar";
 import { Button, Box } from "@mui/material";
 import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
@@ -80,6 +80,7 @@ const ProfileInfo = ({ profile }: any) => {
     handle,
     consumerName,
     publicAddress,
+    data,
   } = profile;
 
   return (
@@ -109,7 +110,7 @@ const ProfileInfo = ({ profile }: any) => {
             left: "0.5em",
           }}
         >
-          <UserAvatar avatar={avatar} />
+          <UserAvatar avatar={avatar} isNFT={data?.avatarIsNFT} />
         </Box>
       </Box>
       <Box pl={3}>

@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import {
   ChannelFeedDocument,
   FeedDocument,
+  useMeQuery,
   useNewTweetMutation,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
@@ -12,18 +13,24 @@ import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { SIGN_FILE } from "../../queries/files";
 import { GifyModal } from "../Giphy/GifyModal";
-import { Stack, Avatar, Grid, InputAdornment, Input, IconButton } from "@mui/material";
+import {
+  Stack,
+  Grid,
+  InputAdornment,
+  Input,
+  IconButton,
+} from "@mui/material";
 import { TWEET } from "../../queries/tweet";
-import { USER } from "../../queries/client";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError, uploadFile } from "../../utils";
 import { useInput } from "../../hooks/useInput";
-import { useQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { ThemeContext } from "../../contexts/theme";
 import { useState, useContext } from "react";
 import { styled } from "@mui/material/styles";
+import { UserAvatar } from "../UserAvatar";
 
 interface NewTweetProps {
   feed?: any;
@@ -141,7 +148,7 @@ export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
     }
   };
 
-  const { data } = useQuery(USER);
+  const { data } = useMeQuery();
 
   const mapTweetFiles = (url: string, index: number) => ({
     url,
@@ -158,12 +165,13 @@ export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
     >
       <Grid item xs={12} pb={2}>
         <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
-          <Avatar
+          <UserAvatar
             sx={{
               width: 40,
               height: 40,
             }}
-            src={data?.me?.avatar}
+            avatar={data?.me?.avatar}
+            isNFT={data?.me?.data?.avatarIsNFT ?? false}
           />
           <Input
             value={tweet.value}

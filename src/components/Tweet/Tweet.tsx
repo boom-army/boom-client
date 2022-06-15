@@ -2,8 +2,8 @@ import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
 import * as linkify from "linkifyjs";
 import Linkify from "linkify-react";
-import React, { useContext, useEffect, useState } from "react";
-import UserAvatar from "../UserAvatar";
+import React, { useContext } from "react";
+import { UserAvatar } from "../UserAvatar";
 import moment from "moment";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import { CommentIcon } from "../Icons";
@@ -19,7 +19,7 @@ import { Tweet } from "../../generated/graphql";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
-import { useGetMetaQuery } from "../../generated/graphql";
+// import { useGetMetaQuery } from "../../generated/graphql";
 import { useReaction } from "../../hooks/useReaction";
 import { UrlMetaData } from "../UrlMeta/UrlMetaData";
 
@@ -68,7 +68,6 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
 
   const extractUrls = linkify.find(text).filter((u) => u.type === "url");
   const targetUrl = extractUrls[0]?.href;
-  // const targetUrl = 'https://github.com/trending'
 
   const linkifyOptions = {
     target: { url: "_blank" },
@@ -83,7 +82,11 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
     >
       <Box mr={2}>
         <Link to={`/${handle}`}>
-          <UserAvatar className="avatar" avatar={user?.avatar as string} />
+          <UserAvatar
+            className="avatar"
+            avatar={user?.avatar as string}
+            isNFT={user?.data?.avatarIsNFT ?? false}
+          />
         </Link>
       </Box>
       <Box mt={1}>

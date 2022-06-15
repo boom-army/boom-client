@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
 import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
 import Linkify from "linkify-react";
+import React, { useContext, useState } from "react";
 import ReplyIcon from "@mui/icons-material/Reply";
-import UserAvatar from "../UserAvatar";
 import moment from "moment";
 import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { EmojiTweet } from "../Tweet/index";
@@ -13,15 +12,16 @@ import { LAMPORTS_PER_SOL } from "../../constants/math";
 import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
+import { Popover } from "@mui/material";
 import { RecoilState, useSetRecoilState } from "recoil";
 import { ThemeContext } from "../../contexts/theme";
 import { TipCreator } from "../TipCreator";
 import { Tweet } from "../../generated/graphql";
+import { UserAvatar } from "../UserAvatar";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
-import { Popover } from "@mui/material";
 
 const ReplyBox = styled(Box)((props) => ({
   "&:before": {
@@ -117,9 +117,9 @@ export const ShowMessage: React.FC<Props> = ({
                     sx={{
                       width: 16,
                       height: 16,
-                      border: `1px solid ${theme.tertiaryColor}`,
                     }}
                     avatar={parentTweet?.user?.avatar as string}
+                    isNFT={parentTweet?.user?.data?.avatarIsNFT ?? false}
                   />
                 </Box>
                 <Box mr={1}>
@@ -224,9 +224,9 @@ export const ShowMessage: React.FC<Props> = ({
               sx={{
                 width: "30px",
                 height: "30px",
-                border: `1px solid ${theme.tertiaryColor}`,
               }}
               avatar={user?.avatar as string}
+              isNFT={parentTweet?.user?.data?.avatarIsNFT ?? false}
             />
           </Link>
         </Box>
