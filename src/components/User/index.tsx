@@ -1,12 +1,12 @@
 import { useContext } from "react";
 
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import Avatar from "@mui/material/Avatar";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import { Follow } from "../Profile/Follow";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../contexts/theme";
 import { User as UserProps } from "../../generated/graphql";
+import { UserAvatar } from "../UserAvatar";
 
 type Props = {
   user: UserProps;
@@ -20,9 +20,13 @@ export const User = ({ user }: Props) => {
         <Grid item xs={10}>
           <Box sx={{ display: "flex" }}>
             <Box>
-              <Avatar
-                sx={{ width: 30, height: 30 }}
-                src={user?.avatar as string}
+              <UserAvatar
+                sx={{
+                  width: 30,
+                  height: 30,
+                }}
+                avatar={user?.avatar}
+                isNFT={user?.data?.avatarIsNFT ?? false}
               />
             </Box>
             <Box ml={2}>
