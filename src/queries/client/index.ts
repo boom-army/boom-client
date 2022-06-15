@@ -6,15 +6,3 @@ export const USER_LOGGED_IN = gql`
     isLoggedIn
   }
 `;
-
-// client query
-export const USER = gql`
-  query me {
-    me {
-      id
-      avatar
-      handle
-      consumerName
-    }
-  }
-`;
