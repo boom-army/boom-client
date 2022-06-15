@@ -57,6 +57,9 @@ query feed($offset: Int!, $limit: Int, $global: Boolean) {
       avatar
       handle
       consumerName
+      data {
+        avatarIsNFT
+      }
     }
     reactions {
       id

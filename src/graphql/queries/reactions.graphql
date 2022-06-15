@@ -4,6 +4,9 @@ query tweetReactions($tweetId: ID!) {
       user {
         handle
         avatar
+        data {
+          avatarIsNFT
+        }
       }
       emojiId
       id

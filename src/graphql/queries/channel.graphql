@@ -75,6 +75,9 @@ fragment TweetData on Tweet {
       id
       handle
       avatar
+      data {
+        avatarIsNFT
+      }
     }
   }
   files {
@@ -122,6 +125,9 @@ fragment TweetData on Tweet {
     avatar
     handle
     consumerName
+    data {
+      avatarIsNFT
+    }
   }
   reactions {
     id

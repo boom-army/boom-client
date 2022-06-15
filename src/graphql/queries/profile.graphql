@@ -31,6 +31,9 @@ query profile($handle: String) {
         publicAddress
         handle
         avatar
+        data {
+          avatarIsNFT
+        }
       }
       files {
         id

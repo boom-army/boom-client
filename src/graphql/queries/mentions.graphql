@@ -25,6 +25,9 @@ query mentions($offset: Int, $limit: Int) {
       publicAddress
       handle
       consumerName
+      data {
+        avatarIsNFT
+      }
     }
     createdAt
   }
