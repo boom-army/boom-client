@@ -12,6 +12,8 @@ import {
 import { Follow } from "../Profile/Follow";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import { UserAvatar } from "../UserAvatar";
+import { ProfileQuery } from "../../generated/graphql";
 
 const CardStyled = styled(Card)({
   "& .MuiButtonBase-root": {
@@ -25,9 +27,9 @@ const TypographyStyled = styled(Typography)<{
   props?: any;
 }>((props) => ({}));
 
-export const ConsumerCard = ({ consumer }: any) => {
+export const ConsumerCard = ({ profile }: ProfileQuery) => {
   const navigate = useNavigate();
-  const handleOnClick = () => navigate(`/${consumer.handle}`);
+  const handleOnClick = () => navigate(`/${profile.handle}`);
   return (
     <CardStyled sx={{ maxWidth: 345, height: "100%" }}>
       <CardActionArea onClick={handleOnClick}>
@@ -35,17 +37,21 @@ export const ConsumerCard = ({ consumer }: any) => {
           component="img"
           height="80"
           image={
-            consumer.coverPhoto
-              ? consumer.coverPhoto
+            profile.coverPhoto
+              ? profile.coverPhoto
               : '/assets/default-cover.png'
           }
-          alt={`${consumer.handle} cover photo`}
+          alt={`${profile.handle} cover photo`}
         />
         <CardContent>
           <Stack direction="row" spacing={2} sx={{ marginBottom: 2 }}>
-            <Avatar
-              alt={`${consumer.handle} cover photo`}
-              src={consumer.avatar}
+            <UserAvatar
+              sx={{
+                width: "30px",
+                height: "30px",
+              }}
+              avatar={profile?.avatar}
+              isNFT={profile?.data?.avatarIsNFT ?? false}
             />
             <Stack>
               <TypographyStyled
@@ -54,22 +60,22 @@ export const ConsumerCard = ({ consumer }: any) => {
                 nowrap={true && "true"}
                 sx={{ marginTop: -0.7 }}
               >
-                {consumer.consumerName}
+                {profile.consumerName}
               </TypographyStyled>
               <TypographyStyled
                 nowrap={true && "true"}
                 variant="body2"
                 component="div"
               >
-                @{consumer.handle}
+                @{profile.handle}
               </TypographyStyled>
             </Stack>
           </Stack>
-          <Typography variant="body2">{consumer.bio}</Typography>
+          <Typography variant="body2">{profile.bio}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Follow sm id={consumer.id} isFollowing={consumer.isFollowing} />
+        <Follow sm id={profile.id} isFollowing={profile.isFollowing} />
       </CardActions>
     </CardStyled>
   );
