@@ -36,6 +36,7 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
   const coverPhoto = useInput(profile && profile.coverPhoto);
 
   const [avatarState, setAvatar] = useState(avatar?.value ?? "");
+  const [dataState, setData] = useState(profile.data ?? { avatarIsNFT: false });
   const [coverPhotoState, setCoverPhoto] = useState(
     coverPhoto?.value ?? "/assets/default-cover.png"
   );
@@ -68,6 +69,7 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
           location: location.value,
           website: website.value,
           avatar: avatarState,
+          data: dataState,
           coverPhoto: coverPhotoState,
         },
       });
@@ -104,6 +106,7 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
       setCoverPhoto(imageUrl);
     } catch (error) {
       console.log(error);
+      displayError(error, enqueueSnackbar);
     }
   };
 
@@ -120,9 +123,16 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
       const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
       const imageUrl: string | undefined | any =
         imageData?.config?.url?.split("?")[0];
+      // set avatar state to NOT NFT
+      const userData = {...profile.data};
+      delete userData.__typename;
+      userData.avatarIsNFT = false;
+      setData(userData);
+      // set avatar
       setAvatar(imageUrl);
     } catch (error) {
       console.log(error);
+      displayError(error, enqueueSnackbar);
     }
   };
 
