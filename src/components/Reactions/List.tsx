@@ -1,4 +1,3 @@
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import React, { useState, useEffect, useContext } from "react";
 import Stack from "@mui/material/Stack";
@@ -8,6 +7,7 @@ import { Reaction, useTweetReactionsLazyQuery } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { UserAvatar } from "../UserAvatar";
 
 export interface Accumulator
   extends Record<
@@ -41,10 +41,10 @@ const createUserReactionTooltip = (
         (user) =>
           user && (
             <Stack key={user.handle} direction="row" spacing={1}>
-              <Avatar
-                alt={user.handle}
-                src={user.avatar}
+              <UserAvatar
                 sx={{ width: 20, height: 20 }}
+                avatar={user.avatar}
+                isNFT={user.data?.avatarIsNFT ?? false}
               />
               <span>@{user.handle}</span>
             </Stack>
