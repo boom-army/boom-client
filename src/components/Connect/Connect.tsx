@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/client";
 import { Box } from "@mui/system";
 import { styled } from "@mui/material/styles";
 import { ThemeContext } from "../../contexts/theme";
+import { User } from "../../generated/graphql";
 
 export const Connect = () => {
   const { theme } = useContext(ThemeContext);
@@ -56,9 +57,9 @@ export const Connect = () => {
           spacing={{ md: 2 }}
           sx={{ paddingTop: 3, paddingLeft: 2, paddingRight: 2 }}
         >
-          {data.users.map((consumer: any) => (
-            <StyledGrid item xs={12} md={4} key={`grid-${consumer.id}`}>
-              <ConsumerCard key={`card-${consumer.id}`} consumer={consumer} />
+          {data.users.map((profile: User) => (
+            <StyledGrid item xs={12} md={4} key={`grid-${profile.id}`}>
+              <ConsumerCard key={`card-${profile.id}`} profile={profile} />
             </StyledGrid>
           ))}
         </Grid>
