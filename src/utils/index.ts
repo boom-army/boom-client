@@ -55,5 +55,6 @@ export const camelizeKeys = (obj: any) =>
   );
 
 export const cleanTypeName = (obj: any) => {
+  if (!obj) return null;
   return omit(obj, "__typename");
 }
