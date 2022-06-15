@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import UserAvatar from "../UserAvatar";
+import { UserAvatar } from "../UserAvatar";
 import DeleteComment from "./DeleteComment";
 import { setDate } from "../../utils";
 import { Box } from "@mui/system";
 import { styled } from "@mui/material/styles";
-// import { Comment } from "../../generated/graphql";
+import { User } from "../../generated/graphql";
 
 const Wrapper = styled("div")((props) => ({
   display: "flex",
@@ -60,7 +60,7 @@ interface CommentProps {
   id: string;
   text?: string;
   isCommentMine?: boolean;
-  user?: any;
+  user?: User;
   createdAt?: string;
 }
 
@@ -77,7 +77,10 @@ const Comment = ({
   return (
     <Wrapper>
       <Box mr={2}>
-        <UserAvatar avatar={user?.avatar} />
+        <UserAvatar
+          avatar={user?.avatar}
+          isNFT={user?.data?.avatarIsNFT ?? false}
+        />
       </Box>
       <div className="comment-info">
         <div className="comment-info-user">
