@@ -1,5 +1,5 @@
 import axios from "axios";
-import { transform, camelCase, isArray, isObject } from "lodash";
+import { transform, camelCase, isArray, isObject, omit } from "lodash";
 
 export const displayError = (err: any, enqueueSnackbar: any) => {
   let e = err.message.split(":");
@@ -53,3 +53,7 @@ export const camelizeKeys = (obj: any) =>
       acc[camelKey] = isObject(value) ? camelizeKeys(value) : value;
     }
   );
+
+export const cleanTypeName = (obj: any) => {
+  return omit(obj, "__typename");
+}

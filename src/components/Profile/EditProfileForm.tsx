@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { SIGN_FILE } from "../../queries/files";
 import { ThemeContext } from "../../contexts/theme";
-import { displayError, uploadFile } from "../../utils";
+import { cleanTypeName, displayError, uploadFile } from "../../utils";
 import {
   useEditProfileMutation,
   ProfileDocument,
@@ -21,6 +21,7 @@ import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useState, useContext } from "react";
+import { UserAvatar } from "../UserAvatar";
 
 export const EditProfileForm = ({ profile, setUser }: any) => {
   const { theme } = useContext(ThemeContext);
@@ -36,7 +37,7 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
   const coverPhoto = useInput(profile && profile.coverPhoto);
 
   const [avatarState, setAvatar] = useState(avatar?.value ?? "");
-  const [dataState, setData] = useState(profile.data ?? { avatarIsNFT: false });
+  const [dataState, setData] = useState(cleanTypeName(profile.data) ?? { avatarIsNFT: false });
   const [coverPhotoState, setCoverPhoto] = useState(
     coverPhoto?.value ?? "/assets/default-cover.png"
   );
@@ -124,8 +125,7 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
       const imageUrl: string | undefined | any =
         imageData?.config?.url?.split("?")[0];
       // set avatar state to NOT NFT
-      const userData = {...profile.data};
-      delete userData.__typename;
+      const userData = cleanTypeName(profile.data);
       userData.avatarIsNFT = false;
       setData(userData);
       // set avatar
@@ -218,8 +218,9 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
                       </Avatar>
                     }
                   >
-                    <Avatar
-                      src={avatarState}
+                    <UserAvatar
+                      avatar={avatarState}
+                      isNFT={dataState.avatarIsNFT}
                       sx={{
                         cursor: "pointer",
                       }}
