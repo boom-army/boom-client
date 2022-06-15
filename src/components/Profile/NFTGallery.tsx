@@ -1,9 +1,6 @@
+import Clear from "@mui/icons-material/Clear";
+import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import React, { useContext, useState, useMemo, useEffect } from "react";
-import {
-  Metadata,
-  MetadataData,
-} from "@metaplex-foundation/mpl-token-metadata";
-import { useConnection } from "@solana/wallet-adapter-react";
 import {
   Box,
   Button,
@@ -14,17 +11,22 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
-import { currentCluster } from "../../utils/utils";
-import { ThemeContext } from "../../contexts/theme";
-import { useSnackbar } from "../../contexts/snackbar";
-import { displayError } from "../../utils";
 import { Loader } from "../Loader";
-import Clear from "@mui/icons-material/Clear";
-
-interface NFTGalleryProps {
-  publicAddress: string;
-}
+import {
+  Metadata,
+  MetadataData,
+} from "@metaplex-foundation/mpl-token-metadata";
+import { ThemeContext } from "../../contexts/theme";
+import { currentCluster } from "../../utils/utils";
+import { displayError } from "../../utils";
+import { useConnection } from "@solana/wallet-adapter-react";
+import {
+  useEditProfileMutation,
+  ProfileDocument,
+  ProfileQuery,
+} from "../../generated/graphql";
+import { useSnackbar } from "../../contexts/snackbar";
+import { useParams } from "react-router-dom";
 
 interface NFTTileProps {
   data: MetadataData;
@@ -46,9 +48,14 @@ interface URIData {
 const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
   const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
+  let { handle } = useParams<string>();
 
   const [nftSelect, toggleNftSelect] = useState(false);
   const [uRIData, setURIData] = useState<URIData>();
+
+  const [editProfileMutation] = useEditProfileMutation({
+    refetchQueries: [{ query: ProfileDocument, variables: { handle } }],
+  });
 
   useMemo(() => {
     (async () => {
@@ -62,6 +69,27 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
     })();
   }, [data, cluster]);
 
+  const handleEditProfile = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      await editProfileMutation({
+        variables: {
+          handle,
+          avatar: uRIData?.image,
+          data: { avatarIsNFT: true },
+        },
+      });
+
+      enqueueSnackbar("Your profile has been updated 🥳.", {
+        variant: "success",
+      });
+    } catch (err) {
+      console.log(err);      
+      return displayError(err, enqueueSnackbar);
+    }
+  };
+
   return (
     <>
       <Box
@@ -73,6 +101,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
           minWidth: "140px",
           cursor: "pointer",
         }}
+        key={uRIData?.image}
       >
         <Link
           onClick={() => toggleNftSelect(true)}
@@ -175,8 +204,20 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
             </Box>
           </Box>
           <Stack mt={2} spacing={1}>
-            <Button fullWidth={true} variant="contained">Set Profile Picture</Button>
-            <Button fullWidth={true} variant="outlined" onClick={() => toggleNftSelect(false)}>Cancel</Button>
+            <Button
+              fullWidth={true}
+              variant="contained"
+              onClick={handleEditProfile}
+            >
+              Set Profile Picture
+            </Button>
+            <Button
+              fullWidth={true}
+              variant="outlined"
+              onClick={() => toggleNftSelect(false)}
+            >
+              Cancel
+            </Button>
           </Stack>
         </Box>
       </Modal>
@@ -184,7 +225,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
   );
 };
 
-export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
+export const NFTGallery: React.FC<ProfileQuery> = ({ profile }) => {
   const { connection } = useConnection();
   const { name } = currentCluster();
   const { enqueueSnackbar } = useSnackbar();
@@ -196,8 +237,8 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
     (async () => {
       try {
         setLoading(true);
-        const nftMeta = publicAddress
-          ? await Metadata.findDataByOwner(connection, publicAddress)
+        const nftMeta = profile.publicAddress
+          ? await Metadata.findDataByOwner(connection, profile.publicAddress)
           : [];
         setNfts(nftMeta);
       } catch (error) {
@@ -206,7 +247,7 @@ export const NFTGallery: React.FC<NFTGalleryProps> = ({ publicAddress }) => {
         setLoading(false);
       }
     })();
-  }, [publicAddress, connection, enqueueSnackbar]);
+  }, [profile.publicAddress, connection, enqueueSnackbar]);
 
   if (loading) return <Loader />;
 

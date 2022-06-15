@@ -311,6 +311,7 @@ export type MutationEditProfileArgs = {
   bio?: Maybe<Scalars['String']>;
   consumerName?: Maybe<Scalars['String']>;
   coverPhoto?: Maybe<Scalars['String']>;
+  data?: Maybe<UserDataInput>;
   dob?: Maybe<Scalars['String']>;
   handle?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
@@ -638,7 +639,11 @@ export type User = {
 
 export type UserData = {
   __typename?: 'UserData';
-  avatarIsNFT?: Maybe<Scalars['String']>;
+  avatarIsNFT?: Maybe<Scalars['Boolean']>;
+};
+
+export type UserDataInput = {
+  avatarIsNFT?: Maybe<Scalars['Boolean']>;
 };
 
 export type AddChannelMutationVariables = Exact<{
@@ -718,7 +723,7 @@ export type ProfileQueryVariables = Exact<{
 }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: string | null | undefined } | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, user?: { __typename?: 'User', id: string, consumerName?: string | null | undefined, publicAddress: string, handle: string, avatar: string } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> } };
+export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, user?: { __typename?: 'User', id: string, consumerName?: string | null | undefined, publicAddress: string, handle: string, avatar: string } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> } };
 
 export type EditProfileMutationVariables = Exact<{
   handle?: Maybe<Scalars['String']>;
@@ -729,6 +734,7 @@ export type EditProfileMutationVariables = Exact<{
   website?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
   coverPhoto?: Maybe<Scalars['String']>;
+  data?: Maybe<UserDataInput>;
 }>;
 
 
@@ -1466,7 +1472,7 @@ export type ProfileQueryHookResult = ReturnType<typeof useProfileQuery>;
 export type ProfileLazyQueryHookResult = ReturnType<typeof useProfileLazyQuery>;
 export type ProfileQueryResult = Apollo.QueryResult<ProfileQuery, ProfileQueryVariables>;
 export const EditProfileDocument = gql`
-    mutation editProfile($handle: String, $consumerName: String, $location: String, $dob: String, $bio: String, $website: String, $avatar: String, $coverPhoto: String) {
+    mutation editProfile($handle: String, $consumerName: String, $location: String, $dob: String, $bio: String, $website: String, $avatar: String, $coverPhoto: String, $data: UserDataInput) {
   editProfile(
     handle: $handle
     consumerName: $consumerName
@@ -1476,6 +1482,7 @@ export const EditProfileDocument = gql`
     website: $website
     avatar: $avatar
     coverPhoto: $coverPhoto
+    data: $data
   ) {
     id
     handle
@@ -1506,6 +1513,7 @@ export type EditProfileMutationFn = Apollo.MutationFunction<EditProfileMutation,
  *      website: // value for 'website'
  *      avatar: // value for 'avatar'
  *      coverPhoto: // value for 'coverPhoto'
+ *      data: // value for 'data'
  *   },
  * });
  */

@@ -1,5 +1,4 @@
-import { ProfileDocument } from "../../generated/graphql";
-import { SIGN_FILE } from "../../queries/files";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import {
   Avatar,
   Button,
@@ -10,10 +9,13 @@ import {
   Badge,
   Input,
 } from "@mui/material";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { SIGN_FILE } from "../../queries/files";
 import { ThemeContext } from "../../contexts/theme";
 import { displayError, uploadFile } from "../../utils";
-import { useEditProfileMutation } from "../../generated/graphql";
+import {
+  useEditProfileMutation,
+  ProfileDocument,
+} from "../../generated/graphql";
 import { useInput } from "../../hooks/useInput";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";

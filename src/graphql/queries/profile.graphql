@@ -68,6 +68,7 @@ mutation editProfile(
   $website: String
   $avatar: String
   $coverPhoto: String
+  $data: UserDataInput
 ) {
   editProfile(
     handle: $handle
@@ -78,6 +79,7 @@ mutation editProfile(
     website: $website
     avatar: $avatar
     coverPhoto: $coverPhoto
+    data: $data
   ) {
     id
     handle
