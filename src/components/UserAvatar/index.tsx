@@ -1,18 +1,32 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
-import { SxProps } from "@mui/material/styles";
+import { SxProps, styled } from "@mui/material/styles";
 
 interface IProps {
   avatar?: string;
   className?: string;
+  isNFT?: boolean;
   sx?: SxProps | undefined;
 }
 
-const PersonAvatar = ({ avatar, sx }: IProps) => (
-  <Avatar className="avatar" sx={sx} src={avatar}>
-    {!avatar && <PersonIcon />}
-  </Avatar>
-);
+const NFTAvatar = styled(Avatar)({
+  "--path": "5% 25%, 5% 75%, 50% 100%, 95% 75%, 95% 25%, 50% 0%",
+  position: "relative",
+  clipPath: "polygon(var(--path))",
+  transition: "all 0.2s ease-in",
+});
 
-export default PersonAvatar;
+export const UserAvatar = ({ avatar, isNFT = false, sx }: IProps) => {  
+  return (
+    isNFT ? (
+      <NFTAvatar className={`avatar`} sx={sx} src={avatar}>
+        {!avatar && <PersonIcon />}
+      </NFTAvatar>
+    ) : (
+      <Avatar className={`avatar`} sx={sx} src={avatar}>
+        {!avatar && <PersonIcon />}
+      </Avatar>
+    )
+  );
+};
