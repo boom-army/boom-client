@@ -84,8 +84,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
       enqueueSnackbar("Your profile has been updated 🥳.", {
         variant: "success",
       });
-    } catch (err) {
-      console.log(err);      
+    } catch (err) { 
       return displayError(err, enqueueSnackbar);
     }
   };
