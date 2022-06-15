@@ -62,6 +62,18 @@ query profile($handle: String) {
   }
 }
 
+query me {
+  me {
+    id
+    avatar
+    handle
+    consumerName
+    data {
+      avatarIsNFT
+    }
+  }
+}
+
 mutation editProfile(
   $handle: String
   $consumerName: String
