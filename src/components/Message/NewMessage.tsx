@@ -36,6 +36,7 @@ import { useContext, useState } from "react";
 import { useInput } from "../../hooks/useInput";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
+import { UserAvatar } from "../UserAvatar";
 
 interface Props {
   feed?: any;
@@ -236,15 +237,14 @@ export const NewMessage: React.FC<Props> = ({
       >
         <Grid item xs={12} pb={2}>
           <Stack direction={"row"} spacing={2} sx={{ alignItems: "center" }}>
-            <Avatar
-              src={data?.me?.avatar}
+            <UserAvatar
               sx={{
                 width: 30,
                 height: 30,
-                border: `1px solid ${theme.tertiaryColor}`,
               }}
+              avatar={data?.me?.avatar}
+              isNFT={data?.me?.data?.avatarIsNFT ?? false}
             />
-
             <Input
               value={tweet.value}
               onChange={tweet.onChange}
