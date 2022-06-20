@@ -110,7 +110,7 @@ export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
       });
 
       setNftData(null);
-      enqueueSnackbar("Your tweet has been posted", { variant: "success" });
+      enqueueSnackbar("Your meep has been posted", { variant: "success" });
     } catch (err) {
       console.log(err);
       return displayError(err, enqueueSnackbar);
