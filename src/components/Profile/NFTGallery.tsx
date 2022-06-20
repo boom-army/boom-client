@@ -137,7 +137,8 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
             bgcolor: theme.background,
             border: `2px solid ${theme.blueSecondary}`,
             borderRadius: 1,
-            width: "25em",
+            maxWidth: "25em",
+            width: "95%",
           }}
         >
           <Box
