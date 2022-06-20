@@ -1,3 +1,86 @@
+fragment TweetData on Tweet {
+  id
+  text
+  tags
+  isTweetMine
+  commentsCount
+  retweetsCount
+  isRetweet
+  tipsCount
+  createdAt
+  channel {
+    id
+  }
+  parentTweet {
+    id
+    text
+    user {
+      id
+      handle
+      avatar
+      data {
+        avatarIsNFT
+      }
+    }
+  }
+  files {
+    id
+    url
+  }
+  gif {
+    id
+    title
+    fixedHeightUrl
+    originalUrl
+  }
+  nft {
+    id
+    publicKey
+    name
+    symbol
+    description
+    sellerFeeBasisPoints
+    externalUrl
+    image
+    attributes {
+      traitType
+      value
+    }
+    collection {
+      name
+      family
+    }
+    properties {
+      files {
+        uri
+        type
+      }
+      category
+      creators {
+        address
+        share
+      }
+    }
+  }
+  user {
+    id
+    publicAddress
+    avatar
+    handle
+    consumerName
+    data {
+      avatarIsNFT
+    }
+  }
+  reactions {
+    id
+    emojiId
+    skin
+    isMine
+    count
+  }
+}
+
 mutation newTweet(
   $text: String!
   $files: [String!]!
@@ -26,3 +109,5 @@ mutation newTweet(
     createdAt
   }
 }
+
+
