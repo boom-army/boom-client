@@ -18,7 +18,7 @@ const SearchResultUsers = ({ loading, users }: Props) => {
 
   if (users === undefined)
     return (
-      <CustomResponse text="Use the search bar to find tags, people and tweets" />
+      <CustomResponse text="Use the search bar to find tags, people and meeps" />
     );
 
   return (

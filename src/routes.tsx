@@ -16,6 +16,7 @@ import {
   ChannelFeed,
   Channels,
   ConnectView,
+  Explore,
   Following,
   Home,
   Nav,
@@ -184,6 +185,7 @@ export const AppRoutes: React.FC = () => {
                             />
                           }
                         />
+                        <Route path="explore" element={<Explore />} />
                         <Route path=":handle" element={<Profile />} />
                         <Route path="mint-nft" element={<NFTMint />} />
                         <Route path="mint-boom-hero" element={<OGMint />} />

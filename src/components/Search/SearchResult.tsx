@@ -26,16 +26,14 @@ const Wrapper = styled("div")((props) => ({
 const SearchResult = ({
   searchTweetLoading,
   searchUserLoading,
-  searchTagLoading,
-  tags,
   users,
   tweets,
 }: any) => {
   const [searchResultAction, setSearchResultAction] = useState("TWEETS");
 
   const changeToTweets = () => setSearchResultAction("TWEETS");
-  const changeToTags = () => setSearchResultAction("TAGS");
   const changeToUsers = () => setSearchResultAction("USERS");
+  const changeToTags = () => setSearchResultAction("TAGS");
 
   return (
     <Wrapper>
@@ -64,7 +62,7 @@ const SearchResult = ({
         <SearchResultTweets tweets={tweets} loading={searchTweetLoading} />
       )}
       {searchResultAction === "TAGS" && (
-        <SearchResultTags tags={tags} loading={searchTagLoading} />
+        <SearchResultTweets tweets={tweets} loading={searchTweetLoading} />
       )}
       {searchResultAction === "USERS" && (
         <SearchResultUsers users={users} loading={searchUserLoading} />
