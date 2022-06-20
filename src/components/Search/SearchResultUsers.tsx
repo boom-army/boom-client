@@ -23,8 +23,8 @@ const SearchResultUsers = ({ loading, users }: Props) => {
 
   return (
     <Wrapper>
-      {users?.searchByUser?.length ? (
-        users.searchByUser.map((user: UserProps) => (
+      {users?.searchUser?.length ? (
+        users.searchUser.map((user: UserProps) => (
           <User key={user.id} user={user} />
         ))
       ) : (

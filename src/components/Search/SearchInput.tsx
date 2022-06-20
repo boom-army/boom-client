@@ -10,6 +10,7 @@ import { displayError } from "../../utils";
 import { useLazyQuery } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { styled } from "@mui/material/styles";
+import { useSearchTweetsLazyQuery } from "../../generated/graphql";
 
 const Wrapper = styled("div")((props) => ({
   margin: "1rem 0",
@@ -40,11 +41,11 @@ const SearchInput = () => {
     useLazyQuery(SEARCH_BY_TAG);
 
   const [
-    searchByTweet,
+    searchTweets,
     { data: searchTweetData, loading: searchTweetLoading },
-  ] = useLazyQuery(SEARCH_BY_TWEET);
+  ] = useSearchTweetsLazyQuery();
 
-  const [searchByUser, { data: searchUserData, loading: searchUserLoading }] =
+  const [searchUser, { data: searchUserData, loading: searchUserLoading }] =
     useLazyQuery(SEARCH_BY_USER);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -57,9 +58,9 @@ const SearchInput = () => {
     }
 
     try {
-      await searchByTag({ variables: { term: term.value } });
-      await searchByTweet({ variables: { term: term.value } });
-      await searchByUser({ variables: { term: term.value } });
+      searchTweets({ variables: { term: term.value, type: "tags" } });
+      searchTweets({ variables: { term: term.value, type: "text" } });
+      searchUser({ variables: { term: term.value } });
     } catch (err) {
       displayError(err, enqueueSnackbar);
     }

@@ -1,0 +1,19 @@
+query searchUser($term: String!) {
+  searchUser(term: $term) {
+    id
+    handle
+    consumerName
+    avatar
+    followingCount
+    followersCount
+    tweetsCount
+    isFollowing
+    isSelf
+  }
+}
+
+query searchTweets($term: String!, $type: String) {
+  searchTweets(term: $term, type: $type) {
+    ...TweetData
+  }
+}

@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const SEARCH_BY_USER = gql`
-  query searchByUser($term: String!) {
-    searchByUser(term: $term) {
+  query searchUser($term: String!) {
+    searchUser(term: $term) {
       id
       handle
       consumerName
@@ -44,35 +44,5 @@ export const SEARCH_BY_TAG = gql`
 `;
 
 export const SEARCH_BY_TWEET = gql`
-  query searchByTweet($term: String!) {
-    searchByTweet(term: $term) {
-      id
-      text
-      tags
-      isRetweet
-      tipsCount
-      isTweetMine
-      retweetsCount
-      commentsCount
-      reactions {
-        id
-        emojiId
-        skin
-        isMine
-        count
-      }
-      files {
-        id
-        url
-      }
-      user {
-        id
-        handle
-        publicAddress
-        avatar
-        consumerName
-      }
-      createdAt
-    }
-  }
+  
 `;
