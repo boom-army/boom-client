@@ -43,7 +43,9 @@ const SearchInput = () => {
           searchUser({ variables: { term: term.value } });
           break;
         case "TAGS":
-          searchTweets({ variables: { term: term.value, type: "tags" } });
+          const value =
+            term.value.substring(0, 1) === "#" ? term.value : `#${term.value}`;
+          searchTweets({ variables: { term: value, type: "tags" } });
           break;
         default:
           searchTweets({ variables: { term: term.value, type: "text" } });
