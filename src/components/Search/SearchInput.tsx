@@ -53,7 +53,6 @@ const SearchInput = () => {
       displayError(err, enqueueSnackbar);
     }
   };
-  console.log("-----------------boom", searchTweetData);
 
   return (
     <>
@@ -95,7 +94,7 @@ const SearchInput = () => {
       </Container>
       <SearchResult
         tabValue={tabValue}
-        data={searchUserData}
+        data={searchTweetData || searchUserData}
         loading={searchUserLoading || searchTweetLoading}
         setTabValue={setTabValue}
       />
