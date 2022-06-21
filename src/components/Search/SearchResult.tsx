@@ -41,12 +41,12 @@ const SearchResult = ({
               aria-label="Search tablist select"
               variant="fullWidth"
             >
-              <Tab sx={{ minWidth: 150 }} label="Tweets" value="TWEETS" />
+              <Tab sx={{ minWidth: 150 }} label="Meeps" value="MEEPS" />
               <Tab label="Tags" value="TAGS" />
               <Tab label="Users" value="USERS" />
             </TabList>
           </Box>
-          <TabPanel value="TWEETS">
+          <TabPanel value="MEEPS">
             <SearchResultTweets tweets={searchTweetData} loading={loading} fetchMoreTweets={fetchMoreTweets} />
           </TabPanel>
           <TabPanel value="TAGS">

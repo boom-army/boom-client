@@ -22,7 +22,7 @@ const SearchInput = () => {
   const { theme } = useContext(ThemeContext);
   let [searchParams, setSearchParams] = useSearchParams();
   const [tabValue, setTabValue] = useState(
-    searchParams.get("type") || "TWEETS"
+    searchParams.get("type") || "MEEPS"
   );
   const term = useInput(searchParams.get("term") || "");
 
@@ -48,7 +48,7 @@ const SearchInput = () => {
           searchTweets({ variables: { term: value, type: "tags" } });
           break;
         default:
-          setSearchParams({ type: "TWEETS", term: term.value });
+          setSearchParams({ type: "MEEPS", term: term.value });
           searchTweets({ variables: { term: term.value, type: "text" } });
           break;
       }
