@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import SearchResult from "./SearchResult";
 import {
@@ -16,11 +16,15 @@ import {
   useSearchUserLazyQuery,
 } from "../../generated/graphql";
 import { useSnackbar } from "../../contexts/snackbar";
+import { useSearchParams } from "react-router-dom";
 
 const SearchInput = () => {
-  const term = useInput("");
   const { theme } = useContext(ThemeContext);
-  const [tabValue, setTabValue] = useState("TWEETS");
+  let [searchParams, setSearchParams] = useSearchParams();
+  const [tabValue, setTabValue] = useState(
+    searchParams.get("type") || "TWEETS"
+  );
+  const term = useInput(searchParams.get("term") || "");
 
   const [searchTweets, { data: searchTweetData, loading: searchTweetLoading }] =
     useSearchTweetsLazyQuery();
@@ -30,30 +34,44 @@ const SearchInput = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleSearch = async (e: any) => {
-    e.preventDefault();
-
-    if (!term.value) {
-      return enqueueSnackbar("Enter something to search", { variant: "error" });
-    }
-
+  const runQuery = () => {
     try {
       switch (tabValue) {
         case "USERS":
+          setSearchParams({ type: "USERS", term: term.value });
           searchUser({ variables: { term: term.value } });
           break;
         case "TAGS":
           const value =
             term.value.substring(0, 1) === "#" ? term.value : `#${term.value}`;
+          setSearchParams({ type: "TAGS", term: value });
           searchTweets({ variables: { term: value, type: "tags" } });
           break;
         default:
+          setSearchParams({ type: "TWEETS", term: term.value });
           searchTweets({ variables: { term: term.value, type: "text" } });
           break;
       }
     } catch (err) {
       displayError(err, enqueueSnackbar);
     }
+  }
+
+  useEffect(() => {
+    if (searchParams.has("term")) {
+      runQuery();
+    }
+  }, [])
+  
+
+  const handleSearch = async (e: any | null) => {
+    if (e) e.preventDefault();
+
+    if (!term.value) {
+      return enqueueSnackbar("Enter something to search", { variant: "error" });
+    }
+
+    runQuery();
   };
 
   return (
