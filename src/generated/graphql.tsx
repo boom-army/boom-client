@@ -512,12 +512,14 @@ export type QueryProfileByIdArgs = {
 
 
 export type QuerySearchTweetsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   term: Scalars['String'];
   type?: Maybe<Scalars['String']>;
 };
 
 
 export type QuerySearchUserArgs = {
+  offset?: Maybe<Scalars['Int']>;
   term: Scalars['String'];
 };
 
@@ -747,6 +749,7 @@ export type TweetReactionsQuery = { __typename?: 'Query', tweet: { __typename?: 
 
 export type SearchUserQueryVariables = Exact<{
   term: Scalars['String'];
+  offset?: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -755,6 +758,7 @@ export type SearchUserQuery = { __typename?: 'Query', searchUser: Array<{ __type
 export type SearchTweetsQueryVariables = Exact<{
   term: Scalars['String'];
   type?: Maybe<Scalars['String']>;
+  offset?: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -1510,8 +1514,8 @@ export type TweetReactionsQueryHookResult = ReturnType<typeof useTweetReactionsQ
 export type TweetReactionsLazyQueryHookResult = ReturnType<typeof useTweetReactionsLazyQuery>;
 export type TweetReactionsQueryResult = Apollo.QueryResult<TweetReactionsQuery, TweetReactionsQueryVariables>;
 export const SearchUserDocument = gql`
-    query searchUser($term: String!) {
-  searchUser(term: $term) {
+    query searchUser($term: String!, $offset: Int) {
+  searchUser(term: $term, offset: $offset) {
     id
     handle
     consumerName
@@ -1538,6 +1542,7 @@ export const SearchUserDocument = gql`
  * const { data, loading, error } = useSearchUserQuery({
  *   variables: {
  *      term: // value for 'term'
+ *      offset: // value for 'offset'
  *   },
  * });
  */
@@ -1553,8 +1558,8 @@ export type SearchUserQueryHookResult = ReturnType<typeof useSearchUserQuery>;
 export type SearchUserLazyQueryHookResult = ReturnType<typeof useSearchUserLazyQuery>;
 export type SearchUserQueryResult = Apollo.QueryResult<SearchUserQuery, SearchUserQueryVariables>;
 export const SearchTweetsDocument = gql`
-    query searchTweets($term: String!, $type: String) {
-  searchTweets(term: $term, type: $type) {
+    query searchTweets($term: String!, $type: String, $offset: Int) {
+  searchTweets(term: $term, type: $type, offset: $offset) {
     ...TweetData
   }
 }
@@ -1574,6 +1579,7 @@ export const SearchTweetsDocument = gql`
  *   variables: {
  *      term: // value for 'term'
  *      type: // value for 'type'
+ *      offset: // value for 'offset'
  *   },
  * });
  */

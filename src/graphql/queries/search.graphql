@@ -1,5 +1,5 @@
-query searchUser($term: String!) {
-  searchUser(term: $term) {
+query searchUser($term: String!, $offset: Int) {
+  searchUser(term: $term, offset: $offset) {
     id
     handle
     consumerName
@@ -12,8 +12,8 @@ query searchUser($term: String!) {
   }
 }
 
-query searchTweets($term: String!, $type: String) {
-  searchTweets(term: $term, type: $type) {
+query searchTweets($term: String!, $type: String, $offset: Int) {
+  searchTweets(term: $term, type: $type, offset: $offset) {
     ...TweetData
   }
 }

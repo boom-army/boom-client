@@ -26,10 +26,10 @@ const SearchInput = () => {
   );
   const term = useInput(searchParams.get("term") || "");
 
-  const [searchTweets, { data: searchTweetData, loading: searchTweetLoading }] =
+  const [searchTweets, { data: searchTweetData, loading: searchTweetLoading, fetchMore: fetchMoreTweets }] =
     useSearchTweetsLazyQuery();
 
-  const [searchUser, { data: searchUserData, loading: searchUserLoading }] =
+  const [searchUser, { data: searchUserData, loading: searchUserLoading, fetchMore: fetchMoreUsers }] =
     useSearchUserLazyQuery();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -116,6 +116,8 @@ const SearchInput = () => {
         tabValue={tabValue}
         searchTweetData={searchTweetData}
         searchUserData={searchUserData}
+        fetchMoreTweets={fetchMoreTweets}
+        fetchMoreUsers={fetchMoreUsers}
         loading={searchUserLoading || searchTweetLoading}
         setTabValue={setTabValue}
       />

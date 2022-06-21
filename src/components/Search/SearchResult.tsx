@@ -9,25 +9,27 @@ import {
 } from "../../generated/graphql";
 
 interface SearchResultProps {
-  loading: boolean;
-  searchTweetData: SearchTweetsQuery | undefined;
-  searchUserData: SearchUserQuery | undefined;
-  tabValue: string;
-  setTabValue: React.Dispatch<React.SetStateAction<string>>;
+  loading: boolean
+  searchTweetData: SearchTweetsQuery | undefined
+  searchUserData: SearchUserQuery | undefined
+  fetchMoreTweets: any
+  fetchMoreUsers: any
+  tabValue: string
+  setTabValue: React.Dispatch<React.SetStateAction<string>>
 }
 
 const SearchResult = ({
   loading,
   searchTweetData,
   searchUserData,
+  fetchMoreTweets,
+  fetchMoreUsers,
   tabValue,
   setTabValue,
 }: SearchResultProps) => {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
-
-  console.log('****', searchTweetData, searchUserData); 
 
   return (
     <>
@@ -45,13 +47,13 @@ const SearchResult = ({
             </TabList>
           </Box>
           <TabPanel value="TWEETS">
-            <SearchResultTweets tweets={searchTweetData} loading={loading} />
+            <SearchResultTweets tweets={searchTweetData} loading={loading} fetchMoreTweets={fetchMoreTweets} />
           </TabPanel>
           <TabPanel value="TAGS">
-            <SearchResultTweets tweets={searchTweetData} loading={loading} />
+            <SearchResultTweets tweets={searchTweetData} loading={loading} fetchMoreTweets={fetchMoreTweets} />
           </TabPanel>
           <TabPanel value="USERS">
-            <SearchResultUsers users={searchUserData} loading={loading} />
+            <SearchResultUsers users={searchUserData} loading={loading} fetchMoreUsers={fetchMoreUsers} />
           </TabPanel>
         </TabContext>
       </Box>
