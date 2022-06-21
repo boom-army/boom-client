@@ -10,13 +10,11 @@ export const Following: React.FC = () => {
       limit: 10,
       global: false,
     },
-    fetchPolicy: "network-only",
   });
 
   return (
     <>
-      <NewTweet feed={data?.feed} />
-      <FeedList loading={loading} error={error} data={data?.feed} fetchMore={fetchMore} />
+      <FeedList loading={loading} error={error} data={data} fetchMore={fetchMore} />
     </>
   );
 };

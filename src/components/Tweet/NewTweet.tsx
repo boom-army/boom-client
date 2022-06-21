@@ -57,7 +57,7 @@ const ImageInput = styled("input")({
   display: "none",
 });
 
-export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
+export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
   const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
@@ -178,7 +178,6 @@ export const NewTweet = ({ feed, parentTweet, channel }: NewTweetProps) => {
             onChange={tweet.onChange}
             placeholder={"What's happening?"}
             fullWidth={true}
-            autoFocus={true}
             sx={{
               color: theme.primaryColor,
               padding: "1em 1em 1em 0",
