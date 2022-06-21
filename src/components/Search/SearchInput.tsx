@@ -27,10 +27,10 @@ const SearchInput = () => {
   const term = useInput(searchParams.get("term") || "");
 
   const [searchTweets, { data: searchTweetData, loading: searchTweetLoading, fetchMore: fetchMoreTweets }] =
-    useSearchTweetsLazyQuery({ fetchPolicy: "no-cache" });
+    useSearchTweetsLazyQuery({ fetchPolicy: "network-only" });
 
   const [searchUser, { data: searchUserData, loading: searchUserLoading, fetchMore: fetchMoreUsers }] =
-    useSearchUserLazyQuery({ fetchPolicy: "no-cache" });
+    useSearchUserLazyQuery({ fetchPolicy: "network-only" });
 
   const { enqueueSnackbar } = useSnackbar();
 
