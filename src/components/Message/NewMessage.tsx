@@ -50,7 +50,7 @@ const IconsGrid = styled(Grid)((props) => ({
   flexDirection: "row",
   "& svg": {
     fill: props.theme.accentColor,
-    width: "20px",
+    width: "22px",
     height: "20px",
     marginRight: "1em",
     "& path": {
@@ -185,7 +185,7 @@ export const NewMessage: React.FC<Props> = ({
     }
   };
 
-  const { data } = useMeQuery();  
+  const { data } = useMeQuery();
 
   const mapTweetFiles = (url: string, index: number) => ({
     url,

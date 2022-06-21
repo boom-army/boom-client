@@ -44,9 +44,9 @@ const IconsGrid = styled(Grid)((props) => ({
   flexDirection: "row",
   "& svg": {
     fill: props.theme.accentColor,
-    width: "20px",
+    width: "22px",
     height: "20px",
-    marginRight: "1em",
+    marginRight: "0.7em",
     "& path": {
       fill: props.theme.accentColor,
     },
