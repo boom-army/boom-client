@@ -1,13 +1,6 @@
-import React, { useContext } from "react";
-import SearchResult from "./SearchResult";
-import { useInput } from "../../hooks/useInput";
-import { displayError } from "../../utils";
-import { useSnackbar } from "../../contexts/snackbar";
+import React, { useContext, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  useSearchTweetsLazyQuery,
-  useSearchUserLazyQuery,
-} from "../../generated/graphql";
+import SearchResult from "./SearchResult";
 import {
   Box,
   Container,
@@ -16,10 +9,18 @@ import {
   TextField,
 } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
+import { displayError } from "../../utils";
+import { useInput } from "../../hooks/useInput";
+import {
+  useSearchTweetsLazyQuery,
+  useSearchUserLazyQuery,
+} from "../../generated/graphql";
+import { useSnackbar } from "../../contexts/snackbar";
 
 const SearchInput = () => {
   const term = useInput("");
   const { theme } = useContext(ThemeContext);
+  const [tabValue, setTabValue] = useState("TWEETS");
 
   const [searchTweets, { data: searchTweetData, loading: searchTweetLoading }] =
     useSearchTweetsLazyQuery();
@@ -31,25 +32,38 @@ const SearchInput = () => {
 
   const handleSearch = async (e: any) => {
     e.preventDefault();
-    
+
     if (!term.value) {
       return enqueueSnackbar("Enter something to search", { variant: "error" });
     }
 
     try {
-      searchTweets({ variables: { term: term.value, type: "tags" } });
-      searchTweets({ variables: { term: term.value, type: "text" } });
-      searchUser({ variables: { term: term.value } });
+      switch (tabValue) {
+        case "USERS":
+          searchUser({ variables: { term: term.value } });
+          break;
+        case "TAGS":
+          searchTweets({ variables: { term: term.value, type: "tags" } });
+          break;
+        default:
+          searchTweets({ variables: { term: term.value, type: "text" } });
+          break;
+      }
     } catch (err) {
       displayError(err, enqueueSnackbar);
     }
   };
-  console.log('-----------------boom', searchTweetData);
+  console.log("-----------------boom", searchTweetData);
 
   return (
     <>
       <Container>
-        <Box component="form" noValidate sx={{ mt: 3, mb: 3 }} onSubmit={handleSearch}>
+        <Box
+          component="form"
+          noValidate
+          sx={{ mt: 3, mb: 3 }}
+          onSubmit={handleSearch}
+        >
           <TextField
             name="search"
             fullWidth
@@ -80,10 +94,10 @@ const SearchInput = () => {
         </Box>
       </Container>
       <SearchResult
-        searchTweetLoading={searchTweetLoading}
-        searchUserLoading={searchUserLoading}
-        users={searchUserData}
-        tweets={searchTweetData}
+        tabValue={tabValue}
+        data={searchUserData}
+        loading={searchUserLoading || searchTweetLoading}
+        setTabValue={setTabValue}
       />
     </>
   );

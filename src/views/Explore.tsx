@@ -1,15 +1,11 @@
 import React from "react";
 import SearchInput from "../components/Search/SearchInput";
-import { styled } from "@mui/material/styles";
-
-const Wrapper = styled("div")({
-  paddingBottom: "5rem",
-});
+import { Box } from "@mui/material";
 
 export const Explore = () => {
   return (
-    <Wrapper>
+    <Box pb={5}>
       <SearchInput />
-    </Wrapper>
+    </Box>
   );
 };

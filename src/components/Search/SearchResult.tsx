@@ -1,83 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchResultTweets from "./SearchResultTweets";
-import SearchResultTags from "./SearchResultTags";
 import SearchResultUsers from "./SearchResultUsers";
 import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import {
+  SearchTweetsQuery,
+  SearchUserQuery,
+} from "../../generated/graphql";
+
+interface SearchResultProps {
+  loading: boolean;
+  data: SearchUserQuery | SearchTweetsQuery | undefined;
+  tabValue: string;
+  setTabValue: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const SearchResult = ({
-  searchTweetLoading,
-  searchUserLoading,
-  users,
-  tweets,
-}: any) => {
-  const [searchResultAction, setSearchResultAction] = useState("TWEETS");
-
-  const changeToTweets = () => setSearchResultAction("TWEETS");
-  const changeToUsers = () => setSearchResultAction("USERS");
-  const changeToTags = () => setSearchResultAction("TAGS");
-
-  const [tabValue, setTabValue] = useState("1");
+  loading,
+  data,
+  tabValue,
+  setTabValue,
+}: SearchResultProps) => {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 
   return (
     <>
-    <Box sx={{ typography: "body1" }}>
+      <Box sx={{ typography: "body1" }}>
         <TabContext value={tabValue}>
           <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
             <TabList
               onChange={handleChange}
-              aria-label="Profile tablist select"
+              aria-label="Search tablist select"
               variant="fullWidth"
             >
-              <Tab sx={{ minWidth: 150 }} label="Tweets" value="1" />
-              <Tab label="Tags" value="2" />
-              <Tab label="Users" value="3" />
+              <Tab sx={{ minWidth: 150 }} label="Tweets" value="TWEETS" />
+              <Tab label="Tags" value="TAGS" />
+              <Tab label="Users" value="USERS" />
             </TabList>
           </Box>
-          <TabPanel value="1">
-            1111111
+          <TabPanel value="TWEETS">
+            <SearchResultTweets tweets={data} loading={loading} />
           </TabPanel>
-          <TabPanel value="2">
-            222222222
+          <TabPanel value="TAGS">
+            <SearchResultTweets tweets={data} loading={loading} />
           </TabPanel>
-          <TabPanel value="3">
-            33333333
+          <TabPanel value="USERS">
+            <SearchResultUsers users={data} loading={loading} />
           </TabPanel>
         </TabContext>
       </Box>
-      {/* <div className="tabs">
-        <span
-          className={searchResultAction === "TWEETS" ? "active" : ""}
-          onClick={changeToTweets}
-        >
-          Tweets
-        </span>
-        <span
-          className={searchResultAction === "TAGS" ? "active" : ""}
-          onClick={changeToTags}
-        >
-          Tags
-        </span>
-        <span
-          className={searchResultAction === "USERS" ? "active" : ""}
-          onClick={changeToUsers}
-        >
-          Users
-        </span>
-      </div>
-
-      {searchResultAction === "TWEETS" && (
-        <SearchResultTweets tweets={tweets} loading={searchTweetLoading} />
-      )}
-      {searchResultAction === "TAGS" && (
-        <SearchResultTweets tweets={tweets} loading={searchTweetLoading} />
-      )}
-      {searchResultAction === "USERS" && (
-        <SearchResultUsers users={users} loading={searchUserLoading} />
-      )} */}
     </>
   );
 };
