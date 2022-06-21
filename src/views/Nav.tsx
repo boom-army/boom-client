@@ -115,7 +115,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           <NavLink style={applyActiveStyles} to="/">
             <Stack direction="row" {...stackProps}>
               <Language style={iconProps} />
-              <Typography variant="body1">Community</Typography>
+              <Typography variant="body1">Hero Feed</Typography>
             </Stack>
           </NavLink>
 

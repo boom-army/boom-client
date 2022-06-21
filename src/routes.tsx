@@ -217,8 +217,8 @@ export const AppRoutes: React.FC = () => {
                     >
                       <BottomNavigationAction
                         component={NavLink}
-                        label="Community"
-                        value="community"
+                        label="Heroes"
+                        value="hero-feed"
                         icon={<LanguageIcon />}
                         to="/"
                       />
