@@ -39,6 +39,7 @@ const SearchInput = () => {
       switch (tabValue) {
         case "USERS":
           setSearchParams({ type: "USERS", term: term.value });
+          console.log("running", term.value, tabValue);
           searchUser({ variables: { term: term.value } });
           break;
         case "TAGS":
@@ -55,14 +56,13 @@ const SearchInput = () => {
     } catch (err) {
       displayError(err, enqueueSnackbar);
     }
-  }
+  };
 
   useEffect(() => {
     if (searchParams.has("term")) {
       runQuery();
     }
-  }, [])
-  
+  }, [tabValue]);
 
   const handleSearch = async (e: any | null) => {
     if (e) e.preventDefault();
@@ -114,7 +114,8 @@ const SearchInput = () => {
       </Container>
       <SearchResult
         tabValue={tabValue}
-        data={searchTweetData || searchUserData}
+        searchTweetData={searchTweetData}
+        searchUserData={searchUserData}
         loading={searchUserLoading || searchTweetLoading}
         setTabValue={setTabValue}
       />

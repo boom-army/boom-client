@@ -10,20 +10,24 @@ import {
 
 interface SearchResultProps {
   loading: boolean;
-  data: SearchUserQuery | SearchTweetsQuery | undefined;
+  searchTweetData: SearchTweetsQuery | undefined;
+  searchUserData: SearchUserQuery | undefined;
   tabValue: string;
   setTabValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const SearchResult = ({
   loading,
-  data,
+  searchTweetData,
+  searchUserData,
   tabValue,
   setTabValue,
 }: SearchResultProps) => {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
+
+  console.log('****', searchTweetData, searchUserData); 
 
   return (
     <>
@@ -41,13 +45,13 @@ const SearchResult = ({
             </TabList>
           </Box>
           <TabPanel value="TWEETS">
-            <SearchResultTweets tweets={data} loading={loading} />
+            <SearchResultTweets tweets={searchTweetData} loading={loading} />
           </TabPanel>
           <TabPanel value="TAGS">
-            <SearchResultTweets tweets={data} loading={loading} />
+            <SearchResultTweets tweets={searchTweetData} loading={loading} />
           </TabPanel>
           <TabPanel value="USERS">
-            <SearchResultUsers users={data} loading={loading} />
+            <SearchResultUsers users={searchUserData} loading={loading} />
           </TabPanel>
         </TabContext>
       </Box>
