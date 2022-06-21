@@ -27,10 +27,10 @@ const SearchInput = () => {
   const term = useInput(searchParams.get("term") || "");
 
   const [searchTweets, { data: searchTweetData, loading: searchTweetLoading, fetchMore: fetchMoreTweets }] =
-    useSearchTweetsLazyQuery();
+    useSearchTweetsLazyQuery({ fetchPolicy: "no-cache" });
 
   const [searchUser, { data: searchUserData, loading: searchUserLoading, fetchMore: fetchMoreUsers }] =
-    useSearchUserLazyQuery();
+    useSearchUserLazyQuery({ fetchPolicy: "no-cache" });
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -39,7 +39,6 @@ const SearchInput = () => {
       switch (tabValue) {
         case "USERS":
           setSearchParams({ type: "USERS", term: term.value });
-          console.log("running", term.value, tabValue);
           searchUser({ variables: { term: term.value } });
           break;
         case "TAGS":

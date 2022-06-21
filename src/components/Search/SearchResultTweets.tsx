@@ -13,7 +13,7 @@ const SearchResultTweets = ({ tweets, loading, fetchMoreTweets }: any) => {
       <CustomResponse text="Use the search bar to find tags, people and meeps" />
     );
 
-  return (
+  return tweets?.searchTweets?.length ? (
     <Grid
       container
       id="tweetScroll"
@@ -41,15 +41,13 @@ const SearchResultTweets = ({ tweets, loading, fetchMoreTweets }: any) => {
           )
         }
       >
-        {tweets?.searchTweets?.length ? (
-          tweets.searchTweets.map((tweet: any) => (
-            <ShowTweet key={tweet.id} tweet={tweet} />
-          ))
-        ) : (
-          <CustomResponse text="No Meeps found, try a different search" />
-        )}
+        {tweets.searchTweets.map((tweet: any) => (
+          <ShowTweet key={tweet.id} tweet={tweet} />
+        ))}
       </InfiniteScroll>
     </Grid>
+  ) : (
+    <CustomResponse text="No Meeps found, try a different search" />
   );
 };
 

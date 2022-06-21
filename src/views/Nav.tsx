@@ -7,6 +7,7 @@ import Person from "@mui/icons-material/Person";
 import React, { useContext } from "react";
 import StyleIcon from "@mui/icons-material/Style";
 import TagIcon from "@mui/icons-material/Tag";
+import SearchIcon from "@mui/icons-material/Search";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
@@ -148,6 +149,12 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                 <Stack direction="row" {...stackProps}>
                   <GroupIcon sx={iconProps} />
                   <Typography variant="body1">Creators</Typography>
+                </Stack>
+              </NavLink>
+              <NavLink style={applyActiveStyles} to="/explore">
+                <Stack direction="row" {...stackProps}>
+                  <SearchIcon sx={iconProps} />
+                  <Typography variant="body1">Explore</Typography>
                 </Stack>
               </NavLink>
               <NavLink style={applyActiveStyles} to="/notifications">
