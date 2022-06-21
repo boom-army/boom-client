@@ -24,10 +24,7 @@ export const ChangeColor = () => {
       newAccentColor = colors[0];
     } else {
       newAccentColor = colors[colors.indexOf(currentColor) + 1];
-    }
-
-    console.log(theme);
-    
+    }    
 
     setTheme({
       ...theme,
