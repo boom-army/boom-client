@@ -2,26 +2,8 @@ import React, { useState } from "react";
 import SearchResultTweets from "./SearchResultTweets";
 import SearchResultTags from "./SearchResultTags";
 import SearchResultUsers from "./SearchResultUsers";
-import { styled } from "@mui/material/styles";
-
-const Wrapper = styled("div")((props) => ({
-  ".tabs": {
-    display: "flex",
-    justifyContent: "space-around",
-    borderBottom: `2px solid ${props.theme.tertiaryColor}`,
-  },
-
-  span: {
-    cursor: "pointer",
-    marginBottom: "0.4rem",
-  },
-
-  "span.active": {
-    borderBottom: `2px solid ${props.theme.accentColor}`,
-    fontWeight: "500",
-    color: props.theme.accentColor,
-  },
-}));
+import { Box, Tab } from "@mui/material";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 const SearchResult = ({
   searchTweetLoading,
@@ -35,9 +17,38 @@ const SearchResult = ({
   const changeToUsers = () => setSearchResultAction("USERS");
   const changeToTags = () => setSearchResultAction("TAGS");
 
+  const [tabValue, setTabValue] = useState("1");
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setTabValue(newValue);
+  };
+
   return (
-    <Wrapper>
-      <div className="tabs">
+    <>
+    <Box sx={{ typography: "body1" }}>
+        <TabContext value={tabValue}>
+          <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
+            <TabList
+              onChange={handleChange}
+              aria-label="Profile tablist select"
+              variant="fullWidth"
+            >
+              <Tab sx={{ minWidth: 150 }} label="Tweets" value="1" />
+              <Tab label="Tags" value="2" />
+              <Tab label="Users" value="3" />
+            </TabList>
+          </Box>
+          <TabPanel value="1">
+            1111111
+          </TabPanel>
+          <TabPanel value="2">
+            222222222
+          </TabPanel>
+          <TabPanel value="3">
+            33333333
+          </TabPanel>
+        </TabContext>
+      </Box>
+      {/* <div className="tabs">
         <span
           className={searchResultAction === "TWEETS" ? "active" : ""}
           onClick={changeToTweets}
@@ -66,8 +77,8 @@ const SearchResult = ({
       )}
       {searchResultAction === "USERS" && (
         <SearchResultUsers users={users} loading={searchUserLoading} />
-      )}
-    </Wrapper>
+      )} */}
+    </>
   );
 };
 
