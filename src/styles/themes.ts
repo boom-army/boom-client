@@ -40,13 +40,15 @@ const themeBlues = {
   blueSecondary: "#4D97CB"
 }
 
+const accent = "#CA2055"
+
 export const lightTheme = {
   background: "#FFF",
   background2: "#F5F8FA",
   bgHover: "#F5F8FA",
   primaryColor: "#17141A",
   secondaryColor: "#657786",
-  accentColor: "#CA2055",
+  accentColor: accent,
   tertiaryColor: "#CCD6DD",
   tertiaryColor2: "#F5F8FA",
   success: "#0DA600",
@@ -56,6 +58,9 @@ export const lightTheme = {
     text: {
       primary: "#17141A",
       secondary: "#666",
+    },
+    primary: {
+      main: accent
     }
   },
   ...fontSettings,
@@ -68,7 +73,7 @@ export const darkTheme = {
   bgHover: "#192734",
   primaryColor: "#FFF",
   secondaryColor: "#657786",
-  accentColor: "#CA2055",
+  accentColor: accent,
   tertiaryColor: "#38444D",
   tertiaryColor2: "#202E3A",
   success: "#0DA600",
@@ -78,6 +83,9 @@ export const darkTheme = {
     text: {
       primary: "#FFF",
       secondary: "#CCC",
+    },
+    primary: {
+      main: accent
     }
   },
   ...fontSettings,

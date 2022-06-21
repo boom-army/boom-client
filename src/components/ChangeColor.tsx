@@ -26,9 +26,17 @@ export const ChangeColor = () => {
       newAccentColor = colors[colors.indexOf(currentColor) + 1];
     }
 
+    console.log(theme);
+    
+
     setTheme({
       ...theme,
       accentColor: newAccentColor,
+      pallette: {
+        primary: {
+          main: newAccentColor,
+        }
+      }
     });
 
     setCurrentColor(newAccentColor);
