@@ -4,8 +4,20 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import React from "react";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import stc from "string-to-color";
-import { Box, Typography } from "@mui/material";
+import { styled, Box, Typography } from "@mui/material";
 import { SearchTweetsQuery } from "../../generated/graphql";
+
+const IconBox = styled(Box)((props: any) => ({
+  color: props.theme.blue.light,
+  marginLeft: "0.5em",
+  "& svg": {
+    width: "16px",
+    verticalAlign: -6
+  },
+  "& span": {
+    color: props.theme.secondaryColor,
+  }
+}));
 
 interface NewsProps {
   meep: SearchTweetsQuery["searchTweets"][0];
@@ -23,18 +35,18 @@ export const NewsItem = ({ meep }: NewsProps) => {
       </Typography>
       <Typography display="inline">{text}</Typography>
       <Typography display="inline">
-        <Box display="inline-block">
-          <SentimentSatisfiedAltIcon /> 3
-        </Box>
-        <Box display="inline-block">
-          <MonetizationOnIcon /> 3
-        </Box>
-        <Box display="inline-block">
-          <ModeCommentIcon /> 3
-        </Box>
-        <Box display="inline-block">
-          <LoopIcon /> 3
-        </Box>
+        <IconBox display="inline-block">
+          <SentimentSatisfiedAltIcon /> <span>3</span>
+        </IconBox>
+        <IconBox display="inline-block">
+          <MonetizationOnIcon /> <span>3</span>
+        </IconBox>
+        <IconBox display="inline-block">
+          <ModeCommentIcon /> <span>3</span>
+        </IconBox>
+        <IconBox display="inline-block">
+          <LoopIcon /> <span>3</span>
+        </IconBox>
       </Typography>
     </Box>
   );
