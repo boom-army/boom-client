@@ -190,7 +190,7 @@ export const AppRoutes: React.FC = () => {
                         <Route path="explore" element={<Explore />} />
                         <Route path=":handle" element={<Profile />} />
                         <Route path="mint-nft" element={<NFTMint />} />
-                        <Route path="mint-boom-hero" element={<OGMint />} />
+                        {/* <Route path="mint-boom-hero" element={<OGMint />} /> */}
                         <Route path="*" element={<Navigate replace to="/" />} />
                       </Routes>
                     </Paper>

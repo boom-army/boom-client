@@ -19,6 +19,11 @@ const IconBox = styled(Box)((props: any) => ({
   },
 }));
 
+const IconTypography = styled(Typography)((props: any) => ({
+  color: props.theme.secondaryColor,
+  fontWeight: 300,
+}));
+
 interface NewsProps {
   meep: SearchTweetsQuery["searchTweets"][0];
 }
@@ -38,23 +43,34 @@ export const NewsItem = ({ meep }: NewsProps) => {
       <Typography display="inline">
         {meep.reactions?.length ? (
           <IconBox display="inline-block">
-            <SentimentSatisfiedAltIcon /> <span>{meep.reactions?.length}</span>
+            <SentimentSatisfiedAltIcon />{" "}
+            <IconTypography display="inline">
+              {meep.reactions?.length}
+            </IconTypography>
           </IconBox>
         ) : null}
         {parseInt(meep.tipsCount as string) > 0 && (
           <IconBox display="inline-block">
             <MonetizationOnIcon />{" "}
-            <span>{parseInt(meep.tipsCount as string) / LAMPORTS_PER_SOL}</span>
+            <IconTypography display="inline">
+              {parseInt(meep.tipsCount as string) / LAMPORTS_PER_SOL}
+            </IconTypography>
           </IconBox>
         )}
         {meep.commentsCount ? (
           <IconBox display="inline-block">
-            <ModeCommentIcon /> <span>{meep.commentsCount}</span>
+            <ModeCommentIcon />{" "}
+            <IconTypography display="inline">
+              {meep.commentsCount}
+            </IconTypography>
           </IconBox>
         ) : null}
         {meep.retweetsCount ? (
           <IconBox display="inline-block">
-            <LoopIcon /> <span>{meep.retweetsCount}</span>
+            <LoopIcon />{" "}
+            <IconTypography display="inline">
+              {meep.retweetsCount}
+            </IconTypography>
           </IconBox>
         ) : null}
       </Typography>
