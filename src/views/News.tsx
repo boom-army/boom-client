@@ -1,14 +1,13 @@
-import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Box, Grid } from "@mui/material";
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
-import stc from "string-to-color";
 import { useSearchTweetsQuery } from "../generated/graphql";
+import { NewsItem } from "../components/NewsItem";
 
 export const News = () => {
   const { data, loading, fetchMore } = useSearchTweetsQuery({
-    variables: { term: "#news", type: "TAGS", limit: 30 },
+    variables: { term: "#news", type: "TAGS", limit: 20 },
   });
 
   if (loading)
@@ -46,15 +45,7 @@ export const News = () => {
           )
         }
       >
-        {data?.searchTweets.map((tweet) => {
-          const [text] = tweet.text.split('#')
-          return (
-            <Box p={1}>
-            <Typography display="inline" mr={1} sx={{ color: stc(tweet.user?.handle) }}>{tweet.user?.handle} /</Typography>
-            <Typography display="inline">{text}</Typography>
-          </Box>
-          )
-        })}
+        {data?.searchTweets.map((meep) => <NewsItem meep={meep} />)}
       </InfiniteScroll>
     </Grid>
   ) : (
