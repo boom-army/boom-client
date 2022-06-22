@@ -43,6 +43,21 @@ const fontSettings = {
     fontWeightLight: 300,
     fontWeightSemiBold: 600,
     fontWeightExtraBold: 800,
+    h1: {
+      fontSize: 30,
+      fontWeight: 600,
+      lineHeight: "1.8rem"
+    },
+    h2: {
+      fontSize: 26,
+      fontWeight: 600,
+      lineHeight: "1.2rem"
+    },
+    h3: {
+      fontSize: 22,
+      fontWeight: 600,
+      lineHeight: "1.2rem"
+    }
   },
 };
 
