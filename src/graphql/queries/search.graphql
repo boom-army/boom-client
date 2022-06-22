@@ -1,5 +1,5 @@
-query searchUser($term: String!, $offset: Int) {
-  searchUser(term: $term, offset: $offset) {
+query searchUser($term: String!, $offset: Int, $limit: Int) {
+  searchUser(term: $term, offset: $offset, limit: $limit) {
     id
     handle
     consumerName

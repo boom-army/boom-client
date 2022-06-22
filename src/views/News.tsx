@@ -8,7 +8,7 @@ import { useSearchTweetsQuery } from "../generated/graphql";
 
 export const News = () => {
   const { data, loading, fetchMore } = useSearchTweetsQuery({
-    variables: { term: "#news", type: "TAGS", limit: 50 },
+    variables: { term: "#news", type: "TAGS", limit: 30 },
   });
 
   if (loading)

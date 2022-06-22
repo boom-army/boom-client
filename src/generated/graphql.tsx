@@ -520,6 +520,7 @@ export type QuerySearchTweetsArgs = {
 
 
 export type QuerySearchUserArgs = {
+  limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   term: Scalars['String'];
 };
@@ -751,6 +752,7 @@ export type TweetReactionsQuery = { __typename?: 'Query', tweet: { __typename?: 
 export type SearchUserQueryVariables = Exact<{
   term: Scalars['String'];
   offset?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -1516,8 +1518,8 @@ export type TweetReactionsQueryHookResult = ReturnType<typeof useTweetReactionsQ
 export type TweetReactionsLazyQueryHookResult = ReturnType<typeof useTweetReactionsLazyQuery>;
 export type TweetReactionsQueryResult = Apollo.QueryResult<TweetReactionsQuery, TweetReactionsQueryVariables>;
 export const SearchUserDocument = gql`
-    query searchUser($term: String!, $offset: Int) {
-  searchUser(term: $term, offset: $offset) {
+    query searchUser($term: String!, $offset: Int, $limit: Int) {
+  searchUser(term: $term, offset: $offset, limit: $limit) {
     id
     handle
     consumerName
@@ -1545,6 +1547,7 @@ export const SearchUserDocument = gql`
  *   variables: {
  *      term: // value for 'term'
  *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
  *   },
  * });
  */
