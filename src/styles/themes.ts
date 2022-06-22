@@ -1,17 +1,28 @@
 export interface ThemeVars {
-  background: string;
-  background2: string;
-  bgHover: string;
-  primaryColor: string;
-  secondaryColor: string;
-  accentColor: string;
-  tertiaryColor: string;
-  tertiaryColor2: string;
-  overlay: string;
-  success: string;
-  bs1: string;
-  bluePrimary: string;
-  blueSecondary: string;
+  background: string
+  background2: string
+  bgHover: string
+  primaryColor: string
+  secondaryColor: string
+  accentColor: string
+  tertiaryColor: string
+  tertiaryColor2: string
+  overlay: string
+  success: string
+  error: string
+  warning: string
+  bs1: string
+  blue: Shades
+  grey: Shades
+}
+
+interface Shades {
+  lightest?: string
+  lighter?: string
+  light?: string
+  dark?: string
+  darker?: string
+  darkest?: string
 }
 
 const fontSettings = {
@@ -35,9 +46,20 @@ const fontSettings = {
   },
 };
 
-const themeBlues = {
-  bluePrimary: "#315881",
-  blueSecondary: "#4D97CB"
+const themeColors = {
+  blue: {
+    lightest: "#4D97CB",
+    lighter: "#316081",
+    light: "#274C66",
+    dark: "#152937",
+    darker: "#122430",
+    darkest: "#0E1B25",
+  },
+  grey: {
+    lighter: "#D8DCDE",
+    light: "#949A9E",
+    dark: "#374148",
+  },
 }
 
 const accent = "#CA2055"
@@ -52,6 +74,8 @@ export const lightTheme = {
   tertiaryColor: "#CCD6DD",
   tertiaryColor2: "#F5F8FA",
   success: "#0DA600",
+  error: "#FD0069",
+  warning: "#FEAB07",
   overlay: "rgba(147, 149, 150, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
   palette: {
@@ -64,7 +88,7 @@ export const lightTheme = {
     }
   },
   ...fontSettings,
-  ...themeBlues,
+  ...themeColors,
 };
 
 export const darkTheme = {
@@ -77,6 +101,8 @@ export const darkTheme = {
   tertiaryColor: "#38444D",
   tertiaryColor2: "#202E3A",
   success: "#0DA600",
+  error: "#FD0069",
+  warning: "#FEAB07",
   overlay: "rgba(110, 118, 125, 0.4)",
   bs1: "0 0 6px 3px rgba(0,0,0,0.1)",
   palette: {
@@ -89,5 +115,5 @@ export const darkTheme = {
     }
   },
   ...fontSettings,
-  ...themeBlues,
+  ...themeColors,
 };

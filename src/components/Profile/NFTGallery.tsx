@@ -135,7 +135,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
             transform: "translate(-50%, -50%)",
             padding: 2,
             bgcolor: theme.background,
-            border: `2px solid ${theme.blueSecondary}`,
+            border: `2px solid ${theme.blue.lightest}`,
             borderRadius: 1,
             maxWidth: "25em",
             width: "95%",
@@ -156,7 +156,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
                 padding: 0,
               }}
             >
-              <Clear fontSize="small" sx={{ color: theme.bluePrimary }} />
+              <Clear fontSize="small" sx={{ color: theme.blue.lighter }} />
             </IconButton>
           </Box>
           <Box display="flex" mt={2}>

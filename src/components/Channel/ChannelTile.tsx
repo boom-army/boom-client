@@ -115,7 +115,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
     <>
       <BoxStyled
         sx={{
-          backgroundColor: active ? theme.background : theme.bluePrimary,
+          backgroundColor: active ? theme.background : theme.blue.lighter,
           borderRadius: 1,
           display: "flex",
           border: active ? `1px solid ${theme.secondaryColor}` : 0,
@@ -163,7 +163,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
                   sx={{
                     width: 16,
                     height: 16,
-                    background: theme.blueSecondary,
+                    background: theme.blue.lightest,
                   }}
                 >
                   <AddIcon className="status" />

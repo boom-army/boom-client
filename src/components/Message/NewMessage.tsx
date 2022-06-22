@@ -199,12 +199,12 @@ export const NewMessage: React.FC<Props> = ({
           display={"flex"}
           justifyContent={"space-between"}
           sx={{
-            backgroundColor: theme.bluePrimary,
+            backgroundColor: theme.blue.lighter,
             padding: "0.5em 2em 0.5em 1em",
           }}
         >
           <Stack spacing={1} direction="row">
-            <ReplyIcon sx={{ color: theme.blueSecondary }} />
+            <ReplyIcon sx={{ color: theme.blue.lightest }} />
             <Box display="flex">
               <Typography fontWeight={200}>Replying to</Typography>
               <Typography ml={0.5}>
@@ -219,7 +219,7 @@ export const NewMessage: React.FC<Props> = ({
               }}
               sx={{ padding: "0" }}
             >
-              <CloseIcon sx={{ color: theme.blueSecondary }} />
+              <CloseIcon sx={{ color: theme.blue.lightest }} />
             </IconButton>
           </Box>
         </Box>
