@@ -2,12 +2,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person from "@mui/icons-material/Person";
 import React, { useContext } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
 import TagIcon from "@mui/icons-material/Tag";
-import SearchIcon from "@mui/icons-material/Search";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
@@ -118,7 +119,12 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               <Typography variant="body1">Hero Feed</Typography>
             </Stack>
           </NavLink>
-
+          <NavLink style={applyActiveStyles} to="/news">
+            <Stack direction="row" {...stackProps}>
+              <NewspaperIcon style={iconProps} />
+              <Typography variant="body1">News</Typography>
+            </Stack>
+          </NavLink>
           <NavLink style={applyActiveStyles} to="/mint-boom-hero">
             <Stack direction="row" {...stackProps}>
               <AutoGraphIcon sx={iconProps} />

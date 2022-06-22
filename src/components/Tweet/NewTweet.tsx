@@ -33,7 +33,6 @@ import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
 
 interface NewTweetProps {
-  feed?: any;
   parentTweet?: string | undefined;
   channel?: string | undefined;
 }

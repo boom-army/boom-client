@@ -20,6 +20,7 @@ import {
   Following,
   Home,
   Nav,
+  News,
   Notifications,
   OGMint,
   Suggestion,
@@ -163,6 +164,7 @@ export const AppRoutes: React.FC = () => {
                         <Route path="following" element={<Following />} />
                         <Route path="connect" element={<ConnectView />} />
                         <Route path="channels" element={<Channels />} />
+                        <Route path="news" element={<News />} />
                         <Route
                           path="channels/:channelId"
                           element={<ChannelFeed />}

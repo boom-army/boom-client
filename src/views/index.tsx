@@ -5,6 +5,7 @@ export { Explore } from "./Explore";
 export { Following } from "./Following";
 export { Home } from "./Home";
 export { Nav } from "./Nav";
+export { News } from "./News";
 export { Notifications } from "./Notifications";
 export { OGMint } from "./OGMint";
 export { Suggestion } from "./Suggestion";
