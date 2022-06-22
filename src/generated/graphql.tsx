@@ -512,6 +512,7 @@ export type QueryProfileByIdArgs = {
 
 
 export type QuerySearchTweetsArgs = {
+  limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   term: Scalars['String'];
   type?: Maybe<Scalars['String']>;
@@ -759,6 +760,7 @@ export type SearchTweetsQueryVariables = Exact<{
   term: Scalars['String'];
   type?: Maybe<Scalars['String']>;
   offset?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -1558,8 +1560,8 @@ export type SearchUserQueryHookResult = ReturnType<typeof useSearchUserQuery>;
 export type SearchUserLazyQueryHookResult = ReturnType<typeof useSearchUserLazyQuery>;
 export type SearchUserQueryResult = Apollo.QueryResult<SearchUserQuery, SearchUserQueryVariables>;
 export const SearchTweetsDocument = gql`
-    query searchTweets($term: String!, $type: String, $offset: Int) {
-  searchTweets(term: $term, type: $type, offset: $offset) {
+    query searchTweets($term: String!, $type: String, $offset: Int, $limit: Int) {
+  searchTweets(term: $term, type: $type, offset: $offset, limit: $limit) {
     ...TweetData
   }
 }
@@ -1580,6 +1582,7 @@ export const SearchTweetsDocument = gql`
  *      term: // value for 'term'
  *      type: // value for 'type'
  *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
  *   },
  * });
  */

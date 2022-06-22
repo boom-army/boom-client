@@ -12,8 +12,8 @@ query searchUser($term: String!, $offset: Int) {
   }
 }
 
-query searchTweets($term: String!, $type: String, $offset: Int) {
-  searchTweets(term: $term, type: $type, offset: $offset) {
+query searchTweets($term: String!, $type: String, $offset: Int, $limit: Int) {
+  searchTweets(term: $term, type: $type, offset: $offset, limit: $limit) {
     ...TweetData
   }
 }
