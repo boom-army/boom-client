@@ -120,7 +120,6 @@ export const NFTPicker: React.FC<{
           await fetchSetMeta(connection, key);
         }
       } catch (error) {
-        console.log(error);
         setValidKey(false);
         if (nftInput.length > 42) {
           displayError(error, enqueueSnackbar);
