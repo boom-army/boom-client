@@ -25,6 +25,7 @@ export const SearchModalHeader: React.FC<Props> = ({
         hiddenLabel={true}
         fullWidth={true}
         type="text"
+        autoFocus={true}
         placeholder="Search for GIF"
         value={input}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
