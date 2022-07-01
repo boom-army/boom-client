@@ -61,8 +61,6 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
     createdAt,
   } = tweet;
 
-  console.log(user);  
-
   const { theme } = useContext(ThemeContext);
   const { handleReaction } = useReaction({ tweetId: id });
   const handle = user && user.handle;
