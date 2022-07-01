@@ -89,22 +89,18 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
         </Link>
       </Box>
       <Box mt={1}>
-        <Box display="flex">
-          <Link to={`/${handle}`}>
-            <Box display="flex" mr={1}>
-              <Typography sx={{ fontWeight: "600", mr: 0.5 }}>
-                {user && user.consumerName}
-              </Typography>
-              <Typography>{`@${handle}`}</Typography>
-            </Box>
-          </Link>
-          <Link to={`/${handle}/status/${id}`} className="secondary">
-            <Typography sx={{ color: theme.secondaryColor }}>
-              {" "}
-              {moment(setDate(createdAt)).fromNow()}
-            </Typography>
-          </Link>
-        </Box>
+        <Link to={`/${handle}`}>
+          <Typography display={"inline"}  sx={{ fontWeight: "600", mr: 0.5 }}>
+            {user && user.consumerName}
+          </Typography>
+          <Typography display={"inline"} mr={0.5}>{`@${handle}`}</Typography>
+        </Link>
+        <Link to={`/${handle}/status/${id}`} className="secondary">
+          <Typography display={"inline"} sx={{ color: theme.secondaryColor }}>
+            {" "}
+            {moment(setDate(createdAt)).fromNow()}
+          </Typography>
+        </Link>
         <Linkify options={linkifyOptions}>
           <TweetBody mb={0.75} sx={{ wordBreak: "break-word" }}>
             {text}
