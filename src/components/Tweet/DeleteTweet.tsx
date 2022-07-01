@@ -1,23 +1,22 @@
 import React from "react";
-import { DELETE_TWEET } from "../../queries/tweet";
-import { TrashIcon } from "../Icons";
-import { useMutation } from "@apollo/client";
-import { useSnackbar } from "../../contexts/snackbar";
 import { FeedDocument, Tweet } from "../../generated/graphql";
+import { TrashIcon } from "../Icons";
+import { useDeleteTweetMutation } from "../../generated/graphql";
+import { useSnackbar } from "../../contexts/snackbar";
 
 interface Props {
   id: string
 }
 
 export const DeleteTweet: React.FC<Props> = ({ id }) => {
-  const [deleteTweetMutation, { loading }] = useMutation(DELETE_TWEET, {
+  const [deleteTweetMutation, { loading }] = useDeleteTweetMutation({
     variables: { id },
-    update: (cache, { data: { deleteTweet } }) => {
+    update: (cache, { data }) => {
       const { feed }: any = cache.readQuery({ query: FeedDocument });
       cache.writeQuery({
         query: FeedDocument,
         data: {
-          feed: feed.filter((tweet: Tweet) => tweet.id !== deleteTweet.id),
+          feed: feed.filter((tweet: Tweet) => tweet.id !== data?.deleteTweet?.id),
         },
       });
     },

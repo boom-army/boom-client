@@ -14,3 +14,7 @@ query tweetReactions($tweetId: ID!) {
     }
   }
 }
+
+mutation toggleReaction($id: ID!, $emojiId: String!, $skin: Int) {
+  toggleReaction(id: $id, emojiId: $emojiId, skin: $skin)
+}

@@ -81,6 +81,15 @@ fragment TweetData on Tweet {
   }
 }
 
+query tweet($id: ID!) {
+  tweet(id: $id) {
+    ...TweetData
+    childTweets {
+      ...TweetData
+    }
+  }
+}
+
 mutation newTweet(
   $text: String!
   $files: [String!]!
@@ -110,4 +119,12 @@ mutation newTweet(
   }
 }
 
+mutation toggleRetweet($id: ID!) {
+  toggleRetweet(id: $id)
+}
 
+mutation deleteTweet($id: ID!) {
+  deleteTweet(id: $id) {
+    id
+  }
+}

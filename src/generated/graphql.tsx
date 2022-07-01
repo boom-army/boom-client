@@ -793,6 +793,36 @@ export type NewTweetMutationVariables = Exact<{
 
 export type NewTweetMutation = { __typename?: 'Mutation', newTweet: { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, mentions?: Array<string> | null | undefined, commentsCount: number, createdAt?: string | null | undefined } };
 
+export type TweetQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type TweetQuery = { __typename?: 'Query', tweet: { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, childTweets?: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined } | null | undefined> | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined } };
+
+export type ToggleReactionMutationVariables = Exact<{
+  id: Scalars['ID'];
+  emojiId: Scalars['String'];
+  skin?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type ToggleReactionMutation = { __typename?: 'Mutation', toggleReaction: boolean };
+
+export type ToggleRetweetMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type ToggleRetweetMutation = { __typename?: 'Mutation', toggleRetweet: boolean };
+
+export type DeleteTweetMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteTweetMutation = { __typename?: 'Mutation', deleteTweet?: { __typename?: 'Tweet', id: string } | null | undefined };
+
 export const TweetDataFragmentDoc = gql`
     fragment TweetData on Tweet {
   id
@@ -1689,3 +1719,138 @@ export function useNewTweetMutation(baseOptions?: Apollo.MutationHookOptions<New
 export type NewTweetMutationHookResult = ReturnType<typeof useNewTweetMutation>;
 export type NewTweetMutationResult = Apollo.MutationResult<NewTweetMutation>;
 export type NewTweetMutationOptions = Apollo.BaseMutationOptions<NewTweetMutation, NewTweetMutationVariables>;
+export const TweetDocument = gql`
+    query tweet($id: ID!) {
+  tweet(id: $id) {
+    ...TweetData
+    childTweets {
+      ...TweetData
+    }
+  }
+}
+    ${TweetDataFragmentDoc}`;
+
+/**
+ * __useTweetQuery__
+ *
+ * To run a query within a React component, call `useTweetQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTweetQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTweetQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useTweetQuery(baseOptions: Apollo.QueryHookOptions<TweetQuery, TweetQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TweetQuery, TweetQueryVariables>(TweetDocument, options);
+      }
+export function useTweetLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TweetQuery, TweetQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TweetQuery, TweetQueryVariables>(TweetDocument, options);
+        }
+export type TweetQueryHookResult = ReturnType<typeof useTweetQuery>;
+export type TweetLazyQueryHookResult = ReturnType<typeof useTweetLazyQuery>;
+export type TweetQueryResult = Apollo.QueryResult<TweetQuery, TweetQueryVariables>;
+export const ToggleReactionDocument = gql`
+    mutation toggleReaction($id: ID!, $emojiId: String!, $skin: Int) {
+  toggleReaction(id: $id, emojiId: $emojiId, skin: $skin)
+}
+    `;
+export type ToggleReactionMutationFn = Apollo.MutationFunction<ToggleReactionMutation, ToggleReactionMutationVariables>;
+
+/**
+ * __useToggleReactionMutation__
+ *
+ * To run a mutation, you first call `useToggleReactionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useToggleReactionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [toggleReactionMutation, { data, loading, error }] = useToggleReactionMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      emojiId: // value for 'emojiId'
+ *      skin: // value for 'skin'
+ *   },
+ * });
+ */
+export function useToggleReactionMutation(baseOptions?: Apollo.MutationHookOptions<ToggleReactionMutation, ToggleReactionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ToggleReactionMutation, ToggleReactionMutationVariables>(ToggleReactionDocument, options);
+      }
+export type ToggleReactionMutationHookResult = ReturnType<typeof useToggleReactionMutation>;
+export type ToggleReactionMutationResult = Apollo.MutationResult<ToggleReactionMutation>;
+export type ToggleReactionMutationOptions = Apollo.BaseMutationOptions<ToggleReactionMutation, ToggleReactionMutationVariables>;
+export const ToggleRetweetDocument = gql`
+    mutation toggleRetweet($id: ID!) {
+  toggleRetweet(id: $id)
+}
+    `;
+export type ToggleRetweetMutationFn = Apollo.MutationFunction<ToggleRetweetMutation, ToggleRetweetMutationVariables>;
+
+/**
+ * __useToggleRetweetMutation__
+ *
+ * To run a mutation, you first call `useToggleRetweetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useToggleRetweetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [toggleRetweetMutation, { data, loading, error }] = useToggleRetweetMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useToggleRetweetMutation(baseOptions?: Apollo.MutationHookOptions<ToggleRetweetMutation, ToggleRetweetMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ToggleRetweetMutation, ToggleRetweetMutationVariables>(ToggleRetweetDocument, options);
+      }
+export type ToggleRetweetMutationHookResult = ReturnType<typeof useToggleRetweetMutation>;
+export type ToggleRetweetMutationResult = Apollo.MutationResult<ToggleRetweetMutation>;
+export type ToggleRetweetMutationOptions = Apollo.BaseMutationOptions<ToggleRetweetMutation, ToggleRetweetMutationVariables>;
+export const DeleteTweetDocument = gql`
+    mutation deleteTweet($id: ID!) {
+  deleteTweet(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteTweetMutationFn = Apollo.MutationFunction<DeleteTweetMutation, DeleteTweetMutationVariables>;
+
+/**
+ * __useDeleteTweetMutation__
+ *
+ * To run a mutation, you first call `useDeleteTweetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTweetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTweetMutation, { data, loading, error }] = useDeleteTweetMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteTweetMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTweetMutation, DeleteTweetMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteTweetMutation, DeleteTweetMutationVariables>(DeleteTweetDocument, options);
+      }
+export type DeleteTweetMutationHookResult = ReturnType<typeof useDeleteTweetMutation>;
+export type DeleteTweetMutationResult = Apollo.MutationResult<DeleteTweetMutation>;
+export type DeleteTweetMutationOptions = Apollo.BaseMutationOptions<DeleteTweetMutation, DeleteTweetMutationVariables>;

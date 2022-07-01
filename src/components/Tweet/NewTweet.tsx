@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import {
   ChannelFeedDocument,
   FeedDocument,
+  TweetDocument,
   useMeQuery,
   useNewTweetMutation,
 } from "../../generated/graphql";
@@ -20,7 +21,6 @@ import {
   Input,
   IconButton,
 } from "@mui/material";
-import { TWEET } from "../../queries/tweet";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError, uploadFile } from "../../utils";
@@ -69,7 +69,7 @@ export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
       FeedDocument,
       ChannelFeedDocument,
       {
-        query: TWEET,
+        query: TweetDocument,
         variables: { id: parentTweet },
       },
     ],

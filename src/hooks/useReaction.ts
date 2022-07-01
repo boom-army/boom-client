@@ -1,8 +1,7 @@
-import { TOGGLE_REACTION, TWEET } from "../queries/tweet";
 import { displayError } from "../utils";
-import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../contexts/snackbar";
 import { useCallback } from "react";
+import { TweetDocument, useToggleReactionMutation } from "../generated/graphql";
 
 interface Props {
   tweetId: string;
@@ -11,12 +10,12 @@ interface Props {
 export const useReaction = ({ tweetId }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const [toggleReactionMutation, { loading }] = useMutation(TOGGLE_REACTION, {
-    refetchQueries: [{ query: TWEET, variables: { id: tweetId } }],
+  const [toggleReactionMutation, { loading }] = useToggleReactionMutation({
+    refetchQueries: [{ query: TweetDocument, variables: { id: tweetId } }],
   });
 
   const handleReaction = useCallback(
-    async ({ emojiId, skin }: { emojiId: string, skin: string }) => {
+    async ({ emojiId, skin }: { emojiId: string, skin: number }) => {
       try {
         await toggleReactionMutation({
           variables: { id: tweetId, emojiId, skin },

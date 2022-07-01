@@ -1,11 +1,10 @@
 import { useState, useContext } from "react";
 import { Box } from "@mui/system";
 import { RetweetIcon, RtFillIcon } from "../Icons";
-import { TOGGLE_RETWEET } from "../../queries/tweet";
+import { useToggleRetweetMutation } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { Typography } from "@mui/material";
 import { displayError } from "../../utils";
-import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 
 interface RetweetProps {
@@ -18,7 +17,7 @@ export const Retweet = ({ id, isRetweet, retweetsCount }: RetweetProps) => {
   const { theme } = useContext(ThemeContext);
   const [retweet, setRetweet] = useState(isRetweet);
   const [retweetsCountState, setRetweetsCount] = useState(retweetsCount);
-  const [toggleRetweetMutation, { loading }] = useMutation(TOGGLE_RETWEET, {
+  const [toggleRetweetMutation, { loading }] = useToggleRetweetMutation({
     variables: { id },
   });
   const { enqueueSnackbar } = useSnackbar();

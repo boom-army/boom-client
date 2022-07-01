@@ -1,11 +1,10 @@
 import React from "react";
 import { DELETE_COMMENT } from "../../queries/comment";
-import { TWEET } from "../../queries/tweet";
+import { Comment, TweetDocument } from "../../generated/graphql";
 import { TrashIcon } from "../Icons";
 import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "../../contexts/snackbar";
-import { Comment, Tweet } from "../../generated/graphql";
 
 interface DeleteProps {
   id: string;
@@ -19,12 +18,12 @@ const DeleteComment = ({ id }: DeleteProps) => {
     variables: { id },
     update: (cache, { data: { deleteComment } }) => {
       const { tweet }: any = cache.readQuery({
-        query: TWEET,
+        query: TweetDocument,
         variables: { id: tweetId },
       });
 
       cache.writeQuery({
-        query: TWEET,
+        query: TweetDocument,
         data: {
           tweet: {
             ...tweet,

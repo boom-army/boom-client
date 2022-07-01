@@ -14,6 +14,7 @@ import { Box } from "@mui/system";
 import {
   ChannelFeedDocument,
   FeedDocument,
+  TweetDocument,
   useMeQuery,
   useNewTweetMutation,
 } from "../../generated/graphql";
@@ -24,7 +25,6 @@ import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { RecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
-import { TWEET } from "../../queries/tweet";
 import { ThemeContext } from "../../contexts/theme";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
@@ -84,7 +84,7 @@ export const NewMessage: React.FC<Props> = ({
       FeedDocument,
       ChannelFeedDocument,
       {
-        query: TWEET,
+        query: TweetDocument,
         variables: { id: parentTweet },
       },
     ],

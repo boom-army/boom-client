@@ -3,7 +3,6 @@ import "linkify-plugin-mention";
 import * as linkify from "linkifyjs";
 import Linkify from "linkify-react";
 import React, { useContext } from "react";
-import { UserAvatar } from "../UserAvatar";
 import moment from "moment";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import { CommentIcon } from "../Icons";
@@ -15,16 +14,16 @@ import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { ThemeContext } from "../../contexts/theme";
 import { TipCreator } from "../TipCreator";
-import { Tweet } from "../../generated/graphql";
+import { TweetQuery, Reaction } from "../../generated/graphql";
+import { UrlMetaData } from "../UrlMeta/UrlMetaData";
+import { UserAvatar } from "../UserAvatar";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
-// import { useGetMetaQuery } from "../../generated/graphql";
 import { useReaction } from "../../hooks/useReaction";
-import { UrlMetaData } from "../UrlMeta/UrlMetaData";
 
 interface Props {
-  tweet: Tweet;
+  tweet: TweetQuery["tweet"];
 }
 
 const IconsStack = styled(Stack)((props) => ({
@@ -61,6 +60,8 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
     tipsCount,
     createdAt,
   } = tweet;
+
+  console.log(user);  
 
   const { theme } = useContext(ThemeContext);
   const { handleReaction } = useReaction({ tweetId: id });
@@ -122,7 +123,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
         <Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
           {reactions && reactions.length > 0 && (
             <ReactionsList
-              reactions={reactions}
+              reactions={reactions as Reaction[]}
               // @ts-ignore
               handleReaction={handleReaction}
               tweetId={id}

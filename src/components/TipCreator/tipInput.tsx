@@ -4,7 +4,6 @@ import { Box } from "@mui/system";
 import { IconButton } from "@mui/material";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
-import { TWEET } from "../../queries/tweet";
 import { TextField, Stack, Button, Typography } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
@@ -14,7 +13,7 @@ import { interactionInstruction } from "../../utils/boom-web3";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useSosolProgram } from "../../hooks";
-import { useTipCreatorMutation } from "../../generated/graphql";
+import { useTipCreatorMutation, TweetDocument } from "../../generated/graphql";
 
 interface Props {
   userPubKey: string;
@@ -39,7 +38,7 @@ export const TipInput: React.FC<Props> = ({
   const { sosolProgram } = useSosolProgram();
 
   const [tipCreatorMutation] = useTipCreatorMutation({
-    refetchQueries: [{ query: TWEET, variables: { id: tweetId } }],
+    refetchQueries: [{ query: TweetDocument, variables: { id: tweetId } }],
   });
 
   // TODO: consolodate tx react hook from EmojiTweet and this
