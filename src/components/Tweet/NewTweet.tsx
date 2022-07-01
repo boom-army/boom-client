@@ -20,6 +20,7 @@ import {
   InputAdornment,
   Input,
   IconButton,
+  TextField,
 } from "@mui/material";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
@@ -172,14 +173,20 @@ export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
             avatar={data?.me?.avatar}
             isNFT={data?.me?.data?.avatarIsNFT ?? false}
           />
-          <Input
+          <TextField
+            multiline
+            maxRows={4}
             value={tweet.value}
             onChange={tweet.onChange}
             placeholder={"What's happening?"}
             fullWidth={true}
+            variant="standard"
             sx={{
               color: theme.primaryColor,
               padding: "1em 1em 1em 0",
+              "& .MuiInput-root:before": {
+                border: 0,
+              },
               "&:before": {
                 borderColor: theme.tertiaryColor2,
               },
@@ -187,15 +194,17 @@ export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
                 borderColor: theme.tertiaryColor2,
               },
             }}
-            endAdornment={
-              <InputAdornment position="end">
-                <EmojiPicker
-                  emojiHandler={(pickedEmoji: any) =>
-                    tweet.setValue(tweet.value + pickedEmoji.native)
-                  }
-                />
-              </InputAdornment>
-            }
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <EmojiPicker
+                    emojiHandler={(pickedEmoji: any) =>
+                      tweet.setValue(tweet.value + pickedEmoji.native)
+                    }
+                  />
+                </InputAdornment>
+              ),
+            }}
           />
         </Stack>
       </Grid>
