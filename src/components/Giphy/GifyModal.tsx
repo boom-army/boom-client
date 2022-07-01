@@ -181,18 +181,19 @@ export const GifyModal: React.FC<{
         <Box
           sx={{
             position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(50%, -70%)",
-            padding: 2,
+            top: "30%",
+            transform: "translate(20%, -60%)",
             bgcolor: theme.background,
             border: `2px solid ${theme.blue.lightest}`,
             borderRadius: 1,
-            maxWidth: "90hw",
+            maxWidth: "90vw",
             width: 500,
             height: 650,
             minHeight: 500,
             maxHeight: "90vh",
+            "@media screen and (max-width: 900px)": {
+              transform: "translate(-22%, -50%)",
+            },
           }}
         >
           <Stack direction="column" sx={{ height: "100%" }}>
