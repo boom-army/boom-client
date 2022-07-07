@@ -77,7 +77,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
       item
       xs={12}
       mt={2}
-      sx={{ position: "relative", padding: "0 1em", display: "flex" }}
+      sx={{ position: "relative", padding: "0 1em", display: "flex", maxWidth: "100vw" }}
     >
       <Box mr={2}>
         <Link to={`/${handle}`}>
