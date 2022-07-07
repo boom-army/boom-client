@@ -1,8 +1,8 @@
 import axios from "axios";
 import { transform, camelCase, isArray, isObject, omit } from "lodash";
 
-export const displayError = (err: any, enqueueSnackbar: any) => {
-  let e = err.message.split(":");
+export const displayError = (err: any, enqueueSnackbar: any) => {  
+  let e = err.message ? err.message.split(":") : [err];
   e = e.length === 1 ? e[0] : e[1];
   enqueueSnackbar(e.trim().replace(".", ""), { variant: "error" });
 };
