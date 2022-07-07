@@ -17,7 +17,7 @@ import { useSnackbar } from "./snackbar";
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
-  const endpoint = process.env.REACT_APP_RPC_URL as string;
+  const endpoint = process.env.REACT_APP_RPC_URL!;  
   let network = currentCluster().name;
 
   const wallets = useMemo(
