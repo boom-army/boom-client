@@ -247,7 +247,7 @@ export const NFTGallery: React.FC<ProfileQuery> = ({ profile }) => {
         setLoading(false);
       }
     })();
-  }, [profile.publicAddress, connection, enqueueSnackbar]);
+  }, [profile.publicAddress]);
 
   if (loading) return <Loader />;
 
