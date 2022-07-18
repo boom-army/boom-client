@@ -1,4 +1,3 @@
-import Button from "../../styles/Button";
 import { AttributionLink } from "../Giphy/AttributionLink";
 import { Box } from "@mui/system";
 import {
@@ -18,10 +17,10 @@ import {
   Stack,
   Grid,
   InputAdornment,
-  Input,
   IconButton,
   TextField,
 } from "@mui/material";
+import { LoadingButton as Button } from "@mui/lab";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { displayError, uploadFile } from "../../utils";
@@ -249,7 +248,13 @@ export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
       </IconsGrid>
       <Grid item xs={6} pr={1}>
         <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
-          <Button sm="true" disabled={loading} onClick={handleNewTweet}>
+          <Button
+            variant="contained"
+            size="small"
+            loading={loading}
+            onClick={handleNewTweet}
+            sx={{ borderRadius: "20px"}}
+          >
             Post
           </Button>
         </Box>
