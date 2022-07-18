@@ -79,7 +79,7 @@ const Comment = ({
       <Box mr={2}>
         <UserAvatar
           avatar={user?.avatar}
-          isNFT={user?.data?.avatarIsNFT ?? false}
+          isNFT={user?.data?.avatarMint}
         />
       </Box>
       <div className="comment-info">

@@ -6,7 +6,7 @@ import { SxProps, styled } from "@mui/material/styles";
 interface IProps {
   avatar?: string;
   className?: string;
-  isNFT?: boolean;
+  isNFT?: string | null | undefined;
   sx?: SxProps | undefined;
 }
 
@@ -17,9 +17,9 @@ const NFTAvatar = styled(Avatar)({
   transition: "all 0.2s ease-in",
 });
 
-export const UserAvatar = ({ avatar, isNFT = false, sx }: IProps) => {  
+export const UserAvatar = ({ avatar, isNFT = '', sx }: IProps) => {
   return (
-    isNFT ? (
+    isNFT && isNFT.length > 0 ? (
       <NFTAvatar className={`avatar`} sx={sx} src={avatar}>
         {!avatar && <PersonIcon />}
       </NFTAvatar>

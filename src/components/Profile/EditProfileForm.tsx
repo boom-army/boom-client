@@ -13,9 +13,11 @@ import { SIGN_FILE } from "../../queries/files";
 import { ThemeContext } from "../../contexts/theme";
 import { cleanTypeName, displayError, uploadFile } from "../../utils";
 import {
-  useEditProfileMutation,
   ProfileDocument,
+  ProfileQuery,
+  useEditProfileMutation,
 } from "../../generated/graphql";
+import { User } from "../../contexts/user";
 import { useInput } from "../../hooks/useInput";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
@@ -23,21 +25,26 @@ import { useSnackbar } from "../../contexts/snackbar";
 import { useState, useContext } from "react";
 import { UserAvatar } from "../UserAvatar";
 
-export const EditProfileForm = ({ profile, setUser }: any) => {
+interface Profile {
+  profile: ProfileQuery["profile"]
+  setUser: (user: User | null) => void | User 
+}
+
+export const EditProfileForm = ({ profile, setUser }: Profile) => {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
-  const handle = useInput(profile && profile.handle);
-  const consumerName = useInput(profile && profile.consumerName);
-  const location = useInput(profile && profile.location);
-  const website = useInput(profile && profile.website);
-  const dob = useInput(profile && profile.dob);
-  const avatar = useInput(profile && profile.avatar);
-  const bio = useInput(profile && profile.bio);
-  const coverPhoto = useInput(profile && profile.coverPhoto);
+  const handle = useInput(profile.handle);
+  const consumerName = useInput(profile.consumerName as string);
+  const location = useInput(profile.location as string);
+  const website = useInput(profile.website as string);
+  const dob = useInput(profile.dob as string);
+  const avatar = useInput(profile.avatar);
+  const bio = useInput(profile.bio as string);
+  const coverPhoto = useInput(profile.coverPhoto as string);
 
   const [avatarState, setAvatar] = useState(avatar?.value ?? "");
-  const [dataState, setData] = useState(cleanTypeName(profile.data) ?? { avatarIsNFT: false });
+  const [dataState, setData] = useState(cleanTypeName(profile.data) ?? {});
   const [coverPhotoState, setCoverPhoto] = useState(
     coverPhoto?.value ?? "/assets/default-cover.png"
   );
@@ -112,6 +119,8 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
   };
 
   const handleAvatar = async (e: any) => {
+    console.log('boom');
+    
     try {
       const file = e.target.files[0];
       const { data } = await signFileMutation({
@@ -126,7 +135,8 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
         imageData?.config?.url?.split("?")[0];
       // set avatar state to NOT NFT
       const userData = cleanTypeName(profile.data);
-      userData.avatarIsNFT = false;
+      delete userData.avatarMint;
+      delete userData.avatarUpdateAuthority;
       setData(userData);
       // set avatar
       setAvatar(imageUrl);
@@ -220,7 +230,7 @@ export const EditProfileForm = ({ profile, setUser }: any) => {
                   >
                     <UserAvatar
                       avatar={avatarState}
-                      isNFT={dataState.avatarIsNFT}
+                      isNFT={dataState.avatarMint}
                       sx={{
                         cursor: "pointer",
                       }}

@@ -50,7 +50,7 @@ export const ConsumerCard = ({ profile }: ProfileQuery) => {
                 height: 30,
               }}
               avatar={profile?.avatar}
-              isNFT={profile?.data?.avatarIsNFT ?? false}
+              isNFT={profile?.data?.avatarMint}
             />
             <Stack>
               <TypographyStyled

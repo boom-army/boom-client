@@ -19,7 +19,8 @@ fragment TweetData on Tweet {
       handle
       avatar
       data {
-        avatarIsNFT
+        avatarMint
+        avatarUpdateAuthority
       }
     }
   }
@@ -69,7 +70,8 @@ fragment TweetData on Tweet {
     handle
     consumerName
     data {
-      avatarIsNFT
+      avatarMint
+      avatarUpdateAuthority
     }
   }
   reactions {

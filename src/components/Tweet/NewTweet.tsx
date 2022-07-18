@@ -170,7 +170,7 @@ export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
               height: 40,
             }}
             avatar={data?.me?.avatar}
-            isNFT={data?.me?.data?.avatarIsNFT ?? false}
+            isNFT={data?.me?.data?.avatarMint}
           />
           <TextField
             multiline

@@ -37,7 +37,7 @@ export const User = ({ user }: Props) => {
                   height: 30,
                 }}
                 avatar={user?.avatar}
-                isNFT={user?.data?.avatarIsNFT ?? false}
+                isNFT={user?.data?.avatarMint}
               />
             </Box>
             <Box ml={2}>

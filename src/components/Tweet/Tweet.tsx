@@ -84,7 +84,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
           <UserAvatar
             className="avatar"
             avatar={user?.avatar as string}
-            isNFT={user?.data?.avatarIsNFT ?? false}
+            isNFT={user?.data?.avatarMint}
           />
         </Link>
       </Box>

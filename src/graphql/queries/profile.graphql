@@ -18,7 +18,8 @@ query profile($handle: String) {
     newMentionsCount
     bio
     data {
-      avatarIsNFT
+      avatarMint
+      avatarUpdateAuthority
     }
     tweets {
       ...TweetData
@@ -34,7 +35,8 @@ query me {
     handle
     consumerName
     data {
-      avatarIsNFT
+      avatarMint
+      avatarUpdateAuthority
     }
   }
 }

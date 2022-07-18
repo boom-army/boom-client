@@ -22,7 +22,8 @@ export const USERS = gql`
       consumerName
       avatar
       data {
-        avatarIsNFT
+        avatarMint
+        avatarUpdateAuthority
       }
       coverPhoto
       bio
@@ -37,7 +38,8 @@ export const USER_FOLLOW = gql`
       handle
       avatar
       data {
-        avatarIsNFT
+        avatarMint
+        avatarUpdateAuthority
       }
       isFollowing
       isSelf

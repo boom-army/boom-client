@@ -242,7 +242,7 @@ export const NewMessage: React.FC<Props> = ({
                 height: 30,
               }}
               avatar={data?.me?.avatar}
-              isNFT={data?.me?.data?.avatarIsNFT ?? false}
+              isNFT={data?.me?.data?.avatarMint}
             />
             <Input
               value={tweet.value}

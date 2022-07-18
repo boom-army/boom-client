@@ -44,7 +44,7 @@ const createUserReactionTooltip = (
               <UserAvatar
                 sx={{ width: 20, height: 20 }}
                 avatar={user.avatar}
-                isNFT={user.data?.avatarIsNFT ?? false}
+                isNFT={user?.data?.avatarMint}
               />
               <span>@{user.handle}</span>
             </Stack>

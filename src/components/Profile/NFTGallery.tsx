@@ -77,14 +77,17 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
         variables: {
           handle,
           avatar: uRIData?.image,
-          data: { avatarIsNFT: true },
+          data: {
+            avatarMint: data.mint,
+            avatarUpdateAuthority: data.updateAuthority,
+          },
         },
       });
 
       enqueueSnackbar("Your profile has been updated 🥳.", {
         variant: "success",
       });
-    } catch (err) { 
+    } catch (err) {
       return displayError(err, enqueueSnackbar);
     }
   };

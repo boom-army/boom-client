@@ -119,7 +119,7 @@ export const ShowMessage: React.FC<Props> = ({
                       height: 16,
                     }}
                     avatar={parentTweet?.user?.avatar as string}
-                    isNFT={parentTweet?.user?.data?.avatarIsNFT ?? false}
+                    isNFT={parentTweet?.user?.data?.avatarMint}
                   />
                 </Box>
                 <Box mr={1}>
@@ -225,8 +225,8 @@ export const ShowMessage: React.FC<Props> = ({
                 width: "30px",
                 height: "30px",
               }}
-              avatar={user?.avatar as string}
-              isNFT={parentTweet?.user?.data?.avatarIsNFT ?? false}
+              avatar={ user?.avatar as string }
+              isNFT={ user?.data?.avatarMint }
             />
           </Link>
         </Box>

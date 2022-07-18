@@ -458,6 +458,7 @@ export type Query = {
   feed: Array<Tweet>;
   getMeta?: Maybe<Metadata>;
   healthCheck: Scalars['String'];
+  hero: Array<Tweet>;
   me: User;
   mentions: Array<Tweet>;
   oneSignal: OneSignal;
@@ -487,6 +488,12 @@ export type QueryFeedArgs = {
 
 export type QueryGetMetaArgs = {
   url?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryHeroArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
 
 
@@ -638,11 +645,13 @@ export type User = {
 
 export type UserData = {
   __typename?: 'UserData';
-  avatarIsNFT?: Maybe<Scalars['Boolean']>;
+  avatarMint?: Maybe<Scalars['String']>;
+  avatarUpdateAuthority?: Maybe<Scalars['String']>;
 };
 
 export type UserDataInput = {
-  avatarIsNFT?: Maybe<Scalars['Boolean']>;
+  avatarMint?: Maybe<Scalars['String']>;
+  avatarUpdateAuthority?: Maybe<Scalars['String']>;
 };
 
 export type AddChannelMutationVariables = Exact<{
@@ -677,7 +686,7 @@ export type ChannelFeedQueryVariables = Exact<{
 }>;
 
 
-export type ChannelFeedQuery = { __typename?: 'Query', channelFeed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> };
+export type ChannelFeedQuery = { __typename?: 'Query', channelFeed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> };
 
 export type FeedQueryVariables = Exact<{
   offset: Scalars['Int'];
@@ -686,7 +695,7 @@ export type FeedQueryVariables = Exact<{
 }>;
 
 
-export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> };
+export type FeedQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> };
 
 export type HealthCheckQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -699,7 +708,7 @@ export type MentionsQueryVariables = Exact<{
 }>;
 
 
-export type MentionsQuery = { __typename?: 'Query', mentions: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> };
+export type MentionsQuery = { __typename?: 'Query', mentions: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> };
 
 export type GetMetaQueryVariables = Exact<{
   url?: Maybe<Scalars['String']>;
@@ -720,12 +729,12 @@ export type ProfileQueryVariables = Exact<{
 }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> } };
+export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> } };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } };
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } };
 
 export type EditProfileMutationVariables = Exact<{
   handle?: Maybe<Scalars['String']>;
@@ -747,7 +756,16 @@ export type TweetReactionsQueryVariables = Exact<{
 }>;
 
 
-export type TweetReactionsQuery = { __typename?: 'Query', tweet: { __typename?: 'Tweet', reactions?: Array<{ __typename?: 'Reaction', emojiId: string, id: string, isMine: boolean, user: { __typename?: 'User', handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } }> | null | undefined } };
+export type TweetReactionsQuery = { __typename?: 'Query', tweet: { __typename?: 'Tweet', reactions?: Array<{ __typename?: 'Reaction', emojiId: string, id: string, isMine: boolean, user: { __typename?: 'User', handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } }> | null | undefined } };
+
+export type ToggleReactionMutationVariables = Exact<{
+  id: Scalars['ID'];
+  emojiId: Scalars['String'];
+  skin?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type ToggleReactionMutation = { __typename?: 'Mutation', toggleReaction: boolean };
 
 export type SearchUserQueryVariables = Exact<{
   term: Scalars['String'];
@@ -766,7 +784,7 @@ export type SearchTweetsQueryVariables = Exact<{
 }>;
 
 
-export type SearchTweetsQuery = { __typename?: 'Query', searchTweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> };
+export type SearchTweetsQuery = { __typename?: 'Query', searchTweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> };
 
 export type TipCreatorMutationVariables = Exact<{
   tipAmount: Scalars['String'];
@@ -777,7 +795,14 @@ export type TipCreatorMutationVariables = Exact<{
 
 export type TipCreatorMutation = { __typename?: 'Mutation', tipCreator: { __typename?: 'Tip', id: string } };
 
-export type TweetDataFragment = { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined };
+export type TweetDataFragment = { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined };
+
+export type TweetQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type TweetQuery = { __typename?: 'Query', tweet: { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, childTweets?: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined } | null | undefined> | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined } };
 
 export type NewTweetMutationVariables = Exact<{
   text: Scalars['String'];
@@ -792,22 +817,6 @@ export type NewTweetMutationVariables = Exact<{
 
 
 export type NewTweetMutation = { __typename?: 'Mutation', newTweet: { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, mentions?: Array<string> | null | undefined, commentsCount: number, createdAt?: string | null | undefined } };
-
-export type TweetQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type TweetQuery = { __typename?: 'Query', tweet: { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, childTweets?: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined } | null | undefined> | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarIsNFT?: boolean | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined } };
-
-export type ToggleReactionMutationVariables = Exact<{
-  id: Scalars['ID'];
-  emojiId: Scalars['String'];
-  skin?: Maybe<Scalars['Int']>;
-}>;
-
-
-export type ToggleReactionMutation = { __typename?: 'Mutation', toggleReaction: boolean };
 
 export type ToggleRetweetMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -845,7 +854,8 @@ export const TweetDataFragmentDoc = gql`
       handle
       avatar
       data {
-        avatarIsNFT
+        avatarMint
+        avatarUpdateAuthority
       }
     }
   }
@@ -895,7 +905,8 @@ export const TweetDataFragmentDoc = gql`
     handle
     consumerName
     data {
-      avatarIsNFT
+      avatarMint
+      avatarUpdateAuthority
     }
   }
   reactions {
@@ -1371,7 +1382,8 @@ export const ProfileDocument = gql`
     newMentionsCount
     bio
     data {
-      avatarIsNFT
+      avatarMint
+      avatarUpdateAuthority
     }
     tweets {
       ...TweetData
@@ -1416,7 +1428,8 @@ export const MeDocument = gql`
     handle
     consumerName
     data {
-      avatarIsNFT
+      avatarMint
+      avatarUpdateAuthority
     }
   }
 }
@@ -1509,7 +1522,8 @@ export const TweetReactionsDocument = gql`
         handle
         avatar
         data {
-          avatarIsNFT
+          avatarMint
+          avatarUpdateAuthority
         }
       }
       emojiId
@@ -1547,6 +1561,39 @@ export function useTweetReactionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type TweetReactionsQueryHookResult = ReturnType<typeof useTweetReactionsQuery>;
 export type TweetReactionsLazyQueryHookResult = ReturnType<typeof useTweetReactionsLazyQuery>;
 export type TweetReactionsQueryResult = Apollo.QueryResult<TweetReactionsQuery, TweetReactionsQueryVariables>;
+export const ToggleReactionDocument = gql`
+    mutation toggleReaction($id: ID!, $emojiId: String!, $skin: Int) {
+  toggleReaction(id: $id, emojiId: $emojiId, skin: $skin)
+}
+    `;
+export type ToggleReactionMutationFn = Apollo.MutationFunction<ToggleReactionMutation, ToggleReactionMutationVariables>;
+
+/**
+ * __useToggleReactionMutation__
+ *
+ * To run a mutation, you first call `useToggleReactionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useToggleReactionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [toggleReactionMutation, { data, loading, error }] = useToggleReactionMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      emojiId: // value for 'emojiId'
+ *      skin: // value for 'skin'
+ *   },
+ * });
+ */
+export function useToggleReactionMutation(baseOptions?: Apollo.MutationHookOptions<ToggleReactionMutation, ToggleReactionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ToggleReactionMutation, ToggleReactionMutationVariables>(ToggleReactionDocument, options);
+      }
+export type ToggleReactionMutationHookResult = ReturnType<typeof useToggleReactionMutation>;
+export type ToggleReactionMutationResult = Apollo.MutationResult<ToggleReactionMutation>;
+export type ToggleReactionMutationOptions = Apollo.BaseMutationOptions<ToggleReactionMutation, ToggleReactionMutationVariables>;
 export const SearchUserDocument = gql`
     query searchUser($term: String!, $offset: Int, $limit: Int) {
   searchUser(term: $term, offset: $offset, limit: $limit) {
@@ -1665,6 +1712,44 @@ export function useTipCreatorMutation(baseOptions?: Apollo.MutationHookOptions<T
 export type TipCreatorMutationHookResult = ReturnType<typeof useTipCreatorMutation>;
 export type TipCreatorMutationResult = Apollo.MutationResult<TipCreatorMutation>;
 export type TipCreatorMutationOptions = Apollo.BaseMutationOptions<TipCreatorMutation, TipCreatorMutationVariables>;
+export const TweetDocument = gql`
+    query tweet($id: ID!) {
+  tweet(id: $id) {
+    ...TweetData
+    childTweets {
+      ...TweetData
+    }
+  }
+}
+    ${TweetDataFragmentDoc}`;
+
+/**
+ * __useTweetQuery__
+ *
+ * To run a query within a React component, call `useTweetQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTweetQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTweetQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useTweetQuery(baseOptions: Apollo.QueryHookOptions<TweetQuery, TweetQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TweetQuery, TweetQueryVariables>(TweetDocument, options);
+      }
+export function useTweetLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TweetQuery, TweetQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TweetQuery, TweetQueryVariables>(TweetDocument, options);
+        }
+export type TweetQueryHookResult = ReturnType<typeof useTweetQuery>;
+export type TweetLazyQueryHookResult = ReturnType<typeof useTweetLazyQuery>;
+export type TweetQueryResult = Apollo.QueryResult<TweetQuery, TweetQueryVariables>;
 export const NewTweetDocument = gql`
     mutation newTweet($text: String!, $files: [String!]!, $tags: [String!]!, $mentions: [String!]!, $gif: GifInput, $nft: NFTInput, $parentTweet: String, $channel: String) {
   newTweet(
@@ -1719,77 +1804,6 @@ export function useNewTweetMutation(baseOptions?: Apollo.MutationHookOptions<New
 export type NewTweetMutationHookResult = ReturnType<typeof useNewTweetMutation>;
 export type NewTweetMutationResult = Apollo.MutationResult<NewTweetMutation>;
 export type NewTweetMutationOptions = Apollo.BaseMutationOptions<NewTweetMutation, NewTweetMutationVariables>;
-export const TweetDocument = gql`
-    query tweet($id: ID!) {
-  tweet(id: $id) {
-    ...TweetData
-    childTweets {
-      ...TweetData
-    }
-  }
-}
-    ${TweetDataFragmentDoc}`;
-
-/**
- * __useTweetQuery__
- *
- * To run a query within a React component, call `useTweetQuery` and pass it any options that fit your needs.
- * When your component renders, `useTweetQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTweetQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useTweetQuery(baseOptions: Apollo.QueryHookOptions<TweetQuery, TweetQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TweetQuery, TweetQueryVariables>(TweetDocument, options);
-      }
-export function useTweetLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TweetQuery, TweetQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TweetQuery, TweetQueryVariables>(TweetDocument, options);
-        }
-export type TweetQueryHookResult = ReturnType<typeof useTweetQuery>;
-export type TweetLazyQueryHookResult = ReturnType<typeof useTweetLazyQuery>;
-export type TweetQueryResult = Apollo.QueryResult<TweetQuery, TweetQueryVariables>;
-export const ToggleReactionDocument = gql`
-    mutation toggleReaction($id: ID!, $emojiId: String!, $skin: Int) {
-  toggleReaction(id: $id, emojiId: $emojiId, skin: $skin)
-}
-    `;
-export type ToggleReactionMutationFn = Apollo.MutationFunction<ToggleReactionMutation, ToggleReactionMutationVariables>;
-
-/**
- * __useToggleReactionMutation__
- *
- * To run a mutation, you first call `useToggleReactionMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useToggleReactionMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [toggleReactionMutation, { data, loading, error }] = useToggleReactionMutation({
- *   variables: {
- *      id: // value for 'id'
- *      emojiId: // value for 'emojiId'
- *      skin: // value for 'skin'
- *   },
- * });
- */
-export function useToggleReactionMutation(baseOptions?: Apollo.MutationHookOptions<ToggleReactionMutation, ToggleReactionMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<ToggleReactionMutation, ToggleReactionMutationVariables>(ToggleReactionDocument, options);
-      }
-export type ToggleReactionMutationHookResult = ReturnType<typeof useToggleReactionMutation>;
-export type ToggleReactionMutationResult = Apollo.MutationResult<ToggleReactionMutation>;
-export type ToggleReactionMutationOptions = Apollo.BaseMutationOptions<ToggleReactionMutation, ToggleReactionMutationVariables>;
 export const ToggleRetweetDocument = gql`
     mutation toggleRetweet($id: ID!) {
   toggleRetweet(id: $id)
