@@ -25,12 +25,18 @@ const IconTypography = styled(Typography)((props: any) => ({
   fontWeight: 300,
 }));
 
+const truncString = (text: string, max: number, add: string) => {
+  add = add || '...';
+  return (text.length > max ? `${text.substring(0,max)}${add}` : text);
+};
+
 interface NewsProps {
   meep: SearchTweetsQuery["searchTweets"][0];
 }
 
 export const NewsItem = ({ meep }: NewsProps) => {
-  const [text] = meep.text.split("#");
+  let [text] = meep.text.split("#");
+  text = truncString(text, 140, '...');
   return (
     <Card>
       <CardActionArea
