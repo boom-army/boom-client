@@ -46,14 +46,14 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             component="div"
             pb={1}
           >
-            Post in the Hero Feed by setting your PFP to a{" "}
+            Set your PFP to a{" "}
             <Link
               to={`/${userData?.handle}`}
               style={{ color: theme.blue.lightest }}
             >
               Boom Hero NFT
             </Link>
-            .
+            to appear in the Hero Feed.
           </Typography>
           <Button
             component={MuiLink}
