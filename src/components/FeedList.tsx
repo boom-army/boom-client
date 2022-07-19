@@ -4,10 +4,11 @@ import { ApolloError } from "@apollo/client";
 import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
 import { Grid } from "@mui/material";
+import { HARKL_ID } from "../utils/utils";
 import { Loader } from "./Loader";
 import { NewTweet, ShowTweet } from "./Tweet";
 import { Tweet, useMeQuery } from "../generated/graphql";
-import { HARKL_ID } from "../utils/utils";
+import { BoomHeroStore } from "./Advertising/BoomHeroStore";
 
 interface Props {
   loading?: boolean;
@@ -74,6 +75,11 @@ export const FeedList: React.FC<Props> = ({
             )
           }
         >
+          {userData && userData.me.data?.avatarUpdateAuthority !== HARKL_ID && (
+            <Grid item xs={12}>
+              <BoomHeroStore userData={userData?.me} />
+            </Grid>
+          )}
           {data?.length
             ? data?.map((tweet) => (
                 <ShowTweet key={tweet.id} tweet={tweet as Tweet} />

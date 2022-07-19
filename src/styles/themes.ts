@@ -25,6 +25,22 @@ interface Shades {
   darkest?: string
 }
 
+const themeColors = {
+  blue: {
+    lightest: "#4D97CB",
+    lighter: "#316081",
+    light: "#274C66",
+    dark: "#152937",
+    darker: "#122430",
+    darkest: "#0E1B25",
+  },
+  grey: {
+    lighter: "#D8DCDE",
+    light: "#949A9E",
+    dark: "#374148",
+  },
+}
+
 const fontSettings = {
   typography: {
     fontFamily: [
@@ -57,25 +73,19 @@ const fontSettings = {
       fontSize: 22,
       fontWeight: 600,
       lineHeight: "1.2rem"
+    },
+    h4: {
+      fontSize: 18,
+      fontWeight: 600,
+      lineHeight: "1.2rem"
+    },
+    h5: {
+      fontSize: 16,
+      fontWeight: 600,
+      lineHeight: "1.2rem"
     }
   },
 };
-
-const themeColors = {
-  blue: {
-    lightest: "#4D97CB",
-    lighter: "#316081",
-    light: "#274C66",
-    dark: "#152937",
-    darker: "#122430",
-    darkest: "#0E1B25",
-  },
-  grey: {
-    lighter: "#D8DCDE",
-    light: "#949A9E",
-    dark: "#374148",
-  },
-}
 
 const accent = "#CA2055"
 
