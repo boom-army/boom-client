@@ -67,7 +67,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
         displayError(error, enqueueSnackbar);
       }
     })();
-  }, []);
+  }, [data, cluster]);
 
   const handleEditProfile = async (e: any) => {
     e.preventDefault();
@@ -250,7 +250,7 @@ export const NFTGallery: React.FC<ProfileQuery> = ({ profile }) => {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [profile.publicAddress]);
 
   if (loading) return <Loader />;
 
