@@ -193,7 +193,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
               <Chip
                 component="a"
                 target="_blank"
-                href={`https://solscan.io/token/${data?.mint}?cluster=${cluster}`}
+                href={`https://solana.fm/address/${data?.mint}?cluster=${cluster}-solana`}
                 label="View in explorer"
                 variant="outlined"
                 size="small"
