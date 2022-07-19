@@ -160,6 +160,7 @@ export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
       p={2}
       sx={{
         borderBottom: `2px solid ${theme.tertiaryColor}`,
+        maxHeight: "10em",
       }}
     >
       <Grid item xs={12} pb={2}>

@@ -51,13 +51,13 @@ export const FeedList: React.FC<Props> = ({
         overflow: "auto",
       }}
     >
-      {data?.length && loading && (
+      {data?.length && loading ? (
         <Box sx={{ marginTop: "1rem" }}>
           <Loader />
         </Box>
-      )}
+      ) : null}
       <NewTweet />
-      {data && (
+      {data?.length ? (
         <InfiniteScroll
           dataLength={data?.length}
           next={fetchData}
@@ -71,14 +71,16 @@ export const FeedList: React.FC<Props> = ({
             )
           }
         >
-          {data?.length ? (
-            data?.map((tweet) => (
-              <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
-            ))
-          ) : (
-            <CustomResponse text="No Meeps exist to display in this feed. Let everyone know what's happening." />
-          )}
+          {data?.length
+            ? data?.map((tweet) => (
+                <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
+              ))
+            : null}
         </InfiniteScroll>
+      ) : (
+        <Grid item xs={12}>
+          <CustomResponse text="No hero's have meeped." />
+        </Grid>
       )}
     </Grid>
   );
