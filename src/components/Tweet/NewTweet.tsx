@@ -6,6 +6,7 @@ import {
   TweetDocument,
   useNewTweetMutation,
   MeQuery,
+  HeroFeedDocument,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { ImageBox } from "../ImageBox";
@@ -68,6 +69,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
       FeedDocument,
+      HeroFeedDocument,
       ChannelFeedDocument,
       {
         query: TweetDocument,

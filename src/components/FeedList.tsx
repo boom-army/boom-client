@@ -59,9 +59,7 @@ export const FeedList: React.FC<Props> = ({
           <Loader />
         </Box>
       ) : null}
-      {userData && userData.me.data?.avatarUpdateAuthority === HARKL_ID && (
-        <NewTweet userData={userData?.me} />
-      )}
+      {userData && <NewTweet userData={userData?.me} />}
       {data?.length ? (
         <InfiniteScroll
           dataLength={data?.length}
