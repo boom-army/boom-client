@@ -6,7 +6,8 @@ import { CustomResponse } from "./CustomResponse";
 import { Grid } from "@mui/material";
 import { Loader } from "./Loader";
 import { NewTweet, ShowTweet } from "./Tweet";
-import { Tweet } from "../generated/graphql";
+import { Tweet, useMeQuery } from "../generated/graphql";
+import { HARKL_ID } from "../utils/utils";
 
 interface Props {
   loading?: boolean;
@@ -21,6 +22,8 @@ export const FeedList: React.FC<Props> = ({
   data,
   fetchMore,
 }) => {
+  const { data: userData } = useMeQuery();
+
   if (loading)
     return (
       <Box sx={{ marginTop: "1rem" }}>
@@ -56,7 +59,9 @@ export const FeedList: React.FC<Props> = ({
           <Loader />
         </Box>
       ) : null}
-      <NewTweet />
+      {userData && userData.me.data?.avatarUpdateAuthority === HARKL_ID && (
+        <NewTweet userData={userData?.me} />
+      )}
       {data?.length ? (
         <InfiniteScroll
           dataLength={data?.length}

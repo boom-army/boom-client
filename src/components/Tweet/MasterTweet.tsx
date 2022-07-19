@@ -4,7 +4,7 @@ import { CustomResponse } from "../CustomResponse";
 import { Helmet } from "react-helmet";
 import { Loader } from "../Loader";
 import { NewTweet, ParentTweet, ShowTweet } from ".";
-import { useTweetQuery } from "../../generated/graphql";
+import { useMeQuery, useTweetQuery } from "../../generated/graphql";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 
@@ -16,6 +16,8 @@ export const MasterTweet = () => {
       id: tweetId!,
     },
   });
+  const { data: userData } = useMeQuery();
+
   const comments =
     data?.tweet?.childTweets?.length! > 0 ? data?.tweet.childTweets : [];
   const exists = !!data?.tweet?.id;
@@ -63,7 +65,7 @@ export const MasterTweet = () => {
           ) : (
             <CustomResponse text="Oops, the tweet you are looking for doesn't seem to exist." />
           )}
-          {exists && <NewTweet parentTweet={data?.tweet?.id} />}
+          {exists && userData && <NewTweet parentTweet={data?.tweet?.id} userData={userData?.me} />}
           {comments &&
             comments.map((comment: any) => (
               <ShowTweet tweet={comment} key={comment.id} />

@@ -4,8 +4,8 @@ import {
   ChannelFeedDocument,
   FeedDocument,
   TweetDocument,
-  useMeQuery,
   useNewTweetMutation,
+  MeQuery,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { ImageBox } from "../ImageBox";
@@ -33,8 +33,9 @@ import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
 
 interface NewTweetProps {
-  parentTweet?: string | undefined;
-  channel?: string | undefined;
+  parentTweet?: string | undefined
+  channel?: string | undefined
+  userData: MeQuery["me"]
 }
 
 const IconsGrid = styled(Grid)((props) => ({
@@ -56,7 +57,7 @@ const ImageInput = styled("input")({
   display: "none",
 });
 
-export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
+export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
   const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
@@ -147,8 +148,6 @@ export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
     }
   };
 
-  const { data } = useMeQuery();
-
   const mapTweetFiles = (url: string, index: number) => ({
     url,
     id: `preview-${index}`,
@@ -170,8 +169,8 @@ export const NewTweet = ({ parentTweet, channel }: NewTweetProps) => {
               width: 40,
               height: 40,
             }}
-            avatar={data?.me?.avatar}
-            isNFT={data?.me?.data?.avatarMint}
+            avatar={userData?.avatar}
+            isNFT={userData?.data?.avatarMint}
           />
           <TextField
             multiline

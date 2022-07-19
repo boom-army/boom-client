@@ -291,6 +291,8 @@ export const CIVIC = new anchor.web3.PublicKey(
   'gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs',
 );
 
+export const HARKL_ID = 'harkLSUe2Puud2TVQUhHW4vs45mF1YMLU3PThPCuWd8';
+
 export const getAtaForMint = async (
   mint: anchor.web3.PublicKey,
   buyer: anchor.web3.PublicKey,
