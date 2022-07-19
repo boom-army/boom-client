@@ -75,7 +75,7 @@ export const FeedList: React.FC<Props> = ({
             )
           }
         >
-          {userData && userData.me.data?.avatarUpdateAuthority !== HARKL_ID && (
+          {userData?.me.data?.avatarUpdateAuthority !== HARKL_ID && (
             <Grid item xs={12}>
               <BoomHeroStore userData={userData?.me} />
             </Grid>
