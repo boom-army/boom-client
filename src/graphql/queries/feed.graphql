@@ -3,3 +3,9 @@ query feed($offset: Int!, $limit: Int, $global: Boolean) {
     ...TweetData
   }
 }
+
+query heroFeed($offset: Int!, $limit: Int) {
+  heroFeed(offset: $offset, limit: $limit) {
+    ...TweetData
+  }
+}

@@ -1,7 +1,6 @@
 import React from "react";
 import { FeedList } from "../components/FeedList";
-import { NewTweet } from "../components/Tweet";
-import { useFeedQuery } from "../generated/graphql";
+import { useFeedQuery, Tweet } from "../generated/graphql";
 
 export const Following: React.FC = () => {
   const { loading, error, data, fetchMore } = useFeedQuery({
@@ -14,7 +13,7 @@ export const Following: React.FC = () => {
 
   return (
     <>
-      <FeedList loading={loading} error={error} data={data} fetchMore={fetchMore} />
+      <FeedList loading={loading} error={error} data={data?.feed as Array<Tweet>} fetchMore={fetchMore} />
     </>
   );
 };

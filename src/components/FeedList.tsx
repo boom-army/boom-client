@@ -6,12 +6,12 @@ import { CustomResponse } from "./CustomResponse";
 import { Grid } from "@mui/material";
 import { Loader } from "./Loader";
 import { NewTweet, ShowTweet } from "./Tweet";
-import { Tweet, FeedQuery } from "../generated/graphql";
+import { Tweet } from "../generated/graphql";
 
 interface Props {
   loading?: boolean;
   error?: ApolloError | undefined | any;
-  data: FeedQuery | undefined;
+  data: Array<Tweet> | undefined;
   fetchMore: (props: any) => void;
 }
 
@@ -37,7 +37,7 @@ export const FeedList: React.FC<Props> = ({
   const fetchData = () => {
     fetchMore({
       variables: {
-        offset: data?.feed.length ?? 0,
+        offset: data?.length ?? 0,
       },
     });
   };
@@ -51,7 +51,7 @@ export const FeedList: React.FC<Props> = ({
         overflow: "auto",
       }}
     >
-      {data?.feed.length && loading && (
+      {data?.length && loading && (
         <Box sx={{ marginTop: "1rem" }}>
           <Loader />
         </Box>
@@ -59,7 +59,7 @@ export const FeedList: React.FC<Props> = ({
       <NewTweet />
       {data && (
         <InfiniteScroll
-          dataLength={data?.feed.length}
+          dataLength={data?.length}
           next={fetchData}
           hasMore={true}
           scrollableTarget="scrollBox"
@@ -71,8 +71,8 @@ export const FeedList: React.FC<Props> = ({
             )
           }
         >
-          {data?.feed.length ? (
-            data?.feed.map((tweet) => (
+          {data?.length ? (
+            data?.map((tweet) => (
               <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
             ))
           ) : (
