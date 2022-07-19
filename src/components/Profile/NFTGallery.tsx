@@ -67,7 +67,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
         displayError(error, enqueueSnackbar);
       }
     })();
-  }, [data, cluster]);
+  }, []);
 
   const handleEditProfile = async (e: any) => {
     e.preventDefault();
@@ -178,7 +178,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
                 alignContent: "flex-start",
               }}
             >
-              {uRIData?.attributes &&
+              {uRIData?.attributes && typeof uRIData?.attributes?.map === 'function' &&
                 uRIData.attributes.map((nftItem) => (
                   <Chip
                     label={`${nftItem.trait_type}: ${nftItem.value}`}
@@ -250,7 +250,7 @@ export const NFTGallery: React.FC<ProfileQuery> = ({ profile }) => {
         setLoading(false);
       }
     })();
-  }, [profile.publicAddress]);
+  }, []);
 
   if (loading) return <Loader />;
 
