@@ -53,7 +53,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             >
               Boom Hero NFT 
             </Link> : 'Boom Hero NFT '}
-            to appear in the Hero Feed.
+            {" "}to appear in the Hero Feed.
           </Typography>
           <Button
             component={MuiLink}
