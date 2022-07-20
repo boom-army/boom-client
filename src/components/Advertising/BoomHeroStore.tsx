@@ -6,7 +6,7 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Link as MuiLink
+  Link as MuiLink,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { MeQuery } from "../../generated/graphql";
@@ -47,13 +47,17 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             pb={1}
           >
             Set your PFP to a{" "}
-            {userData?.handle ? <Link
-              to={`/${userData?.handle}`}
-              style={{ color: theme.blue.lightest }}
-            >
-              Boom Hero NFT 
-            </Link> : 'Boom Hero NFT '}
-            {" "}to appear in the Hero Feed.
+            {userData?.handle ? (
+              <Link
+                to={`/${userData?.handle}`}
+                style={{ color: theme.blue.lightest }}
+              >
+                Boom Hero NFT
+              </Link>
+            ) : (
+              "Boom Hero NFT "
+            )}{" "}
+            to appear in the Hero Feed.
           </Typography>
           <Button
             component={MuiLink}
