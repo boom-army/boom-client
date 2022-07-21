@@ -140,8 +140,8 @@ export const Channels: React.FC = () => {
   return (
     <>
       <Box m={1}>
-        <Typography variant="h2" sx={{ fontSize: "18px" }}>
-          Select channels to display
+        <Typography variant="h2" sx={{ fontSize: "18px" }} pb={1}>
+          NFT Channels
         </Typography>
       </Box>
       {data && data?.channels?.length ? (

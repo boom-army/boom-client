@@ -83,6 +83,9 @@ const fontSettings = {
       fontSize: 16,
       fontWeight: 600,
       lineHeight: "1.2rem"
+    },
+    body2: {
+      fontWeight: 300
     }
   },
 };
