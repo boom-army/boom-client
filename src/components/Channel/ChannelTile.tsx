@@ -1,22 +1,13 @@
 import React, { useContext } from "react";
-import CircularProgress from "@mui/material/CircularProgress";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { Avatar, AvatarGroup, Box, Typography } from "@mui/material";
 import { ChannelStatus } from "../../constants";
-import {
-  ChannelsDocument,
-  ChannelsQuery,
-  useAddChannelMutation,
-  useChannelUnlinkMutation,
-} from "../../generated/graphql";
+import { NavLink } from "react-router-dom";
+import { ChannelsQuery } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
-import { displayError } from "../../utils";
-import { gql } from "@apollo/client";
 import { shortenAddress } from "../../utils/utils";
 import { styled } from "@mui/material/styles";
-import { uniqBy } from "lodash";
-import { useSnackbar } from "../../contexts/snackbar";
 
 interface Props {
   channel: ChannelsQuery["channels"][0];
@@ -24,85 +15,8 @@ interface Props {
 
 export const ChannelTile: React.FC<Props> = ({ channel }) => {
   const { theme } = useContext(ThemeContext);
-  const [addChannelMutation, { loading }] = useAddChannelMutation();
-  const [channelUnlinkMutation] = useChannelUnlinkMutation({
-    variables: {
-      channelId: channel.id,
-    },
-  });
-  const { enqueueSnackbar } = useSnackbar();
-
+  const localTheme = localStorage.getItem("theme");
   const active = channel.status === ChannelStatus.ACTIVE;
-
-  const toggleChannel = async () => {
-    try {
-      if (channel.status === ChannelStatus.ACTIVE) {
-        await channelUnlinkMutation({
-          update: (cache) => {
-            cache.writeFragment({
-              id: `Channel:${channel.id}`,
-              fragment: gql`
-                fragment ChannelStatus on Channel {
-                  status
-                }
-              `,
-              data: {
-                status: null,
-              },
-            });
-          },
-        });
-      } else {
-        await addChannelMutation({
-          variables: {
-            mintAuthority: channel.mintAuthority,
-            name: channel.name,
-            family: channel.family,
-            description: channel.description,
-            image: channel.image,
-            status: ChannelStatus.ACTIVE,
-            channelParentId: null,
-          },
-          update: (cache, { data }) => {
-            const { channels }: any = cache.readQuery({
-              query: ChannelsDocument,
-            });
-            cache.writeQuery({
-              query: ChannelsDocument,
-              data: {
-                channels: uniqBy([...channels, data?.addChannel], "id"),
-              },
-            });
-          },
-        });
-      }
-    } catch (error) {
-      displayError(error, enqueueSnackbar);
-    }
-  };
-
-  const StyledCircularProgress = styled(CircularProgress)((props: any) => ({
-    color: props.theme.accentColor,
-  }));
-
-  const BoxStyled = styled(Box)({
-    h3: {
-      fontWeight: 600,
-      fontSize: "16px",
-      lineHeight: "22px",
-      padding: "0.2em 0 0.5em",
-    },
-    ".status": {
-      width: "14px",
-    },
-    "& .MuiTypography-body2": {
-      fontWeight: 300,
-    },
-    "@media screen and (max-width: 530px)": {
-      margin: 0,
-      marginTop: "1em",
-    },
-  });
 
   const MemberAvatarBox = styled(Box)({
     "& .MuiAvatarGroup-root .MuiAvatar-root": {
@@ -112,17 +26,22 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
 
   return (
     <>
-      <BoxStyled
+      <Box
+        component={NavLink}
         sx={{
-          backgroundColor: active ? theme.background : theme.blue.lighter,
+          backgroundColor: localTheme === 'dark' ? theme.blue.darker : theme.tertiaryColor2,
           borderRadius: 1,
           display: "flex",
           border: active ? `1px solid ${theme.secondaryColor}` : 0,
           cursor: "pointer",
           margin: 1,
           padding: 1,
+          "@media screen and (max-width: 530px)": {
+            margin: 0,
+            marginTop: "1em",
+          },
         }}
-        onClick={toggleChannel}
+        to={channel?.id}
       >
         <Box mr={1}>
           <Avatar
@@ -139,7 +58,15 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
             }}
           >
             <Box>
-              <Typography variant="h3">
+              <Typography
+                variant="h3"
+                sx={{
+                  fontWeight: 600,
+                  fontSize: "16px",
+                  lineHeight: "22px",
+                  padding: "0.2em 0 0.5em",
+                }}
+              >
                 {`${channel.family} - ${channel.name}`}{" "}
                 {channel.verified && (
                   <VerifiedIcon
@@ -150,15 +77,12 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
               </Typography>
             </Box>
             <Box>
-              {loading && <StyledCircularProgress size={16} />}
-              {!loading && (
-                <LaunchIcon
-                  className="status"
-                  sx={{
-                    color: theme.blue.lightest,
-                  }}
-                />
-              )}
+              <LaunchIcon
+                sx={{
+                  fontSize: 14,
+                  color: theme.blue.lightest,
+                }}
+              />
             </Box>
           </Box>
           <Box
@@ -205,7 +129,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
             </Box>
           </Box>
         </Box>
-      </BoxStyled>
+      </Box>
     </>
   );
 };
