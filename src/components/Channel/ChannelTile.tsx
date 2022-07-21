@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import CheckIcon from "@mui/icons-material/Check";
 import CircularProgress from "@mui/material/CircularProgress";
 import VerifiedIcon from "@mui/icons-material/Verified";
+import LaunchIcon from "@mui/icons-material/Launch";
 import { Avatar, AvatarGroup, Box, Typography } from "@mui/material";
 import { ChannelStatus } from "../../constants";
 import {
@@ -109,7 +108,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
     "& .MuiAvatarGroup-root .MuiAvatar-root": {
       border: 0,
     },
-  });  
+  });
 
   return (
     <>
@@ -152,22 +151,13 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
             </Box>
             <Box>
               {loading && <StyledCircularProgress size={16} />}
-              {!loading && active ? (
-                <Avatar
-                  sx={{ width: 16, height: 16, background: theme.success }}
-                >
-                  <CheckIcon className="status" />
-                </Avatar>
-              ) : (
-                <Avatar
+              {!loading && (
+                <LaunchIcon
+                  className="status"
                   sx={{
-                    width: 16,
-                    height: 16,
-                    background: theme.blue.lightest,
+                    color: theme.blue.lightest,
                   }}
-                >
-                  <AddIcon className="status" />
-                </Avatar>
+                />
               )}
             </Box>
           </Box>
