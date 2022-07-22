@@ -1,7 +1,6 @@
 import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
 import * as linkify from "linkifyjs";
-import Linkify from "linkify-react";
 import React, { useContext } from "react";
 import moment from "moment";
 import { Box, Grid, Stack, Typography } from "@mui/material";
@@ -18,6 +17,7 @@ import { TweetQuery, Reaction } from "../../generated/graphql";
 import { UrlMetaData } from "../UrlMeta/UrlMetaData";
 import { UserAvatar } from "../UserAvatar";
 import { VideoContainer } from "../Giphy/VideoContainer";
+import { safeLinkifyText } from "../../utils/typography";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
@@ -65,19 +65,22 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
   const { handleReaction } = useReaction({ tweetId: id });
   const handle = user && user.handle;
 
-  const extractUrls = linkify.find(text).filter((u) => u.type === "url");
-  const targetUrl = extractUrls[0]?.href;
+  const sanitizedText = safeLinkifyText(text);
 
-  const linkifyOptions = {
-    target: { url: "_blank" },
-    formatHref: { hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}` },
-  };
+  const extractUrls = linkify.find(sanitizedText).filter((u) => u.type === "url");
+  const targetUrl = extractUrls[0]?.href;
+  
   return (
     <Grid
       item
       xs={12}
       mt={2}
-      sx={{ position: "relative", padding: "0 1em", display: "flex", maxWidth: "100vw" }}
+      sx={{
+        position: "relative",
+        padding: "0 1em",
+        display: "flex",
+        maxWidth: "100vw",
+      }}
     >
       <Box mr={2}>
         <Link to={`/${handle}`}>
@@ -90,7 +93,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
       </Box>
       <Box mt={1}>
         <Link to={`/${handle}`}>
-          <Typography display={"inline"}  sx={{ fontWeight: "600", mr: 0.5 }}>
+          <Typography display={"inline"} sx={{ fontWeight: "600", mr: 0.5 }}>
             {user && user.consumerName}
           </Typography>
           <Typography display={"inline"} mr={0.5}>{`@${handle}`}</Typography>
@@ -101,11 +104,9 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
             {moment(setDate(createdAt)).fromNow()}
           </Typography>
         </Link>
-        <Linkify options={linkifyOptions}>
-          <TweetBody mb={0.75} sx={{ wordBreak: "break-word" }}>
-            {text}
-          </TweetBody>
-        </Linkify>
+        <TweetBody mb={0.75} sx={{ wordBreak: "break-word" }}>
+          <p dangerouslySetInnerHTML={{__html: sanitizedText}} />
+        </TweetBody>
         <UrlMetaData url={targetUrl} />
         <Box>
           {gif && <VideoContainer gif={gif} />}
