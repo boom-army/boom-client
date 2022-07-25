@@ -9,6 +9,7 @@ import {
   HeroFeedDocument,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
+import { ReactTrixRTEInput, ReactTrixRTEToolbar } from "react-trix-rte";
 import { ImageBox } from "../ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
@@ -155,6 +156,27 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
     id: `preview-${index}`,
   });
 
+  let mergeTags = [{
+    trigger: "@",
+    tags: [
+      {name: "Dominic St-Pierre", tag: "@dominic"},
+      {name: "John Doe", tag: "@john"}
+    ]
+  }, {
+    trigger: "{",
+    tags: [
+      {name: "First name", tag: "{{ .FirstName }}"},
+      {name: "Last name", tag: "{{ .LastName }}"}
+    ]
+  }]
+  const handleChange = (html: any, text: any)  => {
+    console.log(html,'****', text);
+    tweet.setValue(html);
+    // this is a reference back to the editor if you want to
+    // do editing programatically
+    // editor.insertString("editor is ready");
+  }
+
   return (
     <Grid
       container
@@ -173,7 +195,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
             avatar={userData?.avatar}
             isNFT={userData?.data?.avatarMint}
           />
-          <TextField
+          {/* <TextField
             multiline
             maxRows={4}
             value={tweet.value}
@@ -205,7 +227,13 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
                 </InputAdornment>
               ),
             }}
+          /> */}
+          <ReactTrixRTEInput
+            toolbarId="react-trix-rte-editor"
+            defaultValue="<div>What's happening?</div>"
+            onChange={handleChange}
           />
+          <ReactTrixRTEToolbar toolbarId="react-trix-rte-editor" />
         </Stack>
       </Grid>
       <IconsGrid item xs={6} pl={6}>
