@@ -1,4 +1,3 @@
-import "trix/dist/trix";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import OneSignal from "react-onesignal";
 import SimpleReactLightbox from "simple-react-lightbox";

@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext, useCallback } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
-import { ModalUnstyled } from '@mui/base';
 import {
   Box,
   Button,
@@ -10,6 +9,7 @@ import {
   InputAdornment,
   InputBase,
   InputLabel,
+  Modal,
   Stack,
   Typography,
 } from "@mui/material";
@@ -23,29 +23,6 @@ import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../../contexts/snackbar";
 import cuid from "cuid";
-
-const StyledModal = styled(ModalUnstyled)({
-  right: "0",
-  bottom: "0",
-  top: "0",
-  left: "0",
-  display: "flex",
-  justifyContent: "center",
-  "& .MuiInputBase-input": {
-    padding: "10px 12px",
-    width: "100%",
-  },
-});
-
-const Backdrop = styled("div")({
-  position: "fixed",
-  right: "0",
-  bottom: "0",
-  top: "0",
-  left: "0",
-  backgroundColor: "rgba(0, 0, 0, 0.5)",
-  WebkitTapHighlightColor: "transparent",
-});
 
 export const NFTPicker: React.FC<{
   setNftData: React.Dispatch<React.SetStateAction<any>>;
@@ -138,23 +115,28 @@ export const NFTPicker: React.FC<{
 
       {nftForm && (
         <>
-          <StyledModal
+          <Modal
             open={nftForm}
             onClose={handleClose}
-            BackdropComponent={Backdrop}
           >
             <Box
               sx={{
+                top: '30%',
+                left: '30%',
+                justifyContent: "center",
                 position: "absolute",
                 minWidth: 600,
                 maxWidth: 600,
                 overflowX: "hidden",
                 overflowY: "hidden",
                 height: "auto",
-                top: "10rem",
                 color: theme.primaryColor,
                 background: theme.background,
                 padding: "1rem",
+                "& .MuiInputBase-input": {
+                  padding: "10px 12px",
+                  width: "100%",
+                },
               }}
             >
               <Stack
@@ -292,7 +274,7 @@ export const NFTPicker: React.FC<{
                 </>
               )}
             </Box>
-          </StyledModal>
+          </Modal>
         </>
       )}
     </>

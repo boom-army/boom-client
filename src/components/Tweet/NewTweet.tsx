@@ -1,5 +1,6 @@
 import { AttributionLink } from "../Giphy/AttributionLink";
 import { Box } from "@mui/system";
+import { useRef } from "react";
 import {
   ChannelFeedDocument,
   FeedDocument,
@@ -9,7 +10,6 @@ import {
   HeroFeedDocument,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
-import { ReactTrixRTEInput, ReactTrixRTEToolbar } from "react-trix-rte";
 import { ImageBox } from "../ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
@@ -22,6 +22,8 @@ import {
   IconButton,
   TextField,
 } from "@mui/material";
+import { Editor, EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
 import { LoadingButton as Button } from "@mui/lab";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
@@ -66,6 +68,14 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles]: any = useState([]);
   const tweet = useInput("");
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
+
+  const editor = useRef<HTMLInputElement>(null);
+  function focusEditor() {
+    editor?.current?.focus();
+  }
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
@@ -156,19 +166,6 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
     id: `preview-${index}`,
   });
 
-  let mergeTags = [{
-    trigger: "@",
-    tags: [
-      {name: "Dominic St-Pierre", tag: "@dominic"},
-      {name: "John Doe", tag: "@john"}
-    ]
-  }, {
-    trigger: "{",
-    tags: [
-      {name: "First name", tag: "{{ .FirstName }}"},
-      {name: "Last name", tag: "{{ .LastName }}"}
-    ]
-  }]
   const handleChange = (html: any, text: any)  => {
     console.log(html,'****', text);
     tweet.setValue(html);
@@ -182,7 +179,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
       container
       p={2}
       sx={{
-        borderBottom: `2px solid ${theme.tertiaryColor}`
+        borderBottom: `2px solid ${theme.tertiaryColor}`,
       }}
     >
       <Grid item xs={12} pb={2}>
@@ -228,12 +225,17 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
               ),
             }}
           /> */}
-          <ReactTrixRTEInput
-            toolbarId="react-trix-rte-editor"
-            defaultValue="<div>What's happening?</div>"
-            onChange={handleChange}
-          />
-          <ReactTrixRTEToolbar toolbarId="react-trix-rte-editor" />
+          <div
+            style={{ border: "1px solid black", minHeight: "6em", cursor: "text" }}
+            onClick={focusEditor}
+          >
+            <Editor
+              ref={editor}
+              editorState={editorState}
+              onChange={setEditorState}
+              placeholder="Write something!"
+            />
+          </div>
         </Stack>
       </Grid>
       <IconsGrid item xs={6} pl={6}>
@@ -282,7 +284,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
             size="small"
             loading={loading}
             onClick={handleNewTweet}
-            sx={{ borderRadius: "20px"}}
+            sx={{ borderRadius: "20px" }}
           >
             Post
           </Button>
