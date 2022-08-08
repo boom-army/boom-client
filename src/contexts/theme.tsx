@@ -1,33 +1,69 @@
-import React from "react";
-import { darkTheme, lightTheme, ThemeVars } from "../styles/themes";
+import { PaletteMode, ThemeOptions } from "@mui/material";
+import { blue, grey } from "@mui/material/colors";
+import { createContext } from "react";
 
-export enum Theme {
-  StorageTag = "theme",
-  Dark = "dark",
-  Light = "light",
+const palette = {
+  light: {
+    primary: {
+      main: '#34C0AC',
+      light: '#B1DED3',
+      dark: '#00765A',
+    },
+  },
 }
 
-export type ThemeContextType = {
-  theme: ThemeVars;
-  setTheme: (c: any) => void;
-};
-
-export const ThemeContext = React.createContext<ThemeContextType>({
-  theme: darkTheme,
-  setTheme: (theme) => console.warn("no theme provider"),
+export const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+        // palette values for light mode
+        primary: {
+          main: palette.light.primary.main
+        },
+      }
+      : {
+        // palette values for dark mode
+        primary: {
+          main: "#274C66"
+        },
+        divider: "#374148",
+        background: {
+          default: '#15202b',
+          paper: '#0E1B25',
+        },
+        text: {
+          primary: '#FFF',
+          secondary: '#CCC',
+        },
+      }),
+  },
 });
 
-export const ThemeProvider: React.FC<{children: JSX.Element}> = ({ children }) => {
-  const themeSet =
-    localStorage.getItem(Theme.StorageTag) === Theme.Light
-      ? lightTheme
-      : darkTheme;
+export const getThemedComponents = (mode: PaletteMode): ThemeOptions => ({
+  components: {
+    ...(mode === 'light'
+      ? {
+        MuiAppBar: {
+          styleOverrides: {
+            colorPrimary: {
+              backgroundColor: grey[300],
+            },
+          },
+        },
+      }
+      : {
+        MuiAppBar: {
+          styleOverrides: {
+            colorPrimary: {
+              backgroundColor: blue[500],
+            },
+          },
+        },
+      }),
+  },
+});
 
-  const [theme, setTheme] = React.useState(themeSet);
-
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
+export const ColorModeContext = createContext({
+  toggleColorMode: () => {},
+});

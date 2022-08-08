@@ -7,7 +7,7 @@ import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
 
 const Wrapper = styled("div")((props) => ({
-  borderBottom: `1px solid ${props.theme.tertiaryColor}`,
+  borderBottom: `1px solid ${props.theme.palette.secondary.dark}`,
 
   ".avatar": {
     marginLeft: "1.4rem",
@@ -23,12 +23,12 @@ const Wrapper = styled("div")((props) => ({
 
     "span.wallet": {
       marginTop: "0.1rem",
-      color: props.theme.secondaryColor,
+      color: props.theme.palette.secondary.main,
     },
 
     "span.handle": {
       marginTop: "0.1rem",
-      color: props.theme.secondaryColor,
+      color: props.theme.palette.secondary.main,
     },
   },
 
@@ -42,7 +42,7 @@ const Wrapper = styled("div")((props) => ({
 
   "div.loc-dob-web": {
     display: "flex",
-    color: props.theme.secondaryColor,
+    color: props.theme.palette.secondary.main,
     margin: "0.6rem 0",
 
     span: {
@@ -57,7 +57,7 @@ const Wrapper = styled("div")((props) => ({
   },
 
   "div.follow-following": {
-    color: props.theme.secondaryColor,
+    color: props.theme.palette.secondary.main,
     span: {
       marginRight: "1.3rem",
     },

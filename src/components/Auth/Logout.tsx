@@ -1,12 +1,12 @@
-import React, { useCallback, useContext } from "react";
-import { ThemeContext } from "../../contexts/theme";
+import { Box } from "@mui/material";
 import { UserIcon } from "../Icons";
-import { Wrapper } from "../ToggleTheme";
+import { useCallback } from "react";
 import { useSnackbar } from "../../contexts/snackbar";
+import { useTheme } from '@mui/material/styles';
 import { useWallet } from "@solana/wallet-adapter-react";
 
 const Logout = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { disconnect } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -26,10 +26,10 @@ const Logout = () => {
   );
 
   return (
-    <Wrapper onClick={handleLogout}>
-      <UserIcon sm="true" color={theme.accentColor} />
+    <Box onClick={handleLogout}>
+      <UserIcon sm="true" color={theme.palette.primary.main} />
       <p>Logout</p>
-    </Wrapper>
+    </Box>
   );
 };
 

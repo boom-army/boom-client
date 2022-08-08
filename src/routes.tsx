@@ -33,34 +33,34 @@ import { MasterTweet } from "./components/Tweet/MasterTweet";
 import { NFTMint } from "./components/Mint/NFTMint";
 import { NavLink } from "react-router-dom";
 import { Profile } from "./components/Profile/Profile";
-import { ThemeContext } from "./contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
 
 export const AppRoutes: React.FC = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { user, setUser } = useContext(UserContext);
   const [value, setValue] = React.useState("recents");
   const [drawer, setDrawer] = React.useState(false);
 
   const StyledBottomNavigation = styled(BottomNavigation)({
     width: "auto",
-    backgroundColor: theme.background,
-    borderTop: `1px solid ${theme.tertiaryColor}`,
+    backgroundColor: theme.palette.background.default,
+    borderTop: `1px solid ${theme.palette.secondary.dark}`,
     "& .MuiButtonBase-root": {
-      color: `${theme.secondaryColor} !important`,
+      color: `${theme.palette.secondary.main} !important`,
       paddingTop: "1em",
     },
     "& .Mui-selected": {
-      color: theme.accentColor,
+      color: theme.palette.primary.main,
       "& .MuiSvgIcon-root": {
-        color: theme.accentColor,
+        color: theme.palette.primary.main,
       },
     },
     "& .MuiBadge-badge": {
-      color: theme.primaryColor,
-      backgroundColor: theme.accentColor,
+      color: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.main,
     },
   });
 
@@ -86,8 +86,8 @@ export const AppRoutes: React.FC = () => {
   });
 
   const middleColStyles = {
-    borderRight: `1px solid ${theme.tertiaryColor}`,
-    borderLeft: `1px solid ${theme.tertiaryColor}`,
+    borderRight: `1px solid ${theme.palette.secondary.dark}`,
+    borderLeft: `1px solid ${theme.palette.secondary.dark}`,
 
     "@media screen and (max-width: 530px)": {
       border: 0,

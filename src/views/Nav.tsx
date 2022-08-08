@@ -14,7 +14,7 @@ import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
 import { MorePopUp } from "../components/MorePopup";
 import { NavLink } from "react-router-dom";
-import { ThemeContext } from "../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { User as StoreUser } from "../contexts/user";
 import { styled } from "@mui/material/styles";
 import { useChannelsQuery } from "../generated/graphql";
@@ -25,9 +25,9 @@ interface Props {
 }
 
 export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const iconProps = {
-    color: theme.accentColor,
+    color: theme.palette.primary.main,
   };
 
   const { data } = useChannelsQuery();
@@ -37,7 +37,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
-    color: isActive ? theme.accentColor : theme.primaryColor,
+    color: isActive ? theme.palette.primary.main : theme.palette.primary.main,
   });
 
   const stackProps = {
@@ -61,7 +61,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   const StyledStack2 = styled(Stack)({
     minHeight: "100vh",
     paddingTop: "1.3rem",
-    borderLeft: `1px solid ${theme.tertiaryColor}`,
+    borderLeft: `1px solid ${theme.palette.secondary.dark}`,
     overflowY: "scroll",
     scrollbarWidth: "none",
     width: "30%",
@@ -70,7 +70,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     },
     ".active": {
       "& .MuiAvatar-root": {
-        border: `3px solid ${theme.accentColor}`,
+        border: `3px solid ${theme.palette.primary.main}`,
       },
     },
     "&::-webkit-scrollbar": {
@@ -78,7 +78,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     },
     "& .MuiAvatar-root": {
       "&:hover": {
-        border: `3px solid ${theme.accentColor}`,
+        border: `3px solid ${theme.palette.primary.main}`,
         filter: "saturate(150%)",
       },
     },
@@ -171,7 +171,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                     sx={{
                       "& .MuiBadge-badge": {
                         color: "#FFFFFF",
-                        backgroundColor: theme.accentColor,
+                        backgroundColor: theme.palette.primary.main,
                       },
                     }}
                   >

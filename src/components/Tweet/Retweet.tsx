@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Box } from "@mui/system";
 import { RetweetIcon, RtFillIcon } from "../Icons";
 import { useToggleRetweetMutation } from "../../generated/graphql";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { Typography } from "@mui/material";
 import { displayError } from "../../utils";
 import { useSnackbar } from "../../contexts/snackbar";
@@ -14,7 +14,7 @@ interface RetweetProps {
 }
 
 export const Retweet = ({ id, isRetweet, retweetsCount }: RetweetProps) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [retweet, setRetweet] = useState(isRetweet);
   const [retweetsCountState, setRetweetsCount] = useState(retweetsCount);
   const [toggleRetweetMutation, { loading }] = useToggleRetweetMutation({
@@ -45,7 +45,7 @@ export const Retweet = ({ id, isRetweet, retweetsCount }: RetweetProps) => {
       ) : (
         <RetweetIcon loading={loading} onClick={handleRetweet} />
       )}
-      <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>{retweetsCountState ? retweetsCountState : null}</Typography>
+      <Typography ml={0.5} sx={{ color: theme.palette.secondary.main }}>{retweetsCountState ? retweetsCountState : null}</Typography>
     </Box>
   );
 };

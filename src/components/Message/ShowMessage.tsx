@@ -14,7 +14,7 @@ import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { Popover } from "@mui/material";
 import { RecoilState, useSetRecoilState } from "recoil";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { TipCreator } from "../TipCreator";
 import { Tweet } from "../../generated/graphql";
 import { UserAvatar } from "../UserAvatar";
@@ -27,9 +27,9 @@ const ReplyBox = styled(Box)((props) => ({
   "&:before": {
     width: "1.5em",
     height: "0.7em",
-    borderLeft: `solid 2px ${props.theme.accentColor}`,
-    borderTop: `solid 2px ${props.theme.accentColor}`,
-    borderColor: `${props.theme.accentColor} transparent transparent ${props.theme.accentColor}`,
+    borderLeft: `solid 2px ${props.theme.palette.primary.main}`,
+    borderTop: `solid 2px ${props.theme.palette.primary.main}`,
+    borderColor: `${props.theme.palette.primary.main} transparent transparent ${props.theme.palette.primary.main}`,
     borderRadius: "1em 0 0 1em",
     content: '""',
     display: "block",
@@ -46,16 +46,16 @@ const IconsBox = styled(Box)((props) => ({
     width: "18px",
     height: "18px",
     "& path": {
-      fill: props.theme.secondaryColor,
+      fill: props.theme.palette.secondary.main,
     },
   },
   "& :hover svg path": {
-    fill: props.theme.accentColor,
+    fill: props.theme.palette.primary.main,
   },
 }));
 
 const MeepBody = styled(Typography)((props) => ({
-  a: { color: props.theme.accentColor },
+  a: { color: props.theme.palette.primary.main },
 }));
 
 interface Props {
@@ -85,7 +85,7 @@ export const ShowMessage: React.FC<Props> = ({
     createdAt,
   } = tweet;
 
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { handleReaction } = useReaction({ tweetId: id });
   const setParentTweetState = useSetRecoilState(parentTweetState);
   const [popAnchor, setPopAnchor] = useState<HTMLElement | null>(null);
@@ -125,7 +125,7 @@ export const ShowMessage: React.FC<Props> = ({
                 <Box mr={1}>
                   <Typography
                     variant="body2"
-                    sx={{ color: theme.secondaryColor }}
+                    sx={{ color: theme.palette.secondary.main }}
                   >
                     @{parentTweet?.user?.handle}
                   </Typography>
@@ -143,7 +143,7 @@ export const ShowMessage: React.FC<Props> = ({
                     variant="body2"
                     sx={{
                       fontWeight: "300",
-                      color: theme.secondaryColor,
+                      color: theme.palette.secondary.main,
                     }}
                   >
                     {parentTweet?.text}
@@ -173,8 +173,8 @@ export const ShowMessage: React.FC<Props> = ({
           direction={"row"}
           spacing={2}
           sx={{
-            background: theme.background2,
-            border: `1px solid ${theme.tertiaryColor}`,
+            background: theme.palette.background.default,
+            border: `1px solid ${theme.palette.secondary.dark}`,
             padding: "0.2em 1em",
             borderRadius: "5px",
             alignItems: "baseline",
@@ -198,8 +198,8 @@ export const ShowMessage: React.FC<Props> = ({
           >
             <ReplyIcon
               sx={{
-                color: theme.secondaryColor,
-                "&:hover": { color: theme.accentColor },
+                color: theme.palette.secondary.main,
+                "&:hover": { color: theme.palette.primary.main },
               }}
             />
           </IconButton>
@@ -213,7 +213,7 @@ export const ShowMessage: React.FC<Props> = ({
         onClick={handlePopoverOpen}
         sx={{
           "&:hover": {
-            backgroundColor: theme.tertiaryColor2,
+            backgroundColor: theme.palette.secondary.dark,
             cursor: "pointer",
           },
         }}
@@ -239,7 +239,7 @@ export const ShowMessage: React.FC<Props> = ({
                 </Typography>
               </Link>
             </Box>
-            <Typography sx={{ color: theme.secondaryColor }}>
+            <Typography sx={{ color: theme.palette.secondary.main }}>
               {moment(setDate(createdAt)).fromNow()}
             </Typography>
           </Stack>

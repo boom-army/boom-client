@@ -1,49 +1,21 @@
-import React, { useState, useContext } from "react";
-import { ThemeContext } from "../contexts/theme";
-import { lightTheme, darkTheme, ThemeVars } from "../styles/themes";
+import { useContext } from "react";
+import { useTheme } from '@mui/material/styles';
 import { ThemeIcon } from "./Icons";
-import { styled } from "@mui/material/styles";
-
-export const Wrapper = styled("div")({
-  display: "flex",
-  alignItems: "baseline",
-  marginLeft: "0.7rem",
-  marginBottom: "1rem",
-  cursor: "pointer",
-  p: {
-    marginLeft: "0.4rem",
-  },
-});
+import { ColorModeContext } from "../contexts/theme";
+import { Box } from "@mui/material";
 
 const ToggleTheme = () => {
-  const localSt = localStorage.getItem("theme");
-  const [currentTheme, setCurrentTheme] = useState(localSt ? localSt : "dark");
+  // const localSt = localStorage.getItem("theme");
+  // const [currentTheme, setCurrentTheme] = useState(localSt ? localSt : "dark");
 
-  const { theme, setTheme } = useContext(ThemeContext);
-
-  const toggleTheme = () => {
-    if (currentTheme === "dark") {
-      setTheme((theme: ThemeVars) => ({
-        ...theme,
-        ...lightTheme,
-      }));
-      localStorage.setItem("theme", "light");
-      setCurrentTheme("light");
-    } else {
-      setTheme((theme: ThemeVars) => ({
-        ...theme,
-        ...darkTheme,
-      }));
-      localStorage.setItem("theme", "dark");
-      setCurrentTheme("dark");
-    }
-  };
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
 
   return (
-    <Wrapper onClick={toggleTheme}>
-      <ThemeIcon sm="true" color={theme.accentColor} />
+    <Box onClick={colorMode.toggleColorMode}>
+      <ThemeIcon sm="true" color={theme.palette.primary.main} />
       <p>Theme</p>
-    </Wrapper>
+    </Box>
   );
 };
 

@@ -17,7 +17,7 @@ import { Connection, PublicKey } from "@solana/web3.js";
 import { CircularProgress } from "@mui/material";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { styled } from "@mui/material/styles";
 import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
@@ -55,7 +55,7 @@ export const NFTPicker: React.FC<{
   const [metadata, setMetadata] = useState<any>(null);
   const [validKey, setValidKey] = useState<null | Boolean>(null);
   const [loading, setLoading] = useState(false);
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const handleClose = () => {
     setNftInput("");
     setMetadata(null);
@@ -152,8 +152,8 @@ export const NFTPicker: React.FC<{
                 overflowY: "hidden",
                 height: "auto",
                 top: "10rem",
-                color: theme.primaryColor,
-                background: theme.background,
+                color: theme.palette.primary.main,
+                background: theme.palette.background.default,
                 padding: "1rem",
               }}
             >
@@ -165,7 +165,7 @@ export const NFTPicker: React.FC<{
                 <InputLabel
                   shrink
                   htmlFor="nft-input"
-                  sx={{ color: theme.primaryColor }}
+                  sx={{ color: theme.palette.primary.main }}
                 >
                   NFT Public Key
                 </InputLabel>
@@ -197,8 +197,8 @@ export const NFTPicker: React.FC<{
                     )
                   }
                   sx={{
-                    border: `1px solid ${theme.secondaryColor}`,
-                    color: theme.primaryColor,
+                    border: `1px solid ${theme.palette.secondary.main}`,
+                    color: theme.palette.primary.main,
                     borderRadius: "4px",
                   }}
                 />

@@ -28,7 +28,7 @@ import { displayError, uploadFile } from "../../utils";
 import { useInput } from "../../hooks/useInput";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { useState, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
@@ -44,12 +44,12 @@ const IconsGrid = styled(Grid)((props) => ({
   alignItems: "center",
   flexDirection: "row",
   "& svg": {
-    fill: props.theme.accentColor,
+    fill: props.theme.palette.primary.main,
     width: "22px",
     height: "20px",
     marginRight: "0.7em",
     "& path": {
-      fill: props.theme.accentColor,
+      fill: props.theme.palette.primary.main,
     },
   },
 }));
@@ -59,7 +59,7 @@ const ImageInput = styled("input")({
 });
 
 export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
@@ -160,7 +160,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
       container
       p={2}
       sx={{
-        borderBottom: `2px solid ${theme.tertiaryColor}`
+        borderBottom: `2px solid ${theme.palette.secondary.dark}`
       }}
     >
       <Grid item xs={12} pb={2}>
@@ -182,16 +182,16 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
             fullWidth={true}
             variant="standard"
             sx={{
-              color: theme.primaryColor,
+              color: theme.palette.primary.main,
               padding: "1em 1em 1em 0",
               "& .MuiInput-root:before": {
                 border: 0,
               },
               "&:before": {
-                borderColor: theme.tertiaryColor2,
+                borderColor: theme.palette.secondary.dark,
               },
               "&:hover:not(.Mui-disabled):before": {
-                borderColor: theme.tertiaryColor2,
+                borderColor: theme.palette.secondary.dark,
               },
             }}
             InputProps={{
@@ -254,7 +254,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
             size="small"
             loading={loading}
             onClick={handleNewTweet}
-            sx={{ borderRadius: "20px"}}
+            sx={{ borderRadius: "20px" }}
           >
             Post
           </Button>

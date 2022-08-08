@@ -9,19 +9,19 @@ import { SearchTweetsQuery } from "../../generated/graphql";
 import { styled, Box, Typography, Card, CardActionArea } from "@mui/material";
 
 const IconBox = styled(Box)((props: any) => ({
-  color: props.theme.blue.light,
+  color: props.blue[200],
   marginLeft: "0.5em",
   "& svg": {
     width: "16px",
     verticalAlign: -6,
   },
   "& span": {
-    color: props.theme.secondaryColor,
+    color: props.theme.palette.secondary.main,
   },
 }));
 
 const IconTypography = styled(Typography)((props: any) => ({
-  color: props.theme.secondaryColor,
+  color: props.theme.palette.secondary.main,
   fontWeight: 300,
 }));
 

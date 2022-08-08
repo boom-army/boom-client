@@ -3,7 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { FormControl, InputAdornment } from "@mui/material";
 import { TextField } from "@mui/material";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 
 interface Props {
   input: string;
@@ -18,7 +18,7 @@ export const SearchModalHeader: React.FC<Props> = ({
   setInput,
   handleClose,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   return (
     <FormControl fullWidth={true}>
       <TextField
@@ -33,7 +33,7 @@ export const SearchModalHeader: React.FC<Props> = ({
           setInput(e.target.value);
         }}
         InputProps={{
-          style: { color: theme.primaryColor, padding: 10 },
+          style: { color: theme.palette.primary.main, padding: 10 },
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
@@ -42,7 +42,7 @@ export const SearchModalHeader: React.FC<Props> = ({
                 size="medium"
                 disableRipple={true}
               >
-                <CloseIcon sx={{ color: theme.accentColor }} />
+                <CloseIcon sx={{ color: theme.palette.primary.main }} />
               </IconButton>
             </InputAdornment>
           ),

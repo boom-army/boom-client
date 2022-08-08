@@ -21,7 +21,7 @@ import { uploadFile } from "../../utils";
 import { useConnection, useAnchorWallet } from "@solana/wallet-adapter-react";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 
 const { mintNFT } = actions;
 
@@ -50,7 +50,7 @@ interface Attributes {
 }
 
 export const NFTMint: React.FC = (props) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { connection } = useConnection();
   const anchorWallet = useAnchorWallet();
   const wallet = anchorWallet as Wallet;
@@ -248,10 +248,10 @@ export const NFTMint: React.FC = (props) => {
                   label="Name"
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   InputProps={{
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   value={fields.name}
                   onChange={handleFormChange}
@@ -266,10 +266,10 @@ export const NFTMint: React.FC = (props) => {
                   label="Collection Family"
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   InputProps={{
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   value={fields.collection.family}
                   onChange={(e) => {
@@ -293,10 +293,10 @@ export const NFTMint: React.FC = (props) => {
                   label="Collection Name"
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   InputProps={{
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   value={fields.collection.name}
                   onChange={(e) => {
@@ -322,10 +322,10 @@ export const NFTMint: React.FC = (props) => {
                   rows={4}
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   InputProps={{
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   value={fields.description}
                   onChange={handleFormChange}
@@ -357,10 +357,10 @@ export const NFTMint: React.FC = (props) => {
                         label="Trait type"
                         InputLabelProps={{
                           shrink: true,
-                          style: { color: theme.secondaryColor },
+                          style: { color: theme.palette.secondary.main },
                         }}
                         InputProps={{
-                          style: { color: theme.secondaryColor },
+                          style: { color: theme.palette.secondary.main },
                         }}
                         value={fields?.attributes[i]?.trait_type}
                         onChange={(e) => {
@@ -383,17 +383,17 @@ export const NFTMint: React.FC = (props) => {
                         label="Value"
                         InputLabelProps={{
                           shrink: true,
-                          style: { color: theme.secondaryColor },
+                          style: { color: theme.palette.secondary.main },
                         }}
                         InputProps={{
-                          style: { color: theme.secondaryColor },
+                          style: { color: theme.palette.secondary.main },
                           endAdornment: (
                             <InputAdornment position="end">
                               <IconButton
                                 aria-label="Remove attribute field"
                                 onClick={() => removeAttr(i)}
                               >
-                                <ClearIcon sx={{ color: theme.accentColor }} />
+                                <ClearIcon sx={{ color: theme.palette.primary.main }} />
                               </IconButton>
                             </InputAdornment>
                           ),
@@ -433,10 +433,10 @@ export const NFTMint: React.FC = (props) => {
                   type="number"
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   InputProps={{
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary.main },
                   }}
                   value={nftCount}
                   onChange={(e) => {

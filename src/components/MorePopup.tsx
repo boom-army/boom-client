@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { styled } from "@mui/material/styles";
 import Popup from "reactjs-popup";
 import ToggleTheme from "./ToggleTheme";
 import Logout from "./Auth/Logout";
-import { ChangeColor } from "./ChangeColor";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Stack, Typography } from "@mui/material";
-import { ThemeContext } from "../contexts/theme";
+import { useTheme } from '@mui/material/styles';
+import { grey } from "@mui/material/colors";
 
 const Wrapper = styled("div")({
   ".btn": {
@@ -51,14 +51,14 @@ const MoreBtn = React.forwardRef(
 );
 
 export const MorePopUp = ({ iconProps, stackProps }: Props) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const contentStyle = {
     width: "160px",
-    background: theme.background,
+    background: theme.palette.background.default,
     borderRadius: "6px",
-    border: `1px solid ${theme.tertiaryColor}`,
-    boxShadow: theme.bs1,
+    border: `1px solid ${theme.palette.secondary.dark}`,
+    boxShadow: grey[400],
     padding: "1rem 1rem 0 1rem",
   };
 
@@ -80,7 +80,6 @@ export const MorePopUp = ({ iconProps, stackProps }: Props) => {
         arrow={false}
       >
         <ToggleTheme />
-        <ChangeColor />
         <Logout />
       </StyledPopup>
     </Wrapper>

@@ -12,10 +12,11 @@ import { ImageGrid } from "./ImageGrid";
 import { ImageSuggestionGrid } from "./ImageSuggestionGrid";
 import { Loader } from "../Loader";
 import { SearchModalHeader } from "./SearchModalHeader";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { debounce } from "lodash";
 import { ModalUnstyled } from '@mui/base';
 import { IconButton, Stack, styled } from "@mui/material";
+import { blue } from "@mui/material/colors";
 
 const StyledModal = styled(ModalUnstyled)({
   position: "absolute",
@@ -63,7 +64,7 @@ export const GifyModal: React.FC<{
   const [error, setError] = useState<any>(null);
   const [searchResults, setSearchResults] = useState<Search | null>(null); // current searched gifs
   const { searchGiphyCache, setSearchGiphyCache } = useContext(GiphyContext); // search cache
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const handleClose = () => setOpen(false);
   const handleOpen = () => {
     setInput("");
@@ -183,8 +184,8 @@ export const GifyModal: React.FC<{
             position: "absolute",
             top: "30%",
             transform: "translate(20%, -60%)",
-            bgcolor: theme.background,
-            border: `2px solid ${theme.blue.lightest}`,
+            bgcolor: theme.palette.background.default,
+            border: `2px solid ${blue[100]}`,
             borderRadius: 1,
             maxWidth: "90vw",
             width: 500,

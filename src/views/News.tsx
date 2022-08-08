@@ -5,10 +5,10 @@ import { Loader } from "../components/Loader";
 import { useSearchTweetsQuery } from "../generated/graphql";
 import { NewsItem } from "../components/NewsItem";
 import { useContext } from "react";
-import { ThemeContext } from "../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 
 export const News = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { data, loading, fetchMore } = useSearchTweetsQuery({
     variables: { term: "#news", type: "TAGS", limit: 20 },
   });
@@ -27,7 +27,7 @@ export const News = () => {
           sx={{
             position: "absolute",
             top: 0,
-            backgroundColor: alpha(theme.background2, 0.9),
+            backgroundColor: alpha(theme.palette.background.default, 0.9),
             width: "100%",
             padding: "1rem",
           }}

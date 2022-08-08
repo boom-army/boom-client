@@ -10,7 +10,7 @@ import { User } from "../../generated/graphql";
 
 const Wrapper = styled("div")((props) => ({
   display: "flex",
-  borderBottom: `1px solid ${props.theme.tertiaryColor}`,
+  borderBottom: `1px solid ${props.theme.palette.secondary.dark}`,
   padding: "1.5rem 1rem 1rem 1rem",
 
   ".comment-info-user": {
@@ -29,7 +29,7 @@ const Wrapper = styled("div")((props) => ({
 
   ".comment-info-user span.secondary": {
     paddingLeft: "0.5rem",
-    color: `${props.theme.secondaryColor}`,
+    color: `${props.theme.palette.secondary.main}`,
   },
 
   "@media screen and (max-width: 430px)": {

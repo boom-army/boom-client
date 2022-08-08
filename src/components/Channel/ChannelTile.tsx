@@ -5,16 +5,17 @@ import { Avatar, AvatarGroup, Box, Typography } from "@mui/material";
 import { ChannelStatus } from "../../constants";
 import { NavLink } from "react-router-dom";
 import { ChannelsQuery } from "../../generated/graphql";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { shortenAddress } from "../../utils/utils";
 import { styled } from "@mui/material/styles";
+import { blue } from "@mui/material/colors";
 
 interface Props {
   channel: ChannelsQuery["channels"][0];
 }
 
 export const ChannelTile: React.FC<Props> = ({ channel }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const localTheme = localStorage.getItem("theme");
   const active = channel.status === ChannelStatus.ACTIVE;
 
@@ -29,10 +30,10 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
       <Box
         component={NavLink}
         sx={{
-          backgroundColor: localTheme === 'dark' ? theme.blue.darker : theme.tertiaryColor2,
+          backgroundColor: localTheme === 'dark' ? blue[500] : theme.palette.secondary.dark,
           borderRadius: 1,
           display: "flex",
-          border: active ? `1px solid ${theme.secondaryColor}` : 0,
+          border: active ? `1px solid ${theme.palette.secondary.main}` : 0,
           cursor: "pointer",
           margin: 1,
           padding: 1,
@@ -80,7 +81,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
               <LaunchIcon
                 sx={{
                   fontSize: 14,
-                  color: theme.blue.lightest,
+                  color: blue[100],
                 }}
               />
             </Box>

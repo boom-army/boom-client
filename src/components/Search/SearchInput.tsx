@@ -8,7 +8,7 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { displayError } from "../../utils";
 import { useInput } from "../../hooks/useInput";
 import {
@@ -19,7 +19,7 @@ import { useSnackbar } from "../../contexts/snackbar";
 import { useSearchParams } from "react-router-dom";
 
 const SearchInput = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   let [searchParams, setSearchParams] = useSearchParams();
   const [tabValue, setTabValue] = useState(
     searchParams.get("type") || "MEEPS"
@@ -90,10 +90,10 @@ const SearchInput = () => {
             label="Search"
             InputLabelProps={{
               shrink: true,
-              style: { color: theme.secondaryColor },
+              style: { color: theme.palette.secondary.main },
             }}
             InputProps={{
-              style: { color: theme.secondaryColor },
+              style: { color: theme.palette.secondary.main },
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton

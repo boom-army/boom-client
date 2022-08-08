@@ -16,7 +16,7 @@ import {
   Metadata,
   MetadataData,
 } from "@metaplex-foundation/mpl-token-metadata";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { currentCluster } from "../../utils/utils";
 import { displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
@@ -27,6 +27,7 @@ import {
 } from "../../generated/graphql";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useParams } from "react-router-dom";
+import { blue } from "@mui/material/colors";
 
 interface NFTTileProps {
   data: MetadataData;
@@ -46,7 +47,7 @@ interface URIData {
 }
 
 const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   let { handle } = useParams<string>();
 
@@ -107,7 +108,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
       >
         <Link
           onClick={() => toggleNftSelect(true)}
-          color={theme.secondaryColor}
+          color={theme.palette.secondary.main}
           underline="hover"
         >
           <Box>
@@ -137,8 +138,8 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
             left: "50%",
             transform: "translate(-50%, -50%)",
             padding: 2,
-            bgcolor: theme.background,
-            border: `2px solid ${theme.blue.lightest}`,
+            bgcolor: theme.palette.background.default,
+            border: `2px solid ${blue[100]}`,
             borderRadius: 1,
             maxWidth: "25em",
             width: "95%",
@@ -159,7 +160,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
                 padding: 0,
               }}
             >
-              <Clear fontSize="small" sx={{ color: theme.blue.lighter }} />
+              <Clear fontSize="small" sx={{ color: blue[200] }} />
             </IconButton>
           </Box>
           <Box display="flex" mt={2}>

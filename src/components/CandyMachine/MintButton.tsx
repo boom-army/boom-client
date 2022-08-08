@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import { CandyMachineAccount } from "../../utils/candy-machine";
 import { CircularProgress } from "@mui/material";
 import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useContext } from "react";
 import { useEffect, useState, useRef } from "react";
@@ -29,7 +29,7 @@ export const MintButton = ({
 }) => {
   const wallet = useWallet();
   const connection = useConnection();
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [verified, setVerified] = useState(false);
   const { requestGatewayToken, gatewayStatus } = useGateway();
   const [webSocketSubscriptionId, setWebSocketSubscriptionId] = useState(-1);
@@ -40,17 +40,17 @@ export const MintButton = ({
     height: "60px",
     marginTop: "10px",
     marginBottom: "5px",
-    backgroundColor: theme.accentColor,
+    backgroundColor: theme.palette.primary.main,
     color: "white",
     fontSize: "16px",
     fontWeight: "bold",
     "&:hover": {
-      backgroundColor: theme.accentColor,
+      backgroundColor: theme.palette.primary.main,
       filter: "brightness(0.8)",
     },
     "&.MuiButton-contained.Mui-disabled": {
-      backgroundColor: theme.tertiaryColor,
-      color: theme.primaryColor,
+      backgroundColor: theme.palette.secondary.dark,
+      color: theme.palette.primary.main,
     },
   });
 

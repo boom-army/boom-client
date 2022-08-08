@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const StyledCircularProgress = styled(CircularProgress)((props: any) => ({
-  color: props.theme.accentColor,
+  color: props.theme.palette.primary.main,
 }));
 
 export const Loader = () => {

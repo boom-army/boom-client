@@ -25,7 +25,7 @@ import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { RecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { client } from "../../apollo/client";
@@ -36,6 +36,7 @@ import { useInput } from "../../hooks/useInput";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { UserAvatar } from "../UserAvatar";
+import { blue } from "@mui/material/colors";
 
 interface Props {
   feed?: any;
@@ -49,12 +50,12 @@ const IconsGrid = styled(Grid)((props) => ({
   alignItems: "center",
   flexDirection: "row",
   "& svg": {
-    fill: props.theme.accentColor,
+    fill: props.theme.palette.primary.main,
     width: "22px",
     height: "20px",
     marginRight: "1em",
     "& path": {
-      fill: props.theme.accentColor,
+      fill: props.theme.palette.primary.main,
     },
   },
 }));
@@ -69,7 +70,7 @@ export const NewMessage: React.FC<Props> = ({
   parentTweetState,
   scrollRef,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
@@ -199,12 +200,12 @@ export const NewMessage: React.FC<Props> = ({
           display={"flex"}
           justifyContent={"space-between"}
           sx={{
-            backgroundColor: theme.blue.lighter,
+            backgroundColor: blue[200],
             padding: "0.5em 2em 0.5em 1em",
           }}
         >
           <Stack spacing={1} direction="row">
-            <ReplyIcon sx={{ color: theme.blue.lightest }} />
+            <ReplyIcon sx={{ color: blue[100] }} />
             <Box display="flex">
               <Typography fontWeight={200}>Replying to</Typography>
               <Typography ml={0.5}>
@@ -219,7 +220,7 @@ export const NewMessage: React.FC<Props> = ({
               }}
               sx={{ padding: "0" }}
             >
-              <CloseIcon sx={{ color: theme.blue.lightest }} />
+              <CloseIcon sx={{ color: blue[100] }} />
             </IconButton>
           </Box>
         </Box>
@@ -228,7 +229,7 @@ export const NewMessage: React.FC<Props> = ({
         container
         p={2}
         sx={{
-          borderTop: `2px solid ${theme.tertiaryColor}`,
+          borderTop: `2px solid ${theme.palette.secondary.dark}`,
           "@media (max-width: 900px)": {
             marginBottom: "4em",
           },
@@ -252,13 +253,13 @@ export const NewMessage: React.FC<Props> = ({
               autoFocus={true}
               ref={scrollRef}
               sx={{
-                color: theme.primaryColor,
+                color: theme.palette.primary.main,
                 padding: "1em 1em 1em 0",
                 "&:before": {
-                  borderColor: theme.tertiaryColor2,
+                  borderColor: theme.palette.secondary.dark,
                 },
                 "&:hover:not(.Mui-disabled):before": {
-                  borderColor: theme.tertiaryColor2,
+                  borderColor: theme.palette.secondary.dark,
                 },
               }}
               endAdornment={
@@ -322,7 +323,7 @@ export const NewMessage: React.FC<Props> = ({
                 handleNewTweet(e);
               }}
             >
-              <SendIcon sx={{ color: theme.accentColor }} />
+              <SendIcon sx={{ color: theme.palette.primary.main }} />
             </IconButton>
           </Box>
         </Grid>

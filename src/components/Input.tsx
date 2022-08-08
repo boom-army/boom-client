@@ -18,12 +18,12 @@ const Wrapper = styled("div")<{
   props?: any;
 }>((props) => ({
   width: `${(props.fullWidth ? "100%" : "315px") || (props.lg && "100%")}`,
-  background: `${props.theme.tertiaryColor2}`,
+  background: `${props.theme.palette.secondary.dark}`,
   padding: "0.2rem 0.4rem",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
-  borderBottom: `1px solid ${props.theme.accentColor}`,
+  borderBottom: `1px solid ${props.theme.palette.primary.main}`,
   marginBottom: "2rem",
 
   input: {
@@ -32,12 +32,12 @@ const Wrapper = styled("div")<{
     background: "inherit",
     border: "none",
     fontSize: "1rem",
-    fontFamily: props.theme.font,
-    color: props.theme.primaryColor,
+    fontFamily: props.theme.typography.fontFamily,
+    color: props.theme.palette.primary.main,
   },
 
   label: {
-    color: props.theme.secondaryColor,
+    color: props.theme.palette.secondary.main,
     marginBottom: "2px",
   },
 
@@ -56,29 +56,3 @@ const Wrapper = styled("div")<{
     width: "1px",
   },
 }));
-
-const Input = ({
-  lg = false,
-  type = "text",
-  text,
-  value,
-  onChange,
-  placeholder,
-  fullWidth = false,
-  hideLabel = false,
-}: InputProps) => {
-  return (
-    <Wrapper lg={lg === false ? "false" : "true"} {...fullWidth}>
-      <label className={hideLabel ? "hideLabel" : ""}>{text}</label>
-      <input
-        autoComplete="new-password"
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-    </Wrapper>
-  );
-};
-
-export default Input;
