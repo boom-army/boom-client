@@ -108,7 +108,7 @@
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.4.5",
     "moment": "2.29.1",
-    "mui-rte": "^2.0.1",
+    "mui-rte": "file:packages/mui-rte",
     "mz": "^2.7.0",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "pnp-webpack-plugin": "1.6.4",
