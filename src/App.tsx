@@ -2,19 +2,32 @@ import GlobalStyles from "@mui/material/GlobalStyles";
 import OneSignal from "react-onesignal";
 import SimpleReactLightbox from "simple-react-lightbox";
 import { AppRoutes } from "./routes";
-import { CssBaseline, PaletteMode, responsiveFontSizes, useMediaQuery } from "@mui/material";
-import { deepmerge } from '@mui/utils';
+import {
+  CssBaseline,
+  PaletteMode,
+  responsiveFontSizes,
+  useMediaQuery,
+} from "@mui/material";
 import { RecoilRoot } from "recoil";
 import { SnackbarProvider } from "./contexts/snackbar";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { UserContextProvider } from "./contexts/user";
-import { getDesignTokens, getThemedComponents, ColorModeContext } from "./contexts/theme";
+import { deepmerge } from "@mui/utils";
+import {
+  getDesignTokens,
+  getThemedComponents,
+  ColorModeContext,
+} from "./contexts/theme";
 import { useMemo, useState, useEffect } from "react";
 import { useOneSignalQuery } from "./generated/graphql";
 
 export const App = () => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [mode, setMode] = useState<PaletteMode>(localStorage.getItem("theme") as PaletteMode || prefersDarkMode ? 'dark' : 'light');
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [mode, setMode] = useState<PaletteMode>(
+    (localStorage.getItem("theme") as PaletteMode) || prefersDarkMode
+      ? "dark"
+      : "light"
+  );
 
   useEffect(() => {
     setMode(localStorage.getItem("theme") as PaletteMode);
@@ -23,7 +36,7 @@ export const App = () => {
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode(prevMode => {
+        setMode((prevMode) => {
           const nextMode = prevMode === "light" ? "dark" : "light";
           localStorage.setItem("theme", nextMode);
           return nextMode;
@@ -92,13 +105,13 @@ export const App = () => {
                 color: theme.palette.primary.main,
                 overflowX: "hidden",
               },
-              '*::-webkit-scrollbar': {
+              "*::-webkit-scrollbar": {
                 width: "0.4rem",
               },
-              '*::-webkit-scrollbar-track': {
+              "*::-webkit-scrollbar-track": {
                 background: theme.palette.background.default,
               },
-              '*::-webkit-scrollbar-thumb': {
+              "*::-webkit-scrollbar-thumb": {
                 background: theme.palette.primary.main,
               },
               ".MuiPaper-root": {
@@ -133,9 +146,10 @@ export const App = () => {
                 cursor: "not-allowed",
               },
               // using svg as input icon
-              ".svg-input > input, .avatar-input > input, .cover-photo > input": {
-                display: "none",
-              },
+              ".svg-input > input, .avatar-input > input, .cover-photo > input":
+                {
+                  display: "none",
+                },
             }}
           />
           <SnackbarProvider>
