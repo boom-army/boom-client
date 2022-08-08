@@ -1,11 +1,10 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person from "@mui/icons-material/Person";
-import React, { useContext } from "react";
+import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
 import TagIcon from "@mui/icons-material/Tag";
@@ -14,10 +13,10 @@ import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
 import { MorePopUp } from "../components/MorePopup";
 import { NavLink } from "react-router-dom";
-import { useTheme } from '@mui/material/styles';
 import { User as StoreUser } from "../contexts/user";
 import { styled } from "@mui/material/styles";
 import { useChannelsQuery } from "../generated/graphql";
+import { useTheme } from '@mui/material/styles';
 
 interface Props {
   newMentionsCount: number | undefined;
@@ -110,6 +109,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
         sx={{
           display: "inline-flex",
           width: "100%",
+          backgroundColor: theme.palette.background.default,
         }}
       >
         <StyledStack key="main-stack" direction="column" spacing={4.5}>

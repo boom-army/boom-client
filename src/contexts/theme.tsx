@@ -25,7 +25,10 @@ export const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
       : {
         // palette values for dark mode
         primary: {
-          main: "#274C66"
+          main: "#CA2055"
+        },
+        secondary: {
+          main: "#657786"
         },
         divider: "#374148",
         background: {
@@ -56,7 +59,7 @@ export const getThemedComponents = (mode: PaletteMode): ThemeOptions => ({
         MuiAppBar: {
           styleOverrides: {
             colorPrimary: {
-              backgroundColor: blue[500],
+              // backgroundColor: blue[500],
             },
           },
         },

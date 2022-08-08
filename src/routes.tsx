@@ -6,7 +6,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import LanguageIcon from "@mui/icons-material/Language";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { Badge, Container, Grid, Paper, SwipeableDrawer } from "@mui/material";
@@ -37,6 +37,7 @@ import { useTheme } from '@mui/material/styles';
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
+import { grey } from "@mui/material/colors";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
@@ -84,15 +85,6 @@ export const AppRoutes: React.FC = () => {
   const { loading, data, refetch } = useProfileQuery({
     variables: { handle: user?.handle },
   });
-
-  const middleColStyles = {
-    borderRight: `1px solid ${theme.palette.secondary.dark}`,
-    borderLeft: `1px solid ${theme.palette.secondary.dark}`,
-
-    "@media screen and (max-width: 530px)": {
-      border: 0,
-    },
-  };
 
   return (
     <>
@@ -156,7 +148,6 @@ export const AppRoutes: React.FC = () => {
                       xs={12}
                       sm={12}
                       md={6}
-                      sx={middleColStyles}
                       elevation={0}
                     >
                       <Routes>
