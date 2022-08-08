@@ -11,7 +11,7 @@ import { LAMPORTS_PER_SOL } from "../../constants/math";
 import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { TipCreator } from "../TipCreator";
 import { TweetQuery, Reaction } from "../../generated/graphql";
 import { UrlMetaData } from "../UrlMeta/UrlMetaData";
@@ -31,16 +31,16 @@ const IconsStack = styled(Stack)((props) => ({
     width: "18px",
     height: "18px",
     "& path": {
-      fill: props.theme.secondaryColor,
+      fill: props.theme.palette.secondary.main,
     },
   },
   "& :hover svg path": {
-    fill: props.theme.accentColor,
+    fill: props.theme.palette.primary.main,
   },
 }));
 
 const TweetBody = styled(Typography)((props) => ({
-  a: { color: props.theme.accentColor },
+  a: { color: props.theme.palette.primary.main },
 }));
 
 export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
@@ -61,7 +61,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
     createdAt,
   } = tweet;
 
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { handleReaction } = useReaction({ tweetId: id });
   const handle = user && user.handle;
 
@@ -99,7 +99,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
           <Typography display={"inline"} mr={0.5}>{`@${handle}`}</Typography>
         </Link>
         <Link to={`/${handle}/status/${id}`} className="secondary">
-          <Typography display={"inline"} sx={{ color: theme.secondaryColor }}>
+          <Typography display={"inline"} sx={{ color: theme.palette.secondary.main }}>
             {" "}
             {moment(setDate(createdAt)).fromNow()}
           </Typography>
@@ -137,7 +137,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
             <Link to={`/${handle}/status/${id}`}>
               <Box display="flex" alignItems={"center"}>
                 <CommentIcon />
-                <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
+                <Typography ml={0.5} sx={{ color: theme.palette.secondary.main }}>
                   {commentsCount ? commentsCount : null}
                 </Typography>
               </Box>

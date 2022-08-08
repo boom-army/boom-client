@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
 import { TextField, Stack, Button, Typography } from "@mui/material";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { displayError } from "../../utils";
@@ -28,7 +28,7 @@ export const TipInput: React.FC<Props> = ({
   userId,
   tweetId,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [inputError, setInputError] = useState(false);
   const [txValue, setTxValue] = useState(0);
 
@@ -197,10 +197,10 @@ export const TipInput: React.FC<Props> = ({
             type="number"
             InputLabelProps={{
               shrink: true,
-              style: { color: theme.secondaryColor },
+              style: { color: theme.palette.secondary.main },
             }}
             InputProps={{
-              style: { color: theme.secondaryColor },
+              style: { color: theme.palette.secondary.main },
               inputMode: "numeric",
               // @ts-ignore
               pattern: "[0-9]*",

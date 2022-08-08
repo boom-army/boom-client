@@ -1,33 +1,121 @@
-import React from "react";
-import { darkTheme, lightTheme, ThemeVars } from "../styles/themes";
+import { PaletteMode, ThemeOptions } from "@mui/material";
+import { grey } from "@mui/material/colors";
+import { TypographyOptions } from "@mui/material/styles/createTypography";
+import { createContext } from "react";
 
-export enum Theme {
-  StorageTag = "theme",
-  Dark = "dark",
-  Light = "light",
+const palette = {
+  light: {
+    primary: {
+      main: '#34C0AC',
+      light: '#B1DED3',
+      dark: '#00765A',
+    },
+  },
 }
 
-export type ThemeContextType = {
-  theme: ThemeVars;
-  setTheme: (c: any) => void;
+const typography: TypographyOptions = {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Noto Sans Display"',
+      '"Trebuchet MS"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 600,
+    fontWeightBold: 800,
+    h1: {
+      fontSize: 30,
+      fontWeight: 600,
+      lineHeight: 1.8
+    },
+    h2: {
+      fontSize: 26,
+      fontWeight: 600,
+      lineHeight: 1.2
+    },
+    h3: {
+      fontSize: 22,
+      fontWeight: 600,
+      lineHeight: 1.2
+    },
+    h4: {
+      fontSize: 18,
+      fontWeight: 600,
+      lineHeight: 1.2
+    },
+    h5: {
+      fontSize: 16,
+      fontWeight: 600,
+      lineHeight: 1.2
+    },
+    body2: {
+      fontWeight: 300
+    }
 };
 
-export const ThemeContext = React.createContext<ThemeContextType>({
-  theme: darkTheme,
-  setTheme: (theme) => console.warn("no theme provider"),
+export const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
+  typography,
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+        // palette values for light mode
+        primary: {
+          main: palette.light.primary.main
+        },
+      }
+      : {
+        // palette values for dark mode
+        primary: {
+          main: "#CA2055"
+        },
+        secondary: {
+          main: "#657786"
+        },
+        divider: "#374148",
+        background: {
+          default: '#15202b',
+          paper: '#0E1B25',
+        },
+        text: {
+          primary: '#FFF',
+          secondary: '#CCC',
+        },
+      }),
+  },
 });
 
-export const ThemeProvider: React.FC<{children: JSX.Element}> = ({ children }) => {
-  const themeSet =
-    localStorage.getItem(Theme.StorageTag) === Theme.Light
-      ? lightTheme
-      : darkTheme;
+export const getThemedComponents = (mode: PaletteMode): ThemeOptions => ({
+  components: {
+    ...(mode === 'light'
+      ? {
+        MuiAppBar: {
+          styleOverrides: {
+            colorPrimary: {
+              backgroundColor: grey[300],
+            },
+          },
+        },
+      }
+      : {
+        MuiAppBar: {
+          styleOverrides: {
+            colorPrimary: {
+              // backgroundColor: blue[500],
+            },
+          },
+        },
+      }),
+  },
+});
 
-  const [theme, setTheme] = React.useState(themeSet);
-
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
+export const ColorModeContext = createContext({
+  toggleColorMode: () => {},
+});

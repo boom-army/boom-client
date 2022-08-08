@@ -5,7 +5,7 @@ const ImageBoxWrapper = styled("div")((props: any) => ({
   "> div": {
     display: "flex",
     borderRadius: "0.2em",
-    border: `1px solid ${props.theme.secondaryColor}`,
+    border: `1px solid ${props.theme.palette.secondary.main}`,
     overflow: "hidden",
     maxWidth: "400px",
     width: "100%",

@@ -42,7 +42,7 @@ const ConnectButton = styled(WalletDialogButton)((props) => ({
   height: "60px",
   marginTop: "10px",
   marginBottom: "5px",
-  background: props.theme.accentColor,
+  background: props.theme.palette.primary.main,
   color: "white",
   fontSize: "16px",
   fontWeight: "bold",

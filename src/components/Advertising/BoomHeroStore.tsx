@@ -10,14 +10,15 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { MeQuery } from "../../generated/graphql";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
+import { blue } from "@mui/material/colors";
 
 interface BoomHeroStoreProps {
   userData: MeQuery["me"] | undefined;
 }
 
 export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   return (
     <Card
@@ -25,7 +26,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
         display: "flex",
         margin: "1em",
         padding: "1em",
-        border: `2px solid ${theme.blue.light}`,
+        border: `2px solid ${blue[100]}`,
         borderRadius: "5px",
       }}
     >
@@ -50,7 +51,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             {userData?.handle ? (
               <Link
                 to={`/${userData?.handle}`}
-                style={{ color: theme.blue.lightest }}
+                style={{ color: blue[100] }}
               >
                 Boom Hero NFT
               </Link>

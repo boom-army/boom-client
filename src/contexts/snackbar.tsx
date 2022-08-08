@@ -1,6 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { Alert, AlertColor } from "@mui/material";
-import { ThemeContext } from "./theme";
+import { Alert, AlertColor, useTheme } from "@mui/material";
 import { Snackbar } from "@mui/material";
 
 type SnackBarContextActions = {
@@ -16,7 +15,7 @@ interface SnackBarContextProviderProps {
 const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
   children,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const [open, setOpen] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<string>("");
@@ -47,7 +46,7 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
         <Alert
           onClose={handleClose}
           severity={typeColor}
-          sx={{ width: "100%", border: `1px solid ${theme.tertiaryColor}` }}
+          sx={{ width: "100%", border: `1px solid ${theme.palette.secondary.dark}` }}
         >
           {message}
         </Alert>

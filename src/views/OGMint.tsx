@@ -20,7 +20,7 @@ import {
   Typography,
 } from "@mui/material";
 import Tilt from "react-parallax-tilt";
-import { ThemeContext } from "../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { CandyMintHome } from "../components/CandyMachine/CandyMintHome";
 
 const TiltStyled = styled(Tilt)({
@@ -38,7 +38,7 @@ const TiltStyled = styled(Tilt)({
 
 const ThemeListItemText = styled(ListItemText)((props) => ({
   "& p": {
-    color: props.theme.secondaryColor,
+    color: props.theme.palette.secondary.main,
   },
 }));
 
@@ -62,7 +62,7 @@ const txTimeout: number = 30000;
 const candyMachineId = getCandyMachineId();
 
 export const OGMint = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { connection } = useConnection();
 
   return (
@@ -140,7 +140,7 @@ export const OGMint = () => {
         <List>
           <ListItem>
             <ListItemAvatar>
-              <Avatar sx={{ background: theme.accentColor }}>
+              <Avatar sx={{ background: theme.palette.primary.main }}>
                 <CheckIcon />
               </Avatar>
             </ListItemAvatar>
@@ -152,7 +152,7 @@ export const OGMint = () => {
           </ListItem>
           <ListItem>
             <ListItemAvatar>
-              <Avatar sx={{ background: theme.accentColor }}>
+              <Avatar sx={{ background: theme.palette.primary.main }}>
                 <CableIcon />
               </Avatar>
             </ListItemAvatar>
@@ -164,7 +164,7 @@ export const OGMint = () => {
           </ListItem>
           <ListItem>
             <ListItemAvatar>
-              <Avatar sx={{ background: theme.accentColor }}>
+              <Avatar sx={{ background: theme.palette.primary.main }}>
                 <AccountBalanceWalletIcon />
               </Avatar>
             </ListItemAvatar>
@@ -175,7 +175,7 @@ export const OGMint = () => {
           </ListItem>
           <ListItem>
             <ListItemAvatar>
-              <Avatar sx={{ background: theme.accentColor }}>
+              <Avatar sx={{ background: theme.palette.primary.main }}>
                 <TwitterIcon />
               </Avatar>
             </ListItemAvatar>
@@ -186,7 +186,7 @@ export const OGMint = () => {
           </ListItem>
           <ListItem>
             <ListItemAvatar>
-              <Avatar sx={{ background: theme.accentColor }}>
+              <Avatar sx={{ background: theme.palette.primary.main }}>
                 <SupportAgentIcon />
               </Avatar>
             </ListItemAvatar>
@@ -208,7 +208,7 @@ export const OGMint = () => {
           upcoming Season Challenges idea. To keep up with what's going on see
           our docs.
         </Typography>
-        <Typography mb={1} sx={{ color: theme.accentColor }}>
+        <Typography mb={1} sx={{ color: theme.palette.primary.main }}>
           <a
             href="https://boom.army/docs/docs/prologue/season-challenges/"
             target="_blank"

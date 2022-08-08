@@ -10,7 +10,7 @@ import {
   Input,
 } from "@mui/material";
 import { SIGN_FILE } from "../../queries/files";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { cleanTypeName, displayError, uploadFile } from "../../utils";
 import {
   ProfileDocument,
@@ -31,7 +31,7 @@ interface Profile {
 }
 
 export const EditProfileForm = ({ profile, setUser }: Profile) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const handle = useInput(profile.handle);
@@ -182,7 +182,7 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                     sx={{
                       width: 30,
                       height: 30,
-                      backgroundColor: theme.accentColor,
+                      backgroundColor: theme.palette.primary.main,
                       cursor: "pointer",
                     }}
                   >
@@ -220,8 +220,8 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                         sx={{
                           width: 22,
                           height: 22,
-                          border: `2px solid ${theme.background}`,
-                          backgroundColor: theme.accentColor,
+                          border: `2px solid ${theme.palette.background.default}`,
+                          backgroundColor: theme.palette.primary.main,
                         }}
                       >
                         <AddPhotoAlternateIcon sx={{ width: 14, height: 14 }} />
@@ -249,10 +249,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Handle"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 value={handle.value}
                 onChange={handle.onChange}
@@ -268,10 +268,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Name"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 value={consumerName.value}
                 onChange={consumerName.onChange}
@@ -288,10 +288,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Bio"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 value={bio.value}
                 onChange={bio.onChange}
@@ -307,10 +307,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Website"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 value={website.value}
                 onChange={website.onChange}
@@ -326,10 +326,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Date of Birth"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 value={dob.value}
                 onChange={dob.onChange}
@@ -345,10 +345,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Location"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary.main },
                 }}
                 value={location.value}
                 onChange={location.onChange}

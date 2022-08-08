@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { TipInput } from "./tipInput";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { Box, IconButton, Modal, Typography } from "@mui/material";
 import PaidIcon from "@mui/icons-material/Paid";
 
@@ -19,7 +19,7 @@ export const TipCreator: React.FC<TipProps> = ({
   userId,
   hideAmount,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [showTip, setShowTip] = useState(false);
 
   return (
@@ -32,12 +32,12 @@ export const TipCreator: React.FC<TipProps> = ({
         >
           <PaidIcon
             sx={{
-              color: theme.secondaryColor,
-              "&:hover": { color: theme.accentColor },
+              color: theme.palette.secondary.main,
+              "&:hover": { color: theme.palette.primary.main },
             }}
           />
           {!hideAmount && (
-            <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
+            <Typography ml={0.5} sx={{ color: theme.palette.secondary.main }}>
               {tipAmount ? tipAmount : null}
             </Typography>
           )}
@@ -56,7 +56,7 @@ export const TipCreator: React.FC<TipProps> = ({
             left: "50%",
             transform: "translate(-50%, -50%)",
             width: 400,
-            bgcolor: theme.background2,
+            bgcolor: theme.palette.background.default,
             p: 1,
           }}
         >

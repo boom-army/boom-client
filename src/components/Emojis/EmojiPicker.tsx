@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import { Picker } from "emoji-mart";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import "emoji-mart/css/emoji-mart.css";
 import { styled } from "@mui/material/styles";
 import { Box, Modal } from "@mui/material";
@@ -13,40 +13,40 @@ const PickerWrapper = styled(Box)((props: any) => ({
   transform: "translate(-50%, -50%)",
   bgcolor: "background.paper",
   ".emoji-mart-bar svg,.emoji-mart-bar svg path": {
-    fill: props.theme.accentColor,
+    fill: props.theme.palette.primary.main,
   },
   ".emoji-mart .emoji-mart-anchor-bar": {
-    backgroundColor: `${props.theme.accentColor} !important`,
+    backgroundColor: `${props.theme.palette.primary.main} !important`,
   },
   ".emoji-mart-preview": {
     display: "none",
   },
   ".emoji-mart-dark": {
-    borderColor: props.theme.secondaryColor,
-    backgroundColor: props.theme.background,
+    borderColor: props.theme.palette.secondary.main,
+    backgroundColor: props.theme.palette.background.default,
   },
   ".emoji-mart-dark .emoji-mart-category-label span": {
-    backgroundColor: props.theme.background,
+    backgroundColor: props.theme.palette.background.default,
     color: "#fff",
   },
   ".emoji-mart-scroll::WebkitScrollbar": {
     width: "0.25rem",
   },
   ".emoji-mart-scroll::WebkitScrollbarTrack": {
-    background: props.theme.background,
+    background: props.theme.palette.background.default,
   },
   ".emoji-mart-scroll::WebkitScrollbarThumb": {
-    background: props.theme.accentColor,
+    background: props.theme.palette.primary.main,
   },
 }));
 
 const PickerIcon = styled("span")((props: any) => ({
   cursor: "pointer",
   "& svg path": {
-    fill: props.theme.secondaryColor,
+    fill: props.theme.palette.secondary.main,
   },
   "&:hover svg path": {
-    fill: props.theme.accentColor,
+    fill: props.theme.palette.primary.main,
   },
 }));
 
@@ -63,7 +63,7 @@ export const EmojiPicker = ({
   dismissOnClick,
 }: EmojiPickerProps) => {
   const [picker, togglePicker] = useState(false);
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const handleEmojiSelect = (pickedEmoji: any) => {
     emojiHandler(pickedEmoji);
@@ -88,7 +88,7 @@ export const EmojiPicker = ({
             <Picker
               useButton={true}
               sheetSize={64}
-              theme={theme.background === "#15202b" ? "dark" : "light"}
+              theme={theme.palette.background.default === "#15202b" ? "dark" : "light"}
               onSelect={handleEmojiSelect}
             />
           )}

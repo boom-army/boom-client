@@ -6,7 +6,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import LanguageIcon from "@mui/icons-material/Language";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { Badge, Container, Grid, Paper, SwipeableDrawer } from "@mui/material";
@@ -33,34 +33,35 @@ import { MasterTweet } from "./components/Tweet/MasterTweet";
 import { NFTMint } from "./components/Mint/NFTMint";
 import { NavLink } from "react-router-dom";
 import { Profile } from "./components/Profile/Profile";
-import { ThemeContext } from "./contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
+import { grey } from "@mui/material/colors";
 
 export const AppRoutes: React.FC = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { user, setUser } = useContext(UserContext);
   const [value, setValue] = React.useState("recents");
   const [drawer, setDrawer] = React.useState(false);
 
   const StyledBottomNavigation = styled(BottomNavigation)({
     width: "auto",
-    backgroundColor: theme.background,
-    borderTop: `1px solid ${theme.tertiaryColor}`,
+    backgroundColor: theme.palette.background.default,
+    borderTop: `1px solid ${theme.palette.secondary.dark}`,
     "& .MuiButtonBase-root": {
-      color: `${theme.secondaryColor} !important`,
+      color: `${theme.palette.secondary.main} !important`,
       paddingTop: "1em",
     },
     "& .Mui-selected": {
-      color: theme.accentColor,
+      color: theme.palette.primary.main,
       "& .MuiSvgIcon-root": {
-        color: theme.accentColor,
+        color: theme.palette.primary.main,
       },
     },
     "& .MuiBadge-badge": {
-      color: theme.primaryColor,
-      backgroundColor: theme.accentColor,
+      color: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.main,
     },
   });
 
@@ -84,15 +85,6 @@ export const AppRoutes: React.FC = () => {
   const { loading, data, refetch } = useProfileQuery({
     variables: { handle: user?.handle },
   });
-
-  const middleColStyles = {
-    borderRight: `1px solid ${theme.tertiaryColor}`,
-    borderLeft: `1px solid ${theme.tertiaryColor}`,
-
-    "@media screen and (max-width: 530px)": {
-      border: 0,
-    },
-  };
 
   return (
     <>
@@ -156,7 +148,6 @@ export const AppRoutes: React.FC = () => {
                       xs={12}
                       sm={12}
                       md={6}
-                      sx={middleColStyles}
                       elevation={0}
                     >
                       <Routes>

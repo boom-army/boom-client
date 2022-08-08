@@ -1,11 +1,10 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person from "@mui/icons-material/Person";
-import React, { useContext } from "react";
+import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
 import TagIcon from "@mui/icons-material/Tag";
@@ -14,10 +13,10 @@ import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
 import { MorePopUp } from "../components/MorePopup";
 import { NavLink } from "react-router-dom";
-import { ThemeContext } from "../contexts/theme";
 import { User as StoreUser } from "../contexts/user";
 import { styled } from "@mui/material/styles";
 import { useChannelsQuery } from "../generated/graphql";
+import { useTheme } from '@mui/material/styles';
 
 interface Props {
   newMentionsCount: number | undefined;
@@ -25,9 +24,9 @@ interface Props {
 }
 
 export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const iconProps = {
-    color: theme.accentColor,
+    color: theme.palette.primary.main,
   };
 
   const { data } = useChannelsQuery();
@@ -37,7 +36,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
-    color: isActive ? theme.accentColor : theme.primaryColor,
+    color: isActive ? theme.palette.primary.main : theme.palette.primary.main,
   });
 
   const stackProps = {
@@ -61,7 +60,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   const StyledStack2 = styled(Stack)({
     minHeight: "100vh",
     paddingTop: "1.3rem",
-    borderLeft: `1px solid ${theme.tertiaryColor}`,
+    borderLeft: `1px solid ${theme.palette.secondary.dark}`,
     overflowY: "scroll",
     scrollbarWidth: "none",
     width: "30%",
@@ -70,7 +69,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     },
     ".active": {
       "& .MuiAvatar-root": {
-        border: `3px solid ${theme.accentColor}`,
+        border: `3px solid ${theme.palette.primary.main}`,
       },
     },
     "&::-webkit-scrollbar": {
@@ -78,7 +77,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     },
     "& .MuiAvatar-root": {
       "&:hover": {
-        border: `3px solid ${theme.accentColor}`,
+        border: `3px solid ${theme.palette.primary.main}`,
         filter: "saturate(150%)",
       },
     },
@@ -110,6 +109,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
         sx={{
           display: "inline-flex",
           width: "100%",
+          backgroundColor: theme.palette.background.default,
         }}
       >
         <StyledStack key="main-stack" direction="column" spacing={4.5}>
@@ -171,7 +171,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                     sx={{
                       "& .MuiBadge-badge": {
                         color: "#FFFFFF",
-                        backgroundColor: theme.accentColor,
+                        backgroundColor: theme.palette.primary.main,
                       },
                     }}
                   >

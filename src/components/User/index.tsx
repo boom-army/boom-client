@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Follow } from "../Profile/Follow";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../contexts/theme";
+import { useTheme } from '@mui/material/styles';
 import { User as UserProps } from "../../generated/graphql";
 import { UserAvatar } from "../UserAvatar";
 import { Link as RouterLink } from "react-router-dom";
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const User = ({ user }: Props) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   return (
     <Card>
       <Box sx={{ display: "flex" }}>
@@ -46,7 +46,7 @@ export const User = ({ user }: Props) => {
               </Typography>
               <Typography
                 noWrap
-                sx={{ color: theme.secondaryColor, width: "10em" }}
+                sx={{ color: theme.palette.secondary.main, width: "10em" }}
               >{`@${user && user.handle}`}</Typography>
             </Box>
           </Box>
