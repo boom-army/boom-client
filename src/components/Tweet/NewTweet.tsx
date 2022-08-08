@@ -1,6 +1,6 @@
 import { AttributionLink } from "../Giphy/AttributionLink";
 import { Box } from "@mui/system";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   ChannelFeedDocument,
   FeedDocument,
@@ -22,8 +22,7 @@ import {
   IconButton,
   TextField,
 } from "@mui/material";
-import { Editor, EditorState } from "draft-js";
-import "draft-js/dist/Draft.css";
+import MUIRichTextEditor from 'mui-rte';
 import { LoadingButton as Button } from "@mui/lab";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
@@ -68,14 +67,9 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles]: any = useState([]);
   const tweet = useInput("");
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-
-  const editor = useRef<HTMLInputElement>(null);
-  function focusEditor() {
-    editor?.current?.focus();
-  }
+  // function focusEditor() {
+  //   editor?.current?.focus();
+  // }
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
@@ -129,7 +123,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
       return displayError(err, enqueueSnackbar);
     }
 
-    tweet.setValue("");
+    // tweet.setValue("");
     setTweetFiles([]);
     setGif(null);
   };
@@ -166,9 +160,9 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
     id: `preview-${index}`,
   });
 
-  const handleChange = (html: any, text: any)  => {
-    console.log(html,'****', text);
-    tweet.setValue(html);
+  const handleChange = (state: any)  => {
+    console.log('****', state);
+    // tweet.setValue(html);
     // this is a reference back to the editor if you want to
     // do editing programatically
     // editor.insertString("editor is ready");
@@ -225,17 +219,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
               ),
             }}
           /> */}
-          <div
-            style={{ border: "1px solid black", minHeight: "6em", cursor: "text" }}
-            onClick={focusEditor}
-          >
-            <Editor
-              ref={editor}
-              editorState={editorState}
-              onChange={setEditorState}
-              placeholder="Write something!"
-            />
-          </div>
+          <MUIRichTextEditor label="Start typing..." />
         </Stack>
       </Grid>
       <IconsGrid item xs={6} pl={6}>

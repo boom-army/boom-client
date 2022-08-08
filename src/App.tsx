@@ -11,38 +11,6 @@ import { UserContextProvider } from "./contexts/user";
 import { useContext, useState, useEffect } from "react";
 import { useOneSignalQuery } from "./generated/graphql";
 
-declare module "@mui/material/styles" {
-  interface Theme {
-    background: string;
-    bgHover: string;
-    primaryColor: string;
-    secondaryColor: string;
-    accentColor: string;
-    tertiaryColor: string;
-    tertiaryColor2: string;
-    overlay: string;
-    success: string;
-    font: string;
-    bs1: string;
-    loading: string;
-  }
-  // allow configuration using `createTheme`
-  interface ThemeOptions {
-    background?: string;
-    bgHover?: string;
-    primaryColor?: string;
-    secondaryColor?: string;
-    accentColor?: string;
-    tertiaryColor: string;
-    tertiaryColor2?: string;
-    overlay?: string;
-    success?: string;
-    font?: string;
-    bs1?: string;
-    loading?: string;
-  }
-}
-
 export const App = () => {
   const { theme } = useContext(ThemeContext);
   const custom_theme = createTheme(theme);
