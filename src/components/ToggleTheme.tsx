@@ -5,9 +5,6 @@ import { ColorModeContext } from "../contexts/theme";
 import { Box } from "@mui/material";
 
 const ToggleTheme = () => {
-  // const localSt = localStorage.getItem("theme");
-  // const [currentTheme, setCurrentTheme] = useState(localSt ? localSt : "dark");
-
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
 

@@ -14,16 +14,20 @@ import { useOneSignalQuery } from "./generated/graphql";
 
 export const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [mode, setMode] = useState<PaletteMode>('dark');
+  const [mode, setMode] = useState<PaletteMode>(localStorage.getItem("theme") as PaletteMode || prefersDarkMode ? 'dark' : 'light');
 
   useEffect(() => {
-    setMode(prefersDarkMode ? 'dark' : 'light');
+    setMode(localStorage.getItem("theme") as PaletteMode);
   }, [prefersDarkMode]);
 
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        setMode(prevMode => {
+          const nextMode = prevMode === "light" ? "dark" : "light";
+          localStorage.setItem("theme", nextMode);
+          return nextMode;
+        });
       },
     }),
     []

@@ -16,7 +16,6 @@ interface Props {
 
 export const ChannelTile: React.FC<Props> = ({ channel }) => {
   const theme = useTheme();
-  const localTheme = localStorage.getItem("theme");
   const active = channel.status === ChannelStatus.ACTIVE;
 
   const MemberAvatarBox = styled(Box)({
@@ -30,7 +29,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
       <Box
         component={NavLink}
         sx={{
-          backgroundColor: localTheme === 'dark' ? blue[500] : theme.palette.secondary.dark,
+          backgroundColor: theme.palette.secondary.dark,
           borderRadius: 1,
           display: "flex",
           border: active ? `1px solid ${theme.palette.secondary.main}` : 0,
