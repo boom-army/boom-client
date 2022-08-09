@@ -22,7 +22,6 @@ import {
   IconButton,
   TextField,
 } from "@mui/material";
-import MUIRichTextEditor from 'mui-rte';
 import { LoadingButton as Button } from "@mui/lab";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
@@ -34,6 +33,7 @@ import { useTheme } from '@mui/material/styles';
 import { useState, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
+import { TextEditor } from "../Editor/TextEditior";
 
 interface NewTweetProps {
   parentTweet?: string | undefined
@@ -67,9 +67,6 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles]: any = useState([]);
   const tweet = useInput("");
-  // function focusEditor() {
-  //   editor?.current?.focus();
-  // }
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
@@ -160,20 +157,12 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
     id: `preview-${index}`,
   });
 
-  const handleChange = (state: any)  => {
-    console.log('****', state);
-    // tweet.setValue(html);
-    // this is a reference back to the editor if you want to
-    // do editing programatically
-    // editor.insertString("editor is ready");
-  }
-
   return (
     <Grid
       container
       p={2}
       sx={{
-        borderBottom: `2px solid ${theme.palette.secondary.dark}`
+        borderBottom: `2px solid ${theme.palette.secondary.dark}`,
       }}
     >
       <Grid item xs={12} pb={2}>
@@ -186,40 +175,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
             avatar={userData?.avatar}
             isNFT={userData?.data?.avatarMint}
           />
-          {/* <TextField
-            multiline
-            maxRows={4}
-            value={tweet.value}
-            onChange={tweet.onChange}
-            placeholder={"What's happening?"}
-            fullWidth={true}
-            variant="standard"
-            sx={{
-              color: theme.palette.primary.main,
-              padding: "1em 1em 1em 0",
-              "& .MuiInput-root:before": {
-                border: 0,
-              },
-              "&:before": {
-                borderColor: theme.palette.secondary.dark,
-              },
-              "&:hover:not(.Mui-disabled):before": {
-                borderColor: theme.palette.secondary.dark,
-              },
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <EmojiPicker
-                    emojiHandler={(pickedEmoji: any) =>
-                      tweet.setValue(tweet.value + pickedEmoji.native)
-                    }
-                  />
-                </InputAdornment>
-              ),
-            }}
-          /> */}
-          <MUIRichTextEditor label="Start typing..." />
+          <TextEditor />
         </Stack>
       </Grid>
       <IconsGrid item xs={6} pl={6}>
