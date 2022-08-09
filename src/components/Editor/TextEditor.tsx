@@ -1,3 +1,4 @@
+// From https://codesandbox.io/s/lexical-rich-text-example-5tncvy
 import { exampleTheme } from "./themes/ExampleTheme";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
@@ -26,13 +27,10 @@ function Placeholder() {
 
 const editorConfig = {
   namespace: "RTEEditor",
-  // The editor theme
   theme: exampleTheme,
-  // Handling of errors during update
   onError(error: Error) {
-    throw error;
+    console.log(error);
   },
-  // Any custom nodes go here
   nodes: [
     HeadingNode,
     ListNode,
@@ -71,4 +69,4 @@ export const TextEditor = () => {
       </div>
     </LexicalComposer>
   );
-}
+};

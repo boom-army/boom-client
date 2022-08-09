@@ -1,6 +1,5 @@
 import { AttributionLink } from "../Giphy/AttributionLink";
 import { Box } from "@mui/system";
-import { useEffect, useRef } from "react";
 import {
   ChannelFeedDocument,
   FeedDocument,
@@ -18,9 +17,7 @@ import { GifyModal } from "../Giphy/GifyModal";
 import {
   Stack,
   Grid,
-  InputAdornment,
   IconButton,
-  TextField,
 } from "@mui/material";
 import { LoadingButton as Button } from "@mui/lab";
 import { UploadFileIcon } from "../Icons";
@@ -30,10 +27,10 @@ import { useInput } from "../../hooks/useInput";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useTheme } from '@mui/material/styles';
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
-import { TextEditor } from "../Editor/TextEditior";
+import { TextEditor } from "../Editor/TextEditor";
 
 interface NewTweetProps {
   parentTweet?: string | undefined
