@@ -15,7 +15,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 
 const LowPriority = 1;
 
-export default function ToolbarPlugin() {
+export const ToolbarPlugin = () => {
   const [editor] = useLexicalComposerContext();
   const toolbarRef = useRef(null);
   const [blockType, setBlockType] = useState("paragraph");
