@@ -30,7 +30,7 @@ import { useTheme } from '@mui/material/styles';
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
-import { TextEditor } from "../Editor/TextEditor";
+import { TextEditor } from "../Editor";
 
 interface NewTweetProps {
   parentTweet?: string | undefined
