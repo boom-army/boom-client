@@ -37,6 +37,7 @@ import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
+import { BoomOnes } from "./views/BoomOnes";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -191,6 +192,7 @@ export const AppRoutes: React.FC = () => {
                         <Route path=":handle" element={<Profile />} />
                         <Route path="mint-nft" element={<NFTMint />} />
                         {/* <Route path="mint-boom-hero" element={<OGMint />} /> */}
+                        <Route path="auctions" element={<BoomOnes />} />
                         <Route path="*" element={<Navigate replace to="/" />} />
                       </Routes>
                     </Paper>
