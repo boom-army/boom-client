@@ -1,5 +1,4 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
 import NewspaperIcon from '@mui/icons-material/Newspaper';
