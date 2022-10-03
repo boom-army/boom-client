@@ -2,7 +2,7 @@ import { Box, Grid } from "@mui/material";
 
 export const BoomOnes = () => {
   return (
-    <Grid container mt={2} px={2}>
+    <Grid container spacing={1} mt={2} px={2}>
       <Grid item xs={12}>
         <Box>
             Harkl leads!
@@ -10,10 +10,10 @@ export const BoomOnes = () => {
         </Box>
       </Grid>
       <Grid item xs={6}>
-        <Box>
+        <Box sx={{ overflow: 'hidden' }}>
           <img
             src={"/assets/420.png"}
-            width="200"
+            width="100%"
             alt="Boom Heroes #420"
           />
         </Box>
