@@ -1,8 +1,10 @@
-import React from "react";
+import { ThemeContext } from "../../contexts/theme";
 import { Box, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 
 export const CurrentUser = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       <Grid
@@ -18,10 +20,15 @@ export const CurrentUser = () => {
               component="h2"
               color={"primary"}
               mt={1}
-              sx={{ display: "inline-flex" }}
+              sx={{
+                display: "inline-flex",
+                "&:hover": { backgroundColor: theme.accentColor },
+              }}
             >
               <img src={"/assets/boom-logo.png"} alt="Boom" width={"30"} />{" "}
-              <Box ml={1} pt={0.5}>βeta</Box>
+              <Box ml={1} pt={0.5} pr={1}>
+                βeta
+              </Box>
             </Typography>
           </Link>
         </Box>
@@ -29,3 +36,4 @@ export const CurrentUser = () => {
     </>
   );
 };
+
