@@ -1,28 +1,28 @@
 export interface ThemeVars {
-  background: string
-  background2: string
-  bgHover: string
-  primaryColor: string
-  secondaryColor: string
-  accentColor: string
-  tertiaryColor: string
-  tertiaryColor2: string
-  overlay: string
-  success: string
-  error: string
-  warning: string
-  bs1: string
-  blue: Shades
-  grey: Shades
+  background: string;
+  background2: string;
+  bgHover: string;
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  tertiaryColor: string;
+  tertiaryColor2: string;
+  overlay: string;
+  success: string;
+  error: string;
+  warning: string;
+  bs1: string;
+  blue: Shades;
+  grey: Shades;
 }
 
 interface Shades {
-  lightest?: string
-  lighter?: string
-  light?: string
-  dark?: string
-  darker?: string
-  darkest?: string
+  lightest?: string;
+  lighter?: string;
+  light?: string;
+  dark?: string;
+  darker?: string;
+  darkest?: string;
 }
 
 const themeColors = {
@@ -39,7 +39,7 @@ const themeColors = {
     light: "#949A9E",
     dark: "#374148",
   },
-}
+};
 
 const fontSettings = {
   typography: {
@@ -62,35 +62,63 @@ const fontSettings = {
     h1: {
       fontSize: 30,
       fontWeight: 600,
-      lineHeight: "1.8rem"
+      lineHeight: "1.8rem",
     },
     h2: {
       fontSize: 26,
       fontWeight: 600,
-      lineHeight: "1.2rem"
+      lineHeight: "1.2rem",
     },
     h3: {
       fontSize: 22,
       fontWeight: 600,
-      lineHeight: "1.2rem"
+      lineHeight: "1.2rem",
     },
     h4: {
       fontSize: 18,
       fontWeight: 600,
-      lineHeight: "1.2rem"
+      lineHeight: "1.2rem",
     },
     h5: {
       fontSize: 16,
       fontWeight: 600,
-      lineHeight: "1.2rem"
+      lineHeight: "1.2rem",
     },
     body2: {
-      fontWeight: 300
-    }
+      fontWeight: 300,
+    },
   },
 };
 
-const accent = "#CA2055"
+const accent = "#CA2055";
+
+const overRides = {
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: ({ theme }: { theme: ThemeVars }) => ({
+          boxShadow: `${theme.background2} 0px 3px 5px`,
+        }),
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: ({ theme }: { theme: ThemeVars }) => ({
+          color: theme.primaryColor,
+        }),
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: ({ theme }: { theme: ThemeVars }) => ({
+          "& fieldset": {
+            borderColor: theme.tertiaryColor,
+          }
+        }),
+      },
+    },
+  },
+};
 
 export const lightTheme = {
   background: "#FFF",
@@ -112,11 +140,12 @@ export const lightTheme = {
       secondary: "#666",
     },
     primary: {
-      main: accent
-    }
+      main: accent,
+    },
   },
   ...fontSettings,
   ...themeColors,
+  ...overRides,
 };
 
 export const darkTheme = {
@@ -139,9 +168,10 @@ export const darkTheme = {
       secondary: "#CCC",
     },
     primary: {
-      main: accent
-    }
+      main: accent,
+    },
   },
   ...fontSettings,
   ...themeColors,
+  ...overRides,
 };
