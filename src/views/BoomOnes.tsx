@@ -10,6 +10,9 @@ import {
   IconButton,
   Link,
   List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
   Popper,
   Stack,
   TextField,
@@ -22,6 +25,7 @@ import Face6Icon from "@mui/icons-material/Face6";
 import { ThemeContext } from "../contexts/theme";
 import { useContext, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
+import { UserAvatar } from "../components/UserAvatar";
 
 export const BoomOnes = () => {
   const { theme } = useContext(ThemeContext);
@@ -31,6 +35,8 @@ export const BoomOnes = () => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
+
+  const bids = [1, 2, 3, 4];
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
@@ -133,13 +139,23 @@ export const BoomOnes = () => {
             />
             <AuctionLabel
               label="Leading bid"
-              content={<Typography variant="h3">💥345 ($0.34)</Typography>}
+              content={
+                <Typography pt={0.5} variant="h3" component={"p"}>
+                  💥345 ($0.34)
+                </Typography>
+              }
             />
             <Box>
               <AuctionLabel
                 label="Time left"
                 content={
-                  <Typography variant="h3" display={"inline"} ml={0.5}>
+                  <Typography
+                    pt={0.5}
+                    variant="h3"
+                    component={"p"}
+                    display={"inline"}
+                    ml={0.5}
+                  >
                     00:46
                   </Typography>
                 }
@@ -210,10 +226,41 @@ export const BoomOnes = () => {
               aria-controls="bids-content"
               id="bids-header"
             >
-              <Typography>Bid History</Typography>
+              <Typography variant="h6">Bid History</Typography>
             </AccordionSummary>
-            <AccordionDetails>
-              <List></List>
+            <AccordionDetails sx={{ p: 0 }}>
+              <List>
+                {bids.map((bid, index) => (
+                  <ListItem
+                    key={bid + index}
+                    sx={{ borderTop: `1px solid ${theme.tertiaryColor2}` }}
+                  >
+                    <ListItemAvatar>
+                      <UserAvatar
+                      // avatar={user?.avatar}
+                      // isNFT={user?.data?.avatarMint}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <Box display={"flex"} justifyContent={"space-between"}>
+                          <Typography display={"inline"}>@harkl</Typography>
+                          <Box>
+                          <Typography
+                            display={"inline"}
+                            color={theme.secondaryColor}
+                          >
+                            bid
+                          </Typography>{" "}
+                          <Typography display={"inline"}>💥345</Typography>
+                          </Box>
+                        </Box>
+                      }
+                      secondary="5 hours ago"
+                    />
+                  </ListItem>
+                ))}
+              </List>
             </AccordionDetails>
           </Accordion>
         </Box>
@@ -231,7 +278,7 @@ export const BoomOnes = () => {
               aria-controls="description-content"
               id="description-header"
             >
-              <Typography>Description</Typography>
+              <Typography variant="h6">Description</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
@@ -254,7 +301,7 @@ export const BoomOnes = () => {
               aria-controls="metadata-content"
               id="metadata-header"
             >
-              <Typography>Metadata</Typography>
+              <Typography variant="h6">Metadata</Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ overflow: "hidden" }}>
               <pre>
