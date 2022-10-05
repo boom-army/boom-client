@@ -162,45 +162,47 @@ export const BoomOnes = () => {
               />
             </Box>
           </Box>
-          <Box pt={4} display="flex" justifyContent={"center"}>
-            <FormGroup>
-              <TextField
-                autoFocus
-                id="bid"
-                inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                label="Bid"
-                name="bid"
-                required
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-                  style: { color: theme.secondaryColor },
-                }}
-                InputProps={{
-                  style: { color: theme.secondaryColor },
-                }}
-                value={345}
-                onChange={() => {}}
-              />
-              <Button
-                variant="contained"
-                size="large"
-                sx={{ minWidth: "50%", marginTop: "1em" }}
-              >
-                <Typography display={"inline"}>Place </Typography>
-                <Typography
-                  display={"inline"}
-                  sx={{ fontWeight: 600 }}
-                  ml={0.5}
-                >
-                  💥346 ($32.89)
-                </Typography>
-                <Typography display={"inline"} ml={0.5}>
-                  Bid
-                </Typography>
-              </Button>
-            </FormGroup>
-          </Box>
+          <FormGroup row={true} sx={{ width: "100%", pt: 4 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  autoFocus
+                  id="bid"
+                  inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                  label="Bid"
+                  name="bid"
+                  required
+                  type="number"
+                  size="small"
+                  InputLabelProps={{
+                    shrink: true,
+                    style: { color: theme.secondaryColor },
+                  }}
+                  InputProps={{
+                    style: { color: theme.secondaryColor },
+                  }}
+                  value={345}
+                  onChange={() => {}}
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Button variant="contained" size="large" sx={{ width: "100%" }}>
+                  <Typography display={"inline"}>Place </Typography>
+                  <Typography
+                    display={"inline"}
+                    sx={{ fontWeight: 600 }}
+                    ml={0.5}
+                  >
+                    💥346 ($32.89)
+                  </Typography>
+                  <Typography display={"inline"} ml={0.5}>
+                    Bid
+                  </Typography>
+                </Button>
+              </Grid>
+            </Grid>
+          </FormGroup>
           <Box mt={2} display="flex" justifyContent={"center"}>
             <Link
               href="https://dex.aldrin.com/swap?base=USDC&quote=BMA"
@@ -246,13 +248,13 @@ export const BoomOnes = () => {
                         <Box display={"flex"} justifyContent={"space-between"}>
                           <Typography display={"inline"}>@harkl</Typography>
                           <Box>
-                          <Typography
-                            display={"inline"}
-                            color={theme.secondaryColor}
-                          >
-                            bid
-                          </Typography>{" "}
-                          <Typography display={"inline"}>💥345</Typography>
+                            <Typography
+                              display={"inline"}
+                              color={theme.secondaryColor}
+                            >
+                              bid
+                            </Typography>{" "}
+                            <Typography display={"inline"}>💥345</Typography>
                           </Box>
                         </Box>
                       }
