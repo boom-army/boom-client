@@ -130,8 +130,10 @@ export const BoomOnes = () => {
                   label="@harkl"
                   variant="outlined"
                   icon={
-                    <Face6Icon
-                      sx={{ "&.MuiChip-icon": { color: theme.accentColor } }}
+                    <UserAvatar
+                      // avatar={user?.avatar}
+                      // isNFT={user?.data?.avatarMint}
+                      sx={{ width: "23px", height: "23px", ml: "3px" }}
                     />
                   }
                 />
