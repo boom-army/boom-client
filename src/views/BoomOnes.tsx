@@ -26,6 +26,7 @@ import { AuctionLabel } from "../components/Auctions/AuctionLabel";
 export const BoomOnes = () => {
   const { theme } = useContext(ThemeContext);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [accordionPanel, setAccordionPanel] = useState("bids");
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -84,23 +85,17 @@ export const BoomOnes = () => {
         </Box>
         <Box display="flex" justifyContent={"space-between"} mt={2}>
           <Typography mt={2} variant="h4">
-            Family: BoomOnes Collection
+            <CollectionsIcon
+              sx={{ color: theme.accentColor, verticalAlign: "middle" }}
+            />{" "}
+            BoomOnes Collection
           </Typography>
           <Stack mt={1} spacing={1} direction="row">
             <Chip
-              label="Creator"
+              label="harkL...a3W"
               variant="outlined"
               icon={
                 <Face6Icon
-                  sx={{ "&.MuiChip-icon": { color: theme.accentColor } }}
-                />
-              }
-            />
-            <Chip
-              label="Series"
-              variant="outlined"
-              icon={
-                <CollectionsIcon
                   sx={{ "&.MuiChip-icon": { color: theme.accentColor } }}
                 />
               }
@@ -117,8 +112,8 @@ export const BoomOnes = () => {
         <Box
           p={2}
           sx={{
-            border: `1px solid ${theme.blue.light}`,
-            backgroundColor: theme.blue.dark,
+            border: `1px solid ${theme.secondaryColor}`,
+            backgroundColor: theme.background2,
           }}
         >
           <Box display={"flex"} justifyContent={"space-between"}>
@@ -203,8 +198,34 @@ export const BoomOnes = () => {
         </Box>
       </Grid>
       <Grid item xs={12}>
-        <Box mt={2}>
-          <Accordion expanded={true}>
+        <Box mt={1}>
+          <Accordion
+            expanded={accordionPanel === "bids"}
+            onChange={() =>
+              setAccordionPanel(accordionPanel !== "bids" ? "bids" : "")
+            }
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="bids-content"
+              id="bids-header"
+            >
+              <Typography>Bid History</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <List></List>
+            </AccordionDetails>
+          </Accordion>
+        </Box>
+        <Box mt={1}>
+          <Accordion
+            expanded={accordionPanel === "description"}
+            onChange={() =>
+              setAccordionPanel(
+                accordionPanel !== "description" ? "description" : ""
+              )
+            }
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="description-content"
@@ -221,16 +242,42 @@ export const BoomOnes = () => {
             </AccordionDetails>
           </Accordion>
         </Box>
-        <Box>
-          <Typography variant="h6">Bid History</Typography>
-          <List></List>
+        <Box mt={1}>
+          <Accordion
+            expanded={accordionPanel === "metadata"}
+            onChange={() =>
+              setAccordionPanel(accordionPanel !== "metadata" ? "metadata" : "")
+            }
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="metadata-content"
+              id="metadata-header"
+            >
+              <Typography>Metadata</Typography>
+            </AccordionSummary>
+            <AccordionDetails sx={{ overflow: "hidden" }}>
+              <pre>
+                {JSON.stringify(
+                  {
+                    item: "one",
+                    name: "Boom Hero #420",
+                    description:
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing",
+                  },
+                  null,
+                  2
+                )}
+              </pre>
+            </AccordionDetails>
+          </Accordion>
         </Box>
-        <Box>Metadata</Box>
-        <Box>Price</Box>
       </Grid>
-      <Grid item xs={12}>
-        Promo box
-      </Grid>
+      {/* <Grid item xs={12}>
+        <Typography mt={2} variant={"h4"}>
+          Promo box
+        </Typography>
+      </Grid> */}
     </Grid>
   );
 };
