@@ -19,11 +19,11 @@ import {
   Typography,
 } from "@mui/material";
 import CollectionsIcon from "@mui/icons-material/Collections";
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Face6Icon from "@mui/icons-material/Face6";
 import ShareIcon from "@mui/icons-material/Share";
-import TwitterIcon from '@mui/icons-material/Twitter';
+import TwitterIcon from "@mui/icons-material/Twitter";
 import { ThemeContext } from "../contexts/theme";
 import { useContext, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
@@ -41,7 +41,7 @@ export const BoomOnes = () => {
   };
 
   const handleShare = (text: string) => {
-    navigator.clipboard.writeText(text)
+    navigator.clipboard.writeText(text);
     setAnchorEl(null);
     enqueueSnackbar("Copied to clipboard", { variant: "success" });
   };
@@ -104,7 +104,9 @@ export const BoomOnes = () => {
                     },
                   }}
                 >
-                  <TwitterIcon sx={{ fontSize: 16, color: theme.accentColor }} />
+                  <TwitterIcon
+                    sx={{ fontSize: 16, color: theme.accentColor }}
+                  />
                 </IconButton>
                 <IconButton
                   type="button"
@@ -116,7 +118,9 @@ export const BoomOnes = () => {
                     },
                   }}
                 >
-                  <ContentCopyIcon sx={{ fontSize: 16, color: theme.accentColor, ml: 2 }} />
+                  <ContentCopyIcon
+                    sx={{ fontSize: 16, color: theme.accentColor, ml: 2 }}
+                  />
                 </IconButton>
               </Box>
             </Popper>
