@@ -19,16 +19,20 @@ import {
   Typography,
 } from "@mui/material";
 import CollectionsIcon from "@mui/icons-material/Collections";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ShareIcon from "@mui/icons-material/Share";
 import Face6Icon from "@mui/icons-material/Face6";
+import ShareIcon from "@mui/icons-material/Share";
+import TwitterIcon from '@mui/icons-material/Twitter';
 import { ThemeContext } from "../contexts/theme";
 import { useContext, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
 import { UserAvatar } from "../components/UserAvatar";
+import { useSnackbar } from "../contexts/snackbar";
 
 export const BoomOnes = () => {
   const { theme } = useContext(ThemeContext);
+  const { enqueueSnackbar } = useSnackbar();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [accordionPanel, setAccordionPanel] = useState("bids");
 
@@ -36,10 +40,16 @@ export const BoomOnes = () => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
+  const handleShare = (text: string) => {
+    navigator.clipboard.writeText(text)
+    setAnchorEl(null);
+    enqueueSnackbar("Copied to clipboard", { variant: "success" });
+  };
+
   const bids = [1, 2, 3, 4];
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
+  const id = open ? "share-popper" : undefined;
   return (
     <Grid
       container
@@ -84,7 +94,30 @@ export const BoomOnes = () => {
                   bgcolor: theme.background2,
                 }}
               >
-                The content of the Popper.
+                <IconButton
+                  type="button"
+                  size="small"
+                  onClick={() => handleShare("Boom is copying")}
+                  sx={{
+                    "&:hover": {
+                      opacity: 0.8,
+                    },
+                  }}
+                >
+                  <TwitterIcon sx={{ fontSize: 16, color: theme.accentColor }} />
+                </IconButton>
+                <IconButton
+                  type="button"
+                  size="small"
+                  onClick={() => handleShare("Boom is copying")}
+                  sx={{
+                    "&:hover": {
+                      opacity: 0.8,
+                    },
+                  }}
+                >
+                  <ContentCopyIcon sx={{ fontSize: 16, color: theme.accentColor, ml: 2 }} />
+                </IconButton>
               </Box>
             </Popper>
           </Link>
@@ -140,6 +173,20 @@ export const BoomOnes = () => {
               }
             />
             <AuctionLabel
+              label="Time left"
+              content={
+                <Typography
+                  pt={0.5}
+                  variant="h3"
+                  component={"p"}
+                  display={"inline"}
+                  ml={0.5}
+                >
+                  00:46
+                </Typography>
+              }
+            />
+            <AuctionLabel
               label="Leading bid"
               content={
                 <Typography pt={0.5} variant="h3" component={"p"}>
@@ -147,22 +194,6 @@ export const BoomOnes = () => {
                 </Typography>
               }
             />
-            <Box>
-              <AuctionLabel
-                label="Time left"
-                content={
-                  <Typography
-                    pt={0.5}
-                    variant="h3"
-                    component={"p"}
-                    display={"inline"}
-                    ml={0.5}
-                  >
-                    00:46
-                  </Typography>
-                }
-              />
-            </Box>
           </Box>
           <FormGroup row={true} sx={{ width: "100%", pt: 4 }}>
             <Grid container spacing={2}>
@@ -205,7 +236,7 @@ export const BoomOnes = () => {
               </Grid>
             </Grid>
           </FormGroup>
-          <Box mt={2} display="flex" justifyContent={"center"}>
+          <Box mt={3} display="flex" justifyContent={"center"}>
             <Link
               href="https://dex.aldrin.com/swap?base=USDC&quote=BMA"
               target={"_blank"}
@@ -290,6 +321,35 @@ export const BoomOnes = () => {
                 Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
                 eget.
               </Typography>
+            </AccordionDetails>
+          </Accordion>
+        </Box>
+        <Box mt={1}>
+          <Accordion
+            expanded={accordionPanel === "details"}
+            onChange={() =>
+              setAccordionPanel(accordionPanel !== "details" ? "details" : "")
+            }
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="details-content"
+              id="details-header"
+            >
+              <Typography variant="h6">Details</Typography>
+            </AccordionSummary>
+            <AccordionDetails sx={{ overflow: "hidden" }}>
+              <ul>
+                <li>
+                  Mint address <strong>6aDpE ... KUw</strong>
+                </li>
+                <li>On-chain Collection 6XxjK ... zNr</li>
+                <li>Token address 5XgEo ... 7Hp</li>
+                <li>Owner 4n8hb ... HyC</li>
+                <li>Creator Royalties 9.99%</li>
+                <li>Transaction Fee 2%</li>
+                <li>Listing/Bidding/Cancel Free</li>
+              </ul>
             </AccordionDetails>
           </Accordion>
         </Box>
