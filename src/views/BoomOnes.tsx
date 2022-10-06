@@ -29,6 +29,8 @@ import { useContext, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
 import { UserAvatar } from "../components/UserAvatar";
 import { useSnackbar } from "../contexts/snackbar";
+// import { PublicKey } from "@solana/web3.js";
+// import { CandyShop } from "@liqnft/candy-shop-sdk";
 
 export const BoomOnes = () => {
   const { theme } = useContext(ThemeContext);
@@ -40,13 +42,28 @@ export const BoomOnes = () => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
+  // const candyShop = new CandyShop({
+  //   candyShopCreatorAddress: new PublicKey(
+  //     "G1p59D3CScwE9r31RNFsGm3q5xZapt6EXHmtHV7Jq5AS"
+  //   ),
+  //   treasuryMint: new PublicKey("boomh1LQnwDnHtKxWTFgxcbdRjPypRSjdwxkAEJkFSH"),
+  //   candyShopProgramId: new PublicKey(
+  //     "csbMUULiQfGjT8ezT16EoEBaiarS6VWRevTw1JMydrS"
+  //   ),
+  //   env: "mainnet-beta",
+  //   settings: {
+  //     currencySymbol: "BMA",
+  //     currencyDecimals: 9,
+  //   },
+  // });
+
   const handleShare = (text: string) => {
     navigator.clipboard.writeText(text);
     setAnchorEl(null);
     enqueueSnackbar("Copied to clipboard", { variant: "success" });
   };
 
-  const bids = [1, 2, 3, 4];
+  const bids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const open = Boolean(anchorEl);
   const id = open ? "share-popper" : undefined;
@@ -267,7 +284,9 @@ export const BoomOnes = () => {
             >
               <Typography variant="h6">Bid History</Typography>
             </AccordionSummary>
-            <AccordionDetails sx={{ p: 0 }}>
+            <AccordionDetails
+              sx={{ p: 0, maxHeight: "300px", overflow: "scroll" }}
+            >
               <List>
                 {bids.map((bid, index) => (
                   <ListItem
