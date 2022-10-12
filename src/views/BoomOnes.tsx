@@ -24,38 +24,143 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Face6Icon from "@mui/icons-material/Face6";
 import ShareIcon from "@mui/icons-material/Share";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import { useWallet } from "@solana/wallet-adapter-react";
+import dayjs from "dayjs";
 import { ThemeContext } from "../contexts/theme";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
 import { UserAvatar } from "../components/UserAvatar";
 import { useSnackbar } from "../contexts/snackbar";
-// import { PublicKey } from "@solana/web3.js";
-// import { CandyShop } from "@liqnft/candy-shop-sdk";
+import { PublicKey } from "@solana/web3.js";
+import { CandyShop, fetchAuctionsByShopAddress } from "@liqnft/candy-shop-sdk";
+import { AuctionStatus } from "@liqnft/candy-shop-types";
+import { shortenAddress } from "../utils/utils";
+import { AuctionCountdown } from "../components/Auctions/AuctionCountdown";
+
+const ORDER_FETCH_LIMIT = 12;
+const BMA_TICK_SIZE = 1000000000;
+const DEFAULT_LIST_AUCTION_STATUS = [
+  AuctionStatus.CREATED,
+  AuctionStatus.STARTED,
+  AuctionStatus.EXPIRED,
+  AuctionStatus.COMPLETE,
+];
+
+interface ListBase<T> {
+  success: boolean;
+  msg: undefined | string;
+  result: T[];
+  totalCount: number;
+  count: number;
+  offset: number;
+}
+
+interface Auction {
+  auctionAddress: string;
+  tokenAccount: string;
+  candyShopAddress: string;
+  tokenMint: string;
+  sellerAddress: string;
+  startingBid: string;
+  startTime: string;
+  biddingPeriod: string;
+  highestBid: string;
+  tickSize: string;
+  buyNowPrice: string | null;
+  status: AuctionStatus;
+  highestBidBuyer?: string;
+  highestBidPrice?: string;
+  userBid?: boolean;
+  totalBid?: number;
+  nftUri?: string;
+  name: string;
+  symbol: string;
+  description?: string;
+  sellerFeeBasisPoint: number;
+  image?: string;
+  animationUrl?: string;
+  attributes?: NftAttribute[];
+  externalUri?: string;
+  properties?: NftProperties;
+}
+
+interface NftCreator {
+  address: string;
+  share: number;
+  verified?: number;
+}
+interface NftFiles {
+  uri: string;
+  type: string;
+}
+
+interface NftProperties {
+  files: NftFiles[];
+  category: string;
+  creators: NftCreator[];
+}
+interface NftAttribute {
+  value: string;
+  trait_type: string;
+}
 
 export const BoomOnes = () => {
   const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [accordionPanel, setAccordionPanel] = useState("bids");
+  const [auctionNFT, setAuctionNFT] = useState<Auction>();
+
+  const [bid, setBid] = useState<number>(
+    auctionNFT?.highestBid
+      ? (Number(auctionNFT?.highestBid) + Number(auctionNFT?.tickSize)) /
+          BMA_TICK_SIZE
+      : 1
+  );
+
+  const wallet = useWallet();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
-  // const candyShop = new CandyShop({
-  //   candyShopCreatorAddress: new PublicKey(
-  //     "G1p59D3CScwE9r31RNFsGm3q5xZapt6EXHmtHV7Jq5AS"
-  //   ),
-  //   treasuryMint: new PublicKey("boomh1LQnwDnHtKxWTFgxcbdRjPypRSjdwxkAEJkFSH"),
-  //   candyShopProgramId: new PublicKey(
-  //     "csbMUULiQfGjT8ezT16EoEBaiarS6VWRevTw1JMydrS"
-  //   ),
-  //   env: "mainnet-beta",
-  //   settings: {
-  //     currencySymbol: "BMA",
-  //     currencyDecimals: 9,
-  //   },
-  // });
+  useEffect(() => {
+    const candyShop = new CandyShop({
+      candyShopCreatorAddress: new PublicKey(
+        "G1p59D3CScwE9r31RNFsGm3q5xZapt6EXHmtHV7Jq5AS"
+      ),
+      treasuryMint: new PublicKey(
+        "boomh1LQnwDnHtKxWTFgxcbdRjPypRSjdwxkAEJkFSH"
+      ),
+      candyShopProgramId: new PublicKey(
+        "csbMUULiQfGjT8ezT16EoEBaiarS6VWRevTw1JMydrS"
+      ),
+      env: "mainnet-beta",
+      settings: {
+        currencySymbol: "BMA",
+        currencyDecimals: 9,
+      },
+    });
+    if (wallet.connected) {
+      (async () => {
+        try {
+          const auction = await fetchAuctionsByShopAddress(
+            candyShop.candyShopAddress,
+            {
+              offset: 0,
+              limit: ORDER_FETCH_LIMIT,
+              status: DEFAULT_LIST_AUCTION_STATUS,
+              walletAddress: wallet.publicKey?.toBase58(),
+            }
+          );
+          console.log(auction, dayjs.unix(new Date().getTime() / 1000).unix());
+          setAuctionNFT(auction.result[0]);
+        } catch (error) {
+          console.info(`fetch candy machine info, error= `, error);
+        }
+      })();
+    }
+  }, []);
 
   const handleShare = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -78,7 +183,7 @@ export const BoomOnes = () => {
       <Grid item xs={12}>
         <Box display={"flex"} justifyContent={"space-between"}>
           <Typography variant="h2" sx={{ lineHeight: 1.5 }}>
-            Boom Heroes Hero #420
+            {auctionNFT?.name}
           </Typography>
           <Link>
             <IconButton
@@ -148,11 +253,11 @@ export const BoomOnes = () => {
             <CollectionsIcon
               sx={{ color: theme.accentColor, verticalAlign: "middle" }}
             />{" "}
-            BoomOnes Collection
+            {auctionNFT?.symbol}
           </Typography>
           <Stack mt={1} spacing={1} direction="row">
             <Chip
-              label="harkL...a3W"
+              label={auctionNFT && shortenAddress(auctionNFT?.sellerAddress)}
               variant="outlined"
               icon={
                 <Face6Icon
@@ -165,7 +270,7 @@ export const BoomOnes = () => {
       </Grid>
       <Grid item xs={12}>
         <Box sx={{ overflow: "hidden" }}>
-          <img src={"/assets/420.png"} width="100%" alt="Boom Heroes #420" />
+          <img src={auctionNFT?.image} width="100%" alt="Boom Heroes #420" />
         </Box>
       </Grid>
       <Grid item xs={12}>
@@ -203,7 +308,14 @@ export const BoomOnes = () => {
                   display={"inline"}
                   ml={0.5}
                 >
-                  00:46
+                  {auctionNFT && (
+                    <AuctionCountdown
+                      endTime={dayjs.unix(
+                        Number(auctionNFT.startTime) +
+                          Number(auctionNFT.biddingPeriod)
+                      )}
+                    />
+                  )}
                 </Typography>
               }
             />
@@ -211,7 +323,9 @@ export const BoomOnes = () => {
               label="Leading bid"
               content={
                 <Typography pt={0.5} variant="h3" component={"p"}>
-                  💥345 ($0.34)
+                  {auctionNFT?.highestBid
+                    ? `💥${auctionNFT.highestBid}`
+                    : `No bid`}
                 </Typography>
               }
             />
@@ -235,23 +349,26 @@ export const BoomOnes = () => {
                   InputProps={{
                     style: { color: theme.secondaryColor },
                   }}
-                  value={345}
-                  onChange={() => {}}
+                  value={bid}
+                  onChange={(e) => {
+                    setBid(Number(e.target.value));
+                  }}
                   sx={{ width: "100%" }}
                 />
               </Grid>
               <Grid item xs={6}>
                 <Button variant="contained" size="large" sx={{ width: "100%" }}>
-                  <Typography display={"inline"}>Place </Typography>
+                  <Typography display={"inline"}>Bid at</Typography>
                   <Typography
                     display={"inline"}
                     sx={{ fontWeight: 600 }}
                     ml={0.5}
                   >
-                    💥346 ($32.89)
+                    💥
+                    {bid}
                   </Typography>
                   <Typography display={"inline"} ml={0.5}>
-                    Bid
+                    BMA
                   </Typography>
                 </Button>
               </Grid>
@@ -340,9 +457,7 @@ export const BoomOnes = () => {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
+                {auctionNFT?.description || "No description present"}
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -364,7 +479,7 @@ export const BoomOnes = () => {
             <AccordionDetails sx={{ overflow: "hidden" }}>
               <ul>
                 <li>
-                  Mint address <strong>6aDpE ... KUw</strong>
+                  Mint address <strong>{auctionNFT?.tokenMint}</strong>
                 </li>
                 <li>On-chain Collection 6XxjK ... zNr</li>
                 <li>Token address 5XgEo ... 7Hp</li>
