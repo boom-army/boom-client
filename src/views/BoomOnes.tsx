@@ -32,10 +32,17 @@ import { AuctionLabel } from "../components/Auctions/AuctionLabel";
 import { UserAvatar } from "../components/UserAvatar";
 import { useSnackbar } from "../contexts/snackbar";
 import { PublicKey } from "@solana/web3.js";
-import { CandyShop, fetchAuctionsByShopAddress } from "@liqnft/candy-shop-sdk";
+import {
+  CandyShop,
+  fetchAuctionsByShopAddress,
+  ExplorerLinkBase,
+} from "@liqnft/candy-shop-sdk";
 import { AuctionStatus } from "@liqnft/candy-shop-types";
 import { shortenAddress } from "../utils/utils";
-import { AuctionCountdown } from "../components/Auctions/AuctionCountdown";
+import { Countdown } from "../components/Auctions/CandyCountdown";
+import { Price } from "../components/Auctions/CandyPrice";
+import { AuctionActivity } from "../components/Auctions/CandyAuctionActivity";
+import { ExplorerLink } from "../components/Auctions/CandyExplorer";
 
 const ORDER_FETCH_LIMIT = 12;
 const BMA_TICK_SIZE = 1000000000;
@@ -110,6 +117,8 @@ export const BoomOnes = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [accordionPanel, setAccordionPanel] = useState("bids");
   const [auctionNFT, setAuctionNFT] = useState<Auction>();
+  const [candyShop, setCandyShop] = useState<CandyShop>();
+  const [metadata, setMetadata] = useState<string>();
 
   const [bid, setBid] = useState<number>(
     auctionNFT?.highestBid
@@ -141,6 +150,7 @@ export const BoomOnes = () => {
         currencyDecimals: 9,
       },
     });
+    setCandyShop(candyShop);
     if (wallet.connected) {
       (async () => {
         try {
@@ -153,7 +163,6 @@ export const BoomOnes = () => {
               walletAddress: wallet.publicKey?.toBase58(),
             }
           );
-          console.log(auction, dayjs.unix(new Date().getTime() / 1000).unix());
           setAuctionNFT(auction.result[0]);
         } catch (error) {
           console.info(`fetch candy machine info, error= `, error);
@@ -161,6 +170,17 @@ export const BoomOnes = () => {
       })();
     }
   }, []);
+
+  useEffect(() => {
+    // @ts-ignore
+    fetch(auctionNFT?.nftUri)
+      .then((res) => res.json())
+      .then((data) => {
+        setMetadata(JSON.stringify(data, null, 2));
+      })
+      .catch((error) => console.log(error));
+    // setMetadata(metadata);
+  }, [auctionNFT]);
 
   const handleShare = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -309,11 +329,13 @@ export const BoomOnes = () => {
                   ml={0.5}
                 >
                   {auctionNFT && (
-                    <AuctionCountdown
-                      endTime={dayjs.unix(
+                    <Countdown
+                      start={Number(auctionNFT.startTime)}
+                      end={
                         Number(auctionNFT.startTime) +
-                          Number(auctionNFT.biddingPeriod)
-                      )}
+                        Number(auctionNFT.biddingPeriod)
+                      }
+                      status={auctionNFT.status}
                     />
                   )}
                 </Typography>
@@ -323,9 +345,12 @@ export const BoomOnes = () => {
               label="Leading bid"
               content={
                 <Typography pt={0.5} variant="h3" component={"p"}>
-                  {auctionNFT?.highestBid
-                    ? `💥${auctionNFT.highestBid}`
-                    : `No bid`}
+                  {candyShop && auctionNFT && (
+                    <Price
+                      value={auctionNFT.highestBidPrice}
+                      candyShop={candyShop}
+                    />
+                  )}
                 </Typography>
               }
             />
@@ -357,7 +382,16 @@ export const BoomOnes = () => {
                 />
               </Grid>
               <Grid item xs={6}>
-                <Button variant="contained" size="large" sx={{ width: "100%" }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{ width: "100%" }}
+                  disabled={
+                    auctionNFT?.status === AuctionStatus.COMPLETE ||
+                    auctionNFT?.status === AuctionStatus.EXPIRED ||
+                    auctionNFT?.status === AuctionStatus.CANCELLED
+                  }
+                >
                   <Typography display={"inline"}>Bid at</Typography>
                   <Typography
                     display={"inline"}
@@ -404,7 +438,13 @@ export const BoomOnes = () => {
             <AccordionDetails
               sx={{ p: 0, maxHeight: "300px", overflow: "scroll" }}
             >
-              <List>
+              {candyShop && auctionNFT && (
+                <AuctionActivity
+                  candyShop={candyShop}
+                  auctionAddress={auctionNFT?.auctionAddress}
+                />
+              )}
+              {/* <List>
                 {bids.map((bid, index) => (
                   <ListItem
                     key={bid + index}
@@ -435,7 +475,7 @@ export const BoomOnes = () => {
                     />
                   </ListItem>
                 ))}
-              </List>
+              </List> */}
             </AccordionDetails>
           </Accordion>
         </Box>
@@ -479,14 +519,45 @@ export const BoomOnes = () => {
             <AccordionDetails sx={{ overflow: "hidden" }}>
               <ul>
                 <li>
-                  Mint address <strong>{auctionNFT?.tokenMint}</strong>
+                  Mint address{" "}
+                  <strong>
+                    {auctionNFT && (
+                      <ExplorerLink
+                        address={auctionNFT?.tokenMint}
+                        type="address"
+                        source={ExplorerLinkBase.SolanaFM}
+                        env={"mainnet-beta"}
+                      />
+                    )}
+                  </strong>
                 </li>
-                <li>On-chain Collection 6XxjK ... zNr</li>
-                <li>Token address 5XgEo ... 7Hp</li>
-                <li>Owner 4n8hb ... HyC</li>
-                <li>Creator Royalties 9.99%</li>
-                <li>Transaction Fee 2%</li>
-                <li>Listing/Bidding/Cancel Free</li>
+                {/* <li>On-chain Collection 6XxjK ... zNr</li> */}
+                {/* <li>Token address 5XgEo ... 7Hp</li> */}
+                <li>
+                  Owner{" "}
+                  <strong>
+                    {auctionNFT && (
+                      <ExplorerLink
+                        address={auctionNFT?.sellerAddress}
+                        type="address"
+                        source={ExplorerLinkBase.SolanaFM}
+                        env={"mainnet-beta"}
+                      />
+                    )}
+                  </strong>
+                </li>
+                <li>
+                  Creator Royalties{" "}
+                  <strong>{`${
+                    Number(auctionNFT?.sellerFeeBasisPoint) / 100
+                  }`}</strong>
+                </li>
+                <li>
+                  Transaction Fee <strong>2%</strong>
+                </li>
+                <li>
+                  Bidding/Cancel <strong>Free</strong>
+                </li>
               </ul>
             </AccordionDetails>
           </Accordion>
@@ -506,18 +577,7 @@ export const BoomOnes = () => {
               <Typography variant="h6">Metadata</Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ overflow: "hidden" }}>
-              <pre>
-                {JSON.stringify(
-                  {
-                    item: "one",
-                    name: "Boom Hero #420",
-                    description:
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing",
-                  },
-                  null,
-                  2
-                )}
-              </pre>
+              <pre>{metadata}</pre>
             </AccordionDetails>
           </Accordion>
         </Box>
