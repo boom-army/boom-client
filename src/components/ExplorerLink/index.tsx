@@ -21,7 +21,7 @@ export const ExplorerLink = (props: {
     return null;
   }
 
-  const length = props.length ?? 9;
+  const length = props.length ?? 4;
 
   return (
     <a

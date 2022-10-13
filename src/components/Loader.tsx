@@ -7,10 +7,14 @@ const StyledCircularProgress = styled(CircularProgress)((props: any) => ({
   color: props.theme.accentColor,
 }));
 
-export const Loader = () => {
+interface LoaderProps {
+  size?: number;
+}
+
+export const Loader: React.FC<LoaderProps> = ({ size }) => {
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <StyledCircularProgress size={30} />
+      <StyledCircularProgress size={size || 30} />
     </Box>
   );
 };

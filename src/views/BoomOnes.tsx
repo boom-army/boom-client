@@ -24,10 +24,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Face6Icon from "@mui/icons-material/Face6";
 import ShareIcon from "@mui/icons-material/Share";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import dayjs from "dayjs";
 import { ThemeContext } from "../contexts/theme";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
 import { UserAvatar } from "../components/UserAvatar";
 import { useSnackbar } from "../contexts/snackbar";
@@ -45,6 +45,7 @@ import { AuctionActivity } from "../components/Auctions/CandyAuctionActivity";
 import { ExplorerLink } from "../components/Auctions/CandyExplorer";
 import { NftAttributes } from "../components/Auctions/CandyAttributes";
 import BN from "bn.js";
+import { Loader } from "../components/Loader";
 
 const ORDER_FETCH_LIMIT = 12;
 const BMA_TICK_SIZE = 1000000000;
@@ -121,21 +122,18 @@ export const BoomOnes = () => {
   const [auctionNFT, setAuctionNFT] = useState<Auction>();
   const [candyShop, setCandyShop] = useState<CandyShop>();
   const [metadata, setMetadata] = useState<string>();
+  const [bidding, setBidding] = useState(false);
+  const [mustWithdraw, setMustWithdraw] = useState(false);
 
-  const [bid, setBid] = useState<number>(
-    auctionNFT?.highestBid
-      ? (Number(auctionNFT?.highestBid) + Number(auctionNFT?.tickSize)) /
-          BMA_TICK_SIZE
-      : 1
-  );
+  const [bid, setBid] = useState<number>(1);
 
-  const wallet = useWallet();
+  const wallet = useAnchorWallet();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
-  useEffect(() => {
+  useMemo(() => {
     const CandyShopInstance = new CandyShop({
       candyShopCreatorAddress: new PublicKey(
         "G1p59D3CScwE9r31RNFsGm3q5xZapt6EXHmtHV7Jq5AS"
@@ -153,7 +151,7 @@ export const BoomOnes = () => {
       },
     });
     setCandyShop(CandyShopInstance);
-    if (wallet.connected) {
+    const walletKey = wallet?.publicKey.toBase58() || 'null';
       (async () => {
         try {
           const auction = await fetchAuctionsByShopAddress(
@@ -162,24 +160,30 @@ export const BoomOnes = () => {
               offset: 0,
               limit: ORDER_FETCH_LIMIT,
               status: DEFAULT_LIST_AUCTION_STATUS,
-              walletAddress: wallet.publicKey?.toBase58(),
+              walletAddress: walletKey,
             }
           );
           setAuctionNFT(auction.result[0]);
+          setBid(
+            (Number(auction.result[0]?.highestBidPrice) +
+              Number(auction.result[0]?.tickSize)) /
+              BMA_TICK_SIZE
+          );
+          console.log(auction);
         } catch (error) {
           console.info(`fetch candy machine info, error= `, error);
         }
       })();
-    }
   }, []);
 
-  useEffect(() => {
-    auctionNFT?.nftUri && fetch(auctionNFT?.nftUri)
-      .then((res) => res.json())
-      .then((data) => {
-        setMetadata(JSON.stringify(data, null, 2));
-      })
-      .catch((error) => console.log(error));
+  useMemo(() => {
+    auctionNFT?.nftUri &&
+      fetch(auctionNFT?.nftUri)
+        .then((res) => res.json())
+        .then((data) => {
+          setMetadata(JSON.stringify(data, null, 2));
+        })
+        .catch((error) => console.log(error));
   }, [auctionNFT]);
 
   const handleShare = (text: string) => {
@@ -191,12 +195,12 @@ export const BoomOnes = () => {
   const open = Boolean(anchorEl);
   const id = open ? "share-popper" : undefined;
 
-  const placeBid = (price: number) => { 
-
+  const placeBid = (price: number) => {
     if (!wallet || !candyShop || !auctionNFT) {
-      enqueueSnackbar('Auction not loaded', { variant: "info" });
+      enqueueSnackbar("Auction not loaded", { variant: "info" });
       return;
-    };
+    }
+    setBidding(true);
 
     const minBidPrice =
       (auctionNFT?.highestBidPrice
@@ -204,16 +208,17 @@ export const BoomOnes = () => {
         : Number(auctionNFT?.startingBid)) / candyShop?.baseUnitsPerCurrency;
 
     if (price < minBidPrice) {
-      return enqueueSnackbar(`You must bid at least ${minBidPrice}`, { variant: "info" });
+      return enqueueSnackbar(`You must bid at least ${minBidPrice}`, {
+        variant: "info",
+      });
     }
 
     candyShop
       .bidAuction({
-        // @ts-ignore
         wallet,
         tokenMint: new PublicKey(auctionNFT?.tokenMint),
         tokenAccount: new PublicKey(auctionNFT?.tokenAccount),
-        bidPrice: new BN(price * candyShop.baseUnitsPerCurrency)
+        bidPrice: new BN(price * candyShop.baseUnitsPerCurrency),
       })
       .then((txId: string) => {
         console.log(`bidAuction request success, txId=`, txId);
@@ -223,31 +228,37 @@ export const BoomOnes = () => {
       .catch((err: Error) => {
         enqueueSnackbar(err.message, { variant: "error" });
         console.log(`bidAuction failed, error=`, err);
+        setBidding(false);
+      })
+      .finally(() => {
+        setBidding(false);
       });
   };
 
-  const withdraw = () => {
-
-    if (!wallet || !candyShop || !auctionNFT) {
-      enqueueSnackbar('Auction not loaded', { variant: "info" });
-      return;
-    };
-
-    candyShop
-      .withdrawAuctionBid({
-        // @ts-ignore
-        wallet,
-        tokenMint: new PublicKey(auctionNFT?.tokenMint),
-        tokenAccount: new PublicKey(auctionNFT?.tokenAccount)
-      })
-      .then((txId: string) => {
-        console.log(`withdrawAuctionBid request success, txId=`, txId);
-        enqueueSnackbar(`Successful bid withdrawal: ${txId}`, { variant: "success" });
-      })
-      .catch((err: Error) => {
-        enqueueSnackbar(err.message, { variant: "error" });
-        console.log(`withdrawAuctionBid failed, error=`, err);
-      });
+  const withdraw = async () => {
+    (async () => {
+      try {
+        if (!wallet || !candyShop || !auctionNFT) {
+          enqueueSnackbar("Auction not loaded", { variant: "info" });
+          return;
+        }
+        setBidding(true);
+        const txId = await candyShop.withdrawAuctionBid({
+          wallet,
+          tokenMint: new PublicKey(auctionNFT?.tokenMint),
+          tokenAccount: new PublicKey(auctionNFT?.tokenAccount),
+        });
+        enqueueSnackbar(`Successful bid withdrawal: ${txId}`, {
+          variant: "success",
+        });
+      } catch (error: any) {
+        enqueueSnackbar(error.message, { variant: "error" });
+        console.log(`withdrawAuctionBid failed, error=`, error);
+        setBidding(false);
+      } finally {
+        setBidding(false);
+      }
+    })();
   };
 
   return (
@@ -443,26 +454,40 @@ export const BoomOnes = () => {
                 <Button
                   variant="contained"
                   size="large"
-                  sx={{ width: "100%" }}
+                  sx={{
+                    width: "100%",
+                    backgroundColor: bidding
+                      ? theme.blue.dark
+                      : theme.accentColor,
+                  }}
                   disabled={
                     auctionNFT?.status === AuctionStatus.COMPLETE ||
                     auctionNFT?.status === AuctionStatus.EXPIRED ||
-                    auctionNFT?.status === AuctionStatus.CANCELLED
+                    auctionNFT?.status === AuctionStatus.CANCELLED ||
+                    !wallet?.publicKey
                   }
                   onClick={() => placeBid(bid)}
                 >
-                  <Typography display={"inline"}>Bid at</Typography>
-                  <Typography
-                    display={"inline"}
-                    sx={{ fontWeight: 600 }}
-                    ml={0.5}
-                  >
-                    💥
-                    {bid}
-                  </Typography>
-                  <Typography display={"inline"} ml={0.5}>
-                    BMA
-                  </Typography>
+                  {mustWithdraw ? (
+                    <Typography>Withdraw and bid again</Typography>
+                  ) : bidding ? (
+                    <Loader size={24} />
+                  ) : (
+                    <>
+                      <Typography display={"inline"}>Bid at</Typography>
+                      <Typography
+                        display={"inline"}
+                        sx={{ fontWeight: 600 }}
+                        ml={0.5}
+                      >
+                        💥
+                        {bid}
+                      </Typography>
+                      <Typography display={"inline"} ml={0.5}>
+                        BMA
+                      </Typography>
+                    </>
+                  )}
                 </Button>
               </Grid>
             </Grid>
@@ -501,6 +526,12 @@ export const BoomOnes = () => {
                 <AuctionActivity
                   candyShop={candyShop}
                   auctionAddress={auctionNFT?.auctionAddress}
+                  orderBy={{ order: "desc", column: "price" }}
+                  withdraw={withdraw}
+                  walletAddress={wallet?.publicKey?.toBase58()}
+                  leadingBid={auctionNFT?.highestBid}
+                  bidding={bidding}
+                  setMustWithdraw={setMustWithdraw}
                 />
               )}
               {/* <List>
@@ -625,7 +656,9 @@ export const BoomOnes = () => {
           <Accordion
             expanded={accordionPanel === "attributes"}
             onChange={() =>
-              setAccordionPanel(accordionPanel !== "attributes" ? "attributes" : "")
+              setAccordionPanel(
+                accordionPanel !== "attributes" ? "attributes" : ""
+              )
             }
           >
             <AccordionSummary
@@ -636,7 +669,10 @@ export const BoomOnes = () => {
               <Typography variant="h6">Attributes</Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ overflow: "hidden" }}>
-              <NftAttributes loading={false} attributes={auctionNFT?.attributes} />
+              <NftAttributes
+                loading={false}
+                attributes={auctionNFT?.attributes}
+              />
             </AccordionDetails>
           </Accordion>
         </Box>
