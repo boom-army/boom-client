@@ -27,7 +27,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { useWallet } from "@solana/wallet-adapter-react";
 import dayjs from "dayjs";
 import { ThemeContext } from "../contexts/theme";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
 import { UserAvatar } from "../components/UserAvatar";
 import { useSnackbar } from "../contexts/snackbar";
@@ -43,6 +43,8 @@ import { Countdown } from "../components/Auctions/CandyCountdown";
 import { Price } from "../components/Auctions/CandyPrice";
 import { AuctionActivity } from "../components/Auctions/CandyAuctionActivity";
 import { ExplorerLink } from "../components/Auctions/CandyExplorer";
+import { NftAttributes } from "../components/Auctions/CandyAttributes";
+import BN from "bn.js";
 
 const ORDER_FETCH_LIMIT = 12;
 const BMA_TICK_SIZE = 1000000000;
@@ -134,7 +136,7 @@ export const BoomOnes = () => {
   };
 
   useEffect(() => {
-    const candyShop = new CandyShop({
+    const CandyShopInstance = new CandyShop({
       candyShopCreatorAddress: new PublicKey(
         "G1p59D3CScwE9r31RNFsGm3q5xZapt6EXHmtHV7Jq5AS"
       ),
@@ -150,12 +152,12 @@ export const BoomOnes = () => {
         currencyDecimals: 9,
       },
     });
-    setCandyShop(candyShop);
+    setCandyShop(CandyShopInstance);
     if (wallet.connected) {
       (async () => {
         try {
           const auction = await fetchAuctionsByShopAddress(
-            candyShop.candyShopAddress,
+            CandyShopInstance.candyShopAddress,
             {
               offset: 0,
               limit: ORDER_FETCH_LIMIT,
@@ -172,14 +174,12 @@ export const BoomOnes = () => {
   }, []);
 
   useEffect(() => {
-    // @ts-ignore
-    fetch(auctionNFT?.nftUri)
+    auctionNFT?.nftUri && fetch(auctionNFT?.nftUri)
       .then((res) => res.json())
       .then((data) => {
         setMetadata(JSON.stringify(data, null, 2));
       })
       .catch((error) => console.log(error));
-    // setMetadata(metadata);
   }, [auctionNFT]);
 
   const handleShare = (text: string) => {
@@ -188,10 +188,68 @@ export const BoomOnes = () => {
     enqueueSnackbar("Copied to clipboard", { variant: "success" });
   };
 
-  const bids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
   const open = Boolean(anchorEl);
   const id = open ? "share-popper" : undefined;
+
+  const placeBid = (price: number) => { 
+
+    if (!wallet || !candyShop || !auctionNFT) {
+      enqueueSnackbar('Auction not loaded', { variant: "info" });
+      return;
+    };
+
+    const minBidPrice =
+      (auctionNFT?.highestBidPrice
+        ? Number(auctionNFT?.highestBidPrice) + Number(auctionNFT?.tickSize)
+        : Number(auctionNFT?.startingBid)) / candyShop?.baseUnitsPerCurrency;
+
+    if (price < minBidPrice) {
+      return enqueueSnackbar(`You must bid at least ${minBidPrice}`, { variant: "info" });
+    }
+
+    candyShop
+      .bidAuction({
+        // @ts-ignore
+        wallet,
+        tokenMint: new PublicKey(auctionNFT?.tokenMint),
+        tokenAccount: new PublicKey(auctionNFT?.tokenAccount),
+        bidPrice: new BN(price * candyShop.baseUnitsPerCurrency)
+      })
+      .then((txId: string) => {
+        console.log(`bidAuction request success, txId=`, txId);
+        enqueueSnackbar(`Successful bid: ${txId}`, { variant: "success" });
+        // setBidPrice(price);
+      })
+      .catch((err: Error) => {
+        enqueueSnackbar(err.message, { variant: "error" });
+        console.log(`bidAuction failed, error=`, err);
+      });
+  };
+
+  const withdraw = () => {
+
+    if (!wallet || !candyShop || !auctionNFT) {
+      enqueueSnackbar('Auction not loaded', { variant: "info" });
+      return;
+    };
+
+    candyShop
+      .withdrawAuctionBid({
+        // @ts-ignore
+        wallet,
+        tokenMint: new PublicKey(auctionNFT?.tokenMint),
+        tokenAccount: new PublicKey(auctionNFT?.tokenAccount)
+      })
+      .then((txId: string) => {
+        console.log(`withdrawAuctionBid request success, txId=`, txId);
+        enqueueSnackbar(`Successful bid withdrawal: ${txId}`, { variant: "success" });
+      })
+      .catch((err: Error) => {
+        enqueueSnackbar(err.message, { variant: "error" });
+        console.log(`withdrawAuctionBid failed, error=`, err);
+      });
+  };
+
   return (
     <Grid
       container
@@ -391,6 +449,7 @@ export const BoomOnes = () => {
                     auctionNFT?.status === AuctionStatus.EXPIRED ||
                     auctionNFT?.status === AuctionStatus.CANCELLED
                   }
+                  onClick={() => placeBid(bid)}
                 >
                   <Typography display={"inline"}>Bid at</Typography>
                   <Typography
@@ -550,7 +609,7 @@ export const BoomOnes = () => {
                   Creator Royalties{" "}
                   <strong>{`${
                     Number(auctionNFT?.sellerFeeBasisPoint) / 100
-                  }`}</strong>
+                  }%`}</strong>
                 </li>
                 <li>
                   Transaction Fee <strong>2%</strong>
@@ -559,6 +618,25 @@ export const BoomOnes = () => {
                   Bidding/Cancel <strong>Free</strong>
                 </li>
               </ul>
+            </AccordionDetails>
+          </Accordion>
+        </Box>
+        <Box mt={1}>
+          <Accordion
+            expanded={accordionPanel === "attributes"}
+            onChange={() =>
+              setAccordionPanel(accordionPanel !== "attributes" ? "attributes" : "")
+            }
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="attributes-content"
+              id="attributes-header"
+            >
+              <Typography variant="h6">Attributes</Typography>
+            </AccordionSummary>
+            <AccordionDetails sx={{ overflow: "hidden" }}>
+              <NftAttributes loading={false} attributes={auctionNFT?.attributes} />
             </AccordionDetails>
           </Accordion>
         </Box>
