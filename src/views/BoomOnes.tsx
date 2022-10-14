@@ -37,7 +37,7 @@ import {
   fetchAuctionsByShopAddress,
   ExplorerLinkBase,
 } from "@liqnft/candy-shop-sdk";
-import { AuctionStatus } from "@liqnft/candy-shop-types";
+import { AuctionStatus, AuctionBid } from "@liqnft/candy-shop-types";
 import { shortenAddress } from "../utils/utils";
 import { Countdown } from "../components/Auctions/CandyCountdown";
 import { Price } from "../components/Auctions/CandyPrice";
@@ -124,6 +124,7 @@ export const BoomOnes = () => {
   const [metadata, setMetadata] = useState<string>();
   const [bidding, setBidding] = useState(false);
   const [mustWithdraw, setMustWithdraw] = useState(false);
+  const [bids, setBids] = useState<AuctionBid[]>([]);
 
   const [bid, setBid] = useState<number>(1);
 
@@ -164,11 +165,13 @@ export const BoomOnes = () => {
             }
           );
           setAuctionNFT(auction.result[0]);
-          setBid(
-            (Number(auction.result[0]?.highestBidPrice) +
-              Number(auction.result[0]?.tickSize)) /
-              BMA_TICK_SIZE
-          );
+          if (auction.result[0].highestBid) {
+            setBid(
+              (Number(auction.result[0]?.highestBidPrice) +
+                Number(auction.result[0]?.tickSize)) /
+                BMA_TICK_SIZE
+            );
+          }
           console.log(auction);
         } catch (error) {
           console.info(`fetch candy machine info, error= `, error);
@@ -203,7 +206,7 @@ export const BoomOnes = () => {
     setBidding(true);
 
     const minBidPrice =
-      (auctionNFT?.highestBidPrice
+      (auctionNFT?.highestBidPrice && auctionNFT?.highestBidPrice
         ? Number(auctionNFT?.highestBidPrice) + Number(auctionNFT?.tickSize)
         : Number(auctionNFT?.startingBid)) / candyShop?.baseUnitsPerCurrency;
 
@@ -223,7 +226,7 @@ export const BoomOnes = () => {
       .then((txId: string) => {
         console.log(`bidAuction request success, txId=`, txId);
         enqueueSnackbar(`Successful bid: ${txId}`, { variant: "success" });
-        // setBidPrice(price);
+        setMustWithdraw(false);
       })
       .catch((err: Error) => {
         enqueueSnackbar(err.message, { variant: "error" });
@@ -255,6 +258,7 @@ export const BoomOnes = () => {
         enqueueSnackbar(error.message, { variant: "error" });
         console.log(`withdrawAuctionBid failed, error=`, error);
         setBidding(false);
+        setMustWithdraw(false);
       } finally {
         setBidding(false);
       }
@@ -532,6 +536,9 @@ export const BoomOnes = () => {
                   leadingBid={auctionNFT?.highestBid}
                   bidding={bidding}
                   setMustWithdraw={setMustWithdraw}
+                  mustWithdraw={mustWithdraw}
+                  bids={bids}
+                  setBids={setBids}
                 />
               )}
               {/* <List>

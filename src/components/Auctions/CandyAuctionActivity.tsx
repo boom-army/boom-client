@@ -45,6 +45,9 @@ interface AuctionActivityProps {
   leadingBid: string | undefined;
   bidding: boolean;
   setMustWithdraw: (mustWithdraw: boolean) => void;
+  mustWithdraw: boolean;
+  bids: AuctionBid[];
+  setBids: (bids: AuctionBid[]) => void;
 }
 
 const LIMIT = 10;
@@ -69,8 +72,10 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
   walletAddress,
   bidding,
   setMustWithdraw,
+  mustWithdraw,
+  bids,
+  setBids,
 }) => {
-  const [bids, setBids] = useState<AuctionBid[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [offset, setOffset] = useState<number>(0);
 
@@ -92,10 +97,9 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
           if (hasMore) {
             setOffset(offset + count + 1);
           }
-
-          setHasMore(hasMore);
+          
+          //@ts-ignore
           setBids((list) => {
-            console.log("list", list);
             if (firstLoad) return result || [];
             return removeDuplicate<AuctionBid>(list, result, "bidAddress");
           });
@@ -105,25 +109,24 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
           console.log(`${Logger}: fetchAuctionHistory failed, error=`, error);
         });
     },
-    [auctionAddress, orderBy]
+    []
   );
 
   useEffect(() => {
     getAuctionBids(0, LIMIT)();
   }, [getAuctionBids]);
 
-  function to(ms: number) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  useEffect(() => {
+    getAuctionBids(offset, LIMIT)();
+  }, [mustWithdraw]);
 
-  const makeWithdraw = async () => {
-    console.log('***************1');
-    // await withdraw();
-    // await to(2000);
-    // console.log('***************2');
-    // await to(2000);
-    // console.log('***************3');
-    // wait 10 seconds for the withdraw to be confirmed
+  const makeWithdraw = (auctionIndex: number) => {
+    // withdraw();
+    console.log('****************1');
+    //@ts-ignore
+    setBids((list) => {
+      console.log(list);
+    });
     
   };
 
@@ -153,15 +156,12 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
           hasMore={hasMore}
         >
           {bids.map((auction, index) => {
-            console.log("auction", AuctionStatus[auction.status], index);
-
             const canWithdraw =
               walletAddress === auction.buyerAddress &&
               index !== 0 &&
               AuctionStatus[auction.status] !== "STARTED" &&
               walletAddress !== auction.bidAddress;
             setMustWithdraw(canWithdraw);
-            // const canWithdraw = false;
             return (
               <Grid item xs={12}>
                 <Box key={auction.bidAddress} display={"inline-flex"}>
@@ -188,7 +188,7 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
                           "&.Mui-disabled": { color: theme.secondaryColor },
                         }}
                         disabled={bidding}
-                        onClick={async () => await makeWithdraw()}
+                        onClick={async () => makeWithdraw(index)}
                       >
                         Withdraw bid
                       </Button>
