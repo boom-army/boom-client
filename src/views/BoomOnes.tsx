@@ -681,7 +681,7 @@ export const BoomOnes = () => {
                     )}
                   </strong>
                 </li>
-                <li>
+                {/* <li>
                   Creator Royalties{" "}
                   <strong>{`${
                     Number(auctionNFT?.sellerFeeBasisPoint) / 100
@@ -689,9 +689,9 @@ export const BoomOnes = () => {
                 </li>
                 <li>
                   Transaction Fee <strong>2%</strong>
-                </li>
+                </li> */}
                 <li>
-                  Bidding/Cancel <strong>Free</strong>
+                  Bid/Withdraw Bid <strong>No cost</strong>
                 </li>
               </ul>
             </AccordionDetails>
