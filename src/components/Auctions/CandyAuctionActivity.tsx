@@ -40,7 +40,7 @@ interface AuctionActivityProps {
   candyShop: CandyShop;
   orderBy?: SortBy;
   auctionAddress: string;
-  withdraw: () => Promise<void>;
+  withdraw: (bidIndex?: number) => Promise<void>;
   walletAddress: string | undefined;
   leadingBid: string | undefined;
   bidding: boolean;
@@ -51,7 +51,6 @@ interface AuctionActivityProps {
 }
 
 const LIMIT = 10;
-const Logger = "CandyShopUI/AuctionActivity";
 
 const MinBox = styled(Box)({
   "&.MuiBox-root": {
@@ -97,7 +96,7 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
           if (hasMore) {
             setOffset(offset + count + 1);
           }
-          
+
           //@ts-ignore
           setBids((list) => {
             if (firstLoad) return result || [];
@@ -106,7 +105,7 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
         })
         .catch((error: any) => {
           setHasMore(false);
-          console.log(`${Logger}: fetchAuctionHistory failed, error=`, error);
+          console.log(`fetchAuctionHistory failed, error=`, error);
         });
     },
     []
@@ -116,27 +115,13 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
     getAuctionBids(0, LIMIT)();
   }, [getAuctionBids]);
 
-  useEffect(() => {
-    getAuctionBids(offset, LIMIT)();
-  }, [mustWithdraw]);
-
-  const makeWithdraw = (auctionIndex: number) => {
-    // withdraw();
-    console.log('****************1');
-    //@ts-ignore
-    setBids((list) => {
-      console.log(list);
-    });
-    
-  };
-
   return (
     <>
       <Grid
         container
-        id="auctionHistory"
+        id="scrollBox"
         sx={{
-          minHeight: "110px",
+          minHeight: "150px",
           overflow: "auto",
         }}
       >
@@ -151,9 +136,14 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
         <InfiniteScroll
           dataLength={bids.length}
           next={offset === 0 ? EMPTY_FUNCTION : getAuctionBids(offset, LIMIT)}
-          loader={<Loader />}
-          scrollableTarget="auctionHistory"
+          loader={
+            <Box sx={{ marginTop: "1em", ml: "1em" }}>
+              <Loader />
+            </Box>
+          }
+          scrollableTarget="scrollBox"
           hasMore={hasMore}
+          style={{ minHeight: "150px" }}
         >
           {bids.map((auction, index) => {
             const canWithdraw =
@@ -188,7 +178,7 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
                           "&.Mui-disabled": { color: theme.secondaryColor },
                         }}
                         disabled={bidding}
-                        onClick={async () => makeWithdraw(index)}
+                        onClick={async () => withdraw(index)}
                       >
                         Withdraw bid
                       </Button>

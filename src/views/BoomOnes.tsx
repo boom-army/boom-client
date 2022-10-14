@@ -47,6 +47,22 @@ import { NftAttributes } from "../components/Auctions/CandyAttributes";
 import BN from "bn.js";
 import { Loader } from "../components/Loader";
 
+function removeDuplicate<T>(
+  oldList: T[] = [],
+  addList: T[],
+  key: keyof T
+): T[] {
+  const duplicateList = [...oldList, ...addList];
+  const newList: T[] = [];
+  const memo: any = {};
+  for (const item of duplicateList) {
+    if (memo[item[key]]) break;
+    newList.push(item);
+    memo[item[key]] = true;
+  }
+  return newList;
+}
+
 const ORDER_FETCH_LIMIT = 12;
 const BMA_TICK_SIZE = 1000000000;
 const DEFAULT_LIST_AUCTION_STATUS = [
@@ -152,31 +168,30 @@ export const BoomOnes = () => {
       },
     });
     setCandyShop(CandyShopInstance);
-    const walletKey = wallet?.publicKey.toBase58() || 'null';
-      (async () => {
-        try {
-          const auction = await fetchAuctionsByShopAddress(
-            CandyShopInstance.candyShopAddress,
-            {
-              offset: 0,
-              limit: ORDER_FETCH_LIMIT,
-              status: DEFAULT_LIST_AUCTION_STATUS,
-              walletAddress: walletKey,
-            }
-          );
-          setAuctionNFT(auction.result[0]);
-          if (auction.result[0].highestBid) {
-            setBid(
-              (Number(auction.result[0]?.highestBidPrice) +
-                Number(auction.result[0]?.tickSize)) /
-                BMA_TICK_SIZE
-            );
+    const walletKey = wallet?.publicKey.toBase58() || "null";
+    (async () => {
+      try {
+        const auction = await fetchAuctionsByShopAddress(
+          CandyShopInstance.candyShopAddress,
+          {
+            offset: 0,
+            limit: ORDER_FETCH_LIMIT,
+            status: DEFAULT_LIST_AUCTION_STATUS,
+            walletAddress: walletKey,
           }
-          console.log(auction);
-        } catch (error) {
-          console.info(`fetch candy machine info, error= `, error);
+        );
+        setAuctionNFT(auction.result[0]);
+        if (auction.result[0].highestBid) {
+          setBid(
+            (Number(auction.result[0]?.highestBidPrice) +
+              Number(auction.result[0]?.tickSize)) /
+              BMA_TICK_SIZE
+          );
         }
-      })();
+      } catch (error) {
+        console.info(`fetch candy machine info, error= `, error);
+      }
+    })();
   }, []);
 
   useMemo(() => {
@@ -224,9 +239,21 @@ export const BoomOnes = () => {
         bidPrice: new BN(price * candyShop.baseUnitsPerCurrency),
       })
       .then((txId: string) => {
-        console.log(`bidAuction request success, txId=`, txId);
         enqueueSnackbar(`Successful bid: ${txId}`, { variant: "success" });
         setMustWithdraw(false);
+        // @ts-ignore
+        setBids((list) => {
+          const bid = {
+            auctionAddress: auctionNFT?.auctionAddress,
+            bidAddress: "null",
+            buyerAddress: wallet.publicKey.toBase58(),
+            price: price * candyShop.baseUnitsPerCurrency,
+            status: 0,
+          };
+          list[0].status = 1;
+          const updateList = [bid, ...list];
+          return updateList;
+        });
       })
       .catch((err: Error) => {
         enqueueSnackbar(err.message, { variant: "error" });
@@ -238,7 +265,7 @@ export const BoomOnes = () => {
       });
   };
 
-  const withdraw = async () => {
+  const withdraw = async (bidIndex?: number) => {
     (async () => {
       try {
         if (!wallet || !candyShop || !auctionNFT) {
@@ -251,6 +278,12 @@ export const BoomOnes = () => {
           tokenMint: new PublicKey(auctionNFT?.tokenMint),
           tokenAccount: new PublicKey(auctionNFT?.tokenAccount),
         });
+        //@ts-ignore
+        bidIndex &&
+          setBids((list) => {
+            list[bidIndex].status = 1;
+            return list;
+          });
         enqueueSnackbar(`Successful bid withdrawal: ${txId}`, {
           variant: "success",
         });
@@ -463,17 +496,22 @@ export const BoomOnes = () => {
                     backgroundColor: bidding
                       ? theme.blue.dark
                       : theme.accentColor,
+                      "&.Mui-disabled": {
+                        backgroundColor: theme.blue.light,
+                        color: theme.primaryColor,
+                      }
                   }}
                   disabled={
                     auctionNFT?.status === AuctionStatus.COMPLETE ||
                     auctionNFT?.status === AuctionStatus.EXPIRED ||
                     auctionNFT?.status === AuctionStatus.CANCELLED ||
-                    !wallet?.publicKey
+                    !wallet?.publicKey ||
+                    mustWithdraw
                   }
                   onClick={() => placeBid(bid)}
                 >
                   {mustWithdraw ? (
-                    <Typography>Withdraw and bid again</Typography>
+                    <Typography>Withdraw to raise bid</Typography>
                   ) : bidding ? (
                     <Loader size={24} />
                   ) : (
@@ -502,7 +540,7 @@ export const BoomOnes = () => {
               target={"_blank"}
             >
               <Typography variant={"body2"}>
-                Don't have any 💥BMA? Get some here.
+                Don't have any 💥BMA to bid? Get some here.
               </Typography>
             </Link>
           </Box>
