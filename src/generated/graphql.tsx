@@ -463,7 +463,7 @@ export type Query = {
   mentions: Array<Tweet>;
   oneSignal: OneSignal;
   profile: User;
-  profileById: User;
+  profileByPubKey: User;
   searchTweets: Array<Tweet>;
   searchUser: Array<User>;
   tweet: Tweet;
@@ -513,8 +513,8 @@ export type QueryProfileArgs = {
 };
 
 
-export type QueryProfileByIdArgs = {
-  id: Scalars['String'];
+export type QueryProfileByPubKeyArgs = {
+  publicAddress: Scalars['String'];
 };
 
 
@@ -738,6 +738,13 @@ export type ProfileQueryVariables = Exact<{
 
 
 export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, isFollowing: boolean, followersCount: number, followingCount: number, tweetsCount: number, newMentionsCount: number, bio?: string | null | undefined, createdAt?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined, tweets: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> } };
+
+export type ProfileByPubKeyQueryVariables = Exact<{
+  publicAddress: Scalars['String'];
+}>;
+
+
+export type ProfileByPubKeyQuery = { __typename?: 'Query', profileByPubKey: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, bio?: string | null | undefined, createdAt?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1412,7 +1419,6 @@ export const ProfileDocument = gql`
     publicAddress
     handle
     consumerName
-    consumerName
     avatar
     coverPhoto
     dob
@@ -1464,6 +1470,56 @@ export function useProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pr
 export type ProfileQueryHookResult = ReturnType<typeof useProfileQuery>;
 export type ProfileLazyQueryHookResult = ReturnType<typeof useProfileLazyQuery>;
 export type ProfileQueryResult = Apollo.QueryResult<ProfileQuery, ProfileQueryVariables>;
+export const ProfileByPubKeyDocument = gql`
+    query profileByPubKey($publicAddress: String!) {
+  profileByPubKey(publicAddress: $publicAddress) {
+    id
+    publicAddress
+    handle
+    consumerName
+    avatar
+    coverPhoto
+    dob
+    location
+    website
+    isSelf
+    bio
+    data {
+      avatarMint
+      avatarUpdateAuthority
+    }
+    createdAt
+  }
+}
+    `;
+
+/**
+ * __useProfileByPubKeyQuery__
+ *
+ * To run a query within a React component, call `useProfileByPubKeyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProfileByPubKeyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProfileByPubKeyQuery({
+ *   variables: {
+ *      publicAddress: // value for 'publicAddress'
+ *   },
+ * });
+ */
+export function useProfileByPubKeyQuery(baseOptions: Apollo.QueryHookOptions<ProfileByPubKeyQuery, ProfileByPubKeyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProfileByPubKeyQuery, ProfileByPubKeyQueryVariables>(ProfileByPubKeyDocument, options);
+      }
+export function useProfileByPubKeyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProfileByPubKeyQuery, ProfileByPubKeyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProfileByPubKeyQuery, ProfileByPubKeyQueryVariables>(ProfileByPubKeyDocument, options);
+        }
+export type ProfileByPubKeyQueryHookResult = ReturnType<typeof useProfileByPubKeyQuery>;
+export type ProfileByPubKeyLazyQueryHookResult = ReturnType<typeof useProfileByPubKeyLazyQuery>;
+export type ProfileByPubKeyQueryResult = Apollo.QueryResult<ProfileByPubKeyQuery, ProfileByPubKeyQueryVariables>;
 export const MeDocument = gql`
     query me {
   me {

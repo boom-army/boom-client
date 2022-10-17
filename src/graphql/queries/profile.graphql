@@ -4,7 +4,6 @@ query profile($handle: String) {
     publicAddress
     handle
     consumerName
-    consumerName
     avatar
     coverPhoto
     dob
@@ -23,6 +22,27 @@ query profile($handle: String) {
     }
     tweets {
       ...TweetData
+    }
+    createdAt
+  }
+}
+
+query profileByPubKey($publicAddress: String!) {
+  profileByPubKey(publicAddress: $publicAddress) {
+    id
+    publicAddress
+    handle
+    consumerName
+    avatar
+    coverPhoto
+    dob
+    location
+    website
+    isSelf
+    bio
+    data {
+      avatarMint
+      avatarUpdateAuthority
     }
     createdAt
   }

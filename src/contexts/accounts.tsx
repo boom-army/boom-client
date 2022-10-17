@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { Program } from "@project-serum/anchor";
 import { useConnection } from "./connection";
 import {
@@ -315,26 +315,26 @@ const UseNativeAccount = () => {
   return { nativeAccount };
 };
 
-const PRECACHED_OWNERS = new Set<string>();
-const precacheUserTokenAccounts = async (
-  connection: Connection,
-  owner?: PublicKey
-) => {
-  if (!owner) {
-    return;
-  }
+// const PRECACHED_OWNERS = new Set<string>();
+// const precacheUserTokenAccounts = async (
+//   connection: Connection,
+//   owner?: PublicKey
+// ) => {
+//   if (!owner) {
+//     return;
+//   }
 
-  // used for filtering account updates over websocket
-  PRECACHED_OWNERS.add(owner.toBase58());
+//   // used for filtering account updates over websocket
+//   PRECACHED_OWNERS.add(owner.toBase58());
 
-  // user accounts are update via ws subscription
-  const accounts = await connection.getTokenAccountsByOwner(owner, {
-    programId: programIds().token,
-  });
-  accounts.value.forEach((info) => {
-    cache.add(info.pubkey.toBase58(), info.account, TokenAccountParser);
-  });
-};
+//   // user accounts are update via ws subscription
+//   const accounts = await connection.getTokenAccountsByOwner(owner, {
+//     programId: programIds().token,
+//   });
+//   accounts.value.forEach((info) => {
+//     cache.add(info.pubkey.toBase58(), info.account, TokenAccountParser);
+//   });
+// };
 
 export function AccountsProvider({ children = null as any }) {
   const connection = useConnection();
@@ -383,40 +383,40 @@ export function AccountsProvider({ children = null as any }) {
     };
   }, [connection]);
 
-  useEffect(() => {
-    if (!connection || !publicKey) {
-      setTokenAccounts([]);
-    } else {
-      precacheUserTokenAccounts(connection, publicKey).then(() => {
-        setTokenAccounts(selectUserAccounts());
-      });
+  // useMemo(() => {
+  //   if (!connection || !publicKey) {
+  //     setTokenAccounts([]);
+  //   } else {
+  //     precacheUserTokenAccounts(connection, publicKey).then(() => {
+  //       setTokenAccounts(selectUserAccounts());
+  //     });
 
-      // This can return different types of accounts: token-account, mint, multisig
-      // TODO: web3.js expose ability to filter.
-      // this should use only filter syntax to only get accounts that are owned by user
-      const tokenSubID = connection.onProgramAccountChange(
-        programIds().token,
-        (info) => {
-          // TODO: fix type in web3.js
-          const id = info.accountId as unknown as string;
-          // TODO: do we need a better way to identify layout (maybe a enum identifing type?)
-          if (info.accountInfo.data.length === AccountLayout.span) {
-            const data = deserializeAccount(info.accountInfo.data);
+  //     // This can return different types of accounts: token-account, mint, multisig
+  //     // TODO: web3.js expose ability to filter.
+  //     // this should use only filter syntax to only get accounts that are owned by user
+  //     const tokenSubID = connection.onProgramAccountChange(
+  //       programIds().token,
+  //       (info) => {
+  //         // TODO: fix type in web3.js
+  //         const id = info.accountId as unknown as string;
+  //         // TODO: do we need a better way to identify layout (maybe a enum identifing type?)
+  //         if (info.accountInfo.data.length === AccountLayout.span) {
+  //           const data = deserializeAccount(info.accountInfo.data);
 
-            if (PRECACHED_OWNERS.has(data.owner.toBase58())) {
-              cache.add(id, info.accountInfo, TokenAccountParser);
-              setTokenAccounts(selectUserAccounts());
-            }
-          }
-        },
-        "singleGossip"
-      );
+  //           if (PRECACHED_OWNERS.has(data.owner.toBase58())) {
+  //             cache.add(id, info.accountInfo, TokenAccountParser);
+  //             setTokenAccounts(selectUserAccounts());
+  //           }
+  //         }
+  //       },
+  //       "singleGossip"
+  //     );
 
-      return () => {
-        connection.removeProgramAccountChangeListener(tokenSubID);
-      };
-    }
-  }, [connection, connected, publicKey, selectUserAccounts]);
+  //     return () => {
+  //       connection.removeProgramAccountChangeListener(tokenSubID);
+  //     };
+  //   }
+  // }, [connection, connected, publicKey, selectUserAccounts]);
 
   useEffect(() => {
     (async () => {

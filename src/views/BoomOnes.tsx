@@ -9,10 +9,10 @@ import {
   Grid,
   IconButton,
   Link,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
+  // List,
+  // ListItem,
+  // ListItemAvatar,
+  // ListItemText,
   Popper,
   Stack,
   TextField,
@@ -25,7 +25,6 @@ import Face6Icon from "@mui/icons-material/Face6";
 import ShareIcon from "@mui/icons-material/Share";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import dayjs from "dayjs";
 import { ThemeContext } from "../contexts/theme";
 import { useContext, useMemo, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
@@ -46,6 +45,7 @@ import { ExplorerLink } from "../components/Auctions/CandyExplorer";
 import { NftAttributes } from "../components/Auctions/CandyAttributes";
 import BN from "bn.js";
 import { Loader } from "../components/Loader";
+import { useProfileByPubKeyQuery } from "../generated/graphql";
 
 function removeDuplicate<T>(
   oldList: T[] = [],
@@ -72,14 +72,14 @@ const DEFAULT_LIST_AUCTION_STATUS = [
   AuctionStatus.COMPLETE,
 ];
 
-interface ListBase<T> {
-  success: boolean;
-  msg: undefined | string;
-  result: T[];
-  totalCount: number;
-  count: number;
-  offset: number;
-}
+// interface ListBase<T> {
+//   success: boolean;
+//   msg: undefined | string;
+//   result: T[];
+//   totalCount: number;
+//   count: number;
+//   offset: number;
+// }
 
 interface Auction {
   auctionAddress: string;
@@ -141,6 +141,7 @@ export const BoomOnes = () => {
   const [bidding, setBidding] = useState(false);
   const [mustWithdraw, setMustWithdraw] = useState(false);
   const [bids, setBids] = useState<AuctionBid[]>([]);
+  const [bidProfile, setBidProfile] = useState<string>();
 
   const [bid, setBid] = useState<number>(1);
 
@@ -149,6 +150,12 @@ export const BoomOnes = () => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
+
+  const { data } = useProfileByPubKeyQuery({
+      variables: {
+        publicAddress: bidProfile || "",
+      },
+  });  
 
   useMemo(() => {
     const CandyShopInstance = new CandyShop({
@@ -181,12 +188,16 @@ export const BoomOnes = () => {
           }
         );
         setAuctionNFT(auction.result[0]);
+        console.log(auction.result[0]);        
         if (auction.result[0].highestBid) {
           setBid(
             (Number(auction.result[0]?.highestBidPrice) +
               Number(auction.result[0]?.tickSize)) /
               BMA_TICK_SIZE
           );
+        }
+        if (auction.result[0].highestBidBuyer) {
+          setBidProfile(auction.result[0].highestBidBuyer)
         }
       } catch (error) {
         console.info(`fetch candy machine info, error= `, error);
@@ -411,17 +422,29 @@ export const BoomOnes = () => {
             <AuctionLabel
               label="Leader"
               content={
-                <Chip
-                  label="@harkl"
-                  variant="outlined"
-                  icon={
-                    <UserAvatar
-                      // avatar={user?.avatar}
-                      // isNFT={user?.data?.avatarMint}
-                      sx={{ width: "23px", height: "23px", ml: "3px" }}
-                    />
-                  }
-                />
+                auctionNFT?.highestBidBuyer && data?.profileByPubKey ? (
+                  <Chip
+                    label={`@${data?.profileByPubKey?.handle}`}
+                    variant="outlined"
+                    icon={
+                      <UserAvatar
+                        avatar={data?.profileByPubKey?.avatar}
+                        isNFT={data?.profileByPubKey?.data?.avatarMint}
+                        sx={{ width: "23px", height: "23px", ml: "3px" }}
+                      />
+                    }
+                  />
+                ) : (
+                  <Typography
+                    pt={0.5}
+                    variant="h3"
+                    component={"p"}
+                    display={"inline"}
+                    ml={0.5}
+                  >
+                    N/A
+                  </Typography>
+                )
               }
             />
             <AuctionLabel
@@ -496,10 +519,10 @@ export const BoomOnes = () => {
                     backgroundColor: bidding
                       ? theme.blue.dark
                       : theme.accentColor,
-                      "&.Mui-disabled": {
-                        backgroundColor: theme.blue.light,
-                        color: theme.primaryColor,
-                      }
+                    "&.Mui-disabled": {
+                      backgroundColor: theme.blue.light,
+                      color: theme.primaryColor,
+                    },
                   }}
                   disabled={
                     auctionNFT?.status === AuctionStatus.COMPLETE ||
