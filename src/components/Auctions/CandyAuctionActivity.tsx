@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Loader } from "../Loader";
 import { ExplorerLink } from "../ExplorerLink";
-import { Box, Button, Grid, styled } from "@mui/material";
+import { Box, Button, Grid, styled, Typography } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
 
 dayjs.extend(relativeTime);
@@ -137,9 +137,9 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
           dataLength={bids.length}
           next={offset === 0 ? EMPTY_FUNCTION : getAuctionBids(offset, LIMIT)}
           loader={
-            <Box sx={{ marginTop: "1em", ml: "1em" }}>
+            bids.length ? (<Box sx={{ marginTop: "1em", ml: "1em" }}>
               <Loader />
-            </Box>
+            </Box>) : (<Typography m={2}>There are no bids yet.</Typography>)
           }
           scrollableTarget="scrollBox"
           hasMore={hasMore}
