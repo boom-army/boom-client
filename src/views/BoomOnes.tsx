@@ -153,12 +153,15 @@ export const BoomOnes = () => {
   };
 
   const { data } = useProfileByPubKeyQuery({
-      variables: {
-        publicAddress: bidProfile || "",
-      },
+    variables: {
+      publicAddress: bidProfile || "",
+    },
   });
 
-  const fetchAuction = async (CandyShopInstance: CandyShop, walletKey: string) => {
+  const fetchAuction = async (
+    CandyShopInstance: CandyShop,
+    walletKey: string
+  ) => {
     try {
       const auction = await fetchAuctionsByShopAddress(
         CandyShopInstance.candyShopAddress,
@@ -169,7 +172,7 @@ export const BoomOnes = () => {
           walletAddress: walletKey,
         }
       );
-      setAuctionNFT(auction.result[0]);      
+      setAuctionNFT(auction.result[0]);
       if (auction.result[0].highestBid) {
         setBid(
           (Number(auction.result[0]?.highestBidPrice) +
@@ -178,8 +181,8 @@ export const BoomOnes = () => {
         );
       }
       if (auction.result[0].highestBidBuyer) {
-        setBidProfile(auction.result[0].highestBidBuyer)
-      }    
+        setBidProfile(auction.result[0].highestBidBuyer);
+      }
     } catch (error) {
       console.info(`fetch candy machine info, error= `, error);
     }
@@ -421,7 +424,16 @@ export const BoomOnes = () => {
         </Box>
       </Grid>
       <Grid item xs={12}>
-        <Refresh fetchAuction={() => fetchAuction(candyShop as CandyShop, wallet?.publicKey.toBase58() as string)} />
+        {auctionNFT?.status === AuctionStatus.STARTED && (
+          <Refresh
+            fetchAuction={() =>
+              fetchAuction(
+                candyShop as CandyShop,
+                wallet?.publicKey.toBase58() as string
+              )
+            }
+          />
+        )}
         <Box
           p={2}
           sx={{

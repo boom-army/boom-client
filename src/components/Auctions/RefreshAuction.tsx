@@ -32,12 +32,12 @@ function LinearProgressWithLabel(
       <Box sx={{ width: "100%", mr: 1 }}>
         <LinearProgress variant="determinate" {...props} />
       </Box>
-      <Box sx={{ minWidth: 20 }}>
+      <Box sx={{ minWidth: 10 }}>
         <Typography
           sx={{ fontSize: "11px" }}
           variant="body2"
           color="text.secondary"
-        >{`${ticker()}s`}</Typography>
+        >{ticker()}</Typography>
       </Box>
       <Box>
         <IconButton
