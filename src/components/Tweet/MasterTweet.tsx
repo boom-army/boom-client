@@ -1,4 +1,4 @@
-import boomLogo from "../../images/logo.png";
+import boomLogo from "../../images/boom-logo.png";
 import { styled } from "@mui/material/styles";
 import { CustomResponse } from "../CustomResponse";
 import { Helmet } from "react-helmet";
