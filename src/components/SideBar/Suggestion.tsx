@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { WhoToFollow } from "../components/WhoToFollow";
+import { WhoToFollow } from "../WhoToFollow";
 
 const Wrapper = styled("div")({
   position: "relative",

@@ -1,3 +1,4 @@
+export { BoomOnes } from "./BoomOnes";
 export { ChannelFeed } from "./ChannelFeed";
 export { Channels } from "./Channels";
 export { ConnectView } from "./Connect";
@@ -8,4 +9,3 @@ export { Nav } from "./Nav";
 export { News } from "./News";
 export { Notifications } from "./Notifications";
 export { OGMint } from "./OGMint";
-export { Suggestion } from "./Suggestion";

@@ -1,7 +1,7 @@
 import GlobalStyles from "@mui/material/GlobalStyles";
 import OneSignal from "react-onesignal";
 import SimpleReactLightbox from "simple-react-lightbox";
-import { AppRoutes } from "./routes";
+import { AppRoutes } from "./Routes";
 import { CssBaseline } from "@mui/material";
 import { RecoilRoot } from "recoil";
 import { SnackbarProvider } from "./contexts/snackbar";

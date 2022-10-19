@@ -1,5 +1,5 @@
 import React from "react";
-import { Suggestion } from "../../views/Suggestion";
+import { Suggestion } from "../../components/SideBar/Suggestion";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { USER_FOLLOW } from "../../queries/follow/index";
