@@ -46,6 +46,7 @@ import { NftAttributes } from "../components/Auctions/CandyAttributes";
 import BN from "bn.js";
 import { Loader } from "../components/Loader";
 import { useProfileByPubKeyQuery } from "../generated/graphql";
+import { Refresh } from "../components/Auctions/RefreshAuction";
 
 function removeDuplicate<T>(
   oldList: T[] = [],
@@ -63,7 +64,7 @@ function removeDuplicate<T>(
   return newList;
 }
 
-const ORDER_FETCH_LIMIT = 12;
+const ORDER_FETCH_LIMIT = 10;
 const BMA_TICK_SIZE = 1000000000;
 const DEFAULT_LIST_AUCTION_STATUS = [
   AuctionStatus.CREATED,
@@ -133,6 +134,7 @@ interface NftAttribute {
 export const BoomOnes = () => {
   const { theme } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [accordionPanel, setAccordionPanel] = useState("bids");
   const [auctionNFT, setAuctionNFT] = useState<Auction>();
@@ -156,6 +158,33 @@ export const BoomOnes = () => {
       },
   });
 
+  const fetchAuction = async (CandyShopInstance: CandyShop, walletKey: string) => {
+    try {
+      const auction = await fetchAuctionsByShopAddress(
+        CandyShopInstance.candyShopAddress,
+        {
+          offset: 0,
+          limit: ORDER_FETCH_LIMIT,
+          status: DEFAULT_LIST_AUCTION_STATUS,
+          walletAddress: walletKey,
+        }
+      );
+      setAuctionNFT(auction.result[0]);      
+      if (auction.result[0].highestBid) {
+        setBid(
+          (Number(auction.result[0]?.highestBidPrice) +
+            Number(auction.result[0]?.tickSize)) /
+            BMA_TICK_SIZE
+        );
+      }
+      if (auction.result[0].highestBidBuyer) {
+        setBidProfile(auction.result[0].highestBidBuyer)
+      }     
+    } catch (error) {
+      console.info(`fetch candy machine info, error= `, error);
+    }
+  };
+
   useMemo(() => {
     const CandyShopInstance = new CandyShop({
       candyShopCreatorAddress: new PublicKey(
@@ -175,32 +204,7 @@ export const BoomOnes = () => {
     });
     setCandyShop(CandyShopInstance);
     const walletKey = wallet?.publicKey.toBase58() || "null";
-    (async () => {
-      try {
-        const auction = await fetchAuctionsByShopAddress(
-          CandyShopInstance.candyShopAddress,
-          {
-            offset: 0,
-            limit: ORDER_FETCH_LIMIT,
-            status: DEFAULT_LIST_AUCTION_STATUS,
-            walletAddress: walletKey,
-          }
-        );
-        setAuctionNFT(auction.result[0]);      
-        if (auction.result[0].highestBid) {
-          setBid(
-            (Number(auction.result[0]?.highestBidPrice) +
-              Number(auction.result[0]?.tickSize)) /
-              BMA_TICK_SIZE
-          );
-        }
-        if (auction.result[0].highestBidBuyer) {
-          setBidProfile(auction.result[0].highestBidBuyer)
-        }
-      } catch (error) {
-        console.info(`fetch candy machine info, error= `, error);
-      }
-    })();
+    fetchAuction(CandyShopInstance, walletKey);
   }, []);
 
   useMemo(() => {
@@ -417,6 +421,7 @@ export const BoomOnes = () => {
         </Box>
       </Grid>
       <Grid item xs={12}>
+        <Refresh fetchAuction={() => fetchAuction(candyShop as CandyShop, wallet?.publicKey.toBase58() as string)} />
         <Box
           p={2}
           sx={{
