@@ -142,7 +142,6 @@ export const BoomOnes = () => {
   const [mustWithdraw, setMustWithdraw] = useState(false);
   const [bids, setBids] = useState<AuctionBid[]>([]);
   const [bidProfile, setBidProfile] = useState<string>();
-
   const [bid, setBid] = useState<number>(1);
 
   const wallet = useAnchorWallet();
@@ -155,7 +154,7 @@ export const BoomOnes = () => {
       variables: {
         publicAddress: bidProfile || "",
       },
-  });  
+  });
 
   useMemo(() => {
     const CandyShopInstance = new CandyShop({
@@ -187,8 +186,7 @@ export const BoomOnes = () => {
             walletAddress: walletKey,
           }
         );
-        setAuctionNFT(auction.result[0]);
-        console.log(auction.result[0]);        
+        setAuctionNFT(auction.result[0]);      
         if (auction.result[0].highestBid) {
           setBid(
             (Number(auction.result[0]?.highestBidPrice) +
@@ -252,19 +250,27 @@ export const BoomOnes = () => {
       .then((txId: string) => {
         enqueueSnackbar(`Successful bid: ${txId}`, { variant: "success" });
         setMustWithdraw(false);
-        // @ts-ignore
         setBids((list) => {
           const bid = {
             auctionAddress: auctionNFT?.auctionAddress,
             bidAddress: "null",
             buyerAddress: wallet.publicKey.toBase58(),
-            price: price * candyShop.baseUnitsPerCurrency,
+            price: String(price * candyShop.baseUnitsPerCurrency),
             status: 0,
           };
           list[0].status = 1;
           const updateList = [bid, ...list];
           return updateList;
         });
+        setAuctionNFT((auction: any) => {
+          return {
+            ...auction,
+            highestBidPrice: String(price * candyShop.baseUnitsPerCurrency),
+            highestBidBuyer: wallet?.publicKey?.toBase58(),
+          };
+        });
+        setBid(price + 1);
+        setBidProfile(wallet?.publicKey?.toBase58());
       })
       .catch((err: Error) => {
         enqueueSnackbar(err.message, { variant: "error" });
