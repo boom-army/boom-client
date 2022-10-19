@@ -15,14 +15,18 @@ function LinearProgressWithLabel(
 
   const ticker = () => {
     const value = 60 - props.value / 1.6666666666666667;
-    return value > 1 ? value.toFixed(0) : 0;
+    return value > 0 ? value.toFixed(0) : 0;
   };
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Box sx={{ minWidth: 71 }}>
-        <Typography variant="body2" color="text.secondary">
-          {ticker() < 55 ? "Refresh" : "Refreshing"}
+      <Box sx={{ minWidth: 70 }}>
+        <Typography
+          sx={{ fontSize: "11px" }}
+          variant="body2"
+          color="text.secondary"
+        >
+          {ticker() < 57 ? "REFRESH" : "REFRESHING"}
         </Typography>
       </Box>
       <Box sx={{ width: "100%", mr: 1 }}>
@@ -30,6 +34,7 @@ function LinearProgressWithLabel(
       </Box>
       <Box sx={{ minWidth: 20 }}>
         <Typography
+          sx={{ fontSize: "11px" }}
           variant="body2"
           color="text.secondary"
         >{`${ticker()}s`}</Typography>
@@ -55,7 +60,7 @@ export const Refresh: React.FC<RefreshProps> = ({ fetchAuction }) => {
   const [progress, setProgress] = useState(0);
 
   const refreshContent = () => {
-    fetchAuction(); 
+    fetchAuction();
     setProgress(0);
   };
 
@@ -64,7 +69,7 @@ export const Refresh: React.FC<RefreshProps> = ({ fetchAuction }) => {
       setProgress((prevProgress) => {
         if (prevProgress.toFixed() === "100") {
           refreshContent();
-        }       
+        }
         return prevProgress >= 100 ? 0 : prevProgress + 1.6666666666666667;
       });
     }, 1000);
