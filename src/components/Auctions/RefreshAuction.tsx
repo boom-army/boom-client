@@ -9,7 +9,7 @@ import { ThemeContext } from "../../contexts/theme";
 import React, { useContext, useEffect, useState } from "react";
 
 function LinearProgressWithLabel(
-  props: LinearProgressProps & { value: number, refreshContent: () => void }
+  props: LinearProgressProps & { value: number; refreshContent: () => void }
 ) {
   const { theme } = useContext(ThemeContext);
 
@@ -20,9 +20,9 @@ function LinearProgressWithLabel(
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Box sx={{ minWidth: 55 }}>
+      <Box sx={{ minWidth: 71 }}>
         <Typography variant="body2" color="text.secondary">
-          Refresh
+          {ticker() < 55 ? "Refresh" : "Refreshing"}
         </Typography>
       </Box>
       <Box sx={{ width: "100%", mr: 1 }}>
@@ -35,7 +35,11 @@ function LinearProgressWithLabel(
         >{`${ticker()}s`}</Typography>
       </Box>
       <Box>
-        <IconButton aria-label="delete" size="small" onClick={() => props.refreshContent()}>
+        <IconButton
+          aria-label="delete"
+          size="small"
+          onClick={() => props.refreshContent()}
+        >
           <RefreshIcon fontSize="inherit" sx={{ color: theme.accentColor }} />
         </IconButton>
       </Box>
@@ -51,14 +55,16 @@ export const Refresh: React.FC<RefreshProps> = ({ fetchAuction }) => {
   const [progress, setProgress] = useState(0);
 
   const refreshContent = () => {
-    console.log("refreshContent");
-    fetchAuction();
+    fetchAuction(); 
     setProgress(0);
-  }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prevProgress) => {
+        if (prevProgress.toFixed() === "100") {
+          refreshContent();
+        }       
         return prevProgress >= 100 ? 0 : prevProgress + 1.6666666666666667;
       });
     }, 1000);
@@ -69,7 +75,10 @@ export const Refresh: React.FC<RefreshProps> = ({ fetchAuction }) => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <LinearProgressWithLabel value={progress} refreshContent={refreshContent} />
+      <LinearProgressWithLabel
+        value={progress}
+        refreshContent={refreshContent}
+      />
     </Box>
   );
 };

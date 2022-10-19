@@ -179,7 +179,7 @@ export const BoomOnes = () => {
       }
       if (auction.result[0].highestBidBuyer) {
         setBidProfile(auction.result[0].highestBidBuyer)
-      }     
+      }    
     } catch (error) {
       console.info(`fetch candy machine info, error= `, error);
     }
