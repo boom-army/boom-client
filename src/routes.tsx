@@ -116,13 +116,7 @@ export const AppRoutes: React.FC = () => {
                       <Route
                         path="auctions"
                         element={
-                          <GridAuction
-                            loading={loading}
-                            data={data}
-                            refetch={refetch}
-                            user={user}
-                            setUser={setUser}
-                          />
+                          <GridAuction />
                         }
                       />
                       <Route

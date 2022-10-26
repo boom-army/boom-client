@@ -1,36 +1,14 @@
 import React, { useContext } from "react";
 import { BoomOnes } from "../views";
-import { User } from "../contexts/user";
-import { ThemeContext } from "../contexts/theme";
-import { Exact, Maybe, ProfileQuery } from "../generated/graphql";
-import { ApolloQueryResult } from "@apollo/client";
-import { Grid, Paper } from "@mui/material";
 import { ChannelAuction } from "../views/ChannelAuction";
+import { CustomResponse } from "../components/CustomResponse";
+import { Grid, Paper } from "@mui/material";
+import { ThemeContext } from "../contexts/theme";
+import { useAnchorWallet } from "@solana/wallet-adapter-react";
 
-interface GridProps {
-  data: ProfileQuery | undefined;
-  loading: boolean;
-  refetch: (
-    variables?:
-      | Partial<
-          Exact<{
-            handle?: Maybe<string> | undefined;
-          }>
-        >
-      | undefined
-  ) => Promise<ApolloQueryResult<ProfileQuery>>;
-  setUser: (user: User | null) => User | void;
-  user: User | null;
-}
-
-export const GridAuction: React.FC<GridProps> = ({
-  data,
-  loading,
-  refetch,
-  setUser,
-  user,
-}) => {
+export const GridAuction: React.FC = () => {
   const { theme } = useContext(ThemeContext);
+  const anchorWallet = useAnchorWallet();  
 
   const middleColStyles = {
     borderRight: `1px solid ${theme.tertiaryColor}`,
@@ -54,7 +32,8 @@ export const GridAuction: React.FC<GridProps> = ({
         <BoomOnes />
       </Paper>
       <Grid item md={6} xs={12} sm={12} sx={middleColStyles}>
-        <ChannelAuction />
+        {!anchorWallet?.publicKey && <CustomResponse text={"Connect your Solana wallet to chat."} />}
+        {anchorWallet?.publicKey && <ChannelAuction />}
       </Grid>
     </Grid>
   );

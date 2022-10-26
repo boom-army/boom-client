@@ -1,4 +1,6 @@
+
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import GavelIcon from '@mui/icons-material/Gavel';
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
 import NewspaperIcon from '@mui/icons-material/Newspaper';
@@ -17,7 +19,6 @@ import { ThemeContext } from "../contexts/theme";
 import { User as StoreUser } from "../contexts/user";
 import { styled } from "@mui/material/styles";
 import { useGetChannelsQuery } from "../generated/graphql";
-
 interface Props {
   newMentionsCount: number | undefined;
   user: StoreUser | null;
@@ -122,6 +123,12 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
             <Stack direction="row" {...stackProps}>
               <NewspaperIcon style={iconProps} />
               <Typography variant="body1">News</Typography>
+            </Stack>
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/auctions">
+            <Stack direction="row" {...stackProps}>
+              <GavelIcon style={iconProps} />
+              <Typography variant="body1">Auctions</Typography>
             </Stack>
           </NavLink>
           {/* <NavLink style={applyActiveStyles} to="/mint-boom-hero">
