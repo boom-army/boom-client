@@ -13,7 +13,7 @@ export const AuctionLabel: React.FC<AuctionLabelProps> = ({
 }) => {
   const { theme } = useContext(ThemeContext);
   return (
-    <Stack direction={"column"} spacing={0.5}>
+    <Stack direction={"column"} spacing={0.5} mb={{ xs: 1.5, sm: 0 }}>
       <Typography
         sx={{
           fontSize: 12,

@@ -441,7 +441,7 @@ export const BoomOnes = () => {
             backgroundColor: theme.background2,
           }}
         >
-          <Box display={"flex"} justifyContent={"space-between"}>
+          <Box display={{ xs: "block", sm: "flex" }} justifyContent={{ sm: "space-between" }}>
             <AuctionLabel
               label="Leader"
               content={
@@ -509,7 +509,7 @@ export const BoomOnes = () => {
           </Box>
           <FormGroup row={true} sx={{ width: "100%", pt: 4 }}>
             <Grid container spacing={2}>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   autoFocus
                   id="bid"
@@ -533,7 +533,7 @@ export const BoomOnes = () => {
                   sx={{ width: "100%" }}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <Button
                   variant="contained"
                   size="large"
