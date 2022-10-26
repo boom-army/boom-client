@@ -2,11 +2,14 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
 import { atom } from "recoil";
-import { useAddChannelMutation, useGetChannelByIdQuery } from "../generated/graphql";
+import {
+  useAddChannelMutation,
+  useGetChannelByIdQuery,
+} from "../generated/graphql";
 import { ChannelStatus } from "../constants";
 
 export const ChannelAuction: React.FC = () => {
-  const [channelId, setChannelId] = useState<string>('');
+  const [channelId, setChannelId] = useState<string>("");
   const scrollRef = useRef<HTMLDivElement>();
   const parentTweetState = atom({
     key: "parentTweetState",
@@ -31,19 +34,20 @@ export const ChannelAuction: React.FC = () => {
         name: "BoomOnes",
         family: "AuctionHouse",
         image: "",
-        description: "The BoomOnes Auction House. A perfect place to buy and sell your NFTs.",
+        description:
+          "The BoomOnes Auction House. A perfect place to buy and sell your NFTs.",
         status: ChannelStatus.ACTIVE,
         channelParentId: null,
-      }
+      };
       try {
         const auctionChannel = await addChannelMutation({
-          variables
+          variables,
         });
         setChannelId(auctionChannel.data?.addChannel?.id as string);
       } catch (error) {
         return Promise.resolve();
       }
-    })()
+    })();
   }, []);
 
   useEffect(() => {
