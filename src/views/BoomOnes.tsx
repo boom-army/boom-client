@@ -143,7 +143,7 @@ export const BoomOnes = () => {
   const [bidding, setBidding] = useState(false);
   const [mustWithdraw, setMustWithdraw] = useState(false);
   const [bids, setBids] = useState<AuctionBid[]>([]);
-  const [bidProfile, setBidProfile] = useState<string>('');
+  const [bidProfile, setBidProfile] = useState<string>("");
   const [bid, setBid] = useState<number>(1);
 
   const wallet = useAnchorWallet();
@@ -156,7 +156,7 @@ export const BoomOnes = () => {
     variables: {
       publicAddress: bidProfile,
     },
-  });  
+  });
 
   const fetchAuction = async (
     CandyShopInstance: CandyShop,
@@ -179,7 +179,7 @@ export const BoomOnes = () => {
             Number(auction.result[0]?.tickSize)) /
             BMA_TICK_SIZE
         );
-      }    
+      }
       if (auction.result[0].highestBidBuyer) {
         setBidProfile(auction.result[0].highestBidBuyer);
       }
@@ -220,8 +220,12 @@ export const BoomOnes = () => {
         .catch((error) => console.log(error));
   }, [auctionNFT]);
 
-  const handleShare = (text: string) => {
-    navigator.clipboard.writeText(text);
+  const handleShare = (text: string, url?: boolean) => {
+    if (url) {
+      window.open(text, "_blank");
+    } else {
+      navigator.clipboard.writeText(text);
+    }
     setAnchorEl(null);
     enqueueSnackbar("Copied to clipboard", { variant: "success" });
   };
@@ -369,7 +373,12 @@ export const BoomOnes = () => {
                 <IconButton
                   type="button"
                   size="small"
-                  onClick={() => handleShare("Boom is copying")}
+                  onClick={() =>
+                    handleShare(
+                      `https://twitter.com/intent/tweet?url=${window.location.href}&text=Checkout Boom social auctions on Solana&via=boom_army_&hashtags=BoomOnes`,
+                      true
+                    )
+                  }
                   sx={{
                     "&:hover": {
                       opacity: 0.8,
@@ -383,7 +392,7 @@ export const BoomOnes = () => {
                 <IconButton
                   type="button"
                   size="small"
-                  onClick={() => handleShare("Boom is copying")}
+                  onClick={() => handleShare(window.location.href)}
                   sx={{
                     "&:hover": {
                       opacity: 0.8,
@@ -441,7 +450,10 @@ export const BoomOnes = () => {
             backgroundColor: theme.background2,
           }}
         >
-          <Box display={{ xs: "block", sm: "flex" }} justifyContent={{ sm: "space-between" }}>
+          <Box
+            display={{ xs: "block", sm: "flex" }}
+            justifyContent={{ sm: "space-between" }}
+          >
             <AuctionLabel
               label="Leader"
               content={
