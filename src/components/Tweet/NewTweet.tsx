@@ -1,7 +1,7 @@
 import { AttributionLink } from "../Giphy/AttributionLink";
 import { Box } from "@mui/system";
 import {
-  ChannelFeedDocument,
+  GetChannelsDocument,
   FeedDocument,
   TweetDocument,
   useNewTweetMutation,
@@ -70,7 +70,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
     refetchQueries: [
       FeedDocument,
       HeroFeedDocument,
-      ChannelFeedDocument,
+      GetChannelsDocument,
       {
         query: TweetDocument,
         variables: { id: parentTweet },

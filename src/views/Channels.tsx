@@ -3,8 +3,8 @@ import { Box, Typography } from "@mui/material";
 import { ChannelTile } from "../components/Channel/ChannelTile";
 import {
   useAddChannelMutation,
-  useChannelsLazyQuery,
-  useChannelUnlinkMutation,
+  useGetChannelsLazyQuery,
+  useUnlinkChannelMutation,
 } from "../generated/graphql";
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
@@ -28,11 +28,11 @@ export const Channels: React.FC = () => {
   const [nftLoading, setNftLoading] = useState(true);
   const { enqueueSnackbar } = useSnackbar();
 
-  const [getChannels, { data, loading, error }] = useChannelsLazyQuery({
+  const [getChannels, { data, loading, error }] = useGetChannelsLazyQuery({
     fetchPolicy: "network-only",
   });
   const [addChannelMutation] = useAddChannelMutation();
-  const [channelUnlinkMutation] = useChannelUnlinkMutation();
+  const [channelUnlinkMutation] = useUnlinkChannelMutation();
 
   useEffect(() => {
     setNftLoading(true);
@@ -85,7 +85,7 @@ export const Channels: React.FC = () => {
         );
         const currentChannels = await getChannels();
         const channelDiff = differenceBy(
-          currentChannels?.data?.channels || [],
+          currentChannels?.data?.getChannels || [],
           uniqueChannels,
           (d) => [d?.mintAuthority, d?.name, d?.family].join()
         );
@@ -144,8 +144,8 @@ export const Channels: React.FC = () => {
           NFT Channels
         </Typography>
       </Box>
-      {data && data?.channels?.length ? (
-        data?.channels?.map((d) => <ChannelTile key={d.id} channel={d} />)
+      {data && data?.getChannels?.length ? (
+        data?.getChannels?.map((d) => <ChannelTile key={d.id} channel={d} />)
       ) : (
         <CustomResponse text="No channels to display" />
       )}

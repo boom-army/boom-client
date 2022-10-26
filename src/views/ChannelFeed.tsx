@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
 import { atom } from "recoil";
-import { useChannelFeedQuery } from "../generated/graphql";
+import { useGetChannelByIdQuery } from "../generated/graphql";
 import { useParams } from "react-router-dom";
 
 export const ChannelFeed: React.FC = () => {
@@ -13,7 +13,7 @@ export const ChannelFeed: React.FC = () => {
     default: "",
   });
 
-  const { loading, error, data, fetchMore, refetch } = useChannelFeedQuery({
+  const { loading, error, data, fetchMore, refetch } = useGetChannelByIdQuery({
     variables: {
       channelId: channelId as string,
       offset: 0,
@@ -36,13 +36,13 @@ export const ChannelFeed: React.FC = () => {
       <MeepFeed
         loading={loading}
         error={error}
-        data={data?.channelFeed}
+        data={data?.getChannelById}
         fetchMore={fetchMore}
         parentTweetState={parentTweetState}
         scrollRef={scrollRef}
       />
       <NewMessage
-        feed={data?.channelFeed}
+        feed={data?.getChannelById}
         channel={channelId}
         parentTweetState={parentTweetState}
         scrollRef={scrollRef}
