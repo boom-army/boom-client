@@ -375,7 +375,17 @@ export const BoomOnes = () => {
                   size="small"
                   onClick={() =>
                     handleShare(
-                      `https://twitter.com/intent/tweet?url=${window.location.href}&text=Checkout Boom social auctions on Solana&via=boom_army_&hashtags=BoomOnes`,
+                      `https://twitter.com/intent/tweet?url=${
+                        window.location.href
+                      }&text=Checkout%20Boom%20social%20auctions%20on%20Solana%0a%0a${
+                        auctionNFT && auctionNFT.highestBidPrice
+                          ? "Current%20bid%20is%20" +
+                            (auctionNFT &&
+                              Number(auctionNFT?.highestBidPrice) /
+                                BMA_TICK_SIZE) +
+                            "%20$BMA%0a%0a"
+                          : null
+                      }&via=boom_army_&hashtags=BoomOnes`,
                       true
                     )
                   }
