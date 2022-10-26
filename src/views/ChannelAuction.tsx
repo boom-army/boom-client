@@ -33,7 +33,7 @@ export const ChannelAuction: React.FC = () => {
         mintAuthority: "harkLSUe2Puud2TVQUhHW4vs45mF1YMLU3PThPCuWd8",
         name: "BoomOnes",
         family: "AuctionHouse",
-        image: "",
+        image: "https://shdw-drive.genesysgo.net/F71wchw5NCG2f7jZUE6joXLJQUXU1wZdNhSN33Ww7T7K/boom-moon.png",
         description:
           "The BoomOnes Auction House. A perfect place to buy and sell your NFTs.",
         status: ChannelStatus.ACTIVE,
