@@ -143,7 +143,7 @@ export const BoomOnes = () => {
   const [bidding, setBidding] = useState(false);
   const [mustWithdraw, setMustWithdraw] = useState(false);
   const [bids, setBids] = useState<AuctionBid[]>([]);
-  const [bidProfile, setBidProfile] = useState<string>();
+  const [bidProfile, setBidProfile] = useState<string>('');
   const [bid, setBid] = useState<number>(1);
 
   const wallet = useAnchorWallet();
@@ -154,9 +154,9 @@ export const BoomOnes = () => {
 
   const { data } = useProfileByPubKeyQuery({
     variables: {
-      publicAddress: bidProfile || "",
+      publicAddress: bidProfile,
     },
-  });
+  });  
 
   const fetchAuction = async (
     CandyShopInstance: CandyShop,
@@ -179,7 +179,7 @@ export const BoomOnes = () => {
             Number(auction.result[0]?.tickSize)) /
             BMA_TICK_SIZE
         );
-      }
+      }    
       if (auction.result[0].highestBidBuyer) {
         setBidProfile(auction.result[0].highestBidBuyer);
       }
