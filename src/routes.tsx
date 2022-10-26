@@ -11,8 +11,7 @@ import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { Badge, Container, Grid, Paper, SwipeableDrawer } from "@mui/material";
 import { Box, styled } from "@mui/system";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { Nav } from "./views";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GiphyContextProvider } from "./contexts/giphy";
 // import { Helmet } from "react-helmet";
 import { MarketProvider } from "./contexts/market";
@@ -21,7 +20,9 @@ import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
-import { GridStandard } from "./views/GridStandard";
+import { GridStandard } from "./view-grids/GridStandard";
+import { GridAuction } from "./view-grids/GridAuction";
+import { Nav } from "./views";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -112,6 +113,18 @@ export const AppRoutes: React.FC = () => {
                   <AppHeader />
                   <Container maxWidth="lg" disableGutters={true}>
                     <Routes>
+                      <Route
+                        path="auctions"
+                        element={
+                          <GridAuction
+                            loading={loading}
+                            data={data}
+                            refetch={refetch}
+                            user={user}
+                            setUser={setUser}
+                          />
+                        }
+                      />
                       <Route
                         path="*"
                         element={

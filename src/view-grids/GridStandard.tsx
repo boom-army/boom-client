@@ -6,7 +6,6 @@ import { Suggestion } from "../components/SideBar/Suggestion";
 import { EditProfile } from "../components/Profile/EditProfile";
 import { Route, Routes, Navigate } from "react-router-dom";
 import {
-  BoomOnes,
   ChannelFeed,
   Channels,
   ConnectView,
@@ -16,7 +15,7 @@ import {
   Nav,
   News,
   Notifications,
-} from ".";
+} from "../views";
 import { User } from "../contexts/user";
 import { ThemeContext } from "../contexts/theme";
 import { Exact, Maybe, ProfileQuery } from "../generated/graphql";
@@ -96,14 +95,11 @@ export const GridStandard: React.FC<GridProps> = ({
           <Route path="explore" element={<Explore />} />
           <Route path=":handle" element={<Profile />} />
           <Route path="mint-nft" element={<NFTMint />} />
-          {/* <Route path="mint-boom-hero" element={<OGMint />} /> */}
-          <Route path="auctions" element={<BoomOnes />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </Paper>
       <Grid item md={3} display={{ xs: "none", sm: "none", md: "block" }}>
         <Routes>
-          <Route path="auctions" />
           <Route path="*" element={<Suggestion />} />
         </Routes>
       </Grid>
