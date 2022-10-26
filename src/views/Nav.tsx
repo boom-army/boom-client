@@ -1,9 +1,8 @@
-
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import GavelIcon from '@mui/icons-material/Gavel';
+import GavelIcon from "@mui/icons-material/Gavel";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
-import NewspaperIcon from '@mui/icons-material/Newspaper';
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person from "@mui/icons-material/Person";
 import React, { useContext } from "react";
@@ -131,6 +130,24 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               <Typography variant="body1">Auctions</Typography>
             </Stack>
           </NavLink>
+          <NavLink style={applyActiveStyles} to="/mint-nft">
+            <Stack direction="row" {...stackProps}>
+              <StyleIcon sx={iconProps} />
+              <Typography variant="body1">Mint NFT</Typography>
+            </Stack>
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/connect">
+            <Stack direction="row" {...stackProps}>
+              <GroupIcon sx={iconProps} />
+              <Typography variant="body1">Creators</Typography>
+            </Stack>
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/explore">
+            <Stack direction="row" {...stackProps}>
+              <SearchIcon sx={iconProps} />
+              <Typography variant="body1">Search</Typography>
+            </Stack>
+          </NavLink>
           {/* <NavLink style={applyActiveStyles} to="/mint-boom-hero">
             <Stack direction="row" {...stackProps}>
               <AutoGraphIcon sx={iconProps} />
@@ -145,28 +162,10 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   <Typography variant="body1">Channels</Typography>
                 </Stack>
               </NavLink>
-              <NavLink style={applyActiveStyles} to="/mint-nft">
-                <Stack direction="row" {...stackProps}>
-                  <StyleIcon sx={iconProps} />
-                  <Typography variant="body1">Mint NFT</Typography>
-                </Stack>
-              </NavLink>
               <NavLink style={applyActiveStyles} to="/following">
                 <Stack direction="row" {...stackProps}>
                   <Person sx={iconProps} />
                   <Typography variant="body1">Following</Typography>
-                </Stack>
-              </NavLink>
-              <NavLink style={applyActiveStyles} to="/connect">
-                <Stack direction="row" {...stackProps}>
-                  <GroupIcon sx={iconProps} />
-                  <Typography variant="body1">Creators</Typography>
-                </Stack>
-              </NavLink>
-              <NavLink style={applyActiveStyles} to="/explore">
-                <Stack direction="row" {...stackProps}>
-                  <SearchIcon sx={iconProps} />
-                  <Typography variant="body1">Search</Typography>
                 </Stack>
               </NavLink>
               <NavLink style={applyActiveStyles} to="/notifications">
