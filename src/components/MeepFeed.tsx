@@ -28,7 +28,7 @@ export const MeepFeed: React.FC<Props> = ({
 }) => {
   if (loading)
     return (
-      <Box sx={{ marginTop: "1rem" }}>
+      <Box sx={{ padding: "2rem" }}>
         <Loader />
       </Box>
     );
@@ -64,7 +64,7 @@ export const MeepFeed: React.FC<Props> = ({
         hasMore={true}
         loader={
           loading && (
-            <Box sx={{ marginTop: "1rem" }}>
+            <Box sx={{ padding: "1rem" }}>
               <Loader />
             </Box>
           )

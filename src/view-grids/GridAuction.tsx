@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import {
-  BoomOnes
-} from "../views";
+import { BoomOnes } from "../views";
 import { User } from "../contexts/user";
 import { ThemeContext } from "../contexts/theme";
 import { Exact, Maybe, ProfileQuery } from "../generated/graphql";
 import { ApolloQueryResult } from "@apollo/client";
 import { Grid, Paper } from "@mui/material";
+import { ChannelAuction } from "../views/ChannelAuction";
 
 interface GridProps {
   data: ProfileQuery | undefined;
@@ -54,8 +53,8 @@ export const GridAuction: React.FC<GridProps> = ({
       >
         <BoomOnes />
       </Paper>
-      <Grid item md={6} display={{ xs: "none", sm: "none", md: "block" }}>
-        
+      <Grid item md={6} xs={12} sm={12} sx={middleColStyles}>
+        <ChannelAuction />
       </Grid>
     </Grid>
   );
