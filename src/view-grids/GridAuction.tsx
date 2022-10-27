@@ -1,14 +1,11 @@
 import React, { useContext } from "react";
 import { BoomOnes } from "../views";
 import { ChannelAuction } from "../views/ChannelAuction";
-import { CustomResponse } from "../components/CustomResponse";
 import { Grid, Paper } from "@mui/material";
 import { ThemeContext } from "../contexts/theme";
-import { useAnchorWallet } from "@solana/wallet-adapter-react";
 
 export const GridAuction: React.FC = () => {
   const { theme } = useContext(ThemeContext);
-  const anchorWallet = useAnchorWallet();  
 
   const middleColStyles = {
     borderRight: `1px solid ${theme.tertiaryColor}`,
@@ -32,8 +29,7 @@ export const GridAuction: React.FC = () => {
         <BoomOnes />
       </Paper>
       <Grid item md={6} xs={12} sm={12} sx={middleColStyles}>
-        {!anchorWallet?.publicKey && <CustomResponse text={"Connect your Solana wallet to chat."} />}
-        {anchorWallet?.publicKey && <ChannelAuction />}
+        <ChannelAuction />
       </Grid>
     </Grid>
   );
