@@ -1,6 +1,6 @@
 {
-  "name": "DApp Starter",
-  "short_name": "DApp Starter",
+  "name": "Boom",
+  "short_name": "A decentralized toolkit for human social interaction, built on top of the fastest blockchain at scale in the world - Solana",
   "display": "standalone",
   "start_url": "./",
   "theme_color": "#002140",
