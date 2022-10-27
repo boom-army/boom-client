@@ -16,6 +16,7 @@ export const client = new ApolloClient({
       },
     },
   }),
+  credentials: 'include',
   uri: process.env.REACT_APP_APOLLO_API || "http://locahost:7777",
   headers: {
     authorization: localStorage.getItem("token") || "",
