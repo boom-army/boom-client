@@ -4,7 +4,7 @@ import { lightTheme, darkTheme, ThemeVars } from "../styles/themes";
 import { ThemeIcon } from "./Icons";
 import { styled } from "@mui/material/styles";
 
-export const Wrapper = styled("div")({
+export const Wrapper: any = styled("div")({
   display: "flex",
   alignItems: "baseline",
   marginLeft: "0.7rem",

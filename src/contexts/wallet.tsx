@@ -18,16 +18,16 @@ require("@solana/wallet-adapter-react-ui/styles.css");
 
 export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
   const endpoint = process.env.REACT_APP_RPC_URL!;  
-  let network = currentCluster().name;
+  let { name } = currentCluster();
 
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
       new GlowWalletAdapter(),
       new SlopeWalletAdapter(),
-      new SolflareWalletAdapter({ network }),
+      new SolflareWalletAdapter({ network: name }),
     ],
-    [network]
+    [name]
   );
 
   const { enqueueSnackbar } = useSnackbar();
