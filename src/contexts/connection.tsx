@@ -42,11 +42,6 @@ export const ENDPOINTS = [
   },
   {
     name: WalletAdapterNetwork.Mainnet,
-    endpoint: "https://ssc-dao.genesysgo.net/",
-    chainID: ChainID.MainnetBeta,
-  },
-  {
-    name: WalletAdapterNetwork.Mainnet,
     endpoint: "https://monke22bca9cb39054534954488e891e291b3.xyz2.hyperplane.dev",
     chainID: ChainID.MainnetBeta,
   },
