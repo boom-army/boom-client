@@ -113,12 +113,12 @@ export const AppRoutes: React.FC = () => {
                   <AppHeader />
                   <Container maxWidth="lg" disableGutters={true}>
                     <Routes>
-                      <Route
+                      {/* <Route
                         path="auctions"
                         element={
                           <GridAuction />
                         }
-                      />
+                      /> */}
                       <Route
                         path="*"
                         element={

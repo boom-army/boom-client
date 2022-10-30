@@ -57,11 +57,6 @@ export const ENDPOINTS = [
   },
   {
     name: WalletAdapterNetwork.Devnet,
-    endpoint: "https://psytrbhymqlkfrhudd.dev.genesysgo.net:8899/",
-    chainID: ChainID.Devnet,
-  },
-  {
-    name: WalletAdapterNetwork.Devnet,
     endpoint: "http://127.0.0.1:8899",
     chainID: ChainID.Devnet,
   },

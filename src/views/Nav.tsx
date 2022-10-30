@@ -124,12 +124,12 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               <Typography variant="body1">News</Typography>
             </Stack>
           </NavLink>
-          <NavLink style={applyActiveStyles} to="/auctions">
+          {/* <NavLink style={applyActiveStyles} to="/auctions">
             <Stack direction="row" {...stackProps}>
               <GavelIcon style={iconProps} />
               <Typography variant="body1">Auctions</Typography>
             </Stack>
-          </NavLink>
+          </NavLink> */}
           <NavLink style={applyActiveStyles} to="/mint-nft">
             <Stack direction="row" {...stackProps}>
               <StyleIcon sx={iconProps} />
