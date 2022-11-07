@@ -36,7 +36,7 @@ import {
   fetchAuctionsByShopAddress,
   ExplorerLinkBase,
 } from "@liqnft/candy-shop-sdk";
-import { AuctionStatus, AuctionBid } from "@liqnft/candy-shop-types";
+import { AuctionStatus, AuctionBid, Blockchain } from "@liqnft/candy-shop-types";
 import { shortenAddress } from "../utils/utils";
 import { Countdown } from "../components/Auctions/CandyCountdown";
 import { Price } from "../components/Auctions/CandyPrice";
@@ -199,7 +199,7 @@ export const BoomOnes = () => {
       candyShopProgramId: new PublicKey(
         "csbMUULiQfGjT8ezT16EoEBaiarS6VWRevTw1JMydrS"
       ),
-      env: "mainnet-beta",
+      env: Blockchain.SolMainnetBeta,
       settings: {
         currencySymbol: "BMA",
         currencyDecimals: 9,

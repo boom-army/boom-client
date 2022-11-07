@@ -46,6 +46,11 @@ export const ENDPOINTS = [
     chainID: ChainID.MainnetBeta,
   },
   {
+    name: WalletAdapterNetwork.Mainnet,
+    endpoint: "https://solana-api.projectserum.com",
+    chainID: ChainID.MainnetBeta,
+  },
+  {
     name: WalletAdapterNetwork.Testnet,
     endpoint: clusterApiUrl("testnet"),
     chainID: ChainID.Testnet,

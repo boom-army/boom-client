@@ -31,7 +31,7 @@ export const ExplorerLink = (props: {
   return (
     <Box display={"inline"} sx={sx}>
       <a
-        href={`${BaseUrlType[source]}/${type}/${address}${getClusterQuery(env, source)}`}
+        href={`${BaseUrlType[ExplorerLinkBase.SolanaFM]}/${type}/${address}${getClusterQuery(env, source)}`}
         target="_blank"
         rel="noreferrer noopener"
         title={addressString}
