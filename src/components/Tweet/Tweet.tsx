@@ -21,6 +21,7 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
+import { HARKL_ID } from "../../utils/utils";
 
 interface Props {
   tweet: TweetQuery["tweet"];
@@ -44,6 +45,8 @@ const TweetBody = styled(Typography)((props) => ({
 }));
 
 export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
+  console.log(tweet);
+
   const {
     id,
     text,
@@ -64,6 +67,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
   const { theme } = useContext(ThemeContext);
   const { handleReaction } = useReaction({ tweetId: id });
   const handle = user && user.handle;
+  const localTheme = localStorage.getItem("theme");
 
   const extractUrls = linkify.find(text).filter((u) => u.type === "url");
   const targetUrl = extractUrls[0]?.href;
@@ -72,6 +76,10 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
     target: { url: "_blank" },
     formatHref: { hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}` },
   };
+
+  const heroUserName = user?.data?.avatarUpdateAuthority === HARKL_ID 
+    ? { color: localTheme === 'dark' ? theme.blue.lightest : theme.blue.lighter } 
+    : {};
   return (
     <Grid
       item
@@ -90,10 +98,10 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
       </Box>
       <Box mt={1}>
         <Link to={`/${handle}`}>
-          <Typography display={"inline"}  sx={{ fontWeight: "600", mr: 0.5 }}>
+          <Typography display={"inline"} sx={{ fontWeight: "600", mr: 0.5, ...heroUserName }}>
             {user && user.consumerName}
           </Typography>
-          <Typography display={"inline"} mr={0.5}>{`@${handle}`}</Typography>
+          <Typography display={"inline"} sx={heroUserName} mr={0.5}>{`@${handle}`}</Typography>
         </Link>
         <Link to={`/${handle}/status/${id}`} className="secondary">
           <Typography display={"inline"} sx={{ color: theme.secondaryColor }}>
