@@ -47,6 +47,11 @@ export const ENDPOINTS = [
   },
   {
     name: WalletAdapterNetwork.Mainnet,
+    endpoint: "https://stylish-multi-telescope.solana-mainnet.discover.quiknode.pro/341ffad4533deac85acf4fa0de41d6bb04b5a6ac",
+    chainID: ChainID.MainnetBeta,
+  },
+  {
+    name: WalletAdapterNetwork.Mainnet,
     endpoint: "https://solana-api.projectserum.com",
     chainID: ChainID.MainnetBeta,
   },
