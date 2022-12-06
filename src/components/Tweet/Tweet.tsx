@@ -45,8 +45,6 @@ const TweetBody = styled(Typography)((props) => ({
 }));
 
 export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
-  console.log(tweet);
-
   const {
     id,
     text,
