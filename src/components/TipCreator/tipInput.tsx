@@ -1,7 +1,7 @@
 import Close from "@mui/icons-material/Close";
 import React, { useContext, useState, useCallback } from "react";
 import { Box } from "@mui/system";
-import { IconButton } from "@mui/material";
+import { IconButton, Link } from "@mui/material";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
 import { TextField, Stack, Button, Typography } from "@mui/material";
@@ -111,9 +111,24 @@ export const TipInput: React.FC<Props> = ({
           boomTokens ? boomTokens : 100000000 // 0.1 SSL
         );
 
-        enqueueSnackbar(`Transaction complete: <a href="https://solana.fm/tx/${signature}">${signature.slice(0, 4) + '..' + signature.slice(-4)}</a>`, {
-          variant: "success",
-        });
+        // const txLink = `https://solana.fm/tx/${signature}`;
+
+        // enqueueSnackbar(
+        //   'Transaction complete: ' + (
+        //     <Link href={txLink}>
+        //       {signature.slice(0, 4) + ".." + signature.slice(-4)}
+        //     </Link>
+        //   ),
+        //   {
+        //     variant: "success",
+        //   }
+        // );
+        enqueueSnackbar(
+            'Transaction complete: ' + signature,
+            {
+              variant: "success",
+            }
+          );
         await tipCreatorMutation({
           variables: {
             tipAmount: boomTokens.toString(),
@@ -144,9 +159,7 @@ export const TipInput: React.FC<Props> = ({
     <Box>
       <Box sx={{ position: "relative" }}>
         <Box mb={1}>
-          <Typography>
-            Tip this meep some $BMA
-          </Typography>
+          <Typography>Tip this meep some $BMA</Typography>
         </Box>
         <Box
           sx={{
