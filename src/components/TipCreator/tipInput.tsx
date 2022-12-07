@@ -111,7 +111,7 @@ export const TipInput: React.FC<Props> = ({
           boomTokens ? boomTokens : 100000000 // 0.1 SSL
         );
 
-        enqueueSnackbar(`Transaction complete: ${signature}`, {
+        enqueueSnackbar(`Transaction complete: <a href="https://solana.fm/tx/${signature}">${signature.slice(0, 4) + '..' + signature.slice(-4)}</a>`, {
           variant: "success",
         });
         await tipCreatorMutation({
