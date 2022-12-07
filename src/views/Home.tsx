@@ -7,7 +7,7 @@ import {
 } from "../generated/graphql";
 
 export const Home: React.FC = () => {
-  const { loading, error, data, fetchMore, refetch } = useFeedQuery({
+  const { loading, error, data, fetchMore } = useFeedQuery({
     variables: {
       offset: 0,
       limit: 10,
@@ -30,7 +30,6 @@ export const Home: React.FC = () => {
         data={data?.feed as Array<Tweet>}
         fetchMore={fetchMore}
         newMeeps={newMeepsCount?.newMeepsCount}
-        refetch={refetch}
       />
     </>
   );
