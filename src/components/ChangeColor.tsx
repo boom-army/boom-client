@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
+import PaletteIcon from '@mui/icons-material/Palette';
+import { Stack, Typography } from "@mui/material";
 import { ThemeContext } from "../contexts/theme";
-import { ColorIcon } from "./Icons";
-import { Wrapper } from "./ToggleTheme";
+import { useState, useContext } from "react";
 
-export const ChangeColor = () => {
+export const ChangeColor = ({ iconProps, stackProps }: any) => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const colors = [
@@ -40,9 +40,9 @@ export const ChangeColor = () => {
   };
 
   return (
-    <Wrapper onClick={changeColor}>
-      <ColorIcon sm={true && "true"} color={theme.accentColor} />
-      <p>Color</p>
-    </Wrapper>
+      <Stack onClick={changeColor} direction="row" {...stackProps} sx={{cursor: "pointer"}}>
+        <PaletteIcon sx={iconProps} />
+        <Typography variant="body1">Color</Typography>
+      </Stack>
   );
 };

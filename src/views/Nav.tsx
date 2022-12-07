@@ -12,11 +12,13 @@ import TagIcon from "@mui/icons-material/Tag";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
-import { MorePopUp } from "../components/MorePopup";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme";
 import { styled } from "@mui/material/styles";
 import { useGetChannelsQuery, User } from "../generated/graphql";
+import {Logout} from "../components/Auth/Logout";
+import { ChangeColor } from "../components/ChangeColor";
+import { ToggleTheme } from "../components/ToggleTheme";
 interface Props {
   newMentionsCount: number | undefined;
   user: User | null;
@@ -190,9 +192,11 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   <Typography variant="body1">Profile</Typography>
                 </Stack>
               </NavLink>
+              <ToggleTheme stackProps={stackProps} iconProps={iconProps}/>
+              <ChangeColor stackProps={stackProps} iconProps={iconProps}/>
+              <Logout stackProps={stackProps} iconProps={iconProps}/>
             </>
           )}
-          <MorePopUp iconProps={iconProps} stackProps={stackProps} />
         </StyledStack>
         {activeChannels()?.length ? (
           <StyledStack2 key="channel-stack">
