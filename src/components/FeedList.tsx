@@ -18,7 +18,6 @@ interface Props {
   error?: ApolloError | undefined | any;
   data: Array<Tweet> | undefined;
   newMeeps?: NewMeepsCountQuery["newMeepsCount"] | undefined;
-  refetch?: () => void;
   fetchMore: (props: any) => void;
 }
 
@@ -27,7 +26,6 @@ export const FeedList: React.FC<Props> = ({
   error,
   data,
   newMeeps,
-  refetch,
   fetchMore,
 }) => {
   const { theme } = useContext(ThemeContext);
