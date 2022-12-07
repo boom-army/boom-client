@@ -11,6 +11,7 @@ import { NewMeepsCountQuery, Tweet } from "../generated/graphql";
 import { BoomHeroStore } from "./Advertising/BoomHeroStore";
 import { ThemeContext } from "../contexts/theme";
 import { UserContext } from "../contexts/user";
+import { TweetThread } from "./Tweet/TweatThread";
 
 interface Props {
   loading?: boolean;
@@ -108,7 +109,7 @@ export const FeedList: React.FC<Props> = ({
           )}
           {data?.length
             ? data?.map((tweet) => (
-              <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
+              <TweetThread key={tweet.id} tweet={tweet as Tweet} />
             ))
             : null}
         </InfiniteScroll>
