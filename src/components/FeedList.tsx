@@ -7,17 +7,18 @@ import { Grid, Link } from "@mui/material";
 import { HARKL_ID } from "../utils/utils";
 import { Loader } from "./Loader";
 import { NewTweet, ShowTweet } from "./Tweet";
-import { NewMeepsCountDocument, NewMeepsCountQuery, Tweet } from "../generated/graphql";
+import { NewMeepsCountQuery, Tweet } from "../generated/graphql";
 import { BoomHeroStore } from "./Advertising/BoomHeroStore";
 import { ThemeContext } from "../contexts/theme";
 import { UserContext } from "../contexts/user";
-import { client } from "../apollo/client";
 
 interface Props {
   loading?: boolean;
   error?: ApolloError | undefined | any;
   data: Array<Tweet> | undefined;
   newMeeps?: NewMeepsCountQuery["newMeepsCount"] | undefined;
+  refetchData?: () => void;
+  refetchCount?: () => void;
   fetchMore: (props: any) => void;
 }
 
@@ -26,6 +27,8 @@ export const FeedList: React.FC<Props> = ({
   error,
   data,
   newMeeps,
+  refetchData,
+  refetchCount,
   fetchMore,
 }) => {
   const { theme } = useContext(ThemeContext);
@@ -53,8 +56,8 @@ export const FeedList: React.FC<Props> = ({
   };
 
   const loadNewMeeps = () => {
-    fetchData();
-    client.refetchQueries({ include: [NewMeepsCountDocument] });
+    refetchData && refetchData();
+    refetchCount && refetchCount();
   };
 
   return (

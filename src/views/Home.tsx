@@ -7,7 +7,7 @@ import {
 } from "../generated/graphql";
 
 export const Home: React.FC = () => {
-  const { loading, error, data, fetchMore } = useFeedQuery({
+  const { loading, error, data, fetchMore, refetch: refetchData } = useFeedQuery({
     variables: {
       offset: 0,
       limit: 10,
@@ -15,9 +15,9 @@ export const Home: React.FC = () => {
     },
   });
 
-  const { data: newMeepsCount } = useNewMeepsCountQuery({
+  const { data: newMeepsCount, refetch: refetchCount } = useNewMeepsCountQuery({
     variables: {
-      date: data?.feed[0].createdAt,
+      date: data?.feed[1].createdAt,
     },
     pollInterval: 60000,
   });
@@ -29,6 +29,8 @@ export const Home: React.FC = () => {
         error={error}
         data={data?.feed as Array<Tweet>}
         fetchMore={fetchMore}
+        refetchData={refetchData}
+        refetchCount={refetchCount}
         newMeeps={newMeepsCount?.newMeepsCount}
       />
     </>
