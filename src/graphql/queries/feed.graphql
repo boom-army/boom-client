@@ -9,3 +9,7 @@ query heroFeed($offset: Int!, $limit: Int) {
     ...TweetData
   }
 }
+
+query newMeepsCount($date: String) {
+  newMeepsCount(date: $date)
+}

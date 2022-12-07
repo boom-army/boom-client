@@ -461,6 +461,7 @@ export type Query = {
   heroFeed: Array<Tweet>;
   me: User;
   mentions: Array<Tweet>;
+  newMeepsCount?: Maybe<Scalars['Int']>;
   oneSignal: OneSignal;
   profile: User;
   profileByPubKey: User;
@@ -500,6 +501,11 @@ export type QueryHeroFeedArgs = {
 export type QueryMentionsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryNewMeepsCountArgs = {
+  date?: Maybe<Scalars['String']>;
 };
 
 
@@ -704,6 +710,13 @@ export type HeroFeedQueryVariables = Exact<{
 
 
 export type HeroFeedQuery = { __typename?: 'Query', heroFeed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined }> };
+
+export type NewMeepsCountQueryVariables = Exact<{
+  date?: Maybe<Scalars['String']>;
+}>;
+
+
+export type NewMeepsCountQuery = { __typename?: 'Query', newMeepsCount?: number | null | undefined };
 
 export type HealthCheckQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1180,6 +1193,39 @@ export function useHeroFeedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<H
 export type HeroFeedQueryHookResult = ReturnType<typeof useHeroFeedQuery>;
 export type HeroFeedLazyQueryHookResult = ReturnType<typeof useHeroFeedLazyQuery>;
 export type HeroFeedQueryResult = Apollo.QueryResult<HeroFeedQuery, HeroFeedQueryVariables>;
+export const NewMeepsCountDocument = gql`
+    query newMeepsCount($date: String) {
+  newMeepsCount(date: $date)
+}
+    `;
+
+/**
+ * __useNewMeepsCountQuery__
+ *
+ * To run a query within a React component, call `useNewMeepsCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useNewMeepsCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNewMeepsCountQuery({
+ *   variables: {
+ *      date: // value for 'date'
+ *   },
+ * });
+ */
+export function useNewMeepsCountQuery(baseOptions?: Apollo.QueryHookOptions<NewMeepsCountQuery, NewMeepsCountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<NewMeepsCountQuery, NewMeepsCountQueryVariables>(NewMeepsCountDocument, options);
+      }
+export function useNewMeepsCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NewMeepsCountQuery, NewMeepsCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<NewMeepsCountQuery, NewMeepsCountQueryVariables>(NewMeepsCountDocument, options);
+        }
+export type NewMeepsCountQueryHookResult = ReturnType<typeof useNewMeepsCountQuery>;
+export type NewMeepsCountLazyQueryHookResult = ReturnType<typeof useNewMeepsCountLazyQuery>;
+export type NewMeepsCountQueryResult = Apollo.QueryResult<NewMeepsCountQuery, NewMeepsCountQueryVariables>;
 export const HealthCheckDocument = gql`
     query healthCheck {
   healthCheck
