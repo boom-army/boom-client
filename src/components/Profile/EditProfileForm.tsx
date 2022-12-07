@@ -16,8 +16,8 @@ import {
   ProfileDocument,
   ProfileQuery,
   useEditProfileMutation,
+  User,
 } from "../../generated/graphql";
-import { User } from "../../contexts/user";
 import { useInput } from "../../hooks/useInput";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
@@ -82,11 +82,7 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
         },
       });
 
-      setUser({
-        handle: data.editProfile.handle,
-        publicAddress: data.editProfile.publicAddress,
-        id: data.editProfile.id,
-      });
+      setUser(data);
 
       navigate(`/${data.editProfile.handle}`);
 

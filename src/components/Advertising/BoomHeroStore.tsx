@@ -9,11 +9,11 @@ import {
   Link as MuiLink
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { MeQuery } from "../../generated/graphql";
+import { User } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 
 interface BoomHeroStoreProps {
-  userData: MeQuery["me"] | undefined;
+  userData: User | null;
 }
 
 export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {

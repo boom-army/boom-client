@@ -16,9 +16,8 @@ import {
   News,
   Notifications,
 } from "../views";
-import { User } from "../contexts/user";
 import { ThemeContext } from "../contexts/theme";
-import { Exact, Maybe, ProfileQuery } from "../generated/graphql";
+import { Exact, Maybe, ProfileQuery, User } from "../generated/graphql";
 import { ApolloQueryResult } from "@apollo/client";
 import { Grid, Paper } from "@mui/material";
 

@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-export interface User {
-  handle: string;
-  id: string;
-  publicAddress: string;
-}
+import { User } from "../generated/graphql";
 
 export interface UserContextType {
   user: User | null;

@@ -15,12 +15,11 @@ import { ChannelStatus } from "../constants";
 import { MorePopUp } from "../components/MorePopup";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme";
-import { User as StoreUser } from "../contexts/user";
 import { styled } from "@mui/material/styles";
-import { useGetChannelsQuery } from "../generated/graphql";
+import { useGetChannelsQuery, User } from "../generated/graphql";
 interface Props {
   newMentionsCount: number | undefined;
-  user: StoreUser | null;
+  user: User | null;
 }
 
 export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
