@@ -16,7 +16,7 @@
     "localnet:up": "solana-test-validator --bpf-program BpfProgram1111111111111111111111111111111111 program/target/deploy/sosol_program.so",
     "predeploy": "git pull --ff-only && yarn && yarn build",
     "start": "node scripts/start.js",
-    "dev": "cp ./.env.dev ./.env && node scripts/start.js",
+    "start:dev": "cp ./.env.dev ./.env && node scripts/start.js",
     "test": "node scripts/test.js",
     "test-with-coverage": "node scripts/test.js --coverage"
   },
