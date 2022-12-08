@@ -51,14 +51,14 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             component="div"
             pb={1}
           >
-            Set your PFP{" "}
+            Flex your profile{" "}
             {userData?.handle ? <Link
               to={`/${userData?.handle}`}
               style={{ color: theme.blue.lightest }}
             >
               by clicking your Boom Hero NFT{" "}
             </Link> : 'Boom Hero NFT'}
-             to flex your profile
+             and making it your PFP
           </Typography>
           <Button
             component={MuiLink}
