@@ -32,16 +32,17 @@ export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
   const { childTweets } = tweet;
   // slice array to 3 tweets
   const slicedChildTweets = childTweets?.slice(0, 3);
-
+  const isThreaded = (slicedChildTweets && slicedChildTweets.length > 0) ?? false;
+  
   return (
-    <Grid container>
-      <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
+    <Grid item>
+      <ShowTweet key={tweet.id} tweet={tweet as Tweet} threaded={isThreaded}/>
       {slicedChildTweets?.length ?
         slicedChildTweets.map(
           (tweet) =>
             tweet && (
               <Grid item xs={12} key={tweet.id}>
-                <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
+                <ShowTweet key={tweet.id} tweet={tweet as Tweet} threaded={isThreaded}/>
               </Grid>
             )
         ) : null}

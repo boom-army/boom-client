@@ -25,6 +25,7 @@ import { HARKL_ID } from "../../utils/utils";
 
 interface Props {
   tweet: TweetQuery["tweet"];
+  threaded?: boolean;
 }
 
 const IconsStack = styled(Stack)((props) => ({
@@ -44,7 +45,7 @@ const TweetBody = styled(Typography)((props) => ({
   a: { color: props.theme.accentColor },
 }));
 
-export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
+export const ShowTweet: React.FC<Props> = ({ tweet, threaded }: Props) => {
   const {
     id,
     text,
@@ -71,7 +72,9 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
 
   const linkifyOptions = {
     target: { url: "_blank" },
-    formatHref: { hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}` },
+    formatHref: {
+      hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
+    },
   };
 
   return (
@@ -79,9 +82,14 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
       item
       xs={12}
       mt={2}
-      sx={{ position: "relative", padding: "0 1em", display: "flex", maxWidth: "100vw" }}
+      sx={{
+        position: "relative",
+        padding: "0 1em",
+        display: "flex",
+        maxWidth: "100vw",
+      }}
     >
-      <Box mr={2}>
+      <Box mr={2} position="relative">
         <Link to={`/${handle}`}>
           <UserAvatar
             className="avatar"
@@ -89,6 +97,17 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
             isNFT={user?.data?.avatarMint}
           />
         </Link>
+        {threaded && (
+          <Box
+            sx={{
+              borderLeft: `1px solid ${theme.tertiaryColor}`,
+              height: "calc(100% - 2.5em)",
+              position: "absolute",
+              left: "1.25em",
+              top: "3em",
+            }}
+          />
+        )}
       </Box>
       <Box mt={1}>
         <Link to={`/${handle}`}>
@@ -96,7 +115,9 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
             {user && user.consumerName}
           </Typography>
           <Typography display={"inline"} mr={0.5}>{`@${handle}`}</Typography>
-          {user?.data?.avatarUpdateAuthority === HARKL_ID && (<Typography display={"inline"}>✪</Typography>)}
+          {user?.data?.avatarUpdateAuthority === HARKL_ID && (
+            <Typography display={"inline"}>✪</Typography>
+          )}
         </Link>
         <Link to={`/${handle}/status/${id}`} className="secondary">
           <Typography display={"inline"} sx={{ color: theme.secondaryColor }}>
