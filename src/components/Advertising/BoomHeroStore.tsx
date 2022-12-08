@@ -53,7 +53,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             >
               Boom Hero NFT 
             </Link> : 'Boom Hero NFT '}
-            to get insider status.
+            to get insider status
           </Typography>
           <Button
             component={MuiLink}
