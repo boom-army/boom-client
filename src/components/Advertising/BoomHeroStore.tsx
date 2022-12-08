@@ -46,14 +46,14 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             component="div"
             pb={1}
           >
-            Set your PFP to a{" "}
+            Set your PFP{" "}
             {userData?.handle ? <Link
               to={`/${userData?.handle}`}
               style={{ color: theme.blue.lightest }}
             >
-              Boom Hero NFT 
-            </Link> : 'Boom Hero NFT '}
-            to get insider status
+              by clicking your Boom Hero NFT{" "}
+            </Link> : 'Boom Hero NFT'}
+             to flex your profile
           </Typography>
           <Button
             component={MuiLink}
@@ -62,7 +62,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             href="https://magiceden.io/marketplace/boomheroes"
             target="_blank"
           >
-            Buy NFT on Magic Eden
+            Buy BoomHeroes on Magic Eden
           </Button>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}></Box>

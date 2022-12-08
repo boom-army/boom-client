@@ -82,7 +82,7 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
         },
       });
 
-      setUser(data);
+      setUser(data.editProfile);
 
       navigate(`/${data.editProfile.handle}`);
 

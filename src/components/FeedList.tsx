@@ -45,7 +45,7 @@ export const FeedList: React.FC<Props> = ({
 
   // logout the user if removed from db
   if (data === undefined) {
-    localStorage.clear();
+    localStorage.removeItem("user");
   }
 
   const fetchData = () => {
