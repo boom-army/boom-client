@@ -33,27 +33,28 @@ export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
   // slice array to 3 tweets
   const slicedChildTweets = childTweets?.slice(0, 3);
   const isThreaded = (slicedChildTweets && slicedChildTweets.length > 0) ?? false;
+  const hiddenTweetsCount = childTweets?.length && slicedChildTweets?.length && (childTweets?.length - slicedChildTweets?.length);
   
   return (
-    <Grid item>
+    <Grid item pb={1.5} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
       <ShowTweet key={tweet.id} tweet={tweet as Tweet} threaded={isThreaded}/>
       {slicedChildTweets?.length ?
         slicedChildTweets.map(
-          (tweet) =>
+          (tweet, i) =>
             tweet && (
               <Grid item xs={12} key={tweet.id}>
-                <ShowTweet key={tweet.id} tweet={tweet as Tweet} threaded={isThreaded}/>
+                <ShowTweet key={tweet.id} tweet={tweet as Tweet} threaded={i < 3 && i !== slicedChildTweets.length-1 && isThreaded}/>
               </Grid>
             )
         ) : null}
-      {(tweet.user && childTweets?.length && childTweets.length > 3) ? (
+      {(tweet.user && hiddenTweetsCount) ? (
         <Grid item xs={12}>
-          <Box mx={2} mt={1}>
+          <Box mx={2} mt={1} pl={7}>
             <Link
               style={{ cursor: "pointer", color: theme.accentColor }}
               to={`/${tweet.user.handle}/status/${tweet.id}`}
             >
-              Show this thread
+              <Typography variant="body2">{hiddenTweetsCount} more meep{hiddenTweetsCount > 1 ? 's' : null}...</Typography>
             </Link>
           </Box>
         </Grid>
