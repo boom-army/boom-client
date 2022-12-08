@@ -6,7 +6,7 @@ import { CustomResponse } from "./CustomResponse";
 import { Grid, Link } from "@mui/material";
 import { HARKL_ID } from "../utils/utils";
 import { Loader } from "./Loader";
-import { NewTweet, ShowTweet } from "./Tweet";
+import { NewTweet } from "./Tweet";
 import { NewMeepsCountQuery, Tweet } from "../generated/graphql";
 import { BoomHeroStore } from "./Advertising/BoomHeroStore";
 import { ThemeContext } from "../contexts/theme";

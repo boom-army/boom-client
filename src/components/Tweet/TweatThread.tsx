@@ -1,27 +1,9 @@
-import "linkify-plugin-hashtag";
-import "linkify-plugin-mention";
-import * as linkify from "linkifyjs";
-import Linkify from "linkify-react";
 import React, { useContext } from "react";
-import moment from "moment";
-import { Box, Grid, Stack, Typography } from "@mui/material";
-import { CommentIcon } from "../Icons";
-import { EmojiTweet, Retweet, ShowTweet } from "./index";
-import { ImageBox } from "../ImageBox";
-import { LAMPORTS_PER_SOL } from "../../constants/math";
+import { Box, Grid, Typography } from "@mui/material";
+import { ShowTweet } from "./index";
 import { Link } from "react-router-dom";
-import { List as ReactionsList } from "../Reactions/List";
-import { NFTTweet } from "../NFT/NFTTweet";
-import { Theme, ThemeContext } from "../../contexts/theme";
-import { TipCreator } from "../TipCreator";
-import { TweetQuery, Reaction, Tweet } from "../../generated/graphql";
-import { UrlMetaData } from "../UrlMeta/UrlMetaData";
-import { UserAvatar } from "../UserAvatar";
-import { VideoContainer } from "../Giphy/VideoContainer";
-import { setDate } from "../../utils";
-import { styled } from "@mui/material/styles";
-import { useReaction } from "../../hooks/useReaction";
-import { HARKL_ID } from "../../utils/utils";
+import { ThemeContext } from "../../contexts/theme";
+import { TweetQuery, Tweet } from "../../generated/graphql";
 
 interface Props {
   tweet: TweetQuery["tweet"];
