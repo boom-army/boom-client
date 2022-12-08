@@ -777,7 +777,7 @@ export type EditProfileMutationVariables = Exact<{
 }>;
 
 
-export type EditProfileMutation = { __typename?: 'Mutation', editProfile: { __typename?: 'User', id: string, handle: string, publicAddress: string } };
+export type EditProfileMutation = { __typename?: 'Mutation', editProfile: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } };
 
 export type TweetReactionsQueryVariables = Exact<{
   tweetId: Scalars['ID'];
@@ -1628,8 +1628,13 @@ export const EditProfileDocument = gql`
     data: $data
   ) {
     id
+    avatar
     handle
-    publicAddress
+    consumerName
+    data {
+      avatarMint
+      avatarUpdateAuthority
+    }
   }
 }
     `;

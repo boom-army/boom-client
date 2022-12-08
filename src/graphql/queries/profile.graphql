@@ -84,7 +84,12 @@ mutation editProfile(
     data: $data
   ) {
     id
+    avatar
     handle
-    publicAddress
+    consumerName
+    data {
+      avatarMint
+      avatarUpdateAuthority
+    }
   }
 }
