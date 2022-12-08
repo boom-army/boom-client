@@ -21,7 +21,7 @@ import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
 import { GridStandard } from "./view-grids/GridStandard";
-import { GridAuction } from "./view-grids/GridAuction";
+// import { GridAuction } from "./view-grids/GridAuction";
 import { Nav } from "./views";
 
 export const AppRoutes: React.FC = () => {
