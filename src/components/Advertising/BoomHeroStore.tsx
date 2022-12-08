@@ -41,7 +41,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
           <Typography component="div" variant="h4" pb={1}>
             Become a <Typography display={"inline"}><VerifiedIcon sx={{
               color: theme.accentColor,
-              fontSize: "18px",
+              fontSize: "1.15rem",
               verticalAlign: "-3px"
             }} /></Typography>VIP on Boom
           </Typography>

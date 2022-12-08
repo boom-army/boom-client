@@ -119,7 +119,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded }: Props) => {
           {user?.data?.avatarUpdateAuthority === HARKL_ID && (
             <Typography display={"inline"}><VerifiedIcon sx={{
               color: theme.accentColor,
-              fontSize: "16px",
+              fontSize: "1rem",
               verticalAlign: "-3px"
             }} /></Typography>
           )}
