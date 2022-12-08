@@ -38,7 +38,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto", p: "0.5em 1em 0 1em" }}>
           <Typography component="div" variant="h4" pb={1}>
-            Post in the Hero feed
+            Become a VIP on Boom
           </Typography>
           <Typography
             variant="subtitle2"
@@ -53,7 +53,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             >
               Boom Hero NFT 
             </Link> : 'Boom Hero NFT '}
-            to appear in the Hero Feed.
+            to get insider status.
           </Typography>
           <Button
             component={MuiLink}
