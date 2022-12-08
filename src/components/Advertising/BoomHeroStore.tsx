@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { User } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 interface BoomHeroStoreProps {
   userData: User | null;
@@ -32,13 +33,17 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
       <CardMedia
         component="img"
         sx={{ width: 100, height: 100 }}
-        image="assets/magic-eden-logo.png"
-        alt="Magic Eden Logo"
+        image="assets/tensor-logo.jpeg"
+        alt="Tensor Trade Logo"
       />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto", p: "0.5em 1em 0 1em" }}>
           <Typography component="div" variant="h4" pb={1}>
-            Become a VIP on Boom
+            Become a <Typography display={"inline"}><VerifiedIcon sx={{
+              color: theme.accentColor,
+              fontSize: "18px",
+              verticalAlign: "-3px"
+            }} /></Typography>VIP on Boom
           </Typography>
           <Typography
             variant="subtitle2"
@@ -59,10 +64,10 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             component={MuiLink}
             size="small"
             variant="contained"
-            href="https://magiceden.io/marketplace/boomheroes"
+            href="https://www.tensor.trade/trade/boomheroes"
             target="_blank"
           >
-            Buy BoomHeroes on Magic Eden
+            Buy BoomHeroes on Tensor
           </Button>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}></Box>
