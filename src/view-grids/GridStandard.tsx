@@ -3,7 +3,7 @@ import { Profile } from "../components/Profile/Profile";
 import { MasterTweet } from "../components/Tweet/MasterTweet";
 import { NFTMint } from "../components/Mint/NFTMint";
 import { Suggestion } from "../components/SideBar/Suggestion";
-import { EditProfile } from "../components/Profile/EditProfile";
+import { EditProfile } from "../views/EditProfile";
 import { Route, Routes, Navigate } from "react-router-dom";
 import {
   ChannelFeed,

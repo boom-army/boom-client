@@ -1,5 +1,5 @@
-import { Loader } from "../Loader";
-import { EditProfileForm } from "./EditProfileForm";
+import { Loader } from "../components/Loader";
+import { EditProfileForm } from "../components/Profile/EditProfileForm";
 
 export const EditProfile = ({ data, loading, setUser }: any) => {
   if (loading) return <Loader />;

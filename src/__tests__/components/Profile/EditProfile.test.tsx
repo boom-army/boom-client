@@ -1,4 +1,4 @@
-import { EditProfile } from "../../../components/Profile/EditProfile";
+import { EditProfile } from "../../../views/EditProfile";
 import { MemoryRouter } from "react-router-dom";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
