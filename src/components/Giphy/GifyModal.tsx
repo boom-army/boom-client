@@ -12,28 +12,8 @@ import { ImageGrid } from "./ImageGrid";
 import { ImageSuggestionGrid } from "./ImageSuggestionGrid";
 import { Loader } from "../Loader";
 import { SearchModalHeader } from "./SearchModalHeader";
-import { ThemeContext } from "../../contexts/theme";
 import { debounce } from "lodash";
-import { ModalUnstyled } from '@mui/base';
-import { IconButton, Stack, styled } from "@mui/material";
-
-const StyledModal = styled(ModalUnstyled)({
-  position: "absolute",
-  top: "28%",
-  left: "25%",
-  height: "80%",
-});
-
-const Backdrop = styled("div")({
-  // zIndex: '-1',
-  position: "fixed",
-  right: "0",
-  bottom: "0",
-  top: "0",
-  left: "0",
-  backgroundColor: "rgba(0, 0, 0, 0.5)",
-  WebkitTapHighlightColor: "transparent",
-});
+import { Dialog, DialogContent, IconButton, Stack } from "@mui/material";
 
 const GIPHY_API = process.env.REACT_APP_GIPHY_KEY as string;
 
@@ -63,7 +43,6 @@ export const GifyModal: React.FC<{
   const [error, setError] = useState<any>(null);
   const [searchResults, setSearchResults] = useState<Search | null>(null); // current searched gifs
   const { searchGiphyCache, setSearchGiphyCache } = useContext(GiphyContext); // search cache
-  const { theme } = useContext(ThemeContext);
   const handleClose = () => setOpen(false);
   const handleOpen = () => {
     setInput("");
@@ -173,30 +152,19 @@ export const GifyModal: React.FC<{
       <IconButton onClick={handleOpen}>
         <GifIcon />
       </IconButton>
-      <StyledModal
+      <Dialog
         open={open}
         onClose={handleClose}
-        BackdropComponent={Backdrop}
+        scroll={"paper"}
+        fullWidth={true}
+        maxWidth={"sm"}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "30%",
-            transform: "translate(20%, -60%)",
-            bgcolor: theme.background,
-            border: `2px solid ${theme.blue.lightest}`,
-            borderRadius: 1,
-            maxWidth: "90vw",
-            width: 500,
-            height: 650,
-            minHeight: 500,
-            maxHeight: "90vh",
-            "@media screen and (max-width: 900px)": {
-              transform: "translate(-22%, -50%)",
-            },
-          }}
-        >
-          <Stack direction="column" sx={{ height: "100%" }}>
+        <DialogContent
+        sx={{
+          height: { md: "70vh", sm: "100vh" },
+          margin: { md: "auto", sm: 0.5},
+        }}>
+          <Stack direction="column" sx={{ height: "100%", minWidth: "100%" }}>
             <SearchModalHeader
               input={input}
               setIsLoading={setIsLoading}
@@ -235,8 +203,8 @@ export const GifyModal: React.FC<{
               )}
             </Box>
           </Stack>
-        </Box>
-      </StyledModal>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
