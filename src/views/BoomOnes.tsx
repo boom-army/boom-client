@@ -9,11 +9,11 @@ import {
   Grid,
   IconButton,
   Link,
+  Popper,
   // List,
   // ListItem,
   // ListItemAvatar,
   // ListItemText,
-  Popper,
   Stack,
   TextField,
   Typography,
@@ -359,7 +359,10 @@ export const BoomOnes = () => {
               id={id}
               open={open}
               anchorEl={anchorEl}
-              placement={"left-start"}
+              placement={"left-start"} 
+              nonce={undefined} 
+              onResize={undefined} 
+              onResizeCapture={undefined}
             >
               <Box
                 sx={{
