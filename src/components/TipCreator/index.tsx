@@ -2,7 +2,14 @@ import React, { useState, useContext } from "react";
 import { TipInput } from "./tipInput";
 import { ThemeContext } from "../../contexts/theme";
 import { Box, IconButton, Modal, Typography } from "@mui/material";
-import PaidIcon from "@mui/icons-material/Paid";
+import { ReactComponent as BMAIcon } from "../../icons/bma.svg";
+import { styled } from "@mui/material/styles";
+
+const BMAIconWrapper = styled("span")((props) => ({
+  "svg": {
+    color: props.theme.secondaryColor,
+  }
+}));
 
 interface TipProps {
   tipAmount?: number | null | string;
@@ -30,12 +37,11 @@ export const TipCreator: React.FC<TipProps> = ({
           aria-label="tip"
           onClick={() => setShowTip(!showTip)}
         >
-          <PaidIcon
-            sx={{
-              color: theme.secondaryColor,
-              "&:hover": { color: theme.accentColor },
-            }}
-          />
+          <BMAIconWrapper>
+            <BMAIcon
+              className={"bma-icon"}
+            />
+          </BMAIconWrapper>
           {!hideAmount && (
             <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
               {tipAmount ? tipAmount : null}
