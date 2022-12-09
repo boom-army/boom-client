@@ -1,11 +1,16 @@
 import { useEffect, useState, useContext, useCallback } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
-import { ModalUnstyled } from '@mui/base';
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
   Button,
   Chip,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   IconButton,
   InputAdornment,
   InputBase,
@@ -18,34 +23,10 @@ import { CircularProgress } from "@mui/material";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
-import { styled } from "@mui/material/styles";
 import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../../contexts/snackbar";
 import cuid from "cuid";
-
-const StyledModal = styled(ModalUnstyled)({
-  right: "0",
-  bottom: "0",
-  top: "0",
-  left: "0",
-  display: "flex",
-  justifyContent: "center",
-  "& .MuiInputBase-input": {
-    padding: "10px 12px",
-    width: "100%",
-  },
-});
-
-const Backdrop = styled("div")({
-  position: "fixed",
-  right: "0",
-  bottom: "0",
-  top: "0",
-  left: "0",
-  backgroundColor: "rgba(0, 0, 0, 0.5)",
-  WebkitTapHighlightColor: "transparent",
-});
 
 export const NFTPicker: React.FC<{
   setNftData: React.Dispatch<React.SetStateAction<any>>;
@@ -138,20 +119,39 @@ export const NFTPicker: React.FC<{
 
       {nftForm && (
         <>
-          <StyledModal
+          <Dialog
             open={nftForm}
             onClose={handleClose}
-            BackdropComponent={Backdrop}
+            aria-describedby="nft-picker-dialog"
+            sx={{
+              border: `1px solid ${theme.blue.light}`,
+            }}
           >
+            <DialogTitle sx={{ m: 0, p: 2 }}>
+              Select an NFT to display
+              <IconButton
+                aria-label="close"
+                onClick={handleClose}
+                sx={{
+                  position: "absolute",
+                  right: 8,
+                  top: 8,
+                  color: (theme) => theme.palette.grey[500],
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Enter the NFT Public Mint Key of any Solana NFT to display it in your meep.
+              </DialogContentText>
+            </DialogContent>
             <Box
               sx={{
-                position: "absolute",
                 minWidth: 600,
                 maxWidth: 600,
-                overflowX: "hidden",
-                overflowY: "hidden",
                 height: "auto",
-                top: "10rem",
                 color: theme.primaryColor,
                 background: theme.background,
                 padding: "1rem",
@@ -198,6 +198,7 @@ export const NFTPicker: React.FC<{
                   }
                   sx={{
                     border: `1px solid ${theme.secondaryColor}`,
+                    padding: 1,
                     color: theme.primaryColor,
                     borderRadius: "4px",
                   }}
@@ -276,25 +277,18 @@ export const NFTPicker: React.FC<{
                       flexDirection: "row-reverse",
                     }}
                   >
-                    <Button variant="contained" onClick={handleSelect}>
-                      Select
-                    </Button>
-                    <Box mr={1}>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleClose}
-                      >
-                        Cancel
-                      </Button>
-                    </Box>
                   </Box>
                 </>
               )}
             </Box>
-          </StyledModal>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              {metadata && (<Button onClick={handleSelect}>Select</Button>)}
+            </DialogActions>
+          </Dialog>
         </>
-      )}
+      )
+      }
     </>
   );
 };
