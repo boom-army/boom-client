@@ -95,16 +95,21 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded }: Props) => {
             className="avatar"
             avatar={user?.avatar as string}
             isNFT={user?.data?.avatarMint}
+            sx={{
+              width: "2rem",
+              height: "2rem",
+              marginTop: "0.3rem",
+            }}
           />
         </Link>
         {threaded && (
           <Box
             sx={{
-              borderLeft: `1px solid ${theme.tertiaryColor}`,
-              height: "calc(100% - 2.5em)",
+              borderLeft: `1px solid ${theme.blue.lighter}`,
+              height: "calc(100% - 1.8rem)",
               position: "absolute",
-              left: "1.25em",
-              top: "3em",
+              left: "1rem",
+              top: "2.7rem",
             }}
           />
         )}
