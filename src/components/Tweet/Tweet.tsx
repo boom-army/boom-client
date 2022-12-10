@@ -4,9 +4,8 @@ import * as linkify from "linkifyjs";
 import Linkify from "linkify-react";
 import React, { useContext } from "react";
 import moment from "moment";
-import VerifiedIcon from '@mui/icons-material/Verified';
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import { CommentIcon } from "../Icons";
+import { CommentIcon, HerofiedIcon } from "../Icons";
 import { EmojiTweet, Retweet } from "./index";
 import { ImageBox } from "../ImageBox";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
@@ -117,11 +116,16 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded }: Props) => {
           </Typography>
           <Typography display={"inline"} mr={0.5}>{`@${handle}`}</Typography>
           {user?.data?.avatarUpdateAuthority === HARKL_ID && (
-            <Typography display={"inline"}><VerifiedIcon sx={{
-              color: theme.accentColor,
-              fontSize: "1rem",
-              verticalAlign: "-3px"
-            }} /></Typography>
+            <Typography display={"inline"}>
+              <HerofiedIcon
+                sx={{
+                  fill: theme.accentColor,
+                  width: "1rem",
+                  height: "1rem",
+                  verticalAlign: "-2px",
+                }}
+              />
+            </Typography>
           )}
         </Link>
         <Link to={`/${handle}/status/${id}`} className="secondary">

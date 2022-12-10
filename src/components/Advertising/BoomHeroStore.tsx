@@ -6,12 +6,13 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Link as MuiLink
+  Link as MuiLink,
+  styled
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { User } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
-import VerifiedIcon from '@mui/icons-material/Verified';
+import { HerofiedIcon } from "../Icons";
 
 interface BoomHeroStoreProps {
   userData: User | null;
@@ -39,11 +40,18 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto", p: "0.5em 1em 0 1em" }}>
           <Typography component="div" variant="h4" pb={1}>
-            Become a <Typography display={"inline"}><VerifiedIcon sx={{
-              color: theme.accentColor,
-              fontSize: "1.15rem",
-              verticalAlign: "-3px"
-            }} /></Typography>VIP on Boom
+            Become a{" "}
+            <Typography display={"inline"}>
+              <HerofiedIcon
+                sx={{
+                  fill: theme.accentColor,
+                  width: "1rem",
+                  height: "1rem",
+                  verticalAlign: "-2px",
+                }}
+              />
+            </Typography>
+            VIP on Boom
           </Typography>
           <Typography
             variant="subtitle2"
@@ -52,13 +60,17 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             pb={1}
           >
             Flex your profile{" "}
-            {userData?.handle ? <Link
-              to={`/${userData?.handle}`}
-              style={{ color: theme.blue.lightest }}
-            >
-              by clicking your Boom Hero NFT{" "}
-            </Link> : 'Boom Hero NFT'}
-             and making it your PFP
+            {userData?.handle ? (
+              <Link
+                to={`/${userData?.handle}`}
+                style={{ color: theme.blue.lightest }}
+              >
+                by clicking your Boom Hero NFT{" "}
+              </Link>
+            ) : (
+              "Boom Hero NFT"
+            )}
+            and making it your PFP
           </Typography>
           <Button
             component={MuiLink}
