@@ -64,7 +64,7 @@ export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) =>
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
-  const [tweetFiles, setTweetFiles]: any = useState([]);
+  const [tweetFiles, setTweetFiles] = useState<string[]>([]);
   const tweet = useInput("");
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
@@ -143,7 +143,7 @@ export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) =>
       const signedUrl = data.signFileUrl;
       const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
       const imageUrl = imageData?.config?.url?.split("?")[0];
-      setTweetFiles([...tweetFiles, imageUrl]);
+      imageUrl && setTweetFiles([imageUrl, ...tweetFiles]);
     } catch (error) {
       console.log(error);
     } finally {
