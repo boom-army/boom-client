@@ -36,7 +36,7 @@ import { UserContext } from "../../contexts/user";
 interface NewTweetProps {
   parentTweet?: string | undefined
   channel?: string | undefined
-  setOpenReply?: (open: boolean) => void
+  closePopUp?: () => void
 }
 
 const IconsGrid = styled(Grid)((props) => ({
@@ -58,7 +58,7 @@ const ImageInput = styled("input")({
   display: "none",
 });
 
-export const NewTweet = ({ parentTweet, channel, setOpenReply }: NewTweetProps) => {
+export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) => {
   const { theme } = useContext(ThemeContext);
   const { user: userData } = useContext(UserContext);
   const { enqueueSnackbar } = useSnackbar();
@@ -122,7 +122,7 @@ export const NewTweet = ({ parentTweet, channel, setOpenReply }: NewTweetProps) 
     tweet.setValue("");
     setTweetFiles([]);
     setGif(null);
-    setOpenReply && setOpenReply(false);
+    closePopUp && closePopUp();
   };
 
   const handleTweetFiles = async (e: any) => {
