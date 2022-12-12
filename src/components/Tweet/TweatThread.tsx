@@ -19,13 +19,13 @@ export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
   
   return (
     <Grid item pb={1.5} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
-      <ShowTweet key={tweet.id} tweet={tweet as Tweet} threaded={isThreaded}/>
+      <ShowTweet key={tweet.id} tweet={tweet as Tweet} threaded={isThreaded} popUpResponse/>
       {slicedChildTweets?.length ?
         slicedChildTweets.map(
           (tweet, i) =>
             tweet && (
               <Grid item xs={12} key={tweet.id}>
-                <ShowTweet key={tweet.id} tweet={tweet as Tweet} threaded={i < 3 && i !== slicedChildTweets.length-1 && isThreaded}/>
+                <ShowTweet key={tweet.id} tweet={tweet as Tweet} threaded={i < 3 && i !== slicedChildTweets.length-1 && isThreaded} popUpResponse/>
               </Grid>
             )
         ) : null}

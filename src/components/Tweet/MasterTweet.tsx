@@ -67,7 +67,7 @@ export const MasterTweet = () => {
           ) : (
             <CustomResponse text="Oops, the tweet you are looking for doesn't seem to exist." />
           )}
-          {exists && userData && <NewTweet parentTweet={data?.tweet?.id} userData={userData} />}
+          {exists && userData && <NewTweet parentTweet={data?.tweet?.id} />}
           {comments &&
             comments.map((comment: any) => (
               <ShowTweet tweet={comment} key={comment.id} />

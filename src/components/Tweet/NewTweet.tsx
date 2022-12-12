@@ -5,7 +5,6 @@ import {
   FeedDocument,
   TweetDocument,
   useNewTweetMutation,
-  MeQuery,
   HeroFeedDocument,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
@@ -32,11 +31,12 @@ import { ThemeContext } from "../../contexts/theme";
 import { useState, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
+import { UserContext } from "../../contexts/user";
 
 interface NewTweetProps {
   parentTweet?: string | undefined
   channel?: string | undefined
-  userData: MeQuery["me"]
+  setOpenReply?: (open: boolean) => void
 }
 
 const IconsGrid = styled(Grid)((props) => ({
@@ -58,8 +58,9 @@ const ImageInput = styled("input")({
   display: "none",
 });
 
-export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
+export const NewTweet = ({ parentTweet, channel, setOpenReply }: NewTweetProps) => {
   const { theme } = useContext(ThemeContext);
+  const { user: userData } = useContext(UserContext);
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
@@ -121,6 +122,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
     tweet.setValue("");
     setTweetFiles([]);
     setGif(null);
+    setOpenReply && setOpenReply(false);
   };
 
   const handleTweetFiles = async (e: any) => {

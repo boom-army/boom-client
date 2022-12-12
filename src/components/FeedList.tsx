@@ -75,7 +75,7 @@ export const FeedList: React.FC<Props> = ({
           <Loader />
         </Box>
       ) : null}
-      {userData && <NewTweet userData={userData} />}
+      {userData && <NewTweet />}
       {newMeeps && newMeeps > 0 ? (
         <Grid item xs={12}>
           <Box

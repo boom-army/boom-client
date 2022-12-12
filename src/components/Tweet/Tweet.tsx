@@ -22,10 +22,12 @@ import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
 import { HARKL_ID } from "../../utils/utils";
+import { PopUpResponse } from "./PopUpResponse";
 
 interface Props {
   tweet: TweetQuery["tweet"];
   threaded?: boolean;
+  popUpResponse?: boolean;
 }
 
 const IconsStack = styled(Stack)((props) => ({
@@ -45,7 +47,7 @@ const TweetBody = styled(Typography)((props) => ({
   a: { color: props.theme.accentColor },
 }));
 
-export const ShowTweet: React.FC<Props> = ({ tweet, threaded }: Props) => {
+export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse }: Props) => {
   const {
     id,
     text,
@@ -171,14 +173,18 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded }: Props) => {
               <EmojiTweet handleReaction={handleReaction} />
             </Box>
 
-            <Link to={`/${handle}/status/${id}`}>
-              <Box display="flex" alignItems={"center"}>
-                <CommentIcon />
-                <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
-                  {commentsCount ? commentsCount : null}
-                </Typography>
-              </Box>
-            </Link>
+            {popUpResponse ? (
+              <PopUpResponse commentsCount={commentsCount} parentTweet={tweet.id} />
+            ) : (
+              <Link to={`/${handle}/status/${id}`}>
+                <Box display="flex" alignItems={"center"}>
+                  <CommentIcon />
+                  <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
+                    {commentsCount ? commentsCount : null}
+                  </Typography>
+                </Box>
+              </Link>
+            )}
 
             <Retweet
               id={id}
