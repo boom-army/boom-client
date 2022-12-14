@@ -86,32 +86,32 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse }: P
       mt={2}
       sx={{
         position: "relative",
-        padding: "0 1em",
+        padding: "0 0.25rem",
         display: "flex",
         maxWidth: "100vw",
       }}
     >
-      <Box mr={2} position="relative">
+      <Box mr={1} position="relative">
         <Link to={`/${handle}`}>
           <UserAvatar
             className="avatar"
             avatar={user?.avatar as string}
             isNFT={user?.data?.avatarMint}
             sx={{
-              width: "2rem",
-              height: "2rem",
-              marginTop: "0.3rem",
+              width: "3rem",
+              height: "3rem",
+              marginTop: "0.2rem",
             }}
           />
         </Link>
         {threaded && (
           <Box
             sx={{
-              borderLeft: `1px solid ${theme.blue.lighter}`,
-              height: "calc(100% - 1.8rem)",
+              borderLeft: `1px solid ${theme.tertiaryColor}`,
+              height: "calc(100% - 2.7rem)",
               position: "absolute",
-              left: "1rem",
-              top: "2.7rem",
+              left: "1.5rem",
+              top: "3.6rem",
             }}
           />
         )}
