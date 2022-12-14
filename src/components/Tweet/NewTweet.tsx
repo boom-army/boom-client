@@ -8,7 +8,7 @@ import {
   HeroFeedDocument,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
-import { ImageBox } from "../ImageBox";
+import { ImageBox } from "../Lightbox/ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { SIGN_FILE } from "../../queries/files";

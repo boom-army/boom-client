@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBox } from "../../components/ImageBox";
+import { ImageBox } from "../../components/Lightbox/ImageBox";
 import { act, fireEvent, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
