@@ -7,7 +7,7 @@ import moment from "moment";
 import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { EmojiTweet } from "../Tweet/index";
 import { HashLink } from "react-router-hash-link";
-import { ImageBox } from "../Lightbox/ImageBox";
+import { ImageBox } from "../ImageBox";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
 import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";

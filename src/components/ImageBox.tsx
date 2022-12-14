@@ -60,7 +60,7 @@ interface Props {
 const ImageColumnContainer = ({ files, isLeftCol, disablelightbox }: Props) => {
   const className = `tweet-image-col ${
     isLeftCol ? "tweet-image-left-col" : "tweet-image-right-col"
-  }`;  
+  }`;
 
   return (
     <div className={className}>

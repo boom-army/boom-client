@@ -20,7 +20,7 @@ import {
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { GifyModal } from "../Giphy/GifyModal";
-import { ImageBox } from "../Lightbox/ImageBox";
+import { ImageBox } from "../ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { RecoilState, useRecoilValue, useSetRecoilState } from "recoil";
