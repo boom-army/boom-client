@@ -185,6 +185,9 @@ export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) =>
               "& .MuiInput-root:before": {
                 border: 0,
               },
+              "& .MuiInputBase-inputMultiline": {
+                overflow: "scroll",
+              },
               "&:before": {
                 borderColor: theme.tertiaryColor2,
               },
