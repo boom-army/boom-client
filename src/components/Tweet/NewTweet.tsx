@@ -54,10 +54,6 @@ const IconsGrid = styled(Grid)((props) => ({
   },
 }));
 
-const ImageInput = styled("input")({
-  display: "none",
-});
-
 export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) => {
   const { theme } = useContext(ThemeContext);
   const { user: userData } = useContext(UserContext);
@@ -66,7 +62,7 @@ export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) =>
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles] = useState<string[]>([]);
   const tweet = useInput("");
-
+  
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
       FeedDocument,
@@ -233,17 +229,10 @@ export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) =>
 
         {!gif && !nftData && (
           <>
-            <label htmlFor="icon-button-file">
-              <ImageInput
-                accept="image/*"
-                id="icon-button-file"
-                type="file"
-                onChange={handleTweetFiles}
-              />
-              <IconButton aria-label="upload image" component="span">
-                <UploadFileIcon />
-              </IconButton>
-            </label>
+            <IconButton aria-label="upload image" component="label">
+              <UploadFileIcon />
+              <input hidden accept="image/*" type="file" onChange={handleTweetFiles} />
+            </IconButton>
           </>
         )}
 
