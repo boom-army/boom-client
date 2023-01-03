@@ -158,7 +158,6 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse }: P
           {reactions && reactions.length > 0 && (
             <ReactionsList
               reactions={reactions as Reaction[]}
-              // @ts-ignore
               handleReaction={handleReaction}
               tweetId={id}
             />

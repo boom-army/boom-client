@@ -15,10 +15,10 @@ export const useReaction = ({ tweetId }: Props) => {
   });
 
   const handleReaction = useCallback(
-    async ({ emojiId, skin }: { emojiId: string, skin: number }) => {
+    async ({ emojiId }: { emojiId: string }) => {
       try {
         await toggleReactionMutation({
-          variables: { id: tweetId, emojiId, skin },
+          variables: { id: tweetId, emojiId, skin: null },
         });
         enqueueSnackbar(`Emoji updated`, { variant: "success" });
       } catch (err) {
