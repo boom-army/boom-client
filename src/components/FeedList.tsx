@@ -84,7 +84,7 @@ export const FeedList: React.FC<Props> = ({
             py={1.5}
             sx={{ backgroundColor: theme.tertiaryColor2 }}
           >
-            <Link onClick={loadNewMeeps} sx={{ cursor: "pointer" }}>Show {newMeeps} Meeps</Link>
+            <Link onClick={loadNewMeeps} sx={{ cursor: "pointer" }}>Show {newMeeps} Meep{newMeeps > 1 ? 's' : null}</Link>
           </Box>
         </Grid>
       ) : null}
