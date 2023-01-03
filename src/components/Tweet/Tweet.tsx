@@ -61,12 +61,13 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse }: P
     retweetsCount,
     reactions,
     commentsCount,
+    parentTweet,
     tipsCount,
     createdAt,
   } = tweet;
 
   const { theme } = useContext(ThemeContext);
-  const { handleReaction } = useReaction({ tweetId: id });
+  const { handleReaction } = useReaction({ tweetId: id, parentTweetId: parentTweet?.id });
   const handle = user && user.handle;
 
   const extractUrls = linkify.find(text).filter((u) => u.type === "url");
