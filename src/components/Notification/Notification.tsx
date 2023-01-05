@@ -7,13 +7,13 @@ import { Mention } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { UserAvatar } from "../UserAvatar";
 import { useContext } from "react";
+import moment from "moment";
+import { setDate } from "../../utils";
 
-interface NotificationProps {
-  mention: Mention;
-}
-
-export const Notification = ({ mention }: NotificationProps) => {
+export const Notification = ({ mention }: { mention: Mention }) => {
   const { theme } = useContext(ThemeContext);
+  console.log(mention);
+
   return (
     <Box p={2} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
       {mention.user && (
@@ -32,13 +32,19 @@ export const Notification = ({ mention }: NotificationProps) => {
               />
             </Link>
           </Box>
-          <Link to={`/${mention.user}`}>
-            <Typography display={"inline"} color={theme.secondaryColor} sx={{ fontWeight: "600", mr: 0.5 }}>
+          <Link to={`/${mention.user.handle}`}>
+            <Typography
+              display={"inline"}
+              variant="body2"
+              color={theme.secondaryColor}
+              sx={{ fontWeight: "600", mr: 0.5 }}
+            >
               {mention.user.consumerName}
             </Typography>
             <Typography
               display={"inline"}
               mr={0.5}
+              variant="body2"
               color={theme.secondaryColor}
             >{`@${mention.user.handle}`}</Typography>
             {mention.user?.data?.avatarUpdateAuthority === HARKL_ID && (
@@ -46,22 +52,22 @@ export const Notification = ({ mention }: NotificationProps) => {
                 <HerofiedIcon
                   sx={{
                     fill: theme.accentColor,
-                    width: "1rem",
-                    height: "1rem",
+                    width: "0.8rem",
+                    height: "0.8rem",
                     verticalAlign: "-2px",
                   }}
                 />
               </Typography>
             )}
           </Link>
-          {mention.type === "reply" && (
-            <Typography color={theme.secondaryColor} display={"inline"} pl={0.5}>
-              replied to your meep
-            </Typography>
-          )}
           {mention.type && mention.type.includes("emoji:") && (
             <Box>
-              <Typography color={theme.secondaryColor} display={"inline"} px={0.5}>
+              <Typography
+                variant="body2"
+                color={theme.secondaryColor}
+                display={"inline"}
+                pl={0.5}
+              >
                 reacted{" "}
                 <Box
                   display={"inline"}
@@ -74,11 +80,34 @@ export const Notification = ({ mention }: NotificationProps) => {
               </Typography>
             </Box>
           )}
-          {mention.type === "mention" && (
-            <Typography color={theme.secondaryColor} display={"inline"} pl={0.5}>
-              mentioned you in meep
+          {mention.type === "reply" && (
+            <Typography
+              variant="body2"
+              color={theme.secondaryColor}
+              display={"inline"}
+              pl={0.5}
+              pt={"3px"}
+            >
+              replied to your meep
             </Typography>
           )}
+          {mention.type === "mention" && (
+            <Typography
+              variant="body2"
+              color={theme.secondaryColor}
+              display={"inline"}
+              pl={0.5}
+              pt={"3px"}
+            >
+              mentioned you in a meep
+            </Typography>
+          )}
+          <Typography
+            variant="body2"
+            color={theme.secondaryColor}
+            display={"inline"}
+            pl={0.5}
+            pt={"3px"}>{moment(setDate(mention.createdAt)).fromNow()}</Typography>
         </Box>
       )}
       {mention.tweet && <Typography pt={0.5}>{mention.tweet.text}</Typography>}

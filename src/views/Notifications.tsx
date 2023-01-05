@@ -1,19 +1,11 @@
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
-import { Emoji } from "emoji-mart";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useMentionsQuery } from "../generated/graphql";
-import { Box, Grid, Typography } from "@mui/material";
-import { UserAvatar } from "../components/UserAvatar";
-import { HerofiedIcon } from "../components/Icons";
-import { HARKL_ID } from "../utils/utils";
-import { Link } from "react-router-dom";
-import { ThemeContext } from "../contexts/theme";
+import { Grid } from "@mui/material";
 import { Notification } from "../components/Notification/Notification";
 
 export const Notifications = ({ refetchProfile }: any) => {
-  const { theme } = useContext(ThemeContext);
-
   const { loading, data } = useMentionsQuery({
     variables: {
       offset: 0,
@@ -21,8 +13,6 @@ export const Notifications = ({ refetchProfile }: any) => {
     },
     fetchPolicy: "network-only",
   });
-
-  console.log("data", data?.mentions);
 
   useEffect(() => {
     refetchProfile && refetchProfile();
