@@ -28,6 +28,7 @@ interface Props {
   tweet: TweetQuery["tweet"];
   threaded?: boolean;
   popUpResponse?: boolean;
+  overideMt?: number;
 }
 
 const IconsStack = styled(Stack)((props) => ({
@@ -43,11 +44,7 @@ const IconsStack = styled(Stack)((props) => ({
   },
 }));
 
-const TweetBody = styled(Typography)((props) => ({
-  a: { color: props.theme.accentColor },
-}));
-
-export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse }: Props) => {
+export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse, overideMt }: Props) => {
   const {
     id,
     text,
@@ -84,7 +81,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse }: P
     <Grid
       item
       xs={12}
-      mt={2}
+      mt={overideMt ?? 2}
       sx={{
         position: "relative",
         padding: "0 0.25rem",
@@ -143,9 +140,9 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse }: P
           </Typography>
         </Link>
         <Linkify options={linkifyOptions}>
-          <TweetBody mb={0.75} sx={{ wordBreak: "break-word" }}>
+          <Typography mb={0.75} sx={{ wordBreak: "break-word", a: { color: theme.accentColor} }}>
             {text}
-          </TweetBody>
+          </Typography>
         </Linkify>
         <UrlMetaData url={targetUrl} />
         <Box>

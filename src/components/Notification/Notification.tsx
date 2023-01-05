@@ -9,10 +9,10 @@ import { UserAvatar } from "../UserAvatar";
 import { useContext } from "react";
 import moment from "moment";
 import { setDate } from "../../utils";
+import { ShowTweet } from "../Tweet";
 
 export const Notification = ({ mention }: { mention: Mention }) => {
   const { theme } = useContext(ThemeContext);
-  console.log(mention);
 
   return (
     <Box p={2} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
@@ -110,7 +110,7 @@ export const Notification = ({ mention }: { mention: Mention }) => {
             pt={"3px"}>{moment(setDate(mention.createdAt)).fromNow()}</Typography>
         </Box>
       )}
-      {mention.tweet && <Typography pt={0.5}>{mention.tweet.text}</Typography>}
+      {mention.tweet && <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={1} ></ShowTweet>}
     </Box>
   );
 };
