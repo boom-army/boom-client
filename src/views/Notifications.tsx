@@ -1,16 +1,19 @@
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
-import { ShowTweet } from "../components/Tweet";
 import { Emoji } from "emoji-mart";
-import { styled } from "@mui/material/styles";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useMentionsQuery } from "../generated/graphql";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { UserAvatar } from "../components/UserAvatar";
-
-const Wrapper = styled("div")({});
+import { HerofiedIcon } from "../components/Icons";
+import { HARKL_ID } from "../utils/utils";
+import { Link } from "react-router-dom";
+import { ThemeContext } from "../contexts/theme";
+import { Notification } from "../components/Notification/Notification";
 
 export const Notifications = ({ refetchProfile }: any) => {
+  const { theme } = useContext(ThemeContext);
+
   const { loading, data } = useMentionsQuery({
     variables: {
       offset: 0,
@@ -19,54 +22,25 @@ export const Notifications = ({ refetchProfile }: any) => {
     fetchPolicy: "network-only",
   });
 
-  console.log("data", data);
+  console.log("data", data?.mentions);
 
   useEffect(() => {
     refetchProfile && refetchProfile();
   }, [data, refetchProfile]);
+
   if (loading) return <Loader />;
   return (
-    <Wrapper>
+    <Grid
+      item
+      xs={12}
+    >
       {data?.mentions?.length ? (
         data.mentions.map((mention: any) => (
-          <Box p={1} sx={{ borderBottom: "1px solid black" }}>
-            {mention.user && (
-              <Box display={"flex"}>
-                <UserAvatar
-                  sx={{
-                    width: 20,
-                    height: 20,
-                    marginRight: 0.5,
-                  }}
-                  avatar={mention.user?.avatar}
-                  isNFT={mention.user?.data?.avatarMint}
-                />
-                {mention.user.handle}
-                {mention.type === "reply" && " replied to your meep"}
-                {mention.type.includes("emoji:") && (
-                  <>
-                    <Typography display={"inline"} px={0.5}>
-                      reacted{" "}
-                      <Box
-                        display={"inline"}
-                        sx={{
-                          "& .emoji-mart-emoji": { verticalAlign: "-3px" },
-                        }}
-                      >
-                        <Emoji emoji={mention.type.split(":")[1]} size={16} />
-                      </Box>
-                    </Typography>
-                  </>
-                )}
-                {mention.type === "mention" && " mentioned you in meep"}
-              </Box>
-            )}
-            {mention.tweet && mention.tweet.text}
-          </Box>
+          <Notification mention={mention} />
         ))
       ) : (
         <CustomResponse text="Follow some people to get some feed updates" />
       )}
-    </Wrapper>
+    </Grid>
   );
 };
