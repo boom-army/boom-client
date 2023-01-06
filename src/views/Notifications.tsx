@@ -26,7 +26,7 @@ export const Notifications = ({ refetchProfile }: any) => {
     >
       {data?.mentions?.length ? (
         data.mentions.map((mention: any) => (
-          <Notification mention={mention} />
+          <Notification key={mention.id} mention={mention} />
         ))
       ) : (
         <CustomResponse text="Follow some people to get some feed updates" />

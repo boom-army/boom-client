@@ -3,7 +3,7 @@ import { Emoji } from "emoji-mart";
 import { HARKL_ID } from "../../utils/utils";
 import { HerofiedIcon } from "../Icons";
 import { Link } from "react-router-dom";
-import { Maybe, Mention, Tweet, User } from "../../generated/graphql";
+import { Mention, useProfileByIdQuery, User } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { UserAvatar } from "../UserAvatar";
 import { useContext, useEffect, useState } from "react";
@@ -18,6 +18,16 @@ interface NotificationProps {
 export const Notification = ({ mention }: NotificationProps) => {
   const { theme } = useContext(ThemeContext);
   const [text, setText] = useState('');
+  const [fromUser, setFromUser] = useState(mention?.tweet?.user);
+
+  useProfileByIdQuery({
+    variables: {
+      id: mention?.common?.emojiUserId ?? "",
+    },
+    onCompleted: ({profileById}) => {
+      setFromUser(profileById as User);
+    }
+  });
 
   useEffect(() => {
     switch (mention.type) {
@@ -34,14 +44,14 @@ export const Notification = ({ mention }: NotificationProps) => {
 
   return (
     <Box p={2} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
-      {mention?.tweet?.user && (
+      {fromUser && (
         <Box display={"flex"}>
           <Box mr={0.5} position="relative">
-            <Link to={`/${mention?.tweet?.user.handle}`}>
+            <Link to={`/${fromUser.handle}`}>
               <UserAvatar
                 className="avatar"
-                avatar={mention?.tweet?.user?.avatar as string}
-                isNFT={mention?.tweet?.user?.data?.avatarMint}
+                avatar={fromUser?.avatar as string}
+                isNFT={fromUser?.data?.avatarMint}
                 sx={{
                   width: "1.1rem",
                   height: "1.1rem",
@@ -50,22 +60,22 @@ export const Notification = ({ mention }: NotificationProps) => {
               />
             </Link>
           </Box>
-          <Link to={`/${mention?.tweet?.user.handle}`}>
+          <Link to={`/${fromUser.handle}`}>
             <Typography
               display={"inline"}
               variant="body2"
               color={theme.secondaryColor}
               sx={{ fontWeight: "600", mr: 0.5 }}
             >
-              {mention?.tweet?.user.consumerName}
+              {fromUser.consumerName}
             </Typography>
             <Typography
               display={"inline"}
               mr={0.5}
               variant="body2"
               color={theme.secondaryColor}
-            >{`@${mention?.tweet?.user.handle}`}</Typography>
-            {mention?.tweet?.user?.data?.avatarUpdateAuthority === HARKL_ID && (
+            >{`@${fromUser.handle}`}</Typography>
+            {fromUser?.data?.avatarUpdateAuthority === HARKL_ID && (
               <Typography display={"inline"}>
                 <HerofiedIcon
                   sx={{
@@ -78,7 +88,7 @@ export const Notification = ({ mention }: NotificationProps) => {
               </Typography>
             )}
           </Link>
-          {mention.type && mention.type.includes("emoji:") ? (
+          {mention.type && mention.type.includes("emoji") ? (
             <Box>
               <Typography
                 variant="body2"
@@ -93,7 +103,7 @@ export const Notification = ({ mention }: NotificationProps) => {
                     "& .emoji-mart-emoji": { verticalAlign: "-3px" },
                   }}
                 >
-                  <Emoji emoji={mention.type.split(":")[1]} size={16} />
+                  {mention?.common?.emoji && <Emoji emoji={mention?.common?.emoji} size={16} />}
                 </Box>
               </Typography>
             </Box>
