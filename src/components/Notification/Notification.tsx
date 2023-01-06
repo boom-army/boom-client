@@ -103,7 +103,7 @@ export const Notification = ({ mention }: NotificationProps) => {
                     "& .emoji-mart-emoji": { verticalAlign: "-3px" },
                   }}
                 >
-                  {mention?.common?.emoji && <Emoji emoji={mention?.common?.emoji} size={16} />}
+                  {mention?.common?.emojiId && <Emoji emoji={mention?.common?.emojiId} size={16} />}
                 </Box>
               </Typography>
             </Box>

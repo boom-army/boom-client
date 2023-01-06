@@ -16,7 +16,7 @@ query mentions($offset: Int, $limit: Int) {
       }
     }
     common {
-      emoji
+      emojiId
       emojiUserId
     }
     createdAt
