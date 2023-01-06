@@ -480,6 +480,7 @@ export type Query = {
   newMeepsCount?: Maybe<Scalars['Int']>;
   oneSignal: OneSignal;
   profile: User;
+  profileById: User;
   profileByPubKey: User;
   searchTweets: Array<Tweet>;
   searchUser: Array<User>;
@@ -532,6 +533,11 @@ export type QueryOneSignalArgs = {
 
 export type QueryProfileArgs = {
   handle?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryProfileByIdArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -774,6 +780,13 @@ export type ProfileByPubKeyQueryVariables = Exact<{
 
 
 export type ProfileByPubKeyQuery = { __typename?: 'Query', profileByPubKey: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, bio?: string | null | undefined, createdAt?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } };
+
+export type ProfileByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ProfileByIdQuery = { __typename?: 'Query', profileById: { __typename?: 'User', id: string, publicAddress: string, handle: string, consumerName?: string | null | undefined, avatar: string, coverPhoto?: string | null | undefined, dob?: string | null | undefined, location?: string | null | undefined, website?: string | null | undefined, isSelf: boolean, bio?: string | null | undefined, createdAt?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1608,6 +1621,56 @@ export function useProfileByPubKeyLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type ProfileByPubKeyQueryHookResult = ReturnType<typeof useProfileByPubKeyQuery>;
 export type ProfileByPubKeyLazyQueryHookResult = ReturnType<typeof useProfileByPubKeyLazyQuery>;
 export type ProfileByPubKeyQueryResult = Apollo.QueryResult<ProfileByPubKeyQuery, ProfileByPubKeyQueryVariables>;
+export const ProfileByIdDocument = gql`
+    query profileById($id: String!) {
+  profileById(id: $id) {
+    id
+    publicAddress
+    handle
+    consumerName
+    avatar
+    coverPhoto
+    dob
+    location
+    website
+    isSelf
+    bio
+    data {
+      avatarMint
+      avatarUpdateAuthority
+    }
+    createdAt
+  }
+}
+    `;
+
+/**
+ * __useProfileByIdQuery__
+ *
+ * To run a query within a React component, call `useProfileByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProfileByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProfileByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProfileByIdQuery(baseOptions: Apollo.QueryHookOptions<ProfileByIdQuery, ProfileByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProfileByIdQuery, ProfileByIdQueryVariables>(ProfileByIdDocument, options);
+      }
+export function useProfileByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProfileByIdQuery, ProfileByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProfileByIdQuery, ProfileByIdQueryVariables>(ProfileByIdDocument, options);
+        }
+export type ProfileByIdQueryHookResult = ReturnType<typeof useProfileByIdQuery>;
+export type ProfileByIdLazyQueryHookResult = ReturnType<typeof useProfileByIdLazyQuery>;
+export type ProfileByIdQueryResult = Apollo.QueryResult<ProfileByIdQuery, ProfileByIdQueryVariables>;
 export const MeDocument = gql`
     query me {
   me {

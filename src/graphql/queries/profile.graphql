@@ -48,6 +48,27 @@ query profileByPubKey($publicAddress: String!) {
   }
 }
 
+query profileById($id: String!) {
+  profileById(id: $id) {
+    id
+    publicAddress
+    handle
+    consumerName
+    avatar
+    coverPhoto
+    dob
+    location
+    website
+    isSelf
+    bio
+    data {
+      avatarMint
+      avatarUpdateAuthority
+    }
+    createdAt
+  }
+}
+
 query me {
   me {
     id
