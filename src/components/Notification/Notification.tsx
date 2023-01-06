@@ -15,51 +15,33 @@ interface NotificationProps {
   mention: Mention;
 }
 
-interface DisplayData {
-  fromUser: Maybe<User> | undefined;
-  forTweet: Maybe<Tweet> | undefined;
-  fromText: string | null;
-}
-
 export const Notification = ({ mention }: NotificationProps) => {
   const { theme } = useContext(ThemeContext);
-  const [data, setData] = useState<DisplayData>({
-    fromUser: null,
-    forTweet: null,
-    fromText: null,
-  });
+  const [text, setText] = useState('');
 
   useEffect(() => {
     switch (mention.type) {
       case "mention":
-        setData({
-          fromUser: mention.user,
-          forTweet: mention.tweet,
-          fromText: "mentioned you in a meep",
-        });
+        setText("mentioned you in a meep");
         break;
       case "reply":
-        setData({
-          fromUser: mention.user,
-          forTweet: mention.tweet,
-          fromText: "replied to your meep",
-        });
+        setText("replied to your meep");
         break;
       default:
         break;
     }
   }, [mention]);
 
-  return data.fromUser && data.forTweet ? (
+  return (
     <Box p={2} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
-      {data.fromUser && (
+      {mention?.tweet?.user && (
         <Box display={"flex"}>
           <Box mr={0.5} position="relative">
-            <Link to={`/${data.fromUser.handle}`}>
+            <Link to={`/${mention?.tweet?.user.handle}`}>
               <UserAvatar
                 className="avatar"
-                avatar={data.fromUser?.avatar as string}
-                isNFT={data.fromUser?.data?.avatarMint}
+                avatar={mention?.tweet?.user?.avatar as string}
+                isNFT={mention?.tweet?.user?.data?.avatarMint}
                 sx={{
                   width: "1.1rem",
                   height: "1.1rem",
@@ -68,22 +50,22 @@ export const Notification = ({ mention }: NotificationProps) => {
               />
             </Link>
           </Box>
-          <Link to={`/${data.fromUser.handle}`}>
+          <Link to={`/${mention?.tweet?.user.handle}`}>
             <Typography
               display={"inline"}
               variant="body2"
               color={theme.secondaryColor}
               sx={{ fontWeight: "600", mr: 0.5 }}
             >
-              {data.fromUser.consumerName}
+              {mention?.tweet?.user.consumerName}
             </Typography>
             <Typography
               display={"inline"}
               mr={0.5}
               variant="body2"
               color={theme.secondaryColor}
-            >{`@${data.fromUser.handle}`}</Typography>
-            {data.fromUser?.data?.avatarUpdateAuthority === HARKL_ID && (
+            >{`@${mention?.tweet?.user.handle}`}</Typography>
+            {mention?.tweet?.user?.data?.avatarUpdateAuthority === HARKL_ID && (
               <Typography display={"inline"}>
                 <HerofiedIcon
                   sx={{
@@ -123,7 +105,7 @@ export const Notification = ({ mention }: NotificationProps) => {
               pl={0.5}
               pt={"3px"}
             >
-              {data.fromText}
+              {text}
             </Typography>
           )}
           <Typography
@@ -137,13 +119,13 @@ export const Notification = ({ mention }: NotificationProps) => {
           </Typography>
         </Box>
       )}
-      {data.forTweet && (
+      {mention.tweet && (
         <ShowTweet
           key={mention.id}
-          tweet={data.forTweet}
+          tweet={mention.tweet}
           overideMt={1}
         ></ShowTweet>
       )}
     </Box>
-  ) : null;
+  );
 };
