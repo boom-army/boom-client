@@ -114,7 +114,7 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse, ove
           />
         )}
       </Box>
-      <Box mt={1}>
+      <Box mt={1} sx={{ flexWrap: "wrap", wordBreak: "break-word" }}>
         <Link to={`/${handle}`}>
           <Typography display={"inline"} sx={{ fontWeight: "600", mr: 0.5 }}>
             {user && user.consumerName}
