@@ -12,6 +12,7 @@ export const client = new ApolloClient({
           users: offsetLimitPagination(),
           searchTweets: offsetLimitPagination(),
           searchUser: offsetLimitPagination(),
+          mentions: offsetLimitPagination(),
         },
       },
     },
