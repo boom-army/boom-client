@@ -80,6 +80,12 @@ export type Comment = {
   user?: Maybe<User>;
 };
 
+export type Common = {
+  __typename?: 'Common';
+  emoji?: Maybe<Scalars['String']>;
+  emojiUserId?: Maybe<Scalars['String']>;
+};
+
 export type CreatorsEntity = {
   __typename?: 'CreatorsEntity';
   address?: Maybe<Scalars['String']>;
@@ -133,6 +139,7 @@ export type MembersCount = {
 
 export type Mention = {
   __typename?: 'Mention';
+  common?: Maybe<Common>;
   createdAt?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   tweet?: Maybe<Tweet>;
@@ -738,7 +745,7 @@ export type MentionsQueryVariables = Exact<{
 }>;
 
 
-export type MentionsQuery = { __typename?: 'Query', mentions: Array<{ __typename?: 'Mention', id: string, type?: string | null | undefined, createdAt?: string | null | undefined, tweet?: { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null | undefined, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined }> };
+export type MentionsQuery = { __typename?: 'Query', mentions: Array<{ __typename?: 'Mention', id: string, type?: string | null | undefined, createdAt?: string | null | undefined, tweet?: { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null | undefined, createdAt?: string | null | undefined, channel?: { __typename?: 'Channel', id: string } | null | undefined, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null | undefined, user?: { __typename?: 'User', id: string, handle: string, avatar: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined, files?: Array<{ __typename?: 'File', id: string, url: string }> | null | undefined, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null | undefined, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null | undefined, symbol?: string | null | undefined, description?: string | null | undefined, sellerFeeBasisPoints?: number | null | undefined, externalUrl?: string | null | undefined, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null | undefined, value?: string | null | undefined } | null | undefined> | null | undefined, collection?: { __typename?: 'Collection', name?: string | null | undefined, family?: string | null | undefined } | null | undefined, properties?: { __typename?: 'Properties', category?: string | null | undefined, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null | undefined, type?: string | null | undefined } | null | undefined> | null | undefined, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null | undefined, share?: number | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, publicAddress: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null | undefined, isMine: boolean, count: number }> | null | undefined } | null | undefined, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null | undefined, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined, common?: { __typename?: 'Common', emoji?: string | null | undefined, emojiUserId?: string | null | undefined } | null | undefined }> };
 
 export type GetMetaQueryVariables = Exact<{
   url?: Maybe<Scalars['String']>;
@@ -1291,6 +1298,10 @@ export const MentionsDocument = gql`
         avatarMint
         avatarUpdateAuthority
       }
+    }
+    common {
+      emoji
+      emojiUserId
     }
     createdAt
   }

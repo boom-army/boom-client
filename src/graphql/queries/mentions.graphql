@@ -15,6 +15,10 @@ query mentions($offset: Int, $limit: Int) {
         avatarUpdateAuthority
       }
     }
+    common {
+      emoji
+      emojiUserId
+    }
     createdAt
   }
 }
