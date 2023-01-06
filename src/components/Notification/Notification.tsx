@@ -3,27 +3,63 @@ import { Emoji } from "emoji-mart";
 import { HARKL_ID } from "../../utils/utils";
 import { HerofiedIcon } from "../Icons";
 import { Link } from "react-router-dom";
-import { Mention } from "../../generated/graphql";
+import { Maybe, Mention, Tweet, User } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { UserAvatar } from "../UserAvatar";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { setDate } from "../../utils";
 import { ShowTweet } from "../Tweet";
 
-export const Notification = ({ mention }: { mention: Mention }) => {
-  const { theme } = useContext(ThemeContext);
+interface NotificationProps {
+  mention: Mention;
+}
 
-  return (
+interface DisplayData {
+  fromUser: Maybe<User> | undefined;
+  forTweet: Maybe<Tweet> | undefined;
+  fromText: string | null;
+}
+
+export const Notification = ({ mention }: NotificationProps) => {
+  const { theme } = useContext(ThemeContext);
+  const [data, setData] = useState<DisplayData>({
+    fromUser: null,
+    forTweet: null,
+    fromText: null,
+  });
+
+  useEffect(() => {
+    switch (mention.type) {
+      case "mention":
+        setData({
+          fromUser: mention.user,
+          forTweet: mention.tweet,
+          fromText: "mentioned you in a meep",
+        });
+        break;
+      case "reply":
+        setData({
+          fromUser: mention.user,
+          forTweet: mention.tweet,
+          fromText: "replied to your meep",
+        });
+        break;
+      default:
+        break;
+    }
+  }, [mention]);
+
+  return data.fromUser && data.forTweet ? (
     <Box p={2} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
-      {mention.user && (
+      {data.fromUser && (
         <Box display={"flex"}>
           <Box mr={0.5} position="relative">
-            <Link to={`/${mention.user.handle}`}>
+            <Link to={`/${data.fromUser.handle}`}>
               <UserAvatar
                 className="avatar"
-                avatar={mention.user?.avatar as string}
-                isNFT={mention.user?.data?.avatarMint}
+                avatar={data.fromUser?.avatar as string}
+                isNFT={data.fromUser?.data?.avatarMint}
                 sx={{
                   width: "1.1rem",
                   height: "1.1rem",
@@ -32,22 +68,22 @@ export const Notification = ({ mention }: { mention: Mention }) => {
               />
             </Link>
           </Box>
-          <Link to={`/${mention.user.handle}`}>
+          <Link to={`/${data.fromUser.handle}`}>
             <Typography
               display={"inline"}
               variant="body2"
               color={theme.secondaryColor}
               sx={{ fontWeight: "600", mr: 0.5 }}
             >
-              {mention.user.consumerName}
+              {data.fromUser.consumerName}
             </Typography>
             <Typography
               display={"inline"}
               mr={0.5}
               variant="body2"
               color={theme.secondaryColor}
-            >{`@${mention.user.handle}`}</Typography>
-            {mention.user?.data?.avatarUpdateAuthority === HARKL_ID && (
+            >{`@${data.fromUser.handle}`}</Typography>
+            {data.fromUser?.data?.avatarUpdateAuthority === HARKL_ID && (
               <Typography display={"inline"}>
                 <HerofiedIcon
                   sx={{
@@ -60,7 +96,7 @@ export const Notification = ({ mention }: { mention: Mention }) => {
               </Typography>
             )}
           </Link>
-          {mention.type && mention.type.includes("emoji:") && (
+          {mention.type && mention.type.includes("emoji:") ? (
             <Box>
               <Typography
                 variant="body2"
@@ -79,8 +115,7 @@ export const Notification = ({ mention }: { mention: Mention }) => {
                 </Box>
               </Typography>
             </Box>
-          )}
-          {mention.type === "reply" && (
+          ) : (
             <Typography
               variant="body2"
               color={theme.secondaryColor}
@@ -88,18 +123,7 @@ export const Notification = ({ mention }: { mention: Mention }) => {
               pl={0.5}
               pt={"3px"}
             >
-              replied to your meep
-            </Typography>
-          )}
-          {mention.type === "mention" && (
-            <Typography
-              variant="body2"
-              color={theme.secondaryColor}
-              display={"inline"}
-              pl={0.5}
-              pt={"3px"}
-            >
-              mentioned you in a meep
+              {data.fromText}
             </Typography>
           )}
           <Typography
@@ -107,10 +131,19 @@ export const Notification = ({ mention }: { mention: Mention }) => {
             color={theme.secondaryColor}
             display={"inline"}
             pl={0.5}
-            pt={"3px"}>{moment(setDate(mention.createdAt)).fromNow()}</Typography>
+            pt={"3px"}
+          >
+            {moment(setDate(mention.createdAt)).fromNow()}
+          </Typography>
         </Box>
       )}
-      {mention.tweet && <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={1} ></ShowTweet>}
+      {data.forTweet && (
+        <ShowTweet
+          key={mention.id}
+          tweet={data.forTweet}
+          overideMt={1}
+        ></ShowTweet>
+      )}
     </Box>
-  );
+  ) : null;
 };
