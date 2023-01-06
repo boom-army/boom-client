@@ -24,7 +24,7 @@ export const Notification = ({ mention }: NotificationProps) => {
     variables: {
       id: mention?.common?.emojiUserId ?? "",
     },
-    onCompleted: ({profileById}) => {
+    onCompleted: ({ profileById }) => {
       setFromUser(profileById as User);
     }
   });
@@ -45,7 +45,7 @@ export const Notification = ({ mention }: NotificationProps) => {
   return (
     <Box p={2} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
       {fromUser && (
-        <Box display={"flex"}>
+        <Box display={"flex"} sx={{ flexWrap: "wrap", wordBreak: "break-word" }}>
           <Box mr={0.5} position="relative">
             <Link to={`/${fromUser.handle}`}>
               <UserAvatar
@@ -55,45 +55,38 @@ export const Notification = ({ mention }: NotificationProps) => {
                 sx={{
                   width: "1.1rem",
                   height: "1.1rem",
-                  marginTop: "0.2rem",
+                  mt: "0.1rem",
                 }}
               />
             </Link>
           </Box>
-          <Link to={`/${fromUser.handle}`}>
-            <Typography
-              display={"inline"}
-              variant="body2"
-              color={theme.secondaryColor}
-              sx={{ fontWeight: "600", mr: 0.5 }}
-            >
-              {fromUser.consumerName}
-            </Typography>
-            <Typography
-              display={"inline"}
-              mr={0.5}
-              variant="body2"
-              color={theme.secondaryColor}
-            >{`@${fromUser.handle}`}</Typography>
-            {fromUser?.data?.avatarUpdateAuthority === HARKL_ID && (
-              <Typography display={"inline"}>
-                <HerofiedIcon
-                  sx={{
-                    fill: theme.accentColor,
-                    width: "0.8rem",
-                    height: "0.8rem",
-                    verticalAlign: "-2px",
-                  }}
-                />
-              </Typography>
-            )}
-          </Link>
+          <Typography
+            variant="body2"
+            color={theme.secondaryColor}
+            sx={{ fontWeight: "600", mr: 0.5 }}
+          >
+            {fromUser.consumerName}
+          </Typography>
+          <Typography
+            mr={0.5}
+            variant="body2"
+            color={theme.secondaryColor}
+          >{`@${fromUser.handle}`}</Typography>
+          {fromUser?.data?.avatarUpdateAuthority === HARKL_ID && (
+            <HerofiedIcon
+              sx={{
+                fill: theme.accentColor,
+                width: "0.8rem",
+                height: "0.8rem",
+                verticalAlign: "1px",
+              }}
+            />
+          )}
           {mention.type && mention.type.includes("emoji") ? (
             <Box>
               <Typography
                 variant="body2"
                 color={theme.secondaryColor}
-                display={"inline"}
                 pl={0.5}
               >
                 reacted{" "}
@@ -103,7 +96,7 @@ export const Notification = ({ mention }: NotificationProps) => {
                     "& .emoji-mart-emoji": { verticalAlign: "-3px" },
                   }}
                 >
-                  {mention?.common?.emojiId && <Emoji emoji={mention?.common?.emojiId} size={16} />}
+                  {mention?.common?.emojiId && <Emoji emoji={mention?.common?.emojiId} size={14} />}
                 </Box>
               </Typography>
             </Box>
@@ -111,9 +104,7 @@ export const Notification = ({ mention }: NotificationProps) => {
             <Typography
               variant="body2"
               color={theme.secondaryColor}
-              display={"inline"}
               pl={0.5}
-              pt={"3px"}
             >
               {text}
             </Typography>
@@ -121,9 +112,7 @@ export const Notification = ({ mention }: NotificationProps) => {
           <Typography
             variant="body2"
             color={theme.secondaryColor}
-            display={"inline"}
             pl={0.5}
-            pt={"3px"}
           >
             {moment(setDate(mention.createdAt)).fromNow()}
           </Typography>
@@ -133,7 +122,7 @@ export const Notification = ({ mention }: NotificationProps) => {
         <ShowTweet
           key={mention.id}
           tweet={mention.tweet}
-          overideMt={1}
+          overideMt={0.5}
         ></ShowTweet>
       )}
     </Box>
