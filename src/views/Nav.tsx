@@ -1,5 +1,5 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import GavelIcon from "@mui/icons-material/Gavel";
+// import GavelIcon from "@mui/icons-material/Gavel";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
@@ -8,7 +8,7 @@ import Person from "@mui/icons-material/Person";
 import React, { useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
-import TagIcon from "@mui/icons-material/Tag";
+import LockPersonIcon from '@mui/icons-material/LockPerson';
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
@@ -159,8 +159,8 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
             <>
               <NavLink style={applyActiveStyles} to="/channels">
                 <Stack direction="row" {...stackProps}>
-                  <TagIcon sx={iconProps} />
-                  <Typography variant="body1">Channels</Typography>
+                  <LockPersonIcon sx={iconProps} />
+                  <Typography variant="body1">NFT Chat</Typography>
                 </Stack>
               </NavLink>
               <NavLink style={applyActiveStyles} to="/following">
