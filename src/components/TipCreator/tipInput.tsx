@@ -30,7 +30,7 @@ export const TipInput: React.FC<Props> = ({
 }) => {
   const { theme } = useContext(ThemeContext);
   const [inputError, setInputError] = useState(false);
-  const [txValue, setTxValue] = useState(0);
+  const [txValue, setTxValue] = useState(1);
 
   const anchorWallet = useAnchorWallet();
   const { connection } = useConnection();
@@ -152,63 +152,22 @@ export const TipInput: React.FC<Props> = ({
 
   return (
     <Box>
-      <Box sx={{ position: "relative" }}>
-        <Box mb={1}>
-          <Typography>Tip this meep some $BMA</Typography>
-        </Box>
-        <Box
-          sx={{
-            position: "absolute",
-            left: "95.5%",
-            top: "-13%",
-          }}
-        >
-          <IconButton
-            size="small"
-            color="secondary"
-            onClick={() => {
-              setShowTip(false);
-            }}
-          >
-            <Close fontSize="small" />
-          </IconButton>
-        </Box>
         <Stack
           direction="row"
           justifyContent="flex-start"
           alignItems="flex-start"
           spacing={1}
         >
-          <Button
-            color="inherit"
-            variant="outlined"
-            onClick={() => {
-              handleTipAction({ txAmount: 1 });
-            }}
-          >
-            1
-          </Button>
-          <Button
-            color="inherit"
-            variant="outlined"
-            onClick={() => {
-              handleTipAction({ txAmount: 3 });
-            }}
-          >
-            3
-          </Button>
           <TextField
             error={inputError}
             autoFocus={true}
             id="outlined-number"
-            label="Custom"
+            label="$BMA amount to tip"
             type="number"
             InputLabelProps={{
               shrink: true,
-              style: { color: theme.secondaryColor },
             }}
             InputProps={{
-              style: { color: theme.secondaryColor },
               inputMode: "numeric",
               // @ts-ignore
               pattern: "[0-9]*",
@@ -221,8 +180,8 @@ export const TipInput: React.FC<Props> = ({
             }}
           />
           <Button
-            color="inherit"
-            variant="outlined"
+            sx={{ background: theme.accentColor }}
+            variant="contained"
             onClick={() => {
               handleTipAction({ txAmount: txValue });
             }}
@@ -230,7 +189,6 @@ export const TipInput: React.FC<Props> = ({
             Tip
           </Button>
         </Stack>
-      </Box>
     </Box>
   );
 };
