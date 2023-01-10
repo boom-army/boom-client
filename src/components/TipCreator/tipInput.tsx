@@ -39,7 +39,13 @@ export const TipInput: React.FC<Props> = ({
 
   const [tipCreatorMutation] = useTipCreatorMutation({
     refetchQueries: [{ query: TweetDocument, variables: { id: tweetId } }],
-  });
+  });  
+
+  const snackAction = (signature: string) => (
+    <Link href={`https://solana.fm/tx/${signature}`} target={"_blank"}>
+      {signature.slice(0, 4) + ".." + signature.slice(-4)}
+    </Link>
+  );
 
   // TODO: consolodate tx react hook from EmojiTweet and this
   const handleTipAction = useCallback(
@@ -109,26 +115,15 @@ export const TipInput: React.FC<Props> = ({
           userPubKey.toString(),
           process.env.REACT_APP_CONTENT_HOST as string,
           boomTokens ? boomTokens : 100000000 // 0.1 SSL
-        );
+        );        
 
-        // const txLink = `https://solana.fm/tx/${signature}`;
-
-        // enqueueSnackbar(
-        //   'Transaction complete: ' + (
-        //     <Link href={txLink}>
-        //       {signature.slice(0, 4) + ".." + signature.slice(-4)}
-        //     </Link>
-        //   ),
-        //   {
-        //     variant: "success",
-        //   }
-        // );
         enqueueSnackbar(
-            'Transaction complete: ' + signature,
-            {
-              variant: "success",
-            }
-          );
+          'Transaction complete',
+          {
+            variant: "success",
+            action: snackAction(signature),
+          }
+        );
         await tipCreatorMutation({
           variables: {
             tipAmount: boomTokens.toString(),

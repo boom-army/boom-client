@@ -4,7 +4,7 @@ import { ThemeContext } from "./theme";
 import { Snackbar } from "@mui/material";
 
 type SnackBarContextActions = {
-  enqueueSnackbar: (text: string, { variant }: { variant: AlertColor }) => void;
+  enqueueSnackbar: (text: string, { variant, action }: { variant?: AlertColor, action?: React.ReactNode | null }) => void;
 };
 
 const SnackBarContext = createContext({} as SnackBarContextActions);
@@ -20,19 +20,22 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
 
   const [open, setOpen] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<string>("");
-  const [typeColor, setTypeColor] = React.useState<AlertColor>("info");
+  const [typeColor, setTypeColor] = React.useState<AlertColor | undefined>("info");
+  const [action, setAction] = React.useState<React.ReactNode | null>(null);
 
   const enqueueSnackbar = (
     text: string,
-    { variant }: { variant: AlertColor }
+    { variant, action }: { variant?: AlertColor, action?: React.ReactNode }
   ) => {
     setMessage(text);
     setTypeColor(variant);
+    setAction(action);
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setAction(null);
     setTypeColor("info");
   };
 
@@ -40,7 +43,7 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
     <SnackBarContext.Provider value={{ enqueueSnackbar }}>
       <Snackbar
         open={open}
-        autoHideDuration={100000}
+        autoHideDuration={4000}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         onClose={handleClose}
       >
@@ -50,6 +53,8 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
           sx={{ width: "100%", border: `1px solid ${theme.tertiaryColor}` }}
         >
           {message}
+          {" "}
+          {action && action}
         </Alert>
       </Snackbar>
       {children}
