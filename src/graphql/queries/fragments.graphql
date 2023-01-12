@@ -3,6 +3,7 @@ fragment BaseUser on User {
   avatar
   handle
   consumerName
+  publicAddress
   data {
     avatarMint
     avatarUpdateAuthority
