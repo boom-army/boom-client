@@ -563,7 +563,7 @@ export type QuerySearchUserArgs = {
 
 
 export type QueryTipCountArgs = {
-  dateRange?: Maybe<Scalars['String']>;
+  dateFrom?: Maybe<Scalars['String']>;
   leaders?: Maybe<Scalars['Int']>;
   type?: Maybe<TipCountType>;
 };
@@ -884,7 +884,7 @@ export type TipCreatorMutationVariables = Exact<{
 export type TipCreatorMutation = { __typename?: 'Mutation', tipCreator: { __typename?: 'Tip', id: string } };
 
 export type TipCountUsersQueryVariables = Exact<{
-  dateRange?: Maybe<Scalars['String']>;
+  dateFrom?: Maybe<Scalars['String']>;
   leaders?: Maybe<Scalars['Int']>;
   type?: Maybe<Scalars['String']>;
 }>;
@@ -1995,8 +1995,8 @@ export type TipCreatorMutationHookResult = ReturnType<typeof useTipCreatorMutati
 export type TipCreatorMutationResult = Apollo.MutationResult<TipCreatorMutation>;
 export type TipCreatorMutationOptions = Apollo.BaseMutationOptions<TipCreatorMutation, TipCreatorMutationVariables>;
 export const TipCountUsersDocument = gql`
-    query tipCountUsers($dateRange: String, $leaders: Int, $type: String) {
-  tipCount(dateRange: $dateRange, leaders: $leaders, type: user) {
+    query tipCountUsers($dateFrom: String, $leaders: Int, $type: String) {
+  tipCount(dateFrom: $dateFrom, leaders: $leaders, type: user) {
     duration
     total
     leaders {
@@ -2021,7 +2021,7 @@ export const TipCountUsersDocument = gql`
  * @example
  * const { data, loading, error } = useTipCountUsersQuery({
  *   variables: {
- *      dateRange: // value for 'dateRange'
+ *      dateFrom: // value for 'dateFrom'
  *      leaders: // value for 'leaders'
  *      type: // value for 'type'
  *   },

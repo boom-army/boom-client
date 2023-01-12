@@ -4,8 +4,8 @@ mutation tipCreator($tipAmount: String!, $tweetId: String!, $userId: String!) {
   }
 }
 
-query tipCountUsers($dateRange: String, $leaders: Int, $type: String) {
-  tipCount(dateRange: $dateRange, leaders: $leaders, type: user) {
+query tipCountUsers($dateFrom: String, $leaders: Int, $type: String) {
+  tipCount(dateFrom: $dateFrom, leaders: $leaders, type: user) {
     duration
     total
     leaders {
