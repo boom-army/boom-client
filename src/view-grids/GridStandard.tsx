@@ -20,6 +20,7 @@ import { ThemeContext } from "../contexts/theme";
 import { Exact, Maybe, ProfileQuery, User } from "../generated/graphql";
 import { ApolloQueryResult } from "@apollo/client";
 import { Grid, Paper } from "@mui/material";
+import { TipLeaderboard } from "../views/TipLeaderboard";
 
 interface GridProps {
   data: ProfileQuery | undefined;
@@ -94,6 +95,7 @@ export const GridStandard: React.FC<GridProps> = ({
           <Route path="explore" element={<Explore />} />
           <Route path=":handle" element={<Profile />} />
           <Route path="mint-nft" element={<NFTMint />} />
+          <Route path="leaderboard" element={<TipLeaderboard />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </Paper>

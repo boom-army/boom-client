@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { useState, useEffect, FC } from "react";
 import {
   TableContainer,
   Paper,
@@ -11,24 +10,16 @@ import {
 } from "@mui/material";
 import { useTipCountUsersLazyQuery } from "../../generated/graphql";
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
+export const UserTipsTable: FC<{}> = () => {
+  const [DateFrom, setDateFrom] = useState<string | null>(null);
 
-const UserTipsTable = () => {
-  const classes = useStyles();
-  const [loadTips] = useTipCountUsersLazyQuery({
-    variables: { dateFrom: "" },
+  const [loadTips, { data, loading, error }] = useTipCountUsersLazyQuery({
+    variables: { dateFrom: DateFrom },
   });
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (data) {
-      setUsers(data.getUserTips.sort((a, b) => b.totalTips - a.totalTips));
-    }
-  }, [data]);
+    loadTips();
+  }, []);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -37,28 +28,26 @@ const UserTipsTable = () => {
     return <p>Error</p>;
   }
 
-  return (
+  return data ? (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table aria-label="User Tip Leaderboard">
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Email</TableCell>
+            <TableCell>User handle</TableCell>
             <TableCell align="right">Total Tips</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user) => (
-            <TableRow key={user.user.email}>
+          {data?.tipCount?.leaders?.map((leader) => (
+            <TableRow key={leader?.user?.id}>
               <TableCell component="th" scope="row">
-                {user.user.name}
+                {leader?.user?.handle}
               </TableCell>
-              <TableCell align="right">{user.user.email}</TableCell>
-              <TableCell align="right">{user.totalTips}</TableCell>
+              <TableCell align="right">{leader?.total}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  ) : null;
 };

@@ -149,6 +149,12 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               <Typography variant="body1">Search</Typography>
             </Stack>
           </NavLink>
+          <NavLink style={applyActiveStyles} to="/leaderboard">
+            <Stack direction="row" {...stackProps}>
+              <SearchIcon sx={iconProps} />
+              <Typography variant="body1">Leaderboard</Typography>
+            </Stack>
+          </NavLink>
           {/* <NavLink style={applyActiveStyles} to="/mint-boom-hero">
             <Stack direction="row" {...stackProps}>
               <AutoGraphIcon sx={iconProps} />

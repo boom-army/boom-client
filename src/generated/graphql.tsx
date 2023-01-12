@@ -886,7 +886,6 @@ export type TipCreatorMutation = { __typename?: 'Mutation', tipCreator: { __type
 export type TipCountUsersQueryVariables = Exact<{
   dateFrom?: Maybe<Scalars['String']>;
   leaders?: Maybe<Scalars['Int']>;
-  type?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -1995,8 +1994,8 @@ export type TipCreatorMutationHookResult = ReturnType<typeof useTipCreatorMutati
 export type TipCreatorMutationResult = Apollo.MutationResult<TipCreatorMutation>;
 export type TipCreatorMutationOptions = Apollo.BaseMutationOptions<TipCreatorMutation, TipCreatorMutationVariables>;
 export const TipCountUsersDocument = gql`
-    query tipCountUsers($dateFrom: String, $leaders: Int, $type: String) {
-  tipCount(dateFrom: $dateFrom, leaders: $leaders, type: user) {
+    query tipCountUsers($dateFrom: String, $leaders: Int) {
+  tipCount(dateFrom: $dateFrom, leaders: $leaders) {
     duration
     total
     leaders {
@@ -2023,7 +2022,6 @@ export const TipCountUsersDocument = gql`
  *   variables: {
  *      dateFrom: // value for 'dateFrom'
  *      leaders: // value for 'leaders'
- *      type: // value for 'type'
  *   },
  * });
  */
