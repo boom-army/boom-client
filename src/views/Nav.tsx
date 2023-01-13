@@ -2,13 +2,14 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import GavelIcon from "@mui/icons-material/Gavel";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
+import LockPersonIcon from '@mui/icons-material/LockPerson';
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person from "@mui/icons-material/Person";
 import React, { useContext } from "react";
+import SavingsIcon from '@mui/icons-material/Savings';
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
-import LockPersonIcon from '@mui/icons-material/LockPerson';
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
@@ -151,8 +152,8 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           </NavLink>
           <NavLink style={applyActiveStyles} to="/leaderboard">
             <Stack direction="row" {...stackProps}>
-              <SearchIcon sx={iconProps} />
-              <Typography variant="body1">Leaderboard</Typography>
+              <SavingsIcon sx={iconProps} />
+              <Typography variant="body1">Tip Leaders</Typography>
             </Stack>
           </NavLink>
           {/* <NavLink style={applyActiveStyles} to="/mint-boom-hero">
