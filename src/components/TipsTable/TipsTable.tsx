@@ -102,10 +102,13 @@ export const UserTipsTable: FC<{}> = () => {
         container
         justifyContent={"center"}
         my={2}
-        p={2}
-        sx={{ border: `1px solid ${theme.accentColor}` }}
+        py={3}
+        sx={{
+          border: `1px solid ${theme.accentColor}`,
+          backgroundColor: theme.tertiaryColor2,
+        }}
       >
-        <Grid item xs={12} mb={1}>
+        <Grid item xs={12} mb={1.5}>
           <Typography variant="h2" align="center">
             {formattedData?.total} BMA
           </Typography>
