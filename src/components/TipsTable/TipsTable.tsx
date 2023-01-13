@@ -8,46 +8,68 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-import { useTipCountUsersLazyQuery } from "../../generated/graphql";
+import {
+  TipCount,
+  TipLeader,
+  useTipCountUsersLazyQuery,
+} from "../../generated/graphql";
+import { Loader } from "../Loader";
+import { CustomResponse } from "../CustomResponse";
+import { boomNumFormat } from "../../utils/utils";
+import { map } from "lodash";
 
 export const UserTipsTable: FC<{}> = () => {
   const [DateFrom, setDateFrom] = useState<string | null>(null);
+  const [formattedData, setFormattedData] = useState<TipCount>();
 
-  const [loadTips, { data, loading, error }] = useTipCountUsersLazyQuery({
-    variables: { dateFrom: DateFrom },
-  });
+  const [loadTips, { data, loading, error }] = useTipCountUsersLazyQuery();
 
   useEffect(() => {
-    loadTips();
+    loadTips({
+      variables: { dateFrom: DateFrom },
+    });
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>Error</p>;
-  }
+  useEffect(() => {
+    if (data) {
+      const totalTips = `${boomNumFormat(data?.tipCount?.total as string)} BMA`;
+      const updatedLeaders = map(data?.tipCount?.leaders, (obj: TipLeader) => ({
+        ...obj,
+        total: `${boomNumFormat(obj.total as string)} BMA`,
+      }));
+      console.log({ ...data, total: totalTips, leaders: updatedLeaders });
+      // @ts-ignore
+      setFormattedData({ ...data, total: totalTips, leaders: updatedLeaders });
+    }
+  }, [data]);
 
-  return data ? (
-    <TableContainer component={Paper}>
-      <Table aria-label="User Tip Leaderboard">
-        <TableHead>
-          <TableRow>
-            <TableCell>User handle</TableCell>
-            <TableCell align="right">Total Tips</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data?.tipCount?.leaders?.map((leader) => (
-            <TableRow key={leader?.user?.id}>
-              <TableCell component="th" scope="row">
-                {leader?.user?.handle}
-              </TableCell>
-              <TableCell align="right">{leader?.total}</TableCell>
+  if (loading) {
+    return <Loader />;
+  }
+  if (error) return <CustomResponse text={error.message} />;
+
+  return formattedData ? (
+    <>
+      <TableContainer component={Paper}>
+        <Table aria-label="User Tip Leaderboard">
+          <TableHead>
+            <TableRow>
+              <TableCell>User handle</TableCell>
+              <TableCell align="right">Total Tips</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {formattedData?.leaders?.map((leader) => (
+              <TableRow key={leader?.user?.id}>
+                <TableCell component="th" scope="row">
+                  {leader?.user?.handle}
+                </TableCell>
+                <TableCell align="right">{leader?.total}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   ) : null;
 };
