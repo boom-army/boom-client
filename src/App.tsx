@@ -1,6 +1,8 @@
 import GlobalStyles from "@mui/material/GlobalStyles";
 import OneSignal from "react-onesignal";
 import SimpleReactLightbox from "simple-react-lightbox";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 import { AppRoutes } from "./routes";
 import { CssBaseline } from "@mui/material";
 import { RecoilRoot } from "recoil";
@@ -10,6 +12,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { UserContextProvider } from "./contexts/user";
 import { useContext, useState, useEffect } from "react";
 import { useOneSignalQuery } from "./generated/graphql";
+
+dayjs.extend(duration);
 
 declare module "@mui/material/styles" {
   interface Theme {

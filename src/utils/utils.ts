@@ -284,6 +284,13 @@ export const formatNumber = {
   },
 };
 
+export const boomNumFormat = (val?: number | string | undefined) => {
+  if (!val) {
+    return 0;
+  }
+  return Number(val) / LAMPORTS_PER_SOL;
+};
+
 export const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID =
   new anchor.web3.PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL');
 
