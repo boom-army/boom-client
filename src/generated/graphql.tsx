@@ -618,7 +618,7 @@ export type Tip = {
 
 export type TipCount = {
   __typename?: 'TipCount';
-  duration?: Maybe<Scalars['String']>;
+  dateFrom?: Maybe<Scalars['String']>;
   leaders?: Maybe<Array<Maybe<TipLeader>>>;
   total?: Maybe<Scalars['String']>;
   type?: Maybe<TipCountType>;
@@ -889,7 +889,7 @@ export type TipCountUsersQueryVariables = Exact<{
 }>;
 
 
-export type TipCountUsersQuery = { __typename?: 'Query', tipCount: { __typename?: 'TipCount', duration?: string | null | undefined, total?: string | null | undefined, leaders?: Array<{ __typename?: 'TipLeader', total?: string | null | undefined, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null | undefined, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined> | null | undefined } };
+export type TipCountUsersQuery = { __typename?: 'Query', tipCount: { __typename?: 'TipCount', dateFrom?: string | null | undefined, total?: string | null | undefined, leaders?: Array<{ __typename?: 'TipLeader', total?: string | null | undefined, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null | undefined, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null | undefined, avatarUpdateAuthority?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined> | null | undefined } };
 
 export type TweetQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1996,7 +1996,7 @@ export type TipCreatorMutationOptions = Apollo.BaseMutationOptions<TipCreatorMut
 export const TipCountUsersDocument = gql`
     query tipCountUsers($dateFrom: String, $leaders: Int) {
   tipCount(dateFrom: $dateFrom, leaders: $leaders) {
-    duration
+    dateFrom
     total
     leaders {
       total
