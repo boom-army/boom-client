@@ -10,6 +10,7 @@ import {
   Typography,
   Box,
   Grid,
+  Link,
   ToggleButtonGroup,
   ToggleButton,
 } from "@mui/material";
@@ -20,15 +21,17 @@ import {
 } from "../../generated/graphql";
 import { Loader } from "../Loader";
 import { CustomResponse } from "../CustomResponse";
-import { boomNumFormat } from "../../utils/utils";
+import { boomNumFormat, HARKL_ID } from "../../utils/utils";
 import { map } from "lodash";
 import { ThemeContext } from "../../contexts/theme";
 import dayjs from "dayjs";
+import { UserAvatar } from "../UserAvatar";
+import { HerofiedIcon } from "../Icons";
 
 export const UserTipsTable: FC<{}> = () => {
   const { theme } = useContext(ThemeContext);
   const [formattedData, setFormattedData] = useState<TipCount>();
-  const [activeButton, setActiveButton] = useState("1m");
+  const [activeButton, setActiveButton] = useState("30 days");
 
   const [loadTips, { data, loading, error }] = useTipCountUsersLazyQuery();
   const [dateFrom, setDateFrom] = useState<string | null>(
@@ -60,10 +63,10 @@ export const UserTipsTable: FC<{}> = () => {
   ) => {
     setActiveButton(newAlignment);
     switch (newAlignment) {
-      case "1d":
+      case "24 hours":
         setDateFrom(dayjs().subtract(1, "day").format("YYYY-MM-DD"));
         break;
-      case "7d":
+      case "7 days":
         setDateFrom(dayjs().subtract(7, "day").format("YYYY-MM-DD"));
         break;
       default:
@@ -81,7 +84,7 @@ export const UserTipsTable: FC<{}> = () => {
     <Box p={2}>
       <Box display={"flex"} justifyContent={"space-between"}>
         <Typography variant="h3" component="h1" alignSelf={"center"}>
-          User Tip Leaderboard
+          Tipping Leaderboard
         </Typography>
         <ToggleButtonGroup
           color="primary"
@@ -90,9 +93,9 @@ export const UserTipsTable: FC<{}> = () => {
           onChange={setTimeFrame}
           aria-label="Tip Leader Time Range"
         >
-          <ToggleButton value="1d">24h</ToggleButton>
-          <ToggleButton value="7d">7d</ToggleButton>
-          <ToggleButton value="1m">30d</ToggleButton>
+          <ToggleButton value="24 hours">24h</ToggleButton>
+          <ToggleButton value="7 days">7d</ToggleButton>
+          <ToggleButton value="30 days">30d</ToggleButton>
         </ToggleButtonGroup>
       </Box>
       <Grid
@@ -109,7 +112,7 @@ export const UserTipsTable: FC<{}> = () => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body2" component="p" align="center">
-            Total Tips since {dayjs(dateFrom).fromNow()}
+            total tips given in the last {activeButton}
           </Typography>
         </Grid>
       </Grid>
@@ -118,16 +121,47 @@ export const UserTipsTable: FC<{}> = () => {
           <TableHead>
             <TableRow>
               <TableCell>Rank</TableCell>
-              <TableCell>Handle</TableCell>
-              <TableCell align="right">Total Tips</TableCell>
+              <TableCell>Tipper</TableCell>
+              <TableCell>Total</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {formattedData?.leaders?.map((leader, i) => (
               <TableRow key={leader?.user?.id}>
                 <TableCell>{i + 1}</TableCell>
-                <TableCell>{leader?.user?.handle}</TableCell>
-                <TableCell align="right">{leader?.total}</TableCell>
+                <TableCell>
+                  <Box display={"flex"}>
+                    <Box>
+                      <UserAvatar
+                        avatar={leader?.user?.avatar}
+                        isNFT={leader?.user?.data?.avatarMint}
+                        sx={{ width: 20, height: 20, mr: 1 }}
+                      />
+                    </Box>
+                    <Box>
+                      <Link
+                        href={`/${leader?.user?.handle}`}
+                        sx={{ textDecoration: "none" }}
+                        mr={1}
+                      >
+                        @{leader?.user?.handle}
+                        {leader?.user?.data?.avatarUpdateAuthority ===
+                          HARKL_ID && (
+                          <HerofiedIcon
+                            sx={{
+                              fill: theme.accentColor,
+                              width: "1rem",
+                              height: "1rem",
+                              verticalAlign: "-2px",
+                              marginLeft: "0.2rem",
+                            }}
+                          />
+                        )}
+                      </Link>
+                    </Box>
+                  </Box>
+                </TableCell>
+                <TableCell>{leader?.total}</TableCell>
               </TableRow>
             ))}
           </TableBody>
