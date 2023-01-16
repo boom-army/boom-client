@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Profile } from "../components/Profile/Profile";
 import { MasterTweet } from "../components/Tweet/MasterTweet";
 import { NFTMint } from "../components/Mint/NFTMint";
-import { Suggestion } from "../components/SideBar/Suggestion";
 import { EditProfile } from "../views/EditProfile";
 import { Route, Routes, Navigate } from "react-router-dom";
 import {
@@ -21,6 +20,8 @@ import { Exact, Maybe, ProfileQuery, User } from "../generated/graphql";
 import { ApolloQueryResult } from "@apollo/client";
 import { Grid, Paper } from "@mui/material";
 import { TipLeaderboard } from "../views/TipLeaderboard";
+import { WhoToFollow } from "../components/SideBar/WhoToFollow";
+import { TipRank } from "../components/SideBar/TipRank";
 
 interface GridProps {
   data: ProfileQuery | undefined;
@@ -102,7 +103,15 @@ export const GridStandard: React.FC<GridProps> = ({
       </Paper>
       <Grid item md={3} display={{ xs: "none", sm: "none", md: "block" }}>
         <Routes>
-          <Route path="*" element={<Suggestion />} />
+          <Route
+            path="*"
+            element={
+              <>
+                <TipRank />
+                <WhoToFollow />
+              </>
+            }
+          />
         </Routes>
       </Grid>
     </Grid>

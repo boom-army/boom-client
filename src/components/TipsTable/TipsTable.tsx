@@ -66,7 +66,7 @@ export const UserTipsTable: FC<{}> = () => {
       case 2:
         return "#af956d";
       default:
-        return "imherit";
+        return "inherit";
     }
   };
 
