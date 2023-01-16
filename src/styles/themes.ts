@@ -117,6 +117,13 @@ const overRides = {
         }),
       },
     },
+    MuiTableCell: {
+      styleOverrides: {
+        root: ({ theme }: { theme: ThemeVars }) => ({
+          borderBottomColor: theme.tertiaryColor,
+        }),
+      },
+    },
   },
 };
 

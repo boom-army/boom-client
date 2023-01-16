@@ -138,7 +138,7 @@ export const UserTipsTable: FC<{}> = () => {
           <TableBody>
             {formattedData?.leaders?.map((leader, i) => (
               <TableRow key={leader?.user?.id}>
-                <TableCell>{i + 1}</TableCell>
+                <TableCell align="center">{i + 1}</TableCell>
                 <TableCell>
                   <Box display={"flex"}>
                     <Box>
@@ -154,7 +154,7 @@ export const UserTipsTable: FC<{}> = () => {
                         sx={{ textDecoration: "none" }}
                         mr={1}
                       >
-                        @{leader?.user?.handle}
+                        <strong>@{leader?.user?.handle}</strong>
                         {leader?.user?.data?.avatarUpdateAuthority ===
                           HARKL_ID && (
                           <HerofiedIcon
@@ -162,8 +162,9 @@ export const UserTipsTable: FC<{}> = () => {
                               fill: theme.accentColor,
                               width: "1rem",
                               height: "1rem",
-                              verticalAlign: "-2px",
+                              verticalAlign: "-3px",
                               marginLeft: "0.2rem",
+                              opacity: "0.5"
                             }}
                           />
                         )}
@@ -171,7 +172,7 @@ export const UserTipsTable: FC<{}> = () => {
                     </Box>
                   </Box>
                 </TableCell>
-                <TableCell>{leader?.total}</TableCell>
+                <TableCell align="right">{leader?.total}</TableCell>
               </TableRow>
             ))}
           </TableBody>
