@@ -57,6 +57,19 @@ export const UserTipsTable: FC<{}> = () => {
     }
   }, [data]);
 
+  const rowPlacement = (index: number) => {
+    switch (index) {
+      case 0:
+        return "#c3a400";
+      case 1:
+        return "#B4B4B4";
+      case 2:
+        return "#af956d";
+      default:
+        return "imherit";
+    }
+  };
+
   const setTimeFrame = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string
@@ -137,7 +150,7 @@ export const UserTipsTable: FC<{}> = () => {
           </TableHead>
           <TableBody>
             {formattedData?.leaders?.map((leader, i) => (
-              <TableRow key={leader?.user?.id}>
+              <TableRow key={leader?.user?.id} sx={{ backgroundColor: rowPlacement(i) }}>
                 <TableCell align="center">{i + 1}</TableCell>
                 <TableCell>
                   <Box display={"flex"}>
