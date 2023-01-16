@@ -53,7 +53,7 @@ export const GridStandard: React.FC<GridProps> = ({
 
     "@media screen and (max-width: 530px)": {
       border: 0,
-      paddingBottom: "2rem",
+      paddingBottom: "2.5rem",
     },
   };
   return (

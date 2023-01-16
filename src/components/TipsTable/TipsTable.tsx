@@ -119,7 +119,14 @@ export const UserTipsTable: FC<{}> = () => {
           </Typography>
         </Grid>
       </Grid>
-      <TableContainer component={Paper}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+        }}
+      >
         <Table aria-label="User Tip Leaderboard">
           <TableHead>
             <TableRow>
