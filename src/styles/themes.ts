@@ -124,6 +124,14 @@ const overRides = {
         }),
       },
     },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: ({ theme }: { theme: ThemeVars }) => ({
+          color: theme.primaryColor,
+          borderColor: theme.tertiaryColor2,
+        }),
+      },
+    },
   },
 };
 
