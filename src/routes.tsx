@@ -141,7 +141,7 @@ export const AppRoutes: React.FC = () => {
                         right: 0,
                       }}
                       display={{ xs: "block", sm: "block", md: "none" }}
-                      elevation={1}
+                      elevation={3}
                     >
                       <StyledBottomNavigation
                         value={value}
