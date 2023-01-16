@@ -22,7 +22,6 @@ export const CurrentUser = () => {
               mt={1}
               sx={{
                 display: "inline-flex",
-                "&:hover": { backgroundColor: theme.accentColor },
               }}
             >
               <img src={"/assets/boom-logo.png"} alt="Boom" width={"30"} />{" "}
