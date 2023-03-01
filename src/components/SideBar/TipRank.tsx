@@ -41,11 +41,11 @@ const BMAIconWrapper = styled("span")((props) => ({
 export const TipRank: FC<{}> = () => {
   const { theme } = useContext(ThemeContext);
   const [formattedData, setFormattedData] = useState<TipCount>();
-  const [activeButton, setActiveButton] = useState("24 hours");
+  const [activeButton, setActiveButton] = useState("30 days");
 
   const [loadTips, { data, loading, error }] = useTipCountUsersLazyQuery();
   const [dateFrom, setDateFrom] = useState<string | null>(
-    dayjs().subtract(24, "hour").format("YYYY-MM-DD")
+    dayjs().subtract(30, "day").format("YYYY-MM-DD")
   );
 
   useEffect(() => {
