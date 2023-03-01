@@ -8,7 +8,6 @@ import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 import {
   GlowWalletAdapter,
   PhantomWalletAdapter,
-  SlopeWalletAdapter,
   SolflareWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 import { currentCluster } from "../utils/utils";
@@ -24,7 +23,6 @@ export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
     () => [
       new PhantomWalletAdapter(),
       new GlowWalletAdapter(),
-      new SlopeWalletAdapter(),
       new SolflareWalletAdapter({ network: name }),
     ],
     [name]
