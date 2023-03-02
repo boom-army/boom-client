@@ -21,7 +21,7 @@ import {
 import { Connection, PublicKey } from "@solana/web3.js";
 import { CircularProgress } from "@mui/material";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
-import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
+import NFTIcon from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
 import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";

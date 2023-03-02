@@ -1,7 +1,7 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import viteTsconfigPaths from "vite-tsconfig-paths";
-import svgrPlugin from "vite-plugin-svgr";
+import svgr from "vite-plugin-svgr";
 import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
@@ -15,13 +15,13 @@ export default defineConfig(({ command, mode }) => {
     build: {
       sourcemap: true, // Source map generation must be turned on
       minify: "esbuild",
-      target: "build",
+      outDir: "build",
     },
     plugins: [
       react(),
       viteCommonjs(),
       viteTsconfigPaths(),
-      svgrPlugin(),
+      svgr(),
       nodePolyfills({
         protocolImports: true,
       }),
@@ -50,12 +50,14 @@ export default defineConfig(({ command, mode }) => {
       cors: {
         origin: "*",
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-      }
-    }
-    // optimizeDeps: {
-    //   esbuildOptions: {
-    //     plugins: [esbuildCommonjs(["@civic/solana-gateway-react"])],
-    //   },
-    // },
+      },
+    },
+    optimizeDeps: {
+      // force: true,
+      // exclude: ["@solana/wallet-adapter-react"],
+      // esbuildOptions: {
+      //   plugins: [esbuildCommonjs(["@civic/solana-gateway-react"])],
+      // },
+    },
   };
 });
