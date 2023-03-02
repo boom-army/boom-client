@@ -6,28 +6,32 @@ import {
 import { WalletError } from "@solana/wallet-adapter-base";
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 import {
+  BackpackWalletAdapter,
+  BraveWalletAdapter,
+  ExodusWalletAdapter,
   GlowWalletAdapter,
   PhantomWalletAdapter,
-  SlopeWalletAdapter,
   SolflareWalletAdapter,
+  TorusWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 import { currentCluster } from "../utils/utils";
 import { useSnackbar } from "./snackbar";
 
-require("@solana/wallet-adapter-react-ui/styles.css");
-
 export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
   const endpoint = process.env.REACT_APP_RPC_URL!;  
-  let network = currentCluster().name;
+  let { name } = currentCluster();
 
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
       new GlowWalletAdapter(),
-      new SlopeWalletAdapter(),
-      new SolflareWalletAdapter({ network }),
+      new BackpackWalletAdapter(),
+      new SolflareWalletAdapter({ network: name }),
+      new BraveWalletAdapter(),
+      new TorusWalletAdapter(),
+      new ExodusWalletAdapter({ network: name }),
     ],
-    [network]
+    [name]
   );
 
   const { enqueueSnackbar } = useSnackbar();

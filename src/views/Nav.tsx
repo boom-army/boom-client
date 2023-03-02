@@ -1,27 +1,28 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AutoGraphIcon from "@mui/icons-material/AutoGraph";
+// import GavelIcon from "@mui/icons-material/Gavel";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
-import NewspaperIcon from '@mui/icons-material/Newspaper';
+import LockPersonIcon from '@mui/icons-material/LockPerson';
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person from "@mui/icons-material/Person";
 import React, { useContext } from "react";
+import SavingsIcon from '@mui/icons-material/Savings';
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
-import TagIcon from "@mui/icons-material/Tag";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
-import { MorePopUp } from "../components/MorePopup";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme";
-import { User as StoreUser } from "../contexts/user";
 import { styled } from "@mui/material/styles";
-import { useChannelsQuery } from "../generated/graphql";
-
+import { useGetChannelsQuery, User } from "../generated/graphql";
+import {Logout} from "../components/Auth/Logout";
+import { ChangeColor } from "../components/ChangeColor";
+import { ToggleTheme } from "../components/ToggleTheme";
 interface Props {
   newMentionsCount: number | undefined;
-  user: StoreUser | null;
+  user: User | null;
 }
 
 export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
@@ -30,10 +31,10 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     color: theme.accentColor,
   };
 
-  const { data } = useChannelsQuery();
+  const { data } = useGetChannelsQuery();
 
   const activeChannels = () => {
-    return data?.channels?.filter((c) => c.status === ChannelStatus.ACTIVE);
+    return data?.getChannels?.filter((c) => c.status === ChannelStatus.ACTIVE);
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
@@ -113,7 +114,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
         }}
       >
         <StyledStack key="main-stack" direction="column" spacing={4.5}>
-          <NavLink style={applyActiveStyles} to="/">
+          <NavLink end style={applyActiveStyles} to="/">
             <Stack direction="row" {...stackProps}>
               <Language style={iconProps} />
               <Typography variant="body1">Hero Feed</Typography>
@@ -123,6 +124,36 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
             <Stack direction="row" {...stackProps}>
               <NewspaperIcon style={iconProps} />
               <Typography variant="body1">News</Typography>
+            </Stack>
+          </NavLink>
+          {/* <NavLink style={applyActiveStyles} to="/auctions">
+            <Stack direction="row" {...stackProps}>
+              <GavelIcon style={iconProps} />
+              <Typography variant="body1">Auctions</Typography>
+            </Stack>
+          </NavLink> */}
+          <NavLink style={applyActiveStyles} to="/mint-nft">
+            <Stack direction="row" {...stackProps}>
+              <StyleIcon sx={iconProps} />
+              <Typography variant="body1">Mint NFT</Typography>
+            </Stack>
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/connect">
+            <Stack direction="row" {...stackProps}>
+              <GroupIcon sx={iconProps} />
+              <Typography variant="body1">People</Typography>
+            </Stack>
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/explore">
+            <Stack direction="row" {...stackProps}>
+              <SearchIcon sx={iconProps} />
+              <Typography variant="body1">Search</Typography>
+            </Stack>
+          </NavLink>
+          <NavLink style={applyActiveStyles} to="/leaderboard">
+            <Stack direction="row" {...stackProps}>
+              <SavingsIcon sx={iconProps} />
+              <Typography variant="body1">Tip Leaders</Typography>
             </Stack>
           </NavLink>
           {/* <NavLink style={applyActiveStyles} to="/mint-boom-hero">
@@ -135,32 +166,14 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
             <>
               <NavLink style={applyActiveStyles} to="/channels">
                 <Stack direction="row" {...stackProps}>
-                  <TagIcon sx={iconProps} />
-                  <Typography variant="body1">Channels</Typography>
-                </Stack>
-              </NavLink>
-              <NavLink style={applyActiveStyles} to="/mint-nft">
-                <Stack direction="row" {...stackProps}>
-                  <StyleIcon sx={iconProps} />
-                  <Typography variant="body1">Mint NFT</Typography>
+                  <LockPersonIcon sx={iconProps} />
+                  <Typography variant="body1">NFT Chat</Typography>
                 </Stack>
               </NavLink>
               <NavLink style={applyActiveStyles} to="/following">
                 <Stack direction="row" {...stackProps}>
                   <Person sx={iconProps} />
                   <Typography variant="body1">Following</Typography>
-                </Stack>
-              </NavLink>
-              <NavLink style={applyActiveStyles} to="/connect">
-                <Stack direction="row" {...stackProps}>
-                  <GroupIcon sx={iconProps} />
-                  <Typography variant="body1">Creators</Typography>
-                </Stack>
-              </NavLink>
-              <NavLink style={applyActiveStyles} to="/explore">
-                <Stack direction="row" {...stackProps}>
-                  <SearchIcon sx={iconProps} />
-                  <Typography variant="body1">Search</Typography>
                 </Stack>
               </NavLink>
               <NavLink style={applyActiveStyles} to="/notifications">
@@ -186,9 +199,11 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   <Typography variant="body1">Profile</Typography>
                 </Stack>
               </NavLink>
+              <ToggleTheme stackProps={stackProps} iconProps={iconProps}/>
+              <ChangeColor stackProps={stackProps} iconProps={iconProps}/>
+              <Logout stackProps={stackProps} iconProps={iconProps}/>
             </>
           )}
-          <MorePopUp iconProps={iconProps} stackProps={stackProps} />
         </StyledStack>
         {activeChannels()?.length ? (
           <StyledStack2 key="channel-stack">

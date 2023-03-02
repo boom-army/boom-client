@@ -5,20 +5,21 @@ import { TweetDocument, useToggleReactionMutation } from "../generated/graphql";
 
 interface Props {
   tweetId: string;
+  parentTweetId?: string;
 }
 
-export const useReaction = ({ tweetId }: Props) => {
+export const useReaction = ({ tweetId, parentTweetId }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [toggleReactionMutation, { loading }] = useToggleReactionMutation({
-    refetchQueries: [{ query: TweetDocument, variables: { id: tweetId } }],
+    refetchQueries: [{ query: TweetDocument, variables: { id: parentTweetId ?? tweetId } }],
   });
 
   const handleReaction = useCallback(
-    async ({ emojiId, skin }: { emojiId: string, skin: number }) => {
+    async ({ emojiId }: { emojiId: string }) => {
       try {
         await toggleReactionMutation({
-          variables: { id: tweetId, emojiId, skin },
+          variables: { id: tweetId, emojiId, skin: null },
         });
         enqueueSnackbar(`Emoji updated`, { variant: "success" });
       } catch (err) {

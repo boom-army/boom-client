@@ -2,7 +2,7 @@ import React from "react";
 import { ApolloError } from "@apollo/client";
 import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
-import { ChannelFeedQuery, Tweet } from "../generated/graphql";
+import { GetChannelByIdQuery, Tweet } from "../generated/graphql";
 import { Grid } from "@mui/material";
 import { Loader } from "./Loader";
 import { RecoilState } from "recoil";
@@ -12,7 +12,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 interface Props {
   loading: boolean;
   error: ApolloError | undefined;
-  data: ChannelFeedQuery["channelFeed"] | undefined;
+  data: GetChannelByIdQuery["getChannelById"] | undefined;
   parentTweetState: RecoilState<string>;
   fetchMore: (props: any) => void;
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
@@ -28,7 +28,7 @@ export const MeepFeed: React.FC<Props> = ({
 }) => {
   if (loading)
     return (
-      <Box sx={{ marginTop: "1rem" }}>
+      <Box sx={{ padding: "2rem" }}>
         <Loader />
       </Box>
     );
@@ -64,7 +64,7 @@ export const MeepFeed: React.FC<Props> = ({
         hasMore={true}
         loader={
           loading && (
-            <Box sx={{ marginTop: "1rem" }}>
+            <Box sx={{ padding: "1rem" }}>
               <Loader />
             </Box>
           )

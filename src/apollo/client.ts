@@ -8,17 +8,20 @@ export const client = new ApolloClient({
         fields: {
           feed: offsetLimitPagination(),
           heroFeed: offsetLimitPagination(),
-          channelFeed: offsetLimitPagination(),
+          getChannelById: offsetLimitPagination(),
           users: offsetLimitPagination(),
           searchTweets: offsetLimitPagination(),
           searchUser: offsetLimitPagination(),
+          mentions: offsetLimitPagination(),
         },
       },
     },
   }),
+  credentials: 'include',
   uri: process.env.REACT_APP_APOLLO_API || "http://locahost:7777",
   headers: {
     authorization: localStorage.getItem("token") || "",
+    "Access-Control-Allow-Origin" : "*",
   },
   defaultOptions: {
     watchQuery: {

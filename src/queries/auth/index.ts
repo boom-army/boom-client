@@ -21,6 +21,11 @@ export const LOGIN_REGISTER = gql`
         id
         handle
         publicAddress
+        avatar
+        data {
+          avatarMint
+          avatarUpdateAuthority
+        }
       }
     }
   }

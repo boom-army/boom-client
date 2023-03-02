@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import {
-  ChannelFeedDocument,
+  GetChannelByIdDocument,
   FeedDocument,
   TweetDocument,
   useMeQuery,
@@ -33,7 +33,7 @@ import { displayError, uploadFile } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useContext, useState } from "react";
 import { useInput } from "../../hooks/useInput";
-import { useQuery, useMutation, gql } from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { UserAvatar } from "../UserAvatar";
 
@@ -82,7 +82,7 @@ export const NewMessage: React.FC<Props> = ({
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
       FeedDocument,
-      ChannelFeedDocument,
+      GetChannelByIdDocument,
       {
         query: TweetDocument,
         variables: { id: parentTweet },

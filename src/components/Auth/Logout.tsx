@@ -1,12 +1,10 @@
-import React, { useCallback, useContext } from "react";
-import { ThemeContext } from "../../contexts/theme";
-import { UserIcon } from "../Icons";
-import { Wrapper } from "../ToggleTheme";
+import { useCallback } from "react";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { Stack, Typography } from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
 
-const Logout = () => {
-  const { theme } = useContext(ThemeContext);
+export const Logout = ({ iconProps, stackProps }: any) => {
   const { disconnect } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -26,10 +24,10 @@ const Logout = () => {
   );
 
   return (
-    <Wrapper onClick={handleLogout}>
-      <UserIcon sm="true" color={theme.accentColor} />
-      <p>Logout</p>
-    </Wrapper>
+    <Stack onClick={handleLogout} direction="row" {...stackProps} sx={{cursor: "pointer"}}>
+      <LogoutIcon sx={iconProps} />
+      <Typography variant="body1">Logout</Typography>
+    </Stack>
   );
 };
 

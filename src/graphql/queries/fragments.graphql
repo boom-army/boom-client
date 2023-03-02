@@ -1,0 +1,83 @@
+fragment BaseUser on User {
+  id
+  avatar
+  handle
+  consumerName
+  publicAddress
+  data {
+    avatarMint
+    avatarUpdateAuthority
+  }
+}
+
+fragment TweetData on Tweet {
+  id
+  text
+  tags
+  isTweetMine
+  commentsCount
+  retweetsCount
+  isRetweet
+  tipsCount
+  createdAt
+  channel {
+    id
+  }
+  parentTweet {
+    id
+    text
+    createdAt
+    user {
+      ...BaseUser
+    }
+  }
+  files {
+    id
+    url
+  }
+  gif {
+    id
+    title
+    fixedHeightUrl
+    originalUrl
+  }
+  nft {
+    id
+    publicKey
+    name
+    symbol
+    description
+    sellerFeeBasisPoints
+    externalUrl
+    image
+    attributes {
+      traitType
+      value
+    }
+    collection {
+      name
+      family
+    }
+    properties {
+      files {
+        uri
+        type
+      }
+      category
+      creators {
+        address
+        share
+      }
+    }
+  }
+  user {
+    ...BaseUser
+  }
+  reactions {
+    id
+    emojiId
+    skin
+    isMine
+    count
+  }
+}

@@ -1,7 +1,7 @@
 import Close from "@mui/icons-material/Close";
 import React, { useContext, useState, useCallback } from "react";
 import { Box } from "@mui/system";
-import { IconButton } from "@mui/material";
+import { IconButton, Link } from "@mui/material";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
 import { TextField, Stack, Button, Typography } from "@mui/material";
@@ -30,7 +30,7 @@ export const TipInput: React.FC<Props> = ({
 }) => {
   const { theme } = useContext(ThemeContext);
   const [inputError, setInputError] = useState(false);
-  const [txValue, setTxValue] = useState(0);
+  const [txValue, setTxValue] = useState(1);
 
   const anchorWallet = useAnchorWallet();
   const { connection } = useConnection();
@@ -39,7 +39,13 @@ export const TipInput: React.FC<Props> = ({
 
   const [tipCreatorMutation] = useTipCreatorMutation({
     refetchQueries: [{ query: TweetDocument, variables: { id: tweetId } }],
-  });
+  });  
+
+  const snackAction = (signature: string) => (
+    <Link href={`https://solana.fm/tx/${signature}`} target={"_blank"}>
+      {signature.slice(0, 4) + ".." + signature.slice(-4)}
+    </Link>
+  );
 
   // TODO: consolodate tx react hook from EmojiTweet and this
   const handleTipAction = useCallback(
@@ -109,11 +115,15 @@ export const TipInput: React.FC<Props> = ({
           userPubKey.toString(),
           process.env.REACT_APP_CONTENT_HOST as string,
           boomTokens ? boomTokens : 100000000 // 0.1 SSL
-        );
+        );        
 
-        enqueueSnackbar(`Transaction complete: ${signature}`, {
-          variant: "success",
-        });
+        enqueueSnackbar(
+          'Transaction complete',
+          {
+            variant: "success",
+            action: snackAction(signature),
+          }
+        );
         await tipCreatorMutation({
           variables: {
             tipAmount: boomTokens.toString(),
@@ -142,65 +152,22 @@ export const TipInput: React.FC<Props> = ({
 
   return (
     <Box>
-      <Box sx={{ position: "relative" }}>
-        <Box mb={1}>
-          <Typography>
-            Tip this meep some $BMA
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            position: "absolute",
-            left: "95.5%",
-            top: "-13%",
-          }}
-        >
-          <IconButton
-            size="small"
-            color="secondary"
-            onClick={() => {
-              setShowTip(false);
-            }}
-          >
-            <Close fontSize="small" />
-          </IconButton>
-        </Box>
         <Stack
           direction="row"
           justifyContent="flex-start"
           alignItems="flex-start"
           spacing={1}
         >
-          <Button
-            color="inherit"
-            variant="outlined"
-            onClick={() => {
-              handleTipAction({ txAmount: 1 });
-            }}
-          >
-            1
-          </Button>
-          <Button
-            color="inherit"
-            variant="outlined"
-            onClick={() => {
-              handleTipAction({ txAmount: 3 });
-            }}
-          >
-            3
-          </Button>
           <TextField
             error={inputError}
             autoFocus={true}
             id="outlined-number"
-            label="Custom"
+            label="$BMA amount to tip"
             type="number"
             InputLabelProps={{
               shrink: true,
-              style: { color: theme.secondaryColor },
             }}
             InputProps={{
-              style: { color: theme.secondaryColor },
               inputMode: "numeric",
               // @ts-ignore
               pattern: "[0-9]*",
@@ -213,8 +180,8 @@ export const TipInput: React.FC<Props> = ({
             }}
           />
           <Button
-            color="inherit"
-            variant="outlined"
+            sx={{ background: theme.accentColor }}
+            variant="contained"
             onClick={() => {
               handleTipAction({ txAmount: txValue });
             }}
@@ -222,7 +189,6 @@ export const TipInput: React.FC<Props> = ({
             Tip
           </Button>
         </Stack>
-      </Box>
     </Box>
   );
 };

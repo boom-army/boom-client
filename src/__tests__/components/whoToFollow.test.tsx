@@ -1,4 +1,4 @@
-import { WhoToFollow } from "../../components/WhoToFollow";
+import { WhoToFollow } from "../../components/SideBar/WhoToFollow";
 import { USER_FOLLOW } from "../../queries/follow/index";
 import { MockedProvider } from "@apollo/client/testing";
 import { act, fireEvent, render, screen } from "@testing-library/react";

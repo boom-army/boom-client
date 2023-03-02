@@ -1,5 +1,17 @@
 query mentions($offset: Int, $limit: Int) {
   mentions(offset: $offset, limit: $limit) {
-    ...TweetData
+    id
+    type
+    tweet {
+      ...TweetData
+    }
+    user {
+      ...BaseUser
+    }
+    common {
+      emojiId
+      emojiUserId
+    }
+    createdAt
   }
 }

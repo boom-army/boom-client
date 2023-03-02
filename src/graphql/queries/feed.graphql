@@ -1,11 +1,21 @@
 query feed($offset: Int!, $limit: Int, $global: Boolean) {
   feed(offset: $offset, limit: $limit, global: $global) {
     ...TweetData
+    childTweets {
+      ...TweetData
+    }
   }
 }
 
 query heroFeed($offset: Int!, $limit: Int) {
   heroFeed(offset: $offset, limit: $limit) {
     ...TweetData
+    childTweets {
+      ...TweetData
+    }
   }
+}
+
+query newMeepsCount($date: String) {
+  newMeepsCount(date: $date)
 }

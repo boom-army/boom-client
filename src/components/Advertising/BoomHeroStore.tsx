@@ -6,14 +6,16 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Link as MuiLink
+  Link as MuiLink,
+  styled
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { MeQuery } from "../../generated/graphql";
+import { User } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
+import { HerofiedIcon } from "../Icons";
 
 interface BoomHeroStoreProps {
-  userData: MeQuery["me"] | undefined;
+  userData: User | null;
 }
 
 export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
@@ -32,13 +34,24 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
       <CardMedia
         component="img"
         sx={{ width: 100, height: 100 }}
-        image="assets/magic-eden-logo.png"
-        alt="Magic Eden Logo"
+        image="assets/tensor-logo.jpeg"
+        alt="Tensor Trade Logo"
       />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto", p: "0.5em 1em 0 1em" }}>
           <Typography component="div" variant="h4" pb={1}>
-            Post in the Hero feed
+            Become a{" "}
+            <Typography display={"inline"}>
+              <HerofiedIcon
+                sx={{
+                  fill: theme.accentColor,
+                  width: "1rem",
+                  height: "1rem",
+                  verticalAlign: "-2px",
+                }}
+              />
+            </Typography>
+            VIP on Boom
           </Typography>
           <Typography
             variant="subtitle2"
@@ -46,23 +59,27 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             component="div"
             pb={1}
           >
-            Set your PFP to a{" "}
-            {userData?.handle ? <Link
-              to={`/${userData?.handle}`}
-              style={{ color: theme.blue.lightest }}
-            >
-              Boom Hero NFT 
-            </Link> : 'Boom Hero NFT '}
-            to appear in the Hero Feed.
+            Flex your profile{" "}
+            {userData?.handle ? (
+              <Link
+                to={`/${userData?.handle}`}
+                style={{ color: theme.blue.lightest }}
+              >
+                by clicking your Boom Hero NFT{" "}
+              </Link>
+            ) : (
+              "Boom Hero NFT"
+            )}
+            and making it your PFP
           </Typography>
           <Button
             component={MuiLink}
             size="small"
             variant="contained"
-            href="https://magiceden.io/marketplace/boomheroes"
+            href="https://www.tensor.trade/trade/boomheroes"
             target="_blank"
           >
-            Buy NFT on Magic Eden
+            Buy BoomHeroes on Tensor
           </Button>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}></Box>

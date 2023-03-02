@@ -1,19 +1,25 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import React from "react";
+import React, { useContext } from "react";
 import { ApolloError } from "@apollo/client";
 import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
-import { Grid } from "@mui/material";
+import { Grid, Link } from "@mui/material";
 import { HARKL_ID } from "../utils/utils";
 import { Loader } from "./Loader";
-import { NewTweet, ShowTweet } from "./Tweet";
-import { Tweet, useMeQuery } from "../generated/graphql";
+import { NewTweet } from "./Tweet";
+import { NewMeepsCountQuery, Tweet } from "../generated/graphql";
 import { BoomHeroStore } from "./Advertising/BoomHeroStore";
+import { ThemeContext } from "../contexts/theme";
+import { UserContext } from "../contexts/user";
+import { TweetThread } from "./Tweet/TweatThread";
 
 interface Props {
   loading?: boolean;
   error?: ApolloError | undefined | any;
   data: Array<Tweet> | undefined;
+  newMeeps?: NewMeepsCountQuery["newMeepsCount"] | undefined;
+  refetchData?: () => void;
+  refetchCount?: () => void;
   fetchMore: (props: any) => void;
 }
 
@@ -21,9 +27,13 @@ export const FeedList: React.FC<Props> = ({
   loading,
   error,
   data,
+  newMeeps,
+  refetchData,
+  refetchCount,
   fetchMore,
 }) => {
-  const { data: userData } = useMeQuery();
+  const { theme } = useContext(ThemeContext);
+  const { user: userData } = useContext(UserContext);
 
   if (loading)
     return (
@@ -35,7 +45,7 @@ export const FeedList: React.FC<Props> = ({
 
   // logout the user if removed from db
   if (data === undefined) {
-    localStorage.clear();
+    localStorage.removeItem("user");
   }
 
   const fetchData = () => {
@@ -44,6 +54,11 @@ export const FeedList: React.FC<Props> = ({
         offset: data?.length ?? 0,
       },
     });
+  };
+
+  const loadNewMeeps = () => {
+    refetchData && refetchData();
+    refetchCount && refetchCount();
   };
 
   return (
@@ -60,7 +75,19 @@ export const FeedList: React.FC<Props> = ({
           <Loader />
         </Box>
       ) : null}
-      {userData && <NewTweet userData={userData?.me} />}
+      {userData && <NewTweet key="feedNewTweet" />}
+      {newMeeps && newMeeps > 0 ? (
+        <Grid item xs={12}>
+          <Box
+            display={"flex"}
+            justifyContent={"center"}
+            py={1.5}
+            sx={{ backgroundColor: theme.tertiaryColor2 }}
+          >
+            <Link onClick={loadNewMeeps} sx={{ cursor: "pointer" }}>Show {newMeeps} Meep{newMeeps > 1 ? 's' : null}</Link>
+          </Box>
+        </Grid>
+      ) : null}
       {data?.length ? (
         <InfiniteScroll
           dataLength={data?.length}
@@ -75,15 +102,15 @@ export const FeedList: React.FC<Props> = ({
             )
           }
         >
-          {userData?.me.data?.avatarUpdateAuthority !== HARKL_ID && (
+          {userData?.data?.avatarUpdateAuthority !== HARKL_ID && (
             <Grid item xs={12}>
-              <BoomHeroStore userData={userData?.me} />
+              <BoomHeroStore userData={userData} />
             </Grid>
           )}
           {data?.length
             ? data?.map((tweet) => (
-                <ShowTweet key={tweet.id} tweet={tweet as Tweet} />
-              ))
+              <TweetThread key={tweet.id} tweet={tweet as Tweet} />
+            ))
             : null}
         </InfiniteScroll>
       ) : (

@@ -1,11 +1,10 @@
 import { AttributionLink } from "../Giphy/AttributionLink";
 import { Box } from "@mui/system";
 import {
-  ChannelFeedDocument,
+  GetChannelsDocument,
   FeedDocument,
   TweetDocument,
   useNewTweetMutation,
-  MeQuery,
   HeroFeedDocument,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
@@ -32,11 +31,12 @@ import { ThemeContext } from "../../contexts/theme";
 import { useState, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
+import { UserContext } from "../../contexts/user";
 
 interface NewTweetProps {
   parentTweet?: string | undefined
   channel?: string | undefined
-  userData: MeQuery["me"]
+  closePopUp?: () => void
 }
 
 const IconsGrid = styled(Grid)((props) => ({
@@ -54,23 +54,20 @@ const IconsGrid = styled(Grid)((props) => ({
   },
 }));
 
-const ImageInput = styled("input")({
-  display: "none",
-});
-
-export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
+export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) => {
   const { theme } = useContext(ThemeContext);
+  const { user: userData } = useContext(UserContext);
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
-  const [tweetFiles, setTweetFiles]: any = useState([]);
+  const [tweetFiles, setTweetFiles] = useState<string[]>([]);
   const tweet = useInput("");
-
+  
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
       FeedDocument,
       HeroFeedDocument,
-      ChannelFeedDocument,
+      GetChannelsDocument,
       {
         query: TweetDocument,
         variables: { id: parentTweet },
@@ -121,6 +118,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
     tweet.setValue("");
     setTweetFiles([]);
     setGif(null);
+    closePopUp && closePopUp();
   };
 
   const handleTweetFiles = async (e: any) => {
@@ -141,7 +139,7 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
       const signedUrl = data.signFileUrl;
       const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
       const imageUrl = imageData?.config?.url?.split("?")[0];
-      setTweetFiles([...tweetFiles, imageUrl]);
+      imageUrl && setTweetFiles([imageUrl, ...tweetFiles]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -187,6 +185,9 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
               "& .MuiInput-root:before": {
                 border: 0,
               },
+              "& .MuiInputBase-inputMultiline": {
+                overflow: "scroll",
+              },
               "&:before": {
                 borderColor: theme.tertiaryColor2,
               },
@@ -231,17 +232,10 @@ export const NewTweet = ({ parentTweet, channel, userData }: NewTweetProps) => {
 
         {!gif && !nftData && (
           <>
-            <label htmlFor="icon-button-file">
-              <ImageInput
-                accept="image/*"
-                id="icon-button-file"
-                type="file"
-                onChange={handleTweetFiles}
-              />
-              <IconButton aria-label="upload image" component="span">
-                <UploadFileIcon />
-              </IconButton>
-            </label>
+            <IconButton aria-label="upload image" component="label">
+              <UploadFileIcon />
+              <input hidden accept="image/*" type="file" onChange={handleTweetFiles} />
+            </IconButton>
           </>
         )}
 

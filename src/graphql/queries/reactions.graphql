@@ -2,12 +2,7 @@ query tweetReactions($tweetId: ID!) {
   tweet(id: $tweetId) {
     reactions {
       user {
-        handle
-        avatar
-        data {
-          avatarMint
-          avatarUpdateAuthority
-        }
+        ...BaseUser
       }
       emojiId
       id

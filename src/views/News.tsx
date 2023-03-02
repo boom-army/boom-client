@@ -30,6 +30,7 @@ export const News = () => {
             backgroundColor: alpha(theme.background2, 0.9),
             width: "100%",
             padding: "1rem",
+            zIndex: 1,
           }}
         >
           <Typography variant="h3">Solana News</Typography>
@@ -64,7 +65,7 @@ export const News = () => {
             }
           >
             {data?.searchTweets.map((meep) => (
-              <NewsItem meep={meep} />
+              <NewsItem meep={meep} key={meep.id} />
             ))}
           </InfiniteScroll>
         </Box>

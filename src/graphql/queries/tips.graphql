@@ -3,3 +3,16 @@ mutation tipCreator($tipAmount: String!, $tweetId: String!, $userId: String!) {
     id
   }
 }
+
+query tipCountUsers($dateFrom: String, $leaders: Int) {
+  tipCount(dateFrom: $dateFrom, leaders: $leaders) {
+    dateFrom
+    total
+    leaders {
+      total
+      user {
+        ...BaseUser
+      }
+    }
+  }
+}

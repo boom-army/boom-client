@@ -1,12 +1,14 @@
-import boomLogo from "../../images/logo.png";
-import { styled } from "@mui/material/styles";
+// import boomLogo from "../../images/boom-logo.png";
+// import { styled } from "@mui/material/styles";
 import { CustomResponse } from "../CustomResponse";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 import { Loader } from "../Loader";
 import { NewTweet, ParentTweet, ShowTweet } from ".";
-import { useMeQuery, useTweetQuery } from "../../generated/graphql";
+import { useTweetQuery } from "../../generated/graphql";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/user";
 
 export const MasterTweet = () => {
   const { tweetId } = useParams();
@@ -16,16 +18,16 @@ export const MasterTweet = () => {
       id: tweetId!,
     },
   });
-  const { data: userData } = useMeQuery();
-
+  const { user: userData } = useContext(UserContext);
+  
   const comments =
     data?.tweet?.childTweets?.length! > 0 ? data?.tweet.childTweets : [];
   const exists = !!data?.tweet?.id;
   const hasParent = !!data?.tweet?.parentTweet?.id;
 
-  let heroImage = boomLogo;
-  if (data?.tweet?.files?.length) heroImage = data.tweet.files[0].url;
-  if (data?.tweet?.nft?.image) heroImage = data.tweet.nft.image;
+  // let heroImage = boomLogo;
+  // if (data?.tweet?.files?.length) heroImage = data.tweet.files[0].url;
+  // if (data?.tweet?.nft?.image) heroImage = data.tweet.nft.image;
 
   return (
     <Box mb={7}>
@@ -65,7 +67,7 @@ export const MasterTweet = () => {
           ) : (
             <CustomResponse text="Oops, the tweet you are looking for doesn't seem to exist." />
           )}
-          {exists && userData && <NewTweet parentTweet={data?.tweet?.id} userData={userData?.me} />}
+          {exists && userData && <NewTweet parentTweet={data?.tweet?.id} />}
           {comments &&
             comments.map((comment: any) => (
               <ShowTweet tweet={comment} key={comment.id} />

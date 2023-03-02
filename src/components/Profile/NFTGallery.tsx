@@ -27,6 +27,7 @@ import {
 } from "../../generated/graphql";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../contexts/user";
 
 interface NFTTileProps {
   data: MetadataData;
@@ -47,6 +48,8 @@ interface URIData {
 
 const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
   const { theme } = useContext(ThemeContext);
+  const { setUser } = useContext(UserContext);
+  
   const { enqueueSnackbar } = useSnackbar();
   let { handle } = useParams<string>();
 
@@ -73,7 +76,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
     e.preventDefault();
 
     try {
-      await editProfileMutation({
+      const { data: profile }: any = await editProfileMutation({
         variables: {
           handle,
           avatar: uRIData?.image,
@@ -83,6 +86,9 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
           },
         },
       });
+
+      setUser(profile.editProfile);
+      toggleNftSelect(false)
 
       enqueueSnackbar("Your profile has been updated 🥳.", {
         variant: "success",

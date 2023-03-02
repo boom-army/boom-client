@@ -42,7 +42,17 @@ export const ENDPOINTS = [
   },
   {
     name: WalletAdapterNetwork.Mainnet,
-    endpoint: "https://ssc-dao.genesysgo.net/",
+    endpoint: "https://monke22bca9cb39054534954488e891e291b3.xyz2.hyperplane.dev",
+    chainID: ChainID.MainnetBeta,
+  },
+  {
+    name: WalletAdapterNetwork.Mainnet,
+    endpoint: "https://stylish-multi-telescope.solana-mainnet.discover.quiknode.pro/341ffad4533deac85acf4fa0de41d6bb04b5a6ac",
+    chainID: ChainID.MainnetBeta,
+  },
+  {
+    name: WalletAdapterNetwork.Mainnet,
+    endpoint: "https://solana-api.projectserum.com",
     chainID: ChainID.MainnetBeta,
   },
   {
@@ -53,11 +63,6 @@ export const ENDPOINTS = [
   {
     name: WalletAdapterNetwork.Devnet,
     endpoint: clusterApiUrl("devnet"),
-    chainID: ChainID.Devnet,
-  },
-  {
-    name: WalletAdapterNetwork.Devnet,
-    endpoint: "https://psytrbhymqlkfrhudd.dev.genesysgo.net:8899/",
     chainID: ChainID.Devnet,
   },
   {

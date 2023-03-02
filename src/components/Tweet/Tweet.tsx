@@ -5,7 +5,7 @@ import Linkify from "linkify-react";
 import React, { useContext } from "react";
 import moment from "moment";
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import { CommentIcon } from "../Icons";
+import { CommentIcon, HerofiedIcon } from "../Icons";
 import { EmojiTweet, Retweet } from "./index";
 import { ImageBox } from "../ImageBox";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
@@ -21,9 +21,14 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
+import { HARKL_ID } from "../../utils/utils";
+import { PopUpResponse } from "./PopUpResponse";
 
 interface Props {
   tweet: TweetQuery["tweet"];
+  threaded?: boolean;
+  popUpResponse?: boolean;
+  overideMt?: number;
 }
 
 const IconsStack = styled(Stack)((props) => ({
@@ -39,11 +44,7 @@ const IconsStack = styled(Stack)((props) => ({
   },
 }));
 
-const TweetBody = styled(Typography)((props) => ({
-  a: { color: props.theme.accentColor },
-}));
-
-export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
+export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse, overideMt }: Props) => {
   const {
     id,
     text,
@@ -57,12 +58,13 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
     retweetsCount,
     reactions,
     commentsCount,
+    parentTweet,
     tipsCount,
     createdAt,
   } = tweet;
 
   const { theme } = useContext(ThemeContext);
-  const { handleReaction } = useReaction({ tweetId: id });
+  const { handleReaction } = useReaction({ tweetId: id, parentTweetId: parentTweet?.id });
   const handle = user && user.handle;
 
   const extractUrls = linkify.find(text).filter((u) => u.type === "url");
@@ -70,30 +72,66 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
 
   const linkifyOptions = {
     target: { url: "_blank" },
-    formatHref: { hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}` },
+    formatHref: {
+      hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
+    },
   };
+
   return (
     <Grid
       item
       xs={12}
-      mt={2}
-      sx={{ position: "relative", padding: "0 1em", display: "flex", maxWidth: "100vw" }}
+      mt={overideMt ?? 2}
+      sx={{
+        position: "relative",
+        padding: "0 0.25rem",
+        display: "flex",
+        maxWidth: "100vw",
+      }}
     >
-      <Box mr={2}>
+      <Box mr={1} position="relative">
         <Link to={`/${handle}`}>
           <UserAvatar
             className="avatar"
             avatar={user?.avatar as string}
             isNFT={user?.data?.avatarMint}
+            sx={{
+              width: "3rem",
+              height: "3rem",
+              marginTop: "0.2rem",
+            }}
           />
         </Link>
+        {threaded && (
+          <Box
+            sx={{
+              borderLeft: `1px solid ${theme.tertiaryColor}`,
+              height: "calc(100% - 2.7rem)",
+              position: "absolute",
+              left: "1.5rem",
+              top: "3.6rem",
+            }}
+          />
+        )}
       </Box>
-      <Box mt={1}>
+      <Box mt={1} sx={{ flexWrap: "wrap", wordBreak: "break-word" }}>
         <Link to={`/${handle}`}>
-          <Typography display={"inline"}  sx={{ fontWeight: "600", mr: 0.5 }}>
+          <Typography display={"inline"} sx={{ fontWeight: "600", mr: 0.5 }}>
             {user && user.consumerName}
           </Typography>
           <Typography display={"inline"} mr={0.5}>{`@${handle}`}</Typography>
+          {user?.data?.avatarUpdateAuthority === HARKL_ID && (
+            <Typography display={"inline"}>
+              <HerofiedIcon
+                sx={{
+                  fill: theme.accentColor,
+                  width: "1rem",
+                  height: "1rem",
+                  verticalAlign: "-2px",
+                }}
+              />
+            </Typography>
+          )}
         </Link>
         <Link to={`/${handle}/status/${id}`} className="secondary">
           <Typography display={"inline"} sx={{ color: theme.secondaryColor }}>
@@ -102,9 +140,9 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
           </Typography>
         </Link>
         <Linkify options={linkifyOptions}>
-          <TweetBody mb={0.75} sx={{ wordBreak: "break-word" }}>
+          <Typography mb={0.75} sx={{ wordBreak: "break-word", a: { color: theme.accentColor} }}>
             {text}
-          </TweetBody>
+          </Typography>
         </Linkify>
         <UrlMetaData url={targetUrl} />
         <Box>
@@ -118,7 +156,6 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
           {reactions && reactions.length > 0 && (
             <ReactionsList
               reactions={reactions as Reaction[]}
-              // @ts-ignore
               handleReaction={handleReaction}
               tweetId={id}
             />
@@ -133,14 +170,18 @@ export const ShowTweet: React.FC<Props> = ({ tweet }: Props) => {
               <EmojiTweet handleReaction={handleReaction} />
             </Box>
 
-            <Link to={`/${handle}/status/${id}`}>
-              <Box display="flex" alignItems={"center"}>
-                <CommentIcon />
-                <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
-                  {commentsCount ? commentsCount : null}
-                </Typography>
-              </Box>
-            </Link>
+            {popUpResponse ? (
+              <PopUpResponse commentsCount={commentsCount} parentTweet={tweet.id} />
+            ) : (
+              <Link to={`/${handle}/status/${id}`}>
+                <Box display="flex" alignItems={"center"}>
+                  <CommentIcon />
+                  <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
+                    {commentsCount ? commentsCount : null}
+                  </Typography>
+                </Box>
+              </Link>
+            )}
 
             <Retweet
               id={id}
