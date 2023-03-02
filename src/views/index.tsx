@@ -8,4 +8,4 @@ export { Home } from "./Home";
 export { Nav } from "./Nav";
 export { News } from "./News";
 export { Notifications } from "./Notifications";
-export { OGMint } from "./OGMint";
+// export { OGMint } from "./OGMint";
