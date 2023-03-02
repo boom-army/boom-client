@@ -14,7 +14,7 @@ import {
 import { currentCluster } from "../utils/utils";
 import { useSnackbar } from "./snackbar";
 
-require("@solana/wallet-adapter-react-ui/styles.css");
+import "@solana/wallet-adapter-react-ui/styles.css?inline"
 
 export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
   const endpoint = process.env.REACT_APP_RPC_URL!;  
