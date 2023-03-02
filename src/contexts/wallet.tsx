@@ -6,10 +6,13 @@ import {
 import { WalletError } from "@solana/wallet-adapter-base";
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 import {
+  BackpackWalletAdapter,
+  BraveWalletAdapter,
+  ExodusWalletAdapter,
   GlowWalletAdapter,
   PhantomWalletAdapter,
-  TorusWalletAdapter,
   SolflareWalletAdapter,
+  TorusWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 import { currentCluster } from "../utils/utils";
 import { useSnackbar } from "./snackbar";
@@ -22,8 +25,11 @@ export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
     () => [
       new PhantomWalletAdapter(),
       new GlowWalletAdapter(),
-      new TorusWalletAdapter(),
+      new BackpackWalletAdapter(),
       new SolflareWalletAdapter({ network: name }),
+      new BraveWalletAdapter(),
+      new TorusWalletAdapter(),
+      new ExodusWalletAdapter({ network: name }),
     ],
     [name]
   );
