@@ -14,8 +14,6 @@ import {
 import { currentCluster } from "../utils/utils";
 import { useSnackbar } from "./snackbar";
 
-import "@solana/wallet-adapter-react-ui/styles.css?inline"
-
 export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
   const endpoint = process.env.REACT_APP_RPC_URL!;  
   let { name } = currentCluster();
