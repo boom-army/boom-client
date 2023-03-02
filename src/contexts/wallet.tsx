@@ -17,8 +17,8 @@ import {
 import { currentCluster } from "../utils/utils";
 import { useSnackbar } from "./snackbar";
 
-export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
-  const endpoint = process.env.REACT_APP_RPC_URL!;  
+export const Wallet: FC<{ children: JSX.Element }> = ({ children = null }) => {
+  const endpoint = process.env.REACT_APP_RPC_URL!;
   let { name } = currentCluster();
 
   const wallets = useMemo(
@@ -37,15 +37,19 @@ export const Wallet: FC<{children: JSX.Element}> = ({ children = null }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const onError = useCallback((error: WalletError) => {
-    const message = error.message ? `${error.name}: ${error.message}` : error.name;
-    enqueueSnackbar(message, { variant: 'error' });
+    const message = error.message
+      ? `${error.name}: ${error.message}`
+      : error.name;
+    enqueueSnackbar(message, { variant: "error" });
     console.error(error);
   }, []);
 
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} onError={onError} autoConnect>
-        <WalletDialogProvider title={<>Login with Solana Wallet</>}>{children}</WalletDialogProvider>
+        <WalletDialogProvider title={<>Login with Solana Wallet</>}>
+          {children}
+        </WalletDialogProvider>
       </WalletProvider>
     </ConnectionProvider>
   );

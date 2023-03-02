@@ -7,7 +7,7 @@ import {
   CardMedia,
   Typography,
   Link as MuiLink,
-  styled
+  styled,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { User } from "../../generated/graphql";

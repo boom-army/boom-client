@@ -16,7 +16,7 @@ export const AuctionCountdown: React.FC<AuctionCountdownProps> = ({
   useMemo(() => {
     var currentTime = dayjs();
     var diffTime = endTime.unix() - currentTime.unix();
-    
+
     var duration = dayjs.duration(diffTime * 1000, "milliseconds");
     var interval = 1000;
     const twoDP = (n: number) => (n > 9 ? n : "0" + n);

@@ -44,7 +44,12 @@ const IconsStack = styled(Stack)((props) => ({
   },
 }));
 
-export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse, overideMt }: Props) => {
+export const ShowTweet: React.FC<Props> = ({
+  tweet,
+  threaded,
+  popUpResponse,
+  overideMt,
+}: Props) => {
   const {
     id,
     text,
@@ -64,7 +69,10 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse, ove
   } = tweet;
 
   const { theme } = useContext(ThemeContext);
-  const { handleReaction } = useReaction({ tweetId: id, parentTweetId: parentTweet?.id });
+  const { handleReaction } = useReaction({
+    tweetId: id,
+    parentTweetId: parentTweet?.id,
+  });
   const handle = user && user.handle;
 
   const extractUrls = linkify.find(text).filter((u) => u.type === "url");
@@ -140,7 +148,10 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse, ove
           </Typography>
         </Link>
         <Linkify options={linkifyOptions}>
-          <Typography mb={0.75} sx={{ wordBreak: "break-word", a: { color: theme.accentColor} }}>
+          <Typography
+            mb={0.75}
+            sx={{ wordBreak: "break-word", a: { color: theme.accentColor } }}
+          >
             {text}
           </Typography>
         </Linkify>
@@ -171,7 +182,10 @@ export const ShowTweet: React.FC<Props> = ({ tweet, threaded, popUpResponse, ove
             </Box>
 
             {popUpResponse ? (
-              <PopUpResponse commentsCount={commentsCount} parentTweet={tweet.id} />
+              <PopUpResponse
+                commentsCount={commentsCount}
+                parentTweet={tweet.id}
+              />
             ) : (
               <Link to={`/${handle}/status/${id}`}>
                 <Box display="flex" alignItems={"center"}>

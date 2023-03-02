@@ -49,8 +49,8 @@ export const Channels: React.FC = () => {
 
         const formatChannelData = nftData.map(async (meta, i) => {
           try {
-            const metaDataFetch: any = await fetch(meta.data.uri).then((response) =>
-              response.json()
+            const metaDataFetch: any = await fetch(meta.data.uri).then(
+              (response) => response.json()
             );
             return {
               __typename: "Channel" as "Channel",
@@ -114,7 +114,7 @@ export const Channels: React.FC = () => {
                   image: channel.image,
                   status: ChannelStatus.ACTIVE,
                   channelParentId: null,
-                }
+                },
               });
             } catch (error) {
               return Promise.resolve();

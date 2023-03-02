@@ -15,6 +15,7 @@ export default defineConfig(({ command, mode }) => {
     build: {
       sourcemap: true, // Source map generation must be turned on
       minify: "esbuild",
+      target: "build",
     },
     plugins: [
       react(),

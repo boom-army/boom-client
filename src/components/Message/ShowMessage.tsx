@@ -102,7 +102,9 @@ export const ShowMessage: React.FC<Props> = ({
   const linkifyOptions = {
     className: "body",
     target: { url: "_blank" },
-    formatHref: { hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}` },
+    formatHref: {
+      hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
+    },
   };
 
   return (
@@ -225,8 +227,8 @@ export const ShowMessage: React.FC<Props> = ({
                 width: "30px",
                 height: "30px",
               }}
-              avatar={ user?.avatar as string }
-              isNFT={ user?.data?.avatarMint }
+              avatar={user?.avatar as string}
+              isNFT={user?.data?.avatarMint}
             />
           </Link>
         </Box>

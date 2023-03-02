@@ -13,7 +13,12 @@ export const Following: React.FC = () => {
 
   return (
     <>
-      <FeedList loading={loading} error={error} data={data?.feed as Array<Tweet>} fetchMore={fetchMore} />
+      <FeedList
+        loading={loading}
+        error={error}
+        data={data?.feed as Array<Tweet>}
+        fetchMore={fetchMore}
+      />
     </>
   );
 };

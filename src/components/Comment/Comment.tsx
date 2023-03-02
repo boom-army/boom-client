@@ -77,10 +77,7 @@ const Comment = ({
   return (
     <Wrapper>
       <Box mr={2}>
-        <UserAvatar
-          avatar={user?.avatar}
-          isNFT={user?.data?.avatarMint}
-        />
+        <UserAvatar avatar={user?.avatar} isNFT={user?.data?.avatarMint} />
       </Box>
       <div className="comment-info">
         <div className="comment-info-user">

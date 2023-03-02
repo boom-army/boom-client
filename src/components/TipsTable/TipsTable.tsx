@@ -149,7 +149,10 @@ export const UserTipsTable: FC<{}> = () => {
           </TableHead>
           <TableBody>
             {formattedData?.leaders?.map((leader, i) => (
-              <TableRow key={leader?.user?.id} sx={{ backgroundColor: rowPlacement(i) }}>
+              <TableRow
+                key={leader?.user?.id}
+                sx={{ backgroundColor: rowPlacement(i) }}
+              >
                 <TableCell align="center">{i + 1}</TableCell>
                 <TableCell>
                   <Box display={"flex"}>
@@ -176,7 +179,7 @@ export const UserTipsTable: FC<{}> = () => {
                               height: "1rem",
                               verticalAlign: "-3px",
                               marginLeft: "0.2rem",
-                              opacity: "0.5"
+                              opacity: "0.5",
                             }}
                           />
                         )}

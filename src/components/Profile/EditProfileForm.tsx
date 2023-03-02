@@ -26,8 +26,8 @@ import { useState, useContext } from "react";
 import { UserAvatar } from "../UserAvatar";
 
 interface Profile {
-  profile: ProfileQuery["profile"]
-  setUser: (user: User | null) => void | User 
+  profile: ProfileQuery["profile"];
+  setUser: (user: User | null) => void | User;
 }
 
 export const EditProfileForm = ({ profile, setUser }: Profile) => {
@@ -115,8 +115,8 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
   };
 
   const handleAvatar = async (e: any) => {
-    console.log('boom');
-    
+    console.log("boom");
+
     try {
       const file = e.target.files[0];
       const { data } = await signFileMutation({

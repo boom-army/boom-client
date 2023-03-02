@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { AuctionStatus } from '@liqnft/candy-shop-types';
-import dayjs from 'dayjs';
+import React, { useState, useEffect } from "react";
+import { AuctionStatus } from "@liqnft/candy-shop-types";
+import dayjs from "dayjs";
 
 interface CountdownProps {
   start: number;
@@ -37,7 +37,11 @@ export const Countdown: React.FC<CountdownProps> = ({ start, end, status }) => {
     status === AuctionStatus.EXPIRED ||
     status === AuctionStatus.CANCELLED
   ) {
-    return <span className="candy-countdown candy-countdown-ended">Auction ended</span>;
+    return (
+      <span className="candy-countdown candy-countdown-ended">
+        Auction ended
+      </span>
+    );
   }
 
   // auction not started yet
@@ -50,5 +54,7 @@ export const Countdown: React.FC<CountdownProps> = ({ start, end, status }) => {
   }
 
   // auction is in progress
-  return <span className="candy-countdown">{`${hoursString}:${minutesString}:${secondsString}`}</span>;
+  return (
+    <span className="candy-countdown">{`${hoursString}:${minutesString}:${secondsString}`}</span>
+  );
 };

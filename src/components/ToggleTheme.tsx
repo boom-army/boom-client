@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { ThemeContext } from "../contexts/theme";
 import { lightTheme, darkTheme, ThemeVars } from "../styles/themes";
-import InvertColorsIcon from '@mui/icons-material/InvertColors';
+import InvertColorsIcon from "@mui/icons-material/InvertColors";
 import { Stack, Typography } from "@mui/material";
 
 export const ToggleTheme = ({ iconProps, stackProps }: any) => {
@@ -29,9 +29,14 @@ export const ToggleTheme = ({ iconProps, stackProps }: any) => {
   };
 
   return (
-      <Stack onClick={toggleTheme} direction="row" {...stackProps} sx={{cursor: "pointer"}}>
-        <InvertColorsIcon sx={iconProps} />
-        <Typography variant="body1">Theme</Typography>
-      </Stack>
+    <Stack
+      onClick={toggleTheme}
+      direction="row"
+      {...stackProps}
+      sx={{ cursor: "pointer" }}
+    >
+      <InvertColorsIcon sx={iconProps} />
+      <Typography variant="body1">Theme</Typography>
+    </Stack>
   );
 };

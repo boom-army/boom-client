@@ -20,8 +20,8 @@ export const UrlMetaData: React.FC<Props> = ({ url }: Props) => {
   });
 
   const title = data?.getMeta?.open_graph?.title || data?.getMeta?.title;
-  const description = data?.getMeta?.open_graph?.description || data?.getMeta?.description;
-  
+  const description =
+    data?.getMeta?.open_graph?.description || data?.getMeta?.description;
 
   const images = data?.getMeta?.open_graph?.images ||
     data?.getMeta?.twitter_card?.images || [{ url: null }];
@@ -33,18 +33,13 @@ export const UrlMetaData: React.FC<Props> = ({ url }: Props) => {
     /[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})/g
   );
 
-  const hasData =
-    heroImage && title && description && url;
+  const hasData = heroImage && title && description && url;
 
   return hasData ? (
     <Card sx={{ maxWidth: 400, margin: "1em 0" }}>
       <CardActionArea onClick={() => window.open(url, "_blank")?.focus()}>
         {heroVideo ? (
-          <CardMedia
-            component="iframe"
-            image={heroVideo}
-            height="240"
-          />
+          <CardMedia component="iframe" image={heroVideo} height="240" />
         ) : (
           <CardMedia
             component="img"

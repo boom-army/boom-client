@@ -11,7 +11,9 @@ export const UserContext = React.createContext<UserContextType>({
   setUser: () => console.warn("no setUser function provided"),
 });
 
-export const UserContextProvider: React.FC<{children: JSX.Element}> = ({ children }) => {
+export const UserContextProvider: React.FC<{ children: JSX.Element }> = ({
+  children,
+}) => {
   const [user, _setUser] = useState<User | null>(null);
 
   useEffect(() => {

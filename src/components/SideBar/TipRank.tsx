@@ -157,7 +157,7 @@ export const TipRank: FC<{}> = () => {
       </Box>
       <List>
         {formattedData?.leaders?.map((leader, i) => (
-          <ListItem key={leader?.user?.id} sx={{padding: 0}}>
+          <ListItem key={leader?.user?.id} sx={{ padding: 0 }}>
             <ListItemAvatar>
               <Badge
                 overlap="circular"

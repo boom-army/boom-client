@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Stack, Typography } from "@mui/material";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 
 export const Logout = ({ iconProps, stackProps }: any) => {
   const { disconnect } = useWallet();
@@ -24,7 +24,12 @@ export const Logout = ({ iconProps, stackProps }: any) => {
   );
 
   return (
-    <Stack onClick={handleLogout} direction="row" {...stackProps} sx={{cursor: "pointer"}}>
+    <Stack
+      onClick={handleLogout}
+      direction="row"
+      {...stackProps}
+      sx={{ cursor: "pointer" }}
+    >
       <LogoutIcon sx={iconProps} />
       <Typography variant="body1">Logout</Typography>
     </Stack>

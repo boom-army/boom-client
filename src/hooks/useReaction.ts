@@ -12,7 +12,9 @@ export const useReaction = ({ tweetId, parentTweetId }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [toggleReactionMutation, { loading }] = useToggleReactionMutation({
-    refetchQueries: [{ query: TweetDocument, variables: { id: parentTweetId ?? tweetId } }],
+    refetchQueries: [
+      { query: TweetDocument, variables: { id: parentTweetId ?? tweetId } },
+    ],
   });
 
   const handleReaction = useCallback(

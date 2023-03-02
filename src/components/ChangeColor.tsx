@@ -1,4 +1,4 @@
-import PaletteIcon from '@mui/icons-material/Palette';
+import PaletteIcon from "@mui/icons-material/Palette";
 import { Stack, Typography } from "@mui/material";
 import { ThemeContext } from "../contexts/theme";
 import { useState, useContext } from "react";
@@ -24,7 +24,7 @@ export const ChangeColor = ({ iconProps, stackProps }: any) => {
       newAccentColor = colors[0];
     } else {
       newAccentColor = colors[colors.indexOf(currentColor) + 1];
-    }    
+    }
 
     setTheme({
       ...theme,
@@ -32,17 +32,22 @@ export const ChangeColor = ({ iconProps, stackProps }: any) => {
       pallette: {
         primary: {
           main: newAccentColor,
-        }
-      }
+        },
+      },
     });
 
     setCurrentColor(newAccentColor);
   };
 
   return (
-      <Stack onClick={changeColor} direction="row" {...stackProps} sx={{cursor: "pointer"}}>
-        <PaletteIcon sx={iconProps} />
-        <Typography variant="body1">Color</Typography>
-      </Stack>
+    <Stack
+      onClick={changeColor}
+      direction="row"
+      {...stackProps}
+      sx={{ cursor: "pointer" }}
+    >
+      <PaletteIcon sx={iconProps} />
+      <Typography variant="body1">Color</Typography>
+    </Stack>
   );
 };

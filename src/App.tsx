@@ -101,13 +101,13 @@ export const App = () => {
               color: theme.primaryColor,
               overflowX: "hidden",
             },
-            '*::-webkit-scrollbar': {
+            "*::-webkit-scrollbar": {
               width: "0.4rem",
             },
-            '*::-webkit-scrollbar-track': {
+            "*::-webkit-scrollbar-track": {
               background: theme.background,
             },
-            '*::-webkit-scrollbar-thumb': {
+            "*::-webkit-scrollbar-thumb": {
               background: theme.accentColor,
             },
             ".MuiPaper-root": {

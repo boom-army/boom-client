@@ -137,9 +137,13 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
           dataLength={bids.length}
           next={offset === 0 ? EMPTY_FUNCTION : getAuctionBids(offset, LIMIT)}
           loader={
-            bids.length ? (<Box sx={{ marginTop: "1em", ml: "1em" }}>
-              <Loader />
-            </Box>) : (<Typography m={2}>There are no bids yet.</Typography>)
+            bids.length ? (
+              <Box sx={{ marginTop: "1em", ml: "1em" }}>
+                <Loader />
+              </Box>
+            ) : (
+              <Typography m={2}>There are no bids yet.</Typography>
+            )
           }
           scrollableTarget="scrollBox"
           hasMore={hasMore}

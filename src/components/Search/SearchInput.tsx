@@ -21,16 +21,26 @@ import { useSearchParams } from "react-router-dom";
 const SearchInput = () => {
   const { theme } = useContext(ThemeContext);
   let [searchParams, setSearchParams] = useSearchParams();
-  const [tabValue, setTabValue] = useState(
-    searchParams.get("type") || "MEEPS"
-  );
+  const [tabValue, setTabValue] = useState(searchParams.get("type") || "MEEPS");
   const term = useInput(searchParams.get("term") || "");
 
-  const [searchTweets, { data: searchTweetData, loading: searchTweetLoading, fetchMore: fetchMoreTweets }] =
-    useSearchTweetsLazyQuery({ fetchPolicy: "network-only" });
+  const [
+    searchTweets,
+    {
+      data: searchTweetData,
+      loading: searchTweetLoading,
+      fetchMore: fetchMoreTweets,
+    },
+  ] = useSearchTweetsLazyQuery({ fetchPolicy: "network-only" });
 
-  const [searchUser, { data: searchUserData, loading: searchUserLoading, fetchMore: fetchMoreUsers }] =
-    useSearchUserLazyQuery({ fetchPolicy: "network-only" });
+  const [
+    searchUser,
+    {
+      data: searchUserData,
+      loading: searchUserLoading,
+      fetchMore: fetchMoreUsers,
+    },
+  ] = useSearchUserLazyQuery({ fetchPolicy: "network-only" });
 
   const { enqueueSnackbar } = useSnackbar();
 

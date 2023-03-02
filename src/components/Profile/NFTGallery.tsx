@@ -49,7 +49,7 @@ interface URIData {
 const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
   const { theme } = useContext(ThemeContext);
   const { setUser } = useContext(UserContext);
-  
+
   const { enqueueSnackbar } = useSnackbar();
   let { handle } = useParams<string>();
 
@@ -88,7 +88,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
       });
 
       setUser(profile.editProfile);
-      toggleNftSelect(false)
+      toggleNftSelect(false);
 
       enqueueSnackbar("Your profile has been updated 🥳.", {
         variant: "success",
@@ -184,7 +184,8 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
                 alignContent: "flex-start",
               }}
             >
-              {uRIData?.attributes && typeof uRIData?.attributes?.map === 'function' &&
+              {uRIData?.attributes &&
+                typeof uRIData?.attributes?.map === "function" &&
                 uRIData.attributes.map((nftItem) => (
                   <Chip
                     label={`${nftItem.trait_type}: ${nftItem.value}`}

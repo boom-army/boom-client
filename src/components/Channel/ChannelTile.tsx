@@ -29,7 +29,8 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
       <Box
         component={NavLink}
         sx={{
-          backgroundColor: localTheme === 'dark' ? theme.blue.darker : theme.tertiaryColor2,
+          backgroundColor:
+            localTheme === "dark" ? theme.blue.darker : theme.tertiaryColor2,
           borderRadius: 1,
           display: "flex",
           border: active ? `1px solid ${theme.secondaryColor}` : 0,

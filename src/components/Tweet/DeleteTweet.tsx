@@ -5,7 +5,7 @@ import { useDeleteTweetMutation } from "../../generated/graphql";
 import { useSnackbar } from "../../contexts/snackbar";
 
 interface Props {
-  id: string
+  id: string;
 }
 
 export const DeleteTweet: React.FC<Props> = ({ id }) => {
@@ -16,7 +16,9 @@ export const DeleteTweet: React.FC<Props> = ({ id }) => {
       cache.writeQuery({
         query: FeedDocument,
         data: {
-          feed: feed.filter((tweet: Tweet) => tweet.id !== data?.deleteTweet?.id),
+          feed: feed.filter(
+            (tweet: Tweet) => tweet.id !== data?.deleteTweet?.id
+          ),
         },
       });
     },

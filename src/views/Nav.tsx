@@ -2,12 +2,12 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import GavelIcon from "@mui/icons-material/Gavel";
 import GroupIcon from "@mui/icons-material/Group";
 import Language from "@mui/icons-material/Language";
-import LockPersonIcon from '@mui/icons-material/LockPerson';
+import LockPersonIcon from "@mui/icons-material/LockPerson";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person from "@mui/icons-material/Person";
 import React, { useContext } from "react";
-import SavingsIcon from '@mui/icons-material/Savings';
+import SavingsIcon from "@mui/icons-material/Savings";
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
@@ -17,7 +17,7 @@ import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme";
 import { styled } from "@mui/material/styles";
 import { useGetChannelsQuery, User } from "../generated/graphql";
-import {Logout} from "../components/Auth/Logout";
+import { Logout } from "../components/Auth/Logout";
 import { ChangeColor } from "../components/ChangeColor";
 import { ToggleTheme } from "../components/ToggleTheme";
 interface Props {
@@ -199,9 +199,9 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   <Typography variant="body1">Profile</Typography>
                 </Stack>
               </NavLink>
-              <ToggleTheme stackProps={stackProps} iconProps={iconProps}/>
-              <ChangeColor stackProps={stackProps} iconProps={iconProps}/>
-              <Logout stackProps={stackProps} iconProps={iconProps}/>
+              <ToggleTheme stackProps={stackProps} iconProps={iconProps} />
+              <ChangeColor stackProps={stackProps} iconProps={iconProps} />
+              <Logout stackProps={stackProps} iconProps={iconProps} />
             </>
           )}
         </StyledStack>

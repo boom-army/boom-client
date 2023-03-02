@@ -79,11 +79,18 @@ export const TipCreator: React.FC<TipProps> = ({
         </DialogTitle>
         <DialogContent dividers>
           <Typography variant={"body2"} sx={{ mb: 2 }}>
-            Share the love and show your appreciation by tipping this meeper ❤️❤️❤️
+            Share the love and show your appreciation by tipping this meeper
+            ❤️❤️❤️
           </Typography>
           <Typography variant={"body2"} sx={{ mb: 2 }}>
             Don't have any $BMA?
-            <Link href={"https://jup.ag/swap/SOL-BMA"} target={"_blank"} sx={{ ml: 1 }}>You can get some here</Link>
+            <Link
+              href={"https://jup.ag/swap/SOL-BMA"}
+              target={"_blank"}
+              sx={{ ml: 1 }}
+            >
+              You can get some here
+            </Link>
           </Typography>
           <Divider sx={{ mb: 2 }} />
           <TipInput

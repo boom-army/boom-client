@@ -301,7 +301,7 @@
 //     try {
 //       setIsUserMinting(true);
 //       document.getElementById("#identity")?.click();
-      
+
 //       if (wallet.connected && candyMachine?.program && wallet.publicKey) {
 //         let setupMint: SetupState | undefined;
 //         if (needTxnSplit && setupTxn === undefined) {

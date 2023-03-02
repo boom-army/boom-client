@@ -19,7 +19,7 @@ export const MasterTweet = () => {
     },
   });
   const { user: userData } = useContext(UserContext);
-  
+
   const comments =
     data?.tweet?.childTweets?.length! > 0 ? data?.tweet.childTweets : [];
   const exists = !!data?.tweet?.id;

@@ -3,19 +3,16 @@ import SearchResultTweets from "./SearchResultTweets";
 import SearchResultUsers from "./SearchResultUsers";
 import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import {
-  SearchTweetsQuery,
-  SearchUserQuery,
-} from "../../generated/graphql";
+import { SearchTweetsQuery, SearchUserQuery } from "../../generated/graphql";
 
 interface SearchResultProps {
-  loading: boolean
-  searchTweetData: SearchTweetsQuery | undefined
-  searchUserData: SearchUserQuery | undefined
-  fetchMoreTweets: any
-  fetchMoreUsers: any
-  tabValue: string
-  setTabValue: React.Dispatch<React.SetStateAction<string>>
+  loading: boolean;
+  searchTweetData: SearchTweetsQuery | undefined;
+  searchUserData: SearchUserQuery | undefined;
+  fetchMoreTweets: any;
+  fetchMoreUsers: any;
+  tabValue: string;
+  setTabValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const SearchResult = ({
@@ -47,13 +44,25 @@ const SearchResult = ({
             </TabList>
           </Box>
           <TabPanel value="MEEPS">
-            <SearchResultTweets tweets={searchTweetData} loading={loading} fetchMoreTweets={fetchMoreTweets} />
+            <SearchResultTweets
+              tweets={searchTweetData}
+              loading={loading}
+              fetchMoreTweets={fetchMoreTweets}
+            />
           </TabPanel>
           <TabPanel value="TAGS">
-            <SearchResultTweets tweets={searchTweetData} loading={loading} fetchMoreTweets={fetchMoreTweets} />
+            <SearchResultTweets
+              tweets={searchTweetData}
+              loading={loading}
+              fetchMoreTweets={fetchMoreTweets}
+            />
           </TabPanel>
           <TabPanel value="USERS">
-            <SearchResultUsers users={searchUserData} loading={loading} fetchMoreUsers={fetchMoreUsers} />
+            <SearchResultUsers
+              users={searchUserData}
+              loading={loading}
+              fetchMoreUsers={fetchMoreUsers}
+            />
           </TabPanel>
         </TabContext>
       </Box>

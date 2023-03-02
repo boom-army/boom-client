@@ -36,7 +36,11 @@ import {
   fetchAuctionsByShopAddress,
   ExplorerLinkBase,
 } from "@liqnft/candy-shop-sdk";
-import { AuctionStatus, AuctionBid, Blockchain } from "@liqnft/candy-shop-types";
+import {
+  AuctionStatus,
+  AuctionBid,
+  Blockchain,
+} from "@liqnft/candy-shop-types";
 import { shortenAddress } from "../utils/utils";
 import { Countdown } from "../components/Auctions/CandyCountdown";
 import { Price } from "../components/Auctions/CandyPrice";
@@ -359,9 +363,9 @@ export const BoomOnes = () => {
               id={id}
               open={open}
               anchorEl={anchorEl}
-              placement={"left-start"} 
-              nonce={undefined} 
-              onResize={undefined} 
+              placement={"left-start"}
+              nonce={undefined}
+              onResize={undefined}
               onResizeCapture={undefined}
             >
               <Box

@@ -16,16 +16,14 @@ const NFTAvatar = styled(Avatar)({
   transition: "all 0.2s ease-in",
 });
 
-export const UserAvatar = ({ avatar, isNFT = '', sx }: IProps) => {
-  return (
-    isNFT && isNFT.length > 0 ? (
-      <NFTAvatar className={`avatar`} sx={sx} src={avatar}>
-        {!avatar && <PersonIcon />}
-      </NFTAvatar>
-    ) : (
-      <Avatar className={`avatar`} sx={sx} src={avatar}>
-        {!avatar && <PersonIcon />}
-      </Avatar>
-    )
+export const UserAvatar = ({ avatar, isNFT = "", sx }: IProps) => {
+  return isNFT && isNFT.length > 0 ? (
+    <NFTAvatar className={`avatar`} sx={sx} src={avatar}>
+      {!avatar && <PersonIcon />}
+    </NFTAvatar>
+  ) : (
+    <Avatar className={`avatar`} sx={sx} src={avatar}>
+      {!avatar && <PersonIcon />}
+    </Avatar>
   );
 };

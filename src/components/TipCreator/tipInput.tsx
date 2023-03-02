@@ -39,7 +39,7 @@ export const TipInput: React.FC<Props> = ({
 
   const [tipCreatorMutation] = useTipCreatorMutation({
     refetchQueries: [{ query: TweetDocument, variables: { id: tweetId } }],
-  });  
+  });
 
   const snackAction = (signature: string) => (
     <Link href={`https://solana.fm/tx/${signature}`} target={"_blank"}>
@@ -115,15 +115,12 @@ export const TipInput: React.FC<Props> = ({
           userPubKey.toString(),
           process.env.REACT_APP_CONTENT_HOST as string,
           boomTokens ? boomTokens : 100000000 // 0.1 SSL
-        );        
-
-        enqueueSnackbar(
-          'Transaction complete',
-          {
-            variant: "success",
-            action: snackAction(signature),
-          }
         );
+
+        enqueueSnackbar("Transaction complete", {
+          variant: "success",
+          action: snackAction(signature),
+        });
         await tipCreatorMutation({
           variables: {
             tipAmount: boomTokens.toString(),
@@ -152,43 +149,43 @@ export const TipInput: React.FC<Props> = ({
 
   return (
     <Box>
-        <Stack
-          direction="row"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          spacing={1}
+      <Stack
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        spacing={1}
+      >
+        <TextField
+          error={inputError}
+          autoFocus={true}
+          id="outlined-number"
+          label="$BMA amount to tip"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          InputProps={{
+            inputMode: "numeric",
+            // @ts-ignore
+            pattern: "[0-9]*",
+          }}
+          value={txValue}
+          size="small"
+          onChange={(e) => {
+            setInputError(false);
+            setTxValue(Number(e.target.value));
+          }}
+        />
+        <Button
+          sx={{ background: theme.accentColor }}
+          variant="contained"
+          onClick={() => {
+            handleTipAction({ txAmount: txValue });
+          }}
         >
-          <TextField
-            error={inputError}
-            autoFocus={true}
-            id="outlined-number"
-            label="$BMA amount to tip"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              inputMode: "numeric",
-              // @ts-ignore
-              pattern: "[0-9]*",
-            }}
-            value={txValue}
-            size="small"
-            onChange={(e) => {
-              setInputError(false);
-              setTxValue(Number(e.target.value));
-            }}
-          />
-          <Button
-            sx={{ background: theme.accentColor }}
-            variant="contained"
-            onClick={() => {
-              handleTipAction({ txAmount: txValue });
-            }}
-          >
-            Tip
-          </Button>
-        </Stack>
+          Tip
+        </Button>
+      </Stack>
     </Box>
   );
 };

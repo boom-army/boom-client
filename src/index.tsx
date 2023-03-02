@@ -1,6 +1,6 @@
 // import * as serviceWorker from "./serviceWorker";
 import "./index.css";
-import 'dayjs/locale/en-nz';
+import "dayjs/locale/en-nz";
 import * as Sentry from "@sentry/react";
 import React from "react";
 import { ApolloProvider } from "@apollo/client";

@@ -69,8 +69,7 @@ export const NFTMint: React.FC = (props) => {
     symbol: "",
     description: "",
     external_url: "",
-    image:
-      "",
+    image: "",
     animation_url: undefined,
     attributes: [] as Attributes[],
     seller_fee_basis_points: 500,

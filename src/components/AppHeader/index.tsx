@@ -102,7 +102,7 @@ export const AppHeader = () => {
       <AppBar
         position="relative"
         sx={{
-          borderBottom: (t) => `1px solid ${t.palette.divider}`
+          borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
         <Toolbar variant="dense">

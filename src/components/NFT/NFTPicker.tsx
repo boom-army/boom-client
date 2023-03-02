@@ -144,7 +144,8 @@ export const NFTPicker: React.FC<{
             </DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Enter the NFT Public Mint Key of any Solana NFT to display it in your meep.
+                Enter the NFT Public Mint Key of any Solana NFT to display it in
+                your meep.
               </DialogContentText>
             </DialogContent>
             <Box
@@ -276,19 +277,17 @@ export const NFTPicker: React.FC<{
                       display: "flex",
                       flexDirection: "row-reverse",
                     }}
-                  >
-                  </Box>
+                  ></Box>
                 </>
               )}
             </Box>
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
-              {metadata && (<Button onClick={handleSelect}>Select</Button>)}
+              {metadata && <Button onClick={handleSelect}>Select</Button>}
             </DialogActions>
           </Dialog>
         </>
-      )
-      }
+      )}
     </>
   );
 };

@@ -17,7 +17,7 @@ interface NotificationProps {
 
 export const Notification = ({ mention }: NotificationProps) => {
   const { theme } = useContext(ThemeContext);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [fromUser, setFromUser] = useState(mention?.tweet?.user);
 
   useProfileByIdQuery({
@@ -26,7 +26,7 @@ export const Notification = ({ mention }: NotificationProps) => {
     },
     onCompleted: ({ profileById }) => {
       setFromUser(profileById as User);
-    }
+    },
   });
 
   useEffect(() => {
@@ -45,7 +45,10 @@ export const Notification = ({ mention }: NotificationProps) => {
   return (
     <Box p={2} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
       {fromUser && (
-        <Box display={"flex"} sx={{ flexWrap: "wrap", wordBreak: "break-word" }}>
+        <Box
+          display={"flex"}
+          sx={{ flexWrap: "wrap", wordBreak: "break-word" }}
+        >
           <Box mr={0.5} position="relative">
             <Link to={`/${fromUser.handle}`}>
               <UserAvatar
@@ -84,11 +87,7 @@ export const Notification = ({ mention }: NotificationProps) => {
           )}
           {mention.type && mention.type.includes("emoji") ? (
             <Box>
-              <Typography
-                variant="body2"
-                color={theme.secondaryColor}
-                pl={0.5}
-              >
+              <Typography variant="body2" color={theme.secondaryColor} pl={0.5}>
                 reacted{" "}
                 <Box
                   display={"inline"}
@@ -96,24 +95,18 @@ export const Notification = ({ mention }: NotificationProps) => {
                     "& .emoji-mart-emoji": { verticalAlign: "-3px" },
                   }}
                 >
-                  {mention?.common?.emojiId && <Emoji emoji={mention?.common?.emojiId} size={14} />}
+                  {mention?.common?.emojiId && (
+                    <Emoji emoji={mention?.common?.emojiId} size={14} />
+                  )}
                 </Box>
               </Typography>
             </Box>
           ) : (
-            <Typography
-              variant="body2"
-              color={theme.secondaryColor}
-              pl={0.5}
-            >
+            <Typography variant="body2" color={theme.secondaryColor} pl={0.5}>
               {text}
             </Typography>
           )}
-          <Typography
-            variant="body2"
-            color={theme.secondaryColor}
-            pl={0.5}
-          >
+          <Typography variant="body2" color={theme.secondaryColor} pl={0.5}>
             {moment(setDate(mention.createdAt)).fromNow()}
           </Typography>
         </Box>

@@ -113,7 +113,7 @@ const overRides = {
         root: ({ theme }: { theme: ThemeVars }) => ({
           "& fieldset": {
             borderColor: theme.tertiaryColor,
-          }
+          },
         }),
       },
     },

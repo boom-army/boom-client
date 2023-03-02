@@ -4,7 +4,13 @@ import { ThemeContext } from "./theme";
 import { Snackbar } from "@mui/material";
 
 type SnackBarContextActions = {
-  enqueueSnackbar: (text: string, { variant, action }: { variant?: AlertColor, action?: React.ReactNode | null }) => void;
+  enqueueSnackbar: (
+    text: string,
+    {
+      variant,
+      action,
+    }: { variant?: AlertColor; action?: React.ReactNode | null }
+  ) => void;
 };
 
 const SnackBarContext = createContext({} as SnackBarContextActions);
@@ -20,12 +26,14 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
 
   const [open, setOpen] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<string>("");
-  const [typeColor, setTypeColor] = React.useState<AlertColor | undefined>("info");
+  const [typeColor, setTypeColor] = React.useState<AlertColor | undefined>(
+    "info"
+  );
   const [action, setAction] = React.useState<React.ReactNode | null>(null);
 
   const enqueueSnackbar = (
     text: string,
-    { variant, action }: { variant?: AlertColor, action?: React.ReactNode }
+    { variant, action }: { variant?: AlertColor; action?: React.ReactNode }
   ) => {
     setMessage(text);
     setTypeColor(variant);
@@ -52,9 +60,7 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
           severity={typeColor}
           sx={{ width: "100%", border: `1px solid ${theme.tertiaryColor}` }}
         >
-          {message}
-          {" "}
-          {action && action}
+          {message} {action && action}
         </Alert>
       </Snackbar>
       {children}

@@ -37,7 +37,9 @@ function LinearProgressWithLabel(
           sx={{ fontSize: "11px" }}
           variant="body2"
           color="text.secondary"
-        >{ticker()}</Typography>
+        >
+          {ticker()}
+        </Typography>
       </Box>
       <Box>
         <IconButton

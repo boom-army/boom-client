@@ -38,7 +38,7 @@ export const ConsumerCard = ({ profile }: ProfileQuery) => {
           image={
             profile.coverPhoto
               ? profile.coverPhoto
-              : '/assets/default-cover.png'
+              : "/assets/default-cover.png"
           }
           alt={`${profile.handle} cover photo`}
         />

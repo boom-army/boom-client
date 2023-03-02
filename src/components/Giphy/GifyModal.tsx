@@ -160,10 +160,11 @@ export const GifyModal: React.FC<{
         maxWidth={"sm"}
       >
         <DialogContent
-        sx={{
-          height: { md: "70vh", sm: "100vh" },
-          margin: { md: "auto", sm: 0.5},
-        }}>
+          sx={{
+            height: { md: "70vh", sm: "100vh" },
+            margin: { md: "auto", sm: 0.5 },
+          }}
+        >
           <Stack direction="column" sx={{ height: "100%", minWidth: "100%" }}>
             <SearchModalHeader
               input={input}

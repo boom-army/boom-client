@@ -34,9 +34,9 @@ import { UserAvatar } from "../UserAvatar";
 import { UserContext } from "../../contexts/user";
 
 interface NewTweetProps {
-  parentTweet?: string | undefined
-  channel?: string | undefined
-  closePopUp?: () => void
+  parentTweet?: string | undefined;
+  channel?: string | undefined;
+  closePopUp?: () => void;
 }
 
 const IconsGrid = styled(Grid)((props) => ({
@@ -54,7 +54,11 @@ const IconsGrid = styled(Grid)((props) => ({
   },
 }));
 
-export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) => {
+export const NewTweet = ({
+  parentTweet,
+  channel,
+  closePopUp,
+}: NewTweetProps) => {
   const { theme } = useContext(ThemeContext);
   const { user: userData } = useContext(UserContext);
   const { enqueueSnackbar } = useSnackbar();
@@ -62,7 +66,7 @@ export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) =>
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles] = useState<string[]>([]);
   const tweet = useInput("");
-  
+
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
       FeedDocument,
@@ -158,7 +162,7 @@ export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) =>
       container
       p={2}
       sx={{
-        borderBottom: `2px solid ${theme.tertiaryColor}`
+        borderBottom: `2px solid ${theme.tertiaryColor}`,
       }}
     >
       <Grid item xs={12} pb={2}>
@@ -234,7 +238,12 @@ export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) =>
           <>
             <IconButton aria-label="upload image" component="label">
               <UploadFileIcon />
-              <input hidden accept="image/*" type="file" onChange={handleTweetFiles} />
+              <input
+                hidden
+                accept="image/*"
+                type="file"
+                onChange={handleTweetFiles}
+              />
             </IconButton>
           </>
         )}
@@ -248,7 +257,7 @@ export const NewTweet = ({ parentTweet, channel, closePopUp }: NewTweetProps) =>
             size="small"
             loading={loading}
             onClick={handleNewTweet}
-            sx={{ borderRadius: "20px"}}
+            sx={{ borderRadius: "20px" }}
           >
             Post
           </Button>

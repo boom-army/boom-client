@@ -39,13 +39,15 @@ export const Retweet = ({ id, isRetweet, retweetsCount }: RetweetProps) => {
   };
 
   return (
-    <Box display="flex" sx={{ alignItems: "center"}}>
+    <Box display="flex" sx={{ alignItems: "center" }}>
       {retweet ? (
         <RtFillIcon loading={loading} color="#17BF63" onClick={handleRetweet} />
       ) : (
         <RetweetIcon loading={loading} onClick={handleRetweet} />
       )}
-      <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>{retweetsCountState ? retweetsCountState : null}</Typography>
+      <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
+        {retweetsCountState ? retweetsCountState : null}
+      </Typography>
     </Box>
   );
 };

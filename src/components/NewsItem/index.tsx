@@ -26,8 +26,8 @@ const IconTypography = styled(Typography)((props: any) => ({
 }));
 
 const truncString = (text: string, max: number, add: string) => {
-  add = add || '...';
-  return (text.length > max ? `${text.substring(0,max)}${add}` : text);
+  add = add || "...";
+  return text.length > max ? `${text.substring(0, max)}${add}` : text;
 };
 
 interface NewsProps {
@@ -36,7 +36,7 @@ interface NewsProps {
 
 export const NewsItem = ({ meep }: NewsProps) => {
   let [text] = meep.text.split("#");
-  text = truncString(text, 140, '...');
+  text = truncString(text, 140, "...");
   return (
     <Card>
       <CardActionArea

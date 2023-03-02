@@ -7,7 +7,13 @@ import {
 } from "../generated/graphql";
 
 export const Home: React.FC = () => {
-  const { loading, error, data, fetchMore, refetch: refetchData } = useFeedQuery({
+  const {
+    loading,
+    error,
+    data,
+    fetchMore,
+    refetch: refetchData,
+  } = useFeedQuery({
     variables: {
       offset: 0,
       limit: 10,

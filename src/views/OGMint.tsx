@@ -158,7 +158,7 @@
 //             </ListItemAvatar>
 //             <ThemeListItemText
 //               primary="Connecting via the mint interface"
-//               secondary="If you use the connect button in the mint interface, you'll get an error popup. 
+//               secondary="If you use the connect button in the mint interface, you'll get an error popup.
 //               Don't worry about it, it's just letting you know you only have access to mint, but not to post on Boom.Army."
 //             />
 //           </ListItem>
