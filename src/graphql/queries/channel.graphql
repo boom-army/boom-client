@@ -34,7 +34,7 @@ mutation addChannel(
 }
 
 query getChannels {
-  getChannels {
+  channels {
     id
     mintAuthority
     name
@@ -52,11 +52,11 @@ query getChannels {
 }
 
 mutation unlinkChannel($channelId: ID!) {
-  unlinkChannel(channelId: $channelId)
+  channelUnlink(channelId: $channelId)
 }
 
 query getChannelById($channelId: ID!, $offset: Int, $limit: Int) {
-  getChannelById(channelId: $channelId, offset: $offset, limit: $limit) {
+  channelFeed(channelId: $channelId, offset: $offset, limit: $limit) {
     ...TweetData
   }
 }
