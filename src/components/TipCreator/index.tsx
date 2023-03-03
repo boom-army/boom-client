@@ -48,7 +48,7 @@ export const TipCreator: React.FC<TipProps> = ({
           onClick={() => setShowTip(!showTip)}
         >
           <BMAIconWrapper>
-            <BMAIcon className={"bma-icon"} />
+            <BMAIcon />
           </BMAIconWrapper>
           {!hideAmount && (
             <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>

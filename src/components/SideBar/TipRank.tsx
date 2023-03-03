@@ -139,7 +139,7 @@ export const TipRank: FC<{}> = () => {
           alignSelf={"center"}
         >
           <BMAIconWrapper>
-            <BMAIcon className={"bma-icon"} />
+            <BMAIcon />
           </BMAIconWrapper>{" "}
           Top Tippers
         </Typography>
