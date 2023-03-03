@@ -2,8 +2,8 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import viteTsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
-import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -19,31 +19,21 @@ export default defineConfig(({ command, mode }) => {
     },
     plugins: [
       react(),
-      viteCommonjs(),
       viteTsconfigPaths(),
       svgr(),
       nodePolyfills({
         protocolImports: true,
       }),
-      // Put the Sentry vite plugin after all other plugins
-      // sentryVitePlugin({
-      //   org: "example-org",
-      //   project: "example-project",
-
-      //   // Specify the directory containing build artifacts
-      //   include: "./dist",
-
-      //   // Auth tokens can be obtained from https://sentry.io/settings/account/api/auth-tokens/
-      //   // and needs the `project:releases` and `org:read` scopes
-      //   authToken: process.env.SENTRY_AUTH_TOKEN,
-
-      //   // Optionally uncomment the line below to override automatic release name detection
-      //   // release: env.RELEASE,
-      // }),
+      sentryVitePlugin({
+        include: ".",
+        ignore: ["node_modules", "vite.config.ts"],
+        org: "sosol",
+        project: "react-client",
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+      }),
     ],
     define: {
       "process.env": process.env,
-      global: {},
     },
     server: {
       port: 3000,
@@ -51,13 +41,6 @@ export default defineConfig(({ command, mode }) => {
         origin: "*",
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       },
-    },
-    optimizeDeps: {
-      // force: true,
-      // exclude: ["@solana/wallet-adapter-react"],
-      // esbuildOptions: {
-      //   plugins: [esbuildCommonjs(["@civic/solana-gateway-react"])],
-      // },
     },
   };
 });
