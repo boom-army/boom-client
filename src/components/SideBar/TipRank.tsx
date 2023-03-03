@@ -11,7 +11,7 @@ import {
   ListItemText,
   Badge,
 } from "@mui/material";
-import BMAIcon from "../../icons/bma.svg";
+import { ReactComponent as BMAIcon } from "../../icons/bma.svg";
 import {
   Maybe,
   TipCount,

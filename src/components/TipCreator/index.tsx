@@ -10,7 +10,7 @@ import {
   Link,
   Typography,
 } from "@mui/material";
-import BMAIcon from "../../icons/bma.svg";
+import { ReactComponent as BMAIcon } from "../../icons/bma.svg";
 import { ThemeContext } from "../../contexts/theme";
 import { TipInput } from "./tipInput";
 import { styled } from "@mui/material/styles";
