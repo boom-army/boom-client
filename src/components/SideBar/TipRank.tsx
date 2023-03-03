@@ -61,7 +61,6 @@ export const TipRank: FC<{}> = () => {
         ...obj,
         total: boomNumFormat(obj.total as string),
       }));
-      console.log({ ...data, total: totalTips, leaders: updatedLeaders });
       // @ts-ignore
       setFormattedData({ ...data, total: totalTips, leaders: updatedLeaders });
     }
