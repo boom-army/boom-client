@@ -18,7 +18,7 @@ import { currentCluster } from "../utils/utils";
 import { useSnackbar } from "./snackbar";
 
 export const Wallet: FC<{ children: JSX.Element }> = ({ children = null }) => {
-  const endpoint = process.env.REACT_APP_RPC_URL!;
+  const endpoint = import.meta.env.VITE_RPC_URL!;
   let { name } = currentCluster();
 
   const wallets = useMemo(

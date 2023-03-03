@@ -10,9 +10,9 @@ import { ThemeProvider } from "./contexts/theme";
 import { client } from "./apollo/client";
 import { createRoot } from "react-dom/client";
 
-if (process.env.REACT_APP_ENV !== "development") {
+if (import.meta.env.VITE_ENV === "production") {
   Sentry.init({
-    dsn: process.env.REACT_APP_SENTRY,
+    dsn: import.meta.env.VITE_SENTRY,
     integrations: [new Integrations.BrowserTracing()],
 
     // Set tracesSampleRate to 1.0 to capture 100%

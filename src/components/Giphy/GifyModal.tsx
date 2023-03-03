@@ -15,7 +15,7 @@ import { SearchModalHeader } from "./SearchModalHeader";
 import { debounce } from "lodash";
 import { Dialog, DialogContent, IconButton, Stack } from "@mui/material";
 
-const GIPHY_API = process.env.REACT_APP_GIPHY_KEY as string;
+const GIPHY_API = import.meta.env.VITE_GIPHY_KEY as string;
 
 const queryGiphy = async (
   query: string,

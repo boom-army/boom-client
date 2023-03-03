@@ -14,14 +14,14 @@ import { idl } from "./sosol";
 import { ERRORS } from "./constants";
 
 const BOOMARMY_MINT: PublicKey = new PublicKey(
-  process.env.REACT_APP_BOOMARMY_MINT as PublicKeyInitData
+  import.meta.env.VITE_BOOMARMY_MINT as PublicKeyInitData
 );
 
 export const loadAnchor = async (wallet: AnchorWallet) => {
   const programId = new PublicKey(
-    process.env.REACT_APP_PROGRAM_ID as PublicKeyInitData
+    import.meta.env.VITE_PROGRAM_ID as PublicKeyInitData
   );
-  const connection = new Connection(process.env.REACT_APP_RPC_URL as string, {
+  const connection = new Connection(import.meta.env.VITE_RPC_URL as string, {
     commitment: "processed",
   });
   const provider = new AnchorProvider(connection, wallet, {

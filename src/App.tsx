@@ -63,7 +63,7 @@ export const App = () => {
     (async () => {
       if (isLoggedIn) {
         await OneSignal.init({
-          appId: process.env.REACT_APP_ONESIGNAL_APP_ID!,
+          appId: import.meta.env.VITE_ONESIGNAL_APP_ID!,
         });
       }
       const userId = await OneSignal.getUserId();

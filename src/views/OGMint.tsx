@@ -46,7 +46,7 @@ export {}
 // const getCandyMachineId = (): web3.PublicKey | undefined => {
 //   try {
 //     const candyMachineId = new web3.PublicKey(
-//       process.env.REACT_APP_CANDY_MACHINE_ID!
+//       import.meta.env.VITE_CANDY_MACHINE_ID!
 //     );
 
 //     return candyMachineId;

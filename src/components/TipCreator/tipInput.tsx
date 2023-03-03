@@ -113,7 +113,7 @@ export const TipInput: React.FC<Props> = ({
           sosolProgram,
           anchorWallet.publicKey,
           userPubKey.toString(),
-          process.env.REACT_APP_CONTENT_HOST as string,
+          import.meta.env.VITE_CONTENT_HOST as string,
           boomTokens ? boomTokens : 100000000 // 0.1 SSL
         );
 

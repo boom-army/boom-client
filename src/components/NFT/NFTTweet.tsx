@@ -7,7 +7,7 @@ import { Box, Stack, Chip, Typography } from "@mui/material";
 export const NFTTweet: React.FC<{
   nftData: any;
 }> = ({ nftData }) => {
-  // const endpoint = process.env.REACT_APP_RPC_URL as string;
+  // const endpoint = import.meta.env.VITE_RPC_URL as string;
   // const context = ENDPOINTS.filter((obj) => obj.endpoint === endpoint)[0];
   // const explorerLink = `https://explorer.solana.com/address/${nftData.publicKey}?cluster=${context.name}`;
 

@@ -241,7 +241,7 @@ export function convert(
 }
 
 export function currentCluster() {
-  const endpoint = process.env.REACT_APP_RPC_URL!;
+  const endpoint = import.meta.env.VITE_RPC_URL!;
   return ENDPOINTS.filter((obj) => obj.endpoint.includes(endpoint))[0];
 }
 
