@@ -8,12 +8,15 @@ import { sentryVitePlugin } from "@sentry/vite-plugin";
 // https://vitejs.dev/config/
 export default defineConfig({
   esbuild: {
-    target: "esnext"
+    target: "esnext",
   },
   build: {
-    sourcemap: true, // Source map generation must be turned on
+    sourcemap: false,
     minify: "esbuild",
     outDir: "build",
+    rollupOptions: {
+      cache: false,
+    },
   },
   plugins: [
     react(),
