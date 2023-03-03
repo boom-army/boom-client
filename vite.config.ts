@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 3000,
       cors: {
-        origin: process.env.VITE_APOLLO_API,
+        origin: process.env.VITE_PUBLIC_URL!,
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       },
     },
