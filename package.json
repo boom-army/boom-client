@@ -9,6 +9,7 @@
     "serve": "vite preview",
     "deploy:ar": "arweave deploy-dir build --key-file ",
     "deploy:prod": "bash ./scripts/prod-deploy.sh",
+    "deploy:wip": "aws s3 cp ./maintenance.html s3://app.boom.army && aws s3 mv s3://app.boom.army/maintenance.html s3://app.boom.army/index.html",
     "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
     "gen:graphql": "graphql-codegen --config codegen.yml",
     "lint": "npx prettier --write ./src",
