@@ -10,7 +10,6 @@ export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   process.env = loadEnv(mode, process.cwd(), "");
-
   return {
     esbuild: {
       target: "esnext",
@@ -40,9 +39,10 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 3000,
       cors: {
-        origin: [process.env.VITE_PUBLIC_URL, process.env.VITE_APOLLO_API],
-        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-        credentials: true,
+        origin: [process.env.VITE_PUBLIC_URL!],
+        // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        // credentials: true,
+        // allowedHeaders: "Content-Type, Authorization, X-Requested-With, Accept",
       },
     },
   };
