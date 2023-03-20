@@ -11,7 +11,7 @@ import { NewMeepsCountQuery, Tweet } from "../generated/graphql";
 import { BoomHeroStore } from "./Advertising/BoomHeroStore";
 import { ThemeContext } from "../contexts/theme";
 import { UserContext } from "../contexts/user";
-import { TweetThread } from "./Tweet/TweatThread";
+import { TweetThread } from "./Tweet/TweetThread/TweatThread";
 
 interface Props {
   loading?: boolean;

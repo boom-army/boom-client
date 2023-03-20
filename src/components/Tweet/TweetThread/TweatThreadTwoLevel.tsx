@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import { ShowTweet } from "./index";
+import { ShowTweet } from "../index";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../contexts/theme";
-import { TweetQuery, Tweet } from "../../generated/graphql";
+import { ThemeContext } from "../../../contexts/theme";
+import { TweetQuery, Tweet } from "../../../generated/graphql";
 
 interface Props {
   tweet: TweetQuery["tweet"];
 }
 
-export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
+export const TweetThreadTwoLevel: React.FC<Props> = ({ tweet }: Props) => {
   const { theme } = useContext(ThemeContext);
-  const { childTweets } = tweet;
+  // fix with childtweets if relevant
+  const childTweets = tweet.masterTweets;
   // slice array to 3 tweets
   const slicedChildTweets = childTweets?.slice(0, 3);
   const isThreaded =

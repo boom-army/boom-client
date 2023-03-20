@@ -23,7 +23,7 @@ import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
 
-const ReplyBox = styled(Box)((props) => ({
+export const ReplyBox = styled(Box)((props) => ({
   "&:before": {
     width: "1.5em",
     height: "0.7em",

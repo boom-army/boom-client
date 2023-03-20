@@ -1,25 +1,27 @@
 import React, { useContext } from "react";
-import { Box, Grid, Typography } from "@mui/material";
-import { ShowTweet } from "./index";
+import { Box, Grid, Stack, Typography } from "@mui/material";
+import { ShowTweet } from "../index";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../contexts/theme";
-import { TweetQuery, Tweet } from "../../generated/graphql";
+import { ThemeContext } from "../../../contexts/theme";
+import { TweetQuery, Tweet } from "../../../generated/graphql";
+import { ReplyBox } from "../../Message/ShowMessage";
+import { HashLink } from "react-router-hash-link";
+import { UserAvatar } from "../../UserAvatar";
+import { ThreadReply } from "./ThreadReply";
 
 interface Props {
   tweet: TweetQuery["tweet"];
 }
 
-export const TweetThreadTwoLevel: React.FC<Props> = ({ tweet }: Props) => {
+export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
   const { theme } = useContext(ThemeContext);
-  const { childTweets } = tweet;
-  // slice array to 3 tweets
-  const slicedChildTweets = childTweets?.slice(0, 3);
-  const isThreaded =
-    (slicedChildTweets && slicedChildTweets.length > 0) ?? false;
+  const masterTweets = tweet.masterTweets || [];
+  const slicedTweets = masterTweets?.slice(1, 4);
+  const isThreaded = (slicedTweets && slicedTweets.length > 0) ?? false;
   const hiddenTweetsCount =
-    childTweets?.length &&
-    slicedChildTweets?.length &&
-    childTweets?.length - slicedChildTweets?.length;
+    slicedTweets?.length &&
+    slicedTweets?.length &&
+    masterTweets?.length - slicedTweets?.length;
 
   return (
     <Grid
@@ -33,16 +35,24 @@ export const TweetThreadTwoLevel: React.FC<Props> = ({ tweet }: Props) => {
         threaded={isThreaded}
         popUpResponse
       />
-      {slicedChildTweets?.length
-        ? slicedChildTweets.map(
+      {slicedTweets?.length
+        ? slicedTweets.map(
             (tweet, i) =>
               tweet && (
-                <Grid item xs={12} key={tweet.id}>
+                <Grid
+                  item
+                  xs={12}
+                  key={tweet.id}
+                  sx={{ position: "relative" }}
+                >
+                  {tweet?.parentTweet && (
+                    <ThreadReply tweet={tweet?.parentTweet} />
+                  )}
                   <ShowTweet
                     key={tweet.id}
                     tweet={tweet as Tweet}
                     threaded={
-                      i < 3 && i !== slicedChildTweets.length - 1 && isThreaded
+                      i < 3 && i !== slicedTweets.length - 1 && isThreaded
                     }
                     popUpResponse
                   />
