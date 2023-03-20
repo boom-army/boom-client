@@ -111,7 +111,7 @@ export const AppHeader = () => {
               <Box sx={{ flexGrow: 1 }}>
                 <CurrentUser />
               </Box>
-              <Box>
+              <Box mt={0.5}>
                 <WalletMultiButton />
               </Box>
             </Box>
