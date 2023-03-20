@@ -185,6 +185,7 @@ export const ShowTweet: React.FC<Props> = ({
               <PopUpResponse
                 commentsCount={commentsCount}
                 parentTweet={tweet.id}
+                masterTweet={tweet?.masterTweet?.id}
               />
             ) : (
               <Link to={`/${handle}/status/${id}`}>

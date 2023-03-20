@@ -16,9 +16,10 @@ import { NewTweet } from "./NewTweet";
 interface PURProps {
   commentsCount: number;
   parentTweet?: string | undefined;
+  masterTweet?: string | undefined;
 }
 
-export const PopUpResponse = ({ commentsCount, parentTweet }: PURProps) => {
+export const PopUpResponse = ({ commentsCount, parentTweet, masterTweet }: PURProps) => {
   const { theme } = useContext(ThemeContext);
 
   const [openReply, setOpenReply] = useState(false);
@@ -57,7 +58,7 @@ export const PopUpResponse = ({ commentsCount, parentTweet }: PURProps) => {
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <NewTweet parentTweet={parentTweet} closePopUp={handleClose} />
+          <NewTweet parentTweet={parentTweet} masterTweet={masterTweet} closePopUp={handleClose} />
         </DialogContent>
       </Dialog>
     </>
