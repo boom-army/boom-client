@@ -44,7 +44,7 @@
     "@solana/spl-token-registry": "^0.2.168",
     "@solana/spl-token-swap": "0.1.0",
     "@solana/wallet-adapter-base": "^0.9.22",
-    "@solana/wallet-adapter-material-ui": "^0.16.28",
+    "@solana/wallet-adapter-material-ui": "^0.16.29",
     "@solana/wallet-adapter-react": "^0.15.30",
     "@solana/wallet-adapter-wallets": "^0.19.15",
     "@solana/web3.js": "^1.73.3",
