@@ -35,6 +35,7 @@ import { UserContext } from "../../contexts/user";
 
 interface NewTweetProps {
   parentTweet?: string | undefined;
+  masterTweet?: string | undefined;
   channel?: string | undefined;
   closePopUp?: () => void;
 }
@@ -56,6 +57,7 @@ const IconsGrid = styled(Grid)((props) => ({
 
 export const NewTweet = ({
   parentTweet,
+  masterTweet,
   channel,
   closePopUp,
 }: NewTweetProps) => {
@@ -108,6 +110,7 @@ export const NewTweet = ({
           nft: nftData,
           files: tweetFiles,
           parentTweet,
+          masterTweet,
           channel,
         },
       });

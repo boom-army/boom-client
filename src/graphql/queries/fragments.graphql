@@ -23,6 +23,9 @@ fragment TweetData on Tweet {
   channel {
     id
   }
+  masterTweet {
+    id
+  }
   parentTweet {
     id
     text
