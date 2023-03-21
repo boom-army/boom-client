@@ -13,7 +13,7 @@ import { interactionInstruction } from "../../utils/boom-web3";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useSosolProgram } from "../../hooks";
-import { useTipCreatorMutation, TweetDocument } from "../../generated/graphql";
+import { useTipCreatorMutation, TweetDocument, FeedDocument, GetChannelsDocument, HeroFeedDocument } from "../../generated/graphql";
 
 interface Props {
   userPubKey: string;
@@ -38,7 +38,15 @@ export const TipInput: React.FC<Props> = ({
   const { sosolProgram } = useSosolProgram();
 
   const [tipCreatorMutation] = useTipCreatorMutation({
-    refetchQueries: [{ query: TweetDocument, variables: { id: tweetId } }],
+    refetchQueries: [
+      FeedDocument,
+      HeroFeedDocument,
+      GetChannelsDocument,
+      {
+        query: TweetDocument,
+        variables: { id: tweetId },
+      },
+    ],
   });
 
   const snackAction = (signature: string) => (

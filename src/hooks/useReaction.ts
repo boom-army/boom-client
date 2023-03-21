@@ -1,7 +1,13 @@
 import { displayError } from "../utils";
 import { useSnackbar } from "../contexts/snackbar";
 import { useCallback } from "react";
-import { TweetDocument, useToggleReactionMutation } from "../generated/graphql";
+import {
+  FeedDocument,
+  GetChannelsDocument,
+  HeroFeedDocument,
+  TweetDocument,
+  useToggleReactionMutation,
+} from "../generated/graphql";
 
 interface Props {
   tweetId: string;
@@ -13,6 +19,9 @@ export const useReaction = ({ tweetId, parentTweetId }: Props) => {
 
   const [toggleReactionMutation, { loading }] = useToggleReactionMutation({
     refetchQueries: [
+      FeedDocument,
+      HeroFeedDocument,
+      GetChannelsDocument,
       { query: TweetDocument, variables: { id: parentTweetId ?? tweetId } },
     ],
   });
