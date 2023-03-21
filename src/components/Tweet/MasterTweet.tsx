@@ -4,11 +4,12 @@ import { CustomResponse } from "../CustomResponse";
 // import { Helmet } from "react-helmet";
 import { Loader } from "../Loader";
 import { NewTweet, ParentTweet, ShowTweet } from ".";
-import { useTweetQuery } from "../../generated/graphql";
+import { Tweet, TweetQuery, useTweetQuery } from "../../generated/graphql";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user";
+import _ from "lodash";
 
 export const MasterTweet = () => {
   const { tweetId } = useParams();
@@ -21,40 +22,30 @@ export const MasterTweet = () => {
   const { user: userData } = useContext(UserContext);
 
   const comments =
-    data?.tweet?.childTweets?.length! > 0 ? data?.tweet.childTweets : [];
+    data?.tweet?.masterTweets?.length! > 0 ? data?.tweet.masterTweets : [];
   const exists = !!data?.tweet?.id;
   const hasParent = !!data?.tweet?.parentTweet?.id;
-
-  // let heroImage = boomLogo;
-  // if (data?.tweet?.files?.length) heroImage = data.tweet.files[0].url;
-  // if (data?.tweet?.nft?.image) heroImage = data.tweet.nft.image;
+  const nestTweets = (
+    tweets: Tweet[],
+    parentId: string | null = null
+  ): Tweet[] => {
+    return _(tweets)
+      .filter((tweet) => {
+        if (tweet?.parentTweet === null) return parentId === null;
+        return tweet?.parentTweet?.id === parentId;
+      })
+      .sortBy("__typename")
+      .map((tweet) => ({
+        ...tweet,
+        childTweets: nestTweets(tweets, tweet.id),
+      }))
+      .value();
+  };
+  const nestedTweets = nestTweets(comments as Tweet[]);
+  console.log("*****", nestedTweets);
 
   return (
     <Box mb={7}>
-      {/* <Helmet>
-        <title>Boom</title>
-        <meta
-          name="title"
-          content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`}
-        />
-        <meta name="description" content={data?.tweet?.text} />
-
-        <meta name="og:url" content={window.location.href} />
-        <meta
-          name="og:title"
-          content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`}
-        />
-        <meta name="og:description" content={data?.tweet?.text} />
-        <meta name="og:image" content={heroImage} />
-
-        <meta name="twitter:url" content={window.location.href} />
-        <meta
-          name="twitter:title"
-          content={`Meep on app.boom.army by ${data?.tweet?.user?.handle}`}
-        />
-        <meta name="twitter:description" content={data?.tweet?.text} />
-        <meta name="twitter:image" content={heroImage} />
-      </Helmet> */}
       {loading ? (
         <Loader />
       ) : (
@@ -67,7 +58,12 @@ export const MasterTweet = () => {
           ) : (
             <CustomResponse text="Oops, the tweet you are looking for doesn't seem to exist." />
           )}
-          {exists && userData && <NewTweet parentTweet={data?.tweet?.id} masterTweet={data?.tweet?.masterTweet?.id} />}
+          {exists && userData && (
+            <NewTweet
+              parentTweet={data?.tweet?.id}
+              masterTweet={data?.tweet?.masterTweet?.id}
+            />
+          )}
           {comments &&
             comments.map((comment: any) => (
               <ShowTweet tweet={comment} key={comment.id} />
