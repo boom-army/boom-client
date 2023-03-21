@@ -16,7 +16,7 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
   return (
     <Box sx={{ position: "relative", top: 17, left: 14 }}>
       <ReplyBox>
-        <HashLink to={`/`}>
+        <HashLink to={`/${tweet?.user?.handle}/status/${tweet?.id}`}>
           <Stack direction="row" pl={5}>
             <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
               <UserAvatar
