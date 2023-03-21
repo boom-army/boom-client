@@ -773,6 +773,8 @@ export type NewMeepsCountQuery = { __typename?: 'Query', newMeepsCount?: number 
 
 export type BaseUserFragment = { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null };
 
+export type ParentTweetFragment = { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null };
+
 export type TweetDataFragment = { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null };
 
 export type HealthCheckQueryVariables = Exact<{ [key: string]: never; }>;
@@ -944,6 +946,16 @@ export const BaseUserFragmentDoc = gql`
   }
 }
     `;
+export const ParentTweetFragmentDoc = gql`
+    fragment ParentTweet on Tweet {
+  id
+  text
+  createdAt
+  user {
+    ...BaseUser
+  }
+}
+    ${BaseUserFragmentDoc}`;
 export const TweetDataFragmentDoc = gql`
     fragment TweetData on Tweet {
   id
@@ -962,12 +974,7 @@ export const TweetDataFragmentDoc = gql`
     id
   }
   parentTweet {
-    id
-    text
-    createdAt
-    user {
-      ...BaseUser
-    }
+    ...ParentTweet
   }
   files {
     id
@@ -1019,7 +1026,8 @@ export const TweetDataFragmentDoc = gql`
     count
   }
 }
-    ${BaseUserFragmentDoc}`;
+    ${ParentTweetFragmentDoc}
+${BaseUserFragmentDoc}`;
 export const AddChannelDocument = gql`
     mutation addChannel($mintAuthority: String!, $name: String!, $family: String!, $description: String, $image: String, $status: String, $channelParentId: String) {
   addChannel(

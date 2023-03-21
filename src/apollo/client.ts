@@ -22,6 +22,10 @@ const authLink = setContext((_, { headers }) => {
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache({
+    // https://www.apollographql.com/docs/react/data/fragments/#defining-possibletypes-manually
+    possibleTypes: {
+      Tweet: ['ParentTweet'],
+    },
     typePolicies: {
       Query: {
         fields: {

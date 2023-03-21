@@ -60,7 +60,7 @@ export const FeedList: React.FC<Props> = ({
     refetchData && refetchData();
     refetchCount && refetchCount();
   };
-
+  
   return (
     <Grid
       container

@@ -16,7 +16,7 @@ interface Props {
 export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
   const { theme } = useContext(ThemeContext);
   const masterTweets = tweet.masterTweets || [];
-  const slicedTweets = masterTweets?.slice(1, 4);
+  const slicedTweets = masterTweets?.slice(1, 5);
   const isThreaded = (slicedTweets && slicedTweets.length > 0) ?? false;
   const hiddenTweetsCount =
     slicedTweets?.length &&

@@ -21,8 +21,6 @@ export const Home: React.FC = () => {
     },
   });
 
-  console.log("data", data);
-
   const { data: newMeepsCount, refetch: refetchCount } = useNewMeepsCountQuery({
     variables: {
       date: data?.feed[0].createdAt,

@@ -10,6 +10,15 @@ fragment BaseUser on User {
   }
 }
 
+fragment ParentTweet on Tweet {
+  id
+  text
+  createdAt
+  user {
+    ...BaseUser
+  }
+}
+
 fragment TweetData on Tweet {
   id
   text
@@ -27,12 +36,7 @@ fragment TweetData on Tweet {
     id
   }
   parentTweet {
-    id
-    text
-    createdAt
-    user {
-      ...BaseUser
-    }
+    ...ParentTweet
   }
   files {
     id
