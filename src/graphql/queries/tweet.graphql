@@ -4,6 +4,9 @@ query tweet($id: ID!) {
     masterTweets {
       ...TweetData
     }
+    childTweets {
+      ...TweetData
+    }
   }
 }
 
