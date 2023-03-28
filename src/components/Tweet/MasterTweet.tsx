@@ -30,13 +30,13 @@ export const MasterTweet = () => {
       id: tweetId!,
     },
   });
-  
+
   const { user: userData } = useContext(UserContext);
 
   const comments =
     data?.tweet?.masterTweets?.length! > 0
       ? data?.tweet.masterTweets
-      : [] as Tweet[];
+      : ([] as Tweet[]);
   const exists = !!data?.tweet?.id;
   const hasParent = !!data?.tweet?.parentTweet?.id;
   const nestTweets = (
@@ -56,7 +56,9 @@ export const MasterTweet = () => {
       .value();
   };
   const getNestedTweets = nestTweets(comments as Tweet[]);
-  const nestedTweets = getNestedTweets.length ? getNestedTweets : data?.tweet.childTweets;
+  const nestedTweets = getNestedTweets.length
+    ? getNestedTweets
+    : data?.tweet.childTweets;
 
   const NestedMeep: FC<NestedMeepProps> = ({ meep }) => {
     return (
@@ -93,7 +95,10 @@ export const MasterTweet = () => {
       ) : (
         <>
           {hasParent && (
-            <ParentTweet parentTweet={data?.tweet?.parentTweet?.id} />
+            <ParentTweet
+              parentTweet={data?.tweet?.parentTweet?.id}
+              masterTweet={data?.tweet?.masterTweet?.id}
+            />
           )}
           {exists ? (
             <ShowTweet tweet={data.tweet} />

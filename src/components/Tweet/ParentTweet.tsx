@@ -6,6 +6,7 @@ import { UserContext } from "../../contexts/user";
 
 interface Props {
   parentTweet: String | undefined;
+  masterTweet: String | undefined;
 }
 
 export const ParentTweet: React.FC<Props> = (props) => {
@@ -14,9 +15,19 @@ export const ParentTweet: React.FC<Props> = (props) => {
 
   return (
     <>
-      <Box sx={{ background: theme.tertiaryColor, padding: "1rem" }}>
+      <Box
+        sx={{
+          background: theme.tertiaryColor,
+          padding: "1rem",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <Link to={`/${user?.handle}/status/${props.parentTweet}`}>
-          Go up thread to parent &#x2934;
+          Jump up thread &#x2934;
+        </Link>
+        <Link to={`/${user?.handle}/status/${props.masterTweet}`}>
+          Jump to original &#x2934;
         </Link>
       </Box>
     </>
