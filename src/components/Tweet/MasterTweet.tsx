@@ -72,11 +72,11 @@ export const MasterTweet = () => {
           sx={{
             content: '""',
             position: "absolute",
-            top: 0,
+            top: 16,
             bottom: 0,
-            left: 5,
+            left: 6,
             width: "1px",
-            height: "calc(100% - 2.7rem)",
+            height: "calc(100% + 1rem)",
             backgroundColor: theme.tertiaryColor,
           }}
         />
