@@ -4,15 +4,26 @@ import { CustomResponse } from "../CustomResponse";
 // import { Helmet } from "react-helmet";
 import { Loader } from "../Loader";
 import { NewTweet, ParentTweet, ShowTweet } from ".";
-import { Tweet, TweetQuery, useTweetQuery } from "../../generated/graphql";
+import {
+  Maybe,
+  Tweet,
+  TweetQuery,
+  useTweetQuery,
+} from "../../generated/graphql";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
-import { useContext } from "react";
+import { useContext, FC } from "react";
 import { UserContext } from "../../contexts/user";
 import _ from "lodash";
+import { ThemeContext } from "../../contexts/theme";
+
+interface NestedMeepProps {
+  meep: Maybe<Tweet>;
+}
 
 export const MasterTweet = () => {
   const { tweetId } = useParams();
+  const { theme } = useContext(ThemeContext);
 
   const { data, loading } = useTweetQuery({
     variables: {
@@ -22,7 +33,9 @@ export const MasterTweet = () => {
   const { user: userData } = useContext(UserContext);
 
   const comments =
-    data?.tweet?.masterTweets?.length! > 0 ? data?.tweet.masterTweets : [];
+    data?.tweet?.masterTweets?.length! > 0
+      ? data?.tweet.masterTweets
+      : ([] as Tweet[]);
   const exists = !!data?.tweet?.id;
   const hasParent = !!data?.tweet?.parentTweet?.id;
   const nestTweets = (
@@ -42,7 +55,34 @@ export const MasterTweet = () => {
       .value();
   };
   const nestedTweets = nestTweets(comments as Tweet[]);
-  console.log("*****", nestedTweets);
+
+  const NestedMeep: FC<NestedMeepProps> = ({ meep }) => {
+    return (
+      <Box
+        sx={{
+          pl: 1,
+          position: "relative",
+        }}
+      >
+        <ShowTweet tweet={meep as Tweet} key={meep?.id} />
+        {meep?.childTweets?.map((childMeep) => (
+          <NestedMeep meep={childMeep} key={childMeep?.id} />
+        ))}
+        <Box
+          sx={{
+            content: '""',
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 5,
+            width: "1px",
+            height: "calc(100% - 2.7rem)",
+            backgroundColor: theme.tertiaryColor,
+          }}
+        />
+      </Box>
+    );
+  };
 
   return (
     <Box mb={7}>
@@ -64,9 +104,9 @@ export const MasterTweet = () => {
               masterTweet={data?.tweet?.masterTweet?.id}
             />
           )}
-          {comments &&
-            comments.map((comment: any) => (
-              <ShowTweet tweet={comment} key={comment.id} />
+          {nestedTweets &&
+            nestedTweets.map((comment) => (
+              <NestedMeep meep={comment as Tweet} key={comment?.id} />
             ))}
         </>
       )}
