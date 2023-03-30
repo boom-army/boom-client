@@ -22,6 +22,7 @@ import { Grid, Paper } from "@mui/material";
 import { TipLeaderboard } from "../views/TipLeaderboard";
 import { WhoToFollow } from "../components/SideBar/WhoToFollow";
 import { TipRank } from "../components/SideBar/TipRank";
+import { HeroFeed } from "../views/HeroFeed";
 
 interface GridProps {
   data: ProfileQuery | undefined;
@@ -78,6 +79,7 @@ export const GridStandard: React.FC<GridProps> = ({
       >
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="feed" element={<HeroFeed />} />
           <Route path="following" element={<Following />} />
           <Route path="connect" element={<ConnectView />} />
           <Route path="channels" element={<Channels />} />
