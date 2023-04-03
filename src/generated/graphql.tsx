@@ -788,10 +788,13 @@ export type HealthCheckQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type HealthCheckQuery = { __typename?: 'Query', healthCheck: string };
 
-export type HomeStatsQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomeStatsQueryVariables = Exact<{
+  dateFrom?: InputMaybe<Scalars['String']>;
+  leaders?: InputMaybe<Scalars['Int']>;
+}>;
 
 
-export type HomeStatsQuery = { __typename?: 'Query', homeStats: { __typename?: 'HomeStats', ok?: boolean | null } };
+export type HomeStatsQuery = { __typename?: 'Query', homeStats: { __typename?: 'HomeStats', ok?: boolean | null }, tipCount: { __typename?: 'TipCount', dateFrom?: string | null, total?: string | null, leaders?: Array<{ __typename?: 'TipLeader', total?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null> | null } };
 
 export type MentionsQueryVariables = Exact<{
   offset?: InputMaybe<Scalars['Int']>;
@@ -1358,12 +1361,22 @@ export type HealthCheckQueryHookResult = ReturnType<typeof useHealthCheckQuery>;
 export type HealthCheckLazyQueryHookResult = ReturnType<typeof useHealthCheckLazyQuery>;
 export type HealthCheckQueryResult = Apollo.QueryResult<HealthCheckQuery, HealthCheckQueryVariables>;
 export const HomeStatsDocument = gql`
-    query homeStats {
+    query homeStats($dateFrom: String, $leaders: Int) {
   homeStats {
     ok
   }
+  tipCount(dateFrom: $dateFrom, leaders: $leaders) {
+    dateFrom
+    total
+    leaders {
+      total
+      user {
+        ...BaseUser
+      }
+    }
+  }
 }
-    `;
+    ${BaseUserFragmentDoc}`;
 
 /**
  * __useHomeStatsQuery__
@@ -1377,6 +1390,8 @@ export const HomeStatsDocument = gql`
  * @example
  * const { data, loading, error } = useHomeStatsQuery({
  *   variables: {
+ *      dateFrom: // value for 'dateFrom'
+ *      leaders: // value for 'leaders'
  *   },
  * });
  */

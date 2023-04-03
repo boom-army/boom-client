@@ -16,13 +16,23 @@ import {
   useFeedQuery,
   Tweet,
   useNewMeepsCountQuery,
+  useHomeStatsQuery,
 } from "../generated/graphql";
 import { WordCloud } from "../components/WordCloud";
 import { ThemeContext } from "../contexts/theme";
 import { ThemeVars } from "../styles/themes";
+import dayjs from "dayjs";
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
+
+  const prevMonth = dayjs().subtract(1, "month").format("YYYY-MM-DD");
+  const prevWeek = dayjs().subtract(1, "week").format("YYYY-MM-DD");
+  const { data, loading, error } = useHomeStatsQuery({
+    variables: { dateFrom: prevMonth, leaders: 5 },
+  });
+
+  console.log("data", data);
 
   const HomeTitle = styled(Typography)({
     backgroundColor: theme.background2,
@@ -58,9 +68,7 @@ export const Home: React.FC = () => {
     <>
       <Grid container spacing={2} sx={{ mb: 2 }}>
         <Grid item xs={12}>
-          <HomeTitle sx={{ mt: 2, mb: 1 }}>
-            Boom! Stats
-          </HomeTitle>
+          <HomeTitle sx={{ mt: 2, mb: 1 }}>Boom! Stats</HomeTitle>
         </Grid>
         {cards.map((card, index) => (
           <Grid key={index} item xs={12} sm={6} md={3} lg={3}>
@@ -73,7 +81,10 @@ export const Home: React.FC = () => {
                     </Typography>
                   </Box>
                   <Box textAlign="center">
-                    <Typography variant="subtitle1" sx={{ color: theme.secondaryColor, fontWeight: 300 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ color: theme.secondaryColor, fontWeight: 300 }}
+                    >
                       {card.title}
                     </Typography>
                   </Box>

@@ -1,5 +1,15 @@
-query homeStats {
+query homeStats($dateFrom: String, $leaders: Int) {
   homeStats {
     ok
+  }
+  tipCount(dateFrom: $dateFrom, leaders: $leaders) {
+    dateFrom
+    total
+    leaders {
+      total
+      user {
+        ...BaseUser
+      }
+    }
   }
 }
