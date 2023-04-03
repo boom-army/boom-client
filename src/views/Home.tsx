@@ -9,6 +9,7 @@ import {
   Button,
   Paper,
   Divider,
+  styled,
 } from "@mui/material";
 import { FeedList } from "../components/FeedList";
 import {
@@ -18,9 +19,17 @@ import {
 } from "../generated/graphql";
 import { WordCloud } from "../components/WordCloud";
 import { ThemeContext } from "../contexts/theme";
+import { ThemeVars } from "../styles/themes";
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
+
+  const HomeTitle = styled(Typography)({
+    backgroundColor: theme.background2,
+    padding: "0.5rem 1rem",
+    border: `2px solid ${theme.tertiaryColor2}`,
+    borderRadius: "0.2rem",
+  });
 
   const cards = [
     { title: "Connected Wallets", value: 3500 },
@@ -44,11 +53,11 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ mb: 2 }}>
         <Grid item xs={12}>
-          <Typography variant="h6" gutterBottom>
+          <HomeTitle variant="h6" sx={{ mt: 2, mb: 1 }}>
             Stats
-          </Typography>
+          </HomeTitle>
         </Grid>
         {cards.map((card, index) => (
           <Grid key={index} item xs={12} sm={6} md={3} lg={3}>
@@ -73,13 +82,18 @@ export const Home: React.FC = () => {
       </Grid>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={4}>
-          Latest Meeps
+          <HomeTitle>Latest Meeps</HomeTitle>
         </Grid>
         <Grid item xs={12} sm={4}>
-          Top NFT Channels
+          <HomeTitle>Top NFT Channels</HomeTitle>
         </Grid>
         <Grid item xs={12} sm={4}>
-          Latest News
+          <HomeTitle>Latest News</HomeTitle>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <HomeTitle>Tweet of the week</HomeTitle>
         </Grid>
       </Grid>
       <Box sx={{ backgroundColor: theme.background2, padding: 2 }}>
@@ -92,13 +106,14 @@ export const Home: React.FC = () => {
       </Box>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={4}>
-          Tip Leaderboard
+          <HomeTitle>Tip Leaderboard</HomeTitle>
         </Grid>
         <Grid item xs={12} sm={4}>
+          <HomeTitle>Top 10 Hashtags</HomeTitle>
           <WordCloud tagData={tagData} />
         </Grid>
         <Grid item xs={12} sm={4}>
-          Top Meepers
+          <HomeTitle>Top Meepers</HomeTitle>
         </Grid>
       </Grid>
     </>

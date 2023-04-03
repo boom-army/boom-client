@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { FC } from "react";
 
 interface Tag {
@@ -30,10 +30,7 @@ export const WordCloud: FC<Props> = ({ tagData }) => {
     shuffleArray(tagData);
 
   return (
-    <div>
-      <Typography variant="h6" gutterBottom>
-        Top 10 Hashtags
-      </Typography>
+    <Box p={2}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
         {shuffledTagData.map((tag) => {
           const tagSize = 12 + ((tag.count - minCount) * (36 - 12)) / sizeRange;
@@ -49,6 +46,6 @@ export const WordCloud: FC<Props> = ({ tagData }) => {
           );
         })}
       </div>
-    </div>
+    </Box>
   );
 };
