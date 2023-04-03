@@ -132,6 +132,11 @@ export type GifInput = {
   title: Scalars['String'];
 };
 
+export type HomeStats = {
+  __typename?: 'HomeStats';
+  ok?: Maybe<Scalars['Boolean']>;
+};
+
 export type MembersCount = {
   __typename?: 'MembersCount';
   avatars?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -477,6 +482,7 @@ export type Query = {
   getMeta?: Maybe<Metadata>;
   healthCheck: Scalars['String'];
   heroFeed: Array<Tweet>;
+  homeStats: HomeStats;
   me: User;
   mentions: Array<Mention>;
   newMeepsCount?: Maybe<Scalars['Int']>;
@@ -781,6 +787,11 @@ export type HealthCheckQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type HealthCheckQuery = { __typename?: 'Query', healthCheck: string };
+
+export type HomeStatsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type HomeStatsQuery = { __typename?: 'Query', homeStats: { __typename?: 'HomeStats', ok?: boolean | null } };
 
 export type MentionsQueryVariables = Exact<{
   offset?: InputMaybe<Scalars['Int']>;
@@ -1346,6 +1357,40 @@ export function useHealthCheckLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type HealthCheckQueryHookResult = ReturnType<typeof useHealthCheckQuery>;
 export type HealthCheckLazyQueryHookResult = ReturnType<typeof useHealthCheckLazyQuery>;
 export type HealthCheckQueryResult = Apollo.QueryResult<HealthCheckQuery, HealthCheckQueryVariables>;
+export const HomeStatsDocument = gql`
+    query homeStats {
+  homeStats {
+    ok
+  }
+}
+    `;
+
+/**
+ * __useHomeStatsQuery__
+ *
+ * To run a query within a React component, call `useHomeStatsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHomeStatsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useHomeStatsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useHomeStatsQuery(baseOptions?: Apollo.QueryHookOptions<HomeStatsQuery, HomeStatsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<HomeStatsQuery, HomeStatsQueryVariables>(HomeStatsDocument, options);
+      }
+export function useHomeStatsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HomeStatsQuery, HomeStatsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<HomeStatsQuery, HomeStatsQueryVariables>(HomeStatsDocument, options);
+        }
+export type HomeStatsQueryHookResult = ReturnType<typeof useHomeStatsQuery>;
+export type HomeStatsLazyQueryHookResult = ReturnType<typeof useHomeStatsLazyQuery>;
+export type HomeStatsQueryResult = Apollo.QueryResult<HomeStatsQuery, HomeStatsQueryVariables>;
 export const MentionsDocument = gql`
     query mentions($offset: Int, $limit: Int) {
   mentions(offset: $offset, limit: $limit) {
