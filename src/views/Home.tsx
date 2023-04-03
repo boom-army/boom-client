@@ -23,6 +23,7 @@ import { ThemeContext } from "../contexts/theme";
 import { ThemeVars } from "../styles/themes";
 import dayjs from "dayjs";
 import { NewsItem } from "../components/NewsItem";
+import { TweetThread } from "../components/Tweet/TweetThread/TweatThread";
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -36,6 +37,7 @@ export const Home: React.FC = () => {
       term: "#news",
       type: "TAGS",
       limit: 5,
+      offset: 0,
     },
   });
 
@@ -106,7 +108,11 @@ export const Home: React.FC = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Latest Meeps</HomeTitle>
-          <Typography>{dummyText}</Typography>
+          {data?.feed.length
+            ? data?.feed.map((tweet) => (
+                <TweetThread key={tweet.id} tweet={tweet as Tweet} />
+              ))
+            : null}
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Top NFT Channels</HomeTitle>
