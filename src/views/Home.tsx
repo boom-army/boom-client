@@ -56,10 +56,10 @@ export const Home: React.FC = () => {
   const dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
   const cards = [
-    { title: "Connected Wallets", value: 3500 },
-    { title: "Total Meeps", value: 24000 },
-    { title: "Total Tags", value: 1900 },
-    { title: "Total Reactions", value: 4533 },
+    { title: "Connected Wallets", value: data?.homeStats.wallets },
+    { title: "Total Meeps", value: data?.homeStats.meeps },
+    { title: "NFT Channels", value: data?.homeStats.channels },
+    { title: "Total Reactions", value: data?.homeStats.reactions },
   ];
 
   const tagData = [

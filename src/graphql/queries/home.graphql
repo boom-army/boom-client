@@ -1,6 +1,16 @@
-query homeStats($dateFrom: String, $leaders: Int, $term: String!, $type: String, $limit: Int, $offset: Int) {
+query homeStats(
+  $dateFrom: String
+  $leaders: Int
+  $term: String!
+  $type: String
+  $limit: Int
+  $offset: Int
+) {
   homeStats {
-    ok
+    wallets
+    meeps
+    channels
+    reactions
   }
   tipCount(dateFrom: $dateFrom, leaders: $leaders) {
     dateFrom
