@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import React, { FC } from "react";
 
 interface Tag {
@@ -31,21 +31,30 @@ export const WordCloud: FC<Props> = ({ tagData }) => {
 
   return (
     <Box p={2}>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+      <Box style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
         {shuffledTagData.map((tag) => {
-          const tagSize = 12 + ((tag.count - minCount) * (36 - 12)) / sizeRange;
+          const tagSize = 12 + ((tag.count - minCount) * (30 - 12)) / sizeRange;
           return (
-            <div
+            <Box
               key={tag.value}
               style={{
                 fontSize: tagSize,
+                padding: 2,
               }}
             >
-              {tag.value}
-            </div>
+              <Link
+                sx={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  "&:hover": { textDecoration: "underline" },
+                }}
+              >
+                {tag.value}
+              </Link>
+            </Box>
           );
         })}
-      </div>
+      </Box>
     </Box>
   );
 };

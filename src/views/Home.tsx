@@ -26,9 +26,12 @@ export const Home: React.FC = () => {
 
   const HomeTitle = styled(Typography)({
     backgroundColor: theme.background2,
-    padding: "0.5rem 1rem",
-    border: `2px solid ${theme.tertiaryColor2}`,
+    padding: "0.2rem 1rem",
     borderRadius: "0.2rem",
+    fontWeight: 300,
+    fontSize: "0.8rem",
+    textTransform: "uppercase",
+    color: theme.secondaryColor,
   });
 
   const cards = [
@@ -55,8 +58,8 @@ export const Home: React.FC = () => {
     <>
       <Grid container spacing={2} sx={{ mb: 2 }}>
         <Grid item xs={12}>
-          <HomeTitle variant="h6" sx={{ mt: 2, mb: 1 }}>
-            Stats
+          <HomeTitle sx={{ mt: 2, mb: 1 }}>
+            Boom! Stats
           </HomeTitle>
         </Grid>
         {cards.map((card, index) => (
@@ -70,7 +73,7 @@ export const Home: React.FC = () => {
                     </Typography>
                   </Box>
                   <Box textAlign="center">
-                    <Typography variant="subtitle1" color="text.secondary">
+                    <Typography variant="subtitle1" sx={{ color: theme.secondaryColor, fontWeight: 300 }}>
                       {card.title}
                     </Typography>
                   </Box>
