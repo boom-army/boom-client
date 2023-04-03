@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Card,
   CardContent,
@@ -17,29 +17,10 @@ import {
   useNewMeepsCountQuery,
 } from "../generated/graphql";
 import { WordCloud } from "../components/WordCloud";
+import { ThemeContext } from "../contexts/theme";
 
 export const Home: React.FC = () => {
-  const {
-    loading,
-    error,
-    data,
-    fetchMore,
-    refetch: refetchData,
-  } = useFeedQuery({
-    variables: {
-      offset: 0,
-      limit: 10,
-      global: true,
-    },
-  });
-
-  const { data: newMeepsCount, refetch: refetchCount } = useNewMeepsCountQuery({
-    variables: {
-      date: data?.feed[0].createdAt,
-    },
-  });
-
-  console.log("data", newMeepsCount);
+  const { theme } = useContext(ThemeContext);
 
   const cards = [
     { title: "Connected Wallets", value: 3500 },
@@ -63,59 +44,6 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      <Grid
-        container
-        sx={{
-          flexGrow: 1,
-          padding: (theme) => theme.spacing(4),
-        }}
-      >
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src="https://placehold.co/400x200"
-            alt="image"
-            style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-            }}
-          />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            paddingLeft: (theme) => theme.spacing(4),
-            paddingRight: (theme) => theme.spacing(4),
-          }}
-        >
-          <h2>Some Title Here</h2>
-          <p>Some descriptive text here</p>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              marginTop: (theme) => theme.spacing(2),
-            }}
-          >
-            Call to Action
-          </Button>
-        </Grid>
-      </Grid>
-      <Divider />
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h6" gutterBottom>
@@ -154,9 +82,23 @@ export const Home: React.FC = () => {
           Latest News
         </Grid>
       </Grid>
+      <Box sx={{ backgroundColor: theme.background2, padding: 2 }}>
+        <Typography variant="h5" sx={{ color: "white", marginBottom: 2 }}>
+          Ready to explore the dungeon?
+        </Typography>
+        <Button variant="contained" color="primary" size="large">
+          Play WhatIsGorgon Now
+        </Button>
+      </Box>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={4}>
+          Tip Leaderboard
+        </Grid>
+        <Grid item xs={12} sm={4}>
           <WordCloud tagData={tagData} />
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          Top Meepers
         </Grid>
       </Grid>
     </>
