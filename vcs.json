@@ -1,0 +1,502 @@
+[
+    {
+      "name": "Andreessen Horowitz (a16z)",
+      "url": "a16z.com/crypto",
+      "email": "crypto@a16z.com"
+    },
+    {
+      "name": "Blockchain Capital",
+      "url": "blockchain.capital",
+      "email": "info@blockchain.capital"
+    },
+    {
+      "name": "Digital Currency Group",
+      "url": "dcg.co",
+      "email": "info@dcg.co"
+    },
+    {
+      "name": "Polychain Capital",
+      "url": "polychain.capital",
+      "email": "info@polychain.capital"
+    },
+    {
+      "name": "Pantera Capital",
+      "url": "panteracapital.com",
+      "email": "info@panteracapital.com"
+    },
+    {
+      "name": "ConsenSys Ventures",
+      "url": "consensys.net/ventures",
+      "email": "ventures@consensys.net"
+    },
+    {
+      "name": "Boost VC",
+      "url": "boost.vc",
+      "email": "hello@boost.vc"
+    },
+    {
+      "name": "CoinFund",
+      "url": "coinfund.io",
+      "email": "contact@coinfund.io"
+    },
+    {
+      "name": "Fenbushi Capital",
+      "url": "fenbushi.vc",
+      "email": "info@fenbushi.vc"
+    },
+    {
+      "name": "Placeholder",
+      "url": "placeholder.vc",
+      "email": "info@placeholder.vc"
+    },
+    {
+      "name": "1confirmation",
+      "url": "1confirmation.com",
+      "email": "info@1confirmation.com"
+    },
+    {
+      "name": "Alameda Research",
+      "url": "alameda-research.com",
+      "email": "info@alameda-research.com"
+    },
+    {
+      "name": "Arrington XRP Capital",
+      "url": "arringtonxrpcapital.com",
+      "email": "info@arringtonxrpcapital.com"
+    },
+    {
+      "name": "Multicoin Capital",
+      "url": "multicoin.capital",
+      "email": "info@multicoin.capital"
+    },
+    {
+      "name": "Nascent",
+      "url": "nascent.xyz",
+      "email": "info@nascent.xyz"
+    },
+    {
+      "name": "Outlier Ventures",
+      "url": "outlier.ventures",
+      "email": "info@outlierventures.io"
+    },
+    {
+      "name": "Spartan Group",
+      "url": "spartangroup.io",
+      "email": "info@spartangroup.io"
+    },
+    {
+      "name": "Dragonfly Capital",
+      "url": "dragonflycapital.com",
+      "email": "hello@dragonflycap.com"
+    },
+    {
+      "name": "Electric Capital",
+      "url": "electriccapital.com",
+      "email": "info@electriccapital.com"
+    },
+    {
+      "name": "Framework Ventures",
+      "url": "framework.ventures",
+      "email": "contact@framework.ventures"
+    },
+    {
+      "name": "Galaxy Digital",
+      "url": "galaxydigital.io",
+      "email": "info@galaxydigital.io"
+    },
+    {
+      "name": "Hashed",
+      "url": "hashed.com",
+      "email": "hello@hashed.com"
+    },
+    {
+      "name": "Kinetic Capital",
+      "url": "kinetic.capital",
+      "email": "info@kinetic.capital"
+    },
+    {
+      "name": "KR1",
+      "url": "kr1.io",
+      "email": "info@kr1.io"
+    },
+    {
+      "name": "Lemniscap",
+      "url": "lemniscap.com",
+      "email": "info@lemniscap.com"
+    },
+    {
+      "name": "Metacartel Ventures",
+      "url": "metacartel.org",
+      "email": "metacartelventures@gmail.com"
+    },
+    {
+      "name": "Paradigm",
+      "url": "paradigm.xyz",
+      "email": "hello@paradigm.xyz"
+    },
+    {
+      "name": "Scalar Capital",
+      "url": "scalar.capital",
+      "email": "info@scalar.capital"
+    },
+    {
+      "name": "Slow Ventures",
+      "url": "slow.co",
+      "email": "hello@slow.co"
+    },
+    {
+      "name": "Spark Capital",
+      "url": "sparkcapital.com",
+      "email": "info@sparkcapital.com"
+    },
+    {
+      "name": "The LAO",
+      "url": "thelao.io",
+      "email": "hello@thelao.io"
+    },
+    {
+      "name": "Three Arrows Capital",
+      "url": "threearrowscap.com",
+      "email": "info@threearrowscap.com"
+    },
+    {
+      "name": "A.Capital Ventures",
+      "url": "acapital.com",
+      "email": "info@acapital.com"
+    },
+    {
+      "name": "Castle Island Ventures",
+      "url": "castleisland.vc",
+      "email": "info@castleisland.vc"
+    },
+    {
+      "name": "CMS Holdings",
+      "url": "cmsholdings.io",
+      "email": "info@cmsholdings.io"
+    },
+    {
+      "name": "Crypto.com Capital",
+      "url": "crypto.com/en/venture",
+      "email": "venture@crypto.com"
+    },
+    {
+      "name": "Dragon Capital",
+      "url": "dragon.capital",
+      "email": "info@dragon.capital"
+    },
+    {
+      "name": "Fabric Ventures",
+      "url": "fabric.vc",
+      "email": "hello@fabric.vc"
+    },
+    {
+      "name": "Fenwick & West",
+      "url": "fenwick.com",
+      "email": "contact@fenwick.com"
+    },
+    {
+      "name": "Gumi Cryptos Capital",
+      "url": "gumi-cryptos.com",
+      "email": "info@gumi-crypt"
+    },
+    {
+      "name": "Golden Ventures",
+      "url": "goldenventures.com",
+      "email": "hello@goldenventures.com"
+    },
+    {
+      "name": "Kenetic",
+      "url": "kenetic.capital",
+      "email": "hello@kenetic.capital"
+    },
+    {
+      "name": "M13",
+      "url": "m13.co",
+      "email": "info@m13.co"
+    },
+    {
+      "name": "M25",
+      "url": "m25vc.com",
+      "email": "info@m25vc.com"
+    },
+    {
+      "name": "Maven 11 Capital",
+      "url": "maven11.com",
+      "email": "info@maven11.com"
+    },
+    {
+      "name": "Metapurse",
+      "url": "metapurse.fund",
+      "email": "contact@metapurse.fund"
+    },
+    {
+      "name": "Moonrock Capital",
+      "url": "moonrockcapital.com",
+      "email": "info@moonrockcapital.com"
+    },
+    {
+      "name": "Neo Global Capital",
+      "url": "ngc.fund",
+      "email": "info@ngc.fund"
+    },
+    {
+      "name": "Pangea Blockchain Fund",
+      "url": "pangeablockchainfund.com",
+      "email": "contact@pangeablockchainfund.com"
+    },
+    {
+      "name": "PrimeBlock Ventures",
+      "url": "primeblockventures.com",
+      "email": "info@primeblockventures.com"
+    },
+    {
+      "name": "Skynet Trading",
+      "url": "skynet-trading.com",
+      "email": "info@skynet-trading.com"
+    },
+    {
+      "name": "SPiCE VC",
+      "url": "spicevc.com",
+      "email": "info@spicevc.com"
+    },
+    {
+      "name": "Struck Capital",
+      "url": "struckcapital.com",
+      "email": "hello@struckcapital.com"
+    },
+    {
+      "name": "Tally Capital",
+      "url": "tallycapital.com",
+      "email": "info@tallycapital.com"
+    },
+    {
+      "name": "Tetras Capital",
+      "url": "tetrascapital.com",
+      "email": "info@tetrascapital.com"
+    },
+    {
+      "name": "True Ventures",
+      "url": "trueventures.com",
+      "email": "info@trueventures.com"
+    },
+    {
+      "name": "Upfront Ventures",
+      "url": "upfront.com",
+      "email": "info@upfront.com"
+    },
+    {
+      "name": "Wing Venture Capital",
+      "url": "wing.vc",
+      "email": "info@wing.vc"
+    },
+    {
+      "name": "ZhenFund",
+      "url": "zhenfund.com",
+      "email": "contact@zhenfund.com"
+    },
+    {
+      "name": "7BC.VC",
+      "url": "7bc.vc",
+      "email": "contact@7bc.vc"
+    },
+    {
+      "name": "Aleph",
+      "url": "aleph.vc",
+      "email": "contact@aleph.vc"
+    },
+    {
+      "name": "All Blue Capital",
+      "url": "allblue.capital",
+      "email": "info@allblue.capital"
+    },
+    {
+      "name": "Arrano Capital",
+      "url": "arrano.capital",
+      "email": "info@arrano.capital"
+    },
+    {
+      "name": "Astronaut Capital",
+      "url": "astronaut.capital",
+      "email": "info@astronaut.capital"
+    },
+    {
+      "name": "BitBull Capital",
+      "url": "bitbullcapital.com",
+      "email": "info@bitbullcapital.com"
+    },
+    {
+      "name": "Blockchange Ventures",
+      "url": "blockchange.vc",
+      "email": "info@blockchange.vc"
+    },
+    {
+      "name": "BlueYard Capital",
+      "url": "blueyard.com",
+      "email": "info@blueyard.com"
+    },
+    {
+      "name": "Castle Craig",
+      "url": "castlecraig.co.uk",
+      "email": "info@castlecraig.co.uk"
+    },
+    {
+      "name": "Consensus Lab",
+      "url": "consensuslab.com",
+      "email": "info@consensuslab.com"
+    },
+    {
+      "name": "Cross Culture Ventures",
+      "url": "crossculturevc.com",
+      "email": "info@crossculturevc.com"
+    },
+    {
+      "name": "DHVC",
+      "url": "dhvc.com",
+      "email": "info@dhvc.com"
+    },
+    {
+      "name": "Elemental Capital",
+      "url": "elemental.capital",
+      "email": "hello@elemental.capital"
+    },
+    {
+      "name": "Eniac Ventures",
+      "url": "eniac.vc",
+      "email": "info@eniac.vc"
+    },
+    {
+      "name": "Framework Venture Partners",
+      "url": "framework.ventures",
+      "email": "contact@framework.ventures"
+    },
+    {
+      "name": "Genblock Capital",
+      "url": "genblock.capital",
+      "email": "info@genblock.capital"
+    },
+    {
+      "name": "GGV Capital",
+      "url": "ggv.com",
+      "email": "info@ggv.com"
+    },
+    {
+      "name": "HashKey Capital",
+      "url": "hashkey.com",
+      "email": "info@hashkey.com"
+    },
+    {
+      "name": "HCM Capital",
+      "url": "hcm.capital",
+      "email": "info@hcm.capital"
+    },
+    {
+      "name": "Initialized Capital",
+      "url": "initialized.com",
+      "email": "hello@initialized.com"
+    },
+    {
+      "name": "Invictus Capital",
+      "url": "invictuscapital.com",
+      "email": "info@invictuscapital.com"
+    },
+    {
+      "name": "Jump Capital",
+      "url": "jumpcap.com",
+      "email": "info@jumpcap.com"
+    },
+    {
+      "name": "Kenetic Capital",
+      "url": "kenetic.capital",
+      "email": "hello@kenetic.capital"
+    },
+    {
+      "name": "LD Capital",
+      "url": "ldcapital.eu",
+      "email": "info@ldcapital.eu"
+    },
+    {
+      "name": "Lightspeed Venture Partners",
+      "url": "lsvp.com",
+      "email": "info@lsvp.com"
+    },
+    {
+      "name": "Multicurrency Capital",
+      "url": "multicurrencycapital.com",
+      "email": "info@multicurrencycapital.com"
+    },
+    {
+      "name": "Nextgen Venture Partners",
+      "url": "nextgenvp.com",
+      "email": "info@nextgenvp.com"
+    },
+    {
+      "name": "NKB Group",
+      "url": "nkbgroup.io",
+      "email": "info@nkbgroup.io"
+    },
+    {
+      "name": "OGC",
+      "url": "ogc.capital",
+      "email": "info@ogc.capital"
+    },
+    {
+      "name": "OKEx Ventures",
+      "url": "okex.com/ventures",
+      "email": "ventures@okex.com"
+    },
+    {
+      "name": "Panony",
+      "url": "panony.com",
+      "email": "info@panony.com"
+    },
+    {
+      "name": "Republic Crypto",
+      "url": "republic.co/crypto",
+      "email": "crypto@republic.co"
+    },
+    {
+      "name": "Ribbit Capital",
+      "url": "ribbitcap.com",
+      "email": "info@ribbitcap.com"
+    },
+    {
+      "name": "Scalar Ventures",
+      "url": "scalar.ventures",
+      "email": "hello@scalar.ventures"
+    },
+    {
+      "name": "Sino Global Capital",
+      "url": "sinoglobalcapital.com",
+      "email": "info@sinoglobalcapital.com"
+    },
+    {
+      "name": "SNZ",
+      "url": "snzholding.com",
+      "email": "info@snzholding.com"
+    },
+    {
+      "name": "Stratos Technologies",
+      "url": "stratos.tech",
+      "email": "info@stratos.tech"
+    },
+    {
+      "name": "Tally Capital",
+      "url": "tallycapital.com",
+      "email": "info@tallycapital.com"
+    },
+    {
+      "name": "Tezos Capital",
+      "url": "tezos.capital",
+      "email": "contact@tezos.capital"
+    },
+    {
+      "name": "Theta Capital",
+      "url": "theta-capital.com",
+      "email": "info@theta-capital.com"
+    },
+    {
+      "name": "Unbound",
+      "url": "https://un-bound.com",
+      "email": "info@un-bound.com"
+    }
+  ]
