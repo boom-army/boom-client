@@ -791,10 +791,13 @@ export type HealthCheckQuery = { __typename?: 'Query', healthCheck: string };
 export type HomeStatsQueryVariables = Exact<{
   dateFrom?: InputMaybe<Scalars['String']>;
   leaders?: InputMaybe<Scalars['Int']>;
+  term: Scalars['String'];
+  type?: InputMaybe<Scalars['String']>;
+  limit?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type HomeStatsQuery = { __typename?: 'Query', homeStats: { __typename?: 'HomeStats', ok?: boolean | null }, tipCount: { __typename?: 'TipCount', dateFrom?: string | null, total?: string | null, leaders?: Array<{ __typename?: 'TipLeader', total?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null> | null } };
+export type HomeStatsQuery = { __typename?: 'Query', homeStats: { __typename?: 'HomeStats', ok?: boolean | null }, tipCount: { __typename?: 'TipCount', dateFrom?: string | null, total?: string | null, leaders?: Array<{ __typename?: 'TipLeader', total?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null> | null }, news: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }> };
 
 export type MentionsQueryVariables = Exact<{
   offset?: InputMaybe<Scalars['Int']>;
@@ -1361,7 +1364,7 @@ export type HealthCheckQueryHookResult = ReturnType<typeof useHealthCheckQuery>;
 export type HealthCheckLazyQueryHookResult = ReturnType<typeof useHealthCheckLazyQuery>;
 export type HealthCheckQueryResult = Apollo.QueryResult<HealthCheckQuery, HealthCheckQueryVariables>;
 export const HomeStatsDocument = gql`
-    query homeStats($dateFrom: String, $leaders: Int) {
+    query homeStats($dateFrom: String, $leaders: Int, $term: String!, $type: String, $limit: Int) {
   homeStats {
     ok
   }
@@ -1375,8 +1378,12 @@ export const HomeStatsDocument = gql`
       }
     }
   }
+  news: searchTweets(term: $term, type: $type, limit: $limit) {
+    ...TweetData
+  }
 }
-    ${BaseUserFragmentDoc}`;
+    ${BaseUserFragmentDoc}
+${TweetDataFragmentDoc}`;
 
 /**
  * __useHomeStatsQuery__
@@ -1392,10 +1399,13 @@ export const HomeStatsDocument = gql`
  *   variables: {
  *      dateFrom: // value for 'dateFrom'
  *      leaders: // value for 'leaders'
+ *      term: // value for 'term'
+ *      type: // value for 'type'
+ *      limit: // value for 'limit'
  *   },
  * });
  */
-export function useHomeStatsQuery(baseOptions?: Apollo.QueryHookOptions<HomeStatsQuery, HomeStatsQueryVariables>) {
+export function useHomeStatsQuery(baseOptions: Apollo.QueryHookOptions<HomeStatsQuery, HomeStatsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<HomeStatsQuery, HomeStatsQueryVariables>(HomeStatsDocument, options);
       }

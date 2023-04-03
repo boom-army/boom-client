@@ -1,4 +1,4 @@
-query homeStats($dateFrom: String, $leaders: Int) {
+query homeStats($dateFrom: String, $leaders: Int, $term: String!, $type: String, $limit: Int) {
   homeStats {
     ok
   }
@@ -11,5 +11,8 @@ query homeStats($dateFrom: String, $leaders: Int) {
         ...BaseUser
       }
     }
+  }
+  news: searchTweets(term: $term, type: $type, limit: $limit) {
+    ...TweetData
   }
 }

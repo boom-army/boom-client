@@ -22,6 +22,7 @@ import { WordCloud } from "../components/WordCloud";
 import { ThemeContext } from "../contexts/theme";
 import { ThemeVars } from "../styles/themes";
 import dayjs from "dayjs";
+import { NewsItem } from "../components/NewsItem";
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -29,7 +30,13 @@ export const Home: React.FC = () => {
   const prevMonth = dayjs().subtract(1, "month").format("YYYY-MM-DD");
   const prevWeek = dayjs().subtract(1, "week").format("YYYY-MM-DD");
   const { data, loading, error } = useHomeStatsQuery({
-    variables: { dateFrom: prevMonth, leaders: 5 },
+    variables: {
+      dateFrom: prevMonth,
+      leaders: 5,
+      term: "#news",
+      type: "TAGS",
+      limit: 5,
+    },
   });
 
   console.log("data", data);
@@ -43,6 +50,8 @@ export const Home: React.FC = () => {
     textTransform: "uppercase",
     color: theme.secondaryColor,
   });
+
+  const dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
   const cards = [
     { title: "Connected Wallets", value: 3500 },
@@ -97,17 +106,23 @@ export const Home: React.FC = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Latest Meeps</HomeTitle>
+          <Typography>{dummyText}</Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Top NFT Channels</HomeTitle>
+          <Typography>{dummyText}</Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Latest News</HomeTitle>
+          {data?.news.map((meep) => (
+            <NewsItem meep={meep} key={meep.id} />
+          ))}
         </Grid>
       </Grid>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <HomeTitle>Tweet of the week</HomeTitle>
+          <Typography>{dummyText}</Typography>
         </Grid>
       </Grid>
       <Box sx={{ backgroundColor: theme.background2, padding: 2 }}>
