@@ -24,10 +24,7 @@ export const CurrentUser = () => {
                 display: "inline-flex",
               }}
             >
-              <img src={"/assets/boom-logo.png"} alt="Boom" width={"30"} />{" "}
-              <Box ml={1} pt={0.5} pr={1}>
-                βeta
-              </Box>
+              <img src={"/assets/boom-logo.png"} alt="Boom" width={"30"} />
             </Typography>
           </Link>
         </Box>
