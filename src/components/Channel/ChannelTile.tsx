@@ -3,7 +3,7 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { Avatar, AvatarGroup, Box, Typography } from "@mui/material";
 import { ChannelStatus } from "../../constants";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { GetUserChannelsQuery } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { shortenAddress } from "../../utils/utils";
@@ -27,7 +27,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
   return (
     <>
       <Box
-        component={NavLink}
+        component={Link}
         sx={{
           backgroundColor:
             localTheme === "dark" ? theme.blue.darker : theme.tertiaryColor2,
@@ -42,7 +42,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
             marginTop: "1em",
           },
         }}
-        to={channel?.id}
+        to={`/channels/${channel?.id}`}
       >
         <Box mr={1}>
           <Avatar

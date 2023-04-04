@@ -24,6 +24,7 @@ import { ThemeVars } from "../styles/themes";
 import dayjs from "dayjs";
 import { NewsItem } from "../components/NewsItem";
 import { TweetThread } from "../components/Tweet/TweetThread/TweatThread";
+import { ChannelTile } from "../components/Channel/ChannelTile";
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -124,7 +125,9 @@ export const Home: React.FC = () => {
         <Grid item xs={12} sm={4}>
           <HomeTitle>Top NFT Channels</HomeTitle>
           <TriBox>
-            <Typography>{dummyText}</Typography>
+            {data?.channels?.map((d) => (
+              <ChannelTile key={d.id} channel={d} />
+            ))}
           </TriBox>
         </Grid>
         <Grid item xs={12} sm={4}>
