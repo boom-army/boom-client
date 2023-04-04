@@ -53,6 +53,11 @@ export const Home: React.FC = () => {
     color: theme.secondaryColor,
   });
 
+  const TriBox = styled(Box)({
+    maxHeight: "370px",
+    overflow: "auto",
+  });
+
   const dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
   const cards = [
@@ -105,24 +110,30 @@ export const Home: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} mb={2}>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Latest Meeps</HomeTitle>
-          {data?.feed.length
-            ? data?.feed.map((tweet) => (
-                <TweetThread key={tweet.id} tweet={tweet as Tweet} />
-              ))
-            : null}
+          <TriBox>
+            {data?.feed.length
+              ? data?.feed.map((tweet) => (
+                  <TweetThread key={tweet.id} tweet={tweet as Tweet} />
+                ))
+              : null}
+          </TriBox>
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Top NFT Channels</HomeTitle>
-          <Typography>{dummyText}</Typography>
+          <TriBox>
+            <Typography>{dummyText}</Typography>
+          </TriBox>
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Latest News</HomeTitle>
-          {data?.news.map((meep) => (
-            <NewsItem meep={meep} key={meep.id} />
-          ))}
+          <TriBox>
+            {data?.news.map((meep) => (
+              <NewsItem meep={meep} key={meep.id} />
+            ))}
+          </TriBox>
         </Grid>
       </Grid>
       <Grid container spacing={2}>
