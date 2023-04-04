@@ -4,6 +4,7 @@ query homeStats(
   $term: String!
   $type: String
   $limit: Int
+  $tagLimit: Int
   $offset: Int
 ) {
   homeStats {
@@ -31,7 +32,7 @@ query homeStats(
   channels: getChannels(limit: $limit) {
     ...ChannelData
   }
-  tags: getTags(limit: $limit) {
+  tags: getTags(limit: $tagLimit, dateFrom: $dateFrom) {
     dateFrom
     tags {
       tag

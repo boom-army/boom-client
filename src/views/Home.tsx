@@ -31,7 +31,6 @@ export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
 
   const prevMonth = dayjs().subtract(1, "month").format("YYYY-MM-DD");
-  const prevWeek = dayjs().subtract(1, "week").format("YYYY-MM-DD");
   const { data, loading, error } = useHomeStatsQuery({
     variables: {
       dateFrom: prevMonth,
@@ -40,6 +39,7 @@ export const Home: React.FC = () => {
       type: "TAGS",
       limit: 5,
       offset: 0,
+      tagLimit: 20,
     },
   });
 
@@ -67,19 +67,6 @@ export const Home: React.FC = () => {
     { title: "Total Meeps", value: data?.homeStats.meeps },
     { title: "NFT Channels", value: data?.homeStats.channels },
     { title: "Total Reactions", value: data?.homeStats.reactions },
-  ];
-
-  const tagData = [
-    { value: "hashtag1", count: 200 },
-    { value: "hashtag2", count: 150 },
-    { value: "hashtag3", count: 120 },
-    { value: "hashtag4", count: 100 },
-    { value: "hashtag5", count: 80 },
-    { value: "hashtag6", count: 70 },
-    { value: "hashtag7", count: 50 },
-    { value: "hashtag8", count: 40 },
-    { value: "hashtag9", count: 30 },
-    { value: "hashtag10", count: 20 },
   ];
 
   return (
@@ -159,7 +146,7 @@ export const Home: React.FC = () => {
           <HomeTitle>Tip Leaderboard</HomeTitle>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle>Top 10 Hashtags</HomeTitle>
+          <HomeTitle>Trending</HomeTitle>
           <WordCloud tagData={data?.tags?.tags as Tag[]} />
         </Grid>
         <Grid item xs={12} sm={4}>
