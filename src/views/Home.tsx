@@ -17,6 +17,7 @@ import {
   Tweet,
   useNewMeepsCountQuery,
   useHomeStatsQuery,
+  Tag,
 } from "../generated/graphql";
 import { WordCloud } from "../components/WordCloud";
 import { ThemeContext } from "../contexts/theme";
@@ -159,7 +160,7 @@ export const Home: React.FC = () => {
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Top 10 Hashtags</HomeTitle>
-          <WordCloud tagData={tagData} />
+          <WordCloud tagData={data?.tags?.tags as Tag[]} />
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Top Meepers</HomeTitle>

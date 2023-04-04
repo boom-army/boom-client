@@ -1,42 +1,30 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import React, { FC } from "react";
+import { Tag } from "../generated/graphql";
+import { shuffle } from "lodash";
 
-interface Tag {
-  value: string;
-  count: number;
-}
 interface Props {
   tagData: Tag[];
 }
 
-function shuffleArray(array: Tag[]) {
-  // Shuffle the array using the Fisher-Yates algorithm
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 export const WordCloud: FC<Props> = ({ tagData }) => {
   // Get the maximum and minimum count values
-  const maxCount = Math.max(...tagData.map((tag) => tag.count));
-  const minCount = Math.min(...tagData.map((tag) => tag.count));
+  const maxCount = tagData ? Math.max(...tagData.map((tag: any) => tag.count)) : 0;
+  const minCount = tagData ? Math.min(...tagData.map((tag: any) => tag.count)) : 0;
 
   // Calculate the size range for the tags
   const sizeRange = maxCount - minCount;
 
-  const shuffledTagData: Array<{ value: string; count: number }> =
-    shuffleArray(tagData);
+  const shuffledTagData = shuffle(tagData);
 
   return (
     <Box p={2}>
       <Box style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-        {shuffledTagData.map((tag) => {
+        {shuffledTagData && shuffledTagData.map((tag: Tag) => {
           const tagSize = 12 + ((tag.count - minCount) * (30 - 12)) / sizeRange;
           return (
             <Box
-              key={tag.value}
+              key={tag.tag}
               style={{
                 fontSize: tagSize,
                 padding: 2,
@@ -49,7 +37,7 @@ export const WordCloud: FC<Props> = ({ tagData }) => {
                   "&:hover": { textDecoration: "underline" },
                 }}
               >
-                {tag.value}
+                {tag.tag}
               </Link>
             </Box>
           );

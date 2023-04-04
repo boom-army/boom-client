@@ -1,0 +1,9 @@
+query getTags($limit: Int, $dateFrom: String) {
+  getTags(limit: $limit) {
+    dateFrom
+    tags {
+      tag
+      count
+    }
+  }
+}

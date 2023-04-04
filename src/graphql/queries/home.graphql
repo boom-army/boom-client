@@ -31,4 +31,11 @@ query homeStats(
   channels: getChannels(limit: $limit) {
     ...ChannelData
   }
+  tags: getTags(limit: $limit) {
+    dateFrom
+    tags {
+      tag
+      count
+    }
+  }
 }
