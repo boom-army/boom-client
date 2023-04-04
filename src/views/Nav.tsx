@@ -10,6 +10,7 @@ import React, { useContext } from "react";
 import SavingsIcon from "@mui/icons-material/Savings";
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
+import HomeIcon from '@mui/icons-material/Home';
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
@@ -116,7 +117,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
         <StyledStack key="main-stack" direction="column" spacing={4.5}>
           <NavLink end style={applyActiveStyles} to="/">
             <Stack direction="row" {...stackProps}>
-              <Language style={iconProps} />
+              <HomeIcon style={iconProps} />
               <Typography variant="body1">Home</Typography>
             </Stack>
           </NavLink>
