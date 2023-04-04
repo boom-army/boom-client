@@ -33,8 +33,8 @@ mutation addChannel(
   }
 }
 
-query getChannels {
-  getChannels {
+query getUserChannels {
+  getUserChannels {
     id
     mintAuthority
     name

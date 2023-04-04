@@ -16,7 +16,7 @@ import { ChannelStatus } from "../constants";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme";
 import { styled } from "@mui/material/styles";
-import { useGetChannelsQuery, User } from "../generated/graphql";
+import { useGetUserChannelsQuery, User } from "../generated/graphql";
 import { Logout } from "../components/Auth/Logout";
 import { ChangeColor } from "../components/ChangeColor";
 import { ToggleTheme } from "../components/ToggleTheme";
@@ -31,10 +31,10 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     color: theme.accentColor,
   };
 
-  const { data } = useGetChannelsQuery();
+  const { data } = useGetUserChannelsQuery();
 
   const activeChannels = () => {
-    return data?.getChannels?.filter((c) => c.status === ChannelStatus.ACTIVE);
+    return data?.getUserChannels?.filter((c) => c.status === ChannelStatus.ACTIVE);
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({

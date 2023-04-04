@@ -3,7 +3,7 @@ import { useSnackbar } from "../contexts/snackbar";
 import { useCallback } from "react";
 import {
   FeedDocument,
-  GetChannelsDocument,
+  GetUserChannelsDocument,
   HeroFeedDocument,
   TweetDocument,
   useToggleReactionMutation,
@@ -21,7 +21,7 @@ export const useReaction = ({ tweetId, parentTweetId }: Props) => {
     refetchQueries: [
       FeedDocument,
       HeroFeedDocument,
-      GetChannelsDocument,
+      GetUserChannelsDocument,
       { query: TweetDocument, variables: { id: parentTweetId ?? tweetId } },
     ],
   });

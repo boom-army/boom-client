@@ -4,13 +4,13 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import { Avatar, AvatarGroup, Box, Typography } from "@mui/material";
 import { ChannelStatus } from "../../constants";
 import { NavLink } from "react-router-dom";
-import { GetChannelsQuery } from "../../generated/graphql";
+import { GetUserChannelsQuery } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { shortenAddress } from "../../utils/utils";
 import { styled } from "@mui/material/styles";
 
 interface Props {
-  channel: GetChannelsQuery["getChannels"][0];
+  channel: GetUserChannelsQuery["getUserChannels"][0];
 }
 
 export const ChannelTile: React.FC<Props> = ({ channel }) => {

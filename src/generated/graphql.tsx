@@ -481,8 +481,8 @@ export type Query = {
   __typename?: 'Query';
   feed: Array<Tweet>;
   getChannelById: Array<Tweet>;
-  getChannels: Array<Channel>;
   getMeta?: Maybe<Metadata>;
+  getUserChannels: Array<Channel>;
   healthCheck: Scalars['String'];
   heroFeed: Array<Tweet>;
   homeStats: HomeStats;
@@ -735,10 +735,10 @@ export type AddChannelMutationVariables = Exact<{
 
 export type AddChannelMutation = { __typename?: 'Mutation', addChannel: { __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, createdAt?: string | null, updatedAt?: string | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null } };
 
-export type GetChannelsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetUserChannelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetChannelsQuery = { __typename?: 'Query', getChannels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, verified?: boolean | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null }> };
+export type GetUserChannelsQuery = { __typename?: 'Query', getUserChannels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, verified?: boolean | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null }> };
 
 export type UnlinkChannelMutationVariables = Exact<{
   channelId: Scalars['ID'];
@@ -1109,9 +1109,9 @@ export function useAddChannelMutation(baseOptions?: Apollo.MutationHookOptions<A
 export type AddChannelMutationHookResult = ReturnType<typeof useAddChannelMutation>;
 export type AddChannelMutationResult = Apollo.MutationResult<AddChannelMutation>;
 export type AddChannelMutationOptions = Apollo.BaseMutationOptions<AddChannelMutation, AddChannelMutationVariables>;
-export const GetChannelsDocument = gql`
-    query getChannels {
-  getChannels {
+export const GetUserChannelsDocument = gql`
+    query getUserChannels {
+  getUserChannels {
     id
     mintAuthority
     name
@@ -1130,31 +1130,31 @@ export const GetChannelsDocument = gql`
     `;
 
 /**
- * __useGetChannelsQuery__
+ * __useGetUserChannelsQuery__
  *
- * To run a query within a React component, call `useGetChannelsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetChannelsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetUserChannelsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserChannelsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetChannelsQuery({
+ * const { data, loading, error } = useGetUserChannelsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetChannelsQuery(baseOptions?: Apollo.QueryHookOptions<GetChannelsQuery, GetChannelsQueryVariables>) {
+export function useGetUserChannelsQuery(baseOptions?: Apollo.QueryHookOptions<GetUserChannelsQuery, GetUserChannelsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetChannelsQuery, GetChannelsQueryVariables>(GetChannelsDocument, options);
+        return Apollo.useQuery<GetUserChannelsQuery, GetUserChannelsQueryVariables>(GetUserChannelsDocument, options);
       }
-export function useGetChannelsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetChannelsQuery, GetChannelsQueryVariables>) {
+export function useGetUserChannelsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserChannelsQuery, GetUserChannelsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetChannelsQuery, GetChannelsQueryVariables>(GetChannelsDocument, options);
+          return Apollo.useLazyQuery<GetUserChannelsQuery, GetUserChannelsQueryVariables>(GetUserChannelsDocument, options);
         }
-export type GetChannelsQueryHookResult = ReturnType<typeof useGetChannelsQuery>;
-export type GetChannelsLazyQueryHookResult = ReturnType<typeof useGetChannelsLazyQuery>;
-export type GetChannelsQueryResult = Apollo.QueryResult<GetChannelsQuery, GetChannelsQueryVariables>;
+export type GetUserChannelsQueryHookResult = ReturnType<typeof useGetUserChannelsQuery>;
+export type GetUserChannelsLazyQueryHookResult = ReturnType<typeof useGetUserChannelsLazyQuery>;
+export type GetUserChannelsQueryResult = Apollo.QueryResult<GetUserChannelsQuery, GetUserChannelsQueryVariables>;
 export const UnlinkChannelDocument = gql`
     mutation unlinkChannel($channelId: ID!) {
   unlinkChannel(channelId: $channelId)
