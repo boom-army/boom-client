@@ -28,4 +28,7 @@ query homeStats(
   feed: heroFeed(limit: $limit, offset: $offset) {
     ...TweetData
   }
+  channels: getChannels(limit: $limit) {
+    ...ChannelData
+  }
 }

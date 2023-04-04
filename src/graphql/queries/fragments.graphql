@@ -88,3 +88,19 @@ fragment TweetData on Tweet {
     count
   }
 }
+
+fragment ChannelData on Channel {
+  id
+  mintAuthority
+  name
+  family
+  description
+  image
+  channelParentId
+  status
+  verified
+  membersCount {
+    count
+    avatars
+  }
+}

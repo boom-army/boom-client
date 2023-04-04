@@ -35,19 +35,13 @@ mutation addChannel(
 
 query getUserChannels {
   getUserChannels {
-    id
-    mintAuthority
-    name
-    family
-    description
-    image
-    channelParentId
-    status
-    verified
-    membersCount {
-      count
-      avatars
-    }
+    ...ChannelData
+  }
+}
+
+query getChannels($limit: Int) {
+  getChannels(limit: $limit) {
+    ...ChannelData
   }
 }
 

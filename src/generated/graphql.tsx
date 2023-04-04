@@ -481,6 +481,7 @@ export type Query = {
   __typename?: 'Query';
   feed: Array<Tweet>;
   getChannelById: Array<Tweet>;
+  getChannels: Array<Channel>;
   getMeta?: Maybe<Metadata>;
   getUserChannels: Array<Channel>;
   healthCheck: Scalars['String'];
@@ -513,6 +514,11 @@ export type QueryGetChannelByIdArgs = {
   channelId: Scalars['ID'];
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryGetChannelsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -740,6 +746,13 @@ export type GetUserChannelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetUserChannelsQuery = { __typename?: 'Query', getUserChannels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, verified?: boolean | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null }> };
 
+export type GetChannelsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetChannelsQuery = { __typename?: 'Query', getChannels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, verified?: boolean | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null }> };
+
 export type UnlinkChannelMutationVariables = Exact<{
   channelId: Scalars['ID'];
 }>;
@@ -786,6 +799,8 @@ export type ParentTweetFragment = { __typename?: 'Tweet', id: string, text: stri
 
 export type TweetDataFragment = { __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null };
 
+export type ChannelDataFragment = { __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, verified?: boolean | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null };
+
 export type HealthCheckQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -801,7 +816,7 @@ export type HomeStatsQueryVariables = Exact<{
 }>;
 
 
-export type HomeStatsQuery = { __typename?: 'Query', homeStats: { __typename?: 'HomeStats', wallets?: number | null, meeps?: number | null, channels?: number | null, reactions?: number | null }, tipCount: { __typename?: 'TipCount', dateFrom?: string | null, total?: string | null, leaders?: Array<{ __typename?: 'TipLeader', total?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null> | null }, news: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }>, feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }> };
+export type HomeStatsQuery = { __typename?: 'Query', homeStats: { __typename?: 'HomeStats', wallets?: number | null, meeps?: number | null, channels?: number | null, reactions?: number | null }, tipCount: { __typename?: 'TipCount', dateFrom?: string | null, total?: string | null, leaders?: Array<{ __typename?: 'TipLeader', total?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null> | null }, news: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }>, feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }>, channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, verified?: boolean | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null }> };
 
 export type MentionsQueryVariables = Exact<{
   offset?: InputMaybe<Scalars['Int']>;
@@ -1049,6 +1064,23 @@ export const TweetDataFragmentDoc = gql`
 }
     ${ParentTweetFragmentDoc}
 ${BaseUserFragmentDoc}`;
+export const ChannelDataFragmentDoc = gql`
+    fragment ChannelData on Channel {
+  id
+  mintAuthority
+  name
+  family
+  description
+  image
+  channelParentId
+  status
+  verified
+  membersCount {
+    count
+    avatars
+  }
+}
+    `;
 export const AddChannelDocument = gql`
     mutation addChannel($mintAuthority: String!, $name: String!, $family: String!, $description: String, $image: String, $status: String, $channelParentId: String) {
   addChannel(
@@ -1112,22 +1144,10 @@ export type AddChannelMutationOptions = Apollo.BaseMutationOptions<AddChannelMut
 export const GetUserChannelsDocument = gql`
     query getUserChannels {
   getUserChannels {
-    id
-    mintAuthority
-    name
-    family
-    description
-    image
-    channelParentId
-    status
-    verified
-    membersCount {
-      count
-      avatars
-    }
+    ...ChannelData
   }
 }
-    `;
+    ${ChannelDataFragmentDoc}`;
 
 /**
  * __useGetUserChannelsQuery__
@@ -1155,6 +1175,41 @@ export function useGetUserChannelsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetUserChannelsQueryHookResult = ReturnType<typeof useGetUserChannelsQuery>;
 export type GetUserChannelsLazyQueryHookResult = ReturnType<typeof useGetUserChannelsLazyQuery>;
 export type GetUserChannelsQueryResult = Apollo.QueryResult<GetUserChannelsQuery, GetUserChannelsQueryVariables>;
+export const GetChannelsDocument = gql`
+    query getChannels($limit: Int) {
+  getChannels(limit: $limit) {
+    ...ChannelData
+  }
+}
+    ${ChannelDataFragmentDoc}`;
+
+/**
+ * __useGetChannelsQuery__
+ *
+ * To run a query within a React component, call `useGetChannelsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetChannelsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetChannelsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useGetChannelsQuery(baseOptions?: Apollo.QueryHookOptions<GetChannelsQuery, GetChannelsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetChannelsQuery, GetChannelsQueryVariables>(GetChannelsDocument, options);
+      }
+export function useGetChannelsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetChannelsQuery, GetChannelsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetChannelsQuery, GetChannelsQueryVariables>(GetChannelsDocument, options);
+        }
+export type GetChannelsQueryHookResult = ReturnType<typeof useGetChannelsQuery>;
+export type GetChannelsLazyQueryHookResult = ReturnType<typeof useGetChannelsLazyQuery>;
+export type GetChannelsQueryResult = Apollo.QueryResult<GetChannelsQuery, GetChannelsQueryVariables>;
 export const UnlinkChannelDocument = gql`
     mutation unlinkChannel($channelId: ID!) {
   unlinkChannel(channelId: $channelId)
@@ -1391,9 +1446,13 @@ export const HomeStatsDocument = gql`
   feed: heroFeed(limit: $limit, offset: $offset) {
     ...TweetData
   }
+  channels: getChannels(limit: $limit) {
+    ...ChannelData
+  }
 }
     ${BaseUserFragmentDoc}
-${TweetDataFragmentDoc}`;
+${TweetDataFragmentDoc}
+${ChannelDataFragmentDoc}`;
 
 /**
  * __useHomeStatsQuery__
