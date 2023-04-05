@@ -28,6 +28,7 @@ import dayjs from "dayjs";
 import { UserAvatar } from "../UserAvatar";
 import { HerofiedIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
+import { NameCard } from "../UserLabels/NameCard";
 
 const BMAIconWrapper = styled("span")((props) => ({
   svg: {
@@ -97,33 +98,6 @@ export const TipRank: FC<{}> = () => {
     }
   };
 
-  const NameCard = ({ user }: { user: Maybe<User> | undefined }) => (
-    <Box sx={{ overflow: "hidden" }}>
-      <Link
-        href={`/${user?.handle}`}
-        sx={{
-          textDecoration: "none",
-          wordWrap: "break-word",
-          fontSize: "1rem",
-        }}
-      >
-        <strong>@{user?.handle}</strong>
-        {user?.data?.avatarUpdateAuthority === HARKL_ID && (
-          <HerofiedIcon
-            sx={{
-              fill: theme.accentColor,
-              width: "1rem",
-              height: "1rem",
-              verticalAlign: "-3px",
-              marginLeft: "0.2rem",
-              opacity: "0.5",
-            }}
-          />
-        )}
-      </Link>
-    </Box>
-  );
-
   if (loading) {
     return <Loader />;
   }
@@ -181,7 +155,7 @@ export const TipRank: FC<{}> = () => {
               </Badge>
             </ListItemAvatar>
             <ListItemText
-              primary={<NameCard user={leader?.user} />}
+              primary={<NameCard user={leader?.user as any} />}
               secondary={`${leader?.total} BMA`}
             />
           </ListItem>
