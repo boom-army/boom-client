@@ -28,4 +28,13 @@ query homeStats(
       count
     }
   }
+  meepers: topMeepers(limit: $limit) {
+    dateFrom
+    meepers {
+      meepCount
+      user {
+        ...BaseUser
+      }
+    }
+  }
 }

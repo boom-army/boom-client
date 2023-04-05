@@ -140,6 +140,12 @@ export type HomeStats = {
   wallets?: Maybe<Scalars['Int']>;
 };
 
+export type Meepers = {
+  __typename?: 'Meepers';
+  dateFrom?: Maybe<Scalars['String']>;
+  meepers?: Maybe<Array<Maybe<UserWithMeepCount>>>;
+};
+
 export type MembersCount = {
   __typename?: 'MembersCount';
   avatars?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -498,6 +504,7 @@ export type Query = {
   searchTweets: Array<Tweet>;
   searchUser: Array<User>;
   tipCount: TipCount;
+  topMeepers: Meepers;
   tweet: Tweet;
   userFollow: Array<User>;
   users: Array<User>;
@@ -590,6 +597,12 @@ export type QueryTipCountArgs = {
   dateFrom?: InputMaybe<Scalars['String']>;
   leaders?: InputMaybe<Scalars['Int']>;
   type?: InputMaybe<TipCountType>;
+};
+
+
+export type QueryTopMeepersArgs = {
+  dateFrom?: InputMaybe<Scalars['String']>;
+  limit?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -747,6 +760,12 @@ export type UserDataInput = {
   avatarUpdateAuthority?: InputMaybe<Scalars['String']>;
 };
 
+export type UserWithMeepCount = {
+  __typename?: 'UserWithMeepCount';
+  meepCount?: Maybe<Scalars['Int']>;
+  user?: Maybe<User>;
+};
+
 export type AddChannelMutationVariables = Exact<{
   mintAuthority: Scalars['String'];
   name: Scalars['String'];
@@ -835,7 +854,7 @@ export type HomeStatsQueryVariables = Exact<{
 }>;
 
 
-export type HomeStatsQuery = { __typename?: 'Query', homeStats: { __typename?: 'HomeStats', wallets?: number | null, meeps?: number | null, channels?: number | null, reactions?: number | null }, news: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }>, feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }>, channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, verified?: boolean | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null }>, tags: { __typename?: 'Tags', dateFrom?: string | null, tags?: Array<{ __typename?: 'Tag', tag: string, count: number } | null> | null } };
+export type HomeStatsQuery = { __typename?: 'Query', homeStats: { __typename?: 'HomeStats', wallets?: number | null, meeps?: number | null, channels?: number | null, reactions?: number | null }, news: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }>, feed: Array<{ __typename?: 'Tweet', id: string, text: string, tags: Array<string>, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channel?: { __typename?: 'Channel', id: string } | null, masterTweet?: { __typename?: 'Tweet', id: string } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }>, channels: Array<{ __typename?: 'Channel', id: string, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, verified?: boolean | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null }>, tags: { __typename?: 'Tags', dateFrom?: string | null, tags?: Array<{ __typename?: 'Tag', tag: string, count: number } | null> | null }, meepers: { __typename?: 'Meepers', dateFrom?: string | null, meepers?: Array<{ __typename?: 'UserWithMeepCount', meepCount?: number | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null> | null } };
 
 export type MentionsQueryVariables = Exact<{
   offset?: InputMaybe<Scalars['Int']>;
@@ -995,6 +1014,14 @@ export type DeleteTweetMutationVariables = Exact<{
 
 
 export type DeleteTweetMutation = { __typename?: 'Mutation', deleteTweet?: { __typename?: 'Tweet', id: string } | null };
+
+export type TopMeepersQueryVariables = Exact<{
+  dateFrom?: InputMaybe<Scalars['String']>;
+  limit?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type TopMeepersQuery = { __typename?: 'Query', topMeepers: { __typename?: 'Meepers', dateFrom?: string | null, meepers?: Array<{ __typename?: 'UserWithMeepCount', meepCount?: number | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null> | null } };
 
 export const BaseUserFragmentDoc = gql`
     fragment BaseUser on User {
@@ -1473,9 +1500,19 @@ export const HomeStatsDocument = gql`
       count
     }
   }
+  meepers: topMeepers(limit: $limit) {
+    dateFrom
+    meepers {
+      meepCount
+      user {
+        ...BaseUser
+      }
+    }
+  }
 }
     ${TweetDataFragmentDoc}
-${ChannelDataFragmentDoc}`;
+${ChannelDataFragmentDoc}
+${BaseUserFragmentDoc}`;
 
 /**
  * __useHomeStatsQuery__
@@ -2416,3 +2453,45 @@ export function useDeleteTweetMutation(baseOptions?: Apollo.MutationHookOptions<
 export type DeleteTweetMutationHookResult = ReturnType<typeof useDeleteTweetMutation>;
 export type DeleteTweetMutationResult = Apollo.MutationResult<DeleteTweetMutation>;
 export type DeleteTweetMutationOptions = Apollo.BaseMutationOptions<DeleteTweetMutation, DeleteTweetMutationVariables>;
+export const TopMeepersDocument = gql`
+    query topMeepers($dateFrom: String, $limit: Int) {
+  topMeepers(dateFrom: $dateFrom, limit: $limit) {
+    dateFrom
+    meepers {
+      meepCount
+      user {
+        ...BaseUser
+      }
+    }
+  }
+}
+    ${BaseUserFragmentDoc}`;
+
+/**
+ * __useTopMeepersQuery__
+ *
+ * To run a query within a React component, call `useTopMeepersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTopMeepersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTopMeepersQuery({
+ *   variables: {
+ *      dateFrom: // value for 'dateFrom'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useTopMeepersQuery(baseOptions?: Apollo.QueryHookOptions<TopMeepersQuery, TopMeepersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TopMeepersQuery, TopMeepersQueryVariables>(TopMeepersDocument, options);
+      }
+export function useTopMeepersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TopMeepersQuery, TopMeepersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TopMeepersQuery, TopMeepersQueryVariables>(TopMeepersDocument, options);
+        }
+export type TopMeepersQueryHookResult = ReturnType<typeof useTopMeepersQuery>;
+export type TopMeepersLazyQueryHookResult = ReturnType<typeof useTopMeepersLazyQuery>;
+export type TopMeepersQueryResult = Apollo.QueryResult<TopMeepersQuery, TopMeepersQueryVariables>;

@@ -1,0 +1,11 @@
+query topMeepers($dateFrom: String, $limit: Int) {
+  topMeepers(dateFrom: $dateFrom, limit: $limit) {
+    dateFrom
+    meepers {
+      meepCount
+      user {
+        ...BaseUser
+      }
+    }
+  }
+}
