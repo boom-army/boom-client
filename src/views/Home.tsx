@@ -26,6 +26,7 @@ import dayjs from "dayjs";
 import { NewsItem } from "../components/NewsItem";
 import { TweetThread } from "../components/Tweet/TweetThread/TweatThread";
 import { ChannelTile } from "../components/Channel/ChannelTile";
+import { TipRank } from "../components/SideBar/TipRank";
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -34,7 +35,6 @@ export const Home: React.FC = () => {
   const { data, loading, error } = useHomeStatsQuery({
     variables: {
       dateFrom: prevMonth,
-      leaders: 5,
       term: "#news",
       type: "TAGS",
       limit: 5,
@@ -127,7 +127,7 @@ export const Home: React.FC = () => {
           </TriBox>
         </Grid>
       </Grid>
-      <Grid container spacing={2}>
+      {/* <Grid container spacing={2}>
         <Grid item xs={12}>
           <HomeTitle>Tweet of the week</HomeTitle>
           <Typography>{dummyText}</Typography>
@@ -140,10 +140,11 @@ export const Home: React.FC = () => {
         <Button variant="contained" color="primary" size="large">
           Play WhatIsGorgon Now
         </Button>
-      </Box>
+      </Box> */}
       <Grid container spacing={2}>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Tip Leaderboard</HomeTitle>
+          <TipRank />
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Trending</HomeTitle>

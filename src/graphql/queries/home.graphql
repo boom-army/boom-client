@@ -1,6 +1,5 @@
 query homeStats(
   $dateFrom: String
-  $leaders: Int
   $term: String!
   $type: String
   $limit: Int
@@ -12,16 +11,6 @@ query homeStats(
     meeps
     channels
     reactions
-  }
-  tipCount(dateFrom: $dateFrom, leaders: $leaders) {
-    dateFrom
-    total
-    leaders {
-      total
-      user {
-        ...BaseUser
-      }
-    }
   }
   news: searchTweets(term: $term, type: $type, limit: $limit) {
     ...TweetData
