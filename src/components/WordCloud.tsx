@@ -31,6 +31,7 @@ export const WordCloud: FC<Props> = ({ tagData }) => {
               }}
             >
               <Link
+                href={`/explore?type=TAGS&term=${tag.tag.replace("#", "")}`}
                 sx={{
                   cursor: "pointer",
                   textDecoration: "none",
