@@ -27,6 +27,7 @@ import { ThemeContext } from "../../contexts/theme";
 import dayjs from "dayjs";
 import { UserAvatar } from "../UserAvatar";
 import { HerofiedIcon } from "../Icons";
+import { awardColorSelect } from "../../utils";
 
 export const UserTipsTable: FC<{}> = () => {
   const { theme } = useContext(ThemeContext);
@@ -55,19 +56,6 @@ export const UserTipsTable: FC<{}> = () => {
       setFormattedData({ ...data, total: totalTips, leaders: updatedLeaders });
     }
   }, [data]);
-
-  const awardColorSelect = (index: number) => {
-    switch (index) {
-      case 0:
-        return "#c3a400";
-      case 1:
-        return "#B4B4B4";
-      case 2:
-        return "#af956d";
-      default:
-        return "inherit";
-    }
-  };
 
   const setTimeFrame = (
     event: React.MouseEvent<HTMLElement>,

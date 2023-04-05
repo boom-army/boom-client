@@ -29,6 +29,7 @@ import { UserAvatar } from "../UserAvatar";
 import { HerofiedIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
 import { NameCard } from "../UserLabels/NameCard";
+import { awardColorSelect } from "../../utils";
 
 const BMAIconWrapper = styled("span")((props) => ({
   svg: {
@@ -66,19 +67,6 @@ export const TipRank: FC<{}> = () => {
       setFormattedData({ ...data, total: totalTips, leaders: updatedLeaders });
     }
   }, [data]);
-
-  const awardColorSelect = (index: number) => {
-    switch (index) {
-      case 0:
-        return "#c3a400";
-      case 1:
-        return "#B4B4B4";
-      case 2:
-        return "#af956d";
-      default:
-        return "inherit";
-    }
-  };
 
   const setTimeFrame = (
     event: React.MouseEvent<HTMLElement>,

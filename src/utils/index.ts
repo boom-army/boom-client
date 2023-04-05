@@ -57,3 +57,16 @@ export const camelizeKeys = (obj: any) =>
 export const cleanTypeName = (obj: any) => {
   return omit(obj, "__typename");
 };
+
+export const awardColorSelect = (index: number) => {
+  switch (index) {
+    case 0:
+      return "#c3a400";
+    case 1:
+      return "#B4B4B4";
+    case 2:
+      return "#af956d";
+    default:
+      return "inherit";
+  }
+};
