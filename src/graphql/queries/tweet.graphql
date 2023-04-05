@@ -34,7 +34,10 @@ mutation newTweet(
   ) {
     id
     text
-    tags
+    tags {
+      id
+      text
+    }
     mentions
     commentsCount
     createdAt

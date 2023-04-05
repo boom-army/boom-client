@@ -22,13 +22,16 @@ fragment ParentTweet on Tweet {
 fragment TweetData on Tweet {
   id
   text
-  tags
   isTweetMine
   commentsCount
   retweetsCount
   isRetweet
   tipsCount
   createdAt
+  tags {
+    id
+    text
+  }
   channel {
     id
   }
