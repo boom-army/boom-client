@@ -27,6 +27,7 @@ import { NewsItem } from "../components/NewsItem";
 import { TweetThread } from "../components/Tweet/TweetThread/TweatThread";
 import { ChannelTile } from "../components/Channel/ChannelTile";
 import { TipRank } from "../components/SideBar/TipRank";
+import { TopMeepers } from "../components/TopMeepers";
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -152,6 +153,7 @@ export const Home: React.FC = () => {
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle>Top Meepers</HomeTitle>
+          <TopMeepers meepers={data?.meepers.meepers} />
         </Grid>
       </Grid>
     </>
