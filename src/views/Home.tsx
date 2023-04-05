@@ -44,8 +44,6 @@ export const Home: React.FC = () => {
     },
   });
 
-  console.log("data", data);
-
   const HomeTitle = styled(Typography)({
     backgroundColor: theme.background2,
     padding: "0.2rem 1rem",
@@ -60,8 +58,6 @@ export const Home: React.FC = () => {
     maxHeight: "370px",
     overflow: "auto",
   });
-
-  const dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
   const cards = [
     { title: "Connected Wallets", value: data?.homeStats.wallets },
