@@ -67,7 +67,7 @@ export const TipRank: FC<{}> = () => {
     }
   }, [data]);
 
-  const rowPlacement = (index: number) => {
+  const awardColorSelect = (index: number) => {
     switch (index) {
       case 0:
         return "#c3a400";
@@ -138,8 +138,8 @@ export const TipRank: FC<{}> = () => {
                 variant="dot"
                 sx={{
                   "& .MuiBadge-badge": {
-                    backgroundColor: rowPlacement(i),
-                    color: rowPlacement(i),
+                    backgroundColor: awardColorSelect(i),
+                    color: awardColorSelect(i),
                     boxShadow: `0 0 0 2px ${theme.background}`,
                     width: 16,
                     height: 16,

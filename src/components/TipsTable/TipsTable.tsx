@@ -56,7 +56,7 @@ export const UserTipsTable: FC<{}> = () => {
     }
   }, [data]);
 
-  const rowPlacement = (index: number) => {
+  const awardColorSelect = (index: number) => {
     switch (index) {
       case 0:
         return "#c3a400";
@@ -151,7 +151,7 @@ export const UserTipsTable: FC<{}> = () => {
             {formattedData?.leaders?.map((leader, i) => (
               <TableRow
                 key={leader?.user?.id}
-                sx={{ backgroundColor: rowPlacement(i) }}
+                sx={{ backgroundColor: awardColorSelect(i) }}
               >
                 <TableCell align="center">{i + 1}</TableCell>
                 <TableCell>
