@@ -17,7 +17,7 @@ interface TMProps {
 }
 
 export const TopMeepers: FC<TMProps> = ({ meepers }) => {
-    const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <List>
       {meepers?.map((meeper: any, i) => (
@@ -35,6 +35,8 @@ export const TopMeepers: FC<TMProps> = ({ meepers }) => {
                   width: 16,
                   height: 16,
                   borderRadius: "50%",
+                  display:
+                    awardColorSelect(i) !== "inherit" ? "inline-flex" : "none",
                 },
               }}
             >
