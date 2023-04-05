@@ -20,7 +20,7 @@ export const TopMeepers: FC<TMProps> = ({ meepers }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <List>
-      {meepers?.map((meeper: any, i) => (
+      {meepers?.map((meeper: any, i: number) => (
         <ListItem key={meeper?.user?.id} sx={{ padding: 0 }}>
           <ListItemAvatar>
             <Badge
