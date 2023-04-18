@@ -28,6 +28,7 @@ import { TweetThread } from "../components/Tweet/TweetThread/TweatThread";
 import { ChannelTile } from "../components/Channel/ChannelTile";
 import { TipRank } from "../components/SideBar/TipRank";
 import { TopMeepers } from "../components/TopMeepers";
+import { HomeTitle } from "../components/HomeTitle";
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -42,16 +43,6 @@ export const Home: React.FC = () => {
       offset: 0,
       tagLimit: 20,
     },
-  });
-
-  const HomeTitle = styled(Typography)({
-    backgroundColor: theme.background2,
-    padding: "0.2rem 1rem",
-    borderRadius: "0.2rem",
-    fontWeight: 300,
-    fontSize: "0.8rem",
-    textTransform: "uppercase",
-    color: theme.secondaryColor,
   });
 
   const TriBox = styled(Box)({
@@ -70,7 +61,7 @@ export const Home: React.FC = () => {
     <>
       <Grid container spacing={2} sx={{ mb: 2 }}>
         <Grid item xs={12}>
-          <HomeTitle sx={{ mt: 2, mb: 1 }}>Boom! Stats</HomeTitle>
+          <HomeTitle title="Boom! Stats" sx={{ mt: 2, mb: 1 }} />
         </Grid>
         {cards.map((card, index) => (
           <Grid key={index} item xs={12} sm={6} md={3} lg={3}>
@@ -98,7 +89,7 @@ export const Home: React.FC = () => {
       </Grid>
       <Grid container spacing={2} mb={2}>
         <Grid item xs={12} sm={4}>
-          <HomeTitle>Latest Meeps</HomeTitle>
+          <HomeTitle title="Latest Meeps" />
           <TriBox>
             {data?.feed.length
               ? data?.feed.map((tweet) => (
@@ -108,7 +99,7 @@ export const Home: React.FC = () => {
           </TriBox>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle>Top NFT Channels</HomeTitle>
+          <HomeTitle title="Top NFT Channels" />
           <TriBox>
             {data?.channels?.map((d) => (
               <ChannelTile key={d.id} channel={d} />
@@ -116,7 +107,7 @@ export const Home: React.FC = () => {
           </TriBox>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle>Latest News</HomeTitle>
+          <HomeTitle title="Latest News" />
           <TriBox>
             {data?.news.map((meep) => (
               <NewsItem meep={meep} key={meep.id} />
@@ -140,15 +131,15 @@ export const Home: React.FC = () => {
       </Box> */}
       <Grid container spacing={2}>
         <Grid item xs={12} sm={4}>
-          <HomeTitle>Tip Leaderboard</HomeTitle>
+          <HomeTitle title="Tip Leaderboard" />
           <TipRank />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle>Trending</HomeTitle>
+          <HomeTitle title="Trending" />
           <WordCloud tagData={data?.tags?.tags as Tag[]} />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle>Top Meepers</HomeTitle>
+          <HomeTitle title="Top Meepers" />
           <TopMeepers meepers={data?.meepers.meepers} />
         </Grid>
       </Grid>
