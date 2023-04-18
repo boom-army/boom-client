@@ -89,7 +89,7 @@ export const Home: React.FC = () => {
       </Grid>
       <Grid container spacing={2} mb={2}>
         <Grid item xs={12} sm={4}>
-          <HomeTitle title="Latest Meeps" />
+          <HomeTitle title="Latest Meeps" titleLink="/feed" />
           <TriBox>
             {data?.feed.length
               ? data?.feed.map((tweet) => (
@@ -99,7 +99,7 @@ export const Home: React.FC = () => {
           </TriBox>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle title="Top NFT Channels" />
+          <HomeTitle title="Top NFT Channels" titleLink="/channels" />
           <TriBox>
             {data?.channels?.map((d) => (
               <ChannelTile key={d.id} channel={d} />
@@ -107,7 +107,7 @@ export const Home: React.FC = () => {
           </TriBox>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle title="Latest News" />
+          <HomeTitle title="Latest News" titleLink="/news" />
           <TriBox>
             {data?.news.map((meep) => (
               <NewsItem meep={meep} key={meep.id} />
@@ -131,7 +131,7 @@ export const Home: React.FC = () => {
       </Box> */}
       <Grid container spacing={2}>
         <Grid item xs={12} sm={4}>
-          <HomeTitle title="Tip Leaderboard" />
+          <HomeTitle title="Tip Leaderboard" titleLink="/leaderboard" />
           <TipRank />
         </Grid>
         <Grid item xs={12} sm={4}>
