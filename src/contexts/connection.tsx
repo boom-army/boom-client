@@ -49,7 +49,7 @@ export const ENDPOINTS = [
   {
     name: WalletAdapterNetwork.Mainnet,
     endpoint:
-      "https://stylish-multi-telescope.solana-mainnet.discover.quiknode.pro/341ffad4533deac85acf4fa0de41d6bb04b5a6ac",
+      "https://stylish-multi-telescope.solana-mainnet.discover.quiknode.pro/6b0cdd226c9009e005f8fd4b4225fa95a687b3c1",
     chainID: ChainID.MainnetBeta,
   },
   {

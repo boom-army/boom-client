@@ -242,7 +242,11 @@ export function convert(
 
 export function currentCluster() {
   const endpoint = import.meta.env.VITE_RPC_URL!;
-  return ENDPOINTS.filter((obj) => obj.endpoint.includes(endpoint))[0];
+  const cluster = ENDPOINTS.filter((obj) => obj.endpoint.includes(endpoint))[0];
+  if (!cluster) {
+    throw new Error("Invalid RPC cluster");
+  }
+  return cluster;
 }
 
 export interface AlertState {
