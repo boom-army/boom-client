@@ -15,7 +15,7 @@ import {
 import { SIGN_FILE } from "../../queries/files";
 import { SOSOL_HOST_ID } from "../../utils/ids";
 import { actions, Wallet } from "@metaplex/js";
-import { displayError } from "../../utils";
+import { displayError, getUniqueFileName } from "../../utils";
 import { uniqBy } from "lodash";
 import { uploadFile } from "../../utils";
 import { useConnection, useAnchorWallet } from "@solana/wallet-adapter-react";
@@ -85,14 +85,7 @@ export const NFTMint: React.FC = (props) => {
   const handleImageUpload = async (e: any) => {
     try {
       const file = e?.target?.files[0];
-      // Rename the file so upload is unique
-      const blob = file.slice(0, file.size, file.type);
-      const renamed = new File(
-        [blob],
-        `${wallet.publicKey.toBase58()}-${file.name}`,
-        { type: file.type }
-      );
-
+      const renamed = getUniqueFileName(file, wallet.publicKey.toBase58());
       const { data } = await signFileMutation({
         variables: {
           file: renamed.name,

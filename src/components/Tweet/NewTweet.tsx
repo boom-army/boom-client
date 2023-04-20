@@ -23,7 +23,7 @@ import {
 import { LoadingButton as Button } from "@mui/lab";
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
-import { displayError, uploadFile } from "../../utils";
+import { displayError, getUniqueFileName, uploadFile } from "../../utils";
 import { useInput } from "../../hooks/useInput";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
@@ -145,8 +145,7 @@ export const NewTweet = ({
           variant: "error",
         });
       }
-
-      const file = e.target.files[0];
+      const file = getUniqueFileName(e.target.files[0], userData?.id);
       const { data } = await signFileMutation({
         variables: {
           file: file.name,

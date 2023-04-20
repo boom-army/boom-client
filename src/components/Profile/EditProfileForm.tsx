@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { SIGN_FILE } from "../../queries/files";
 import { ThemeContext } from "../../contexts/theme";
-import { cleanTypeName, displayError, uploadFile } from "../../utils";
+import { cleanTypeName, displayError, getUniqueFileName, uploadFile } from "../../utils";
 import {
   ProfileDocument,
   ProfileQuery,
@@ -96,7 +96,7 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
 
   const handleCoverPhoto = async (e: any) => {
     try {
-      const file = e.target.files[0];
+      const file = getUniqueFileName(e.target.files[0], profile.handle);
       const { data } = await signFileMutation({
         variables: {
           file: file.name,
@@ -115,10 +115,8 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
   };
 
   const handleAvatar = async (e: any) => {
-    console.log("boom");
-
     try {
-      const file = e.target.files[0];
+      const file = getUniqueFileName(e.target.files[0], profile.handle);
       const { data } = await signFileMutation({
         variables: {
           file: file.name,

@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import { transform, camelCase, isArray, isObject, omit } from "lodash";
 
 export const displayError = (err: any, enqueueSnackbar: any) => {
@@ -77,3 +78,10 @@ export const awardColorSelect = (index: number) => {
       return "inherit";
   }
 };
+
+export const getUniqueFileName = (file: File, prefix?: string) => {
+  const timestamp = dayjs().format('YYYY-MM-DD_HH-mm-ss');
+  const id = prefix || 'user';
+  const uniqueFilename = `${id}_${timestamp}_${file.name}`;
+  return new File([file], uniqueFilename, { type: file.type });
+}
