@@ -23,25 +23,27 @@ export const setDate = (date: any) => {
 export const uploadFile = async (
   file: any,
   signedUrl: any,
-  enqueueSnackbar: any
+  enqueueSnackbar: any,
+  setUploadState: any,
 ) => {
-  const snackbarKey = new Date().getTime() + Math.random(); // Generate a unique key for the snackbar
-
-  const data = await axios.put(signedUrl, file, {
-    headers: {
-      "Content-Type": file.type,
-    },
-    onUploadProgress: (p) => {
-      const progress = Math.round((p.loaded / p.total) * 100); // Calculate progress percentage
-      enqueueSnackbar(`Upload in progress: ${progress}%`, {
-        variant: "info",
-        key: snackbarKey,
-      });
-    },
-  });
-
-  enqueueSnackbar("Upload completed", { variant: "success" });
-  return data;
+  return axios
+    .put(signedUrl, file, {
+      headers: {
+        "Content-Type": file.type,
+      },
+      onUploadProgress: (p) => {
+        const progress = Math.round((p.loaded / p.total) * 100); // Calculate progress percentage        
+        setUploadState(progress);
+      },
+    })
+    .then((data) => {
+      enqueueSnackbar("Upload completed", { variant: "success" });
+      return data;
+    })
+    .catch((error) => {
+      enqueueSnackbar("Upload failed", { variant: "error" });
+      console.error("Upload error:", error);
+    });
 };
 
 export const camelizeKeys = (obj: any) =>

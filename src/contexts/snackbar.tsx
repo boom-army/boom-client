@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
-import { Alert, AlertColor } from "@mui/material";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { Alert, AlertColor, Snackbar, LinearProgress } from "@mui/material";
 import { ThemeContext } from "./theme";
-import { Snackbar } from "@mui/material";
 
 type SnackBarContextActions = {
   enqueueSnackbar: (
@@ -10,6 +9,7 @@ type SnackBarContextActions = {
       key?: number;
       variant?: AlertColor;
       action?: React.ReactNode | null;
+      progress?: number;
     }
   ) => void;
 };
@@ -34,6 +34,7 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
   const [activeSnackbarKey, setActiveSnackbarKey] = useState<number | null>(
     null
   );
+  const [progress, setProgress] = useState<number>(0);
 
   const enqueueSnackbar = (
     text: string,
@@ -41,6 +42,7 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
       key?: number;
       variant?: AlertColor;
       action?: React.ReactNode | null;
+      progress?: number;
     }
   ) => {
     if (!options.key || options.key === activeSnackbarKey) {
@@ -49,6 +51,7 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
       setAction(options.action);
       setOpen(true);
       setActiveSnackbarKey(options.key || null);
+      setProgress(options.progress || 0);
     }
   };
 
@@ -73,6 +76,13 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
           sx={{ width: "100%", border: `1px solid ${theme.tertiaryColor}` }}
         >
           {message} {action && action}
+          {progress && (
+            <LinearProgress
+              variant="determinate"
+              value={progress}
+              sx={{ marginTop: 1 }}
+            />
+          )}
         </Alert>
       </Snackbar>
       {children}
