@@ -25,17 +25,23 @@ export const uploadFile = async (
   signedUrl: any,
   enqueueSnackbar: any
 ) => {
+  const snackbarKey = new Date().getTime() + Math.random(); // Generate a unique key for the snackbar
+
   const data = await axios.put(signedUrl, file, {
     headers: {
       "Content-Type": file.type,
       "x-amz-acl": "public-read",
-      // "Content-Disposition": "inline",
     },
     onUploadProgress: (p) => {
-      // progress = p.loaded / p.total;
+      const progress = Math.round((p.loaded / p.total) * 100); // Calculate progress percentage
+      enqueueSnackbar(`Upload in progress: ${progress}%`, {
+        variant: "info",
+        key: snackbarKey,
+      });
     },
   });
-  enqueueSnackbar(`Upload in progress`, { variant: "info" });
+
+  enqueueSnackbar("Upload completed", { variant: "success" });
   return data;
 };
 

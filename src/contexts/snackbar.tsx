@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { Alert, AlertColor } from "@mui/material";
 import { ThemeContext } from "./theme";
 import { Snackbar } from "@mui/material";
@@ -6,10 +6,11 @@ import { Snackbar } from "@mui/material";
 type SnackBarContextActions = {
   enqueueSnackbar: (
     text: string,
-    {
-      variant,
-      action,
-    }: { variant?: AlertColor; action?: React.ReactNode | null }
+    options: {
+      key?: number;
+      variant?: AlertColor;
+      action?: React.ReactNode | null;
+    }
   ) => void;
 };
 
@@ -30,21 +31,32 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
     "info"
   );
   const [action, setAction] = React.useState<React.ReactNode | null>(null);
+  const [activeSnackbarKey, setActiveSnackbarKey] = useState<number | null>(
+    null
+  );
 
   const enqueueSnackbar = (
     text: string,
-    { variant, action }: { variant?: AlertColor; action?: React.ReactNode }
+    options: {
+      key?: number;
+      variant?: AlertColor;
+      action?: React.ReactNode | null;
+    }
   ) => {
-    setMessage(text);
-    setTypeColor(variant);
-    setAction(action);
-    setOpen(true);
+    if (!options.key || options.key === activeSnackbarKey) {
+      setMessage(text);
+      setTypeColor(options.variant);
+      setAction(options.action);
+      setOpen(true);
+      setActiveSnackbarKey(options.key || null);
+    }
   };
 
   const handleClose = () => {
     setOpen(false);
     setAction(null);
     setTypeColor("info");
+    setActiveSnackbarKey(null);
   };
 
   return (
