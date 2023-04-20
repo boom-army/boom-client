@@ -30,7 +30,6 @@ export const uploadFile = async (
   const data = await axios.put(signedUrl, file, {
     headers: {
       "Content-Type": file.type,
-      "x-amz-acl": "public-read",
     },
     onUploadProgress: (p) => {
       const progress = Math.round((p.loaded / p.total) * 100); // Calculate progress percentage
