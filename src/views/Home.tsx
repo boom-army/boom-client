@@ -6,22 +6,15 @@ import {
   Grid,
   Box,
   Stack,
-  Button,
-  Paper,
-  Divider,
   styled,
 } from "@mui/material";
-import { FeedList } from "../components/FeedList";
 import {
-  useFeedQuery,
   Tweet,
-  useNewMeepsCountQuery,
   useHomeStatsQuery,
   Tag,
 } from "../generated/graphql";
 import { WordCloud } from "../components/WordCloud";
 import { ThemeContext } from "../contexts/theme";
-import { ThemeVars } from "../styles/themes";
 import dayjs from "dayjs";
 import { NewsItem } from "../components/NewsItem";
 import { TweetThread } from "../components/Tweet/TweetThread/TweatThread";
@@ -44,7 +37,7 @@ export const Home: React.FC = () => {
       global: true,
       tagLimit: 20,
     },
-  });
+  });  
 
   const TriBox = styled(Box)({
     maxHeight: "370px",

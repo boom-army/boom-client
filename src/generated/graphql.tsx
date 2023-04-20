@@ -1497,7 +1497,7 @@ export const HomeStatsDocument = gql`
   news: searchTweets(term: $term, type: $type, limit: $limit) {
     ...TweetData
   }
-  feed: feed(limit: $limit, offset: $offset, global: $global) {
+  feed: feed(offset: $offset, limit: $limit, global: $global) {
     ...TweetData
   }
   channels: getChannels(limit: $limit) {
