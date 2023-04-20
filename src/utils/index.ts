@@ -24,7 +24,7 @@ export const uploadFile = async (
   file: any,
   signedUrl: any,
   enqueueSnackbar: any,
-  setUploadState: any,
+  setUploadState?: any
 ) => {
   return axios
     .put(signedUrl, file, {
@@ -32,8 +32,8 @@ export const uploadFile = async (
         "Content-Type": file.type,
       },
       onUploadProgress: (p) => {
-        const progress = Math.round((p.loaded / p.total) * 100); // Calculate progress percentage        
-        setUploadState(progress);
+        const progress = Math.round((p.loaded / p.total) * 100); // Calculate progress percentage
+        setUploadState && setUploadState(progress);
       },
     })
     .then((data) => {

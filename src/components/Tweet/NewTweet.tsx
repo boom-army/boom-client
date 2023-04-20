@@ -28,7 +28,7 @@ import { useInput } from "../../hooks/useInput";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { ThemeContext } from "../../contexts/theme";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
 import { UserContext } from "../../contexts/user";
@@ -67,6 +67,7 @@ export const NewTweet = ({
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles] = useState<string[]>([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const tweet = useInput("");
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
@@ -81,6 +82,15 @@ export const NewTweet = ({
     ],
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
+
+  useEffect(() => {
+    if (uploadProgress > 0) {
+      enqueueSnackbar("Uploading...", {
+        variant: "info",
+        progress: uploadProgress,
+      });
+    }
+  }, [uploadProgress]);
 
   const createGifInput = (gif: any) => ({
     title: gif.title,
@@ -144,7 +154,12 @@ export const NewTweet = ({
         },
       });
       const signedUrl = data.signFileUrl;
-      const imageData = await uploadFile(file, signedUrl, enqueueSnackbar);
+      const imageData = await uploadFile(
+        file,
+        signedUrl,
+        enqueueSnackbar,
+        setUploadProgress
+      );
       const imageUrl = imageData?.config?.url?.split("?")[0];
       imageUrl && setTweetFiles([imageUrl, ...tweetFiles]);
     } catch (error) {
@@ -152,6 +167,7 @@ export const NewTweet = ({
     } finally {
       // reset value so the input event handler can trigger again
       e.target.value = null;
+      setUploadProgress(0);
     }
   };
 
