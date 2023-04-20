@@ -97,7 +97,7 @@ export const NFTMint: React.FC = (props) => {
         variables: {
           file: renamed.name,
           type: renamed.type,
-          bucket: AWSBucket.NFT,
+          subdir: AWSBucket.NFT,
         },
       });
       const signedUrl = data.signFileUrl;
@@ -131,7 +131,7 @@ export const NFTMint: React.FC = (props) => {
       variables: {
         file: blobFile.name,
         type: blobFile.type,
-        bucket: AWSBucket.NFT,
+        subdir: AWSBucket.NFT,
       },
     });
     const signedUrl = data.signFileUrl;
