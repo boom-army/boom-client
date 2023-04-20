@@ -76,13 +76,13 @@ const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
           sx={{ width: "100%", border: `1px solid ${theme.tertiaryColor}` }}
         >
           {message} {action && action}
-          {progress && (
+          {progress ? (
             <LinearProgress
               variant="determinate"
               value={progress}
               sx={{ marginTop: 1 }}
             />
-          )}
+          ) : null}
         </Alert>
       </Snackbar>
       {children}
