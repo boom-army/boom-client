@@ -370,8 +370,8 @@ export type MutationNewTweetArgs = {
 
 
 export type MutationSignFileUrlArgs = {
-  bucket?: InputMaybe<Scalars['String']>;
   file: Scalars['String'];
+  subdir?: InputMaybe<Scalars['String']>;
   type: Scalars['String'];
 };
 
@@ -857,6 +857,7 @@ export type HomeStatsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   tagLimit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
+  global?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 
@@ -1486,7 +1487,7 @@ export type HealthCheckQueryHookResult = ReturnType<typeof useHealthCheckQuery>;
 export type HealthCheckLazyQueryHookResult = ReturnType<typeof useHealthCheckLazyQuery>;
 export type HealthCheckQueryResult = Apollo.QueryResult<HealthCheckQuery, HealthCheckQueryVariables>;
 export const HomeStatsDocument = gql`
-    query homeStats($dateFrom: String, $term: String!, $type: String, $limit: Int, $tagLimit: Int, $offset: Int) {
+    query homeStats($dateFrom: String, $term: String!, $type: String, $limit: Int, $tagLimit: Int, $offset: Int, $global: Boolean) {
   homeStats {
     wallets
     meeps
@@ -1496,7 +1497,7 @@ export const HomeStatsDocument = gql`
   news: searchTweets(term: $term, type: $type, limit: $limit) {
     ...TweetData
   }
-  feed: heroFeed(limit: $limit, offset: $offset) {
+  feed: feed(limit: $limit, offset: $offset, global: $global) {
     ...TweetData
   }
   channels: getChannels(limit: $limit) {
@@ -1541,6 +1542,7 @@ ${BaseUserFragmentDoc}`;
  *      limit: // value for 'limit'
  *      tagLimit: // value for 'tagLimit'
  *      offset: // value for 'offset'
+ *      global: // value for 'global'
  *   },
  * });
  */

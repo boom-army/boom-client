@@ -41,6 +41,7 @@ export const Home: React.FC = () => {
       type: "TAGS",
       limit: 5,
       offset: 0,
+      global: true,
       tagLimit: 20,
     },
   });

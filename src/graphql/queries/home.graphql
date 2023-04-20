@@ -5,6 +5,7 @@ query homeStats(
   $limit: Int
   $tagLimit: Int
   $offset: Int
+  $global: Boolean
 ) {
   homeStats {
     wallets
@@ -15,7 +16,7 @@ query homeStats(
   news: searchTweets(term: $term, type: $type, limit: $limit) {
     ...TweetData
   }
-  feed: heroFeed(limit: $limit, offset: $offset) {
+  feed: feed(limit: $limit, offset: $offset, global: $global) {
     ...TweetData
   }
   channels: getChannels(limit: $limit) {
