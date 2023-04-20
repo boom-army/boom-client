@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ClearIcon from "@mui/icons-material/Clear";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { Box } from "@mui/system";
@@ -63,6 +63,16 @@ export const NFTMint: React.FC = (props) => {
   const [isMinting, setMinting] = useState<boolean>(false);
   const [fileName, setFileName] = useState("");
   // const [nftCount, setNFTCount] = useState(1);
+  const [uploadProgress, setUploadProgress] = useState(0);
+
+  useEffect(() => {
+    if (uploadProgress > 0) {
+      enqueueSnackbar("Uploading...", {
+        variant: "info",
+        progress: uploadProgress,
+      });
+    }
+  }, [uploadProgress]);
 
   const defaultFieldsState = {
     name: "",
@@ -94,7 +104,12 @@ export const NFTMint: React.FC = (props) => {
         },
       });
       const signedUrl = data.signFileUrl;
-      const imageData = await uploadFile(renamed, signedUrl, enqueueSnackbar);
+      const imageData = await uploadFile(
+        renamed,
+        signedUrl,
+        enqueueSnackbar,
+        setUploadProgress
+      );
       const imageUrl = imageData?.config?.url?.split("?")[0] as string;
 
       setFileName(renamed.name);
@@ -113,6 +128,7 @@ export const NFTMint: React.FC = (props) => {
     } finally {
       // reset value so the input event handler can trigger again
       e.target.value = null;
+      setUploadProgress(0);
     }
   };
 
