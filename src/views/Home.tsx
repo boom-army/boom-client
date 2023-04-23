@@ -19,6 +19,7 @@ import { ChannelTile } from "../components/Channel/ChannelTile";
 import { TipRank } from "../components/SideBar/TipRank";
 import { TopMeepers } from "../components/TopMeepers";
 import { HomeTitle } from "../components/HomeTitle";
+import { LinkTilesGrid } from "../components/LinkTiles";
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -85,7 +86,7 @@ export const Home: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-      <Grid container spacing={2} mb={2}>
+      <Grid container spacing={2} mb={4}>
         <Grid item xs={12} sm={4}>
           <HomeTitle title="Latest Meeps" titleLink="/feed" />
           {loading ? (
@@ -171,6 +172,7 @@ export const Home: React.FC = () => {
           )}
         </Grid>
       </Grid>
+      < LinkTilesGrid />
       {/* <Grid container spacing={2}>
         <Grid item xs={12}>
           <HomeTitle>Tweet of the week</HomeTitle>
