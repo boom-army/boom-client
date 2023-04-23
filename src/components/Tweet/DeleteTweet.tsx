@@ -27,7 +27,7 @@ export const DeleteTweet: React.FC<Props> = ({ id }) => {
 
   const handleDeleteTweet = async () => {
     await deleteTweetMutation();
-    enqueueSnackbar("Your tweet has been deleted", { variant: "success" });
+    enqueueSnackbar("Your meep has been deleted", { variant: "success" });
   };
 
   return <TrashIcon loading={loading} onClick={handleDeleteTweet} />;
