@@ -39,12 +39,7 @@ export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
         ? slicedTweets.map(
             (tweet, i) =>
               tweet && (
-                <Grid
-                  item
-                  xs={12}
-                  key={tweet.id}
-                  sx={{ position: "relative" }}
-                >
+                <Grid item xs={12} key={tweet.id} sx={{ position: "relative" }}>
                   {tweet?.parentTweet && (
                     <ThreadReply tweet={tweet?.parentTweet} />
                   )}

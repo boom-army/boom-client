@@ -60,7 +60,7 @@ export const FeedList: React.FC<Props> = ({
     refetchData && refetchData();
     refetchCount && refetchCount();
   };
-  
+
   return (
     <Grid
       container
@@ -91,30 +91,34 @@ export const FeedList: React.FC<Props> = ({
         </Grid>
       ) : null}
       {data?.length ? (
-        <InfiniteScroll
-          dataLength={data?.length}
-          next={fetchData}
-          hasMore={true}
-          scrollableTarget="scrollBox"
-          loader={
-            loading && (
-              <Box sx={{ marginTop: "1rem" }}>
-                <Loader />
-              </Box>
-            )
-          }
-        >
-          {userData?.data?.avatarUpdateAuthority !== HARKL_ID && (
-            <Grid item xs={12}>
-              <BoomHeroStore userData={userData} />
-            </Grid>
-          )}
-          {data?.length
-            ? data?.map((tweet) => (
-                <TweetThread key={tweet.id} tweet={tweet as Tweet} />
-              ))
-            : null}
-        </InfiniteScroll>
+        <Grid item xs={12}>
+          <Box width="100%">
+            <InfiniteScroll
+              dataLength={data?.length}
+              next={fetchData}
+              hasMore={true}
+              scrollableTarget="scrollBox"
+              loader={
+                loading && (
+                  <Box sx={{ marginTop: "1rem" }}>
+                    <Loader />
+                  </Box>
+                )
+              }
+            >
+              {userData?.data?.avatarUpdateAuthority !== HARKL_ID && (
+                <Grid item xs={12}>
+                  <BoomHeroStore userData={userData} />
+                </Grid>
+              )}
+              {data?.length
+                ? data?.map((tweet) => (
+                    <TweetThread key={tweet.id} tweet={tweet as Tweet} />
+                  ))
+                : null}
+            </InfiniteScroll>
+          </Box>
+        </Grid>
       ) : (
         <Grid item xs={12}>
           <CustomResponse text="No hero's have meeped." />
