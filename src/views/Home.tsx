@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -7,12 +7,9 @@ import {
   Box,
   Stack,
   styled,
+  Skeleton,
 } from "@mui/material";
-import {
-  Tweet,
-  useHomeStatsQuery,
-  Tag,
-} from "../generated/graphql";
+import { Tweet, useHomeStatsQuery, Tag } from "../generated/graphql";
 import { WordCloud } from "../components/WordCloud";
 import { ThemeContext } from "../contexts/theme";
 import dayjs from "dayjs";
@@ -37,7 +34,7 @@ export const Home: React.FC = () => {
       global: true,
       tagLimit: 20,
     },
-  });  
+  });
 
   const TriBox = styled(Box)({
     maxHeight: "370px",
@@ -63,9 +60,16 @@ export const Home: React.FC = () => {
               <CardContent>
                 <Stack alignItems="center">
                   <Box textAlign="center">
-                    <Typography variant="h1" component="div">
-                      {card.value}
-                    </Typography>
+                    {loading ? (
+                      <Skeleton
+                        variant="text"
+                        sx={{ fontSize: "2rem", minWidth: "120px" }}
+                      />
+                    ) : (
+                      <Typography variant="h1" component="div">
+                        {card.value}
+                      </Typography>
+                    )}
                   </Box>
                   <Box textAlign="center">
                     <Typography
@@ -84,29 +88,87 @@ export const Home: React.FC = () => {
       <Grid container spacing={2} mb={2}>
         <Grid item xs={12} sm={4}>
           <HomeTitle title="Latest Meeps" titleLink="/feed" />
-          <TriBox>
-            {data?.feed.length
-              ? data?.feed.map((tweet) => (
-                  <TweetThread key={tweet.id} tweet={tweet as Tweet} />
-                ))
-              : null}
-          </TriBox>
+          {loading ? (
+            <Box>
+              <Skeleton variant="text" />
+              <Skeleton variant="text" sx={{ mb: 2 }} />
+              <Skeleton
+                variant="rounded"
+                width="100%"
+                height={60}
+                sx={{ mb: 2 }}
+              />
+              <Skeleton variant="text" />
+              <Skeleton variant="text" sx={{ mb: 2 }} />
+              <Skeleton variant="rounded" width="100%" height={60} />
+            </Box>
+          ) : (
+            <TriBox>
+              {data?.feed.length
+                ? data?.feed.map((tweet) => (
+                    <TweetThread key={tweet.id} tweet={tweet as Tweet} />
+                  ))
+                : null}
+            </TriBox>
+          )}
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle title="Top NFT Channels" titleLink="/channels" />
-          <TriBox>
-            {data?.channels?.map((d) => (
-              <ChannelTile key={d.id} channel={d} />
-            ))}
-          </TriBox>
+          {loading ? (
+            <Box>
+              <Skeleton
+                variant="rounded"
+                width="100%"
+                height={60}
+                sx={{ mb: 1 }}
+              />
+              <Skeleton
+                variant="rounded"
+                width="100%"
+                height={60}
+                sx={{ mb: 1 }}
+              />
+              <Skeleton
+                variant="rounded"
+                width="100%"
+                height={60}
+                sx={{ mb: 1 }}
+              />
+              <Skeleton
+                variant="rounded"
+                width="100%"
+                height={60}
+                sx={{ mb: 1 }}
+              />
+            </Box>
+          ) : (
+            <TriBox>
+              {data?.channels?.map((d) => (
+                <ChannelTile key={d.id} channel={d} />
+              ))}
+            </TriBox>
+          )}
         </Grid>
         <Grid item xs={12} sm={4}>
           <HomeTitle title="Latest News" titleLink="/news" />
-          <TriBox>
-            {data?.news.map((meep) => (
-              <NewsItem meep={meep} key={meep.id} />
-            ))}
-          </TriBox>
+          {loading ? (
+            <Box>
+              <Skeleton variant="text" width="100%" sx={{ mb: 1 }} />
+              <Skeleton variant="text" width="100%" sx={{ mb: 1 }} />
+              <Skeleton variant="text" width="100%" sx={{ mb: 1 }} />
+              <Skeleton variant="text" width="100%" sx={{ mb: 1 }} />
+              <Skeleton variant="text" width="100%" sx={{ mb: 1 }} />
+              <Skeleton variant="text" width="100%" sx={{ mb: 1 }} />
+              <Skeleton variant="text" width="100%" sx={{ mb: 1 }} />
+              <Skeleton variant="text" width="100%" sx={{ mb: 1 }} />
+            </Box>
+          ) : (
+            <TriBox>
+              {data?.news.map((meep) => (
+                <NewsItem meep={meep} key={meep.id} />
+              ))}
+            </TriBox>
+          )}
         </Grid>
       </Grid>
       {/* <Grid container spacing={2}>
