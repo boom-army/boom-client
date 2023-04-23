@@ -35,7 +35,7 @@ interface NewsProps {
 }
 
 export const NewsItem = ({ meep }: NewsProps) => {
-  let [text] = meep.text.split("#");
+  let [text] = meep.text.split("#news");
   text = truncString(text, 140, "...");
   return (
     <Card>
