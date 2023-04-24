@@ -101,6 +101,7 @@ export const ShowMessage: React.FC<Props> = ({
 
   const linkifyOptions = {
     className: "body",
+    nl2br: true,
     target: { url: "_blank" },
     formatHref: {
       hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
