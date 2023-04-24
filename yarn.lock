@@ -8762,25 +8762,25 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-linkify-plugin-hashtag@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/linkify-plugin-hashtag/-/linkify-plugin-hashtag-3.0.3.tgz#7d744764b8c379e9e2482f67923aa41588fd38cf"
-  integrity sha512-60v/jDigRuqa8uWNwKNYx5D6yMAn1GCgNk/JU7SbIgW8DMTDFg/vS1JG4Y2lSUBIJXLkZC5a0ZOTDmpbjwPCWw==
+linkify-plugin-hashtag@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/linkify-plugin-hashtag/-/linkify-plugin-hashtag-4.1.1.tgz#c98f32a41b8513cc4497434e32d28eb701a0f33f"
+  integrity sha512-vrTU3+Jmqry79QlKoK5Iy2yTbFE1/jwp217SkRmSaNSx4CqXhYSDXdmrKeqpRDXMLLOLbnrepxtklTMMu5/mIQ==
 
-linkify-plugin-mention@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/linkify-plugin-mention/-/linkify-plugin-mention-3.0.3.tgz#8896dfe032610b1ce360d1f934f0dd92748e9e3d"
-  integrity sha512-P63yTexhLj975Qm+znP63grkM1WlEW76FljGLfUybZQVz+1gZE89YX3lsdOXVOnLF45VKULDlHqIfuS71QrPOg==
+linkify-plugin-mention@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/linkify-plugin-mention/-/linkify-plugin-mention-4.1.1.tgz#3ff4a45edc43d56e14582bf66dcadd152a45aeaa"
+  integrity sha512-7qIOT3FhU4+WlbdRC5sZYZJckOSgBI4Hg6pDXtIOtyaJOYKK3vos4L86yb1veVbyAO2hf4CKoEAGrEvIqKviIA==
 
-linkify-react@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/linkify-react/-/linkify-react-3.0.3.tgz#97d420694cb173e46f75fb2b7de6f3887059ad4f"
-  integrity sha512-CdERZyocGB+2sHYKMKltAWy5TyelgocnMI7SU5vdT0ojtZd1u8sRuntXrxjA3tvgTirtLm2nD7gDdJFaVXvDAw==
+linkify-react@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/linkify-react/-/linkify-react-4.1.1.tgz#79cc29c6e5c0fd660be74a6a51d25c1b36977cf7"
+  integrity sha512-2K9Y1cUdvq40dFWqCJ//X+WP19nlzIVITFGI93RjLnA0M7KbnxQ/ffC3AZIZaEIrLangF9Hjt3i0GQ9/anEG5A==
 
-linkifyjs@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-3.0.5.tgz#99e51a3a0c0e232fcb63ebb89eea3ff923378f34"
-  integrity sha512-1Y9XQH65eQKA9p2xtk+zxvnTeQBG7rdAXSkUG97DmuI/Xhji9uaUzaWxRj6rf9YC0v8KKHkxav7tnLX82Sz5Fg==
+linkifyjs@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-4.1.1.tgz#73d427e3bbaaf4ca8e71c589ad4ffda11a9a5fde"
+  integrity sha512-zFN/CTVmbcVef+WaDXT63dNzzkfRBKT1j464NJQkV7iSgJU0sLBus9W0HBwnXK13/hf168pbrx/V/bjEHOXNHA==
 
 listr2@^4.0.5:
   version "4.0.5"
