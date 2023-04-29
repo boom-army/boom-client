@@ -45,7 +45,7 @@ export const Home: React.FC = () => {
   const cards = [
     { title: "Connected Wallets", value: data?.homeStats.wallets },
     { title: "Total Meeps", value: data?.homeStats.meeps },
-    { title: "NFT Channels", value: data?.homeStats.channels },
+    { title: "NFT DAOs", value: data?.homeStats.channels },
     { title: "Total Reactions", value: data?.homeStats.reactions },
   ];
 
@@ -114,7 +114,7 @@ export const Home: React.FC = () => {
           )}
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle title="Top NFT Channels" titleLink="/channels" />
+          <HomeTitle title="Top NFT DAOs" titleLink="/d" />
           {loading ? (
             <Box>
               <Skeleton

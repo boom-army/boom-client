@@ -37,7 +37,7 @@ export const LinkTilesGrid = () => {
 
   const tiles = [
     { icon: <Language />, label: "Hero Feed", link: "/feed" },
-    { icon: <LockPersonIcon />, label: "NFT Channels", link: "/channels" },
+    { icon: <LockPersonIcon />, label: "NFT DAOS", link: "/daos" },
     { icon: <NewspaperIcon />, label: "News", link: "/news" },
     { icon: <SavingsIcon />, label: "Tip Leaderboard", link: "/leaderboard" },
   ];

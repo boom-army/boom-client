@@ -141,7 +141,7 @@ export const Channels: React.FC = () => {
     <>
       <Box m={1}>
         <Typography variant="h2" sx={{ fontSize: "18px" }} pb={1}>
-          NFT Channels
+          Your NFT DAOs
         </Typography>
       </Box>
       {data && data?.getUserChannels?.length ? (

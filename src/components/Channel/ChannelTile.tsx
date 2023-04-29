@@ -42,7 +42,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
             marginTop: "1em",
           },
         }}
-        to={`/channels/${channel?.id}`}
+        to={`/d/${channel?.id}`}
       >
         <Box mr={1}>
           <Avatar

@@ -113,7 +113,7 @@ export const ShowMessage: React.FC<Props> = ({
       {parentTweet && (
         <Box sx={{ position: "relative" }}>
           <ReplyBox>
-            <HashLink to={`/channels/${channel?.id}#${parentTweet?.id}`}>
+            <HashLink to={`/d/${channel?.id}#${parentTweet?.id}`}>
               <Stack direction="row" pl={5}>
                 <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
                   <UserAvatar

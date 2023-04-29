@@ -171,10 +171,10 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           </NavLink> */}
           {user?.handle && (
             <>
-              <NavLink style={applyActiveStyles} to="/channels">
+              <NavLink style={applyActiveStyles} to="/d">
                 <Stack direction="row" {...stackProps}>
                   <LockPersonIcon sx={iconProps} />
-                  <Typography variant="body1">NFT Chat</Typography>
+                  <Typography variant="body1">NFT DAOs</Typography>
                 </Stack>
               </NavLink>
               <NavLink style={applyActiveStyles} to="/following">
