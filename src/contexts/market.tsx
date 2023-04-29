@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { MINT_TO_MARKET } from "./../models/marketOverrides";
-import { STABLE_COINS } from "../utils/utils";
-import { useConnectionConfig } from "./connection";
+import { STABLE_COINS, currentCluster } from "../utils/utils";
 import { cache, getMultipleAccounts } from "./accounts";
 import { Market, MARKETS, Orderbook, TOKEN_MINTS } from "@project-serum/serum";
 import { AccountInfo, Connection, PublicKey } from "@solana/web3.js";
@@ -31,7 +30,7 @@ const MarketsContext = React.createContext<MarketsContextState | null>(null);
 const marketEmitter = new EventEmitter();
 
 export function MarketProvider({ children = null as any }) {
-  const { endpoint } = useConnectionConfig();
+  const { endpoint } = currentCluster();
   const accountsToObserve = useMemo(() => new Map<string, number>(), []);
   const [marketMints, setMarketMints] = useState<string[]>([]);
   const { userAccounts } = useUserAccounts();

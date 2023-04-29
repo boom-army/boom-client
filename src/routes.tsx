@@ -7,14 +7,12 @@ import LanguageIcon from "@mui/icons-material/Language";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import React, { useContext } from "react";
-import { AccountsProvider } from "./contexts/accounts";
 import { AppHeader } from "./components/AppHeader";
 import { Badge, Container, Grid, Paper, SwipeableDrawer } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GiphyContextProvider } from "./contexts/giphy";
 // import { Helmet } from "react-helmet";
-import { MarketProvider } from "./contexts/market";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
@@ -106,114 +104,100 @@ export const AppRoutes: React.FC = () => {
 
       <BrowserRouter basename={"/"}>
         <Wallet>
-          <AccountsProvider>
-            <MarketProvider>
-              <GiphyContextProvider>
-                <>
-                  <AppHeader />
-                  <Container maxWidth="lg" disableGutters={true}>
-                    <Routes>
-                      {/* <Route
+          <GiphyContextProvider>
+            <>
+              <AppHeader />
+              <Container maxWidth="lg" disableGutters={true}>
+                <Routes>
+                  {/* <Route
                         path="auctions"
                         element={
                           <GridAuction />
                         }
                       /> */}
-                      <Route
-                        path="/"
-                        element={
-                          <Home />
-                        }
+                  <Route path="/" element={<Home />} />
+                  <Route
+                    path="*"
+                    element={
+                      <GridStandard
+                        loading={loading}
+                        data={data}
+                        refetch={refetch}
+                        user={user}
+                        setUser={setUser}
                       />
-                      <Route
-                        path="*"
-                        element={
-                          <GridStandard
-                            loading={loading}
-                            data={data}
-                            refetch={refetch}
-                            user={user}
-                            setUser={setUser}
-                          />
+                    }
+                  />
+                </Routes>
+                <Paper
+                  component={Grid}
+                  sx={{
+                    position: "fixed",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                  }}
+                  display={{ xs: "block", sm: "block", md: "none" }}
+                  elevation={3}
+                >
+                  <StyledBottomNavigation value={value} onChange={handleChange}>
+                    <BottomNavigationAction
+                      component={NavLink}
+                      label="Heroes"
+                      value="hero-feed"
+                      icon={<LanguageIcon />}
+                      to="/"
+                    />
+                    {user?.handle && (
+                      <BottomNavigationAction
+                        component={NavLink}
+                        label="Notifications"
+                        value="notifications"
+                        icon={
+                          <Badge badgeContent={data?.profile?.newMentionsCount}>
+                            <NotificationsIcon />
+                          </Badge>
                         }
+                        to="/notifications"
                       />
-                    </Routes>
-                    <Paper
-                      component={Grid}
-                      sx={{
-                        position: "fixed",
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                      }}
-                      display={{ xs: "block", sm: "block", md: "none" }}
-                      elevation={3}
-                    >
-                      <StyledBottomNavigation
-                        value={value}
-                        onChange={handleChange}
-                      >
-                        <BottomNavigationAction
-                          component={NavLink}
-                          label="Heroes"
-                          value="hero-feed"
-                          icon={<LanguageIcon />}
-                          to="/"
-                        />
-                        {user?.handle && (
-                          <BottomNavigationAction
-                            component={NavLink}
-                            label="Notifications"
-                            value="notifications"
-                            icon={
-                              <Badge
-                                badgeContent={data?.profile?.newMentionsCount}
-                              >
-                                <NotificationsIcon />
-                              </Badge>
-                            }
-                            to="/notifications"
-                          />
-                        )}
-                        {user?.handle && (
-                          <BottomNavigationAction
-                            component={NavLink}
-                            label="Profile"
-                            value="profile"
-                            icon={<AccountCircleIcon />}
-                            to={`/${user?.handle}`}
-                          />
-                        )}
-                        <BottomNavigationAction
-                          label="Menu"
-                          value="menu"
-                          icon={<MenuIcon />}
-                          onClick={toggleDrawer(true)}
-                        />
-                      </StyledBottomNavigation>
-                    </Paper>
-                    <SwipeableDrawer
-                      open={drawer}
-                      onClose={toggleDrawer(false)}
-                      onOpen={toggleDrawer(true)}
-                    >
-                      <Box
-                        role="presentation"
-                        onClick={toggleDrawer(false)}
-                        onKeyDown={toggleDrawer(false)}
-                        sx={{ paddingLeft: "1em" }}
-                      >
-                        <Nav
-                          user={user}
-                          newMentionsCount={data?.profile?.newMentionsCount}
-                        />
-                      </Box>
-                    </SwipeableDrawer>
-                  </Container>
-                </>
-              </GiphyContextProvider>
-            </MarketProvider>
-          </AccountsProvider>
+                    )}
+                    {user?.handle && (
+                      <BottomNavigationAction
+                        component={NavLink}
+                        label="Profile"
+                        value="profile"
+                        icon={<AccountCircleIcon />}
+                        to={`/${user?.handle}`}
+                      />
+                    )}
+                    <BottomNavigationAction
+                      label="Menu"
+                      value="menu"
+                      icon={<MenuIcon />}
+                      onClick={toggleDrawer(true)}
+                    />
+                  </StyledBottomNavigation>
+                </Paper>
+                <SwipeableDrawer
+                  open={drawer}
+                  onClose={toggleDrawer(false)}
+                  onOpen={toggleDrawer(true)}
+                >
+                  <Box
+                    role="presentation"
+                    onClick={toggleDrawer(false)}
+                    onKeyDown={toggleDrawer(false)}
+                    sx={{ paddingLeft: "1em" }}
+                  >
+                    <Nav
+                      user={user}
+                      newMentionsCount={data?.profile?.newMentionsCount}
+                    />
+                  </Box>
+                </SwipeableDrawer>
+              </Container>
+            </>
+          </GiphyContextProvider>
         </Wallet>
       </BrowserRouter>
     </>

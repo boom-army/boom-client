@@ -1,8 +1,5 @@
-import React, { FC, useCallback, useMemo } from "react";
-import {
-  ConnectionProvider,
-  WalletProvider,
-} from "@solana/wallet-adapter-react";
+import { FC, useCallback, useMemo } from "react";
+import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
 import { WalletError } from "@solana/wallet-adapter-base";
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 import {
@@ -16,10 +13,10 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import { currentCluster } from "../utils/utils";
 import { useSnackbar } from "./snackbar";
+import { UmiProvider } from "./umi";
 
 export const Wallet: FC<{ children: JSX.Element }> = ({ children = null }) => {
-  const endpoint = import.meta.env.VITE_RPC_URL!;  
-  let { name } = currentCluster();  
+  const { name, endpoint } = currentCluster();
 
   const wallets = useMemo(
     () => [
@@ -47,9 +44,11 @@ export const Wallet: FC<{ children: JSX.Element }> = ({ children = null }) => {
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} onError={onError} autoConnect>
-        <WalletDialogProvider title={<>Login with Solana Wallet</>}>
-          {children}
-        </WalletDialogProvider>
+        <UmiProvider endpoint={endpoint}>
+          <WalletDialogProvider title={<>Login with Solana Wallet</>}>
+            {children}
+          </WalletDialogProvider>
+        </UmiProvider>
       </WalletProvider>
     </ConnectionProvider>
   );

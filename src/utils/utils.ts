@@ -14,6 +14,7 @@ import {
   TransactionInstruction,
   PublicKey,
 } from "@solana/web3.js";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 
 const WAD = new BigNumber("1e+18");
 
@@ -242,11 +243,23 @@ export function convert(
 
 export function currentCluster() {
   const endpoint = import.meta.env.VITE_RPC_URL!;
-  const cluster = ENDPOINTS.filter((obj) => obj.endpoint.includes(endpoint))[0];
-  if (!cluster) {
+  const clusterName = (endpoint: string) => {
+    switch (true) {
+      case endpoint.includes("dev"):
+        return WalletAdapterNetwork.Devnet;
+      case endpoint.includes("test"):
+        return WalletAdapterNetwork.Testnet;
+      case endpoint.includes("main") || endpoint.includes("quiknode"):
+        return WalletAdapterNetwork.Mainnet;
+      default:
+        return WalletAdapterNetwork.Devnet;
+    }
+  };
+  const name = clusterName(endpoint);
+  if (!name) {
     throw new Error("Invalid RPC cluster");
   }
-  return cluster;
+  return { name, endpoint };
 }
 
 export interface AlertState {
