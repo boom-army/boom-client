@@ -8,29 +8,27 @@ import {
 } from "../generated/graphql";
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
-import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { uniqBy, differenceBy } from "lodash";
 import { displayError } from "../utils";
-import {
-  AnchorWallet,
-  useAnchorWallet,
-  useConnection,
-} from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../contexts/snackbar";
 import { useApolloClient } from "@apollo/client";
 import { ChannelStatus } from "../constants";
+import { useUmi } from "../contexts/umi";
+import { useMetaplex } from "../contexts/metaplex";
 
 export const Channels: React.FC = () => {
   const { connection } = useConnection();
+  const metaplex = useMetaplex();
   const client = useApolloClient();
-  const anchorWallet = useAnchorWallet();
-  const wallet = anchorWallet as AnchorWallet;
+  const { publicKey } = useWallet();
   const [nftLoading, setNftLoading] = useState(true);
   const { enqueueSnackbar } = useSnackbar();
 
-  const [getUserChannels, { data, loading, error }] = useGetUserChannelsLazyQuery({
-    fetchPolicy: "network-only",
-  });
+  const [getUserChannels, { data, loading, error }] =
+    useGetUserChannelsLazyQuery({
+      fetchPolicy: "network-only",
+    });
   const [addChannelMutation] = useAddChannelMutation();
   const [channelUnlinkMutation] = useUnlinkChannelMutation();
 
@@ -38,46 +36,48 @@ export const Channels: React.FC = () => {
     setNftLoading(true);
     (async () => {
       try {
-        if (!wallet?.publicKey)
-          displayError("Wallet not connected", enqueueSnackbar);
-        const nftData = wallet?.publicKey
-          ? await Metadata.findDataByOwner(
-              connection,
-              wallet?.publicKey.toString()
-            )
+        if (!publicKey) displayError("Wallet not connected", enqueueSnackbar);
+        const nftData = publicKey
+          ? await metaplex?.nfts().findAllByOwner({
+              owner: publicKey,
+            })
           : [];
 
-        const formatChannelData = nftData.map(async (meta, i) => {
-          try {
-            const metaDataFetch: any = await fetch(meta.data.uri).then(
-              (response) => response.json()
-            );
-            return {
-              __typename: "Channel" as "Channel",
-              id: meta.mint ?? "",
-              mintAuthority: meta.updateAuthority ?? "",
-              name: metaDataFetch?.collection?.name ?? "",
-              family: metaDataFetch?.collection?.family ?? "",
-              image: metaDataFetch?.image ?? "",
-              description: metaDataFetch?.description ?? "",
-              status: "active",
-              verified: null,
-              channelParentId: null,
-              membersCount: null,
-            };
-          } catch (error) {
-            return Promise.resolve({
-              name: "",
-              family: "",
-              mintAuthority: "",
-              description: "",
-              image: "",
-              status: "",
-            });
-          }
-        });
+        const formatChannelData =
+          nftData?.map(async (data, i) => {
+            try {
+              const meta: any = await fetch(data.uri).then((response) =>
+                response.json()
+              );
+              return {
+                __typename: "Channel" as "Channel",
+                // @ts-ignore
+                id: data.mintAddress.toBase58() ?? "",
+                mintAuthority: data.updateAuthorityAddress.toBase58() ?? "",
+                collection: data.collection?.address ?? "",
+                name: meta?.collection?.name ?? "",
+                family: meta?.collection?.family ?? "",
+                status: "active",
+                image: meta.image ?? "",
+                description: meta.description ?? "",
+                verified: null,
+                channelParentId: null,
+                membersCount: null,
+              };
+            } catch (error) {
+              return Promise.resolve({
+                name: "",
+                family: "",
+                mintAuthority: "",
+                description: "",
+                image: "",
+                status: "",
+              });
+            }
+          }) || [];
         const channelData = await Promise.all(formatChannelData);
-        const validChannels = channelData.filter(
+        console.log("nftData", JSON.stringify(channelData));
+        const validChannels = channelData?.filter(
           (channel) => channel?.name || channel?.family
         );
         const uniqueChannels = uniqBy(validChannels, (d) =>
@@ -127,7 +127,7 @@ export const Channels: React.FC = () => {
         displayError(error, enqueueSnackbar);
       }
     })();
-  }, [connection, wallet, client]);
+  }, [connection, publicKey, client]);
 
   if (nftLoading || loading)
     return (
@@ -145,7 +145,9 @@ export const Channels: React.FC = () => {
         </Typography>
       </Box>
       {data && data?.getUserChannels?.length ? (
-        data?.getUserChannels?.map((d) => <ChannelTile key={d.id} channel={d} />)
+        data?.getUserChannels?.map((d) => (
+          <ChannelTile key={d.id} channel={d} />
+        ))
       ) : (
         <CustomResponse text="No channels to display" />
       )}
