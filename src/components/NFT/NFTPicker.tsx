@@ -20,13 +20,13 @@ import {
 } from "@mui/material";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { CircularProgress } from "@mui/material";
-import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
 import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../../contexts/snackbar";
 import cuid from "cuid";
+import { useMetaplex } from "../../contexts/metaplex";
 
 export const NFTPicker: React.FC<{
   setNftData: React.Dispatch<React.SetStateAction<any>>;
@@ -36,15 +36,18 @@ export const NFTPicker: React.FC<{
   const [metadata, setMetadata] = useState<any>(null);
   const [validKey, setValidKey] = useState<null | Boolean>(null);
   const [loading, setLoading] = useState(false);
+
   const { theme } = useContext(ThemeContext);
+  const metaplex = useMetaplex();
+  const { connection } = useConnection();
+  const { enqueueSnackbar } = useSnackbar();
+
   const handleClose = () => {
     setNftInput("");
     setMetadata(null);
     setNftData(null);
     toggleNftForm(false);
   };
-  const { connection } = useConnection();
-  const { enqueueSnackbar } = useSnackbar();
   const nftKey = cuid();
 
   const handleSelect = () => {
@@ -54,53 +57,41 @@ export const NFTPicker: React.FC<{
     toggleNftForm(false);
   };
 
-  const fetchSetMeta = useCallback(
-    async (connection: Connection, key: PublicKey) => {
-      const mintMeta = key && (await Metadata.findByMint(connection, key));
-      const uri = mintMeta.data.data.uri;
-      if (uri) {
-        const data: any = await fetch(uri)
-          .then((response) => response.json())
-          .then((data) => camelizeKeys(data));
-        data.publicKey = key.toString();
-        setMetadata({
-          publicKey: data.publicKey,
-          name: data.name,
-          symbol: data.symbol,
-          description: data.description,
-          externalUrl: data.externalUrl,
-          sellerFeeBasisPoints: data.sellerFeeBasisPoints,
-          image: data.image,
-          attributes: data.attributes,
-          collection: data.collection,
-          properties: data.properties,
-        });
-        setValidKey(true);
-      }
-    },
-    []
-  );
-
   useEffect(() => {
     setLoading(true);
     (async () => {
       try {
         if (!nftInput) return;
-        const key = new PublicKey(nftInput);
-        const acc = await connection.getParsedAccountInfo(key);
+        const publicKey = new PublicKey(nftInput);
+        // const acc = await connection.getParsedAccountInfo(key);
+        console.log("nftInput", nftInput);
+        const nft = await metaplex
+          ?.nfts()
+          .findByMint({ mintAddress: publicKey, loadJsonMetadata: true });
+        const meta: any =
+          nft && (await fetch(nft.uri).then((response) => response.json()));
+        console.log("nftInput", JSON.stringify(nft), meta);
 
-        if (!acc.value) throw new Error("No NFT found with that public key");
-        // @ts-ignore: error in types
-        if (acc && acc?.value?.data?.parsed.info.mint) {
-          // @ts-ignore: error in types
-          const mintKey = new PublicKey(acc.value.data.parsed.info.mint);
-          await fetchSetMeta(connection, mintKey);
-        }
-        // @ts-ignore: error in types
-        if (Math.floor(acc?.value?.data?.parsed.info.supply) === 1) {
-          await fetchSetMeta(connection, key);
+        if (nft?.model !== "nft")
+          throw new Error("No NFT found with that public key");
+        if (nft?.address) {
+          setMetadata({
+            publicKey,
+            name: nft.name,
+            symbol: nft.symbol,
+            description: meta.description || "",
+            externalUrl: nft.uri,
+            sellerFeeBasisPoints: nft.sellerFeeBasisPoints,
+            image: meta.image,
+            attributes: meta.attributes,
+            collection: meta.collection,
+            properties: meta.properties,
+          });
+          setValidKey(true);
         }
       } catch (error) {
+        console.log("error", error);
+
         setValidKey(false);
         if (nftInput.length > 42) {
           displayError(error, enqueueSnackbar);
@@ -109,7 +100,7 @@ export const NFTPicker: React.FC<{
         setLoading(false);
       }
     })();
-  }, [nftInput, validKey, connection, enqueueSnackbar, fetchSetMeta]);
+  }, [nftInput, validKey, connection, enqueueSnackbar]);
 
   return (
     <>
