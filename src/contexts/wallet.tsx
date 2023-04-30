@@ -1,5 +1,8 @@
 import { FC, useCallback, useMemo } from "react";
-import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
 import { WalletError } from "@solana/wallet-adapter-base";
 import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 import {
@@ -14,6 +17,7 @@ import {
 import { currentCluster } from "../utils/utils";
 import { useSnackbar } from "./snackbar";
 import { UmiProvider } from "./umi";
+import { MetaplexProvider } from "./metaplex";
 
 export const Wallet: FC<{ children: JSX.Element }> = ({ children = null }) => {
   const { name, endpoint } = currentCluster();
@@ -44,11 +48,13 @@ export const Wallet: FC<{ children: JSX.Element }> = ({ children = null }) => {
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} onError={onError} autoConnect>
-        <UmiProvider endpoint={endpoint}>
-          <WalletDialogProvider title={<>Login with Solana Wallet</>}>
-            {children}
-          </WalletDialogProvider>
-        </UmiProvider>
+        <MetaplexProvider>
+          <UmiProvider endpoint={endpoint}>
+            <WalletDialogProvider title={<>Login with Solana Wallet</>}>
+              {children}
+            </WalletDialogProvider>
+          </UmiProvider>
+        </MetaplexProvider>
       </WalletProvider>
     </ConnectionProvider>
   );
