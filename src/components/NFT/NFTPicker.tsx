@@ -181,14 +181,32 @@ export const NFTPicker: React.FC<{
                         {loading && (
                           <CircularProgress
                             size={16}
-                            sx={{ color: theme.accentColor }}
+                            sx={{
+                              "&.MuiSvgIcon": {
+                                color: (theme) => theme.accentColor,
+                              },
+                            }}
                           />
                         )}
                         {!loading && validKey === null && metadata && (
-                          <CheckIcon color="success" />
+                          <CheckIcon
+                            color="success"
+                            sx={{
+                              "&.MuiSvgIcon-colorSuccess": {
+                                color: (theme) => theme.palette.success.main,
+                              },
+                            }}
+                          />
                         )}
                         {!loading && validKey !== null && (
-                          <ErrorIcon color="error" />
+                          <ErrorIcon
+                            color="error"
+                            sx={{
+                              "&.MuiSvgIcon-colorError": {
+                                color: (theme) => theme.palette.error.main,
+                              },
+                            }}
+                          />
                         )}
                       </InputAdornment>
                     ),
