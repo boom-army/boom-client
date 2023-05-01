@@ -13,6 +13,10 @@ import {
   InputAdornment,
   Card,
   CardMedia,
+  Chip,
+  Modal,
+  Stack,
+  CircularProgress,
 } from "@mui/material";
 import { SOSOL_HOST_ID } from "../../utils/ids";
 import { displayError } from "../../utils";
@@ -451,6 +455,91 @@ export const NFTMint: React.FC = (props) => {
             </Grid>
           </Box>
         </Box>
+        <Modal
+          open={isMinting}
+          aria-labelledby="NFT action select"
+          aria-describedby="Apply action for given NFT"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Box
+            sx={{
+              padding: 3,
+              bgcolor: theme.background,
+              border: `2px solid ${theme.blue.lightest}`,
+              borderRadius: 1,
+              maxWidth: "25em",
+              width: "95%",
+            }}
+          >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+            >
+              <Typography id="nft-modal-title" variant="h6" component="h2">
+                Minting your NFT{" "}
+                <CircularProgress
+                  size={16}
+                  sx={{
+                    "&.MuiSvgIcon": {
+                      color: (theme) => theme.accentColor,
+                    },
+                  }}
+                />
+              </Typography>
+            </Box>
+            <Typography variant="body2" mb={2}>
+              You'll need to approve 3 transations for your files to be uploaded
+              to the blockchain. This may take a few minutes.
+            </Typography>
+            <Box display="flex">
+              <Stack spacing={2}>
+                {preview && (
+                  <img src={preview} alt={fields?.name} width="120" />
+                )}
+              </Stack>
+              <Box
+                ml={2}
+                display="flex"
+                flexDirection="column"
+                sx={{
+                  overflow: "hidden",
+                  flexWrap: "wrap",
+                  alignContent: "flex-start",
+                }}
+              >
+                <Typography variant="subtitle1">
+                  {fields.description}
+                </Typography>
+                <Typography variant="body2">
+                  {fields.collection.family}
+                </Typography>
+                <Typography variant="body2" mb={1}>
+                  {fields.collection.name}
+                </Typography>
+                {fields?.attributes &&
+                  typeof fields?.attributes?.map === "function" &&
+                  fields.attributes.map((nftItem) => (
+                    <Chip
+                      key={`${nftItem.trait_type}-${nftItem.value}`}
+                      label={`${nftItem.trait_type}: ${nftItem.value}`}
+                      variant="outlined"
+                      size="small"
+                      sx={{
+                        margin: "0.25em 0.5em 0.25em 0",
+                        fontSize: "0.7em",
+                      }}
+                    />
+                  ))}
+              </Box>
+            </Box>
+          </Box>
+        </Modal>
       </Container>
     </>
   );
