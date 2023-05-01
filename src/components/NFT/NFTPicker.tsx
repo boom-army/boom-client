@@ -1,7 +1,8 @@
-import { useEffect, useState, useContext, useCallback } from "react";
+import { useEffect, useState, useContext } from "react";
 import CheckIcon from "@mui/icons-material/Check";
-import ClearIcon from "@mui/icons-material/Clear";
 import CloseIcon from "@mui/icons-material/Close";
+import ErrorIcon from "@mui/icons-material/Error";
+import cuid from "cuid";
 import {
   Box,
   Button,
@@ -13,20 +14,18 @@ import {
   DialogTitle,
   IconButton,
   InputAdornment,
-  InputBase,
-  InputLabel,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
-import { Connection, PublicKey } from "@solana/web3.js";
 import { CircularProgress } from "@mui/material";
+import { PublicKey } from "@solana/web3.js";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
-import { camelizeKeys, displayError } from "../../utils";
+import { displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
-import { useSnackbar } from "../../contexts/snackbar";
-import cuid from "cuid";
 import { useMetaplex } from "../../contexts/metaplex";
+import { useSnackbar } from "../../contexts/snackbar";
 
 export const NFTPicker: React.FC<{
   setNftData: React.Dispatch<React.SetStateAction<any>>;
@@ -34,8 +33,9 @@ export const NFTPicker: React.FC<{
   const [nftForm, toggleNftForm] = useState(false);
   const [nftInput, setNftInput] = useState("");
   const [metadata, setMetadata] = useState<any>(null);
-  const [validKey, setValidKey] = useState<null | Boolean>(null);
+  const [validKey, setValidKey] = useState<null | string>(null);
   const [loading, setLoading] = useState(false);
+  const [fetchNftData, setFetchNftData] = useState(false);
 
   const { theme } = useContext(ThemeContext);
   const metaplex = useMetaplex();
@@ -47,6 +47,7 @@ export const NFTPicker: React.FC<{
     setMetadata(null);
     setNftData(null);
     toggleNftForm(false);
+    setValidKey(null);
   };
   const nftKey = cuid();
 
@@ -55,22 +56,21 @@ export const NFTPicker: React.FC<{
     setNftData(metadata);
     setMetadata(null);
     toggleNftForm(false);
+    setValidKey(null);
   };
 
   useEffect(() => {
+    if (!fetchNftData) return;
     setLoading(true);
     (async () => {
       try {
         if (!nftInput) return;
         const publicKey = new PublicKey(nftInput);
-        // const acc = await connection.getParsedAccountInfo(key);
-        console.log("nftInput", nftInput);
         const nft = await metaplex
           ?.nfts()
           .findByMint({ mintAddress: publicKey, loadJsonMetadata: true });
         const meta: any =
           nft && (await fetch(nft.uri).then((response) => response.json()));
-        console.log("nftInput", JSON.stringify(nft), meta);
 
         if (nft?.model !== "nft")
           throw new Error("No NFT found with that public key");
@@ -87,20 +87,24 @@ export const NFTPicker: React.FC<{
             collection: meta.collection,
             properties: meta.properties,
           });
-          setValidKey(true);
+          setValidKey(null);
         }
       } catch (error) {
-        console.log("error", error);
-
-        setValidKey(false);
+        setValidKey(String(error));
         if (nftInput.length > 42) {
           displayError(error, enqueueSnackbar);
         }
       } finally {
         setLoading(false);
+        setFetchNftData(false);
       }
     })();
-  }, [nftInput, validKey, connection, enqueueSnackbar]);
+  }, [nftInput, connection, enqueueSnackbar]);
+
+  useEffect(() => {
+    setFetchNftData(true);
+    console.log(validKey, !!validKey);
+  }, [nftInput, validKey]);
 
   return (
     <>
@@ -154,24 +158,20 @@ export const NFTPicker: React.FC<{
                 sx={{ height: "100%" }}
                 key="StackInput"
               >
-                <InputLabel
-                  shrink
-                  htmlFor="nft-input"
-                  sx={{ color: theme.primaryColor }}
-                >
-                  NFT Public Key
-                </InputLabel>
-                <InputBase
+                <TextField
                   key={nftKey}
+                  label="NFT Public Key"
                   placeholder="eg. 43QrHJ2csgLsRUhXW7WHQecZhRLFHW88sazGvUT65vYj"
                   id="nft-input"
+                  error={validKey !== null}
+                  helperText={validKey}
                   value={nftInput}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setNftInput(e.currentTarget.value);
                   }}
                   autoFocus
-                  endAdornment={
-                    validKey !== null && (
+                  InputProps={{
+                    endAdornment: validKey !== null && (
                       <InputAdornment
                         position="end"
                         sx={{ paddingRight: "0.5rem" }}
@@ -180,19 +180,13 @@ export const NFTPicker: React.FC<{
                           <CircularProgress size={16} color="secondary" />
                         )}
                         {!loading &&
-                          (validKey === true ? (
+                          (validKey === null ? (
                             <CheckIcon color="success" />
                           ) : (
-                            <ClearIcon color="error" />
+                            <ErrorIcon color="error" />
                           ))}
                       </InputAdornment>
-                    )
-                  }
-                  sx={{
-                    border: `1px solid ${theme.secondaryColor}`,
-                    padding: 1,
-                    color: theme.primaryColor,
-                    borderRadius: "4px",
+                    ),
                   }}
                 />
               </Stack>
