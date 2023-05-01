@@ -159,6 +159,8 @@ export const NFTMint: React.FC = (props) => {
       displayError(e, enqueueSnackbar);
     } finally {
       setMinting(false);
+      setPreview(null);
+      setImage(null);
     }
   };
 
