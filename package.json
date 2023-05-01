@@ -5,7 +5,7 @@
   "author": "@harkl_",
   "scripts": {
     "dev": "cp ./.env.dev ./.env && vite",
-    "build": "tsc && vite build",
+    "build": "tsc && NODE_OPTIONS='--max-old-space-size=8192' npx vite build",
     "serve": "vite preview",
     "deploy:ar": "arweave deploy-dir build --key-file ",
     "deploy:prod": "bash ./scripts/prod-deploy.sh",
