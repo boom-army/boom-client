@@ -151,8 +151,9 @@ export const NFTMint: React.FC = (props) => {
       });
 
       setFields(defaultFieldsState);
-      enqueueSnackbar(`Successful mint: ${mint?.mintAddress}`, {
+      enqueueSnackbar("Successful mint:", {
         variant: "success",
+        action: snackAction(mint?.mintAddress),
       });
     } catch (e: any) {
       console.log(e);
@@ -546,3 +547,7 @@ export const NFTMint: React.FC = (props) => {
     </>
   );
 };
+function snackAction(mintAddress: import("@solana/web3.js").PublicKey | undefined): React.ReactNode {
+  throw new Error("Function not implemented.");
+}
+
