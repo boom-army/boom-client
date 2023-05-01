@@ -22,7 +22,7 @@ import { CircularProgress } from "@mui/material";
 import { PublicKey } from "@solana/web3.js";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
 import { ThemeContext } from "../../contexts/theme";
-import { displayError } from "../../utils";
+import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useMetaplex } from "../../contexts/metaplex";
 import { useSnackbar } from "../../contexts/snackbar";
@@ -70,7 +70,10 @@ export const NFTPicker: React.FC<{
           ?.nfts()
           .findByMint({ mintAddress: publicKey, loadJsonMetadata: true });
         const meta: any =
-          nft && (await fetch(nft.uri).then((response) => response.json()));
+          nft &&
+          (await fetch(nft.uri)
+            .then((response) => response.json())
+            .then((data) => camelizeKeys(data)));
 
         if (nft?.model !== "nft")
           throw new Error("No NFT found with that public key");
