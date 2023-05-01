@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Chip,
+  Grid,
   IconButton,
   Link,
   Modal,
@@ -70,7 +71,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
         const json = await response.json();
         setURIData(json);
       } catch (error) {
-        displayError(error, enqueueSnackbar);
+        console.log(console.error());
       }
     })();
   }, [data, cluster]);
@@ -104,36 +105,60 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
 
   return (
     <>
-      <Box
-        pb={4}
-        pr={4}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minWidth: "140px",
-          cursor: "pointer",
-        }}
-        key={uRIData?.image}
-      >
-        <Link
-          onClick={() => toggleNftSelect(true)}
-          color={theme.secondaryColor}
-          underline="hover"
+      <Grid item sm={4} md={3}>
+        <Box
+          sx={{
+            cursor: "pointer",
+            width: "100%",
+          }}
+          key={uRIData?.image}
         >
-          <Box>
-            {uRIData?.image ? (
-              <img src={uRIData?.image} alt={uRIData?.name} width="120" />
-            ) : (
-              <DoNotDisturbOnIcon fontSize="large" />
-            )}
-          </Box>
-          <Box>
-            <Typography sx={{ fontSize: "0.8em", maxWidth: "120px" }}>
-              {uRIData?.name}
-            </Typography>
-          </Box>
-        </Link>
-      </Box>
+          <Link
+            onClick={() => toggleNftSelect(true)}
+            color={theme.secondaryColor}
+            underline="hover"
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                position: "relative",
+              }}
+            >
+              {uRIData?.image ? (
+                <img
+                  src={uRIData?.image}
+                  alt={uRIData?.name}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              ) : (
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: 120,
+                    backgroundColor: theme.tertiaryColor2,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <DoNotDisturbOnIcon fontSize="large" />
+                </Box>
+              )}
+            </Box>
+            <Box>
+              <Typography sx={{ fontSize: "0.8em", maxWidth: "120px" }}>
+                {uRIData?.name}
+              </Typography>
+            </Box>
+          </Link>
+        </Box>
+      </Grid>
       <Modal
         open={nftSelect}
         onClose={() => toggleNftSelect(false)}
@@ -279,10 +304,12 @@ export const NFTGallery: React.FC<ProfileQuery> = ({ profile }) => {
             alignItems: "baseline",
           }}
         >
-          {nfts &&
-            nfts.map((nft: Metadata | Nft | Sft) => (
-              <NFTTile data={nft} key={nft.uri} cluster={name} />
-            ))}
+          <Grid container spacing={2}>
+            {nfts &&
+              nfts.map((nft: Metadata | Nft | Sft) => (
+                <NFTTile data={nft} key={nft.uri} cluster={name} />
+              ))}
+          </Grid>
         </Stack>
       ) : (
         <Box pt={10} sx={{ display: "flex", justifyContent: "center" }}>
