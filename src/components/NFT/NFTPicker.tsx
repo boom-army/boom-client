@@ -99,11 +99,10 @@ export const NFTPicker: React.FC<{
         setFetchNftData(false);
       }
     })();
-  }, [nftInput, connection, enqueueSnackbar]);
+  }, [nftInput, validKey, connection, enqueueSnackbar]);
 
   useEffect(() => {
     setFetchNftData(true);
-    console.log(validKey, !!validKey);
   }, [nftInput, validKey]);
 
   return (
@@ -171,20 +170,23 @@ export const NFTPicker: React.FC<{
                   }}
                   autoFocus
                   InputProps={{
-                    endAdornment: validKey !== null && (
+                    endAdornment: (
                       <InputAdornment
                         position="end"
                         sx={{ paddingRight: "0.5rem" }}
                       >
                         {loading && (
-                          <CircularProgress size={16} color="secondary" />
+                          <CircularProgress
+                            size={16}
+                            sx={{ color: theme.accentColor }}
+                          />
                         )}
-                        {!loading &&
-                          (validKey === null ? (
-                            <CheckIcon color="success" />
-                          ) : (
-                            <ErrorIcon color="error" />
-                          ))}
+                        {!loading && validKey === null && metadata && (
+                          <CheckIcon color="success" />
+                        )}
+                        {!loading && validKey !== null && (
+                          <ErrorIcon color="error" />
+                        )}
                       </InputAdornment>
                     ),
                   }}
