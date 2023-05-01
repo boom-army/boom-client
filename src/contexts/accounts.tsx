@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { Program } from "@project-serum/anchor";
-import { useConnection } from "@solana/wallet-adapter-react";
+import { useConnection } from "./connection";
 import {
   AccountInfo,
   ConfirmedSignatureInfo,
@@ -276,6 +276,51 @@ function wrapNativeAccount(
   };
 }
 
+const UseNativeAccount = () => {
+  const connection = useConnection();
+  const { wallet, publicKey } = useWallet();
+
+  const [nativeAccount, setNativeAccount] = useState<AccountInfo<Buffer>>();
+
+  const updateCache = useCallback(
+    (account: AccountInfo<Buffer> | undefined) => {
+      if (!connection || !publicKey) {
+        return;
+      }
+
+      const wrapped = wrapNativeAccount(publicKey, account);
+      if (wrapped !== undefined) {
+        const id = publicKey.toBase58();
+        cache.registerParser(id, TokenAccountParser);
+        genericCache.set(id, wrapped as TokenAccount);
+        cache.emitter.raiseCacheUpdated(id, false, TokenAccountParser);
+      }
+    },
+    [publicKey, connection]
+  );
+
+  useEffect(() => {
+    if (!connection || !publicKey) {
+      return;
+    }
+
+    connection.getAccountInfo(publicKey).then((acc: any) => {
+      if (acc) {
+        updateCache(acc);
+        setNativeAccount(acc);
+      }
+    });
+    connection.onAccountChange(publicKey, (acc: any) => {
+      if (acc) {
+        updateCache(acc);
+        setNativeAccount(acc);
+      }
+    });
+  }, [setNativeAccount, wallet, publicKey, connection, updateCache]);
+
+  return { nativeAccount };
+};
+
 // const PRECACHED_OWNERS = new Set<string>();
 // const precacheUserTokenAccounts = async (
 //   connection: Connection,
@@ -333,7 +378,7 @@ export function AccountsProvider({ children = null as any }) {
       if (args.isNew) {
         let id = args.id;
         let deserialize = args.parser;
-        connection.onAccountChange(new PublicKey(id), (info) => {
+        connection.onAccountChange(new PublicKey(id), (info: any) => {
           cache.add(id, info, deserialize);
         });
       }
