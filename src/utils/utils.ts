@@ -1,5 +1,4 @@
 import BigNumber from "bignumber.js";
-import { ENDPOINTS } from "../contexts/connection";
 import { MintInfo, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { TokenAccount } from "../models";
 import { TokenInfo } from "@solana/spl-token-registry";

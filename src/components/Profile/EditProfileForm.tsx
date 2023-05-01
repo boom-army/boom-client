@@ -11,7 +11,12 @@ import {
 } from "@mui/material";
 import { SIGN_FILE } from "../../queries/files";
 import { ThemeContext } from "../../contexts/theme";
-import { cleanTypeName, displayError, getUniqueFileName, uploadFile } from "../../utils";
+import {
+  cleanTypeName,
+  displayError,
+  getUniqueFileName,
+  uploadFile,
+} from "../../utils";
 import {
   ProfileDocument,
   ProfileQuery,

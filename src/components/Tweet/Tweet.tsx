@@ -85,7 +85,7 @@ export const ShowTweet: React.FC<Props> = ({
       hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
     },
   };
-  
+
   return (
     <Grid
       item
@@ -148,17 +148,17 @@ export const ShowTweet: React.FC<Props> = ({
             {moment(setDate(createdAt)).fromNow()}
           </Typography>
         </Link>
-          <Linkify options={linkifyOptions}>
-            <Typography
-              mb={0.75}
-              sx={{
-                wordBreak: "break-word",
-                a: { color: theme.accentColor },
-              }}
-            >
-              {text}
-            </Typography>
-          </Linkify>
+        <Linkify options={linkifyOptions}>
+          <Typography
+            mb={0.75}
+            sx={{
+              wordBreak: "break-word",
+              a: { color: theme.accentColor },
+            }}
+          >
+            {text}
+          </Typography>
+        </Linkify>
         <UrlMetaData url={targetUrl} />
         <Box>
           {gif && <VideoContainer gif={gif} />}

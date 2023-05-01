@@ -12,7 +12,7 @@ interface Props {
 
 export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
   const { theme } = useContext(ThemeContext);
-  
+
   return (
     <Box sx={{ position: "relative", top: 17, left: 14, width: "100%" }}>
       <ReplyBox>

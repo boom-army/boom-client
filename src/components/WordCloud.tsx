@@ -20,29 +20,30 @@ export const WordCloud: FC<Props> = ({ tagData }) => {
   return (
     <Box p={2}>
       <Box style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-        {tagData && tagData.map((tag: Tag) => {
-          // const tagSize = 12 + ((tag.count - minCount) * (30 - 12)) / sizeRange;
-          return (
-            <Box
-              key={tag.tag}
-              style={{
-                // fontSize: tagSize,
-                padding: 2,
-              }}
-            >
-              <Link
-                href={`/explore?type=TAGS&term=${tag.tag.replace("#", "")}`}
-                sx={{
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  "&:hover": { textDecoration: "underline" },
+        {tagData &&
+          tagData.map((tag: Tag) => {
+            // const tagSize = 12 + ((tag.count - minCount) * (30 - 12)) / sizeRange;
+            return (
+              <Box
+                key={tag.tag}
+                style={{
+                  // fontSize: tagSize,
+                  padding: 2,
                 }}
               >
-                {tag.tag}
-              </Link>
-            </Box>
-          );
-        })}
+                <Link
+                  href={`/explore?type=TAGS&term=${tag.tag.replace("#", "")}`}
+                  sx={{
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    "&:hover": { textDecoration: "underline" },
+                  }}
+                >
+                  {tag.tag}
+                </Link>
+              </Box>
+            );
+          })}
       </Box>
     </Box>
   );

@@ -19,7 +19,11 @@ interface PURProps {
   masterTweet?: string | undefined;
 }
 
-export const PopUpResponse = ({ commentsCount, parentTweet, masterTweet }: PURProps) => {
+export const PopUpResponse = ({
+  commentsCount,
+  parentTweet,
+  masterTweet,
+}: PURProps) => {
   const { theme } = useContext(ThemeContext);
 
   const [openReply, setOpenReply] = useState(false);
@@ -58,7 +62,11 @@ export const PopUpResponse = ({ commentsCount, parentTweet, masterTweet }: PURPr
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <NewTweet parentTweet={parentTweet} masterTweet={masterTweet} closePopUp={handleClose} />
+          <NewTweet
+            parentTweet={parentTweet}
+            masterTweet={masterTweet}
+            closePopUp={handleClose}
+          />
         </DialogContent>
       </Dialog>
     </>

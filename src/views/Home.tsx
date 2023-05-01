@@ -172,7 +172,7 @@ export const Home: React.FC = () => {
           )}
         </Grid>
       </Grid>
-      < LinkTilesGrid />
+      <LinkTilesGrid />
       {/* <Grid container spacing={2}>
         <Grid item xs={12}>
           <HomeTitle>Tweet of the week</HomeTitle>

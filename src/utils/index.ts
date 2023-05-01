@@ -80,8 +80,8 @@ export const awardColorSelect = (index: number) => {
 };
 
 export const getUniqueFileName = (file: File, prefix?: string) => {
-  const timestamp = dayjs().format('YYYY-MM-DD_HH-mm-ss');
-  const id = prefix || 'user';
+  const timestamp = dayjs().format("YYYY-MM-DD_HH-mm-ss");
+  const id = prefix || "user";
   const uniqueFilename = `${id}_${timestamp}_${file.name}`;
   return new File([file], uniqueFilename, { type: file.type });
-}
+};

@@ -10,7 +10,7 @@ import React, { useContext } from "react";
 import SavingsIcon from "@mui/icons-material/Savings";
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from "@mui/icons-material/Home";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { ChannelStatus } from "../constants";
@@ -35,7 +35,9 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   const { data } = useGetUserChannelsQuery();
 
   const activeChannels = () => {
-    return data?.getUserChannels?.filter((c) => c.status === ChannelStatus.ACTIVE);
+    return data?.getUserChannels?.filter(
+      (c) => c.status === ChannelStatus.ACTIVE
+    );
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({

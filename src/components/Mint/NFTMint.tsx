@@ -547,7 +547,8 @@ export const NFTMint: React.FC = (props) => {
     </>
   );
 };
-function snackAction(mintAddress: import("@solana/web3.js").PublicKey | undefined): React.ReactNode {
+function snackAction(
+  mintAddress: import("@solana/web3.js").PublicKey | undefined
+): React.ReactNode {
   throw new Error("Function not implemented.");
 }
-
