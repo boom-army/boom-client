@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, FormEvent, useEffect } from "react";
 import ClearIcon from "@mui/icons-material/Clear";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { Box } from "@mui/system";
@@ -11,19 +11,19 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Card,
+  CardMedia,
 } from "@mui/material";
-import { SIGN_FILE } from "../../queries/files";
 import { SOSOL_HOST_ID } from "../../utils/ids";
-import { actions, Wallet } from "@metaplex/js";
-import { displayError, getUniqueFileName } from "../../utils";
+import { displayError } from "../../utils";
 import { uniqBy } from "lodash";
-import { uploadFile } from "../../utils";
-import { useConnection, useAnchorWallet } from "@solana/wallet-adapter-react";
-import { useMutation } from "@apollo/client";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../../contexts/snackbar";
 import { ThemeContext } from "../../contexts/theme";
-
-const { mintNFT } = actions;
+import { useUmi } from "../../contexts/umi";
+import { createGenericFileFromBrowserFile } from "@metaplex-foundation/umi";
+import { useMetaplex } from "../../contexts/metaplex";
+import { walletAdapterIdentity } from "@metaplex-foundation/js";
 
 const ImageInput = styled("input")({
   display: "none",
@@ -33,10 +33,6 @@ enum MetadataCategory {
   Audio = "audio",
   Video = "video",
   Image = "image",
-}
-
-enum AWSBucket {
-  NFT = "nft",
 }
 
 interface FileObj {
@@ -51,18 +47,15 @@ interface Attributes {
 
 export const NFTMint: React.FC = (props) => {
   const { theme } = useContext(ThemeContext);
-  const { connection } = useConnection();
-  const anchorWallet = useAnchorWallet();
-  const wallet = anchorWallet as Wallet;
+  const umi = useUmi();
+  const metaplex = useMetaplex();
+  const wallet = useWallet();
+  const { publicKey } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
-  const [signFileMutation] = useMutation(SIGN_FILE);
-
-  // TODO: need to use metaplex/js/packages/cli/src/helpers/upload/arweave-bundle.ts
-  // for uploads to store data on arweave and creators pays storage fees on mint
 
   const [isMinting, setMinting] = useState<boolean>(false);
-  const [fileName, setFileName] = useState("");
-  // const [nftCount, setNFTCount] = useState(1);
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
 
   useEffect(() => {
@@ -79,7 +72,6 @@ export const NFTMint: React.FC = (props) => {
     symbol: "",
     description: "",
     external_url: "",
-    image: "",
     animation_url: undefined,
     attributes: [] as Attributes[],
     seller_fee_basis_points: 500,
@@ -92,83 +84,70 @@ export const NFTMint: React.FC = (props) => {
   };
   const [fields, setFields] = useState(defaultFieldsState);
 
-  const handleImageUpload = async (e: any) => {
+  const handleImageChange = async (e: any) => {
+    if (!publicKey) throw new Error("Wallet not connected");
     try {
       const file = e?.target?.files[0];
-      const renamed = getUniqueFileName(file, wallet.publicKey.toBase58());
-      const { data } = await signFileMutation({
-        variables: {
-          file: renamed.name,
-          type: renamed.type,
-          subdir: AWSBucket.NFT,
-        },
-      });
-      const signedUrl = data.signFileUrl;
-      const imageData = await uploadFile(
-        renamed,
-        signedUrl,
-        enqueueSnackbar,
-        setUploadProgress
-      );
-      const imageUrl = imageData?.config?.url?.split("?")[0] as string;
-
-      setFileName(renamed.name);
-      setFields((attr) => {
-        attr.properties.files.push({ uri: imageUrl, type: file?.type });
-        attr.properties.creators.push({
-          address: wallet?.publicKey?.toBase58(),
-          share: 0,
-        });
-        attr.properties.files = uniqBy(attr.properties.files, "uri");
-        attr.properties.creators = uniqBy(attr.properties.creators, "address");
-        return { ...attr, image: imageUrl };
-      });
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
     } catch (error) {
       console.log(error);
     } finally {
       // reset value so the input event handler can trigger again
       e.target.value = null;
-      setUploadProgress(0);
     }
   };
 
-  const handleURIUpload = async () => {
-    var JSONAttr = JSON.stringify(fields);
-    const blob = new Blob([JSONAttr], { type: "application/json" });
-    const blobFile = new File([blob], `${fileName}.json`);
-    const { data } = await signFileMutation({
-      variables: {
-        file: blobFile.name,
-        type: blobFile.type,
-        subdir: AWSBucket.NFT,
-      },
-    });
-    const signedUrl = data.signFileUrl;
-    const fileData = await uploadFile(blob, signedUrl, enqueueSnackbar);
-    const fileUrl = fileData?.config?.url?.split("?")[0];
-    return fileUrl;
-  };
-
-  const mint = async () => {
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
     setMinting(true);
     try {
-      if (!fields.image) throw new Error("You need to upload an image");
+      if (!publicKey || !wallet) throw new Error("Wallet not connected");
+      if (!image) throw new Error("You need to upload an image");
       if (!fields.name) throw new Error("You need to add a name");
       if (!fields.description) throw new Error("You need to add a description");
       if (!fields.collection.name || !fields.collection.family)
         throw new Error("You need to add a collection name and family");
 
-      const uri = (await handleURIUpload()) as string;
+      metaplex?.use(walletAdapterIdentity(wallet));
 
-      const _nft = await mintNFT({
-        connection,
-        wallet,
+      // Upload image and JSON data.
+      const imageFile = await createGenericFileFromBrowserFile(image);
+      const [imageUri] = await umi.uploader.upload([imageFile], {
+        onProgress: (progress) => {
+          setUploadProgress(progress);
+        },
+      });
+      setFields((attr) => {
+        attr.properties.files.push({
+          uri: imageUri,
+          type: imageFile?.contentType || "",
+        });
+        attr.properties.creators.push({
+          address: publicKey?.toBase58(),
+          share: 0,
+        });
+        attr.properties.files = uniqBy(attr.properties.files, "uri");
+        attr.properties.creators = uniqBy(attr.properties.creators, "address");
+        return { ...attr };
+      });
+      const uri = await umi.uploader.uploadJson(
+        { ...fields, image: imageUri },
+        {
+          onProgress: (progress) => {
+            setUploadProgress(progress);
+          },
+        }
+      );
+
+      const mint = await metaplex?.nfts().create({
         uri,
-        maxSupply: 1,
+        name: fields.name,
+        sellerFeeBasisPoints: fields.seller_fee_basis_points,
       });
 
       setFields(defaultFieldsState);
-      enqueueSnackbar(`Successful mint: ${_nft.txId}`, {
+      enqueueSnackbar(`Successful mint: ${mint?.mintAddress}`, {
         variant: "success",
       });
     } catch (e: any) {
@@ -218,14 +197,14 @@ export const NFTMint: React.FC = (props) => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Box>
+                  <ImageInput
+                    accept="image/*"
+                    id="contained-button-file"
+                    type="file"
+                    hidden
+                    onChange={handleImageChange}
+                  />
                   <label htmlFor="contained-button-file">
-                    <ImageInput
-                      accept="image/*"
-                      id="contained-button-file"
-                      multiple
-                      type="file"
-                      onChange={handleImageUpload}
-                    />
                     <Button
                       variant="contained"
                       component="span"
@@ -237,12 +216,10 @@ export const NFTMint: React.FC = (props) => {
                   </label>
                 </Box>
                 <Box mt={2} mb={2}>
-                  {fields.image && (
-                    <img
-                      src={fields.image}
-                      alt="Preview for NFT upload"
-                      width="100%"
-                    />
+                  {preview && (
+                    <Card>
+                      <CardMedia component="img" image={preview} />
+                    </Card>
                   )}
                 </Box>
               </Grid>
@@ -466,7 +443,7 @@ export const NFTMint: React.FC = (props) => {
                   sx={{ mt: 3, mb: 2 }}
                   type="submit"
                   variant="contained"
-                  onClick={mint}
+                  onClick={handleSubmit}
                 >
                   Mint your NFT
                 </Button>
