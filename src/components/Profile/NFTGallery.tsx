@@ -11,26 +11,29 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Loader } from "../Loader";
 import {
+  FindNftsByOwnerOutput,
   Metadata,
-  MetadataData,
-} from "@metaplex-foundation/mpl-token-metadata";
+  Nft,
+  PublicKey,
+  Sft,
+} from "@metaplex-foundation/js";
+import { Loader } from "../Loader";
 import { ThemeContext } from "../../contexts/theme";
+import { UserContext } from "../../contexts/user";
 import { currentCluster } from "../../utils/utils";
 import { displayError } from "../../utils";
-import { useConnection } from "@solana/wallet-adapter-react";
 import {
   useEditProfileMutation,
   ProfileDocument,
   ProfileQuery,
 } from "../../generated/graphql";
-import { useSnackbar } from "../../contexts/snackbar";
+import { useMetaplex } from "../../contexts/metaplex";
 import { useParams } from "react-router-dom";
-import { UserContext } from "../../contexts/user";
+import { useSnackbar } from "../../contexts/snackbar";
 
 interface NFTTileProps {
-  data: MetadataData;
+  data: Metadata | Nft | Sft;
   cluster: string;
 }
 
@@ -63,7 +66,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
   useMemo(() => {
     (async () => {
       try {
-        const response = await fetch(data.data.uri);
+        const response = await fetch(data.uri);
         const json = await response.json();
         setURIData(json);
       } catch (error) {
@@ -81,8 +84,9 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
           handle,
           avatar: uRIData?.image,
           data: {
-            avatarMint: data.mint,
-            avatarUpdateAuthority: data.updateAuthority,
+            // @ts-ignore
+            avatarMint: data.mintAddress.toBase58(),
+            avatarUpdateAuthority: data.updateAuthorityAddress.toBase58(),
           },
         },
       });
@@ -200,7 +204,8 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
               <Chip
                 component="a"
                 target="_blank"
-                href={`https://solana.fm/address/${data?.mint}?cluster=${cluster}-solana`}
+                // @ts-ignore
+                href={`https://solana.fm/address/${data?.mintAddress.toBase58()}?cluster=${cluster}-solana`}
                 label="View in explorer"
                 variant="outlined"
                 size="small"
@@ -236,11 +241,11 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
 };
 
 export const NFTGallery: React.FC<ProfileQuery> = ({ profile }) => {
-  const { connection } = useConnection();
   const { name } = currentCluster();
+  const metaplex = useMetaplex();
   const { enqueueSnackbar } = useSnackbar();
 
-  const [nfts, setNfts] = useState<MetadataData[]>();
+  const [nfts, setNfts] = useState<FindNftsByOwnerOutput>();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -248,7 +253,9 @@ export const NFTGallery: React.FC<ProfileQuery> = ({ profile }) => {
       try {
         setLoading(true);
         const nftMeta = profile.publicAddress
-          ? await Metadata.findDataByOwner(connection, profile.publicAddress)
+          ? await metaplex
+              ?.nfts()
+              .findAllByOwner({ owner: new PublicKey(profile.publicAddress) })
           : [];
         setNfts(nftMeta);
       } catch (error) {
@@ -273,8 +280,8 @@ export const NFTGallery: React.FC<ProfileQuery> = ({ profile }) => {
           }}
         >
           {nfts &&
-            nfts.map((nft: MetadataData) => (
-              <NFTTile data={nft} key={nft.data.uri} cluster={name} />
+            nfts.map((nft: Metadata | Nft | Sft) => (
+              <NFTTile data={nft} key={nft.uri} cluster={name} />
             ))}
         </Stack>
       ) : (
