@@ -2,12 +2,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import React, { useState, useContext } from "react";
 import {
   Box,
-  Dialog,
-  DialogContent,
-  DialogTitle,
   Divider,
   IconButton,
   Link,
+  Modal,
   Typography,
 } from "@mui/material";
 import { ReactComponent as BMAIcon } from "../../icons/bma.svg";
@@ -57,50 +55,67 @@ export const TipCreator: React.FC<TipProps> = ({
           )}
         </IconButton>
       </Box>
-      <Dialog
+      <Modal
         open={showTip}
         onClose={() => setShowTip(false)}
-        fullWidth={true}
-        maxWidth={"sm"}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }}>
-          Tip this meep some BMA
-          <IconButton
-            aria-label="close"
-            onClick={() => setShowTip(false)}
+        <Box
+          sx={{
+            position: "absolute",
+            width: "80%",
+            maxWidth: "sm",
+            backgroundColor: theme.background,
+            boxShadow: 24,
+            p: 4,
+            outline: "none",
+          }}
+        >
+          <Box
             sx={{
-              position: "absolute",
-              right: 8,
-              top: 8,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent dividers>
-          <Typography variant={"body2"} sx={{ mb: 2 }}>
-            Share the love and show your appreciation by tipping this meeper
-            ❤️❤️❤️
-          </Typography>
-          <Typography variant={"body2"} sx={{ mb: 2 }}>
-            Don't have any $BMA?
-            <Link
-              href={"https://jup.ag/swap/SOL-BMA"}
-              target={"_blank"}
-              sx={{ ml: 1 }}
-            >
-              You can get some here
-            </Link>
-          </Typography>
-          <Divider sx={{ mb: 2 }} />
-          <TipInput
-            userPubKey={userPubKey}
-            setShowTip={setShowTip}
-            userId={userId}
-            tweetId={tweetId}
-          />
-        </DialogContent>
-      </Dialog>
+            <Typography variant="h6" component="h2" id="modal-title">
+              Tip this meep some BMA
+            </Typography>
+            <IconButton aria-label="close" onClick={() => setShowTip(false)}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <Typography variant="body2" id="modal-description" sx={{ mb: 2 }}>
+              Share the love and show your appreciation by tipping this meeper
+              ❤️❤️❤️
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 2 }}>
+              Don't have any $BMA?
+              <Link
+                href="https://jup.ag/swap/SOL-BMA"
+                target="_blank"
+                sx={{ ml: 1 }}
+              >
+                You can get some here
+              </Link>
+            </Typography>
+            <Divider sx={{ mb: 2 }} />
+            <TipInput
+              userPubKey={userPubKey}
+              setShowTip={setShowTip}
+              userId={userId}
+              tweetId={tweetId}
+            />
+          </Box>
+        </Box>
+      </Modal>
     </>
   );
 };

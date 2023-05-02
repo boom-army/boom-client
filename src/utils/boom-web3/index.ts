@@ -91,7 +91,7 @@ const assertProgramProvider = (program: Program) => {
  */
 export const interactionInstruction = async (
   connection: Connection,
-  program: Program,
+  wallet: AnchorWallet,
   consumerAcc: PublicKey,
   creatorAcc: string,
   storageAcc: string,
@@ -106,6 +106,7 @@ export const interactionInstruction = async (
   // TODO: when we start using other storage hosts we'll need to create a BMA
   // token account for them otherwise the tx will fail
   const storage = new web3.PublicKey(storageAcc);
+  const program = await loadAnchor(wallet);
 
   const [, creatorTokenAcc, storageTokenAcc] = await Promise.all([
     assertSufficientTokens(connection, consumerTokenAcc, interactionFee),

@@ -7,7 +7,6 @@ import { NewTweet, ParentTweet, ShowTweet } from ".";
 import {
   Maybe,
   Tweet,
-  TweetQuery,
   useTweetQuery,
 } from "../../generated/graphql";
 import { useParams } from "react-router-dom";

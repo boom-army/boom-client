@@ -1,18 +1,17 @@
-import Close from "@mui/icons-material/Close";
 import React, { useContext, useState, useCallback } from "react";
 import { Box } from "@mui/system";
-import { IconButton, Link } from "@mui/material";
-import { PublicKey, Transaction } from "@solana/web3.js";
+import { Link } from "@mui/material";
+import { PublicKey, Signer, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
-import { TextField, Stack, Button, Typography } from "@mui/material";
+import { TextField, Stack, Button } from "@mui/material";
 import { ThemeContext } from "../../contexts/theme";
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
-import { displayError } from "../../utils";
-import { interactionInstruction } from "../../utils/boom-web3";
-import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+import {
+  useAnchorWallet,
+  useConnection,
+  useWallet,
+} from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../../contexts/snackbar";
-import { useSosolProgram } from "../../hooks";
 import {
   useTipCreatorMutation,
   TweetDocument,
@@ -20,6 +19,8 @@ import {
   GetUserChannelsDocument,
   HeroFeedDocument,
 } from "../../generated/graphql";
+import { displayError } from "../../utils";
+import { interactionInstruction } from "../../utils/boom-web3";
 
 interface Props {
   userPubKey: string;
@@ -39,9 +40,9 @@ export const TipInput: React.FC<Props> = ({
   const [txValue, setTxValue] = useState(1);
 
   const anchorWallet = useAnchorWallet();
+  const wallet = useWallet();
   const { connection } = useConnection();
   const { enqueueSnackbar } = useSnackbar();
-  const { sosolProgram } = useSosolProgram();
 
   const [tipCreatorMutation] = useTipCreatorMutation({
     refetchQueries: [
@@ -61,7 +62,6 @@ export const TipInput: React.FC<Props> = ({
     </Link>
   );
 
-  // TODO: consolodate tx react hook from EmojiTweet and this
   const handleTipAction = useCallback(
     async ({ txAmount }: { txAmount: number }) => {
       const boomTokens = txAmount * 1000000000;
@@ -70,15 +70,25 @@ export const TipInput: React.FC<Props> = ({
           setInputError(true);
           throw new Error("You need to enter a Custom value");
         }
-        if (!anchorWallet?.publicKey) throw new WalletNotConnectedError();
+        if (
+          !anchorWallet?.publicKey ||
+          !anchorWallet.signTransaction ||
+          !anchorWallet ||
+          !wallet.publicKey
+        )
+          throw Error("Wallet not connected");
+
+        const payer = anchorWallet.publicKey as unknown as Signer;
+        const mintPublicKey = new PublicKey(SOSOL_TOKEN_ID);
+
         const sosolMint = new Token(
           connection,
-          SOSOL_TOKEN_ID,
+          mintPublicKey,
           TOKEN_PROGRAM_ID,
-          // @ts-ignore
-          anchorWallet.publicKey
+          payer
         );
         const toCreatorAcc = new PublicKey(userPubKey);
+
         const associatedDestinationTokenAddr =
           await Token.getAssociatedTokenAddress(
             sosolMint.associatedProgramId,
@@ -87,9 +97,8 @@ export const TipInput: React.FC<Props> = ({
             toCreatorAcc
           );
 
-        const receiverAccount = await connection.getAccountInfo(
-          associatedDestinationTokenAddr
-        );
+        const receiverAccount =
+          await sosolMint.getOrCreateAssociatedAccountInfo(toCreatorAcc);
 
         // TODO: move this out into a method in utils to use across the site
         // Create receiver sosol acc if null
@@ -108,27 +117,19 @@ export const TipInput: React.FC<Props> = ({
 
           const transaction = new Transaction().add(...instructions);
           transaction.feePayer = anchorWallet.publicKey;
-          transaction.recentBlockhash = (
-            await connection.getRecentBlockhash()
-          ).blockhash;
+          transaction.recentBlockhash = (await connection.getLatestBlockhash('confirmed')).blockhash;
 
-          const anchorTx = await anchorWallet.signTransaction(transaction);
-
-          const transactionSignature = await connection.sendRawTransaction(
-            anchorTx.serialize(),
-            { skipPreflight: true }
-          );
-
-          await connection.confirmTransaction(transactionSignature);
+          const tx = await anchorWallet.signTransaction(transaction);
+          await wallet.sendTransaction(tx, connection);
         }
 
         const signature = await interactionInstruction(
           connection,
-          sosolProgram,
-          anchorWallet.publicKey,
+          anchorWallet,
+          wallet.publicKey,
           userPubKey.toString(),
           import.meta.env.VITE_CONTENT_HOST as string,
-          boomTokens ? boomTokens : 100000000 // 0.1 SSL
+          boomTokens
         );
 
         enqueueSnackbar("Transaction complete", {
@@ -153,11 +154,11 @@ export const TipInput: React.FC<Props> = ({
       connection,
       enqueueSnackbar,
       setShowTip,
-      sosolProgram,
-      userPubKey,
       tipCreatorMutation,
       tweetId,
       userId,
+      userPubKey,
+      wallet,
     ]
   );
 
