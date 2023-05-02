@@ -82,7 +82,8 @@ const assertProgramProvider = (program: Program) => {
 
 /**
  * Executes an on-chain interaction
- * @param program sosol program derived from loadAnchor()
+ * @param connection the connection to the solana network
+ * @param wallet the anchor wallet
  * @param consumerTokenAcc token account of the consumer/payer
  * @param creatorTokenAcc token account of the content creator
  * @param storageTokenAcc token account of the content storage hosting provider
@@ -103,8 +104,6 @@ export const interactionInstruction = async (
   );
 
   const creator = new web3.PublicKey(creatorAcc);
-  // TODO: when we start using other storage hosts we'll need to create a BMA
-  // token account for them otherwise the tx will fail
   const storage = new web3.PublicKey(storageAcc);
   const program = await loadAnchor(wallet);
 
