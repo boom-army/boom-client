@@ -10,6 +10,7 @@ import React, { useContext } from "react";
 import SavingsIcon from "@mui/icons-material/Savings";
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
+import SpeedIcon from '@mui/icons-material/Speed';
 import HomeIcon from "@mui/icons-material/Home";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -125,7 +126,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           </NavLink>
           <NavLink end style={applyActiveStyles} to="/dash">
             <Stack direction="row" {...stackProps}>
-              <Language style={iconProps} />
+              <SpeedIcon style={iconProps} />
               <Typography variant="body1">Dashboard</Typography>
             </Stack>
           </NavLink>
