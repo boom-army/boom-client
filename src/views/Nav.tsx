@@ -123,10 +123,10 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               <Typography variant="body1">Home</Typography>
             </Stack>
           </NavLink>
-          <NavLink end style={applyActiveStyles} to="/feed">
+          <NavLink end style={applyActiveStyles} to="/dash">
             <Stack direction="row" {...stackProps}>
               <Language style={iconProps} />
-              <Typography variant="body1">Hero Feed</Typography>
+              <Typography variant="body1">Dashboard</Typography>
             </Stack>
           </NavLink>
           <NavLink style={applyActiveStyles} to="/news">

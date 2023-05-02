@@ -10,7 +10,6 @@ import {
   ConnectView,
   Explore,
   Following,
-  Home,
   Nav,
   News,
   Notifications,
@@ -78,8 +77,7 @@ export const GridStandard: React.FC<GridProps> = ({
         elevation={0}
       >
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="feed" element={<HeroFeed />} />
+          <Route path="/" element={<HeroFeed />} />
           <Route path="following" element={<Following />} />
           <Route path="connect" element={<ConnectView />} />
           <Route path="d" element={<Channels />} />

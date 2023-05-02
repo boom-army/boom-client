@@ -20,7 +20,7 @@ import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
 import { GridStandard } from "./view-grids/GridStandard";
 // import { GridAuction } from "./view-grids/GridAuction";
-import { Home, Nav } from "./views";
+import { Dashboard, HeroFeed, Nav } from "./views";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -115,7 +115,7 @@ export const AppRoutes: React.FC = () => {
                           <GridAuction />
                         }
                       /> */}
-                  <Route path="/" element={<Home />} />
+                  <Route path="dash" element={<Dashboard />} />
                   <Route
                     path="*"
                     element={
@@ -143,7 +143,7 @@ export const AppRoutes: React.FC = () => {
                   <StyledBottomNavigation value={value} onChange={handleChange}>
                     <BottomNavigationAction
                       component={NavLink}
-                      label="Heroes"
+                      label="Feed"
                       value="hero-feed"
                       icon={<LanguageIcon />}
                       to="/"

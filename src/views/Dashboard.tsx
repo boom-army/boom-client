@@ -21,7 +21,7 @@ import { TopMeepers } from "../components/TopMeepers";
 import { HomeTitle } from "../components/HomeTitle";
 import { LinkTilesGrid } from "../components/LinkTiles";
 
-export const Home: React.FC = () => {
+export const Dashboard: React.FC = () => {
   const { theme } = useContext(ThemeContext);
 
   const prevMonth = dayjs().subtract(1, "month").format("YYYY-MM-DD");
@@ -88,7 +88,7 @@ export const Home: React.FC = () => {
       </Grid>
       <Grid container spacing={2} mb={4}>
         <Grid item xs={12} sm={4}>
-          <HomeTitle title="Latest Meeps" titleLink="/feed" />
+          <HomeTitle title="Latest Meeps" titleLink="/" />
           {loading ? (
             <Box>
               <Skeleton variant="text" />

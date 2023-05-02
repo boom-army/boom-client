@@ -36,7 +36,7 @@ export const LinkTilesGrid = () => {
   const { theme } = useContext(ThemeContext);
 
   const tiles = [
-    { icon: <Language />, label: "Hero Feed", link: "/feed" },
+    { icon: <Language />, label: "Feed", link: "/feed" },
     { icon: <LockPersonIcon />, label: "NFT DAOS", link: "/daos" },
     { icon: <NewspaperIcon />, label: "News", link: "/news" },
     { icon: <SavingsIcon />, label: "Tip Leaderboard", link: "/leaderboard" },
