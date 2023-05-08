@@ -22,9 +22,6 @@ export const HeroFeed: React.FC = () => {
   });
 
   const { data: newMeepsCount, refetch: refetchCount } = useNewMeepsCountQuery({
-    variables: {
-      date: data?.feed[0].createdAt,
-    },
     pollInterval: 60000,
   });
 
