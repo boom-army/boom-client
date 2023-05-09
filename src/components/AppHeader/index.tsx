@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useContext } from "react";
+import React, { useCallback, useEffect, useMemo, useContext, useState } from "react";
 // import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 // import { formatNumber } from "../../utils/utils";
 // import { useNativeAccount } from "../../contexts/accounts";
@@ -8,7 +8,9 @@ import {
   Container,
   Slide,
   Toolbar,
+  useMediaQuery,
   useScrollTrigger,
+  useTheme,
 } from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
@@ -23,10 +25,12 @@ import { Box } from "@mui/system";
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
-  // const { account } = useNativeAccount();
+  const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const { setUser } = useContext(UserContext);
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const trigger = useScrollTrigger();
+  const [showHeader, setShowHeader] = useState(true)
 
   const token = localStorage.getItem("token");
 
@@ -40,6 +44,13 @@ export const AppHeader = () => {
       }
     },
   });
+
+  useEffect(() => {
+    if (isMobile && !trigger) setShowHeader(false)
+    else setShowHeader(true)
+    console.log(showHeader);
+    
+  }, [trigger, isMobile])
 
   const walletPublicKey = useMemo(() => publicKey?.toBase58(), [publicKey]);
 
@@ -98,7 +109,7 @@ export const AppHeader = () => {
   // };
 
   const TopBar = (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <Slide appear={false} direction="down" in={showHeader}>
       <AppBar
         position="relative"
         sx={{
