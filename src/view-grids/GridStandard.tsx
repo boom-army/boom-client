@@ -59,20 +59,25 @@ export const GridStandard: React.FC<GridProps> = ({
   };
   return (
     <Grid container>
-      <Paper
-        component={Grid}
-        item
-        md={3}
-        display={{ xs: "none", sm: "none", md: "block" }}
-      >
-        <Nav user={user} newMentionsCount={data?.profile?.newMentionsCount} />
-      </Paper>
+      <Grid item md={3} display={{ xs: "none", sm: "none", md: "block" }}>
+        <Routes>
+          <Route
+            path="*"
+            element={
+              <>
+                <TipRank />
+                <WhoToFollow />
+              </>
+            }
+          />
+        </Routes>
+      </Grid>
       <Paper
         component={Grid}
         item
         xs={12}
         sm={12}
-        md={6}
+        md={9}
         sx={middleColStyles}
         elevation={0}
       >
@@ -101,19 +106,6 @@ export const GridStandard: React.FC<GridProps> = ({
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </Paper>
-      <Grid item md={3} display={{ xs: "none", sm: "none", md: "block" }}>
-        <Routes>
-          <Route
-            path="*"
-            element={
-              <>
-                <TipRank />
-                <WhoToFollow />
-              </>
-            }
-          />
-        </Routes>
-      </Grid>
     </Grid>
   );
 };
