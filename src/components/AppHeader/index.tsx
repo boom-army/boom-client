@@ -1,13 +1,9 @@
-import React, {
+import {
   useCallback,
   useEffect,
   useMemo,
   useContext,
-  useState,
 } from "react";
-// import { LAMPORTS_PER_SOL } from "@solana/web3.js";
-// import { formatNumber } from "../../utils/utils";
-// import { useNativeAccount } from "../../contexts/accounts";
 import base58 from "bs58";
 import {
   AppBar,

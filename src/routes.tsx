@@ -30,7 +30,8 @@ import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
 import { GridStandard } from "./view-grids/GridStandard";
 // import { GridAuction } from "./view-grids/GridAuction";
-import { Dashboard, HeroFeed, Nav } from "./views";
+import { Dashboard, Nav } from "./views";
+import { FloatingNavbar } from "./components/FloatingNavbar";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -41,7 +42,6 @@ export const AppRoutes: React.FC = () => {
   const mTheme = useTheme();
   const isMobile = useMediaQuery(mTheme.breakpoints.down("sm"));
   const trigger = useScrollTrigger();
-  console.log(isMobile);
 
   const StyledBottomNavigation = styled(BottomNavigation)({
     width: "auto",
@@ -224,6 +224,7 @@ export const AppRoutes: React.FC = () => {
                   </SwipeableDrawer>
                 </Container>
               </Grid>
+              <FloatingNavbar />
             </>
           </GiphyContextProvider>
         </Wallet>
