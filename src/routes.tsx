@@ -32,16 +32,19 @@ import { GridStandard } from "./view-grids/GridStandard";
 // import { GridAuction } from "./view-grids/GridAuction";
 import { Dashboard, Nav } from "./views";
 import { FloatingNavbar } from "./components/FloatingNavbar";
+import { drawerState, useToggleDrawer } from "./hooks";
+import { useRecoilValue } from "recoil";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { user, setUser } = useContext(UserContext);
   const [value, setValue] = React.useState("recents");
-  const [drawer, setDrawer] = React.useState(false);
 
   const mTheme = useTheme();
   const isMobile = useMediaQuery(mTheme.breakpoints.down("sm"));
   const trigger = useScrollTrigger();
+  const toggleDrawer = useToggleDrawer();
+  const drawer = useRecoilValue(drawerState);
 
   const StyledBottomNavigation = styled(BottomNavigation)({
     width: "auto",
@@ -66,19 +69,6 @@ export const AppRoutes: React.FC = () => {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-
-  const toggleDrawer =
-    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event &&
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
-      ) {
-        return;
-      }
-      setDrawer(open);
-    };
 
   const { loading, data, refetch } = useProfileQuery({
     variables: { handle: user?.handle },
@@ -211,10 +201,10 @@ export const AppRoutes: React.FC = () => {
                     onOpen={toggleDrawer(true)}
                   >
                     <Box
+                    sx={{ width: "20rem", paddingLeft: "1em"  }}
                       role="presentation"
                       onClick={toggleDrawer(false)}
                       onKeyDown={toggleDrawer(false)}
-                      sx={{ paddingLeft: "1em" }}
                     >
                       <Nav
                         user={user}

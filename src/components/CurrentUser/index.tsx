@@ -2,8 +2,11 @@ import { Box, Grid, IconButton, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Theme } from "../../contexts/theme";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useToggleDrawer } from "../../hooks";
 
 export const CurrentUser = () => {
+  const toggleDrawer = useToggleDrawer();
+  
   const headerImg =
     localStorage.getItem(Theme.StorageTag) === Theme.Light
       ? "/assets/boom-logo-dark.png"
@@ -20,8 +23,7 @@ export const CurrentUser = () => {
         <Box mr={1} display="flex" alignItems="center" >
           <IconButton
             color="primary"
-            component={Link}
-            to="/"
+            onClick={toggleDrawer(true)}
             sx={{ marginRight: 1 }}
           >
             <MenuIcon />
