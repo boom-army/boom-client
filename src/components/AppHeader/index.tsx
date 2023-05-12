@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useMemo, useContext } from "react";
 import base58 from "bs58";
-import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { USER_FOLLOW } from "../../queries/follow";
 import { Theme } from "../../contexts/theme";
 import { UserContext } from "../../contexts/user";
-import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -109,12 +108,10 @@ export const AppHeader = () => {
                   color="primary"
                   sx={{
                     display: "inline-flex",
-                    mr: 2,
                   }}
                 >
                   <img src={headerImg} alt="Boom" height={20} />
                 </Typography>
-                <WalletMultiButton />
               </Box>
               <Box mt={0.5}>
                 <CurrentUser />

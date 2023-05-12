@@ -1,6 +1,7 @@
 import { Box, Grid, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useToggleDrawer } from "../../hooks";
+import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
 
 export const CurrentUser = () => {
   const toggleDrawer = useToggleDrawer();
@@ -14,10 +15,11 @@ export const CurrentUser = () => {
         alignItems="center"
       >
         <Box mr={1} display="flex" alignItems="center" >
+        <WalletMultiButton />
           <IconButton
             color="primary"
             onClick={toggleDrawer(true)}
-            sx={{ marginRight: 1 }}
+            sx={{ ml: 1 }}
           >
             <MenuIcon />
           </IconButton>
