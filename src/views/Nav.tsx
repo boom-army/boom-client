@@ -1,7 +1,5 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// import GavelIcon from "@mui/icons-material/Gavel";
 import GroupIcon from "@mui/icons-material/Group";
-import Language from "@mui/icons-material/Language";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -14,7 +12,7 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import HomeIcon from "@mui/icons-material/Home";
 import { Avatar, Badge, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { ChannelStatus } from "../constants";
+import { ChannelStatus, RoutePath } from "../constants";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme";
 import { styled } from "@mui/material/styles";
@@ -124,49 +122,49 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               <Typography variant="body1">Home</Typography>
             </Stack>
           </NavLink>
-          <NavLink end style={applyActiveStyles} to="/dash">
+          <NavLink end style={applyActiveStyles} to={`${RoutePath.DASHBOARD}`}>
             <Stack direction="row" {...stackProps}>
               <SpeedIcon style={iconProps} />
               <Typography variant="body1">Dashboard</Typography>
             </Stack>
           </NavLink>
-          <NavLink style={applyActiveStyles} to="/news">
+          <NavLink style={applyActiveStyles} to={`${RoutePath.NEWS}`}>
             <Stack direction="row" {...stackProps}>
               <NewspaperIcon style={iconProps} />
               <Typography variant="body1">News</Typography>
             </Stack>
           </NavLink>
-          {/* <NavLink style={applyActiveStyles} to="/auctions">
+          {/* <NavLink style={applyActiveStyles} to={`${RoutePath.AUCTIONS}`}>
             <Stack direction="row" {...stackProps}>
               <GavelIcon style={iconProps} />
               <Typography variant="body1">Auctions</Typography>
             </Stack>
           </NavLink> */}
-          <NavLink style={applyActiveStyles} to="/mint-nft">
+          <NavLink style={applyActiveStyles} to={`${RoutePath.MINT_NFT}`}>
             <Stack direction="row" {...stackProps}>
               <StyleIcon sx={iconProps} />
               <Typography variant="body1">Mint NFT</Typography>
             </Stack>
           </NavLink>
-          <NavLink style={applyActiveStyles} to="/connect">
+          <NavLink style={applyActiveStyles} to={`${RoutePath.CONNECT}`}>
             <Stack direction="row" {...stackProps}>
               <GroupIcon sx={iconProps} />
               <Typography variant="body1">People</Typography>
             </Stack>
           </NavLink>
-          <NavLink style={applyActiveStyles} to="/explore">
+          <NavLink style={applyActiveStyles} to={`${RoutePath.EXPLORE}`}>
             <Stack direction="row" {...stackProps}>
               <SearchIcon sx={iconProps} />
               <Typography variant="body1">Search</Typography>
             </Stack>
           </NavLink>
-          <NavLink style={applyActiveStyles} to="/leaderboard">
+          <NavLink style={applyActiveStyles} to={`${RoutePath.LEADERBOARD}`}>
             <Stack direction="row" {...stackProps}>
               <SavingsIcon sx={iconProps} />
               <Typography variant="body1">Tip Leaders</Typography>
             </Stack>
           </NavLink>
-          {/* <NavLink style={applyActiveStyles} to="/mint-boom-hero">
+          {/* <NavLink style={applyActiveStyles} to={`${RoutePath.MINT_HERO}`}>
             <Stack direction="row" {...stackProps}>
               <AutoGraphIcon sx={iconProps} />
               <Typography variant="body1">Mint Boom Hero</Typography>
@@ -174,19 +172,19 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           </NavLink> */}
           {user?.handle && (
             <>
-              <NavLink style={applyActiveStyles} to="/d">
+              <NavLink style={applyActiveStyles} to={`/${RoutePath.DAO}`}>
                 <Stack direction="row" {...stackProps}>
                   <LockPersonIcon sx={iconProps} />
                   <Typography variant="body1">NFT DAOs</Typography>
                 </Stack>
               </NavLink>
-              <NavLink style={applyActiveStyles} to="/following">
+              <NavLink style={applyActiveStyles} to={`${RoutePath.FOLLOWING}`}>
                 <Stack direction="row" {...stackProps}>
                   <Person sx={iconProps} />
                   <Typography variant="body1">Following</Typography>
                 </Stack>
               </NavLink>
-              <NavLink style={applyActiveStyles} to="/notifications">
+              <NavLink style={applyActiveStyles} to={`${RoutePath.NOTIFICATIONS}`}>
                 <Stack direction="row" {...stackProps}>
                   <Badge
                     max={99}
@@ -229,7 +227,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   display={"flex"}
                   sx={{ justifyContent: "center" }}
                 >
-                  <NavLink to={`channels/${channel?.id}`}>
+                  <NavLink to={`${RoutePath.DAO}/${channel?.id}`}>
                     <DynamicAvatar src={channel?.image as string} />
                   </NavLink>
                 </Box>

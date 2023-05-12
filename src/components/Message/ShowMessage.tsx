@@ -22,6 +22,7 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
+import { RoutePath } from "../../constants";
 
 export const ReplyBox = styled(Box)((props) => ({
   "&:before": {
@@ -113,7 +114,7 @@ export const ShowMessage: React.FC<Props> = ({
       {parentTweet && (
         <Box sx={{ position: "relative" }}>
           <ReplyBox>
-            <HashLink to={`/d/${channel?.id}#${parentTweet?.id}`}>
+            <HashLink to={`/${RoutePath.DAO}/${channel?.id}#${parentTweet?.id}`}>
               <Stack direction="row" pl={5}>
                 <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
                   <UserAvatar
@@ -222,7 +223,7 @@ export const ShowMessage: React.FC<Props> = ({
         }}
       >
         <Box>
-          <Link to={`/${handle}`}>
+          <Link to={`/${RoutePath.HANDLE_HASH}/handle`}>
             <UserAvatar
               sx={{
                 width: "30px",
@@ -236,7 +237,7 @@ export const ShowMessage: React.FC<Props> = ({
         <Box ml={1} pt={0.5}>
           <Stack direction="row">
             <Box mr={1}>
-              <Link to={`/${handle}`}>
+              <Link to={`/${RoutePath.HANDLE_HASH}/handle`}>
                 <Typography sx={{ fontWeight: "600" }}>
                   {user && user.consumerName}
                 </Typography>

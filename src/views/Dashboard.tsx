@@ -20,6 +20,7 @@ import { TipRank } from "../components/SideBar/TipRank";
 import { TopMeepers } from "../components/TopMeepers";
 import { HomeTitle } from "../components/HomeTitle";
 import { LinkTilesGrid } from "../components/LinkTiles";
+import { RoutePath } from "../constants";
 
 export const Dashboard: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -114,7 +115,7 @@ export const Dashboard: React.FC = () => {
           )}
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle title="Top NFT DAOs" titleLink="/d" />
+          <HomeTitle title="Top NFT DAOs" titleLink={`/${RoutePath.DAO}`} />
           {loading ? (
             <Box>
               <Skeleton

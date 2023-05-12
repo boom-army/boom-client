@@ -23,6 +23,7 @@ import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
 import { HARKL_ID } from "../../utils/utils";
 import { PopUpResponse } from "./PopUpResponse";
+import { RoutePath } from "../../constants";
 
 interface Props {
   tweet: TweetQuery["tweet"];
@@ -99,7 +100,7 @@ export const ShowTweet: React.FC<Props> = ({
       }}
     >
       <Box mr={1} position="relative">
-        <Link to={`/${handle}`}>
+        <Link to={`/${RoutePath.HANDLE_HASH}/handle`}>
           <UserAvatar
             className="avatar"
             avatar={user?.avatar as string}
@@ -124,7 +125,7 @@ export const ShowTweet: React.FC<Props> = ({
         )}
       </Box>
       <Box mt={1} sx={{ flexWrap: "wrap", wordBreak: "break-word" }}>
-        <Link to={`/${handle}`}>
+        <Link to={`/${RoutePath.HANDLE_HASH}/handle`}>
           <Typography display={"inline"} sx={{ fontWeight: "600", mr: 0.5 }}>
             {user && user.consumerName}
           </Typography>
@@ -142,7 +143,7 @@ export const ShowTweet: React.FC<Props> = ({
             </Typography>
           )}
         </Link>
-        <Link to={`/${handle}/status/${id}`} className="secondary">
+        <Link to={`/${RoutePath.HANDLE_HASH}/handle/status/${id}`} className="secondary">
           <Typography display={"inline"} sx={{ color: theme.secondaryColor }}>
             {" "}
             {moment(setDate(createdAt)).fromNow()}
@@ -192,7 +193,7 @@ export const ShowTweet: React.FC<Props> = ({
                 masterTweet={tweet?.masterTweet?.id}
               />
             ) : (
-              <Link to={`/${handle}/status/${id}`}>
+              <Link to={`/${RoutePath.HANDLE_HASH}/handle/status/${id}`}>
                 <Box display="flex" alignItems={"center"}>
                   <CommentIcon />
                   <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
