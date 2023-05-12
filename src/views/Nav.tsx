@@ -116,7 +116,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
         }}
       >
         <StyledStack key="main-stack" direction="column" spacing={4.5}>
-          <NavLink end style={applyActiveStyles} to="/">
+          <NavLink end style={applyActiveStyles} to={RoutePath.HOME}>
             <Stack direction="row" {...stackProps}>
               <HomeIcon style={iconProps} />
               <Typography variant="body1">Home</Typography>
@@ -201,7 +201,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   <Typography variant="body1">Notifications</Typography>
                 </Stack>
               </NavLink>
-              <NavLink style={applyActiveStyles} to={`/${user?.handle}`}>
+              <NavLink style={applyActiveStyles} to={`${RoutePath.HANDLE_HASH}/${user?.handle}`}>
                 <Stack direction="row" {...stackProps}>
                   <AccountCircleIcon sx={iconProps} />
                   <Typography variant="body1">Profile</Typography>

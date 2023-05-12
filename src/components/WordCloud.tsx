@@ -2,6 +2,7 @@ import { Box, Link } from "@mui/material";
 import React, { FC } from "react";
 import { Tag } from "../generated/graphql";
 import { shuffle } from "lodash";
+import { RoutePath } from "../constants";
 
 interface Props {
   tagData: Tag[];
@@ -32,7 +33,7 @@ export const WordCloud: FC<Props> = ({ tagData }) => {
                 }}
               >
                 <Link
-                  href={`/explore?type=TAGS&term=${tag.tag.replace("#", "")}`}
+                  href={`/${RoutePath.EXPLORE}?type=TAGS&term=${tag.tag.replace("#", "")}`}
                   sx={{
                     cursor: "pointer",
                     textDecoration: "none",

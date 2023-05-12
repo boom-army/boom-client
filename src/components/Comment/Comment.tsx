@@ -83,7 +83,7 @@ const Comment = ({
       <div className="comment-info">
         <div className="comment-info-user">
           <span className="username">{user && user.consumerName}</span>
-          <Link to={`/${RoutePath.HANDLE_HASH}/handle`}>
+          <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
             <span className="secondary">{`@${handle}`}</span>
             <span className="secondary">
               {moment(setDate(createdAt)).fromNow()}

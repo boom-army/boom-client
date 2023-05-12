@@ -7,6 +7,7 @@ import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { Link as RouterLink } from "react-router-dom";
 import { SearchTweetsQuery } from "../../generated/graphql";
 import { styled, Box, Typography, Card, CardActionArea } from "@mui/material";
+import { RoutePath } from "../../constants";
 
 const IconBox = styled(Box)((props: any) => ({
   color: props.theme.blue.light,
@@ -41,7 +42,7 @@ export const NewsItem = ({ meep }: NewsProps) => {
     <Card>
       <CardActionArea
         component={RouterLink}
-        to={`/${meep.user?.handle}/status/${meep.id}`}
+        to={`${RoutePath.HANDLE_HASH}/${meep.user?.handle}/${meep.id}`}
       >
         <Box p={1}>
           <Typography

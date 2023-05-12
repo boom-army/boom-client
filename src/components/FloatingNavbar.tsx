@@ -9,6 +9,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import { useLocation, Link } from "react-router-dom";
+import { RoutePath } from "../constants";
 
 interface NavIconButtonProps {
   icon: React.ReactNode;
@@ -73,10 +74,10 @@ export const FloatingNavbar = () => {
         <Box
           sx={{ display: "flex", flexGrow: 1, justifyContent: "space-evenly" }}
         >
-          <NavIconButton icon={<GroupWorkIcon />} route="/" />
-          <NavIconButton icon={<ChatIcon />} route="/feed" />
-          <NavIconButton icon={<NewspaperIcon />} route="/news" />
-          <NavIconButton icon={<BuildCircleIcon />} route="/tools" />
+          <NavIconButton icon={<GroupWorkIcon />} route={RoutePath.HOME} />
+          <NavIconButton icon={<ChatIcon />} route={`/${RoutePath.FEED}`} />
+          <NavIconButton icon={<NewspaperIcon />} route={`/${RoutePath.NEWS}`} />
+          <NavIconButton icon={<BuildCircleIcon />} route={`/${RoutePath.LAB}`} />
         </Box>
       </Toolbar>
     </Box>

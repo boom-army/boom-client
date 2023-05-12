@@ -8,6 +8,7 @@ import { ReplyBox } from "../../Message/ShowMessage";
 import { HashLink } from "react-router-hash-link";
 import { UserAvatar } from "../../UserAvatar";
 import { ThreadReply } from "./ThreadReply";
+import { RoutePath } from "../../../constants";
 
 interface Props {
   tweet: TweetQuery["tweet"];
@@ -60,7 +61,7 @@ export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
           <Box mx={2} mt={1} pl={7}>
             <Link
               style={{ cursor: "pointer", color: theme.accentColor }}
-              to={`/${tweet.user.handle}/status/${tweet.id}`}
+              to={`${RoutePath.HANDLE_HASH}/${tweet.user.handle}/${tweet.id}`}
             >
               <Typography variant="body2">
                 {hiddenTweetsCount} more meep

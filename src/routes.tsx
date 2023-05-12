@@ -34,6 +34,7 @@ import { Dashboard, Nav } from "./views";
 import { FloatingNavbar } from "./components/FloatingNavbar";
 import { drawerState, useToggleDrawer } from "./hooks";
 import { useRecoilValue } from "recoil";
+import { RoutePath } from "./constants";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -161,7 +162,7 @@ export const AppRoutes: React.FC = () => {
                         label="Feed"
                         value="hero-feed"
                         icon={<LanguageIcon />}
-                        to="/"
+                        to={RoutePath.HOME}
                       />
                       {user?.handle && (
                         <BottomNavigationAction
@@ -175,7 +176,7 @@ export const AppRoutes: React.FC = () => {
                               <NotificationsIcon />
                             </Badge>
                           }
-                          to="/notifications"
+                          to={RoutePath.NOTIFICATIONS}
                         />
                       )}
                       {user?.handle && (
@@ -184,7 +185,7 @@ export const AppRoutes: React.FC = () => {
                           label="Profile"
                           value="profile"
                           icon={<AccountCircleIcon />}
-                          to={`/${user?.handle}`}
+                          to={`${RoutePath.HANDLE_HASH}/${user.handle}`}
                         />
                       )}
                       <BottomNavigationAction

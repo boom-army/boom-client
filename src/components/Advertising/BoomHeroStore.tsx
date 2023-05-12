@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { User } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
 import { HerofiedIcon } from "../Icons";
+import { RoutePath } from "../../constants";
 
 interface BoomHeroStoreProps {
   userData: User | null;
@@ -62,7 +63,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             Flex your profile{" "}
             {userData?.handle ? (
               <Link
-                to={`/${userData?.handle}`}
+                to={`${RoutePath.HANDLE_HASH}/${userData?.handle}`}
                 style={{ color: theme.blue.lightest }}
               >
                 by clicking your Boom Hero NFT{" "}

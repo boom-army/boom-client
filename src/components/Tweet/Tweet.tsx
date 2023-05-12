@@ -100,7 +100,7 @@ export const ShowTweet: React.FC<Props> = ({
       }}
     >
       <Box mr={1} position="relative">
-        <Link to={`/${RoutePath.HANDLE_HASH}/handle`}>
+        <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
           <UserAvatar
             className="avatar"
             avatar={user?.avatar as string}
@@ -125,7 +125,7 @@ export const ShowTweet: React.FC<Props> = ({
         )}
       </Box>
       <Box mt={1} sx={{ flexWrap: "wrap", wordBreak: "break-word" }}>
-        <Link to={`/${RoutePath.HANDLE_HASH}/handle`}>
+        <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
           <Typography display={"inline"} sx={{ fontWeight: "600", mr: 0.5 }}>
             {user && user.consumerName}
           </Typography>

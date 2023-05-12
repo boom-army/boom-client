@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { setDate } from "../../utils";
 import { ShowTweet } from "../Tweet";
+import { RoutePath } from "../../constants";
 
 interface NotificationProps {
   mention: Mention;
@@ -50,7 +51,7 @@ export const Notification = ({ mention }: NotificationProps) => {
           sx={{ flexWrap: "wrap", wordBreak: "break-word" }}
         >
           <Box mr={0.5} position="relative">
-            <Link to={`/${fromUser.handle}`}>
+            <Link to={`${RoutePath.HANDLE_HASH}/${fromUser.handle}`}>
               <UserAvatar
                 className="avatar"
                 avatar={fromUser?.avatar as string}

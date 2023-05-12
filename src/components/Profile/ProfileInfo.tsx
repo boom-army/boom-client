@@ -5,6 +5,7 @@ import { Button, Box } from "@mui/material";
 import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
+import { RoutePath } from "../../constants";
 
 const Wrapper = styled("div")((props) => ({
   borderBottom: `1px solid ${props.theme.tertiaryColor}`,
@@ -118,7 +119,7 @@ const ProfileInfo = ({ profile }: any) => {
           {isSelf ? (
             <Button
               component={Link}
-              to="/settings/profile"
+              to={RoutePath.PROFILE_SETTINGS}
               variant="outlined"
               color="primary"
               size="small"

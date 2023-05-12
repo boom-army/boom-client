@@ -3,6 +3,7 @@ import { ThemeContext } from "../../contexts/theme";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/user";
+import { RoutePath } from "../../constants";
 
 interface Props {
   parentTweet: String | undefined;
@@ -23,10 +24,10 @@ export const ParentTweet: React.FC<Props> = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <Link to={`/${user?.handle}/status/${props.parentTweet}`}>
+        <Link to={`${RoutePath.HANDLE_HASH}/${user?.handle}/${props.parentTweet}`}>
           Jump up thread &#x2934;
         </Link>
-        <Link to={`/${user?.handle}/status/${props.masterTweet}`}>
+        <Link to={`${RoutePath.HANDLE_HASH}/${user?.handle}/${props.masterTweet}`}>
           Jump to original &#x2934;
         </Link>
       </Box>

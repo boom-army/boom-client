@@ -14,6 +14,7 @@ import { ThemeContext } from "../../contexts/theme";
 import { User as UserProps } from "../../generated/graphql";
 import { UserAvatar } from "../UserAvatar";
 import { Link as RouterLink } from "react-router-dom";
+import { RoutePath } from "../../constants";
 
 type Props = {
   user: UserProps;
@@ -26,7 +27,7 @@ export const User = ({ user }: Props) => {
       <Box sx={{ display: "flex" }}>
         <CardActionArea
           component={RouterLink}
-          to={`/${user.handle}`}
+          to={`${RoutePath.HANDLE_HASH}/${user.handle}`}
           sx={{ padding: "0.7em" }}
         >
           <Box sx={{ display: "flex", overflow: "hidden" }}>
@@ -60,7 +61,7 @@ export const User = ({ user }: Props) => {
                 isFollowing={user && user.isFollowing}
               />
             ) : (
-              <Link to="/settings/profile">
+              <Link to={RoutePath.PROFILE_SETTINGS}>
                 <AccountBoxIcon />
               </Link>
             )}

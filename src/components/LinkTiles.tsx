@@ -13,6 +13,7 @@ import LockPersonIcon from "@mui/icons-material/LockPerson";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import SavingsIcon from "@mui/icons-material/Savings";
 import { ThemeContext } from "../contexts/theme";
+import { RoutePath } from "../constants";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: 3,
@@ -36,10 +37,10 @@ export const LinkTilesGrid = () => {
   const { theme } = useContext(ThemeContext);
 
   const tiles = [
-    { icon: <Language />, label: "Feed", link: "/feed" },
-    { icon: <LockPersonIcon />, label: "NFT DAOS", link: "/daos" },
-    { icon: <NewspaperIcon />, label: "News", link: "/news" },
-    { icon: <SavingsIcon />, label: "Tip Leaderboard", link: "/leaderboard" },
+    { icon: <Language />, label: "Feed", link: `/${RoutePath.FEED}` },
+    { icon: <LockPersonIcon />, label: "NFT DAOS", link: `/${RoutePath.DAO}` },
+    { icon: <NewspaperIcon />, label: "News", link: `/${RoutePath.NEWS}` },
+    { icon: <SavingsIcon />, label: "Tip Leaderboard", link: `/${RoutePath.LEADERBOARD}` },
   ];
 
   return (

@@ -223,7 +223,7 @@ export const ShowMessage: React.FC<Props> = ({
         }}
       >
         <Box>
-          <Link to={`/${RoutePath.HANDLE_HASH}/handle`}>
+          <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
             <UserAvatar
               sx={{
                 width: "30px",
@@ -237,7 +237,7 @@ export const ShowMessage: React.FC<Props> = ({
         <Box ml={1} pt={0.5}>
           <Stack direction="row">
             <Box mr={1}>
-              <Link to={`/${RoutePath.HANDLE_HASH}/handle`}>
+              <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
                 <Typography sx={{ fontWeight: "600" }}>
                   {user && user.consumerName}
                 </Typography>

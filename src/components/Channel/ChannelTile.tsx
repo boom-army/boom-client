@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { Avatar, AvatarGroup, Box, Typography } from "@mui/material";
-import { ChannelStatus } from "../../constants";
+import { ChannelStatus, RoutePath } from "../../constants";
 import { Link } from "react-router-dom";
 import { GetUserChannelsQuery } from "../../generated/graphql";
 import { ThemeContext } from "../../contexts/theme";
@@ -42,7 +42,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
             marginTop: "1em",
           },
         }}
-        to={`/d/${channel?.id}`}
+        to={`/${RoutePath.DAO}/${channel?.id}`}
       >
         <Box mr={1}>
           <Avatar

@@ -22,6 +22,7 @@ import { TipLeaderboard } from "../views/TipLeaderboard";
 import { WhoToFollow } from "../components/SideBar/WhoToFollow";
 import { TipRank } from "../components/SideBar/TipRank";
 import { HeroFeed } from "../views/HeroFeed";
+import { RoutePath } from "../constants";
 
 interface GridProps {
   data: ProfileQuery | undefined;
@@ -103,7 +104,7 @@ export const GridStandard: React.FC<GridProps> = ({
           <Route path=":handle" element={<Profile />} />
           <Route path="mint-nft" element={<NFTMint />} />
           <Route path="leaderboard" element={<TipLeaderboard />} />
-          <Route path="*" element={<Navigate replace to="/" />} />
+          <Route path="*" element={<Navigate replace to={RoutePath.HOME} />} />
         </Routes>
       </Paper>
     </Grid>
