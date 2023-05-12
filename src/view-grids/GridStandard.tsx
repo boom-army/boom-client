@@ -83,28 +83,31 @@ export const GridStandard: React.FC<GridProps> = ({
         elevation={0}
       >
         <Routes>
-          <Route path={RoutePath.HOME} element={<HeroFeed />} />
-          <Route path={RoutePath.FOLLOWING} element={<Following />} />
           <Route path={RoutePath.CONNECT} element={<ConnectView />} />
-          <Route path={RoutePath.DAO} element={<Channels />} />
-          <Route path={RoutePath.NEWS} element={<News />} />
           <Route path={RoutePath.DAO_CHANNEL} element={<ChannelFeed />} />
+          {/* <Route path={RoutePath.DAO} element={<Channels />} /> */}
+          <Route path={RoutePath.EXPLORE} element={<Explore />} />
+          <Route path={RoutePath.FEED} element={<HeroFeed />} />
+          <Route path={RoutePath.FOLLOWING} element={<Following />} />
+          <Route path={RoutePath.HANDLE_TWEET} element={<MasterTweet />} />
+          <Route path={RoutePath.HANDLE} element={<Profile />} />
+          <Route path={RoutePath.LEADERBOARD} element={<TipLeaderboard />} />
+          <Route path={RoutePath.MINT_NFT} element={<NFTMint />} />
+          <Route path={RoutePath.NEWS} element={<News />} />
           <Route
             path={RoutePath.NOTIFICATIONS}
             element={<Notifications refetchProfile={refetch} />}
           />
-          <Route path={RoutePath.HANDLE_TWEET} element={<MasterTweet />} />
           <Route
             path={RoutePath.PROFILE_SETTINGS}
             element={
               <EditProfile loading={loading} data={data} setUser={setUser} />
             }
           />
-          <Route path={RoutePath.EXPLORE} element={<Explore />} />
-          <Route path={RoutePath.HANDLE} element={<Profile />} />
-          <Route path={RoutePath.MINT_NFT} element={<NFTMint />} />
-          <Route path={RoutePath.LEADERBOARD} element={<TipLeaderboard />} />
-          <Route path={RoutePath.WILDCARD} element={<Navigate replace to={RoutePath.HOME} />} />
+          <Route
+            path={RoutePath.WILDCARD}
+            element={<Navigate replace to={RoutePath.HOME} />}
+          />
         </Routes>
       </Paper>
     </Grid>

@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import FeedIcon from '@mui/icons-material/Feed';
+import HubIcon from '@mui/icons-material/Hub';
 import IconButton from "@mui/material/IconButton";
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import React from "react";
@@ -74,7 +74,7 @@ export const FloatingNavbar = () => {
         <Box
           sx={{ display: "flex", flexGrow: 1, justifyContent: "space-evenly" }}
         >
-          <NavIconButton icon={<DynamicFeedIcon />} route={RoutePath.HOME} />
+          <NavIconButton icon={<HubIcon />} route={RoutePath.HOME} />
           <NavIconButton icon={<FeedIcon />} route={`/${RoutePath.FEED}`} />
           <NavIconButton icon={<NewspaperIcon />} route={`/${RoutePath.NEWS}`} />
           <NavIconButton icon={<ScienceIcon />} route={`/${RoutePath.LAB}`} />

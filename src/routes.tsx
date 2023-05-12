@@ -35,6 +35,7 @@ import { FloatingNavbar } from "./components/FloatingNavbar";
 import { drawerState, useToggleDrawer } from "./hooks";
 import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";
+import { DAOView } from "./views/DAO";
 
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
@@ -128,6 +129,7 @@ export const AppRoutes: React.FC = () => {
                         <GridAuction />
                       }
                     /> */}
+                    <Route path={RoutePath.HOME} element={<DAOView />} />
                     <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
                     <Route
                       path="*"
