@@ -83,28 +83,28 @@ export const GridStandard: React.FC<GridProps> = ({
         elevation={0}
       >
         <Routes>
-          <Route path="/" element={<HeroFeed />} />
-          <Route path="following" element={<Following />} />
-          <Route path="connect" element={<ConnectView />} />
-          <Route path="d" element={<Channels />} />
-          <Route path="news" element={<News />} />
-          <Route path="d/:channelId" element={<ChannelFeed />} />
+          <Route path={RoutePath.HOME} element={<HeroFeed />} />
+          <Route path={RoutePath.FOLLOWING} element={<Following />} />
+          <Route path={RoutePath.CONNECT} element={<ConnectView />} />
+          <Route path={RoutePath.DAO} element={<Channels />} />
+          <Route path={RoutePath.NEWS} element={<News />} />
+          <Route path={RoutePath.DAO_CHANNEL} element={<ChannelFeed />} />
           <Route
-            path="notifications"
+            path={RoutePath.NOTIFICATIONS}
             element={<Notifications refetchProfile={refetch} />}
           />
-          <Route path=":handle/status/:tweetId" element={<MasterTweet />} />
+          <Route path={RoutePath.HANDLE_TWEET} element={<MasterTweet />} />
           <Route
-            path="settings/profile"
+            path={RoutePath.PROFILE_SETTINGS}
             element={
               <EditProfile loading={loading} data={data} setUser={setUser} />
             }
           />
-          <Route path="explore" element={<Explore />} />
-          <Route path=":handle" element={<Profile />} />
-          <Route path="mint-nft" element={<NFTMint />} />
-          <Route path="leaderboard" element={<TipLeaderboard />} />
-          <Route path="*" element={<Navigate replace to={RoutePath.HOME} />} />
+          <Route path={RoutePath.EXPLORE} element={<Explore />} />
+          <Route path={RoutePath.HANDLE} element={<Profile />} />
+          <Route path={RoutePath.MINT_NFT} element={<NFTMint />} />
+          <Route path={RoutePath.LEADERBOARD} element={<TipLeaderboard />} />
+          <Route path={RoutePath.WILDCARD} element={<Navigate replace to={RoutePath.HOME} />} />
         </Routes>
       </Paper>
     </Grid>

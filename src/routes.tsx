@@ -128,7 +128,7 @@ export const AppRoutes: React.FC = () => {
                         <GridAuction />
                       }
                     /> */}
-                    <Route path="dash" element={<Dashboard />} />
+                    <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
                     <Route
                       path="*"
                       element={
