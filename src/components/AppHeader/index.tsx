@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useContext } from "react";
 import base58 from "bs58";
-import { AppBar, Container, Grid, Toolbar, Typography } from "@mui/material";
+import { AppBar, Container, Grid, Toolbar } from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { USER_FOLLOW } from "../../queries/follow";
@@ -11,6 +11,8 @@ import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { FeedDocument } from "../../generated/graphql";
 import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
+import { RoutePath } from "../../constants";
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
@@ -104,16 +106,12 @@ export const AppHeader = () => {
             <Grid item xs={12}>
               <Box display="flex" justifyContent="space-between">
                 <Box mr={1} display="flex" alignItems="center">
-                  <Typography
-                    variant="body2"
-                    component="h2"
-                    color="primary"
-                    sx={{
-                      display: "inline-flex",
-                    }}
+                  <Link
+                    to={RoutePath.HOME}
+                    style={{ display: "flex", alignItems: "center" }}
                   >
                     <img src={headerImg} alt="Boom" height={20} />
-                  </Typography>
+                  </Link>
                 </Box>
                 <Box mt={0.5}>
                   <CurrentUser />
