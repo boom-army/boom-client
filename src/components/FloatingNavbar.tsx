@@ -1,15 +1,15 @@
-import React from "react";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import ChatIcon from "@mui/icons-material/Chat";
-import NewspaperIcon from '@mui/icons-material/Newspaper';
-import GroupWorkIcon from '@mui/icons-material/GroupWork';
-import BuildCircleIcon from '@mui/icons-material/BuildCircle';
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
-import { useLocation, Link } from "react-router-dom";
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import FeedIcon from '@mui/icons-material/Feed';
+import IconButton from "@mui/material/IconButton";
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import React from "react";
+import ScienceIcon from '@mui/icons-material/Science';
+import Toolbar from "@mui/material/Toolbar";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { RoutePath } from "../constants";
+import { useLocation, Link } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 
 interface NavIconButtonProps {
   icon: React.ReactNode;
@@ -74,10 +74,10 @@ export const FloatingNavbar = () => {
         <Box
           sx={{ display: "flex", flexGrow: 1, justifyContent: "space-evenly" }}
         >
-          <NavIconButton icon={<GroupWorkIcon />} route={RoutePath.HOME} />
-          <NavIconButton icon={<ChatIcon />} route={`/${RoutePath.FEED}`} />
+          <NavIconButton icon={<DynamicFeedIcon />} route={RoutePath.HOME} />
+          <NavIconButton icon={<FeedIcon />} route={`/${RoutePath.FEED}`} />
           <NavIconButton icon={<NewspaperIcon />} route={`/${RoutePath.NEWS}`} />
-          <NavIconButton icon={<BuildCircleIcon />} route={`/${RoutePath.LAB}`} />
+          <NavIconButton icon={<ScienceIcon />} route={`/${RoutePath.LAB}`} />
         </Box>
       </Toolbar>
     </Box>
