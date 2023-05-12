@@ -1,16 +1,9 @@
-import { Box, Grid, IconButton, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import { Theme } from "../../contexts/theme";
+import { Box, Grid, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useToggleDrawer } from "../../hooks";
 
 export const CurrentUser = () => {
   const toggleDrawer = useToggleDrawer();
-  
-  const headerImg =
-    localStorage.getItem(Theme.StorageTag) === Theme.Light
-      ? "/assets/boom-logo-dark.png"
-      : "/assets/boom-logo-light.png";
   
   return (
     <>
@@ -28,16 +21,6 @@ export const CurrentUser = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="body2"
-            component="h2"
-            color="primary"
-            sx={{
-              display: "inline-flex",
-            }}
-          >
-            <img src={headerImg} alt="Boom" height={20} />
-          </Typography>
         </Box>
       </Grid>
     </>

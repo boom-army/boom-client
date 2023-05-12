@@ -1,18 +1,10 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useContext,
-} from "react";
+import { useCallback, useEffect, useMemo, useContext } from "react";
 import base58 from "bs58";
-import {
-  AppBar,
-  Grid,
-  Toolbar,
-} from "@mui/material";
+import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { USER_FOLLOW } from "../../queries/follow";
+import { Theme } from "../../contexts/theme";
 import { UserContext } from "../../contexts/user";
 import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
 import { useMutation } from "@apollo/client";
@@ -27,6 +19,10 @@ export const AppHeader = () => {
   const { setUser } = useContext(UserContext);
 
   const token = localStorage.getItem("token");
+  const headerImg =
+    localStorage.getItem(Theme.StorageTag) === Theme.Light
+      ? "/assets/boom-logo-dark.png"
+      : "/assets/boom-logo-light.png";
 
   const [getNonce] = useMutation(PUBLIC_ADDRESS);
   const [setLogin] = useMutation(LOGIN_REGISTER, {
@@ -106,11 +102,22 @@ export const AppHeader = () => {
         <Grid container>
           <Grid item xs={12}>
             <Box display="flex" justifyContent="space-between">
-              <Box sx={{ flexGrow: 1 }}>
-                <CurrentUser />
+              <Box mr={1} display="flex" alignItems="center">
+                <Typography
+                  variant="body2"
+                  component="h2"
+                  color="primary"
+                  sx={{
+                    display: "inline-flex",
+                    mr: 2,
+                  }}
+                >
+                  <img src={headerImg} alt="Boom" height={20} />
+                </Typography>
+                <WalletMultiButton />
               </Box>
               <Box mt={0.5}>
-                <WalletMultiButton />
+                <CurrentUser />
               </Box>
             </Box>
           </Grid>

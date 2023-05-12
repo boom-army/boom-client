@@ -197,12 +197,13 @@ export const AppRoutes: React.FC = () => {
                     </StyledBottomNavigation>
                   </Paper>
                   <SwipeableDrawer
+                    anchor="right"
                     open={drawer}
                     onClose={toggleDrawer(false)}
                     onOpen={toggleDrawer(true)}
                   >
                     <Box
-                    sx={{ width: "20rem", paddingLeft: "1em"  }}
+                      sx={{ width: "20rem", paddingLeft: "1em" }}
                       role="presentation"
                       onClick={toggleDrawer(false)}
                       onKeyDown={toggleDrawer(false)}
