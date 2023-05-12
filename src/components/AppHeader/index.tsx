@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useContext } from "react";
 import base58 from "bs58";
-import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
+import { AppBar, Container, Grid, Toolbar, Typography } from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { USER_FOLLOW } from "../../queries/follow";
@@ -98,27 +98,30 @@ export const AppHeader = () => {
       }}
     >
       <Toolbar variant="dense">
-        <Grid container>
-          <Grid item xs={12}>
-            <Box display="flex" justifyContent="space-between">
-              <Box mr={1} display="flex" alignItems="center">
-                <Typography
-                  variant="body2"
-                  component="h2"
-                  color="primary"
-                  sx={{
-                    display: "inline-flex",
-                  }}
-                >
-                  <img src={headerImg} alt="Boom" height={20} />
-                </Typography>
+        {/* Remove this when we go full width */}
+        <Container maxWidth="lg">
+          <Grid container>
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="space-between">
+                <Box mr={1} display="flex" alignItems="center">
+                  <Typography
+                    variant="body2"
+                    component="h2"
+                    color="primary"
+                    sx={{
+                      display: "inline-flex",
+                    }}
+                  >
+                    <img src={headerImg} alt="Boom" height={20} />
+                  </Typography>
+                </Box>
+                <Box mt={0.5}>
+                  <CurrentUser />
+                </Box>
               </Box>
-              <Box mt={0.5}>
-                <CurrentUser />
-              </Box>
-            </Box>
+            </Grid>
           </Grid>
-        </Grid>
+        </Container>
       </Toolbar>
     </AppBar>
   );
