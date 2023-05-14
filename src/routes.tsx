@@ -1,6 +1,6 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// import BoomArmy from "./images/raise-the-boomarmy.png";
-// import BoomLogo from "./images/assets/boom-logo.png";
+import BoomArmy from "./images/raise-the-boomarmy.png";
+import BoomLogo from "./images/boom-logo.png";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import LanguageIcon from "@mui/icons-material/Language";
@@ -22,7 +22,7 @@ import {
 import { Box, styled } from "@mui/system";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GiphyContextProvider } from "./contexts/giphy";
-// import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
@@ -78,10 +78,10 @@ export const AppRoutes: React.FC = () => {
 
   return (
     <>
-      {/* <Helmet>
+      <Helmet>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#16202B" />
         <link rel="canonical" href="http://boom.army" />
         <link rel="apple-touch-icon" href={BoomLogo} />
 
@@ -107,7 +107,7 @@ export const AppRoutes: React.FC = () => {
         />
         <meta name="twitter:image" content={BoomArmy} />
         <meta name="twitter:creator" content="@boom_army_" />
-      </Helmet> */}
+      </Helmet>
 
       <BrowserRouter basename={"/"}>
         <Wallet>
