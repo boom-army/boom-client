@@ -3569,14 +3569,6 @@
   dependencies:
     "@solana/wallet-adapter-base" "^0.9.22"
 
-"@solana/wallet-adapter-material-ui@^0.16.29":
-  version "0.16.29"
-  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-material-ui/-/wallet-adapter-material-ui-0.16.29.tgz#37537c421daded6ff07a59b8a34a40193b6e595f"
-  integrity sha512-q/9jo5libEUpGQ9yxDOOdDDvbjccz6RISerMkRGNcfEveLq38EiTLCWymiCMerafo+mCYNG9trpWsxPyT0RufQ==
-  dependencies:
-    "@solana/wallet-adapter-base" "^0.9.22"
-    "@solana/wallet-adapter-react" "^0.15.31"
-
 "@solana/wallet-adapter-mathwallet@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-mathwallet/-/wallet-adapter-mathwallet-0.7.0.tgz#4e0af44da30c1c42b556b0b431aab1a9de7336d4"
