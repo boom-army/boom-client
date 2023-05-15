@@ -7,7 +7,6 @@ import { useWalletDialog } from './useWalletDialog.js';
 export const WalletDialogButton: FC<ButtonProps> = ({
     children = 'Select Wallet',
     color = 'primary',
-    variant = 'contained',
     type = 'button',
     onClick,
     ...props
@@ -23,7 +22,7 @@ export const WalletDialogButton: FC<ButtonProps> = ({
     );
 
     return (
-        <Button color={color} variant={variant} type={type} onClick={handleClick} {...props}>
+        <Button color={color} type={type} onClick={handleClick} {...props}>
             {children}
         </Button>
     );
