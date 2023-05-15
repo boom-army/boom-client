@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import { ThemeContext } from "../../contexts/theme";
 import { User } from "../../generated/graphql";
 
-export const Connect = () => {
+export const People = () => {
   const { theme } = useContext(ThemeContext);
   const { loading, data, fetchMore } = useQuery(USERS, {
     variables: {

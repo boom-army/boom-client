@@ -7,7 +7,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import {
   ChannelFeed,
   Channels,
-  ConnectView,
+  PeopleView,
   Explore,
   Following,
   Nav,
@@ -83,7 +83,7 @@ export const GridStandard: React.FC<GridProps> = ({
         elevation={0}
       >
         <Routes>
-          <Route path={RoutePath.CONNECT} element={<ConnectView />} />
+          <Route path={RoutePath.PEOPLE} element={<PeopleView />} />
           <Route path={RoutePath.DAO_CHANNEL} element={<ChannelFeed />} />
           {/* <Route path={RoutePath.DAO} element={<Channels />} /> */}
           <Route path={RoutePath.EXPLORE} element={<Explore />} />

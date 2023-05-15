@@ -1,7 +1,7 @@
 export { BoomOnes } from "./BoomOnes";
 export { ChannelFeed } from "./ChannelFeed";
 export { Channels } from "./Channels";
-export { ConnectView } from "./Connect";
+export { PeopleView } from "./People";
 export { Explore } from "./Explore";
 export { Following } from "./Following";
 export { Dashboard } from "./Dashboard";

@@ -146,7 +146,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
               <Typography variant="body1">Mint NFT</Typography>
             </Stack>
           </NavLink>
-          <NavLink style={applyActiveStyles} to={`${RoutePath.CONNECT}`}>
+          <NavLink style={applyActiveStyles} to={`${RoutePath.PEOPLE}`}>
             <Stack direction="row" {...stackProps}>
               <GroupIcon sx={iconProps} />
               <Typography variant="body1">People</Typography>
