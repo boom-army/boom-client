@@ -1,6 +1,5 @@
 import React, { FC, useContext } from "react";
-import { ThemeContext } from "../contexts/theme";
-import { Typography, styled, Box, Link } from "@mui/material";
+import { Typography, styled, Box, Link, useTheme } from "@mui/material";
 import { Link as LinkIcon } from "@mui/icons-material";
 
 interface HomeTitleProps {
@@ -10,7 +9,7 @@ interface HomeTitleProps {
 }
 
 export const HomeTitle: FC<HomeTitleProps> = ({ title, sx, titleLink }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const HomeBox = styled(Box)({
     display: "flex",
@@ -19,7 +18,7 @@ export const HomeTitle: FC<HomeTitleProps> = ({ title, sx, titleLink }) => {
     padding: "0.2rem 1rem",
     borderRadius: "0.2rem",
     textTransform: "uppercase",
-    color: theme.secondaryColor,
+    color: theme.palette.secondary,
     alignItems: "center",
     ...sx,
     "&:hover": {

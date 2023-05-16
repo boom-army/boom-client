@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import Link from "@mui/material/Link";
 import { styled } from "@mui/system";
-import { ThemeContext } from "../../contexts/theme";
-import { darkTheme } from "../../styles/themes";
+import { useTheme } from "@mui/material";
 
 export const AttributionLink: React.FC<{ src: any | null }> = ({ src }) => {
-  const { theme } = useContext(ThemeContext);
-  const isDarkTheme = theme.primaryColor === darkTheme.primaryColor;
+  const theme = useTheme();
+  const isDarkTheme = theme.palette.mode === "dark";
 
   const GiphyAttributionImg = styled("img")({
     boxSizing: "content-box",

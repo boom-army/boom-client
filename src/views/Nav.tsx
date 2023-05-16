@@ -4,29 +4,37 @@ import LockPersonIcon from "@mui/icons-material/LockPerson";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Person from "@mui/icons-material/Person";
-import React, { useContext } from "react";
+import React from "react";
 import SavingsIcon from "@mui/icons-material/Savings";
+import InvertColorsIcon from "@mui/icons-material/InvertColors";
 import SearchIcon from "@mui/icons-material/Search";
 import StyleIcon from "@mui/icons-material/Style";
-import SpeedIcon from '@mui/icons-material/Speed';
+import SpeedIcon from "@mui/icons-material/Speed";
 import HomeIcon from "@mui/icons-material/Home";
-import { Avatar, Badge, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Badge,
+  IconButton,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import { ChannelStatus, RoutePath } from "../constants";
 import { NavLink } from "react-router-dom";
-import { ThemeContext } from "../contexts/theme";
+
 import { styled } from "@mui/material/styles";
 import { useGetUserChannelsQuery, User } from "../generated/graphql";
 import { Logout } from "../components/Auth/Logout";
-import { ChangeColor } from "../components/ChangeColor";
-import { ToggleTheme } from "../components/ToggleTheme";
+import { ColorModeContext } from "../contexts/theme";
 interface Props {
   newMentionsCount: number | undefined;
   user: User | null;
 }
 
 export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
+  const { toggleColorMode } = React.useContext(ColorModeContext);
   const iconProps = {
     color: theme.accentColor,
   };
@@ -40,7 +48,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
-    color: isActive ? theme.accentColor : theme.primaryColor,
+    color: isActive ? theme.accentColor : theme.palette.primary.main,
   });
 
   const stackProps = {
@@ -184,7 +192,10 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   <Typography variant="body1">Following</Typography>
                 </Stack>
               </NavLink>
-              <NavLink style={applyActiveStyles} to={`${RoutePath.NOTIFICATIONS}`}>
+              <NavLink
+                style={applyActiveStyles}
+                to={`${RoutePath.NOTIFICATIONS}`}
+              >
                 <Stack direction="row" {...stackProps}>
                   <Badge
                     max={99}
@@ -201,14 +212,20 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   <Typography variant="body1">Notifications</Typography>
                 </Stack>
               </NavLink>
-              <NavLink style={applyActiveStyles} to={`${RoutePath.HANDLE_HASH}/${user?.handle}`}>
+              <NavLink
+                style={applyActiveStyles}
+                to={`${RoutePath.HANDLE_HASH}/${user?.handle}`}
+              >
                 <Stack direction="row" {...stackProps}>
                   <AccountCircleIcon sx={iconProps} />
                   <Typography variant="body1">Profile</Typography>
                 </Stack>
               </NavLink>
-              <ToggleTheme stackProps={stackProps} iconProps={iconProps} />
-              <ChangeColor stackProps={stackProps} iconProps={iconProps} />
+              <Stack onClick={toggleColorMode} direction="row" {...stackProps}>
+                <InvertColorsIcon sx={iconProps} />
+                <Typography variant="body1">Theme</Typography>
+              </Stack>
+              {/* <ChangeColor stackProps={stackProps} iconProps={iconProps} /> */}
               <Logout stackProps={stackProps} iconProps={iconProps} />
             </>
           )}

@@ -25,7 +25,7 @@ import Face6Icon from "@mui/icons-material/Face6";
 import ShareIcon from "@mui/icons-material/Share";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { ThemeContext } from "../contexts/theme";
+
 import { useContext, useMemo, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
 import { UserAvatar } from "../components/UserAvatar";
@@ -136,7 +136,7 @@ interface NftAttribute {
 }
 
 export const BoomOnes = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -350,7 +350,7 @@ export const BoomOnes = () => {
               onClick={handleClick}
               sx={{
                 backgroundColor: theme.accentColor,
-                color: theme.primaryColor,
+                color: theme.palette.primary,
                 "&:hover": {
                   backgroundColor: theme.accentColor,
                   opacity: 0.8,
@@ -463,7 +463,7 @@ export const BoomOnes = () => {
         <Box
           p={2}
           sx={{
-            border: `1px solid ${theme.secondaryColor}`,
+            border: `1px solid ${theme.palette.secondary}`,
             backgroundColor: theme.background2,
           }}
         >
@@ -550,10 +550,10 @@ export const BoomOnes = () => {
                   size="small"
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary },
                   }}
                   InputProps={{
-                    style: { color: theme.secondaryColor },
+                    style: { color: theme.palette.secondary },
                   }}
                   value={bid}
                   onChange={(e) => {
@@ -573,7 +573,7 @@ export const BoomOnes = () => {
                       : theme.accentColor,
                     "&.Mui-disabled": {
                       backgroundColor: theme.blue.light,
-                      color: theme.primaryColor,
+                      color: theme.palette.primary,
                     },
                   }}
                   disabled={
@@ -673,7 +673,7 @@ export const BoomOnes = () => {
                           <Box>
                             <Typography
                               display={"inline"}
-                              color={theme.secondaryColor}
+                              color={theme.palette.secondary}
                             >
                               bid
                             </Typography>{" "}

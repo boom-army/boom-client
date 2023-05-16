@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { ChannelStatus } from "../constants";
 import { CustomResponse } from "../components/CustomResponse";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
-import { ThemeContext } from "../contexts/theme";
+
 import { atom } from "recoil";
 import {
   useAddChannelMutation,
@@ -15,7 +15,7 @@ import { useAnchorWallet } from "@solana/wallet-adapter-react";
 export const ChannelAuction: React.FC = () => {
   const [channelId, setChannelId] = useState<string>("");
   const anchorWallet = useAnchorWallet();
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const scrollRef = useRef<HTMLDivElement>();
   const parentTweetState = atom({
     key: "parentTweetState",
@@ -78,7 +78,7 @@ export const ChannelAuction: React.FC = () => {
       {!anchorWallet?.publicKey && (
         <Box
           sx={{
-            border: `1px solid ${theme.secondaryColor}`,
+            border: `1px solid ${theme.palette.secondary}`,
             backgroundColor: theme.background2,
           }}
         >

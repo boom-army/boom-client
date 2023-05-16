@@ -7,9 +7,10 @@ import {
   IconButton,
   Link,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { CommentIcon } from "../Icons";
-import { ThemeContext } from "../../contexts/theme";
+
 import { useContext, useState } from "react";
 import { NewTweet } from "./NewTweet";
 
@@ -24,7 +25,7 @@ export const PopUpResponse = ({
   parentTweet,
   masterTweet,
 }: PURProps) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const [openReply, setOpenReply] = useState(false);
 
@@ -41,7 +42,7 @@ export const PopUpResponse = ({
       <Link onClick={handleClickOpen} sx={{ textDecoration: "none" }}>
         <Box display="flex" alignItems={"center"}>
           <CommentIcon />
-          <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
+          <Typography ml={0.5} sx={{ color: theme.palette.secondary }}>
             {commentsCount ? commentsCount : null}
           </Typography>
         </Box>

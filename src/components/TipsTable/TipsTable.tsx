@@ -13,6 +13,7 @@ import {
   Link,
   ToggleButtonGroup,
   ToggleButton,
+  useTheme,
 } from "@mui/material";
 import {
   TipCount,
@@ -23,14 +24,14 @@ import { Loader } from "../Loader";
 import { CustomResponse } from "../CustomResponse";
 import { boomNumFormat, HARKL_ID } from "../../utils/utils";
 import { map } from "lodash";
-import { ThemeContext } from "../../contexts/theme";
+
 import dayjs from "dayjs";
 import { UserAvatar } from "../UserAvatar";
 import { HerofiedIcon } from "../Icons";
 import { awardColorSelect } from "../../utils";
 
 export const UserTipsTable: FC<{}> = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [formattedData, setFormattedData] = useState<TipCount>();
   const [activeButton, setActiveButton] = useState("30 days");
 

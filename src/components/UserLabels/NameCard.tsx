@@ -1,8 +1,8 @@
 import React, { FC, useContext } from "react";
-import { Box, Link } from "@mui/material";
+import { Box, Link, useTheme } from "@mui/material";
 import { HARKL_ID } from "../../utils/utils";
 import { HerofiedIcon } from "../Icons";
-import { ThemeContext } from "../../contexts/theme";
+
 import { User } from "@sentry/react";
 import { Maybe } from "../../generated/graphql";
 
@@ -11,7 +11,7 @@ interface NCProps {
 }
 
 export const NameCard: FC<NCProps> = ({ user }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   return (
     <Box sx={{ overflow: "hidden" }}>
       <Link

@@ -6,7 +6,6 @@ import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { App } from "./App";
 import { Integrations } from "@sentry/tracing";
-import { ThemeProvider } from "./contexts/theme";
 import { client } from "./apollo/client";
 import { createRoot } from "react-dom/client";
 
@@ -25,9 +24,7 @@ if (import.meta.env.VITE_ENV === "production") {
 const RootApp = () => (
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <App />
     </ApolloProvider>
   </React.StrictMode>
 );

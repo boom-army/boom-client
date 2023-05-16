@@ -4,7 +4,7 @@ import * as linkify from "linkifyjs";
 import Linkify from "linkify-react";
 import React, { useContext } from "react";
 import moment from "moment";
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography, useTheme } from "@mui/material";
 import { CommentIcon, HerofiedIcon } from "../Icons";
 import { EmojiTweet, Retweet } from "./index";
 import { ImageBox } from "../ImageBox";
@@ -12,7 +12,7 @@ import { LAMPORTS_PER_SOL } from "../../constants/math";
 import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
-import { ThemeContext } from "../../contexts/theme";
+
 import { TipCreator } from "../TipCreator";
 import { TweetQuery, Reaction } from "../../generated/graphql";
 import { UrlMetaData } from "../UrlMeta/UrlMetaData";
@@ -37,7 +37,7 @@ const IconsStack = styled(Stack)((props) => ({
     width: "18px",
     height: "18px",
     "& path": {
-      fill: props.theme.secondaryColor,
+      fill: props.theme.palette.secondary,
     },
   },
   "& :hover svg path": {
@@ -69,7 +69,7 @@ export const ShowTweet: React.FC<Props> = ({
     createdAt,
   } = tweet;
 
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { handleReaction } = useReaction({
     tweetId: id,
     parentTweetId: parentTweet?.id,
@@ -143,8 +143,14 @@ export const ShowTweet: React.FC<Props> = ({
             </Typography>
           )}
         </Link>
-        <Link to={`/${RoutePath.HANDLE_HASH}/handle/status/${id}`} className="secondary">
-          <Typography display={"inline"} sx={{ color: theme.secondaryColor }}>
+        <Link
+          to={`/${RoutePath.HANDLE_HASH}/handle/status/${id}`}
+          className="secondary"
+        >
+          <Typography
+            display={"inline"}
+            sx={{ color: theme.palette.secondary }}
+          >
             {" "}
             {moment(setDate(createdAt)).fromNow()}
           </Typography>
@@ -196,7 +202,7 @@ export const ShowTweet: React.FC<Props> = ({
               <Link to={`/${RoutePath.HANDLE_HASH}/handle/status/${id}`}>
                 <Box display="flex" alignItems={"center"}>
                   <CommentIcon />
-                  <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
+                  <Typography ml={0.5} sx={{ color: theme.palette.secondary }}>
                     {commentsCount ? commentsCount : null}
                   </Typography>
                 </Box>

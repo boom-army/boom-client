@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { BoomOnes } from "../views";
 import { ChannelAuction } from "../views/ChannelAuction";
-import { Grid, Paper } from "@mui/material";
-import { ThemeContext } from "../contexts/theme";
+import { Grid, Paper, useTheme } from "@mui/material";
 
 export const GridAuction: React.FC = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const middleColStyles = {
     borderRight: `1px solid ${theme.tertiaryColor}`,

@@ -3,13 +3,12 @@ import React, { useContext } from "react";
 import { ApolloError } from "@apollo/client";
 import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
-import { Grid, Link } from "@mui/material";
+import { Grid, Link, useTheme } from "@mui/material";
 import { HARKL_ID } from "../utils/utils";
 import { Loader } from "./Loader";
 import { NewTweet } from "./Tweet";
 import { NewMeepsCountQuery, Tweet } from "../generated/graphql";
 import { BoomHeroStore } from "./Advertising/BoomHeroStore";
-import { ThemeContext } from "../contexts/theme";
 import { UserContext } from "../contexts/user";
 import { TweetThread } from "./Tweet/TweetThread/TweatThread";
 
@@ -32,7 +31,7 @@ export const FeedList: React.FC<Props> = ({
   refetchCount,
   fetchMore,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { user: userData } = useContext(UserContext);
 
   if (loading)

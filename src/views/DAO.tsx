@@ -29,7 +29,10 @@ export const DAOView = () => {
         </Button>
       </Grid>
       <Grid item xs={12}>
-        <Typography>Buy a Boom Hero and be part of the alpha crew with full access and participation in the build</Typography>
+        <Typography>
+          Buy a Boom Hero and be part of the alpha crew with full access and
+          participation in the build
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography>Shit post on Meeper while you wait</Typography>
@@ -41,7 +44,9 @@ export const DAOView = () => {
         <Typography>Get some $BMA and beat the liquidity squeeze</Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography>VCs get in touch to be part of the funding round</Typography>
+        <Typography>
+          VCs get in touch to be part of the funding round
+        </Typography>
       </Grid>
     </Grid>
   );

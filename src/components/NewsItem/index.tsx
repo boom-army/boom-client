@@ -17,12 +17,12 @@ const IconBox = styled(Box)((props: any) => ({
     verticalAlign: -6,
   },
   "& span": {
-    color: props.theme.secondaryColor,
+    color: props.theme.palette.secondary,
   },
 }));
 
 const IconTypography = styled(Typography)((props: any) => ({
-  color: props.theme.secondaryColor,
+  color: props.theme.palette.secondary,
   fontWeight: 300,
 }));
 

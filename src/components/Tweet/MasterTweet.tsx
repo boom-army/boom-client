@@ -4,17 +4,12 @@ import { CustomResponse } from "../CustomResponse";
 // import { Helmet } from "react-helmet";
 import { Loader } from "../Loader";
 import { NewTweet, ParentTweet, ShowTweet } from ".";
-import {
-  Maybe,
-  Tweet,
-  useTweetQuery,
-} from "../../generated/graphql";
+import { Maybe, Tweet, useTweetQuery } from "../../generated/graphql";
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { useContext, FC } from "react";
 import { UserContext } from "../../contexts/user";
 import _ from "lodash";
-import { ThemeContext } from "../../contexts/theme";
 
 interface NestedMeepProps {
   meep: Maybe<Tweet>;
@@ -22,7 +17,7 @@ interface NestedMeepProps {
 
 export const MasterTweet = () => {
   const { tweetId } = useParams();
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const { data, loading } = useTweetQuery({
     variables: {

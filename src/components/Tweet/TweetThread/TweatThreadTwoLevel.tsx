@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { ShowTweet } from "../index";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../../contexts/theme";
 import { TweetQuery, Tweet } from "../../../generated/graphql";
 import { RoutePath } from "../../../constants";
 
@@ -11,7 +10,7 @@ interface Props {
 }
 
 export const TweetThreadTwoLevel: React.FC<Props> = ({ tweet }: Props) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   // fix with childtweets if relevant
   const childTweets = tweet.masterTweets;
   // slice array to 3 tweets

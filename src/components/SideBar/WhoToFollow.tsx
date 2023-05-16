@@ -1,14 +1,14 @@
 import { useContext } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { Loader } from "../Loader";
-import { ThemeContext } from "../../contexts/theme";
+
 import { USER_FOLLOW } from "../../queries/follow";
 import { User as UserProps } from "../../generated/graphql";
 import { useQuery } from "@apollo/client";
 import { User } from "../User";
 
 export const WhoToFollow = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const { loading, error, data } = useQuery(USER_FOLLOW);
 
@@ -18,7 +18,7 @@ export const WhoToFollow = () => {
   return (
     <>
       <Box px={1.5} py={1}>
-        <Typography sx={{ color: theme.secondaryColor }} variant="body2">
+        <Typography sx={{ color: theme.palette.secondary }} variant="body2">
           Who to follow
         </Typography>
       </Box>

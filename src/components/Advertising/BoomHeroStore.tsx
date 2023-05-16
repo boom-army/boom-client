@@ -8,10 +8,11 @@ import {
   Typography,
   Link as MuiLink,
   styled,
+  useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { User } from "../../generated/graphql";
-import { ThemeContext } from "../../contexts/theme";
+
 import { HerofiedIcon } from "../Icons";
 import { RoutePath } from "../../constants";
 
@@ -20,7 +21,7 @@ interface BoomHeroStoreProps {
 }
 
 export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   return (
     <Card

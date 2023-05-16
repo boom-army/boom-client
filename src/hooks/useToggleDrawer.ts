@@ -1,7 +1,7 @@
-import { atom, useSetRecoilState } from 'recoil';
+import { atom, useSetRecoilState } from "recoil";
 
 export const drawerState = atom({
-  key: 'drawerState',
+  key: "drawerState",
   default: false,
 });
 

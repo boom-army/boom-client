@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import { Picker } from "emoji-mart";
-import { ThemeContext } from "../../contexts/theme";
+
 import "emoji-mart/css/emoji-mart.css";
 import { styled } from "@mui/material/styles";
-import { Box, Modal } from "@mui/material";
+import { Box, Modal, useTheme } from "@mui/material";
 
 const PickerWrapper = styled(Box)((props: any) => ({
   position: "absolute" as "absolute",
@@ -22,7 +22,7 @@ const PickerWrapper = styled(Box)((props: any) => ({
     display: "none",
   },
   ".emoji-mart-dark": {
-    borderColor: props.theme.secondaryColor,
+    borderColor: props.theme.palette.secondary,
     backgroundColor: props.theme.background,
   },
   ".emoji-mart-dark .emoji-mart-category-label span": {
@@ -43,7 +43,7 @@ const PickerWrapper = styled(Box)((props: any) => ({
 const PickerIcon = styled("span")((props: any) => ({
   cursor: "pointer",
   "& svg path": {
-    fill: props.theme.secondaryColor,
+    fill: props.theme.palette.secondary,
   },
   "&:hover svg path": {
     fill: props.theme.accentColor,
@@ -63,7 +63,7 @@ export const EmojiPicker = ({
   dismissOnClick,
 }: EmojiPickerProps) => {
   const [picker, togglePicker] = useState(false);
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const handleEmojiSelect = (pickedEmoji: any) => {
     emojiHandler(pickedEmoji);
@@ -88,7 +88,7 @@ export const EmojiPicker = ({
             <Picker
               useButton={true}
               sheetSize={64}
-              theme={theme.background === "#15202b" ? "dark" : "light"}
+              theme={theme.palette.mode}
               onSelect={handleEmojiSelect}
             />
           )}

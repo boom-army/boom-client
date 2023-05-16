@@ -7,12 +7,12 @@ import {
   CardContent,
   styled,
   Link,
+  useTheme,
 } from "@mui/material";
 import Language from "@mui/icons-material/Language";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import SavingsIcon from "@mui/icons-material/Savings";
-import { ThemeContext } from "../contexts/theme";
 import { RoutePath } from "../constants";
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -34,13 +34,17 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 export const LinkTilesGrid = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const tiles = [
     { icon: <Language />, label: "Feed", link: `/${RoutePath.FEED}` },
     { icon: <LockPersonIcon />, label: "NFT DAOS", link: `/${RoutePath.DAO}` },
     { icon: <NewspaperIcon />, label: "News", link: `/${RoutePath.NEWS}` },
-    { icon: <SavingsIcon />, label: "Tip Leaderboard", link: `/${RoutePath.LEADERBOARD}` },
+    {
+      icon: <SavingsIcon />,
+      label: "Tip Leaderboard",
+      link: `/${RoutePath.LEADERBOARD}`,
+    },
   ];
 
   return (
@@ -53,7 +57,7 @@ export const LinkTilesGrid = () => {
                 <IconButton>{tile.icon}</IconButton>
                 <Typography
                   variant="subtitle1"
-                  color={theme.secondaryColor}
+                  color={theme.palette.secondary}
                   sx={{
                     fontWeight: 300,
                   }}

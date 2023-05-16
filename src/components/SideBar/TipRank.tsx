@@ -10,6 +10,7 @@ import {
   ListItemAvatar,
   ListItemText,
   Badge,
+  useTheme,
 } from "@mui/material";
 import { ReactComponent as BMAIcon } from "../../icons/bma.svg";
 import {
@@ -23,7 +24,7 @@ import { Loader } from "../Loader";
 import { CustomResponse } from "../CustomResponse";
 import { boomNumFormat, HARKL_ID } from "../../utils/utils";
 import { map } from "lodash";
-import { ThemeContext } from "../../contexts/theme";
+
 import dayjs from "dayjs";
 import { UserAvatar } from "../UserAvatar";
 import { HerofiedIcon } from "../Icons";
@@ -35,13 +36,13 @@ const BMAIconWrapper = styled("span")((props) => ({
   svg: {
     verticalAlign: "-4px",
     path: {
-      fill: props.theme.secondaryColor,
+      fill: props.theme.palette.secondary,
     },
   },
 }));
 
 export const TipRank: FC<{}> = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [formattedData, setFormattedData] = useState<TipCount>();
   const [activeButton, setActiveButton] = useState("30 days");
 
@@ -95,7 +96,7 @@ export const TipRank: FC<{}> = () => {
     <Box p={2}>
       <Box display={"flex"} justifyContent={"space-between"}>
         <Typography
-          sx={{ color: theme.secondaryColor }}
+          sx={{ color: theme.palette.secondary }}
           variant="body2"
           alignSelf={"center"}
         >

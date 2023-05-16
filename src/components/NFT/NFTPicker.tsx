@@ -17,11 +17,12 @@ import {
   Stack,
   TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import { PublicKey } from "@solana/web3.js";
 import { ReactComponent as NFTIcon } from "../../icons/nft.svg";
-import { ThemeContext } from "../../contexts/theme";
+
 import { camelizeKeys, displayError } from "../../utils";
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useMetaplex } from "../../contexts/metaplex";
@@ -37,7 +38,7 @@ export const NFTPicker: React.FC<{
   const [loading, setLoading] = useState(false);
   const [fetchNftData, setFetchNftData] = useState(false);
 
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const metaplex = useMetaplex();
   const { connection } = useConnection();
   const { enqueueSnackbar } = useSnackbar();
@@ -150,7 +151,7 @@ export const NFTPicker: React.FC<{
                 minWidth: 600,
                 maxWidth: 600,
                 height: "auto",
-                color: theme.primaryColor,
+                color: theme.palette.primary,
                 background: theme.background,
                 padding: "1rem",
               }}

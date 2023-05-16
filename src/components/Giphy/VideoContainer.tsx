@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { ThemeContext } from "../../contexts/theme";
 
 interface Gif {
   id?: string;
@@ -20,12 +19,12 @@ interface videoProps {
 
 export const VideoContainer: React.FC<videoProps> = ({ gif, onClose }) => {
   const { fixedHeightUrl, title } = gif;
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const VideoBoxWrapper = styled("div")({
     display: "flex",
     borderRadius: "16px",
-    border: `1px solid ${theme.secondaryColor}`,
+    border: `1px solid ${theme.palette.secondary}`,
     overflow: "hidden",
     width: "90%",
     flexWrap: "wrap",

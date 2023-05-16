@@ -8,10 +8,11 @@ import {
   Stack,
   styled,
   Skeleton,
+  useTheme,
 } from "@mui/material";
 import { Tweet, useHomeStatsQuery, Tag } from "../generated/graphql";
 import { WordCloud } from "../components/WordCloud";
-import { ThemeContext } from "../contexts/theme";
+
 import dayjs from "dayjs";
 import { NewsItem } from "../components/NewsItem";
 import { TweetThread } from "../components/Tweet/TweetThread/TweatThread";
@@ -23,7 +24,7 @@ import { LinkTilesGrid } from "../components/LinkTiles";
 import { RoutePath } from "../constants";
 
 export const Dashboard: React.FC = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const prevMonth = dayjs().subtract(1, "month").format("YYYY-MM-DD");
   const { data, loading, error } = useHomeStatsQuery({
@@ -76,7 +77,7 @@ export const Dashboard: React.FC = () => {
                   <Box textAlign="center">
                     <Typography
                       variant="subtitle1"
-                      sx={{ color: theme.secondaryColor, fontWeight: 300 }}
+                      sx={{ color: theme.palette.secondary, fontWeight: 300 }}
                     >
                       {card.title}
                     </Typography>

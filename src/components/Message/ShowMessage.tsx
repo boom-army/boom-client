@@ -4,7 +4,14 @@ import Linkify from "linkify-react";
 import React, { useContext, useState } from "react";
 import ReplyIcon from "@mui/icons-material/Reply";
 import moment from "moment";
-import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  IconButton,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { EmojiTweet } from "../Tweet/index";
 import { HashLink } from "react-router-hash-link";
 import { ImageBox } from "../ImageBox";
@@ -14,7 +21,7 @@ import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { Popover } from "@mui/material";
 import { RecoilState, useSetRecoilState } from "recoil";
-import { ThemeContext } from "../../contexts/theme";
+
 import { TipCreator } from "../TipCreator";
 import { Tweet } from "../../generated/graphql";
 import { UserAvatar } from "../UserAvatar";
@@ -24,13 +31,13 @@ import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
 import { RoutePath } from "../../constants";
 
-export const ReplyBox = styled(Box)((props) => ({
+export const ReplyBox = styled(Box)(({ theme }) => ({
   "&:before": {
     width: "1.5em",
     height: "0.7em",
-    borderLeft: `solid 2px ${props.theme.accentColor}`,
-    borderTop: `solid 2px ${props.theme.accentColor}`,
-    borderColor: `${props.theme.accentColor} transparent transparent ${props.theme.accentColor}`,
+    borderLeft: `solid 2px ${theme.accentColor}`,
+    borderTop: `solid 2px ${theme.accentColor}`,
+    borderColor: `${theme.accentColor} transparent transparent ${theme.accentColor}`,
     borderRadius: "1em 0 0 1em",
     content: '""',
     display: "block",
@@ -42,21 +49,21 @@ export const ReplyBox = styled(Box)((props) => ({
   },
 }));
 
-const IconsBox = styled(Box)((props) => ({
+const IconsBox = styled(Box)(({ theme }) => ({
   "& svg": {
     width: "18px",
     height: "18px",
     "& path": {
-      fill: props.theme.secondaryColor,
+      fill: theme.palette.secondary,
     },
   },
   "& :hover svg path": {
-    fill: props.theme.accentColor,
+    fill: theme.accentColor,
   },
 }));
 
-const MeepBody = styled(Typography)((props) => ({
-  a: { color: props.theme.accentColor },
+const MeepBody = styled(Typography)(({ theme }) => ({
+  a: { color: theme.accentColor },
 }));
 
 interface Props {
@@ -86,7 +93,7 @@ export const ShowMessage: React.FC<Props> = ({
     createdAt,
   } = tweet;
 
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { handleReaction } = useReaction({ tweetId: id });
   const setParentTweetState = useSetRecoilState(parentTweetState);
   const [popAnchor, setPopAnchor] = useState<HTMLElement | null>(null);
@@ -114,7 +121,9 @@ export const ShowMessage: React.FC<Props> = ({
       {parentTweet && (
         <Box sx={{ position: "relative" }}>
           <ReplyBox>
-            <HashLink to={`/${RoutePath.DAO}/${channel?.id}#${parentTweet?.id}`}>
+            <HashLink
+              to={`/${RoutePath.DAO}/${channel?.id}#${parentTweet?.id}`}
+            >
               <Stack direction="row" pl={5}>
                 <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
                   <UserAvatar
@@ -129,7 +138,7 @@ export const ShowMessage: React.FC<Props> = ({
                 <Box mr={1}>
                   <Typography
                     variant="body2"
-                    sx={{ color: theme.secondaryColor }}
+                    sx={{ color: theme.palette.secondary }}
                   >
                     @{parentTweet?.user?.handle}
                   </Typography>
@@ -147,7 +156,7 @@ export const ShowMessage: React.FC<Props> = ({
                     variant="body2"
                     sx={{
                       fontWeight: "300",
-                      color: theme.secondaryColor,
+                      color: theme.palette.secondary,
                     }}
                   >
                     {parentTweet?.text}
@@ -202,7 +211,7 @@ export const ShowMessage: React.FC<Props> = ({
           >
             <ReplyIcon
               sx={{
-                color: theme.secondaryColor,
+                color: theme.palette.secondary,
                 "&:hover": { color: theme.accentColor },
               }}
             />
@@ -243,7 +252,7 @@ export const ShowMessage: React.FC<Props> = ({
                 </Typography>
               </Link>
             </Box>
-            <Typography sx={{ color: theme.secondaryColor }}>
+            <Typography sx={{ color: theme.palette.secondary }}>
               {moment(setDate(createdAt)).fromNow()}
             </Typography>
           </Stack>

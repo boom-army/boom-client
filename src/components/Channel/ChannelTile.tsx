@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import LaunchIcon from "@mui/icons-material/Launch";
-import { Avatar, AvatarGroup, Box, Typography } from "@mui/material";
+import { Avatar, AvatarGroup, Box, Typography, useTheme } from "@mui/material";
 import { ChannelStatus, RoutePath } from "../../constants";
 import { Link } from "react-router-dom";
 import { GetUserChannelsQuery } from "../../generated/graphql";
-import { ThemeContext } from "../../contexts/theme";
+
 import { shortenAddress } from "../../utils/utils";
 import { styled } from "@mui/material/styles";
 
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const ChannelTile: React.FC<Props> = ({ channel }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const localTheme = localStorage.getItem("theme");
   const active = channel.status === ChannelStatus.ACTIVE;
 
@@ -33,7 +33,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
             localTheme === "dark" ? theme.blue.darker : theme.tertiaryColor2,
           borderRadius: 1,
           display: "flex",
-          border: active ? `1px solid ${theme.secondaryColor}` : 0,
+          border: active ? `1px solid ${theme.palette.secondary}` : 0,
           cursor: "pointer",
           margin: 1,
           padding: 1,

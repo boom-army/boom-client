@@ -21,7 +21,7 @@ export {};
 //   Typography,
 // } from "@mui/material";
 // import Tilt from "react-parallax-tilt";
-// import { ThemeContext } from "../contexts/theme";
+//
 // import { CandyMintHome } from "../components/CandyMachine/CandyMintHome";
 
 // const TiltStyled = styled(Tilt)({
@@ -39,7 +39,7 @@ export {};
 
 // const ThemeListItemText = styled(ListItemText)((props) => ({
 //   "& p": {
-//     color: props.theme.secondaryColor,
+//     color: props.theme.palette.secondary,
 //   },
 // }));
 
@@ -63,7 +63,7 @@ export {};
 // const candyMachineId = getCandyMachineId();
 
 // export const OGMint = () => {
-//   const { theme } = useContext(ThemeContext);
+//   const theme = useTheme();
 //   const { connection } = useConnection();
 
 //   return (

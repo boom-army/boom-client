@@ -1,35 +1,72 @@
-import React from "react";
-import { darkTheme, lightTheme, ThemeVars } from "../styles/themes";
+import React, {
+  ReactNode,
+  createContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  components,
+  darkTheme,
+  lightTheme,
+  palette,
+  typography,
+} from "../constants/themeVars";
 
 export enum Theme {
-  StorageTag = "theme",
-  Dark = "dark",
-  Light = "light",
+  TAG = "theme",
+  DARK = "dark",
+  LIGHT = "light",
 }
 
-export type ThemeContextType = {
-  theme: ThemeVars;
-  setTheme: (c: any) => void;
-};
-
-export const ThemeContext = React.createContext<ThemeContextType>({
-  theme: darkTheme,
-  setTheme: (theme) => console.warn("no theme provider"),
+export const ColorModeContext = createContext({
+  toggleColorMode: () => {},
 });
 
-export const ThemeProvider: React.FC<{ children: JSX.Element }> = ({
+export const ThemePicker: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const themeSet =
-    localStorage.getItem(Theme.StorageTag) === Theme.Light
-      ? lightTheme
-      : darkTheme;
+  const [mode, setMode] = useState<Theme.DARK | Theme.LIGHT>(Theme.LIGHT);
 
-  const [theme, setTheme] = React.useState(themeSet);
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        const newMode = mode === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+        localStorage.setItem(Theme.TAG, newMode);
+        setMode(newMode);
+      },
+    }),
+    []
+  );
+
+  useEffect(() => {
+    const storedThemeMode = localStorage.getItem(Theme.TAG);
+    if (
+      storedThemeMode &&
+      (storedThemeMode === Theme.LIGHT || storedThemeMode === Theme.DARK)
+    ) {
+      setMode(storedThemeMode);
+    }
+  }, []);
+
+  const theme = useMemo(() => {
+    const activeTheme = mode === Theme.DARK ? darkTheme : lightTheme;
+    console.log("boom", activeTheme);
+    return createTheme({
+      palette: {
+        mode,
+        ...palette,
+      },
+      ...activeTheme,
+      ...components,
+      ...typography,
+    });
+  }, [mode]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </ColorModeContext.Provider>
   );
 };

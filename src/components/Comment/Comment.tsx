@@ -30,7 +30,7 @@ const Wrapper = styled("div")((props) => ({
 
   ".comment-info-user span.secondary": {
     paddingLeft: "0.5rem",
-    color: `${props.theme.secondaryColor}`,
+    color: `${props.theme.palette.secondary}`,
   },
 
   "@media screen and (max-width: 430px)": {

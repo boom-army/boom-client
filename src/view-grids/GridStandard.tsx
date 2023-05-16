@@ -14,10 +14,10 @@ import {
   News,
   Notifications,
 } from "../views";
-import { ThemeContext } from "../contexts/theme";
+
 import { Exact, Maybe, ProfileQuery, User } from "../generated/graphql";
 import { ApolloQueryResult } from "@apollo/client";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, useTheme } from "@mui/material";
 import { TipLeaderboard } from "../views/TipLeaderboard";
 import { WhoToFollow } from "../components/SideBar/WhoToFollow";
 import { TipRank } from "../components/SideBar/TipRank";
@@ -47,7 +47,7 @@ export const GridStandard: React.FC<GridProps> = ({
   setUser,
   user,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const middleColStyles = {
     borderRight: `1px solid ${theme.tertiaryColor}`,

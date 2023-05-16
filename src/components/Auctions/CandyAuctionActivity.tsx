@@ -11,8 +11,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Loader } from "../Loader";
 import { ExplorerLink } from "../ExplorerLink";
-import { Box, Button, Grid, styled, Typography } from "@mui/material";
-import { ThemeContext } from "../../contexts/theme";
+import { Box, Button, Grid, styled, Typography, useTheme } from "@mui/material";
 
 dayjs.extend(relativeTime);
 
@@ -78,7 +77,7 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [offset, setOffset] = useState<number>(0);
 
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const getAuctionBids = useCallback(
     (offset: number, limit: number, firstLoad?: boolean) => () => {
@@ -179,7 +178,7 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
                       <Button
                         size="small"
                         sx={{
-                          "&.Mui-disabled": { color: theme.secondaryColor },
+                          "&.Mui-disabled": { color: theme.palette.secondary },
                         }}
                         disabled={bidding}
                         onClick={async () => withdraw(index)}

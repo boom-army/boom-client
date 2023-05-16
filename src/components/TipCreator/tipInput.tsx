@@ -1,10 +1,10 @@
 import React, { useContext, useState, useCallback } from "react";
 import { Box } from "@mui/system";
-import { Link } from "@mui/material";
+import { Link, useTheme } from "@mui/material";
 import { PublicKey, Signer, Transaction } from "@solana/web3.js";
 import { SOSOL_TOKEN_ID } from "../../utils/ids";
 import { TextField, Stack, Button } from "@mui/material";
-import { ThemeContext } from "../../contexts/theme";
+
 import { Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import {
   useAnchorWallet,
@@ -35,7 +35,7 @@ export const TipInput: React.FC<Props> = ({
   userId,
   tweetId,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [inputError, setInputError] = useState(false);
   const [txValue, setTxValue] = useState(1);
 
@@ -117,7 +117,9 @@ export const TipInput: React.FC<Props> = ({
 
           const transaction = new Transaction().add(...instructions);
           transaction.feePayer = anchorWallet.publicKey;
-          transaction.recentBlockhash = (await connection.getLatestBlockhash('confirmed')).blockhash;
+          transaction.recentBlockhash = (
+            await connection.getLatestBlockhash("confirmed")
+          ).blockhash;
 
           const tx = await anchorWallet.signTransaction(transaction);
           await wallet.sendTransaction(tx, connection);

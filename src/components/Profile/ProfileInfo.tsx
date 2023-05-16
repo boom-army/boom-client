@@ -24,12 +24,12 @@ const Wrapper = styled("div")((props) => ({
 
     "span.wallet": {
       marginTop: "0.1rem",
-      color: props.theme.secondaryColor,
+      color: props.theme.palette.secondary,
     },
 
     "span.handle": {
       marginTop: "0.1rem",
-      color: props.theme.secondaryColor,
+      color: props.theme.palette.secondary,
     },
   },
 
@@ -43,7 +43,7 @@ const Wrapper = styled("div")((props) => ({
 
   "div.loc-dob-web": {
     display: "flex",
-    color: props.theme.secondaryColor,
+    color: props.theme.palette.secondary,
     margin: "0.6rem 0",
 
     span: {
@@ -58,7 +58,7 @@ const Wrapper = styled("div")((props) => ({
   },
 
   "div.follow-following": {
-    color: props.theme.secondaryColor,
+    color: props.theme.palette.secondary,
     span: {
       marginRight: "1.3rem",
     },

@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { HashLink } from "react-router-hash-link";
 import { ReplyBox } from "../../Message/ShowMessage";
 import { UserAvatar } from "../../UserAvatar";
 import { TweetQuery } from "../../../generated/graphql";
-import { ThemeContext } from "../../../contexts/theme";
 import { RoutePath } from "../../../constants";
 
 interface Props {
@@ -12,12 +11,14 @@ interface Props {
 }
 
 export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   return (
     <Box sx={{ position: "relative", top: 17, left: 14, width: "100%" }}>
       <ReplyBox>
-        <HashLink to={`${RoutePath.HANDLE_HASH}/${tweet?.user?.handle}/${tweet?.id}`}>
+        <HashLink
+          to={`${RoutePath.HANDLE_HASH}/${tweet?.user?.handle}/${tweet?.id}`}
+        >
           <Stack direction="row" pl={5}>
             <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
               <UserAvatar
@@ -30,7 +31,10 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
               />
             </Box>
             <Box mr={1}>
-              <Typography variant="body2" sx={{ color: theme.secondaryColor }}>
+              <Typography
+                variant="body2"
+                sx={{ color: theme.palette.secondary }}
+              >
                 @{tweet?.user?.handle}
               </Typography>
             </Box>
@@ -47,7 +51,7 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
                 variant="body2"
                 sx={{
                   fontWeight: "300",
-                  color: theme.secondaryColor,
+                  color: theme.palette.secondary,
                 }}
               >
                 {tweet?.text}

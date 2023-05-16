@@ -1,11 +1,6 @@
 import { useCallback, useEffect, useMemo, useContext } from "react";
 import base58 from "bs58";
-import {
-  AppBar,
-  Container,
-  Grid,
-  Toolbar,
-} from "@mui/material";
+import { AppBar, Container, Grid, Toolbar } from "@mui/material";
 import { CurrentUser } from "../CurrentUser";
 import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { USER_FOLLOW } from "../../queries/follow";

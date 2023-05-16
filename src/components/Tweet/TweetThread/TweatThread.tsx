@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography, useTheme } from "@mui/material";
 import { ShowTweet } from "../index";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../../contexts/theme";
 import { TweetQuery, Tweet } from "../../../generated/graphql";
 import { ReplyBox } from "../../Message/ShowMessage";
 import { HashLink } from "react-router-hash-link";
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const masterTweets = tweet.masterTweets || [];
   const slicedTweets = masterTweets?.slice(1, 5);
   const isThreaded = (slicedTweets && slicedTweets.length > 0) ?? false;

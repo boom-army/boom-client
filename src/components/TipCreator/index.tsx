@@ -7,15 +7,16 @@ import {
   Link,
   Modal,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { ReactComponent as BMAIcon } from "../../icons/bma.svg";
-import { ThemeContext } from "../../contexts/theme";
+
 import { TipInput } from "./tipInput";
 import { styled } from "@mui/material/styles";
 
 const BMAIconWrapper = styled("span")((props) => ({
   svg: {
-    color: props.theme.secondaryColor,
+    color: props.theme.palette.secondary,
   },
 }));
 
@@ -34,7 +35,7 @@ export const TipCreator: React.FC<TipProps> = ({
   userId,
   hideAmount,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [showTip, setShowTip] = useState(false);
 
   return (
@@ -49,7 +50,7 @@ export const TipCreator: React.FC<TipProps> = ({
             <BMAIcon />
           </BMAIconWrapper>
           {!hideAmount && (
-            <Typography ml={0.5} sx={{ color: theme.secondaryColor }}>
+            <Typography ml={0.5} sx={{ color: theme.palette.secondary }}>
               {tipAmount ? tipAmount : null}
             </Typography>
           )}

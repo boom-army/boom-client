@@ -6,12 +6,11 @@ import { Loader } from "../Loader";
 import { USERS } from "../../queries/follow";
 import { useQuery } from "@apollo/client";
 import { Box } from "@mui/system";
-import { styled } from "@mui/material/styles";
-import { ThemeContext } from "../../contexts/theme";
+import { styled, useTheme } from "@mui/material/styles";
 import { User } from "../../generated/graphql";
 
 export const People = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { loading, data, fetchMore } = useQuery(USERS, {
     variables: {
       offset: 0,
@@ -20,7 +19,7 @@ export const People = () => {
 
   const StyledGrid = styled(Grid)({
     "@media (max-width: 600px)": {
-      borderBottom: `1px solid ${theme.secondaryColor}`,
+      borderBottom: `1px solid ${theme.palette.secondary}`,
       marginBottom: "1em",
     },
   });

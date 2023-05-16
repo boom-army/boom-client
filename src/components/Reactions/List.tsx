@@ -4,8 +4,8 @@ import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import { Emoji } from "emoji-mart";
 import { Reaction, useTweetReactionsLazyQuery } from "../../generated/graphql";
-import { ThemeContext } from "../../contexts/theme";
-import { Typography } from "@mui/material";
+
+import { Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import { UserAvatar } from "../UserAvatar";
 
@@ -71,7 +71,7 @@ export const List: React.FC<{
   handleReaction: HandleReaction;
   tweetId: string;
 }> = ({ reactions, handleReaction, tweetId }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [getTweetReactions, { data, loading }] = useTweetReactionsLazyQuery({
     variables: { tweetId: tweetId },
   });
@@ -109,7 +109,7 @@ export const List: React.FC<{
                     padding: "2px 10px 0",
                     borderRadius: "30px",
                     minWidth: "auto",
-                    color: theme.secondaryColor,
+                    color: theme.palette.secondary,
                     backgroundColor: isMine ? theme.tertiaryColor2 : "inherit",
                     lineHeight: "1.2",
                   }}

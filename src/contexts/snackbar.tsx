@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Alert, AlertColor, Snackbar, LinearProgress } from "@mui/material";
-import { ThemeContext } from "./theme";
+import {
+  Alert,
+  AlertColor,
+  Snackbar,
+  LinearProgress,
+  useTheme,
+} from "@mui/material";
 
 type SnackBarContextActions = {
   enqueueSnackbar: (
@@ -23,7 +28,7 @@ interface SnackBarContextProviderProps {
 const SnackbarProvider: React.FC<SnackBarContextProviderProps> = ({
   children,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const [open, setOpen] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<string>("");

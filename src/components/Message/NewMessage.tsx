@@ -9,6 +9,7 @@ import {
   InputAdornment,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import {
@@ -25,7 +26,7 @@ import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { RecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
-import { ThemeContext } from "../../contexts/theme";
+
 import { UploadFileIcon } from "../Icons";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { client } from "../../apollo/client";
@@ -44,17 +45,17 @@ interface Props {
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
 
-const IconsGrid = styled(Grid)((props) => ({
+const IconsGrid = styled(Grid)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   flexDirection: "row",
   "& svg": {
-    fill: props.theme.accentColor,
+    fill: theme.accentColor,
     width: "22px",
     height: "20px",
     marginRight: "1em",
     "& path": {
-      fill: props.theme.accentColor,
+      fill: theme.accentColor,
     },
   },
 }));
@@ -69,7 +70,7 @@ export const NewMessage: React.FC<Props> = ({
   parentTweetState,
   scrollRef,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
@@ -252,7 +253,7 @@ export const NewMessage: React.FC<Props> = ({
               autoFocus={true}
               ref={scrollRef}
               sx={{
-                color: theme.primaryColor,
+                color: theme.palette.primary,
                 padding: "1em 1em 1em 0",
                 "&:before": {
                   borderColor: theme.tertiaryColor2,

@@ -4,14 +4,14 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import Typography from "@mui/material/Typography";
-import { IconButton } from "@mui/material";
-import { ThemeContext } from "../../contexts/theme";
+import { IconButton, useTheme } from "@mui/material";
+
 import React, { useContext, useEffect, useState } from "react";
 
 function LinearProgressWithLabel(
   props: LinearProgressProps & { value: number; refreshContent: () => void }
 ) {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const ticker = () => {
     const value = 60 - props.value / 1.6666666666666667;

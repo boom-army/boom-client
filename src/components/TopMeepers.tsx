@@ -4,20 +4,20 @@ import {
   ListItemAvatar,
   Badge,
   ListItemText,
+  useTheme,
 } from "@mui/material";
 import React, { FC, useContext } from "react";
 import { UserAvatar } from "./UserAvatar";
 import { NameCard } from "./UserLabels/NameCard";
 import { UserWithMeepCount, Maybe } from "../generated/graphql";
 import { awardColorSelect } from "../utils";
-import { ThemeContext } from "../contexts/theme";
 
 interface TMProps {
   meepers: any;
 }
 
 export const TopMeepers: FC<TMProps> = ({ meepers }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   return (
     <List>
       {meepers?.map((meeper: any, i: number) => (

@@ -1,10 +1,9 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { Emoji } from "emoji-mart";
 import { HARKL_ID } from "../../utils/utils";
 import { HerofiedIcon } from "../Icons";
 import { Link } from "react-router-dom";
 import { Mention, useProfileByIdQuery, User } from "../../generated/graphql";
-import { ThemeContext } from "../../contexts/theme";
 import { UserAvatar } from "../UserAvatar";
 import { useContext, useEffect, useState } from "react";
 import moment from "moment";
@@ -17,7 +16,7 @@ interface NotificationProps {
 }
 
 export const Notification = ({ mention }: NotificationProps) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const [text, setText] = useState("");
   const [fromUser, setFromUser] = useState(mention?.tweet?.user);
 
@@ -66,7 +65,7 @@ export const Notification = ({ mention }: NotificationProps) => {
           </Box>
           <Typography
             variant="body2"
-            color={theme.secondaryColor}
+            color={theme.palette.secondary}
             sx={{ fontWeight: "600", mr: 0.5 }}
           >
             {fromUser.consumerName}
@@ -74,7 +73,7 @@ export const Notification = ({ mention }: NotificationProps) => {
           <Typography
             mr={0.5}
             variant="body2"
-            color={theme.secondaryColor}
+            color={theme.palette.secondary}
           >{`@${fromUser.handle}`}</Typography>
           {fromUser?.data?.avatarUpdateAuthority === HARKL_ID && (
             <HerofiedIcon
@@ -88,7 +87,11 @@ export const Notification = ({ mention }: NotificationProps) => {
           )}
           {mention.type && mention.type.includes("emoji") ? (
             <Box>
-              <Typography variant="body2" color={theme.secondaryColor} pl={0.5}>
+              <Typography
+                variant="body2"
+                color={theme.palette.secondary}
+                pl={0.5}
+              >
                 reacted{" "}
                 <Box
                   display={"inline"}
@@ -103,11 +106,15 @@ export const Notification = ({ mention }: NotificationProps) => {
               </Typography>
             </Box>
           ) : (
-            <Typography variant="body2" color={theme.secondaryColor} pl={0.5}>
+            <Typography
+              variant="body2"
+              color={theme.palette.secondary}
+              pl={0.5}
+            >
               {text}
             </Typography>
           )}
-          <Typography variant="body2" color={theme.secondaryColor} pl={0.5}>
+          <Typography variant="body2" color={theme.palette.secondary} pl={0.5}>
             {moment(setDate(mention.createdAt)).fromNow()}
           </Typography>
         </Box>

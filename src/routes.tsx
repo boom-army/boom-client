@@ -11,22 +11,22 @@ import {
   Badge,
   BottomNavigation,
   BottomNavigationAction,
+  Box,
   Container,
   Grid,
   IconButton,
   Paper,
   Slide,
   SwipeableDrawer,
+  styled,
   useMediaQuery,
   useScrollTrigger,
   useTheme,
 } from "@mui/material";
-import { Box, styled } from "@mui/system";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GiphyContextProvider } from "./contexts/giphy";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
-import { ThemeContext } from "./contexts/theme";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
@@ -60,7 +60,7 @@ const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
   backgroundColor: theme.background,
   borderTop: `1px solid ${theme.tertiaryColor}`,
   "& .MuiButtonBase-root": {
-    color: `${theme.secondary} !important`,
+    color: `${theme.palette.secondary} !important`,
     paddingTop: "1em",
   },
   "& .Mui-selected": {
@@ -70,13 +70,13 @@ const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
     },
   },
   "& .MuiBadge-badge": {
-    color: theme.primaryColor,
+    color: theme.palette.primary,
     backgroundColor: theme.accentColor,
   },
 }));
 
 export const AppRoutes: React.FC = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { user, setUser } = useContext(UserContext);
   const [value, setValue] = React.useState("recents");
 
@@ -154,7 +154,7 @@ export const AppRoutes: React.FC = () => {
                       <MoreHorizIcon
                         sx={{
                           borderRadius: "50%",
-                          border: `1px solid ${theme.primaryColor}`,
+                          border: `1px solid ${theme.palette.primary}`,
                         }}
                       />
                     </IconButton>

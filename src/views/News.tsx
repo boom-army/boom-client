@@ -1,14 +1,13 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import { alpha, Box, Grid, Typography } from "@mui/material";
+import { alpha, Box, Grid, Typography, useTheme } from "@mui/material";
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
 import { useSearchTweetsQuery } from "../generated/graphql";
 import { NewsItem } from "../components/NewsItem";
 import { useContext } from "react";
-import { ThemeContext } from "../contexts/theme";
 
 export const News = () => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { data, loading, fetchMore } = useSearchTweetsQuery({
     variables: { term: "#news", type: "TAGS", limit: 20 },
   });

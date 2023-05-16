@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
-import FeedIcon from '@mui/icons-material/Feed';
-import HubIcon from '@mui/icons-material/Hub';
+import FeedIcon from "@mui/icons-material/Feed";
+import HubIcon from "@mui/icons-material/Hub";
 import IconButton from "@mui/material/IconButton";
-import NewspaperIcon from '@mui/icons-material/Newspaper';
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import React from "react";
-import ScienceIcon from '@mui/icons-material/Science';
+import ScienceIcon from "@mui/icons-material/Science";
 import Toolbar from "@mui/material/Toolbar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { RoutePath } from "../constants";
@@ -30,7 +30,9 @@ const NavIconButton: React.FC<NavIconButtonProps> = ({ icon, route }) => {
           color="inherit"
           sx={{
             "& svg": {
-              color: isActiveRoute ? theme.accentColor : theme.primaryColor,
+              color: isActiveRoute
+                ? theme.accentColor
+                : theme.palette.primary.main,
             },
             "&:hover": {
               "& svg": {
@@ -76,7 +78,10 @@ export const FloatingNavbar = () => {
         >
           <NavIconButton icon={<HubIcon />} route={RoutePath.HOME} />
           <NavIconButton icon={<FeedIcon />} route={`/${RoutePath.FEED}`} />
-          <NavIconButton icon={<NewspaperIcon />} route={`/${RoutePath.NEWS}`} />
+          <NavIconButton
+            icon={<NewspaperIcon />}
+            route={`/${RoutePath.NEWS}`}
+          />
           <NavIconButton icon={<ScienceIcon />} route={`/${RoutePath.LAB}`} />
         </Box>
       </Toolbar>

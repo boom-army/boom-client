@@ -11,6 +11,7 @@ import {
   Modal,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import {
   FindNftsByOwnerOutput,
@@ -20,7 +21,7 @@ import {
   Sft,
 } from "@metaplex-foundation/js";
 import { Loader } from "../Loader";
-import { ThemeContext } from "../../contexts/theme";
+
 import { UserContext } from "../../contexts/user";
 import { currentCluster } from "../../utils/utils";
 import { displayError } from "../../utils";
@@ -51,7 +52,7 @@ interface URIData {
 }
 
 const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { setUser } = useContext(UserContext);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -115,7 +116,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
         >
           <Link
             onClick={() => toggleNftSelect(true)}
-            color={theme.secondaryColor}
+            color={theme.palette.secondary}
             underline="hover"
           >
             <Box

@@ -8,9 +8,10 @@ import {
   Grid,
   Badge,
   Input,
+  useTheme,
 } from "@mui/material";
 import { SIGN_FILE } from "../../queries/files";
-import { ThemeContext } from "../../contexts/theme";
+
 import {
   cleanTypeName,
   displayError,
@@ -36,7 +37,7 @@ interface Profile {
 }
 
 export const EditProfileForm = ({ profile, setUser }: Profile) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const handle = useInput(profile.handle);
@@ -248,10 +249,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Handle"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 value={handle.value}
                 onChange={handle.onChange}
@@ -267,10 +268,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Name"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 value={consumerName.value}
                 onChange={consumerName.onChange}
@@ -287,10 +288,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Bio"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 value={bio.value}
                 onChange={bio.onChange}
@@ -306,10 +307,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Website"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 value={website.value}
                 onChange={website.onChange}
@@ -325,10 +326,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Date of Birth"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 value={dob.value}
                 onChange={dob.onChange}
@@ -344,10 +345,10 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 label="Location"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 InputProps={{
-                  style: { color: theme.secondaryColor },
+                  style: { color: theme.palette.secondary },
                 }}
                 value={location.value}
                 onChange={location.onChange}

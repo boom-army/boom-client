@@ -19,6 +19,7 @@ import {
   InputAdornment,
   IconButton,
   TextField,
+  useTheme,
 } from "@mui/material";
 import { LoadingButton as Button } from "@mui/lab";
 import { UploadFileIcon } from "../Icons";
@@ -27,7 +28,7 @@ import { displayError, getUniqueFileName, uploadFile } from "../../utils";
 import { useInput } from "../../hooks/useInput";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
-import { ThemeContext } from "../../contexts/theme";
+
 import { useState, useContext, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import { UserAvatar } from "../UserAvatar";
@@ -61,7 +62,7 @@ export const NewTweet = ({
   channel,
   closePopUp,
 }: NewTweetProps) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useTheme();
   const { user: userData } = useContext(UserContext);
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
@@ -202,7 +203,7 @@ export const NewTweet = ({
             fullWidth={true}
             variant="standard"
             sx={{
-              color: theme.primaryColor,
+              color: theme.palette.primary,
               padding: "1em 1em 1em 0",
               "& .MuiInput-root:before": {
                 border: 0,
