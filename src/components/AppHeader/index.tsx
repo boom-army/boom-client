@@ -21,7 +21,7 @@ export const AppHeader = () => {
 
   const token = localStorage.getItem("token");
   const headerImg =
-    localStorage.getItem(Theme.StorageTag) === Theme.Light
+    localStorage.getItem(Theme.TAG) === Theme.LIGHT
       ? "/assets/boom-logo-dark.png"
       : "/assets/boom-logo-light.png";
 

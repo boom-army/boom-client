@@ -27,17 +27,19 @@ export const ColorModeContext = createContext({
 export const ThemePicker: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [mode, setMode] = useState<Theme.DARK | Theme.LIGHT>(Theme.LIGHT);
+  const [mode, setMode] = useState<Theme.DARK | Theme.LIGHT>(Theme.DARK);
 
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        const newMode = mode === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
-        localStorage.setItem(Theme.TAG, newMode);
-        setMode(newMode);
+        setMode((mode) => {
+          const newMode = mode === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+          localStorage.setItem(Theme.TAG, newMode);
+          return newMode;
+        });
       },
     }),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -52,7 +54,6 @@ export const ThemePicker: React.FC<{ children: ReactNode }> = ({
 
   const theme = useMemo(() => {
     const activeTheme = mode === Theme.DARK ? darkTheme : lightTheme;
-    console.log("boom", activeTheme);
     return createTheme({
       palette: {
         mode,
