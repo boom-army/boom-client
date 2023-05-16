@@ -5,6 +5,7 @@ import {
   CardActionArea,
   IconButton,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { Follow } from "../Profile/Follow";
 import { Link } from "react-router-dom";
@@ -19,8 +20,9 @@ type Props = {
 };
 
 export const User = ({ user }: Props) => {
+  const theme = useTheme();
   return (
-    <Card>
+    <Card sx={{ backgroundImage: "none", background: theme.background }}>
       <Box sx={{ display: "flex" }}>
         <CardActionArea
           component={RouterLink}
@@ -42,11 +44,9 @@ export const User = ({ user }: Props) => {
               <Typography noWrap sx={{ width: "10em" }}>
                 {user && user.consumerName}
               </Typography>
-              <Typography
-                noWrap
-                color="secondary"
-                sx={{ width: "10em" }}
-              >{`@${user && user.handle}`}</Typography>
+              <Typography noWrap color="secondary" sx={{ width: "10em" }}>{`@${
+                user && user.handle
+              }`}</Typography>
             </Box>
           </Box>
         </CardActionArea>

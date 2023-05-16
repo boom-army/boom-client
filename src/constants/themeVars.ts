@@ -49,7 +49,7 @@ const palette = {
   },
   warning: {
     main: "#FEAB07",
-  }
+  },
 };
 
 export const paletteDark = {
@@ -109,13 +109,13 @@ export const darkTheme = {
 };
 
 export const components: Components = {
-  // MuiPaper: {
-  //   styleOverrides: {
-  //     root: ({ theme }: { theme: any }) => ({
-  //       boxShadow: `${theme.background2} 0px 3px 5px`,
-  //     }),
-  //   },
-  // },
+  MuiPaper: {
+    styleOverrides: {
+      root: ({ theme }: { theme: any }) => ({
+        boxShadow: `${theme.background2} 0px 3px 5px`,
+      }),
+    },
+  },
   MuiSvgIcon: {
     styleOverrides: {
       root: ({ theme }: { theme: any }) => ({
