@@ -221,9 +221,16 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                   <Typography variant="body1">Profile</Typography>
                 </Stack>
               </NavLink>
-              <Stack onClick={toggleColorMode} direction="row" {...stackProps}>
+              <Stack
+                onClick={toggleColorMode}
+                direction="row"
+                {...stackProps}
+                sx={{ cursor: "pointer" }}
+              >
                 <InvertColorsIcon sx={iconProps} />
-                <Typography variant="body1">Theme</Typography>
+                <Typography variant="body1" sx={{ color: theme.accentColor }}>
+                  Theme
+                </Typography>
               </Stack>
               {/* <ChangeColor stackProps={stackProps} iconProps={iconProps} /> */}
               <Logout stackProps={stackProps} iconProps={iconProps} />

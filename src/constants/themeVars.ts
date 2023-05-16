@@ -33,10 +33,6 @@ const colors = [
 ];
 
 export const palette = {
-  background: {
-    paper: "#FFF",
-    default: "#F5F8FA",
-  },
   primary: {
     main: colors[0],
     light: "#17141A",
@@ -150,10 +146,10 @@ export const typography: TypographyOptions = {
     '"Segoe UI Symbol"',
   ].join(","),
   fontSize: 14,
-  // fontWeight: 400,
   fontWeightLight: 300,
-  // fontWeightSemiBold: 600,
-  // fontWeightExtraBold: 800,
+  fontWeightRegular: 400,
+  fontWeightMedium: 600,
+  fontWeightBold: 800,
   h1: {
     fontSize: 30,
     fontWeight: 600,
