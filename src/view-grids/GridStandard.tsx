@@ -76,8 +76,7 @@ export const GridStandard: React.FC<GridProps> = ({
           />
         </Routes>
       </Grid>
-      <Paper
-        component={Grid}
+      <Grid
         item
         xs={12}
         sm={12}
@@ -114,7 +113,7 @@ export const GridStandard: React.FC<GridProps> = ({
             element={<Navigate replace to={RoutePath.HOME} />}
           />
         </Routes>
-      </Paper>
+      </Grid>
     </>
   );
 };
