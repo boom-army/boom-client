@@ -59,8 +59,8 @@ export const GridStandard: React.FC<GridProps> = ({
     },
   };
   return (
-    <Grid container>
-      <Grid item md={3} display={{ xs: "none", sm: "none", md: "block" }}>
+    <>
+      <Grid item md={2} display={{ xs: "none", sm: "none", md: "block" }}>
         <Routes>
           <Route
             path="*"
@@ -78,7 +78,7 @@ export const GridStandard: React.FC<GridProps> = ({
         item
         xs={12}
         sm={12}
-        md={9}
+        md={5}
         sx={middleColStyles}
         elevation={0}
       >
@@ -110,6 +110,6 @@ export const GridStandard: React.FC<GridProps> = ({
           />
         </Routes>
       </Paper>
-    </Grid>
+    </>
   );
 };

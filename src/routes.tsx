@@ -1,17 +1,19 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BoomArmy from "./images/raise-the-boomarmy.png";
 import BoomLogo from "./images/boom-logo.png";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import LanguageIcon from "@mui/icons-material/Language";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import React, { useContext } from "react";
 import { AppHeader } from "./components/AppHeader";
 import {
   Badge,
+  BottomNavigation,
+  BottomNavigationAction,
   Container,
   Grid,
+  IconButton,
   Paper,
   Slide,
   SwipeableDrawer,
@@ -37,6 +39,43 @@ import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
 
+const MiniDrawer = styled(Box)(({ theme }) => ({
+  position: "fixed",
+  top: 0,
+  left: 0,
+  height: "100vh",
+  width: "3rem",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: theme.spacing(1),
+  backgroundColor: theme.background,
+  zIndex: theme.zIndex.drawer - 1,
+  cursor: "pointer",
+  borderRight: `1px solid ${theme.tertiaryColor}`,
+}));
+
+const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
+  width: "auto",
+  backgroundColor: theme.background,
+  borderTop: `1px solid ${theme.tertiaryColor}`,
+  "& .MuiButtonBase-root": {
+    color: `${theme.secondary} !important`,
+    paddingTop: "1em",
+  },
+  "& .Mui-selected": {
+    color: theme.accentColor,
+    "& .MuiSvgIcon-root": {
+      color: theme.accentColor,
+    },
+  },
+  "& .MuiBadge-badge": {
+    color: theme.primaryColor,
+    backgroundColor: theme.accentColor,
+  },
+}));
+
 export const AppRoutes: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { user, setUser } = useContext(UserContext);
@@ -47,26 +86,6 @@ export const AppRoutes: React.FC = () => {
   const trigger = useScrollTrigger();
   const toggleDrawer = useToggleDrawer();
   const drawer = useRecoilValue(drawerState);
-
-  const StyledBottomNavigation = styled(BottomNavigation)({
-    width: "auto",
-    backgroundColor: theme.background,
-    borderTop: `1px solid ${theme.tertiaryColor}`,
-    "& .MuiButtonBase-root": {
-      color: `${theme.secondaryColor} !important`,
-      paddingTop: "1em",
-    },
-    "& .Mui-selected": {
-      color: theme.accentColor,
-      "& .MuiSvgIcon-root": {
-        color: theme.accentColor,
-      },
-    },
-    "& .MuiBadge-badge": {
-      color: theme.primaryColor,
-      backgroundColor: theme.accentColor,
-    },
-  });
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -121,103 +140,114 @@ export const AppRoutes: React.FC = () => {
               ) : (
                 <AppHeader />
               )}
-              <Grid item>
-                <Container maxWidth="lg" disableGutters={true}>
-                  <Routes>
-                    {/* <Route
+              <Grid container>
+                <Routes>
+                  {/* <Route
                       path="auctions"
                       element={
                         <GridAuction />
                       }
                     /> */}
-                    <Route path={RoutePath.HOME} element={<DAOView />} />
-                    <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
-                    <Route
-                      path="*"
-                      element={
-                        <GridStandard
-                          loading={loading}
-                          data={data}
-                          refetch={refetch}
-                          user={user}
-                          setUser={setUser}
-                        />
-                      }
+                  <Route path={RoutePath.HOME} element={<DAOView />} />
+                  <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
+                  <Route
+                    path={RoutePath.WILDCARD}
+                    element={
+                      <GridStandard
+                        loading={loading}
+                        data={data}
+                        refetch={refetch}
+                        user={user}
+                        setUser={setUser}
+                      />
+                    }
+                  />
+                </Routes>
+                <Paper
+                  component={Grid}
+                  sx={{
+                    position: "fixed",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                  }}
+                  display={{ xs: "block", sm: "block", md: "none" }}
+                  elevation={3}
+                >
+                  <StyledBottomNavigation value={value} onChange={handleChange}>
+                    <BottomNavigationAction
+                      component={NavLink}
+                      label="Feed"
+                      value="hero-feed"
+                      icon={<LanguageIcon />}
+                      to={RoutePath.HOME}
                     />
-                  </Routes>
-                  <Paper
-                    component={Grid}
-                    sx={{
-                      position: "fixed",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                    }}
-                    display={{ xs: "block", sm: "block", md: "none" }}
-                    elevation={3}
-                  >
-                    <StyledBottomNavigation
-                      value={value}
-                      onChange={handleChange}
-                    >
+                    {user?.handle && (
                       <BottomNavigationAction
                         component={NavLink}
-                        label="Feed"
-                        value="hero-feed"
-                        icon={<LanguageIcon />}
-                        to={RoutePath.HOME}
+                        label="Notifications"
+                        value="notifications"
+                        icon={
+                          <Badge badgeContent={data?.profile?.newMentionsCount}>
+                            <NotificationsIcon />
+                          </Badge>
+                        }
+                        to={RoutePath.NOTIFICATIONS}
                       />
-                      {user?.handle && (
-                        <BottomNavigationAction
-                          component={NavLink}
-                          label="Notifications"
-                          value="notifications"
-                          icon={
-                            <Badge
-                              badgeContent={data?.profile?.newMentionsCount}
-                            >
-                              <NotificationsIcon />
-                            </Badge>
-                          }
-                          to={RoutePath.NOTIFICATIONS}
-                        />
-                      )}
-                      {user?.handle && (
-                        <BottomNavigationAction
-                          component={NavLink}
-                          label="Profile"
-                          value="profile"
-                          icon={<AccountCircleIcon />}
-                          to={`${RoutePath.HANDLE_HASH}/${user.handle}`}
-                        />
-                      )}
+                    )}
+                    {user?.handle && (
                       <BottomNavigationAction
-                        label="Menu"
-                        value="menu"
-                        icon={<MenuIcon />}
-                        onClick={toggleDrawer(true)}
+                        component={NavLink}
+                        label="Profile"
+                        value="profile"
+                        icon={<AccountCircleIcon />}
+                        to={`${RoutePath.HANDLE_HASH}/${user.handle}`}
                       />
-                    </StyledBottomNavigation>
-                  </Paper>
-                  <SwipeableDrawer
-                    anchor="right"
-                    open={drawer}
-                    onClose={toggleDrawer(false)}
-                    onOpen={toggleDrawer(true)}
+                    )}
+                    <BottomNavigationAction
+                      label="Menu"
+                      value="menu"
+                      icon={<MenuIcon />}
+                      onClick={toggleDrawer(true)}
+                    />
+                  </StyledBottomNavigation>
+                </Paper>
+                <MiniDrawer
+                  onClick={toggleDrawer(!drawer)}
+                  display={{ xs: "none", sm: "none", md: "flex" }}
+                >
+                  <Box>
+                    <IconButton>
+                      <LanguageIcon />
+                    </IconButton>
+                  </Box>
+                  <IconButton>
+                    <MoreHorizIcon
+                      sx={{
+                        borderRadius: "50%",
+                        border: `1px solid ${theme.primaryColor}`,
+                      }}
+                    />
+                  </IconButton>
+                </MiniDrawer>
+                <SwipeableDrawer
+                  anchor="right"
+                  open={drawer}
+                  onClose={toggleDrawer(false)}
+                  onOpen={toggleDrawer(true)}
+                >
+                  <Box
+                    sx={{ width: "20rem", paddingLeft: "1em" }}
+                    role="presentation"
+                    onClick={toggleDrawer(false)}
+                    onKeyDown={toggleDrawer(false)}
                   >
-                    <Box
-                      sx={{ width: "20rem", paddingLeft: "1em" }}
-                      role="presentation"
-                      onClick={toggleDrawer(false)}
-                      onKeyDown={toggleDrawer(false)}
-                    >
-                      <Nav
-                        user={user}
-                        newMentionsCount={data?.profile?.newMentionsCount}
-                      />
-                    </Box>
-                  </SwipeableDrawer>
-                </Container>
+                    <Nav
+                      user={user}
+                      newMentionsCount={data?.profile?.newMentionsCount}
+                    />
+                  </Box>
+                </SwipeableDrawer>
               </Grid>
               <FloatingNavbar />
             </>
