@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { Loader } from "../Loader";
 
@@ -18,7 +17,7 @@ export const WhoToFollow = () => {
   return (
     <>
       <Box px={1.5} py={1}>
-        <Typography sx={{ color: theme.palette.secondary }} variant="body2">
+        <Typography color="secondary" variant="body2">
           Who to follow
         </Typography>
       </Box>

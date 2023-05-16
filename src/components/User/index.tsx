@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import {
   Box,
@@ -7,7 +5,6 @@ import {
   CardActionArea,
   IconButton,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { Follow } from "../Profile/Follow";
 import { Link } from "react-router-dom";
@@ -22,7 +19,6 @@ type Props = {
 };
 
 export const User = ({ user }: Props) => {
-  const theme = useTheme();
   return (
     <Card>
       <Box sx={{ display: "flex" }}>
@@ -48,7 +44,8 @@ export const User = ({ user }: Props) => {
               </Typography>
               <Typography
                 noWrap
-                sx={{ color: theme.palette.secondary, width: "10em" }}
+                color="secondary"
+                sx={{ width: "10em" }}
               >{`@${user && user.handle}`}</Typography>
             </Box>
           </Box>

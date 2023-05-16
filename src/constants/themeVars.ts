@@ -2,7 +2,7 @@ import { Components, Theme, ThemeVars } from "@mui/material";
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 export interface CustomThemeVars extends ThemeVars {
-  background: string,
+  background: string;
   background2: string;
   bgHover: string;
   accentColor: string;
@@ -32,7 +32,7 @@ const colors = [
   "#17BF63",
 ];
 
-export const palette = {
+const palette = {
   primary: {
     main: colors[0],
     light: "#17141A",
@@ -49,7 +49,23 @@ export const palette = {
   },
   warning: {
     main: "#FEAB07",
+  }
+};
+
+export const paletteDark = {
+  background: {
+    default: "#15202b",
+    paper: "#0E1B25",
   },
+  ...palette,
+};
+
+export const paletteLight = {
+  background: {
+    default: "#FFF",
+    paper: "#F5F8FA",
+  },
+  ...palette,
 };
 
 const themeColors = {
@@ -93,13 +109,13 @@ export const darkTheme = {
 };
 
 export const components: Components = {
-  MuiPaper: {
-    styleOverrides: {
-      root: ({ theme }: { theme: any }) => ({
-        boxShadow: `${theme.background2} 0px 3px 5px`,
-      }),
-    },
-  },
+  // MuiPaper: {
+  //   styleOverrides: {
+  //     root: ({ theme }: { theme: any }) => ({
+  //       boxShadow: `${theme.background2} 0px 3px 5px`,
+  //     }),
+  //   },
+  // },
   MuiSvgIcon: {
     styleOverrides: {
       root: ({ theme }: { theme: any }) => ({

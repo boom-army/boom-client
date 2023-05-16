@@ -49,7 +49,6 @@ const MiniDrawer = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "center",
   padding: theme.spacing(1),
-  backgroundColor: theme.background,
   zIndex: theme.zIndex.drawer - 1,
   cursor: "pointer",
   borderRight: `1px solid ${theme.tertiaryColor}`,
