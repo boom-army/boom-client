@@ -34,9 +34,7 @@ const colors = [
 
 const palette = {
   primary: {
-    main: colors[0],
-    light: "#17141A",
-    dark: "#FFF",
+    main: "#F5F8FA",
   },
   secondary: {
     main: "#657786",
@@ -57,6 +55,9 @@ export const paletteDark = {
     default: "#15202b",
     paper: "#0E1B25",
   },
+  text: {
+    primary: '#F5F8FA',
+  },
   ...palette,
 };
 
@@ -64,6 +65,9 @@ export const paletteLight = {
   background: {
     default: "#FFF",
     paper: "#F5F8FA",
+  },
+  text: {
+    primary: '#15202b',
   },
   ...palette,
 };

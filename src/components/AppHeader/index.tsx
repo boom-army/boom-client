@@ -97,6 +97,7 @@ export const AppHeader = () => {
       position="static"
       sx={{
         borderBottom: (t) => `1px solid ${t.palette.divider}`,
+        backgroundImage: "none",
       }}
     >
       <Toolbar variant="dense">
