@@ -10,7 +10,8 @@ import {
   components,
   darkTheme,
   lightTheme,
-  palette,
+  paletteDark,
+  paletteLight,
   typography,
 } from "../constants/themeVars";
 
@@ -54,6 +55,7 @@ export const ThemePicker: React.FC<{ children: ReactNode }> = ({
 
   const theme = useMemo(() => {
     const activeTheme = mode === Theme.DARK ? darkTheme : lightTheme;
+    const palette = mode === Theme.DARK ? paletteDark : paletteLight;
     return createTheme({
       palette: {
         mode,
