@@ -252,7 +252,7 @@ export const ShowMessage: React.FC<Props> = ({
                 </Typography>
               </Link>
             </Box>
-            <Typography sx={{ color: theme.palette.secondary }}>
+            <Typography color="secondary">
               {moment(setDate(createdAt)).fromNow()}
             </Typography>
           </Stack>

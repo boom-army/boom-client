@@ -202,7 +202,7 @@ export const ShowTweet: React.FC<Props> = ({
               <Link to={`/${RoutePath.HANDLE_HASH}/handle/status/${id}`}>
                 <Box display="flex" alignItems={"center"}>
                   <CommentIcon />
-                  <Typography ml={0.5} sx={{ color: theme.palette.secondary }}>
+                  <Typography ml={0.5} color="secondary">
                     {commentsCount ? commentsCount : null}
                   </Typography>
                 </Box>

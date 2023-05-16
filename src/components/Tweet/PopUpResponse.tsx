@@ -42,7 +42,7 @@ export const PopUpResponse = ({
       <Link onClick={handleClickOpen} sx={{ textDecoration: "none" }}>
         <Box display="flex" alignItems={"center"}>
           <CommentIcon />
-          <Typography ml={0.5} sx={{ color: theme.palette.secondary }}>
+          <Typography ml={0.5} color="secondary">
             {commentsCount ? commentsCount : null}
           </Typography>
         </Box>

@@ -105,11 +105,11 @@ export const List: React.FC<{
                 <Button
                   onClick={() => handleReaction({ emojiId })}
                   startIcon={<Emoji emoji={emojiId} size={16} />}
+                  color="secondary"
                   style={{
                     padding: "2px 10px 0",
                     borderRadius: "30px",
                     minWidth: "auto",
-                    color: theme.palette.secondary,
                     backgroundColor: isMine ? theme.tertiaryColor2 : "inherit",
                     lineHeight: "1.2",
                   }}

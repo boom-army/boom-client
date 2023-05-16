@@ -45,7 +45,7 @@ export const Retweet = ({ id, isRetweet, retweetsCount }: RetweetProps) => {
       ) : (
         <RetweetIcon loading={loading} onClick={handleRetweet} />
       )}
-      <Typography ml={0.5} sx={{ color: theme.palette.secondary }}>
+      <Typography ml={0.5} color="secondary">
         {retweetsCountState ? retweetsCountState : null}
       </Typography>
     </Box>

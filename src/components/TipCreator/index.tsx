@@ -50,7 +50,7 @@ export const TipCreator: React.FC<TipProps> = ({
             <BMAIcon />
           </BMAIconWrapper>
           {!hideAmount && (
-            <Typography ml={0.5} sx={{ color: theme.palette.secondary }}>
+            <Typography ml={0.5} color="secondary">
               {tipAmount ? tipAmount : null}
             </Typography>
           )}

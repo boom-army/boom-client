@@ -48,7 +48,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
-    color: isActive ? theme.accentColor : theme.palette.primary.main,
+    color: isActive ? theme.accentColor : theme.palette.secondary,
   });
 
   const stackProps = {
@@ -228,7 +228,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
                 sx={{ cursor: "pointer" }}
               >
                 <InvertColorsIcon sx={iconProps} />
-                <Typography variant="body1" sx={{ color: theme.accentColor }}>
+                <Typography variant="body1">
                   Theme
                 </Typography>
               </Stack>
