@@ -87,25 +87,25 @@ export const App = () => {
       boxSizing: "inherit",
     },
     body: {
-      backgroundColor: theme.palette.background.default,
-      color: theme.palette.primary.main,
+      backgroundColor: theme.background,
+      color: theme.palette.primary,
       overflowX: "hidden",
     },
     "*::-webkit-scrollbar": {
       width: "0.4rem",
     },
     "*::-webkit-scrollbar-track": {
-      background: theme.palette.background.default,
+      background: theme.background,
     },
     "*::-webkit-scrollbar-thumb": {
       background: theme.accentColor,
     },
     ".MuiPaper-root": {
-      backgroundColor: `${theme.palette.background.default} !important`,
-      color: `${theme.palette.primary.main} !important`,
+      backgroundColor: `${theme.background} !important`,
+      color: `${theme.palette.primary} !important`,
     },
     ".MuiListItemIcon-root": {
-      color: `${theme.palette.secondary.main} !important`,
+      color: `${theme.palette.secondary} !important`,
     },
     "h1, h2, h3, h4, h5, h6": {
       fontWeight: "normal",
