@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Profile } from "../components/Profile/Profile";
 import { MasterTweet } from "../components/Tweet/MasterTweet";
 import { NFTMint } from "../components/Mint/NFTMint";
@@ -17,7 +17,7 @@ import {
 
 import { Exact, Maybe, ProfileQuery, User } from "../generated/graphql";
 import { ApolloQueryResult } from "@apollo/client";
-import { Grid, Paper, useTheme } from "@mui/material";
+import { Box, Grid, useTheme } from "@mui/material";
 import { TipLeaderboard } from "../views/TipLeaderboard";
 import { WhoToFollow } from "../components/SideBar/WhoToFollow";
 import { TipRank } from "../components/SideBar/TipRank";
@@ -76,7 +76,8 @@ export const GridStandard: React.FC<GridProps> = ({
           />
         </Routes>
       </Grid>
-      <Grid
+      <Box
+        component={Grid}
         item
         xs={12}
         sm={12}
@@ -84,7 +85,6 @@ export const GridStandard: React.FC<GridProps> = ({
         sx={{
           ...middleColStyles,
         }}
-        elevation={0}
       >
         <Routes>
           <Route path={RoutePath.PEOPLE} element={<PeopleView />} />
@@ -113,7 +113,7 @@ export const GridStandard: React.FC<GridProps> = ({
             element={<Navigate replace to={RoutePath.HOME} />}
           />
         </Routes>
-      </Grid>
+      </Box>
     </>
   );
 };

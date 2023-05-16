@@ -157,49 +157,51 @@ export const components: Components = {
   },
 };
 
-export const typography: TypographyOptions = {
-  fontFamily: [
-    "-apple-system",
-    "BlinkMacSystemFont",
-    '"Noto Sans Display"',
-    '"Trebuchet MS"',
-    "Arial",
-    "sans-serif",
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(","),
-  fontSize: 14,
-  fontWeightLight: 300,
-  fontWeightRegular: 400,
-  fontWeightMedium: 600,
-  fontWeightBold: 800,
-  h1: {
-    fontSize: 30,
-    fontWeight: 600,
-    lineHeight: "1.8rem",
-  },
-  h2: {
-    fontSize: 26,
-    fontWeight: 600,
-    lineHeight: "1.2rem",
-  },
-  h3: {
-    fontSize: 22,
-    fontWeight: 600,
-    lineHeight: "1.2rem",
-  },
-  h4: {
-    fontSize: 18,
-    fontWeight: 600,
-    lineHeight: "1.2rem",
-  },
-  h5: {
-    fontSize: 16,
-    fontWeight: 600,
-    lineHeight: "1.2rem",
-  },
-  body2: {
-    fontWeight: 300,
+export const typography: { typography: TypographyOptions } = {
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Noto Sans Display"',
+      '"Trebuchet MS"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 600,
+    fontWeightBold: 800,
+    h1: {
+      fontSize: 30,
+      fontWeight: 600,
+      lineHeight: "1.8rem",
+    },
+    h2: {
+      fontSize: 26,
+      fontWeight: 600,
+      lineHeight: "1.2rem",
+    },
+    h3: {
+      fontSize: 22,
+      fontWeight: 600,
+      lineHeight: "1.2rem",
+    },
+    h4: {
+      fontSize: 18,
+      fontWeight: 600,
+      lineHeight: "1.2rem",
+    },
+    h5: {
+      fontSize: 16,
+      fontWeight: 600,
+      lineHeight: "1.2rem",
+    },
+    body2: {
+      fontWeight: 300,
+    },
   },
 };
