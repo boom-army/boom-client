@@ -4,7 +4,7 @@ import SimpleReactLightbox from "simple-react-lightbox";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { AppRoutes } from "./routes";
-import { CssBaseline, useTheme } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { RecoilRoot } from "recoil";
 import { SnackbarProvider } from "./contexts/snackbar";
 import { ThemePicker } from "./contexts/theme";
@@ -44,8 +44,6 @@ declare module "@mui/material/styles" {
 }
 
 export const App = () => {
-  const theme = useTheme();
-
   const isLoggedIn = localStorage.getItem("user");
 
   const [oneSignalId, setOneSignalId] = useState("");
@@ -76,74 +74,47 @@ export const App = () => {
     }
   });
 
-  const globalStyles = {
-    html: {
-      fontSize: "16px",
-      boxSizing: "border-box",
-    },
-    "*, *:before, *:after": {
-      padding: "0",
-      margin: "0",
-      boxSizing: "inherit",
-    },
-    body: {
-      backgroundColor: theme.background,
-      color: theme.palette.primary,
-      overflowX: "hidden",
-    },
-    "*::-webkit-scrollbar": {
-      width: "0.4rem",
-    },
-    "*::-webkit-scrollbar-track": {
-      background: theme.background,
-    },
-    "*::-webkit-scrollbar-thumb": {
-      background: theme.accentColor,
-    },
-    ".MuiPaper-root": {
-      backgroundColor: `${theme.background} !important`,
-      color: `${theme.palette.primary} !important`,
-    },
-    ".MuiListItemIcon-root": {
-      color: `${theme.palette.secondary} !important`,
-    },
-    "h1, h2, h3, h4, h5, h6": {
-      fontWeight: "normal",
-    },
-    a: {
-      textDecoration: "none",
-      color: "inherit",
-    },
-    li: {
-      listStyleType: "none",
-    },
-    "button:focus, textarea:focus, input:focus": {
-      outline: "none",
-    },
-    ".upload-progress-bar": {
-      color: "#FFF",
-    },
-    textarea: {
-      resize: "none",
-      overflow: "hidden",
-    },
-    "button:disabled,button[disabled]": {
-      opacity: "0.5",
-      cursor: "not-allowed",
-    },
-    // using svg as input icon
-    ".svg-input > input, .avatar-input > input, .cover-photo > input": {
-      display: "none",
-    },
-  };
-
   return (
     <RecoilRoot>
       <ThemePicker>
         <CssBaseline />
         <GlobalStyles
-          // @ts-ignore
-          styles={globalStyles}
+          styles={(theme) => ({
+            "*::-webkit-scrollbar": {
+              width: "0.4rem",
+            },
+            "*::-webkit-scrollbar-track": {
+              background: theme.background,
+            },
+            "*::-webkit-scrollbar-thumb": {
+              background: theme.accentColor,
+            },
+            a: {
+              textDecoration: "none",
+              color: "inherit",
+            },
+            li: {
+              listStyleType: "none",
+            },
+            "button:focus, textarea:focus, input:focus": {
+              outline: "none",
+            },
+            ".upload-progress-bar": {
+              color: "#FFF",
+            },
+            textarea: {
+              resize: "none",
+              overflow: "hidden",
+            },
+            "button:disabled,button[disabled]": {
+              opacity: "0.5",
+              cursor: "not-allowed",
+            },
+            // using svg as input icon
+            ".svg-input > input, .avatar-input > input, .cover-photo > input": {
+              display: "none",
+            },
+          })}
         />
         <SnackbarProvider>
           <SimpleReactLightbox>

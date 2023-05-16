@@ -39,7 +39,7 @@ export const ThemePicker: React.FC<{ children: ReactNode }> = ({
         });
       },
     }),
-    [],
+    []
   );
 
   useEffect(() => {
@@ -62,6 +62,9 @@ export const ThemePicker: React.FC<{ children: ReactNode }> = ({
       ...activeTheme,
       ...components,
       ...typography,
+      shape: {
+        borderRadius: 0,
+      },
     });
   }, [mode]);
 
