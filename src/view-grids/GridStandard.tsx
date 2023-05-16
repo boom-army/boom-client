@@ -52,12 +52,15 @@ export const GridStandard: React.FC<GridProps> = ({
   const middleColStyles = {
     borderRight: `1px solid ${theme.tertiaryColor}`,
     borderLeft: `1px solid ${theme.tertiaryColor}`,
+    height: "100vh",
+    overflowY: "scroll",
 
     "@media screen and (max-width: 530px)": {
       border: 0,
       paddingBottom: "2.5rem",
     },
   };
+
   return (
     <>
       <Grid item md={2} display={{ xs: "none", sm: "none", md: "block" }}>
@@ -79,7 +82,9 @@ export const GridStandard: React.FC<GridProps> = ({
         xs={12}
         sm={12}
         md={5}
-        sx={middleColStyles}
+        sx={{
+          ...middleColStyles,
+        }}
         elevation={0}
       >
         <Routes>

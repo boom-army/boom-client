@@ -40,7 +40,6 @@ import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
 
 const MiniDrawer = styled(Box)(({ theme }) => ({
-  position: "fixed",
   top: 0,
   left: 0,
   height: "100vh",
@@ -141,6 +140,26 @@ export const AppRoutes: React.FC = () => {
                 <AppHeader />
               )}
               <Grid container>
+                <Grid item md={0.4}>
+                  <MiniDrawer
+                    onClick={toggleDrawer(!drawer)}
+                    display={{ xs: "none", sm: "none", md: "flex" }}
+                  >
+                    <Box>
+                      <IconButton>
+                        <LanguageIcon />
+                      </IconButton>
+                    </Box>
+                    <IconButton>
+                      <MoreHorizIcon
+                        sx={{
+                          borderRadius: "50%",
+                          border: `1px solid ${theme.primaryColor}`,
+                        }}
+                      />
+                    </IconButton>
+                  </MiniDrawer>
+                </Grid>
                 <Routes>
                   {/* <Route
                       path="auctions"
@@ -212,24 +231,6 @@ export const AppRoutes: React.FC = () => {
                     />
                   </StyledBottomNavigation>
                 </Paper>
-                <MiniDrawer
-                  onClick={toggleDrawer(!drawer)}
-                  display={{ xs: "none", sm: "none", md: "flex" }}
-                >
-                  <Box>
-                    <IconButton>
-                      <LanguageIcon />
-                    </IconButton>
-                  </Box>
-                  <IconButton>
-                    <MoreHorizIcon
-                      sx={{
-                        borderRadius: "50%",
-                        border: `1px solid ${theme.primaryColor}`,
-                      }}
-                    />
-                  </IconButton>
-                </MiniDrawer>
                 <SwipeableDrawer
                   anchor="right"
                   open={drawer}
