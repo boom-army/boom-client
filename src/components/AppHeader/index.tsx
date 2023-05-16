@@ -96,7 +96,8 @@ export const AppHeader = () => {
     <AppBar
       position="static"
       sx={{
-        borderBottom: (t) => `1px solid ${t.palette.divider}`,
+        borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+        backgroundColor: (theme) => theme.background2,
         backgroundImage: "none",
       }}
     >
