@@ -48,7 +48,6 @@ const MiniDrawer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   padding: theme.spacing(1),
   zIndex: theme.zIndex.drawer - 1,
-  cursor: "pointer",
   borderRight: `1px solid ${theme.tertiaryColor}`,
 }));
 
@@ -157,7 +156,11 @@ export const AppRoutes: React.FC = () => {
                     </MiniDrawer>
                   </Grid>
                 ) : null}
-                <Grid item sm={12} md={11.4} container>
+                <Grid
+                  item
+                  sm={12}
+                  md={11}
+                >
                   <Routes>
                     {/* <Route
                       path="auctions"
@@ -230,7 +233,7 @@ export const AppRoutes: React.FC = () => {
                   </StyledBottomNavigation>
                 </Paper>
                 <SwipeableDrawer
-                  anchor="right"
+                  anchor="left"
                   open={drawer}
                   onClose={toggleDrawer(false)}
                   onOpen={toggleDrawer(true)}

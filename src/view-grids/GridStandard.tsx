@@ -17,7 +17,7 @@ import {
 
 import { Exact, Maybe, ProfileQuery, User } from "../generated/graphql";
 import { ApolloQueryResult } from "@apollo/client";
-import { Box, Grid, useTheme } from "@mui/material";
+import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { TipLeaderboard } from "../views/TipLeaderboard";
 import { WhoToFollow } from "../components/SideBar/WhoToFollow";
 import { TipRank } from "../components/SideBar/TipRank";
@@ -46,30 +46,33 @@ export const GridStandard: React.FC<GridProps> = ({
   setUser,
 }) => {
   const theme = useTheme();
+  const hideWidgets = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Grid container justifyContent="center">
-      <Grid
-        item
-        md={2}
-        display={{ xs: "none", sm: "none", md: "block" }}
-        sx={{ height: "calc(100vh - 49px)", overflow: "scroll" }}
-      >
-        <Routes>
-          <Route
-            path="*"
-            element={
-              <>
-                <TipRank />
-                <WhoToFollow />
-              </>
-            }
-          />
-        </Routes>
-      </Grid>
+      {!hideWidgets ? (
+        <Grid
+          item
+          md={3}
+          xl={2}
+          display={{ xs: "none", sm: "none", md: "block" }}
+          sx={{ height: "calc(100vh - 49px)", overflow: "scroll" }}
+        >
+          <Routes>
+            <Route
+              path="*"
+              element={
+                <>
+                  <TipRank />
+                  <WhoToFollow />
+                </>
+              }
+            />
+          </Routes>
+        </Grid>
+      ) : null}
       <Box
         component={Grid}
         item
-        xs={12}
         sm={12}
         md={5}
         sx={{
