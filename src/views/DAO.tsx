@@ -5,8 +5,8 @@ export const DAOView = () => {
   const handleSignUp = () => {};
 
   return (
-    <Grid container rowSpacing={2} sx={{ ml: 2, mr: 2 }}>
-      <Grid item xs={12}>
+    <Grid container justifyContent="center">
+      <Grid item xs={9}>
         <Box>
           <Typography variant="h2">
             Have we really been doing DAO's on Solana?
@@ -23,27 +23,27 @@ export const DAOView = () => {
           </Typography>
         </Box>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={9}>
         <Button variant="contained" onClick={handleSignUp}>
           Join the Waiting List
         </Button>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={9}>
         <Typography>
           Buy a Boom Hero and be part of the alpha crew with full access and
           participation in the build
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={9}>
         <Typography>Shit post on Meeper while you wait</Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={9}>
         <Typography>Read up on how our dev is progressing</Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={9}>
         <Typography>Get some $BMA and beat the liquidity squeeze</Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={9}>
         <Typography>
           VCs get in touch to be part of the funding round
         </Typography>

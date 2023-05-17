@@ -48,21 +48,8 @@ export const GridStandard: React.FC<GridProps> = ({
   user,
 }) => {
   const theme = useTheme();
-
-  const middleColStyles = {
-    borderRight: `1px solid ${theme.tertiaryColor}`,
-    borderLeft: `1px solid ${theme.tertiaryColor}`,
-    height: "100vh",
-    overflowY: "scroll",
-
-    "@media screen and (max-width: 530px)": {
-      border: 0,
-      paddingBottom: "2.5rem",
-    },
-  };
-
   return (
-    <>
+    <Grid container justifyContent="center">
       <Grid item md={2} display={{ xs: "none", sm: "none", md: "block" }}>
         <Routes>
           <Route
@@ -83,7 +70,12 @@ export const GridStandard: React.FC<GridProps> = ({
         sm={12}
         md={5}
         sx={{
-          ...middleColStyles,
+          borderRight: `1px solid ${theme.tertiaryColor}`,
+          borderLeft: `1px solid ${theme.tertiaryColor}`,
+          "@media screen and (max-width: 530px)": {
+            border: 0,
+            paddingBottom: "2.5rem",
+          },
         }}
       >
         <Routes>
@@ -114,6 +106,6 @@ export const GridStandard: React.FC<GridProps> = ({
           />
         </Routes>
       </Box>
-    </>
+    </Grid>
   );
 };

@@ -41,7 +41,7 @@ import { DAOView } from "./views/DAO";
 const MiniDrawer = styled(Box)(({ theme }) => ({
   top: 0,
   left: 0,
-  height: "100vh",
+  maxHeight: "calc(100vh - 3rem)",
   width: "3rem",
   display: "flex",
   flexDirection: "column",
@@ -138,7 +138,7 @@ export const AppRoutes: React.FC = () => {
                 <AppHeader />
               )}
               <Grid container>
-                <Grid item md={0.4}>
+                <Grid item sx={{ width: "3rem" }} display={{ xs: "none", sm: "none", md: "inherit" }}>
                   <MiniDrawer
                     onClick={toggleDrawer(!drawer)}
                     display={{ xs: "none", sm: "none", md: "flex" }}
@@ -158,28 +158,30 @@ export const AppRoutes: React.FC = () => {
                     </IconButton>
                   </MiniDrawer>
                 </Grid>
-                <Routes>
-                  {/* <Route
+                <Grid item xs>
+                  <Routes>
+                    {/* <Route
                       path="auctions"
                       element={
                         <GridAuction />
                       }
                     /> */}
-                  <Route path={RoutePath.HOME} element={<DAOView />} />
-                  <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
-                  <Route
-                    path={RoutePath.WILDCARD}
-                    element={
-                      <GridStandard
-                        loading={loading}
-                        data={data}
-                        refetch={refetch}
-                        user={user}
-                        setUser={setUser}
-                      />
-                    }
-                  />
-                </Routes>
+                    <Route path={RoutePath.HOME} element={<DAOView />} />
+                    <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
+                    <Route
+                      path={RoutePath.WILDCARD}
+                      element={
+                        <GridStandard
+                          loading={loading}
+                          data={data}
+                          refetch={refetch}
+                          user={user}
+                          setUser={setUser}
+                        />
+                      }
+                    />
+                  </Routes>
+                </Grid>
                 <Paper
                   component={Grid}
                   sx={{

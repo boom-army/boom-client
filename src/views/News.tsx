@@ -39,11 +39,11 @@ export const News = () => {
         container
         id="tweetScroll"
         sx={{
-          height: "100vh",
+          maxHeight: "calc(100vh - 49px)",
           overflow: "auto",
         }}
       >
-        <Box mt={8}>
+        <Box mt={6}>
           <InfiniteScroll
             dataLength={data?.searchTweets?.length}
             next={() =>

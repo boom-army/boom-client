@@ -65,7 +65,7 @@ export const FeedList: React.FC<Props> = ({
       container
       id="scrollBox"
       sx={{
-        height: "100vh",
+        maxHeight: "calc(100vh - 49px)",
         overflow: "auto",
       }}
     >

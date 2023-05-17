@@ -18,7 +18,7 @@ const SearchResultTweets = ({ tweets, loading, fetchMoreTweets }: any) => {
       container
       id="tweetScroll"
       sx={{
-        height: "100vh",
+        maxHeight: "calc(100vh - 49px)",
         overflow: "auto",
       }}
     >
