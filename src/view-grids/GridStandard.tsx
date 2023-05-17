@@ -50,7 +50,12 @@ export const GridStandard: React.FC<GridProps> = ({
   const theme = useTheme();
   return (
     <Grid container justifyContent="center">
-      <Grid item md={2} display={{ xs: "none", sm: "none", md: "block" }}>
+      <Grid
+        item
+        md={2}
+        display={{ xs: "none", sm: "none", md: "block" }}
+        sx={{ height: "calc(100vh - 49px)", overflow: "scroll" }}
+      >
         <Routes>
           <Route
             path="*"
