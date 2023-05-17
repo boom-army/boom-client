@@ -1,6 +1,7 @@
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from "@mui/icons-material/Person";
-import { SxProps, styled } from "@mui/material/styles";
+import { Avatar, SxProps, styled, useTheme } from "@mui/material";
+import { createAvatar } from "@dicebear/core";
+import { pixelArtNeutral } from "@dicebear/collection";
+import { useEffect, useState } from "react";
 
 interface IProps {
   avatar?: string;
@@ -16,14 +17,35 @@ const NFTAvatar = styled(Avatar)({
   transition: "all 0.2s ease-in",
 });
 
+const uniqueString = () => {
+  const timestamp = Date.now().toString(36);
+  const randomString = Math.random().toString(36).substring(2, 7);
+  return `${timestamp}-${randomString}`;
+};
+
 export const UserAvatar = ({ avatar, isNFT = "", sx }: IProps) => {
+  const theme = useTheme();
+  const [userAvatar, setUserAvatar] = useState(avatar);
+
+  useEffect(() => {
+    if (!avatar) {
+      const genAvatar = createAvatar(pixelArtNeutral, {
+        seed: uniqueString(),
+      });
+      const svg = genAvatar.toDataUriSync();
+      setUserAvatar(svg);
+    }
+  }, [avatar]);
+
+  console.log(userAvatar);
+
   return isNFT && isNFT.length > 0 ? (
-    <NFTAvatar className={`avatar`} sx={sx} src={avatar}>
-      {!avatar && <PersonIcon />}
-    </NFTAvatar>
+    <NFTAvatar className={`avatar`} sx={sx} src={userAvatar} />
   ) : (
-    <Avatar className={`avatar`} sx={sx} src={avatar}>
-      {!avatar && <PersonIcon />}
-    </Avatar>
+    <Avatar
+      className={`avatar`}
+      sx={{ ...sx, background: theme.tertiaryColor }}
+      src={userAvatar}
+    />
   );
 };

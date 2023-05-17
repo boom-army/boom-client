@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.8",
+    "@dicebear/collection": "^6.0.3",
+    "@dicebear/core": "^6.0.3",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@graphql-codegen/typescript-operations": "^3.0.1",
