@@ -39,9 +39,8 @@ import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
 
 const MiniDrawer = styled(Box)(({ theme }) => ({
-  top: 0,
-  left: 0,
-  maxHeight: "calc(100vh - 3rem)",
+  maxHeight: "calc(100vh - 49px)",
+  minHeight: "calc(100vh - 49px)",
   width: "3rem",
   display: "flex",
   flexDirection: "column",
@@ -78,8 +77,8 @@ export const AppRoutes: React.FC = () => {
   const { user, setUser } = useContext(UserContext);
   const [value, setValue] = React.useState("recents");
 
-  const mTheme = useTheme();
-  const isMobile = useMediaQuery(mTheme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const hideDrawer = useMediaQuery(theme.breakpoints.down("md"));
   const trigger = useScrollTrigger();
   const toggleDrawer = useToggleDrawer();
   const drawer = useRecoilValue(drawerState);
@@ -138,27 +137,27 @@ export const AppRoutes: React.FC = () => {
                 <AppHeader />
               )}
               <Grid container>
-                <Grid item sx={{ width: "3rem" }} display={{ xs: "none", sm: "none", md: "inherit" }}>
-                  <MiniDrawer
-                    onClick={toggleDrawer(!drawer)}
-                    display={{ xs: "none", sm: "none", md: "flex" }}
-                  >
-                    <Box>
+                {!hideDrawer ? (
+                  <Grid item>
+                    <MiniDrawer>
+                      <Box>
+                        <IconButton>
+                          <LanguageIcon />
+                        </IconButton>
+                      </Box>
                       <IconButton>
-                        <LanguageIcon />
+                        <MoreHorizIcon
+                          onClick={toggleDrawer(!drawer)}
+                          sx={{
+                            borderRadius: "50%",
+                            border: `1px solid ${theme.palette.common.white}`,
+                          }}
+                        />
                       </IconButton>
-                    </Box>
-                    <IconButton>
-                      <MoreHorizIcon
-                        sx={{
-                          borderRadius: "50%",
-                          border: `1px solid ${theme.palette.primary}`,
-                        }}
-                      />
-                    </IconButton>
-                  </MiniDrawer>
-                </Grid>
-                <Grid item xs>
+                    </MiniDrawer>
+                  </Grid>
+                ) : null}
+                <Grid item sm={12} md={11.4} container>
                   <Routes>
                     {/* <Route
                       path="auctions"
@@ -175,7 +174,6 @@ export const AppRoutes: React.FC = () => {
                           loading={loading}
                           data={data}
                           refetch={refetch}
-                          user={user}
                           setUser={setUser}
                         />
                       }

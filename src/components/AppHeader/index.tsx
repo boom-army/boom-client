@@ -102,26 +102,23 @@ export const AppHeader = () => {
       }}
     >
       <Toolbar variant="dense">
-        {/* Remove this when we go full width */}
-        <Container maxWidth="lg">
-          <Grid container>
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="space-between">
-                <Box mr={1} display="flex" alignItems="center">
-                  <Link
-                    to={RoutePath.HOME}
-                    style={{ display: "flex", alignItems: "center" }}
-                  >
-                    <img src={headerImg} alt="Boom" height={20} />
-                  </Link>
-                </Box>
-                <Box mt={0.5}>
-                  <CurrentUser />
-                </Box>
+        <Grid container>
+          <Grid item xs={12}>
+            <Box display="flex" justifyContent="space-between">
+              <Box mr={1} display="flex" alignItems="center">
+                <Link
+                  to={RoutePath.HOME}
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  <img src={headerImg} alt="Boom" height={20} />
+                </Link>
               </Box>
-            </Grid>
+              <Box mt={0.5}>
+                <CurrentUser />
+              </Box>
+            </Box>
           </Grid>
-        </Container>
+        </Grid>
       </Toolbar>
     </AppBar>
   );

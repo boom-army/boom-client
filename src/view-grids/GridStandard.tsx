@@ -37,7 +37,6 @@ interface GridProps {
       | undefined
   ) => Promise<ApolloQueryResult<ProfileQuery>>;
   setUser: (user: User | null) => User | void;
-  user: User | null;
 }
 
 export const GridStandard: React.FC<GridProps> = ({
@@ -45,7 +44,6 @@ export const GridStandard: React.FC<GridProps> = ({
   loading,
   refetch,
   setUser,
-  user,
 }) => {
   const theme = useTheme();
   return (
