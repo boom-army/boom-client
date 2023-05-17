@@ -1,14 +1,15 @@
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BoomArmy from "./images/raise-the-boomarmy.png";
 import BoomLogo from "./images/boom-logo.png";
+import FeedIcon from "@mui/icons-material/Feed";
+import HubIcon from "@mui/icons-material/Hub";
 import LanguageIcon from "@mui/icons-material/Language";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import React, { useContext } from "react";
+import ScienceIcon from "@mui/icons-material/Science";
 import { AppHeader } from "./components/AppHeader";
 import {
-  Badge,
   BottomNavigation,
   BottomNavigationAction,
   Box,
@@ -156,11 +157,7 @@ export const AppRoutes: React.FC = () => {
                     </MiniDrawer>
                   </Grid>
                 ) : null}
-                <Grid
-                  item
-                  sm={12}
-                  md={11}
-                >
+                <Grid item sm={12} md={11}>
                   <Routes>
                     {/* <Route
                       path="auctions"
@@ -197,33 +194,32 @@ export const AppRoutes: React.FC = () => {
                   <StyledBottomNavigation value={value} onChange={handleChange}>
                     <BottomNavigationAction
                       component={NavLink}
-                      label="Feed"
-                      value="hero-feed"
-                      icon={<LanguageIcon />}
+                      label="DAO"
+                      value="dao"
+                      icon={<HubIcon />}
                       to={RoutePath.HOME}
                     />
-                    {user?.handle && (
-                      <BottomNavigationAction
-                        component={NavLink}
-                        label="Notifications"
-                        value="notifications"
-                        icon={
-                          <Badge badgeContent={data?.profile?.newMentionsCount}>
-                            <NotificationsIcon />
-                          </Badge>
-                        }
-                        to={RoutePath.NOTIFICATIONS}
-                      />
-                    )}
-                    {user?.handle && (
-                      <BottomNavigationAction
-                        component={NavLink}
-                        label="Profile"
-                        value="profile"
-                        icon={<AccountCircleIcon />}
-                        to={`${RoutePath.HANDLE_HASH}/${user.handle}`}
-                      />
-                    )}
+                    <BottomNavigationAction
+                      component={NavLink}
+                      label="Feed"
+                      value="feed"
+                      icon={<FeedIcon />}
+                      to={RoutePath.FEED}
+                    />
+                    <BottomNavigationAction
+                      component={NavLink}
+                      label="News"
+                      value="news"
+                      icon={<NewspaperIcon />}
+                      to={RoutePath.NEWS}
+                    />
+                    <BottomNavigationAction
+                      component={NavLink}
+                      label="Labs"
+                      value="labs"
+                      icon={<ScienceIcon />}
+                      to={RoutePath.LAB}
+                    />
                     <BottomNavigationAction
                       label="Menu"
                       value="menu"

@@ -37,8 +37,6 @@ export const UserAvatar = ({ avatar, isNFT = "", sx }: IProps) => {
     }
   }, [avatar]);
 
-  console.log(userAvatar);
-
   return isNFT && isNFT.length > 0 ? (
     <NFTAvatar className={`avatar`} sx={sx} src={userAvatar} />
   ) : (
