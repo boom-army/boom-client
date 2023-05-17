@@ -1,15 +1,17 @@
-import Box from "@mui/material/Box";
 import FeedIcon from "@mui/icons-material/Feed";
 import HubIcon from "@mui/icons-material/Hub";
-import IconButton from "@mui/material/IconButton";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import React from "react";
 import ScienceIcon from "@mui/icons-material/Science";
-import Toolbar from "@mui/material/Toolbar";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  Box,
+  IconButton,
+  Toolbar,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { RoutePath } from "../constants";
 import { useLocation, Link } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 
 interface NavIconButtonProps {
   icon: React.ReactNode;
