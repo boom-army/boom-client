@@ -5,7 +5,7 @@ import { Box, IconButton, styled, useTheme } from "@mui/material";
 import { drawerState, useToggleDrawer } from "../../hooks";
 import { useRecoilValue } from "recoil";
 
-const MiniDrawerWrapper = styled(Box)(({ theme }) => ({
+const DrawerWrapper = styled(Box)(({ theme }) => ({
   maxHeight: "calc(100vh - 49px)",
   minHeight: "calc(100vh - 49px)",
   width: "3rem",
@@ -23,7 +23,7 @@ export const MiniDrawer = () => {
   const toggleDrawer = useToggleDrawer();
   const drawer = useRecoilValue(drawerState);
   return (
-    <MiniDrawerWrapper>
+    <DrawerWrapper>
       <Box>
         <IconButton>
           <LanguageIcon />
@@ -38,6 +38,6 @@ export const MiniDrawer = () => {
           }}
         />
       </IconButton>
-    </MiniDrawerWrapper>
+    </DrawerWrapper>
   );
 };

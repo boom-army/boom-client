@@ -1,10 +1,9 @@
 import BoomArmy from "./images/raise-the-boomarmy.png";
 import BoomLogo from "./images/boom-logo.png";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppHeader } from "./components/AppHeader";
 import {
   Box,
-  Grid,
   Slide,
   SwipeableDrawer,
   useMediaQuery,
@@ -25,14 +24,15 @@ import { drawerState, useToggleDrawer } from "./hooks";
 import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
-import { MiniDrawer, MobileBottomNav } from "./components/Nav";
+import { LeftNavDrawer, MiniDrawer, MobileBottomNav } from "./components/Nav";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
   const { user, setUser } = useContext(UserContext);
+  const [showMenu, setShowMenu] = useState(false);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const hideDrawer = useMediaQuery(theme.breakpoints.down("md"));
+  const drawerHidden = useMediaQuery(theme.breakpoints.down("md"));
   const trigger = useScrollTrigger();
   const toggleDrawer = useToggleDrawer();
   const drawer = useRecoilValue(drawerState);
@@ -86,13 +86,17 @@ export const AppRoutes: React.FC = () => {
               ) : (
                 <AppHeader />
               )}
-              <Grid container>
-                {!hideDrawer ? (
-                  <Grid item>
-                    <MiniDrawer />
-                  </Grid>
+              <Box display="flex">
+                {!drawerHidden ? (
+                  <Box
+                    display={"flex"}
+                    onMouseEnter={() => setShowMenu(true)}
+                    onMouseLeave={() => setShowMenu(false)}
+                  >
+                    {!showMenu ? <MiniDrawer /> : <LeftNavDrawer />}
+                  </Box>
                 ) : null}
-                <Grid item sm={12} md={11}>
+                <Box flexGrow={1} overflow="auto">
                   <Routes>
                     {/* <Route
                       path="auctions"
@@ -114,7 +118,7 @@ export const AppRoutes: React.FC = () => {
                       }
                     />
                   </Routes>
-                </Grid>
+                </Box>
                 <MobileBottomNav />
                 <SwipeableDrawer
                   anchor="left"
@@ -134,7 +138,7 @@ export const AppRoutes: React.FC = () => {
                     />
                   </Box>
                 </SwipeableDrawer>
-              </Grid>
+              </Box>
               <FloatingNavbar />
             </>
           </GiphyContextProvider>
