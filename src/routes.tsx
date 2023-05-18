@@ -2,9 +2,7 @@ import BoomArmy from "./images/raise-the-boomarmy.png";
 import BoomLogo from "./images/boom-logo.png";
 import FeedIcon from "@mui/icons-material/Feed";
 import HubIcon from "@mui/icons-material/Hub";
-import LanguageIcon from "@mui/icons-material/Language";
 import MenuIcon from "@mui/icons-material/Menu";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import React, { useContext } from "react";
 import ScienceIcon from "@mui/icons-material/Science";
@@ -38,19 +36,7 @@ import { drawerState, useToggleDrawer } from "./hooks";
 import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
-
-const MiniDrawer = styled(Box)(({ theme }) => ({
-  maxHeight: "calc(100vh - 49px)",
-  minHeight: "calc(100vh - 49px)",
-  width: "3rem",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: theme.spacing(1),
-  zIndex: theme.zIndex.drawer - 1,
-  borderRight: `1px solid ${theme.tertiaryColor}`,
-}));
+import { MiniDrawer } from "./components/Nav";
 
 const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
   width: "auto",
@@ -139,22 +125,7 @@ export const AppRoutes: React.FC = () => {
               <Grid container>
                 {!hideDrawer ? (
                   <Grid item>
-                    <MiniDrawer>
-                      <Box>
-                        <IconButton>
-                          <LanguageIcon />
-                        </IconButton>
-                      </Box>
-                      <IconButton>
-                        <MoreHorizIcon
-                          onClick={toggleDrawer(!drawer)}
-                          sx={{
-                            borderRadius: "50%",
-                            border: `1px solid ${theme.palette.common.white}`,
-                          }}
-                        />
-                      </IconButton>
-                    </MiniDrawer>
+                    <MiniDrawer />
                   </Grid>
                 ) : null}
                 <Grid item sm={12} md={11}>
