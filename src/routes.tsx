@@ -1,22 +1,12 @@
 import BoomArmy from "./images/raise-the-boomarmy.png";
 import BoomLogo from "./images/boom-logo.png";
-import FeedIcon from "@mui/icons-material/Feed";
-import HubIcon from "@mui/icons-material/Hub";
-import MenuIcon from "@mui/icons-material/Menu";
-import NewspaperIcon from "@mui/icons-material/Newspaper";
 import React, { useContext } from "react";
-import ScienceIcon from "@mui/icons-material/Science";
 import { AppHeader } from "./components/AppHeader";
 import {
-  BottomNavigation,
-  BottomNavigationAction,
   Box,
   Grid,
-  IconButton,
-  Paper,
   Slide,
   SwipeableDrawer,
-  styled,
   useMediaQuery,
   useScrollTrigger,
   useTheme,
@@ -24,7 +14,6 @@ import {
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GiphyContextProvider } from "./contexts/giphy";
 import { Helmet } from "react-helmet";
-import { NavLink } from "react-router-dom";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
@@ -36,42 +25,17 @@ import { drawerState, useToggleDrawer } from "./hooks";
 import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
-import { MiniDrawer } from "./components/Nav";
-
-const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
-  width: "auto",
-  backgroundColor: theme.background,
-  borderTop: `1px solid ${theme.tertiaryColor}`,
-  "& .MuiButtonBase-root": {
-    color: `${theme.palette.secondary} !important`,
-    paddingTop: "1em",
-  },
-  "& .Mui-selected": {
-    color: theme.accentColor,
-    "& .MuiSvgIcon-root": {
-      color: theme.accentColor,
-    },
-  },
-  "& .MuiBadge-badge": {
-    color: theme.palette.primary,
-    backgroundColor: theme.accentColor,
-  },
-}));
+import { MiniDrawer, MobileBottomNav } from "./components/Nav";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
   const { user, setUser } = useContext(UserContext);
-  const [value, setValue] = React.useState("recents");
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const hideDrawer = useMediaQuery(theme.breakpoints.down("md"));
   const trigger = useScrollTrigger();
   const toggleDrawer = useToggleDrawer();
   const drawer = useRecoilValue(drawerState);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
 
   const { loading, data, refetch } = useProfileQuery({
     variables: { handle: user?.handle },
@@ -151,54 +115,7 @@ export const AppRoutes: React.FC = () => {
                     />
                   </Routes>
                 </Grid>
-                <Paper
-                  component={Grid}
-                  sx={{
-                    position: "fixed",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                  }}
-                  display={{ xs: "block", sm: "block", md: "none" }}
-                  elevation={3}
-                >
-                  <StyledBottomNavigation value={value} onChange={handleChange}>
-                    <BottomNavigationAction
-                      component={NavLink}
-                      label="DAO"
-                      value="dao"
-                      icon={<HubIcon />}
-                      to={RoutePath.HOME}
-                    />
-                    <BottomNavigationAction
-                      component={NavLink}
-                      label="Feed"
-                      value="feed"
-                      icon={<FeedIcon />}
-                      to={RoutePath.FEED}
-                    />
-                    <BottomNavigationAction
-                      component={NavLink}
-                      label="News"
-                      value="news"
-                      icon={<NewspaperIcon />}
-                      to={RoutePath.NEWS}
-                    />
-                    <BottomNavigationAction
-                      component={NavLink}
-                      label="Labs"
-                      value="labs"
-                      icon={<ScienceIcon />}
-                      to={RoutePath.LAB}
-                    />
-                    <BottomNavigationAction
-                      label="Menu"
-                      value="menu"
-                      icon={<MenuIcon />}
-                      onClick={toggleDrawer(true)}
-                    />
-                  </StyledBottomNavigation>
-                </Paper>
+                <MobileBottomNav />
                 <SwipeableDrawer
                   anchor="left"
                   open={drawer}
