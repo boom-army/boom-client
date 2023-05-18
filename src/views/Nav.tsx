@@ -48,7 +48,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
   };
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
-    color: isActive ? theme.accentColor : theme.palette.secondary,
+    color: isActive ? theme.accentColor : theme.palette.secondary as unknown as string,
   });
 
   const stackProps = {

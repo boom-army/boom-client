@@ -1,4 +1,4 @@
-import { Components, Theme, ThemeVars } from "@mui/material";
+import { Components, ThemeVars } from "@mui/material";
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 export interface CustomThemeVars extends ThemeVars {
@@ -119,9 +119,11 @@ export const darkTheme = {
 export const components: Components = {
   MuiPaper: {
     styleOverrides: {
-      root: ({ theme }: { theme: any }) => ({
-        boxShadow: `${theme.background2} 0px 3px 5px`,
-      }),
+      root: ({ theme }: { theme: any }) =>
+        theme.unstable_sx({
+          boxShadow: `${theme.background2} 0px 3px 5px`,
+          backgroundImage: "none",
+        }),
     },
   },
   MuiSvgIcon: {
