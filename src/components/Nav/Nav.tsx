@@ -14,12 +14,7 @@ import ScienceIcon from "@mui/icons-material/Science";
 import SearchIcon from "@mui/icons-material/Search";
 import SpeedIcon from "@mui/icons-material/Speed";
 import StyleIcon from "@mui/icons-material/Style";
-import {
-  Badge,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Badge, Box, Stack, Typography, useTheme } from "@mui/material";
 import { RoutePath } from "../../constants";
 import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
@@ -55,12 +50,10 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
     alignItems: "center",
     sx: {
       width: "100%",
-      px: 1,
     },
   };
 
   const StyledStack = styled(Stack)({
-    height: "calc(100vh - 49px)",
     paddingTop: "0.5rem",
     width: "95%",
     fontWeight: 500,

@@ -1,6 +1,16 @@
 import React from "react";
-import { Box, styled } from "@mui/material";
+import {
+  Box,
+  Divider,
+  IconButton,
+  Stack,
+  styled,
+  useTheme,
+} from "@mui/material";
 import { Nav } from ".";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { useRecoilValue } from "recoil";
+import { useToggleDrawer, drawerState } from "../../hooks";
 
 const DrawerWrapper = styled(Box)(({ theme }) => ({
   maxHeight: "calc(100vh - 49px)",
@@ -12,12 +22,28 @@ const DrawerWrapper = styled(Box)(({ theme }) => ({
   alignItems: "center",
   zIndex: theme.zIndex.drawer - 1,
   borderRight: `1px solid ${theme.tertiaryColor}`,
+  overflow: "scroll",
 }));
 
 export const LeftNavDrawer = () => {
+  const theme = useTheme();
+  const toggleDrawer = useToggleDrawer();
+  const drawer = useRecoilValue(drawerState);
   return (
     <DrawerWrapper>
       <Nav />
+      <Divider sx={{ width: "100%" }} />
+      <Box display="flex" justifyContent="flex-end" width="100%">
+        <IconButton>
+          <ChevronLeftIcon
+            onClick={toggleDrawer(!drawer)}
+            sx={{
+              borderRadius: "50%",
+              border: `1px solid ${theme.palette.common.white}`,
+            }}
+          />
+        </IconButton>
+      </Box>
     </DrawerWrapper>
   );
 };

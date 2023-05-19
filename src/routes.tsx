@@ -24,7 +24,12 @@ import { drawerState, useToggleDrawer } from "./hooks";
 import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
-import { LeftNavDrawer, MiniDrawer, MobileBottomNav, Nav } from "./components/Nav";
+import {
+  LeftNavDrawer,
+  MiniDrawer,
+  MobileBottomNav,
+  Nav,
+} from "./components/Nav";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
@@ -126,9 +131,10 @@ export const AppRoutes: React.FC = () => {
                   open={drawer}
                   onClose={toggleDrawer(false)}
                   onOpen={toggleDrawer(true)}
+                  sx={{ "& .MuiDrawer-paper": { backgroundImage: "none" } }}
                 >
                   <Box
-                    sx={{ width: "20rem", paddingLeft: "1em" }}
+                    sx={{ width: "20rem", pl: 2, pb: 5 }}
                     role="presentation"
                   >
                     <Nav

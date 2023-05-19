@@ -5,7 +5,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FeedIcon from "@mui/icons-material/Feed";
 import GroupIcon from "@mui/icons-material/Group";
 import HomeIcon from "@mui/icons-material/Home";
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import HubIcon from "@mui/icons-material/Hub";
 import InvertColorsIcon from "@mui/icons-material/InvertColors";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
@@ -58,17 +58,15 @@ export const MiniDrawer = () => {
           <ScienceIcon />
         </StyledIconButton>
       </Box>
-      <Box>
-        <IconButton>
-          <KeyboardArrowRightIcon
-            onClick={toggleDrawer(!drawer)}
-            sx={{
-              borderRadius: "50%",
-              border: `1px solid ${theme.palette.common.white}`,
-            }}
-          />
-        </IconButton>
-      </Box>
+      <IconButton>
+        <ChevronRightIcon
+          onClick={toggleDrawer(!drawer)}
+          sx={{
+            borderRadius: "50%",
+            border: `1px solid ${theme.palette.common.white}`,
+          }}
+        />
+      </IconButton>
     </DrawerWrapper>
   );
 };
