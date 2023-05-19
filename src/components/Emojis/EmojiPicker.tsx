@@ -73,7 +73,7 @@ export const EmojiPicker = ({
   return (
     <Box>
       <PickerIcon onClick={() => togglePicker(true)}>
-        {customIcon ?? <InsertEmoticonIcon />}
+        {customIcon ?? <InsertEmoticonIcon color="secondary" />}
       </PickerIcon>
       <Modal
         open={picker}

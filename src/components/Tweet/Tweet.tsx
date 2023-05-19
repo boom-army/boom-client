@@ -149,7 +149,7 @@ export const ShowTweet: React.FC<Props> = ({
         >
           <Typography
             display={"inline"}
-            sx={{ color: theme.palette.secondary }}
+            sx={{ color: theme.palette.secondary.main }}
           >
             {" "}
             {moment(setDate(createdAt)).fromNow()}
