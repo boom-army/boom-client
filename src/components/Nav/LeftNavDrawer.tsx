@@ -1,5 +1,6 @@
-import { Box, styled } from "@mui/material";
 import React from "react";
+import { Box, styled } from "@mui/material";
+import { Nav } from ".";
 
 const DrawerWrapper = styled(Box)(({ theme }) => ({
   maxHeight: "calc(100vh - 49px)",
@@ -16,7 +17,7 @@ const DrawerWrapper = styled(Box)(({ theme }) => ({
 export const LeftNavDrawer = () => {
   return (
     <DrawerWrapper>
-      <div>FullDrawer</div>
+      <Nav />
     </DrawerWrapper>
   );
 };

@@ -19,7 +19,7 @@ import { useProfileQuery } from "./generated/graphql";
 import { GridStandard } from "./view-grids/GridStandard";
 // import { GridAuction } from "./view-grids/GridAuction";
 import { Dashboard } from "./views";
-import { FloatingNavbar } from "./components/FloatingNavbar";
+import { FloatingNavbar } from "./components/Nav/FloatingNavbar";
 import { drawerState, useToggleDrawer } from "./hooks";
 import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";

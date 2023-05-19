@@ -10,7 +10,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { RoutePath } from "../constants";
+import { RoutePath } from "../../constants";
 import { useLocation, Link } from "react-router-dom";
 
 interface NavIconButtonProps {
