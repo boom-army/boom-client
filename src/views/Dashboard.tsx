@@ -116,7 +116,7 @@ export const Dashboard: React.FC = () => {
           )}
         </Grid>
         <Grid item xs={12} sm={4}>
-          <HomeTitle title="Top NFT DAOs" titleLink={`/${RoutePath.DAO}`} />
+          <HomeTitle title="Top NFT DAOs" titleLink={RoutePath.HOME} />
           {loading ? (
             <Box>
               <Skeleton

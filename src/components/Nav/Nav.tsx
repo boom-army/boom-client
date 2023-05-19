@@ -69,7 +69,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
         icon={<HubIcon style={iconProps} />}
         label="DAOs"
         description="DAOs are the heart of Boom. They are NFT gated communities made up of Solana's biggest fans."
-        routePath={RoutePath.DAO}
+        routePath={RoutePath.HOME}
         applyActiveStyles={applyActiveStyles}
       />
       <HeroNavLink
@@ -149,7 +149,7 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           </NavLink> */}
       {user?.handle && (
         <>
-          <NavLink style={applyActiveStyles} to={`/${RoutePath.DAO}`}>
+          <NavLink style={applyActiveStyles} to={RoutePath.HOME}>
             <Stack direction="row" {...stackProps}>
               <LockPersonIcon sx={iconProps} />
               <Typography variant="body1">NFT DAOs</Typography>

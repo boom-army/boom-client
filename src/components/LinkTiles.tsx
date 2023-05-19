@@ -37,13 +37,13 @@ export const LinkTilesGrid = () => {
   const theme = useTheme();
 
   const tiles = [
-    { icon: <Language />, label: "Feed", link: `/${RoutePath.FEED}` },
-    { icon: <LockPersonIcon />, label: "NFT DAOS", link: `/${RoutePath.DAO}` },
-    { icon: <NewspaperIcon />, label: "News", link: `/${RoutePath.NEWS}` },
+    { icon: <Language />, label: "Feed", link: RoutePath.FEED },
+    { icon: <LockPersonIcon />, label: "NFT DAOS", link: RoutePath.HOME },
+    { icon: <NewspaperIcon />, label: "News", link: RoutePath.NEWS },
     {
       icon: <SavingsIcon />,
       label: "Tip Leaderboard",
-      link: `/${RoutePath.LEADERBOARD}`,
+      link: RoutePath.LEADERBOARD,
     },
   ];
 
@@ -57,7 +57,7 @@ export const LinkTilesGrid = () => {
                 <IconButton>{tile.icon}</IconButton>
                 <Typography
                   variant="subtitle1"
-                  color={theme.palette.secondary}
+                  color={theme.palette.secondary.main}
                   sx={{
                     fontWeight: 300,
                   }}
