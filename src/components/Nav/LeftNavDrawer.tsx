@@ -22,7 +22,7 @@ const DrawerWrapper = styled(Box)(({ theme }) => ({
   alignItems: "center",
   zIndex: theme.zIndex.drawer - 1,
   borderRight: `1px solid ${theme.tertiaryColor}`,
-  overflow: "scroll",
+  overflowY: "scroll",
 }));
 
 export const LeftNavDrawer = () => {
@@ -32,8 +32,7 @@ export const LeftNavDrawer = () => {
   return (
     <DrawerWrapper>
       <Nav />
-      <Divider sx={{ width: "100%" }} />
-      <Box display="flex" justifyContent="flex-end" width="100%">
+      <Box display="flex" justifyContent="flex-end" py={1} width="100%">
         <IconButton>
           <ChevronLeftIcon
             onClick={toggleDrawer(!drawer)}
