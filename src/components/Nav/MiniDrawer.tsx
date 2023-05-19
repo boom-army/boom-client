@@ -17,7 +17,7 @@ import ScienceIcon from "@mui/icons-material/Science";
 import SearchIcon from "@mui/icons-material/Search";
 import SpeedIcon from "@mui/icons-material/Speed";
 import StyleIcon from "@mui/icons-material/Style";
-import { Box, IconButton, styled, useTheme } from "@mui/material";
+import { Box, IconButton, Stack, styled, useTheme } from "@mui/material";
 import { drawerState, useToggleDrawer } from "../../hooks";
 import { useRecoilValue } from "recoil";
 
@@ -44,7 +44,7 @@ export const MiniDrawer = () => {
   const drawer = useRecoilValue(drawerState);
   return (
     <DrawerWrapper>
-      <Box>
+      <Stack spacing={2}>
         <StyledIconButton>
           <HubIcon />
         </StyledIconButton>
@@ -57,7 +57,7 @@ export const MiniDrawer = () => {
         <StyledIconButton>
           <ScienceIcon />
         </StyledIconButton>
-      </Box>
+      </Stack>
       <IconButton>
         <ChevronRightIcon
           onClick={toggleDrawer(!drawer)}

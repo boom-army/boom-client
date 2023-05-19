@@ -34,7 +34,7 @@ const NavIconButton: React.FC<NavIconButtonProps> = ({ icon, route }) => {
             "& svg": {
               color: isActiveRoute
                 ? theme.accentColor
-                : theme.palette.primary.main,
+                : theme.palette.secondary.main,
             },
             "&:hover": {
               "& svg": {
@@ -74,19 +74,20 @@ export const FloatingNavbar = () => {
         borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
       }}
     >
-      <Toolbar>
-        <Box
-          sx={{ display: "flex", flexGrow: 1, justifyContent: "space-evenly" }}
-        >
-          <NavIconButton icon={<HubIcon />} route={RoutePath.HOME} />
-          <NavIconButton icon={<FeedIcon />} route={`/${RoutePath.FEED}`} />
-          <NavIconButton
-            icon={<NewspaperIcon />}
-            route={`/${RoutePath.NEWS}`}
-          />
-          <NavIconButton icon={<ScienceIcon />} route={`/${RoutePath.LAB}`} />
-        </Box>
-      </Toolbar>
+      <Box
+        sx={{
+          display: "flex",
+          flexGrow: 1,
+          justifyContent: "space-evenly",
+          minHeight: "3rem",
+          alignItems: "center",
+        }}
+      >
+        <NavIconButton icon={<HubIcon />} route={RoutePath.HOME} />
+        <NavIconButton icon={<FeedIcon />} route={`/${RoutePath.FEED}`} />
+        <NavIconButton icon={<NewspaperIcon />} route={`/${RoutePath.NEWS}`} />
+        <NavIconButton icon={<ScienceIcon />} route={`/${RoutePath.LAB}`} />
+      </Box>
     </Box>
   );
 };
