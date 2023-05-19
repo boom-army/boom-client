@@ -93,13 +93,13 @@ export const AppRoutes: React.FC = () => {
               )}
               <Box display="flex">
                 {!drawerHidden ? (
-                  <Box
-                    display={"flex"}
-                    onMouseEnter={() => setShowMenu(true)}
-                    onMouseLeave={() => setShowMenu(false)}
-                  >
-                    {/* {!showMenu ? <MiniDrawer /> : <LeftNavDrawer />} */}
-                    <MiniDrawer /> <LeftNavDrawer />
+                  <Box display={"flex"}>
+                    {!showMenu ? (
+                      <MiniDrawer setShowMenu={setShowMenu} />
+                    ) : (
+                      <LeftNavDrawer setShowMenu={setShowMenu} />
+                    )}
+                    {/* <MiniDrawer /> <LeftNavDrawer /> */}
                   </Box>
                 ) : null}
                 <Box flexGrow={1} overflow="auto">

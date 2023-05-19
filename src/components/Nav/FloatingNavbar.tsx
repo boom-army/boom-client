@@ -6,7 +6,6 @@ import ScienceIcon from "@mui/icons-material/Science";
 import {
   Box,
   IconButton,
-  Toolbar,
   useMediaQuery,
   useTheme,
 } from "@mui/material";

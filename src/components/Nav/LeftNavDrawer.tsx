@@ -1,16 +1,16 @@
 import React from "react";
 import {
   Box,
-  Divider,
   IconButton,
-  Stack,
   styled,
   useTheme,
 } from "@mui/material";
 import { Nav } from ".";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { useRecoilValue } from "recoil";
-import { useToggleDrawer, drawerState } from "../../hooks";
+
+interface LeftDrawerProps {
+  setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const DrawerWrapper = styled(Box)(({ theme }) => ({
   maxHeight: "calc(100vh - 49px)",
@@ -25,17 +25,14 @@ const DrawerWrapper = styled(Box)(({ theme }) => ({
   overflowY: "scroll",
 }));
 
-export const LeftNavDrawer = () => {
+export const LeftNavDrawer: React.FC<LeftDrawerProps> = ({ setShowMenu }) => {
   const theme = useTheme();
-  const toggleDrawer = useToggleDrawer();
-  const drawer = useRecoilValue(drawerState);
   return (
     <DrawerWrapper>
       <Nav />
       <Box display="flex" justifyContent="flex-end" py={1} width="100%">
-        <IconButton>
+        <IconButton onClick={() => setShowMenu(false)}>
           <ChevronLeftIcon
-            onClick={toggleDrawer(!drawer)}
             sx={{
               borderRadius: "50%",
               border: `1px solid ${theme.palette.common.white}`,

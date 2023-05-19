@@ -10,16 +10,14 @@ import HubIcon from "@mui/icons-material/Hub";
 import InvertColorsIcon from "@mui/icons-material/InvertColors";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import Person from "@mui/icons-material/Person";
-import SavingsIcon from "@mui/icons-material/Savings";
 import ScienceIcon from "@mui/icons-material/Science";
-import SearchIcon from "@mui/icons-material/Search";
-import SpeedIcon from "@mui/icons-material/Speed";
-import StyleIcon from "@mui/icons-material/Style";
 import { Box, IconButton, Stack, styled, useTheme } from "@mui/material";
-import { drawerState, useToggleDrawer } from "../../hooks";
-import { useRecoilValue } from "recoil";
+import { RoutePath } from "../../constants";
+import { NavLink } from "react-router-dom";
+
+interface MiniDrawerProps {
+  setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const DrawerWrapper = styled(Box)(({ theme }) => ({
   maxHeight: "calc(100vh - 49px)",
@@ -33,34 +31,34 @@ const DrawerWrapper = styled(Box)(({ theme }) => ({
   zIndex: theme.zIndex.drawer - 1,
   borderRight: `1px solid ${theme.tertiaryColor}`,
 }));
-
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
-  color: theme.accentColor,
-}));
-
-export const MiniDrawer = () => {
+export const MiniDrawer: React.FC<MiniDrawerProps> = ({ setShowMenu }) => {
   const theme = useTheme();
-  const toggleDrawer = useToggleDrawer();
-  const drawer = useRecoilValue(drawerState);
   return (
     <DrawerWrapper>
       <Stack spacing={2}>
-        <StyledIconButton>
-          <HubIcon />
-        </StyledIconButton>
-        <StyledIconButton>
-          <FeedIcon />
-        </StyledIconButton>
-        <StyledIconButton>
-          <NewspaperIcon />
-        </StyledIconButton>
-        <StyledIconButton>
-          <ScienceIcon />
-        </StyledIconButton>
+        <NavLink to={`${RoutePath.HOME}`}>
+          <IconButton>
+            <HubIcon />
+          </IconButton>
+        </NavLink>
+        <NavLink to={`${RoutePath.FEED}`}>
+          <IconButton>
+            <FeedIcon />
+          </IconButton>
+        </NavLink>
+        <NavLink to={`${RoutePath.NEWS}`}>
+          <IconButton>
+            <NewspaperIcon />
+          </IconButton>
+        </NavLink>
+        <NavLink to={`${RoutePath.LAB}`}>
+          <IconButton>
+            <ScienceIcon />
+          </IconButton>
+        </NavLink>
       </Stack>
-      <IconButton>
+      <IconButton onClick={() => setShowMenu(true)}>
         <ChevronRightIcon
-          onClick={toggleDrawer(!drawer)}
           sx={{
             borderRadius: "50%",
             border: `1px solid ${theme.palette.common.white}`,
