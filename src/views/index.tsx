@@ -5,7 +5,6 @@ export { PeopleView } from "./People";
 export { Explore } from "./Explore";
 export { Following } from "./Following";
 export { Dashboard } from "./Dashboard";
-export { Nav } from "./Nav";
 export { News } from "./News";
 export { Notifications } from "./Notifications";
 export { HeroFeed } from "./HeroFeed";

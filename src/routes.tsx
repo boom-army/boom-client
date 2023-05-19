@@ -18,13 +18,13 @@ import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
 import { GridStandard } from "./view-grids/GridStandard";
 // import { GridAuction } from "./view-grids/GridAuction";
-import { Dashboard, Nav } from "./views";
+import { Dashboard } from "./views";
 import { FloatingNavbar } from "./components/FloatingNavbar";
 import { drawerState, useToggleDrawer } from "./hooks";
 import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
-import { LeftNavDrawer, MiniDrawer, MobileBottomNav } from "./components/Nav";
+import { LeftNavDrawer, MiniDrawer, MobileBottomNav, Nav } from "./components/Nav";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
@@ -93,7 +93,8 @@ export const AppRoutes: React.FC = () => {
                     onMouseEnter={() => setShowMenu(true)}
                     onMouseLeave={() => setShowMenu(false)}
                   >
-                    {!showMenu ? <MiniDrawer /> : <LeftNavDrawer />}
+                    {/* {!showMenu ? <MiniDrawer /> : <LeftNavDrawer />} */}
+                    <MiniDrawer /> <LeftNavDrawer />
                   </Box>
                 ) : null}
                 <Box flexGrow={1} overflow="auto">
@@ -129,8 +130,6 @@ export const AppRoutes: React.FC = () => {
                   <Box
                     sx={{ width: "20rem", paddingLeft: "1em" }}
                     role="presentation"
-                    onClick={toggleDrawer(false)}
-                    onKeyDown={toggleDrawer(false)}
                   >
                     <Nav
                       user={user}

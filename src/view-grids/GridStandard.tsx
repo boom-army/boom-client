@@ -10,7 +10,6 @@ import {
   PeopleView,
   Explore,
   Following,
-  Nav,
   News,
   Notifications,
 } from "../views";
@@ -53,7 +52,6 @@ export const GridStandard: React.FC<GridProps> = ({
         <Grid
           item
           md={3}
-          xl={2}
           display={{ xs: "none", sm: "none", md: "block" }}
           sx={{ height: "calc(100vh - 49px)", overflow: "scroll" }}
         >
@@ -74,7 +72,7 @@ export const GridStandard: React.FC<GridProps> = ({
         component={Grid}
         item
         sm={12}
-        md={5}
+        md={7}
         sx={{
           borderRight: `1px solid ${theme.tertiaryColor}`,
           borderLeft: `1px solid ${theme.tertiaryColor}`,

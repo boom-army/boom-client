@@ -20,13 +20,13 @@ import {
   useTheme,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { ChannelStatus, RoutePath } from "../constants";
+import { ChannelStatus, RoutePath } from "../../constants";
 import { NavLink } from "react-router-dom";
 
 import { styled } from "@mui/material/styles";
-import { useGetUserChannelsQuery, User } from "../generated/graphql";
-import { Logout } from "../components/Auth/Logout";
-import { ColorModeContext } from "../contexts/theme";
+import { useGetUserChannelsQuery, User } from "../../generated/graphql";
+import { Logout } from "../Auth/Logout";
+import { ColorModeContext } from "../../contexts/theme";
 interface Props {
   newMentionsCount: number | undefined;
   user: User | null;

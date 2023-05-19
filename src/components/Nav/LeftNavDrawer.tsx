@@ -4,7 +4,7 @@ import React from "react";
 const DrawerWrapper = styled(Box)(({ theme }) => ({
   maxHeight: "calc(100vh - 49px)",
   minHeight: "calc(100vh - 49px)",
-  width: "10rem",
+  width: "20rem",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
