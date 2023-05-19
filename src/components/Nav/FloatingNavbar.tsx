@@ -6,11 +6,12 @@ import ScienceIcon from "@mui/icons-material/Science";
 import {
   Box,
   IconButton,
+  styled,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { RoutePath } from "../../constants";
-import { useLocation, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 interface NavIconButtonProps {
   icon: React.ReactNode;
@@ -18,34 +19,26 @@ interface NavIconButtonProps {
 }
 
 const NavIconButton: React.FC<NavIconButtonProps> = ({ icon, route }) => {
-  const theme = useTheme();
-  const location = useLocation();
-  const isActiveRoute = location.pathname === route;
-
+  const ActiveBox = styled(Box)(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    color: theme.palette.secondary.main,
+    "& .active svg": {
+      color: theme.accentColor,
+    },
+    "&:hover": {
+      "& svg": {
+        color: theme.accentColor,
+      },
+    },
+  }));
   return (
-    <Box
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <Link to={route}>
-        <IconButton
-          color="inherit"
-          sx={{
-            "& svg": {
-              color: isActiveRoute
-                ? theme.accentColor
-                : theme.palette.secondary.main,
-            },
-            "&:hover": {
-              "& svg": {
-                color: theme.accentColor,
-              },
-            },
-          }}
-        >
-          {icon}
-        </IconButton>
-      </Link>
-    </Box>
+    <ActiveBox>
+      <NavLink to={route}>
+        <IconButton color="inherit">{icon}</IconButton>
+      </NavLink>
+    </ActiveBox>
   );
 };
 
@@ -82,10 +75,22 @@ export const FloatingNavbar = () => {
           alignItems: "center",
         }}
       >
-        <NavIconButton icon={<HubIcon />} route={RoutePath.HOME} />
-        <NavIconButton icon={<FeedIcon />} route={`/${RoutePath.FEED}`} />
-        <NavIconButton icon={<NewspaperIcon />} route={`/${RoutePath.NEWS}`} />
-        <NavIconButton icon={<ScienceIcon />} route={`/${RoutePath.LAB}`} />
+        <NavIconButton
+          icon={<HubIcon />}
+          route={RoutePath.HOME}
+        />
+        <NavIconButton
+          icon={<FeedIcon />}
+          route={`/${RoutePath.FEED}`}
+        />
+        <NavIconButton
+          icon={<NewspaperIcon />}
+          route={`/${RoutePath.NEWS}`}
+        />
+        <NavIconButton
+          icon={<ScienceIcon />}
+          route={`/${RoutePath.LAB}`}
+        />
       </Box>
     </Box>
   );

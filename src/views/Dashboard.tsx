@@ -77,7 +77,7 @@ export const Dashboard: React.FC = () => {
                   <Box textAlign="center">
                     <Typography
                       variant="subtitle1"
-                      sx={{ color: theme.palette.secondary, fontWeight: 300 }}
+                      sx={{ color: theme.palette.secondary.main, fontWeight: 300 }}
                     >
                       {card.title}
                     </Typography>

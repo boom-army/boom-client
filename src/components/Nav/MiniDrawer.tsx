@@ -30,6 +30,9 @@ const DrawerWrapper = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1),
   zIndex: theme.zIndex.drawer - 1,
   borderRight: `1px solid ${theme.tertiaryColor}`,
+  "& .active svg": {
+    color: theme.accentColor,
+  },
 }));
 export const MiniDrawer: React.FC<MiniDrawerProps> = ({ setShowMenu }) => {
   const theme = useTheme();
@@ -38,22 +41,22 @@ export const MiniDrawer: React.FC<MiniDrawerProps> = ({ setShowMenu }) => {
       <Stack spacing={2}>
         <NavLink to={`${RoutePath.HOME}`}>
           <IconButton>
-            <HubIcon />
+            <HubIcon color="secondary" />
           </IconButton>
         </NavLink>
         <NavLink to={`${RoutePath.FEED}`}>
           <IconButton>
-            <FeedIcon />
+            <FeedIcon color="secondary" />
           </IconButton>
         </NavLink>
         <NavLink to={`${RoutePath.NEWS}`}>
           <IconButton>
-            <NewspaperIcon />
+            <NewspaperIcon color="secondary" />
           </IconButton>
         </NavLink>
         <NavLink to={`${RoutePath.LAB}`}>
           <IconButton>
-            <ScienceIcon />
+            <ScienceIcon color="secondary" />
           </IconButton>
         </NavLink>
       </Stack>
