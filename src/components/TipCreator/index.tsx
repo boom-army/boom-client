@@ -9,16 +9,8 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { ReactComponent as BMAIcon } from "../../icons/bma.svg";
-
 import { TipInput } from "./tipInput";
-import { styled } from "@mui/material/styles";
-
-const BMAIconWrapper = styled("span")((props) => ({
-  svg: {
-    color: props.theme.palette.secondary,
-  },
-}));
+import { BMAIcon } from "../Icons";
 
 interface TipProps {
   tipAmount?: number | null | string;
@@ -42,13 +34,11 @@ export const TipCreator: React.FC<TipProps> = ({
     <>
       <Box display={"flex"} alignItems={"center"}>
         <IconButton
-          sx={{ p: 0 }}
+          sx={{ p: 0, "&:hover": { backgroundColor: "transparent" } }}
           aria-label="tip"
           onClick={() => setShowTip(!showTip)}
         >
-          <BMAIconWrapper>
-            <BMAIcon />
-          </BMAIconWrapper>
+          <BMAIcon />
           {!hideAmount && (
             <Typography ml={0.5} color="secondary">
               {tipAmount ? tipAmount : null}

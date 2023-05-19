@@ -3,14 +3,14 @@ import { SVGProps } from "react";
 
 interface SvgProps extends SVGProps<SVGSVGElement> {
   color?: string;
-  loading?: boolean;
+  loading?: boolean | string | undefined;
 }
 
 const Svg = styled("svg")<SvgProps>(({ theme, color, loading }) => ({
   fill: color ? color : theme.palette.primary.main,
   width: "16px",
   height: "16px",
-  cursor: loading ? "not-allowed" : "pointer",
+  cursor: loading ? "not-allowed" : "inherit",
 }));
 
 export const DimmedSvg = styled("svg")<SvgProps>(({ theme, loading }) => ({

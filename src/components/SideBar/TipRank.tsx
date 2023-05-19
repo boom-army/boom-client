@@ -12,7 +12,6 @@ import {
   Badge,
   useTheme,
 } from "@mui/material";
-import { ReactComponent as BMAIcon } from "../../icons/bma.svg";
 import {
   Maybe,
   TipCount,
@@ -27,7 +26,7 @@ import { map } from "lodash";
 
 import dayjs from "dayjs";
 import { UserAvatar } from "../UserAvatar";
-import { HerofiedIcon } from "../Icons";
+import { BMAIcon, HerofiedIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
 import { NameCard } from "../UserLabels/NameCard";
 import { awardColorSelect } from "../../utils";
@@ -96,7 +95,7 @@ export const TipRank: FC<{}> = () => {
     <Box p={2}>
       <Box display={"flex"} justifyContent={"space-between"}>
         <Typography
-          sx={{ color: theme.palette.secondary }}
+          sx={{ color: theme.palette.secondary.main }}
           variant="body2"
           alignSelf={"center"}
         >
