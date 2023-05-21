@@ -19,8 +19,6 @@ import { GridStandard } from "./view-grids/GridStandard";
 // import { GridAuction } from "./view-grids/GridAuction";
 import { Dashboard } from "./views";
 import { FloatingNavbar, PopoutDrawerMenu } from "./components/Nav";
-import { drawerState, useToggleDrawer } from "./hooks";
-import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
 import {

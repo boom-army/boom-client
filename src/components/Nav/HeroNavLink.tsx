@@ -8,7 +8,6 @@ interface HeroNavLinkProps {
   label: string;
   description: string;
   routePath: RoutePath;
-  applyActiveStyles: any;
 }
 
 export const HeroNavLink: React.FC<HeroNavLinkProps> = ({
@@ -16,9 +15,16 @@ export const HeroNavLink: React.FC<HeroNavLinkProps> = ({
   label,
   description,
   routePath,
-  applyActiveStyles,
 }) => {
   const theme = useTheme();
+
+  const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
+    color: isActive
+      ? theme.accentColor
+      : (theme.palette.secondary.main),
+    width: "100%",
+  });
+
   const h5Styles = {
     my: 0.5,
   };
@@ -38,6 +44,7 @@ export const HeroNavLink: React.FC<HeroNavLinkProps> = ({
       },
     },
   };
+
   return (
     <NavLink end style={applyActiveStyles} to={routePath}>
       <Box {...stackProps}>
