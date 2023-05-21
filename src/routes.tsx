@@ -5,7 +5,6 @@ import { AppHeader } from "./components/AppHeader";
 import {
   Box,
   Slide,
-  SwipeableDrawer,
   useMediaQuery,
   useScrollTrigger,
   useTheme,
@@ -19,7 +18,7 @@ import { useProfileQuery } from "./generated/graphql";
 import { GridStandard } from "./view-grids/GridStandard";
 // import { GridAuction } from "./view-grids/GridAuction";
 import { Dashboard } from "./views";
-import { FloatingNavbar } from "./components/Nav/FloatingNavbar";
+import { FloatingNavbar, PopoutDrawerMenu } from "./components/Nav";
 import { drawerState, useToggleDrawer } from "./hooks";
 import { useRecoilValue } from "recoil";
 import { RoutePath } from "./constants";
@@ -28,8 +27,8 @@ import {
   LeftNavDrawer,
   MiniDrawer,
   MobileBottomNav,
-  Nav,
 } from "./components/Nav";
+import { Lab } from "./views/Lab";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
@@ -48,8 +47,6 @@ export const AppRoutes: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const drawerHidden = useMediaQuery(theme.breakpoints.down("md"));
   const trigger = useScrollTrigger();
-  const toggleDrawer = useToggleDrawer();
-  const drawer = useRecoilValue(drawerState);
 
   const { loading, data, refetch } = useProfileQuery({
     variables: { handle: user?.handle },
@@ -121,6 +118,7 @@ export const AppRoutes: React.FC = () => {
                     /> */}
                     <Route path={RoutePath.HOME} element={<DAOView />} />
                     <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
+                    <Route path={RoutePath.LAB} element={<Lab />} />
                     <Route
                       path={RoutePath.WILDCARD}
                       element={
@@ -135,23 +133,7 @@ export const AppRoutes: React.FC = () => {
                   </Routes>
                 </Box>
                 <MobileBottomNav />
-                <SwipeableDrawer
-                  anchor="left"
-                  open={drawer}
-                  onClose={toggleDrawer(false)}
-                  onOpen={toggleDrawer(true)}
-                  sx={{ "& .MuiDrawer-paper": { backgroundImage: "none" } }}
-                >
-                  <Box
-                    sx={{ width: "20rem", pl: 2, pb: 5 }}
-                    role="presentation"
-                  >
-                    <Nav
-                      user={user}
-                      newMentionsCount={data?.profile?.newMentionsCount}
-                    />
-                  </Box>
-                </SwipeableDrawer>
+                <PopoutDrawerMenu />
               </Box>
               <FloatingNavbar />
             </>
