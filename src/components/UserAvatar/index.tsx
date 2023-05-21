@@ -1,6 +1,6 @@
 import { Avatar, SxProps, styled, useTheme } from "@mui/material";
 import { createAvatar } from "@dicebear/core";
-import { pixelArtNeutral } from "@dicebear/collection";
+import { botttsNeutral } from "@dicebear/collection";
 import { useEffect, useState } from "react";
 
 interface IProps {
@@ -29,7 +29,7 @@ export const UserAvatar = ({ avatar, isNFT = "", sx }: IProps) => {
 
   useEffect(() => {
     if (!avatar) {
-      const genAvatar = createAvatar(pixelArtNeutral, {
+      const genAvatar = createAvatar(botttsNeutral, {
         seed: uniqueString(),
       });
       const svg = genAvatar.toDataUriSync();
