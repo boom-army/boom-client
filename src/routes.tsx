@@ -1,6 +1,6 @@
 import BoomArmy from "./images/raise-the-boomarmy.png";
 import BoomLogo from "./images/boom-logo.png";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppHeader } from "./components/AppHeader";
 import {
   Box,
@@ -35,6 +35,15 @@ export const AppRoutes: React.FC = () => {
   const theme = useTheme();
   const { user, setUser } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
+
+  useEffect(() => {    
+    setShowMenu(JSON.parse(localStorage.getItem("miniMenu") || "true"));
+  }, [])
+  
+  const setMiniMenu = () => {
+    localStorage.setItem("miniMenu", JSON.stringify(!showMenu));
+    setShowMenu(!showMenu);
+  };
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const drawerHidden = useMediaQuery(theme.breakpoints.down("md"));
@@ -95,9 +104,9 @@ export const AppRoutes: React.FC = () => {
                 {!drawerHidden ? (
                   <Box display={"flex"}>
                     {!showMenu ? (
-                      <MiniDrawer setShowMenu={setShowMenu} />
+                      <MiniDrawer setShowMenu={setMiniMenu} />
                     ) : (
-                      <LeftNavDrawer setShowMenu={setShowMenu} />
+                      <LeftNavDrawer setShowMenu={setMiniMenu} />
                     )}
                     {/* <MiniDrawer /> <LeftNavDrawer /> */}
                   </Box>
