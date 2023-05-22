@@ -19,7 +19,7 @@ export const Lab = () => {
   };
   const user = { handle: "harkl" };
   return (
-    <Grid container spacing={1} p={2} sx={{ height: headerOffset}}>
+    <Grid container spacing={1} p={2} sx={{ height: headerOffset }}>
       <Grid item xs={12} display={"flex"}>
         <ScienceIcon fontSize="large" />
         <Typography variant="h1" display={"inline"}>
@@ -90,7 +90,8 @@ export const Lab = () => {
           icon={<SpeedIcon sx={iconProps} />}
           label="Dashboard"
           description="Provides an overview of your account and activity."
-          routePath={RoutePath.DASHBOARD}
+          // @ts-ignore
+          routePath={`../${RoutePath.DASHBOARD}`}
         />
       </Grid>
       <Grid item xs={12}>
@@ -98,7 +99,8 @@ export const Lab = () => {
           icon={<SavingsIcon sx={iconProps} />}
           label="Tip Leaders"
           description="Displays the leaderboard of top tip earners."
-          routePath={RoutePath.LEADERBOARD}
+          // @ts-ignore
+          routePath={`../${RoutePath.LEADERBOARD}`}
         />
       </Grid>
       <Grid item xs={12}>
@@ -106,7 +108,8 @@ export const Lab = () => {
           icon={<GroupIcon sx={iconProps} />}
           label="People"
           description="Shows a list of all users on the platform."
-          routePath={RoutePath.PEOPLE}
+          // @ts-ignore
+          routePath={`../${RoutePath.PEOPLE}`}
         />
       </Grid>
       <Grid item xs={12}>
@@ -114,7 +117,8 @@ export const Lab = () => {
           icon={<SearchIcon sx={iconProps} />}
           label="Search"
           description="Enables you to search for specific content or users."
-          routePath={RoutePath.EXPLORE}
+          // @ts-ignore
+          routePath={`../${RoutePath.EXPLORE}`}
         />
       </Grid>
       <Grid item xs={12}>
@@ -122,7 +126,8 @@ export const Lab = () => {
           icon={<StyleIcon sx={iconProps} />}
           label="Mint NFT"
           description="Allows you to mint and create your own NFTs."
-          routePath={RoutePath.MINT_NFT}
+          // @ts-ignore
+          routePath={`../${RoutePath.MINT_NFT}`}
         />
       </Grid>
       <Grid item xs={12}>
@@ -130,7 +135,8 @@ export const Lab = () => {
           icon={<Person sx={iconProps} />}
           label="Following"
           description="Shows the list of users you are following."
-          routePath={RoutePath.FOLLOWING}
+          // @ts-ignore
+          routePath={`../${RoutePath.FOLLOWING}`}
         />
       </Grid>
       <Grid item xs={12}>
@@ -139,7 +145,7 @@ export const Lab = () => {
           label="Profile"
           description="Displays your user profile."
           // @ts-ignore
-          routePath={`${RoutePath.HANDLE_HASH}/${user?.handle}`}
+          routePath={`../${RoutePath.HANDLE_HASH}/${user?.handle}`}
         />
       </Grid>
     </Grid>
