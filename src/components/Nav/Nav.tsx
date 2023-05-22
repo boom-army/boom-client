@@ -1,5 +1,6 @@
 import ArticleIcon from '@mui/icons-material/Article';
 import FeedIcon from "@mui/icons-material/Feed";
+import GitHubIcon from '@mui/icons-material/GitHub';
 import HubIcon from "@mui/icons-material/Hub";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import React from "react";
@@ -109,6 +110,12 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           <Stack direction="row" {...stackProps}>
             <SwapHorizontalCircleIcon sx={iconProps} fontSize="small" />
             <Typography variant="body2" color="secondary">USDC-BMA</Typography>
+          </Stack>
+        </NavLink>
+        <NavLink style={applyActiveStyles} to={"https://github.com/boom-army"} target="_blank">
+          <Stack direction="row" {...stackProps}>
+            <GitHubIcon sx={iconProps} fontSize="small" />
+            <Typography variant="body2" color="secondary">Boom Github</Typography>
           </Stack>
         </NavLink>
       </Stack>
