@@ -151,7 +151,7 @@ export const NFTPicker: React.FC<{
                 minWidth: 600,
                 maxWidth: 600,
                 height: "auto",
-                color: theme.palette.primary,
+                color: theme.palette.text.primary,
                 background: theme.background,
                 padding: "1rem",
               }}

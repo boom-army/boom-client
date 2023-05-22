@@ -350,7 +350,7 @@ export const BoomOnes = () => {
               onClick={handleClick}
               sx={{
                 backgroundColor: theme.accentColor,
-                color: theme.palette.primary,
+                color: theme.palette.text.primary,
                 "&:hover": {
                   backgroundColor: theme.accentColor,
                   opacity: 0.8,
@@ -574,7 +574,7 @@ export const BoomOnes = () => {
                       : theme.accentColor,
                     "&.Mui-disabled": {
                       backgroundColor: theme.blue.light,
-                      color: theme.palette.primary,
+                      color: theme.palette.secondary.main,
                     },
                   }}
                   disabled={

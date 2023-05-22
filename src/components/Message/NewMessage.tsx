@@ -254,7 +254,7 @@ export const NewMessage: React.FC<Props> = ({
               autoFocus={true}
               ref={scrollRef}
               sx={{
-                color: theme.palette.primary.main,
+                color: theme.palette.text.primary,
                 padding: "1em 1em 1em 0",
                 "&:before": {
                   borderColor: theme.tertiaryColor2,

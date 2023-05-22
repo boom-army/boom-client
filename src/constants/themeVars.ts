@@ -129,7 +129,7 @@ export const components: Components = {
   MuiSvgIcon: {
     styleOverrides: {
       root: ({ theme }: { theme: any }) => ({
-        color: theme.palette.primary,
+        color: theme.palette.text.primary,
       }),
     },
   },
@@ -152,7 +152,7 @@ export const components: Components = {
   MuiToggleButton: {
     styleOverrides: {
       root: ({ theme }: { theme: any }) => ({
-        color: theme.palette.primary,
+        color: theme.palette.text.primary,
         borderColor: theme.tertiaryColor2,
       }),
     },

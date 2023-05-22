@@ -30,7 +30,7 @@ const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
     },
   },
   "& .MuiBadge-badge": {
-    color: theme.palette.primary,
+    color: theme.palette.text.primary,
     backgroundColor: theme.accentColor,
   },
 }));

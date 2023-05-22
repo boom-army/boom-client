@@ -200,11 +200,11 @@ export const NewTweet = ({
             maxRows={4}
             value={tweet.value}
             onChange={tweet.onChange}
-            placeholder={"What's happening?"}
+            placeholder={"It's happening..."}
             fullWidth={true}
             variant="standard"
             sx={{
-              color: theme.palette.primary,
+              color: theme.palette.text.primary,
               padding: "1em 1em 1em 0",
               "& .MuiInput-root:before": {
                 border: 0,

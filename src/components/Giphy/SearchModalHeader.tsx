@@ -32,7 +32,7 @@ export const SearchModalHeader: React.FC<Props> = ({
           setInput(e.target.value);
         }}
         InputProps={{
-          style: { color: theme.palette.primary, padding: 10 },
+          style: { color: theme.palette.text.primary, padding: 10 },
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
