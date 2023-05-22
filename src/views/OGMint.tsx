@@ -67,7 +67,7 @@ export {};
 //   const { connection } = useConnection();
 
 //   return (
-//     <Container style={{ marginTop: 20 }}>
+//     <Container sx={{ marginTop: 20 }}>
 //       <Box
 //         mb={2}
 //         sx={{

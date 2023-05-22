@@ -1,14 +1,7 @@
-import LanguageIcon from "@mui/icons-material/Language";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import React from "react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FeedIcon from "@mui/icons-material/Feed";
-import GroupIcon from "@mui/icons-material/Group";
-import HomeIcon from "@mui/icons-material/Home";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import HubIcon from "@mui/icons-material/Hub";
-import InvertColorsIcon from "@mui/icons-material/InvertColors";
-import LockPersonIcon from "@mui/icons-material/LockPerson";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import ScienceIcon from "@mui/icons-material/Science";
 import { Box, IconButton, Stack, styled, useTheme } from "@mui/material";
@@ -35,6 +28,7 @@ const DrawerWrapper = styled(Box)(({ theme }) => ({
     color: theme.accentColor,
   },
 }));
+
 export const MiniDrawer: React.FC<MiniDrawerProps> = ({ setShowMenu }) => {
   const theme = useTheme();
   return (

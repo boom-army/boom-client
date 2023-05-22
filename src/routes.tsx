@@ -21,11 +21,7 @@ import { Dashboard } from "./views";
 import { FloatingNavbar, PopoutDrawerMenu } from "./components/Nav";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
-import {
-  LeftNavDrawer,
-  MiniDrawer,
-  MobileBottomNav,
-} from "./components/Nav";
+import { LeftNavDrawer, MiniDrawer, MobileBottomNav } from "./components/Nav";
 import { Lab } from "./views/Lab";
 
 export const AppRoutes: React.FC = () => {
@@ -33,10 +29,10 @@ export const AppRoutes: React.FC = () => {
   const { user, setUser } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
 
-  useEffect(() => {    
+  useEffect(() => {
     setShowMenu(JSON.parse(localStorage.getItem("miniMenu") || "true"));
-  }, [])
-  
+  }, []);
+
   const setMiniMenu = () => {
     localStorage.setItem("miniMenu", JSON.stringify(!showMenu));
     setShowMenu(!showMenu);
@@ -44,7 +40,7 @@ export const AppRoutes: React.FC = () => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const drawerHidden = useMediaQuery(theme.breakpoints.down("md"));
-  const trigger = useScrollTrigger();
+  // const trigger = useScrollTrigger();
 
   const { loading, data, refetch } = useProfileQuery({
     variables: { handle: user?.handle },
@@ -89,7 +85,7 @@ export const AppRoutes: React.FC = () => {
           <GiphyContextProvider>
             <>
               {isMobile ? (
-                <Slide appear={false} direction="down" in={!trigger}>
+                <Slide appear={false} direction="down">
                   <AppHeader />
                 </Slide>
               ) : (

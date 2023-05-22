@@ -106,7 +106,7 @@ export const List: React.FC<{
                   onClick={() => handleReaction({ emojiId })}
                   startIcon={<Emoji emoji={emojiId} size={16} />}
                   color="secondary"
-                  style={{
+                  sx={{
                     padding: "2px 10px 0",
                     borderRadius: "30px",
                     minWidth: "auto",

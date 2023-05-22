@@ -463,7 +463,7 @@ export const NFTMint: React.FC = (props) => {
           open={isMinting}
           aria-labelledby="NFT action select"
           aria-describedby="Apply action for given NFT"
-          style={{
+          sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
