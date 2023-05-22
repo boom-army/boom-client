@@ -42,6 +42,7 @@ export const TopMeepers: FC<TMProps> = ({ meepers }) => {
             >
               <UserAvatar
                 avatar={meeper?.user?.avatar}
+                handle={meeper?.user?.handle}
                 isNFT={meeper?.user?.data?.avatarMint}
                 sx={{ width: 38, height: 38, mr: 0.2 }}
               />

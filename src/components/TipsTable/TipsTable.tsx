@@ -148,6 +148,7 @@ export const UserTipsTable: FC<{}> = () => {
                     <Box>
                       <UserAvatar
                         avatar={leader?.user?.avatar}
+                        handle={leader?.user?.handle}
                         isNFT={leader?.user?.data?.avatarMint}
                         sx={{ width: 20, height: 20, mr: 1 }}
                       />

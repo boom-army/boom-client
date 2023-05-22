@@ -243,6 +243,7 @@ export const NewMessage: React.FC<Props> = ({
                 height: 30,
               }}
               avatar={data?.me?.avatar}
+              handle={data?.me?.handle}
               isNFT={data?.me?.data?.avatarMint}
             />
             <Input
@@ -253,7 +254,7 @@ export const NewMessage: React.FC<Props> = ({
               autoFocus={true}
               ref={scrollRef}
               sx={{
-                color: theme.palette.primary,
+                color: theme.palette.primary.main,
                 padding: "1em 1em 1em 0",
                 "&:before": {
                   borderColor: theme.tertiaryColor2,

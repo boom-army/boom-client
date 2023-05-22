@@ -103,7 +103,8 @@ export const ShowTweet: React.FC<Props> = ({
         <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
           <UserAvatar
             className="avatar"
-            avatar={user?.avatar as string}
+            avatar={user?.avatar}
+            handle={user?.handle}
             isNFT={user?.data?.avatarMint}
             sx={{
               width: "3rem",

@@ -37,6 +37,7 @@ export const User = ({ user }: Props) => {
                   height: 30,
                 }}
                 avatar={user?.avatar}
+                handle={user?.handle}
                 isNFT={user?.data?.avatarMint}
               />
             </Box>

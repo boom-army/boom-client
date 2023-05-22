@@ -54,6 +54,7 @@ export const Notification = ({ mention }: NotificationProps) => {
               <UserAvatar
                 className="avatar"
                 avatar={fromUser?.avatar as string}
+                handle={fromUser?.handle}
                 isNFT={fromUser?.data?.avatarMint}
                 sx={{
                   width: "1.1rem",
@@ -65,7 +66,7 @@ export const Notification = ({ mention }: NotificationProps) => {
           </Box>
           <Typography
             variant="body2"
-            color={theme.palette.secondary}
+            color="secondary"
             sx={{ fontWeight: "600", mr: 0.5 }}
           >
             {fromUser.consumerName}
@@ -73,7 +74,7 @@ export const Notification = ({ mention }: NotificationProps) => {
           <Typography
             mr={0.5}
             variant="body2"
-            color={theme.palette.secondary}
+            color="secondary"
           >{`@${fromUser.handle}`}</Typography>
           {fromUser?.data?.avatarUpdateAuthority === HARKL_ID && (
             <HerofiedIcon
@@ -87,11 +88,7 @@ export const Notification = ({ mention }: NotificationProps) => {
           )}
           {mention.type && mention.type.includes("emoji") ? (
             <Box>
-              <Typography
-                variant="body2"
-                color={theme.palette.secondary}
-                pl={0.5}
-              >
+              <Typography variant="body2" color="secondary" pl={0.5}>
                 reacted{" "}
                 <Box
                   display={"inline"}
@@ -106,15 +103,11 @@ export const Notification = ({ mention }: NotificationProps) => {
               </Typography>
             </Box>
           ) : (
-            <Typography
-              variant="body2"
-              color={theme.palette.secondary}
-              pl={0.5}
-            >
+            <Typography variant="body2" color="secondary" pl={0.5}>
               {text}
             </Typography>
           )}
-          <Typography variant="body2" color={theme.palette.secondary} pl={0.5}>
+          <Typography variant="body2" color="secondary" pl={0.5}>
             {moment(setDate(mention.createdAt)).fromNow()}
           </Typography>
         </Box>

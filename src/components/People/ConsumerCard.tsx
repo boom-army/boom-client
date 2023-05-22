@@ -50,6 +50,7 @@ export const ConsumerCard = ({ profile }: ProfileQuery) => {
                 height: 30,
               }}
               avatar={profile?.avatar}
+              handle={profile?.handle}
               isNFT={profile?.data?.avatarMint}
             />
             <Stack>

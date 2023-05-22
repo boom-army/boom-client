@@ -137,6 +137,7 @@ export const TipRank: FC<{}> = () => {
               >
                 <UserAvatar
                   avatar={leader?.user?.avatar}
+                  handle={leader?.user?.handle}
                   isNFT={leader?.user?.data?.avatarMint}
                   sx={{ width: 38, height: 38, mr: 0.2 }}
                 />

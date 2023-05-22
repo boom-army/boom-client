@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 interface IProps {
   avatar?: string;
+  handle?: string;
   className?: string;
   isNFT?: string | null | undefined;
   sx?: SxProps | undefined;
@@ -23,14 +24,14 @@ const uniqueString = () => {
   return `${timestamp}-${randomString}`;
 };
 
-export const UserAvatar = ({ avatar, isNFT = "", sx }: IProps) => {
+export const UserAvatar = ({ avatar, handle, isNFT = "", sx }: IProps) => {
   const theme = useTheme();
   const [userAvatar, setUserAvatar] = useState(avatar);
 
   useEffect(() => {
     if (!avatar) {
       const genAvatar = createAvatar(botttsNeutral, {
-        seed: uniqueString(),
+        seed: handle || uniqueString(),
       });
       const svg = genAvatar.toDataUriSync();
       setUserAvatar(svg);

@@ -3,9 +3,6 @@ import { Box, Grid, Stack, Typography, useTheme } from "@mui/material";
 import { ShowTweet } from "../index";
 import { Link } from "react-router-dom";
 import { TweetQuery, Tweet } from "../../../generated/graphql";
-import { ReplyBox } from "../../Message/ShowMessage";
-import { HashLink } from "react-router-hash-link";
-import { UserAvatar } from "../../UserAvatar";
 import { ThreadReply } from "./ThreadReply";
 import { RoutePath } from "../../../constants";
 

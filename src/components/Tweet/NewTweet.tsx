@@ -192,6 +192,7 @@ export const NewTweet = ({
               height: 40,
             }}
             avatar={userData?.avatar}
+            handle={userData?.handle}
             isNFT={userData?.data?.avatarMint}
           />
           <TextField

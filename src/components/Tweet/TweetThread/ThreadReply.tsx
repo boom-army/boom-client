@@ -26,15 +26,13 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
                   width: 16,
                   height: 16,
                 }}
-                avatar={tweet?.user?.avatar as string}
+                avatar={tweet?.user?.avatar}
+                handle={tweet?.user?.handle}
                 isNFT={tweet?.user?.data?.avatarMint}
               />
             </Box>
             <Box mr={1}>
-              <Typography
-                variant="body2"
-                sx={{ color: theme.palette.secondary }}
-              >
+              <Typography color="secondary" variant="body2">
                 @{tweet?.user?.handle}
               </Typography>
             </Box>
@@ -49,9 +47,9 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
             >
               <Typography
                 variant="body2"
+                color="secondary"
                 sx={{
                   fontWeight: "300",
-                  color: theme.palette.secondary,
                 }}
               >
                 {tweet?.text}

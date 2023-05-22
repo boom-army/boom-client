@@ -132,13 +132,14 @@ export const ShowMessage: React.FC<Props> = ({
                       height: 16,
                     }}
                     avatar={parentTweet?.user?.avatar as string}
+                    handle={parentTweet?.user?.handle}
                     isNFT={parentTweet?.user?.data?.avatarMint}
                   />
                 </Box>
                 <Box mr={1}>
                   <Typography
                     variant="body2"
-                    sx={{ color: theme.palette.secondary }}
+                    color="secondary"
                   >
                     @{parentTweet?.user?.handle}
                   </Typography>
@@ -154,9 +155,9 @@ export const ShowMessage: React.FC<Props> = ({
                 >
                   <Typography
                     variant="body2"
+                    color="secondary"
                     sx={{
                       fontWeight: "300",
-                      color: theme.palette.secondary,
                     }}
                   >
                     {parentTweet?.text}
@@ -210,8 +211,8 @@ export const ShowMessage: React.FC<Props> = ({
             sx={{ padding: "0.2em" }}
           >
             <ReplyIcon
+            color="secondary"
               sx={{
-                color: theme.palette.secondary,
                 "&:hover": { color: theme.accentColor },
               }}
             />
@@ -239,6 +240,7 @@ export const ShowMessage: React.FC<Props> = ({
                 height: "30px",
               }}
               avatar={user?.avatar as string}
+              handle={user?.handle}
               isNFT={user?.data?.avatarMint}
             />
           </Link>

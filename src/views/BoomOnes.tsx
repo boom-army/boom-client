@@ -481,6 +481,7 @@ export const BoomOnes = () => {
                     icon={
                       <UserAvatar
                         avatar={data?.profileByPubKey?.avatar}
+                        handle={data?.profileByPubKey?.handle}
                         isNFT={data?.profileByPubKey?.data?.avatarMint}
                         sx={{ width: "23px", height: "23px", ml: "3px" }}
                       />
