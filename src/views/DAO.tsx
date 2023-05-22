@@ -41,7 +41,7 @@ export const DAOView = () => {
         <Typography>Read up on how our dev is progressing</Typography>
       </Grid>
       <Grid item xs={9}>
-        <Typography>Get some $BMA and beat the liquidity squeeze</Typography>
+        <Typography>Get some $BMA and beat the supply-demand imbalance</Typography>
       </Grid>
       <Grid item xs={9}>
         <Typography>

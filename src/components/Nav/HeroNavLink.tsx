@@ -21,13 +21,14 @@ export const HeroNavLink: React.FC<HeroNavLinkProps> = ({
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
     color: isActive
       ? theme.accentColor
-      : (theme.palette.secondary.main),
+      : (theme.palette.text.primary),
     width: "100%",
   });
 
   const h5Styles = {
     my: 0.5,
   };
+
   const stackProps = {
     justifyContent: "flex-start",
     flexGrow: 1,
