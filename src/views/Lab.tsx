@@ -86,7 +86,7 @@ export const Lab = () => {
         <HeroNavLink
           icon={<SpeedIcon sx={iconProps} />}
           label="Dashboard"
-          description="Provides an overview of your account and activity."
+          description="A frenetic display of stats and mind-bending components on Boom"
           // @ts-ignore
           routePath={`../${RoutePath.DASHBOARD}`}
         />
@@ -95,7 +95,7 @@ export const Lab = () => {
         <HeroNavLink
           icon={<SavingsIcon sx={iconProps} />}
           label="Tip Leaders"
-          description="Displays the leaderboard of top tip earners."
+          description="An electrifying leaderboard that exposes the top tippers in their savage glory"
           // @ts-ignore
           routePath={`../${RoutePath.LEADERBOARD}`}
         />
@@ -104,7 +104,7 @@ export const Lab = () => {
         <HeroNavLink
           icon={<GroupIcon sx={iconProps} />}
           label="People"
-          description="Shows a list of all users on the platform."
+          description="A twisted gallery of misfits, showcasing the mad and beautiful souls inhabiting this wretched platform"
           // @ts-ignore
           routePath={`../${RoutePath.PEOPLE}`}
         />
@@ -113,7 +113,7 @@ export const Lab = () => {
         <HeroNavLink
           icon={<SearchIcon sx={iconProps} />}
           label="Search"
-          description="Enables you to search for specific content or users."
+          description="An enigmatic tool that plunges you into the dark depths of content, tags, and the most righteous Boom advocates"
           // @ts-ignore
           routePath={`../${RoutePath.EXPLORE}`}
         />
@@ -122,7 +122,7 @@ export const Lab = () => {
         <HeroNavLink
           icon={<StyleIcon sx={iconProps} />}
           label="Mint NFT"
-          description="Allows you to mint and create your own NFTs."
+          description="An unholy portal through which you can birth your own twisted creations into the chaotic NFT realm"
           // @ts-ignore
           routePath={`../${RoutePath.MINT_NFT}`}
         />
@@ -131,16 +131,16 @@ export const Lab = () => {
         <HeroNavLink
           icon={<Person sx={iconProps} />}
           label="Following"
-          description="Shows the list of users you are following."
+          description="A relentless feed of the chosen few, the ones you dare to follow into the abyss"
           // @ts-ignore
           routePath={`../${RoutePath.FOLLOWING}`}
         />
       </Grid>
-      <Grid item xs={12} pb={9}>
+      <Grid item xs={12} pb={12}>
         <HeroNavLink
           icon={<AccountCircleIcon sx={iconProps} />}
           label="Profile"
-          description="Displays your user profile."
+          description="A shattered mirror reflecting the fractured shards of your very existence"
           // @ts-ignore
           routePath={`../${RoutePath.HANDLE_HASH}/${user?.handle}`}
         />

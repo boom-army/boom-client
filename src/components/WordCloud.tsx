@@ -20,7 +20,7 @@ export const WordCloud: FC<Props> = ({ tagData }) => {
 
   return (
     <Box p={2}>
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
         {tagData &&
           tagData.map((tag: Tag) => {
             // const tagSize = 12 + ((tag.count - minCount) * (30 - 12)) / sizeRange;
@@ -29,7 +29,7 @@ export const WordCloud: FC<Props> = ({ tagData }) => {
                 key={tag.tag}
                 sx={{
                   // fontSize: tagSize,
-                  padding: 2,
+                  pb: 2,
                 }}
               >
                 <Link
