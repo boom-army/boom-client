@@ -1,13 +1,12 @@
-import ArticleIcon from '@mui/icons-material/Article';
+import ArticleIcon from "@mui/icons-material/Article";
 import FeedIcon from "@mui/icons-material/Feed";
-import GitHubIcon from '@mui/icons-material/GitHub';
+import GitHubIcon from "@mui/icons-material/GitHub";
 import HubIcon from "@mui/icons-material/Hub";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import React from "react";
 import ScienceIcon from "@mui/icons-material/Science";
-import StarsIcon from '@mui/icons-material/Stars';
-import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import StarsIcon from "@mui/icons-material/Stars";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import { ColorModeContext } from "../../contexts/theme";
 import { HeroNavLink } from ".";
 import { Logout } from "../Auth/Logout";
@@ -16,6 +15,7 @@ import { RoutePath } from "../../constants";
 import { Stack, Typography, useTheme } from "@mui/material";
 import { User } from "../../generated/graphql";
 import { styled } from "@mui/material/styles";
+import { BMAIcon } from "../Icons";
 
 interface Props {
   newMentionsCount: number | undefined;
@@ -87,35 +87,70 @@ export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
           routePath={RoutePath.LAB}
         />
       </Stack>
-      <Stack key="bottom-nav-stack" direction="column" spacing={1}>
-        <NavLink style={applyActiveStyles} to={"https://www.tensor.trade/trade/boomheroes"} target="_blank">
+      <Stack
+        key="bottom-nav-stack"
+        direction="column"
+        spacing={1}
+        sx={{ pb:3, width: "100%", borderBottom: `1px solid ${theme.tertiaryColor}` }}
+      >
+        <NavLink
+          style={applyActiveStyles}
+          to={"https://www.tensor.trade/trade/boomheroes"}
+          target="_blank"
+        >
           <Stack direction="row" {...stackProps}>
             <StarsIcon sx={iconProps} fontSize="small" />
-            <Typography variant="body2" color="secondary">Buy a Boom DAO NFT</Typography>
+            <Typography variant="body2" color="secondary">
+              Get a Boom DAO NFT
+            </Typography>
           </Stack>
         </NavLink>
-        <NavLink style={applyActiveStyles} to={"https://moonrank.app/collection/boom_heroes"} target="_blank">
+        <NavLink
+          style={applyActiveStyles}
+          to={"https://moonrank.app/collection/boom_heroes"}
+          target="_blank"
+        >
           <Stack direction="row" {...stackProps}>
             <WorkspacePremiumIcon sx={iconProps} fontSize="small" />
-            <Typography variant="body2" color="secondary">Boom Heroes Rarity</Typography>
+            <Typography variant="body2" color="secondary">
+              Boom Heroes Rarity
+            </Typography>
           </Stack>
         </NavLink>
-        <NavLink style={applyActiveStyles} to={"https://docs.boom.army/blog/"} target="_blank">
+        <NavLink
+          style={applyActiveStyles}
+          to={"https://docs.boom.army/blog/"}
+          target="_blank"
+        >
           <Stack direction="row" {...stackProps}>
             <ArticleIcon sx={iconProps} fontSize="small" />
-            <Typography variant="body2" color="secondary">Blog</Typography>
+            <Typography variant="body2" color="secondary">
+              Blog
+            </Typography>
           </Stack>
         </NavLink>
-        <NavLink style={applyActiveStyles} to={"https://jup.ag/swap/USDC-BMA"} target="_blank">
+        <NavLink
+          style={applyActiveStyles}
+          to={"https://jup.ag/swap/USDC-BMA"}
+          target="_blank"
+        >
           <Stack direction="row" {...stackProps}>
-            <SwapHorizontalCircleIcon sx={iconProps} fontSize="small" />
-            <Typography variant="body2" color="secondary">USDC-BMA</Typography>
+            <BMAIcon {...iconProps} fontSize={20}/>
+            <Typography variant="body2" color="secondary">
+              USDC-BMA
+            </Typography>
           </Stack>
         </NavLink>
-        <NavLink style={applyActiveStyles} to={"https://github.com/boom-army"} target="_blank">
+        <NavLink
+          style={applyActiveStyles}
+          to={"https://github.com/boom-army"}
+          target="_blank"
+        >
           <Stack direction="row" {...stackProps}>
             <GitHubIcon sx={iconProps} fontSize="small" />
-            <Typography variant="body2" color="secondary">Boom Github</Typography>
+            <Typography variant="body2" color="secondary">
+              Boom Github
+            </Typography>
           </Stack>
         </NavLink>
       </Stack>

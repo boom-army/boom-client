@@ -38,7 +38,7 @@ export const TipCreator: React.FC<TipProps> = ({
           aria-label="tip"
           onClick={() => setShowTip(!showTip)}
         >
-          <BMAIcon />
+          <BMAIcon color={theme.palette.secondary.main}/>
           {!hideAmount && (
             <Typography ml={0.5} color="secondary">
               {tipAmount ? tipAmount : null}

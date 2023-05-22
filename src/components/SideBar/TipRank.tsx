@@ -100,7 +100,7 @@ export const TipRank: FC<{}> = () => {
           alignSelf={"center"}
         >
           <BMAIconWrapper>
-            <BMAIcon />
+          <BMAIcon color={theme.palette.secondary.main}/>
           </BMAIconWrapper>{" "}
           Top Tippers
         </Typography>
