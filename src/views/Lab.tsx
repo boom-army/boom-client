@@ -136,7 +136,7 @@ export const Lab = () => {
           routePath={`../${RoutePath.FOLLOWING}`}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} pb={9}>
         <HeroNavLink
           icon={<AccountCircleIcon sx={iconProps} />}
           label="Profile"
