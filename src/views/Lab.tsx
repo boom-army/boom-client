@@ -26,15 +26,12 @@ export const Lab = () => {
           The Lab
         </Typography>
       </Grid>
-      <Grid item xs={12} lg={6}>
+      <Grid item xs={12} lg pr={1}>
         <Box
           sx={{
             height: "100%",
             width: "100%",
             overflow: "hidden",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
           }}
         >
           <img
@@ -50,7 +47,7 @@ export const Lab = () => {
           />
         </Box>
       </Grid>
-      <Grid item xs={12} lg={6}>
+      <Grid item xs={12} lg={9}>
         <Stack spacing={1}>
           <Typography variant="body1">
             In the vile underbelly of the digital beast, there exists a lunatic
