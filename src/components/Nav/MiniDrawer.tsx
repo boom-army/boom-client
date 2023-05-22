@@ -7,14 +7,15 @@ import ScienceIcon from "@mui/icons-material/Science";
 import { Box, IconButton, Stack, styled, useTheme } from "@mui/material";
 import { RoutePath } from "../../constants";
 import { NavLink } from "react-router-dom";
+import { headerOffset } from "../../utils/boom-web3/constants";
 
 interface MiniDrawerProps {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DrawerWrapper = styled(Box)(({ theme }) => ({
-  maxHeight: "calc(100vh - 49px)",
-  minHeight: "calc(100vh - 49px)",
+  maxHeight: headerOffset,
+  minHeight: headerOffset,
   width: "3rem",
   display: "flex",
   flexDirection: "column",

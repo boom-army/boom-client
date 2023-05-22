@@ -5,6 +5,7 @@ import { Loader } from "../components/Loader";
 import { useSearchTweetsQuery } from "../generated/graphql";
 import { NewsItem } from "../components/NewsItem";
 import { useContext } from "react";
+import { headerOffset } from "../utils/boom-web3/constants";
 
 export const News = () => {
   const theme = useTheme();
@@ -39,7 +40,7 @@ export const News = () => {
         container
         id="tweetScroll"
         sx={{
-          maxHeight: "calc(100vh - 49px)",
+          maxHeight: headerOffset,
           overflow: "auto",
         }}
       >

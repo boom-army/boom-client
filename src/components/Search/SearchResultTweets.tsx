@@ -4,6 +4,7 @@ import { ShowTweet } from "../Tweet";
 import { Loader } from "../Loader";
 import { Box, Grid } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { headerOffset } from "../../utils/boom-web3/constants";
 
 const SearchResultTweets = ({ tweets, loading, fetchMoreTweets }: any) => {
   if (loading) return <Loader />;
@@ -18,7 +19,7 @@ const SearchResultTweets = ({ tweets, loading, fetchMoreTweets }: any) => {
       container
       id="tweetScroll"
       sx={{
-        maxHeight: "calc(100vh - 49px)",
+        maxHeight: headerOffset,
         overflow: "auto",
       }}
     >

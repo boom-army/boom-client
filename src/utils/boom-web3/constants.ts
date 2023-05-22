@@ -5,3 +5,5 @@ export const ERRORS = {
   NO_BMA_ACCOUNT: "No BMA account found for Payee at",
   GENERIC_CONTRACT_INTERACTION: "Error interacting with contract",
 };
+
+export const headerOffset = "calc(100vh - 49px)";

@@ -22,6 +22,7 @@ import { WhoToFollow } from "../components/SideBar/WhoToFollow";
 import { TipRank } from "../components/SideBar/TipRank";
 import { HeroFeed } from "../views/HeroFeed";
 import { RoutePath } from "../constants";
+import { headerOffset } from "../utils/boom-web3/constants";
 
 interface GridProps {
   data: ProfileQuery | undefined;
@@ -53,7 +54,7 @@ export const GridStandard: React.FC<GridProps> = ({
           item
           md={3}
           display={{ xs: "none", sm: "none", md: "block" }}
-          sx={{ height: "calc(100vh - 49px)", overflow: "scroll" }}
+          sx={{ height: headerOffset, overflow: "scroll" }}
         >
           <Routes>
             <Route

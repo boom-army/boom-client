@@ -11,6 +11,7 @@ import { NewMeepsCountQuery, Tweet } from "../generated/graphql";
 import { BoomHeroStore } from "./Advertising/BoomHeroStore";
 import { UserContext } from "../contexts/user";
 import { TweetThread } from "./Tweet/TweetThread/TweatThread";
+import { headerOffset } from "../utils/boom-web3/constants";
 
 interface Props {
   loading?: boolean;
@@ -65,7 +66,7 @@ export const FeedList: React.FC<Props> = ({
       container
       id="scrollBox"
       sx={{
-        maxHeight: "calc(100vh - 49px)",
+        maxHeight: headerOffset,
         overflow: "auto",
       }}
     >

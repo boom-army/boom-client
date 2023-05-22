@@ -7,14 +7,15 @@ import {
 } from "@mui/material";
 import { Nav } from ".";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { headerOffset } from "../../utils/boom-web3/constants";
 
 interface LeftDrawerProps {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DrawerWrapper = styled(Box)(({ theme }) => ({
-  maxHeight: "calc(100vh - 49px)",
-  minHeight: "calc(100vh - 49px)",
+  maxHeight: headerOffset,
+  minHeight: headerOffset,
   width: "20rem",
   display: "flex",
   flexDirection: "column",
