@@ -162,9 +162,7 @@ export const components: Components = {
 export const typography: { typography: TypographyOptions } = {
   typography: {
     fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Noto Sans Display"',
+      '"Noto Sans"',
       '"Trebuchet MS"',
       "Arial",
       "sans-serif",
@@ -178,9 +176,10 @@ export const typography: { typography: TypographyOptions } = {
     fontWeightMedium: 600,
     fontWeightBold: 800,
     h1: {
-      fontSize: 30,
+      fontFamily: 'VT323, monospace',
+      fontSize: 60,
       fontWeight: 600,
-      lineHeight: "1.8rem",
+      lineHeight: "4rem",
     },
     h2: {
       fontSize: 26,
