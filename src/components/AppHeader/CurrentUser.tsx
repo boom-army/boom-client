@@ -3,12 +3,11 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import React from "react";
 import { Badge, Box, Grid, IconButton, styled } from "@mui/material";
 import { WalletMultiButton } from "../WalletMUIConnect";
-import { useSidebarState } from "../../hooks";
+import { useNewMentions, useSidebarState } from "../../hooks";
 
-export const CurrentUser: React.FC<{ notifications: number | undefined }> = ({
-  notifications,
-}) => {
+export const CurrentUser: React.FC = () => {
   const { sidebar, toggleRightSidebar } = useSidebarState();
+  const { newMentions } = useNewMentions();
 
   const NotificationPulse = styled(NotificationsActiveIcon)(({ theme }) => ({
     padding: "0.15rem",
@@ -55,8 +54,8 @@ export const CurrentUser: React.FC<{ notifications: number | undefined }> = ({
                 toggleRightSidebar(!sidebar.rightNotificationsFull)
               }
             >
-              {notifications ? (
-                <Badge badgeContent={notifications} color="primary">
+              {newMentions?.newMentions.length ? (
+                <Badge badgeContent={newMentions?.newMentions.length} color="primary">
                   <NotificationsIcon />
                 </Badge>
               ) : (

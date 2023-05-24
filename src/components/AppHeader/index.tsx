@@ -6,26 +6,35 @@ import { PUBLIC_ADDRESS, LOGIN_REGISTER } from "../../queries/auth";
 import { USER_FOLLOW } from "../../queries/follow";
 import { Theme } from "../../contexts/theme";
 import { UserContext } from "../../contexts/user";
-import { useMutation } from "@apollo/client";
+import { ApolloQueryResult, useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { FeedDocument, useNewMentionsQuery, useProfileQuery } from "../../generated/graphql";
+import {
+  FeedDocument,
+  useNewMentionsQuery,
+} from "../../generated/graphql";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { RoutePath } from "../../constants";
+import { useNewMentions } from "../../hooks";
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
   const { user, setUser } = useContext(UserContext);
+  const { setNewMentions } = useNewMentions();
 
   // const { loading, data, refetch } = useProfileQuery({
   //   variables: { handle: user?.handle },
   // });
   const { data: newMentionsData } = useNewMentionsQuery({
     pollInterval: 30000,
-  });  
-  
+  });
+
+  useEffect(() => {
+    setNewMentions(newMentionsData);
+  }, [newMentionsData]);
+
   const token = localStorage.getItem("token");
   const headerImg =
     localStorage.getItem(Theme.TAG) === Theme.LIGHT
@@ -121,7 +130,7 @@ export const AppHeader = () => {
                 </Link>
               </Box>
               <Box mt={0.5}>
-                <CurrentUser notifications={newMentionsData?.newMentions.length} />
+                <CurrentUser />
               </Box>
             </Box>
           </Grid>
