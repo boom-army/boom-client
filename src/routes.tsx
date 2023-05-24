@@ -5,7 +5,6 @@ import { AppHeader } from "./components/AppHeader";
 import {
   Box,
   Slide,
-  Typography,
   useMediaQuery,
   useScrollTrigger,
   useTheme,
@@ -38,7 +37,7 @@ export const AppRoutes: React.FC = () => {
 
   const { loading, data } = useProfileQuery({
     variables: { handle: user?.handle },
-  });  
+  });
 
   return (
     <>
@@ -118,7 +117,7 @@ export const AppRoutes: React.FC = () => {
                     />
                   </Routes>
                 </Box>
-                <Notifications />
+                {sidebar.rightNotificationsFull ? <Notifications /> : null}
                 <MobileBottomNav />
                 <PopoutProfileMenu />
                 <PopoutNavMenu />
