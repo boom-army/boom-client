@@ -5,6 +5,7 @@ import { AppHeader } from "./components/AppHeader";
 import {
   Box,
   Slide,
+  Typography,
   useMediaQuery,
   useScrollTrigger,
   useTheme,
@@ -18,16 +19,18 @@ import { useProfileQuery } from "./generated/graphql";
 import { GridStandard } from "./view-grids/GridStandard";
 // import { GridAuction } from "./view-grids/GridAuction";
 import { Dashboard } from "./views";
-import { FloatingNavbar, PopoutDrawerMenu } from "./components/Nav";
+import { PopoutProfileMenu, PopoutNavMenu } from "./components/Nav";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
 import { LeftNavDrawer, MiniDrawer, MobileBottomNav } from "./components/Nav";
 import { Lab } from "./views/Lab";
+import { useDrawerState } from "./hooks";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
   const { user, setUser } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
+  const { drawer, toggleLeftNav } = useDrawerState();
 
   useEffect(() => {
     setShowMenu(JSON.parse(localStorage.getItem("miniMenu") || "true"));
@@ -126,10 +129,17 @@ export const AppRoutes: React.FC = () => {
                     />
                   </Routes>
                 </Box>
+                <Box
+                  display={"flex"}
+                  sx={{ p: 2, borderLeft: `1px solid ${theme.tertiaryColor}` }}
+                >
+                  <Typography>Notifications</Typography>
+                </Box>
                 <MobileBottomNav />
-                <PopoutDrawerMenu />
+                <PopoutProfileMenu />
+                <PopoutNavMenu />
               </Box>
-              <FloatingNavbar />
+              {/* <FloatingNavbar /> */}
             </>
           </GiphyContextProvider>
         </Wallet>

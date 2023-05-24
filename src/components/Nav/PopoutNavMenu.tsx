@@ -1,12 +1,11 @@
 import React from "react";
 import { Box, SwipeableDrawer } from "@mui/material";
 import { Nav } from "./Nav";
-import { drawerState, useToggleDrawer } from "../../hooks";
-import { useRecoilValue } from "recoil";
+import { useDrawerState } from "../../hooks";
 
-export const PopoutDrawerMenu = () => {
-  const toggleDrawer = useToggleDrawer();
-  const drawer = useRecoilValue(drawerState);
+export const PopoutNavMenu = () => {
+  const { toggleLeftNav, drawer } = useDrawerState();
+  
   const user = null;
   const data = {
     profile: {
@@ -16,9 +15,9 @@ export const PopoutDrawerMenu = () => {
   return (
     <SwipeableDrawer
       anchor="left"
-      open={drawer}
-      onClose={toggleDrawer(false)}
-      onOpen={toggleDrawer(true)}
+      open={drawer.leftNavOpen}
+      onClose={() => toggleLeftNav(false)}
+      onOpen={() => toggleLeftNav(true)}
       sx={{ "& .MuiDrawer-paper": { backgroundImage: "none" } }}
     >
       <Box sx={{ width: "20rem", pl: 2, pb: 5 }} role="presentation">

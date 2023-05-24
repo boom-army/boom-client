@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { RoutePath } from "../../constants";
-import { useToggleDrawer } from "../../hooks";
+import { useDrawerState } from "../../hooks";
 
 const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
   width: "auto",
@@ -37,7 +37,7 @@ const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
 
 export const MobileBottomNav = () => {
   const [value, setValue] = React.useState("recents");
-  const toggleDrawer = useToggleDrawer();
+  const { toggleLeftNav } = useDrawerState();
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -88,7 +88,7 @@ export const MobileBottomNav = () => {
           label="Menu"
           value="menu"
           icon={<MenuIcon />}
-          onClick={toggleDrawer(true)}
+          onClick={() => toggleLeftNav(true)}
         />
       </StyledBottomNavigation>
     </Paper>

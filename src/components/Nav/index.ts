@@ -4,4 +4,5 @@ export * from "./LeftNavDrawer";
 export * from "./MiniDrawer";
 export * from "./MobileBottomNav";
 export * from "./Nav";
-export * from "./PopoutDrawerMenu";
+export * from "./PopoutNavMenu";
+export * from "./PopoutProfileMenu";
