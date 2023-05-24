@@ -1,11 +1,11 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import { alpha, Box, Grid, Typography, useTheme } from "@mui/material";
+import React from "react";
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
-import { useSearchTweetsQuery } from "../generated/graphql";
 import { NewsItem } from "../components/NewsItem";
-import { useContext } from "react";
+import { alpha, Box, Grid, Typography, useTheme } from "@mui/material";
 import { headerOffset } from "../utils/boom-web3/constants";
+import { useSearchTweetsQuery } from "../generated/graphql";
 
 export const News = () => {
   const theme = useTheme();
