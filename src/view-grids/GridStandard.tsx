@@ -6,12 +6,10 @@ import { EditProfile } from "../views/EditProfile";
 import { Route, Routes, Navigate } from "react-router-dom";
 import {
   ChannelFeed,
-  Channels,
   PeopleView,
   Explore,
   Following,
   News,
-  Notifications,
 } from "../views";
 
 import { Exact, Maybe, ProfileQuery, User } from "../generated/graphql";
@@ -42,7 +40,6 @@ interface GridProps {
 export const GridStandard: React.FC<GridProps> = ({
   data,
   loading,
-  refetch,
   setUser,
 }) => {
   const theme = useTheme();
@@ -95,10 +92,6 @@ export const GridStandard: React.FC<GridProps> = ({
           <Route path={RoutePath.LEADERBOARD} element={<TipLeaderboard />} />
           <Route path={RoutePath.MINT_NFT} element={<NFTMint />} />
           <Route path={RoutePath.NEWS} element={<News />} />
-          <Route
-            path={RoutePath.NOTIFICATIONS}
-            element={<Notifications refetchProfile={refetch} />}
-          />
           <Route
             path={RoutePath.PROFILE_SETTINGS}
             element={
