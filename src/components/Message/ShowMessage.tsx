@@ -32,20 +32,28 @@ import { useReaction } from "../../hooks/useReaction";
 import { RoutePath } from "../../constants";
 
 export const ReplyBox = styled(Box)(({ theme }) => ({
-  "&:before": {
-    width: "1.5em",
-    height: "0.7em",
-    borderLeft: `solid 2px ${theme.accentColor}`,
-    borderTop: `solid 2px ${theme.accentColor}`,
-    borderColor: `${theme.accentColor} transparent transparent ${theme.accentColor}`,
-    borderRadius: "1em 0 0 1em",
+  position: "relative",
+
+  "&:before, &:after": {
     content: '""',
     display: "block",
     position: "absolute",
-    WebkitBoxSizing: "border-box",
+    backgroundColor: `${theme.accentColor}`,
     boxSizing: "border-box",
-    top: "30%",
-    left: "0.7em",
+  },
+
+  "&:before": {
+    width: "1.4em",
+    height: "1px", // Match border thickness
+    top: "40%",
+    left: "0.85em",
+  },
+
+  "&:after": {
+    width: "1px", // Match border thickness
+    height: "0.7em",
+    top: "40%",
+    left: "0.85em",
   },
 }));
 
