@@ -24,22 +24,12 @@ import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
 import { LeftNavDrawer, MiniDrawer, MobileBottomNav } from "./components/Nav";
 import { Lab } from "./views/Lab";
-import { useDrawerState } from "./hooks";
+import { useSidebarState } from "./hooks";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
   const { user, setUser } = useContext(UserContext);
-  const [showMenu, setShowMenu] = useState(false);
-  const { drawer, toggleLeftNav } = useDrawerState();
-
-  useEffect(() => {
-    setShowMenu(JSON.parse(localStorage.getItem("miniMenu") || "true"));
-  }, []);
-
-  const setMiniMenu = () => {
-    localStorage.setItem("miniMenu", JSON.stringify(!showMenu));
-    setShowMenu(!showMenu);
-  };
+  const { sidebar } = useSidebarState();
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const drawerHidden = useMediaQuery(theme.breakpoints.down("md"));
@@ -47,7 +37,7 @@ export const AppRoutes: React.FC = () => {
 
   const { loading, data, refetch } = useProfileQuery({
     variables: { handle: user?.handle },
-  });
+  });  
 
   return (
     <>
@@ -97,12 +87,11 @@ export const AppRoutes: React.FC = () => {
               <Box display="flex">
                 {!drawerHidden ? (
                   <Box display={"flex"}>
-                    {!showMenu ? (
-                      <MiniDrawer setShowMenu={setMiniMenu} />
+                    {!sidebar.leftSidebarFull ? (
+                      <MiniDrawer />
                     ) : (
-                      <LeftNavDrawer setShowMenu={setMiniMenu} />
+                      <LeftNavDrawer />
                     )}
-                    {/* <MiniDrawer /> <LeftNavDrawer /> */}
                   </Box>
                 ) : null}
                 <Box flexGrow={1} overflow="auto">

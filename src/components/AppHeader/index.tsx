@@ -114,7 +114,7 @@ export const AppHeader = () => {
                 </Link>
               </Box>
               <Box mt={0.5}>
-                <CurrentUser />
+                <CurrentUser notifications={1} />
               </Box>
             </Box>
           </Grid>

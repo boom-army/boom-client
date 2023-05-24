@@ -8,10 +8,7 @@ import { Box, IconButton, Stack, styled, useTheme } from "@mui/material";
 import { RoutePath } from "../../constants";
 import { NavLink } from "react-router-dom";
 import { headerOffset } from "../../utils/boom-web3/constants";
-
-interface MiniDrawerProps {
-  setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { useSidebarState } from "../../hooks";
 
 const DrawerWrapper = styled(Box)(({ theme }) => ({
   maxHeight: headerOffset,
@@ -30,8 +27,9 @@ const DrawerWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const MiniDrawer: React.FC<MiniDrawerProps> = ({ setShowMenu }) => {
+export const MiniDrawer: React.FC = () => {
   const theme = useTheme();
+  const { sidebar, toggleLeftSidebar } = useSidebarState();
   return (
     <DrawerWrapper>
       <Stack spacing={2}>
@@ -56,7 +54,7 @@ export const MiniDrawer: React.FC<MiniDrawerProps> = ({ setShowMenu }) => {
           </IconButton>
         </NavLink>
       </Stack>
-      <IconButton onClick={() => setShowMenu(true)}>
+      <IconButton onClick={() => toggleLeftSidebar(!sidebar.leftSidebarFull)}>
         <ChevronRightIcon
           sx={{
             borderRadius: "50%",

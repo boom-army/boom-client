@@ -1,9 +1,9 @@
-import { CustomResponse } from "../components/CustomResponse";
-import { Loader } from "../components/Loader";
+import { CustomResponse } from "./CustomResponse";
+import { Loader } from "./Loader";
 import { useEffect } from "react";
 import { useMentionsQuery } from "../generated/graphql";
 import { Box, Grid } from "@mui/material";
-import { Notification } from "../components/Notification/Notification";
+import { Notification } from "./Notification/Notification";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export const Notifications = ({ refetchProfile }: any) => {
