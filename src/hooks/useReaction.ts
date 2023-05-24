@@ -32,7 +32,6 @@ export const useReaction = ({ tweetId, parentTweetId }: Props) => {
         await toggleReactionMutation({
           variables: { id: tweetId, emojiId, skin: null },
         });
-        enqueueSnackbar(`Emoji updated`, { variant: "success" });
       } catch (err) {
         console.log(err);
         return displayError(err, enqueueSnackbar);
