@@ -57,7 +57,6 @@ export const Notifications = () => {
       id="notificationScroll"
       maxWidth="25rem"
       sx={{
-        p: 2,
         borderLeft: `1px solid ${theme.tertiaryColor}`,
         height: headerOffset,
         overflow: "auto",
