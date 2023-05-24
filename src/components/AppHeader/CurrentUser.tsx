@@ -1,14 +1,13 @@
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import React from "react";
-import { Badge, Box, Grid, IconButton, styled, useTheme } from "@mui/material";
+import { Badge, Box, Grid, IconButton, styled } from "@mui/material";
 import { WalletMultiButton } from "../WalletMUIConnect";
 import { useSidebarState } from "../../hooks";
 
-export const CurrentUser: React.FC<{ notifications: number }> = ({
+export const CurrentUser: React.FC<{ notifications: number | undefined }> = ({
   notifications,
 }) => {
-  const theme = useTheme();
   const { sidebar, toggleRightSidebar } = useSidebarState();
 
   const NotificationPulse = styled(NotificationsActiveIcon)(({ theme }) => ({
@@ -56,9 +55,13 @@ export const CurrentUser: React.FC<{ notifications: number }> = ({
                 toggleRightSidebar(!sidebar.rightNotificationsFull)
               }
             >
-              <Badge badgeContent={notifications} color="primary">
+              {notifications ? (
+                <Badge badgeContent={notifications} color="primary">
+                  <NotificationsIcon />
+                </Badge>
+              ) : (
                 <NotificationsIcon />
-              </Badge>
+              )}
             </IconButton>
           )}
         </Box>

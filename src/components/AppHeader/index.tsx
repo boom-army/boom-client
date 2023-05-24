@@ -9,7 +9,7 @@ import { UserContext } from "../../contexts/user";
 import { useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { FeedDocument } from "../../generated/graphql";
+import { FeedDocument, useNewMentionsQuery, useProfileQuery } from "../../generated/graphql";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { RoutePath } from "../../constants";
@@ -17,8 +17,15 @@ import { RoutePath } from "../../constants";
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
+  // const { loading, data, refetch } = useProfileQuery({
+  //   variables: { handle: user?.handle },
+  // });
+  const { data: newMentionsData } = useNewMentionsQuery({
+    pollInterval: 30000,
+  });  
+  
   const token = localStorage.getItem("token");
   const headerImg =
     localStorage.getItem(Theme.TAG) === Theme.LIGHT
@@ -114,7 +121,7 @@ export const AppHeader = () => {
                 </Link>
               </Box>
               <Box mt={0.5}>
-                <CurrentUser notifications={1} />
+                <CurrentUser notifications={newMentionsData?.newMentions.length} />
               </Box>
             </Box>
           </Grid>
