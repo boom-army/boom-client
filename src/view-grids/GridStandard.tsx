@@ -25,15 +25,6 @@ import { headerOffset } from "../utils/boom-web3/constants";
 interface GridProps {
   data: ProfileQuery | undefined;
   loading: boolean;
-  refetch: (
-    variables?:
-      | Partial<
-          Exact<{
-            handle?: Maybe<string> | undefined;
-          }>
-        >
-      | undefined
-  ) => Promise<ApolloQueryResult<ProfileQuery>>;
   setUser: (user: User | null) => User | void;
 }
 
