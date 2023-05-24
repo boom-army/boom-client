@@ -45,7 +45,13 @@ export const CurrentUser: React.FC = () => {
                 toggleRightSidebar(!sidebar.rightNotificationsFull)
               }
             >
-              <NotificationPulse />
+              {newMentions?.length ? (
+                <Badge badgeContent={newMentions?.length} color="primary">
+                  <NotificationPulse />
+                </Badge>
+              ) : (
+                <NotificationPulse />
+              )}
             </IconButton>
           ) : (
             <IconButton
@@ -54,8 +60,8 @@ export const CurrentUser: React.FC = () => {
                 toggleRightSidebar(!sidebar.rightNotificationsFull)
               }
             >
-              {newMentions?.newMentions.length ? (
-                <Badge badgeContent={newMentions?.newMentions.length} color="primary">
+              {newMentions?.length ? (
+                <Badge badgeContent={newMentions?.length} color="primary">
                   <NotificationsIcon />
                 </Badge>
               ) : (

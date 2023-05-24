@@ -28,11 +28,11 @@ export const AppHeader = () => {
   //   variables: { handle: user?.handle },
   // });
   const { data: newMentionsData } = useNewMentionsQuery({
-    pollInterval: 30000,
+    pollInterval: 1000 // 30000,
   });
 
   useEffect(() => {
-    setNewMentions(newMentionsData);
+    setNewMentions(newMentionsData?.newMentions);
   }, [newMentionsData]);
 
   const token = localStorage.getItem("token");

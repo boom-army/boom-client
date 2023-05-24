@@ -10,6 +10,7 @@ import moment from "moment";
 import { setDate } from "../../utils";
 import { ShowTweet } from "../Tweet";
 import { RoutePath } from "../../constants";
+import { useNewMentions } from "../../hooks";
 
 interface NotificationProps {
   mention: Mention;
@@ -19,6 +20,11 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
   const theme = useTheme();
   const [text, setText] = useState("");
   const [fromUser, setFromUser] = useState(mention?.tweet?.user);
+  const { newMentions } = useNewMentions();
+
+  const mentionIsNew =
+    newMentions?.length &&
+    newMentions?.some((newMention) => newMention.id === mention.id);
 
   useProfileByIdQuery({
     variables: {
@@ -44,6 +50,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
 
   return (
     <Box p={2} sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}>
+      {mentionIsNew && ("Boom")}
       {fromUser && (
         <Box
           display={"flex"}

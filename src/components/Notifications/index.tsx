@@ -1,22 +1,24 @@
 import { CustomResponse } from "../CustomResponse";
 import { Loader } from "../Loader";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMentionsQuery } from "../../generated/graphql";
 import { Box, Grid, useTheme } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { NotificationLite } from "./NotificationLite";
 import { headerOffset } from "../../utils/boom-web3/constants";
+import { useNewMentions } from "../../hooks";
 
 export const Notifications = () => {
   const theme = useTheme();
+  const [scrolling, setScrolling] = useState(false);
+  const { setNewMentions } = useNewMentions();
+  
   const { loading, data, fetchMore } = useMentionsQuery({
     variables: {
       offset: 0,
       limit: 10,
     },
   });
-
-  console.log(data);
 
   const fetchData = () => {
     fetchMore({
@@ -25,6 +27,29 @@ export const Notifications = () => {
       },
     });
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolling(true);
+    };
+
+    document
+      .getElementById("notificationScroll")
+      ?.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document
+        .getElementById("notificationScroll")
+        ?.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (scrolling) {      
+      setNewMentions(undefined);
+      setScrolling(false);
+    }
+  }, [scrolling]);
 
   if (loading) return <Loader />;
   return (
