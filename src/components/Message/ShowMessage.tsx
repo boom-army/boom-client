@@ -43,7 +43,7 @@ export const ReplyBox = styled(Box)(({ theme }) => ({
   },
 
   "&:before": {
-    width: "1.4em",
+    width: "1.7em",
     height: "1px", // Match border thickness
     top: "40%",
     left: "0.85em",

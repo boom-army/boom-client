@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Box, Stack, Typography, useTheme } from "@mui/material";
+import React from "react";
+import { Box, Stack, Typography } from "@mui/material";
 import { HashLink } from "react-router-hash-link";
 import { ReplyBox } from "../../Message/ShowMessage";
 import { UserAvatar } from "../../UserAvatar";
@@ -11,15 +11,13 @@ interface Props {
 }
 
 export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
-  const theme = useTheme();
-
   return (
     <Box sx={{ position: "relative", top: 17, left: 14, width: "100%" }}>
       <ReplyBox>
         <HashLink
           to={`${RoutePath.HANDLE_HASH}/${tweet?.user?.handle}/${tweet?.id}`}
         >
-          <Stack direction="row" pl={5}>
+          <Stack direction="row" pl={5.7}>
             <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
               <UserAvatar
                 sx={{
