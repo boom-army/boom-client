@@ -6,6 +6,5 @@ export { Explore } from "./Explore";
 export { Following } from "./Following";
 export { Dashboard } from "./Dashboard";
 export { News } from "./News";
-export { Notifications } from "../components/Notifications";
 export { HeroFeed } from "./HeroFeed";
 // export { OGMint } from "./OGMint";

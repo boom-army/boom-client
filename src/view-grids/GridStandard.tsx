@@ -11,9 +11,7 @@ import {
   Following,
   News,
 } from "../views";
-
-import { Exact, Maybe, ProfileQuery, User } from "../generated/graphql";
-import { ApolloQueryResult } from "@apollo/client";
+import { ProfileQuery, User } from "../generated/graphql";
 import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { TipLeaderboard } from "../views/TipLeaderboard";
 import { WhoToFollow } from "../components/SideBar/WhoToFollow";

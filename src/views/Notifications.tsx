@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Box, Grid } from "@mui/material";
 import { CustomResponse } from "../components/CustomResponse";
 import { Loader } from "../components/Loader";
-import { Notification } from "../components/Notification/Notification";
+import { Notification } from "../components/Notifications/Notification";
 import { useMentionsQuery } from "../generated/graphql";
 
 export const Notifications = ({ refetchProfile }: any) => {
@@ -28,7 +28,7 @@ export const Notifications = ({ refetchProfile }: any) => {
 
   if (loading) return <Loader />;
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} id="scrollBox">
       {data?.mentions?.length ? (
         <InfiniteScroll
           dataLength={data?.mentions?.length}

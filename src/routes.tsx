@@ -25,6 +25,7 @@ import { DAOView } from "./views/DAO";
 import { LeftNavDrawer, MiniDrawer, MobileBottomNav } from "./components/Nav";
 import { Lab } from "./views/Lab";
 import { useSidebarState } from "./hooks";
+import { Notifications } from "./components/Notifications";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
@@ -35,7 +36,7 @@ export const AppRoutes: React.FC = () => {
   const drawerHidden = useMediaQuery(theme.breakpoints.down("md"));
   // const trigger = useScrollTrigger();
 
-  const { loading, data, refetch } = useProfileQuery({
+  const { loading, data } = useProfileQuery({
     variables: { handle: user?.handle },
   });  
 
@@ -94,7 +95,7 @@ export const AppRoutes: React.FC = () => {
                     )}
                   </Box>
                 ) : null}
-                <Box flexGrow={1} overflow="auto">
+                <Box overflow="auto">
                   <Routes>
                     {/* <Route
                       path="auctions"
@@ -111,19 +112,13 @@ export const AppRoutes: React.FC = () => {
                         <GridStandard
                           loading={loading}
                           data={data}
-                          refetch={refetch}
                           setUser={setUser}
                         />
                       }
                     />
                   </Routes>
                 </Box>
-                <Box
-                  display={"flex"}
-                  sx={{ p: 2, borderLeft: `1px solid ${theme.tertiaryColor}` }}
-                >
-                  <Typography>Notifications</Typography>
-                </Box>
+                <Notifications />
                 <MobileBottomNav />
                 <PopoutProfileMenu />
                 <PopoutNavMenu />
