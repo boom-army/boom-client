@@ -21,7 +21,7 @@ import { useNewMentions } from "../../hooks";
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const { setNewMentions } = useNewMentions();
 
   // const { loading, data, refetch } = useProfileQuery({
