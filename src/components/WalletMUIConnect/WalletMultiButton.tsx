@@ -17,12 +17,14 @@ import {
   styled,
 } from "@mui/material";
 import { useWallet } from "@solana/wallet-adapter-react";
-import type { FC } from "react";
+import { FC, useCallback } from "react";
 import React, { useMemo, useState } from "react";
 import { useWalletDialog } from "./useWalletDialog.js";
 import { WalletConnectButton } from "./WalletConnectButton.js";
 import { WalletDialogButton } from "./WalletDialogButton.js";
 import { WalletIcon } from "./WalletIcon.js";
+import { useSnackbar } from "../../contexts/snackbar.js";
+import { useNavigate } from "react-router-dom";
 
 const StyledMenu = styled(Menu)(({ theme }: { theme: Theme }) => ({
   "& .MuiList-root": {
@@ -72,6 +74,8 @@ export const WalletMultiButton: FC<ButtonProps> = ({
   const { publicKey, wallet, disconnect } = useWallet();
   const { setOpen } = useWalletDialog();
   const [anchor, setAnchor] = useState<HTMLElement>();
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const base58 = useMemo(() => publicKey?.toBase58(), [publicKey]);
   const content = useMemo(() => {
@@ -79,6 +83,23 @@ export const WalletMultiButton: FC<ButtonProps> = ({
     if (!wallet || !base58) return null;
     return base58.slice(0, 4) + ".." + base58.slice(-4);
   }, [children, wallet, base58]);
+
+  const handleLogout = useCallback(
+    (event: any) => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("sidebarState");
+      disconnect().catch(() => {
+        // Silently catch because any errors are caught by the context `onError` handler
+      });
+      setTimeout(() => {
+        navigate("/", { replace: true }); // Redirect using React Router
+        window.location.reload(); // Force refresh after redirecting
+      }, 2100);
+      return enqueueSnackbar("You are logged out", { variant: "success" });
+    },
+    [disconnect, enqueueSnackbar]
+  );
 
   if (!wallet) {
     return (
@@ -157,15 +178,7 @@ export const WalletMultiButton: FC<ButtonProps> = ({
             </ListItemIcon>
             Change wallet
           </WalletActionMenuItem>
-          <WalletActionMenuItem
-            onClick={() => {
-              setAnchor(undefined);
-              // eslint-disable-next-line @typescript-eslint/no-empty-function
-              disconnect().catch(() => {
-                // Silently catch because any errors are caught by the context `onError` handler
-              });
-            }}
-          >
+          <WalletActionMenuItem onClick={handleLogout}>
             <ListItemIcon>
               <DisconnectIcon />
             </ListItemIcon>

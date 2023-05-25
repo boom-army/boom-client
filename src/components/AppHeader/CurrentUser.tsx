@@ -61,36 +61,40 @@ export const CurrentUser: React.FC = () => {
             </Box>
           )}
           <WalletMultiButton />
-          {sidebar.rightNotificationsFull ? (
-            <IconButton
-              aria-label="notifications-open"
-              onClick={() =>
-                toggleRightSidebar(!sidebar.rightNotificationsFull)
-              }
-            >
-              {newMentions?.length ? (
-                <Badge badgeContent={newMentions?.length} color="primary">
-                  <NotificationPulse />
-                </Badge>
+          {user && (
+            <>
+              {sidebar.rightNotificationsFull ? (
+                <IconButton
+                  aria-label="notifications-open"
+                  onClick={() =>
+                    toggleRightSidebar(!sidebar.rightNotificationsFull)
+                  }
+                >
+                  {newMentions?.length ? (
+                    <Badge badgeContent={newMentions?.length} color="primary">
+                      <NotificationPulse />
+                    </Badge>
+                  ) : (
+                    <NotificationPulse />
+                  )}
+                </IconButton>
               ) : (
-                <NotificationPulse />
+                <IconButton
+                  aria-label="notifications"
+                  onClick={() =>
+                    toggleRightSidebar(!sidebar.rightNotificationsFull)
+                  }
+                >
+                  {newMentions?.length ? (
+                    <Badge badgeContent={newMentions?.length} color="primary">
+                      <NotificationsIcon />
+                    </Badge>
+                  ) : (
+                    <NotificationsIcon />
+                  )}
+                </IconButton>
               )}
-            </IconButton>
-          ) : (
-            <IconButton
-              aria-label="notifications"
-              onClick={() =>
-                toggleRightSidebar(!sidebar.rightNotificationsFull)
-              }
-            >
-              {newMentions?.length ? (
-                <Badge badgeContent={newMentions?.length} color="primary">
-                  <NotificationsIcon />
-                </Badge>
-              ) : (
-                <NotificationsIcon />
-              )}
-            </IconButton>
+            </>
           )}
         </Box>
       </Grid>
