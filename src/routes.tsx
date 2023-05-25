@@ -25,6 +25,7 @@ import { LeftNavDrawer, MiniDrawer, MobileBottomNav } from "./components/Nav";
 import { Lab } from "./views/Lab";
 import { useSidebarState } from "./hooks";
 import { Notifications } from "./components/Notifications";
+import { Profile } from "./components/Profile/Profile";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
@@ -105,6 +106,7 @@ export const AppRoutes: React.FC = () => {
                     <Route path={RoutePath.HOME} element={<DAOView />} />
                     <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
                     <Route path={RoutePath.LAB} element={<Lab />} />
+                    <Route path={RoutePath.HANDLE} element={<Profile />} />
                     <Route
                       path={RoutePath.WILDCARD}
                       element={

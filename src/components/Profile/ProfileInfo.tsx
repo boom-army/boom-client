@@ -1,69 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { UserAvatar } from "../UserAvatar";
-import { Button, Box } from "@mui/material";
+import { Button, Box, Grid } from "@mui/material";
 import { Follow } from "./Follow";
 import { DobIcon, LocationIcon, LinkIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
 import { RoutePath } from "../../constants";
-
-const Wrapper = styled("div")((props) => ({
-  borderBottom: `1px solid ${props.theme.tertiaryColor}`,
-
-  ".avatar": {
-    marginLeft: "1.4rem",
-    marginTop: "-4rem",
-  },
-
-  ".profile-name-handle": {
-    wordBreak: "break-all",
-
-    "span.consumerName": {
-      fontWeight: "bold",
-    },
-
-    "span.wallet": {
-      marginTop: "0.1rem",
-      color: props.theme.palette.secondary,
-    },
-
-    "span.handle": {
-      marginTop: "0.1rem",
-      color: props.theme.palette.secondary,
-    },
-  },
-
-  ".profile-info": {
-    padding: "0 1.4rem 1rem",
-
-    ".bio": {
-      width: "100%",
-    },
-  },
-
-  "div.loc-dob-web": {
-    display: "flex",
-    color: props.theme.palette.secondary,
-    margin: "0.6rem 0",
-
-    span: {
-      marginRight: "1.5rem",
-    },
-
-    svg: {
-      marginRight: "0.2rem",
-      position: "relative",
-      top: "3px",
-    },
-  },
-
-  "div.follow-following": {
-    color: props.theme.palette.secondary,
-    span: {
-      marginRight: "1.3rem",
-    },
-  },
-}));
 
 const ProfileInfo = ({ profile }: any) => {
   const {
@@ -85,7 +27,7 @@ const ProfileInfo = ({ profile }: any) => {
   } = profile;
 
   return (
-    <Wrapper>
+    <Grid item>
       <Box
         position="relative"
         mb={2}
@@ -144,7 +86,6 @@ const ProfileInfo = ({ profile }: any) => {
         </Box>
         <Box pb={1}>
           <p className="bio">{bio}</p>
-
           {!location && !website && !dob ? null : (
             <div className="loc-dob-web">
               {location ? (
@@ -180,7 +121,7 @@ const ProfileInfo = ({ profile }: any) => {
           </div>
         </Box>
       </Box>
-    </Wrapper>
+    </Grid>
   );
 };
 

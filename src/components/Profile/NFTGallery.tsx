@@ -106,7 +106,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
 
   return (
     <>
-      <Grid item sm={4} md={3}>
+      <Grid item xs={6} md={2}>
         <Box
           sx={{
             cursor: "pointer",
@@ -115,8 +115,8 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
           key={uRIData?.image}
         >
           <Link
+            color="secondary"
             onClick={() => toggleNftSelect(true)}
-            color={theme.palette.secondary}
             underline="hover"
           >
             <Box
@@ -125,6 +125,7 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
+                paddingTop: "100%", // Ensure the box is square
                 position: "relative",
               }}
             >
@@ -133,19 +134,26 @@ const NFTTile: React.FC<NFTTileProps> = ({ data, cluster }) => {
                   src={uRIData?.image}
                   alt={uRIData?.name}
                   style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
                     width: "100%",
-                    height: "auto",
+                    height: "100%",
+                    objectFit: "cover",
                   }}
                 />
               ) : (
                 <Box
                   sx={{
+                    position: "absolute", // Set position to absolute
+                    top: 0,
+                    left: 0,
                     width: "100%",
-                    height: 120,
-                    backgroundColor: theme.tertiaryColor2,
+                    height: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    backgroundColor: theme.tertiaryColor2,
                   }}
                 >
                   <DoNotDisturbOnIcon fontSize="large" />

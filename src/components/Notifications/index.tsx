@@ -12,12 +12,12 @@ export const Notifications = () => {
   const theme = useTheme();
   const [scrolling, setScrolling] = useState(false);
   const { setNewMentions } = useNewMentions();
-  
+
   const { loading, data, fetchMore } = useMentionsQuery({
     variables: {
       offset: 0,
       limit: 10,
-    }
+    },
   });
 
   const fetchData = () => {
@@ -45,7 +45,7 @@ export const Notifications = () => {
   }, []);
 
   useEffect(() => {
-    if (scrolling) {      
+    if (scrolling) {
       setNewMentions(undefined);
       setScrolling(false);
     }
@@ -56,6 +56,7 @@ export const Notifications = () => {
     <Box
       id="notificationScroll"
       maxWidth="25rem"
+      minWidth="20rem"
       sx={{
         borderLeft: `1px solid ${theme.tertiaryColor}`,
         height: headerOffset,
