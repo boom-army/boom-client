@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import ReplyIcon from "@mui/icons-material/Reply";
 import {
   Mention,
-  Tweet,
   useProfileByIdQuery,
   User,
 } from "../../generated/graphql";
@@ -14,9 +13,8 @@ import { MentionTypes, RoutePath } from "../../constants";
 import { ShowTweet } from "../Tweet";
 import { ThreadReply } from "../Tweet/TweetThread/ThreadReply";
 import { UserAvatar } from "../UserAvatar";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNewMentions } from "../../hooks";
-import { UserContext } from "../../contexts/user";
 
 interface NotificationProps {
   mention: Mention;
@@ -25,22 +23,14 @@ interface NotificationProps {
 export const NotificationLite = ({ mention }: NotificationProps) => {
   const theme = useTheme();
   const [text, setText] = useState("");
-  const [tweet, setTweet] = useState(mention?.tweet as Tweet);
   const [fromUser, setFromUser] = useState(mention?.tweet?.user);
   const { newMentions } = useNewMentions();
-  const { user } = useContext(UserContext);
 
   const parentTweet = { ...mention.tweet?.parentTweet, user: fromUser };
   const mentionIsNew =
     newMentions?.length &&
     newMentions?.some((newMention) => newMention.id === mention.id);
-
-  useEffect(() => {
-    if (!mention.tweet?.user) {
-      setTweet({ ...mention.tweet, user } as Tweet);
-    }
-  }, [mention]);
-
+  
   useProfileByIdQuery({
     variables: {
       id: mention?.common?.emojiUserId ?? "",
@@ -132,7 +122,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
           )}
         </Box>
       )}
-      {tweet && <ShowTweet key={mention.id} tweet={tweet} overideMt={0.5} />}
+      {mention.tweet && <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={0.5} />}
     </Stack>
   );
 };
