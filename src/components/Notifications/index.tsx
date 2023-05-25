@@ -17,7 +17,7 @@ export const Notifications = () => {
     variables: {
       offset: 0,
       limit: 10,
-    },
+    }
   });
 
   const fetchData = () => {
