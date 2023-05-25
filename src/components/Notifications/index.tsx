@@ -2,7 +2,7 @@ import { CustomResponse } from "../CustomResponse";
 import { Loader } from "../Loader";
 import { useEffect, useState } from "react";
 import { useMentionsQuery } from "../../generated/graphql";
-import { Box, Grid, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { NotificationLite } from "./NotificationLite";
 import { headerOffset } from "../../utils/boom-web3/constants";
@@ -20,10 +20,10 @@ export const Notifications = () => {
     },
   });
 
-  const fetchData = () => {
+  const fetchData = (customOffset?: number) => {
     fetchMore({
       variables: {
-        offset: data?.mentions?.length ?? 0,
+        offset: customOffset ? customOffset : data?.mentions?.length ?? 0,
       },
     });
   };
@@ -46,6 +46,7 @@ export const Notifications = () => {
 
   useEffect(() => {
     if (scrolling) {
+      data?.mentions && fetchData(data?.mentions.length - 10);
       setNewMentions(undefined);
       setScrolling(false);
     }
