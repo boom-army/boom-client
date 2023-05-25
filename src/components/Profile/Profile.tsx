@@ -31,7 +31,7 @@ export const Profile: React.FC = () => {
   }
 
   return (
-    <Grid container>
+    <Grid container justifyContent="center">
       <Grid item xs={12} sx={{ height: headerOffset }}>
         <ProfileInfo profile={data && data.profile} />
         <Box sx={{ typography: "body1" }}>

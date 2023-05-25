@@ -95,7 +95,7 @@ export const AppRoutes: React.FC = () => {
                     )}
                   </Box>
                 ) : null}
-                <Box overflow="auto">
+                <Box overflow="auto" width="100%">
                   <Routes>
                     {/* <Route
                       path="auctions"
