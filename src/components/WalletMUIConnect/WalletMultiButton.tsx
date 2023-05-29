@@ -25,6 +25,7 @@ import { WalletDialogButton } from "./WalletDialogButton.js";
 import { WalletIcon } from "./WalletIcon.js";
 import { useSnackbar } from "../../contexts/snackbar.js";
 import { useNavigate } from "react-router-dom";
+import { localStorageLogout } from "../../utils";
 
 const StyledMenu = styled(Menu)(({ theme }: { theme: Theme }) => ({
   "& .MuiList-root": {
@@ -86,9 +87,7 @@ export const WalletMultiButton: FC<ButtonProps> = ({
 
   const handleLogout = useCallback(
     (event: any) => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      localStorage.removeItem("sidebarState");
+      localStorageLogout()
       disconnect().catch(() => {
         // Silently catch because any errors are caught by the context `onError` handler
       });

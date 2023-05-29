@@ -50,7 +50,7 @@ export const Notifications = ({ refetchProfile }: any) => {
             : null}
         </InfiniteScroll>
       ) : (
-        <CustomResponse text="Follow some people to get some feed updates" />
+        <CustomResponse text="Interact with some people to get some notifications. Make sure your Boom! browser notifications are enabled." />
       )}
     </Grid>
   );

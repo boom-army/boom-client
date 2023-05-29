@@ -8,6 +8,7 @@ export const CustomResponse = ({ text }: any) => (
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
+      p: 2,
     }}
   >
     <Typography align="center">{text}</Typography>

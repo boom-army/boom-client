@@ -9,14 +9,12 @@ import { UserContext } from "../../contexts/user";
 import { ApolloQueryResult, useMutation } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useWallet } from "@solana/wallet-adapter-react";
-import {
-  FeedDocument,
-  useNewMentionsQuery,
-} from "../../generated/graphql";
+import { FeedDocument, useNewMentionsQuery } from "../../generated/graphql";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { RoutePath } from "../../constants";
 import { useNewMentions } from "../../hooks";
+import { localStorageLogout } from "../../utils";
 
 export const AppHeader = () => {
   const { connected, wallet, publicKey, signMessage } = useWallet();
@@ -101,6 +99,9 @@ export const AppHeader = () => {
 
   useEffect(() => {
     if (wallet && !token && connected) signin();
+    if (!wallet) {
+      localStorageLogout();
+    }
   }, [wallet, signin, token, connected]);
 
   // const logout = () => {

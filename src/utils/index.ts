@@ -85,3 +85,9 @@ export const getUniqueFileName = (file: File, prefix?: string) => {
   const uniqueFilename = `${id}_${timestamp}_${file.name}`;
   return new File([file], uniqueFilename, { type: file.type });
 };
+
+export const localStorageLogout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  localStorage.removeItem("sidebarState");
+};
