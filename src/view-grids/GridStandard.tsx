@@ -76,7 +76,7 @@ export const GridStandard: React.FC<GridProps> = ({
           <Route path={RoutePath.EXPLORE} element={<Explore />} />
           <Route path={RoutePath.FEED} element={<Feed />} />
           <Route path={RoutePath.FOLLOWING} element={<Following />} />
-          <Route path={RoutePath.HANDLE_TWEET} element={<MasterTweet />} />
+          <Route path={RoutePath.MEEP} element={<MasterTweet />} />
           <Route path={RoutePath.LEADERBOARD} element={<TipLeaderboard />} />
           <Route path={RoutePath.MINT_NFT} element={<NFTMint />} />
           <Route path={RoutePath.NEWS} element={<News />} />

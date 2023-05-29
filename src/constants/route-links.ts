@@ -8,7 +8,7 @@ export enum RoutePath {
   FOLLOWING = "following",
   HANDLE = "@/:handle",
   HANDLE_HASH = "@",
-  HANDLE_TWEET = "@/:handle/:tweetId",
+  MEEP = "m/:tweetId",
   HOME = "/",
   LAB = "lab",
   LEADERBOARD = "leaderboard",

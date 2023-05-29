@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { ShowTweet } from "../index";
 import { Link } from "react-router-dom";
 import { TweetQuery, Tweet } from "../../../generated/graphql";
