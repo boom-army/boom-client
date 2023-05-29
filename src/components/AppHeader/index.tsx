@@ -105,11 +105,6 @@ export const AppHeader = () => {
     if (wallet && !token && connected) signin();
   }, [wallet, signin, token, connected]);
 
-  // const logout = () => {
-  //   localStorage.clear();
-  //   window.location.replace('/');
-  // };
-
   return (
     <AppBar
       position="static"

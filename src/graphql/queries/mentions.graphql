@@ -10,7 +10,8 @@ query mentions($offset: Int, $limit: Int) {
     }
     common {
       emojiId
-      mentionTargetUserId
+      emojiUserId
+      mentionUserId
       replyTweetId
     }
     createdAt

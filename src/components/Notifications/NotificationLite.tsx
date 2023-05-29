@@ -4,11 +4,7 @@ import { HARKL_ID } from "../../utils/utils";
 import { HerofiedIcon } from "../Icons";
 import { Link } from "react-router-dom";
 import ReplyIcon from "@mui/icons-material/Reply";
-import {
-  Mention,
-  useProfileByIdQuery,
-  User,
-} from "../../generated/graphql";
+import { Mention, useProfileByIdQuery, User } from "../../generated/graphql";
 import { MentionTypes, RoutePath } from "../../constants";
 import { ShowTweet } from "../Tweet";
 import { ThreadReply } from "../Tweet/TweetThread/ThreadReply";
@@ -23,11 +19,22 @@ interface NotificationProps {
 export const NotificationLite = ({ mention }: NotificationProps) => {
   const theme = useTheme();
   const [text, setText] = useState("");
+  const [fromUser, setFromUser] = useState(mention?.tweet?.user);
   const { newMentions } = useNewMentions();
 
   const mentionIsNew =
     newMentions?.length &&
     newMentions?.some((newMention) => newMention.id === mention.id);
+
+  useProfileByIdQuery({
+    variables: {
+      id:
+        (mention?.common?.emojiUserId || mention?.common?.mentionUserId) ?? "",
+    },
+    onCompleted: ({ profileById }) => {
+      setFromUser(profileById as User);
+    },
+  });
 
   useEffect(() => {
     switch (mention.type) {
@@ -110,7 +117,9 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
           )}
         </Box>
       )}
-      {mention.tweet && <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={0.5} />}
+      {mention.tweet && (
+        <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={0.5} />
+      )}
     </Stack>
   );
 };
