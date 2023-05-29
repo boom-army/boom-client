@@ -10,7 +10,7 @@ fragment BaseUser on User {
   }
 }
 
-fragment ParentTweet on Tweet {
+fragment SlimTweet on Tweet {
   id
   text
   createdAt
@@ -36,10 +36,10 @@ fragment TweetData on Tweet {
     id
   }
   masterTweet {
-    id
+    ...SlimTweet
   }
   parentTweet {
-    ...ParentTweet
+    ...SlimTweet
   }
   files {
     id
