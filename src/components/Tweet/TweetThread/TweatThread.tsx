@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { TweetQuery, Tweet } from "../../../generated/graphql";
 import { ThreadReply } from "./ThreadReply";
 import { RoutePath } from "../../../constants";
+import { truncate } from "lodash";
 
 interface Props {
   tweet: TweetQuery["tweet"];
@@ -13,12 +14,10 @@ interface Props {
 export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
   const theme = useTheme();
   const masterTweets = tweet.masterTweets || [];
-  const slicedTweets = masterTweets?.slice(1, 5);
-  const isThreaded = (slicedTweets && slicedTweets.length > 0) ?? false;
+  const slicedTweets = masterTweets?.slice(0, 4);
+  const isThreaded = masterTweets.length > 0 ?? false;
   const hiddenTweetsCount =
-    slicedTweets?.length &&
-    slicedTweets?.length &&
-    masterTweets?.length - slicedTweets?.length;
+    slicedTweets?.length && (masterTweets?.length - slicedTweets?.length);
 
   return (
     <Grid
@@ -37,9 +36,7 @@ export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
             (tweet, i) =>
               tweet && (
                 <Grid item xs={12} key={tweet.id} sx={{ position: "relative" }}>
-                  {tweet?.parentTweet && (
-                    <ThreadReply tweet={tweet} />
-                  )}
+                  {tweet?.parentTweet && <ThreadReply tweet={tweet} />}
                   <ShowTweet
                     key={tweet.id}
                     tweet={tweet as Tweet}
@@ -57,7 +54,7 @@ export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
           <Box mx={2} mt={1} pl={7}>
             <Link
               style={{ cursor: "pointer", color: theme.accentColor }}
-              to={`${RoutePath.MEEP_HASH}/${tweet.id}`}
+              to={`/${RoutePath.MEEP_HASH}/${tweet?.masterTweet?.id ?? tweet.id}`}
             >
               <Typography variant="body2">
                 {hiddenTweetsCount} more meep
