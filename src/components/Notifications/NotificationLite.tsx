@@ -23,22 +23,11 @@ interface NotificationProps {
 export const NotificationLite = ({ mention }: NotificationProps) => {
   const theme = useTheme();
   const [text, setText] = useState("");
-  const [fromUser, setFromUser] = useState(mention?.tweet?.user);
   const { newMentions } = useNewMentions();
 
-  const parentTweet = { ...mention.tweet?.parentTweet, user: fromUser };
   const mentionIsNew =
     newMentions?.length &&
     newMentions?.some((newMention) => newMention.id === mention.id);
-  
-  useProfileByIdQuery({
-    variables: {
-      id: mention?.common?.emojiUserId ?? "",
-    },
-    onCompleted: ({ profileById }) => {
-      setFromUser(profileById as User);
-    },
-  });
 
   useEffect(() => {
     switch (mention.type) {
@@ -74,8 +63,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
             </Typography>
           </Box>
           <Box pb={1.5}>
-            {/* @ts-ignore */}
-            <ThreadReply tweet={parentTweet} />
+            <ThreadReply tweet={mention.tweet?.parentTweet} />
           </Box>
         </Box>
       )}
@@ -86,15 +74,15 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
               <Emoji emoji={mention?.common?.emojiId} size={20} />
             </Box>
           )}
-          {fromUser && (
+          {mention.user && (
             <Box display={"flex"}>
               <Box mr={0.5} position="relative">
-                <Link to={`${RoutePath.HANDLE_HASH}/${fromUser.handle}`}>
+                <Link to={`${RoutePath.HANDLE_HASH}/${mention.user.handle}`}>
                   <UserAvatar
                     className="avatar"
-                    avatar={fromUser?.avatar as string}
-                    handle={fromUser?.handle}
-                    isNFT={fromUser?.data?.avatarMint}
+                    avatar={mention.user?.avatar as string}
+                    handle={mention.user?.handle}
+                    isNFT={mention.user?.data?.avatarMint}
                     sx={{
                       width: "1.1rem",
                       height: "1.1rem",
@@ -107,8 +95,8 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
                 mr={0.5}
                 variant="body2"
                 color="secondary"
-              >{`@${fromUser.handle}`}</Typography>
-              {fromUser?.data?.avatarUpdateAuthority === HARKL_ID && (
+              >{`@${mention.user.handle}`}</Typography>
+              {mention.user?.data?.avatarUpdateAuthority === HARKL_ID && (
                 <HerofiedIcon
                   sx={{
                     fill: theme.accentColor,
