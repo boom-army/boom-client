@@ -169,6 +169,7 @@ export const WalletMultiButton: FC<ButtonProps> = ({
           <WalletActionMenuItem
             onClick={() => {
               setAnchor(undefined);
+              localStorageLogout();
               setOpen(true);
             }}
           >
