@@ -145,7 +145,7 @@ export const ShowTweet: React.FC<Props> = ({
           )}
         </Link>
         <Link
-          to={`/${RoutePath.HANDLE_HASH}/handle/status/${id}`}
+          to={`/${RoutePath.MEEP_HASH}/${id}`}
           className="secondary"
         >
           <Typography
@@ -200,7 +200,7 @@ export const ShowTweet: React.FC<Props> = ({
                 masterTweet={tweet?.masterTweet?.id}
               />
             ) : (
-              <Link to={`/${RoutePath.HANDLE_HASH}/handle/status/${id}`}>
+              <Link to={`/${RoutePath.MEEP_HASH}/${id}`}>
                 <Box display="flex" alignItems={"center"}>
                   <CommentIcon />
                   <Typography ml={0.5} color="secondary">

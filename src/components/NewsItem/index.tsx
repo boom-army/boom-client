@@ -42,7 +42,7 @@ export const NewsItem = ({ meep }: NewsProps) => {
     <Card>
       <CardActionArea
         component={RouterLink}
-        to={`${RoutePath.HANDLE_HASH}/${meep.user?.handle}/${meep.id}`}
+        to={`${RoutePath.MEEP_HASH}/${meep.id}`}
       >
         <Box p={1}>
           <Typography

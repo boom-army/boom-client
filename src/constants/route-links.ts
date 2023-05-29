@@ -1,5 +1,4 @@
 export enum RoutePath {
-  PEOPLE = "people",
   DAO = "b",
   DAO_CHANNEL = "b/:channelId",
   DASHBOARD = "dash",
@@ -8,13 +7,15 @@ export enum RoutePath {
   FOLLOWING = "following",
   HANDLE = "@/:handle",
   HANDLE_HASH = "@",
-  MEEP = "m/:tweetId",
   HOME = "/",
   LAB = "lab",
   LEADERBOARD = "leaderboard",
+  MEEP = "m/:tweetId",
+  MEEP_HASH = "m",
   MINT_NFT = "mint-nft",
   NEWS = "news",
   NOTIFICATIONS = "notifications",
+  PEOPLE = "people",
   PROFILE_SETTINGS = "settings/profile",
   WILDCARD = "*",
 }
