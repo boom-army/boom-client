@@ -71,8 +71,12 @@ export const AppHeader = () => {
       } = await getNonce({
         variables: { publicAddress: walletPublicKey },
       });
+      console.log(address);
+
       if (address.hasPublicAddress) {
-        const data = new TextEncoder().encode(address.user.nonce);
+        const data = new TextEncoder().encode(
+          `Login to Boom! by using your wallet to sign this message code. This is just a safe, secure way of verifying your identity. It doesn't transfer any funds. CODE: ${address.user.nonce}`
+        );
         const signature = await signMessage(data);
 
         await setLogin({
