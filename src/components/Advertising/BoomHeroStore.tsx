@@ -64,7 +64,7 @@ export const BoomHeroStore: React.FC<BoomHeroStoreProps> = ({ userData }) => {
             Flex your profile{" "}
             {userData?.handle ? (
               <Link
-                to={`../${RoutePath.HANDLE_HASH}/${userData?.handle}`}
+                to={`/${RoutePath.HANDLE_HASH}/${userData?.handle}`}
                 style={{ color: theme.blue.lightest }}
               >
                 by clicking your Boom Hero NFT{" "}

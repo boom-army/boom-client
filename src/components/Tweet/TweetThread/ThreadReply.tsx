@@ -17,7 +17,7 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
     <Box sx={{ position: "relative", top: 17, left: 14, width: "100%" }}>
       <ReplyBox>
         <HashLink
-          to={`${RoutePath.MEEP_HASH}/${masterTweet?.id}`}
+          to={`/${RoutePath.MEEP_HASH}/${masterTweet?.id}`}
         >
           <Stack direction="row" pl={5.7}>
             <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>

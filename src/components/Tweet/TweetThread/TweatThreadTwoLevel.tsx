@@ -56,7 +56,7 @@ export const TweetThreadTwoLevel: React.FC<Props> = ({ tweet }: Props) => {
           <Box mx={2} mt={1} pl={7}>
             <Link
               style={{ cursor: "pointer", color: theme.accentColor }}
-              to={`${RoutePath.MEEP_HASH}/${tweet.id}`}
+              to={`/${RoutePath.MEEP_HASH}/${tweet.id}`}
             >
               <Typography variant="body2">
                 {hiddenTweetsCount} more meep

@@ -26,7 +26,7 @@ export const User = ({ user }: Props) => {
       <Box sx={{ display: "flex" }}>
         <CardActionArea
           component={RouterLink}
-          to={`${RoutePath.HANDLE_HASH}/${user.handle}`}
+          to={`/${RoutePath.HANDLE_HASH}/${user.handle}`}
           sx={{ padding: "0.7em" }}
         >
           <Box sx={{ display: "flex", overflow: "hidden" }}>
@@ -60,7 +60,7 @@ export const User = ({ user }: Props) => {
                 isFollowing={user && user.isFollowing}
               />
             ) : (
-              <Link to={RoutePath.PROFILE_SETTINGS}>
+              <Link to={`/${RoutePath.PROFILE_SETTINGS}`}>
                 <AccountBoxIcon />
               </Link>
             )}

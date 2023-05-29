@@ -26,12 +26,12 @@ export const ParentTweet: React.FC<Props> = (props) => {
         }}
       >
         <Link
-          to={`${RoutePath.MEEP_HASH}/${props.parentTweet}`}
+          to={`/${RoutePath.MEEP_HASH}/${props.parentTweet}`}
         >
           Jump up thread &#x2934;
         </Link>
         <Link
-          to={`${RoutePath.MEEP_HASH}/${props.masterTweet}`}
+          to={`/${RoutePath.MEEP_HASH}/${props.masterTweet}`}
         >
           Jump to original &#x2934;
         </Link>

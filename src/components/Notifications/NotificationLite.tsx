@@ -84,7 +84,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
           {mention.user && (
             <Box display={"flex"}>
               <Box mr={0.5} position="relative">
-                <Link to={`${RoutePath.HANDLE_HASH}/${mention.user.handle}`}>
+                <Link to={`/${RoutePath.HANDLE_HASH}/${mention.user.handle}`}>
                   <UserAvatar
                     className="avatar"
                     avatar={mention.user?.avatar as string}

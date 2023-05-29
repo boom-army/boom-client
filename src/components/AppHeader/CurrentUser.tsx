@@ -44,7 +44,7 @@ export const CurrentUser: React.FC = () => {
         <Box mr={1} display="flex" alignItems="center">
           {user && (
             <Box mr={2}>
-              <Link to={`${RoutePath.HANDLE_HASH}/${user.handle}`}>
+              <Link to={`/${RoutePath.HANDLE_HASH}/${user.handle}`}>
                 <UserAvatar
                   avatar={user?.avatar as string}
                   handle={user?.handle}
