@@ -29,14 +29,16 @@ export const UserAvatar = ({ avatar, handle, isNFT = "", sx }: IProps) => {
   const [userAvatar, setUserAvatar] = useState(avatar);
 
   useEffect(() => {
-    if (!avatar) {
+    if (avatar) {
+      setUserAvatar(avatar);
+    } else {
       const genAvatar = createAvatar(botttsNeutral, {
         seed: handle || uniqueString(),
       });
       const svg = genAvatar.toDataUriSync();
       setUserAvatar(svg);
     }
-  }, [avatar]);
+  }, [avatar, handle]);
 
   return isNFT && isNFT.length > 0 ? (
     <NFTAvatar className={`avatar`} sx={sx} src={userAvatar} />
