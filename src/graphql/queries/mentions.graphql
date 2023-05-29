@@ -12,7 +12,6 @@ query mentions($offset: Int, $limit: Int) {
       emojiId
       emojiUserId
       mentionUserId
-      replyTweetId
     }
     createdAt
   }

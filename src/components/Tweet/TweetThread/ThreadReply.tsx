@@ -52,7 +52,7 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
                   fontWeight: "300",
                 }}
               >
-                {tweet?.text}
+                {parentTweet?.text}
               </Typography>
             </Box>
           </Stack>
