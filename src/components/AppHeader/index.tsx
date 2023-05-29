@@ -103,9 +103,6 @@ export const AppHeader = () => {
 
   useEffect(() => {
     if (wallet && !token && connected) signin();
-    if (!wallet) {
-      localStorageLogout();
-    }
   }, [wallet, signin, token, connected]);
 
   // const logout = () => {
