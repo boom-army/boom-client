@@ -89,7 +89,7 @@ export const Dashboard: React.FC = () => {
         ))}
       </Grid>
       <Grid container spacing={2} mb={4}>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <HomeTitle title="Latest Meeps" titleLink="/" />
           {loading ? (
             <Box>
@@ -115,7 +115,7 @@ export const Dashboard: React.FC = () => {
             </TriBox>
           )}
         </Grid>
-        <Grid item xs={12} sm={4}>
+        {/* <Grid item xs={12} sm={4}>
           <HomeTitle title="Top NFT DAOs" titleLink={RoutePath.HOME} />
           {loading ? (
             <Box>
@@ -151,8 +151,8 @@ export const Dashboard: React.FC = () => {
               ))}
             </TriBox>
           )}
-        </Grid>
-        <Grid item xs={12} sm={4}>
+        </Grid> */}
+        <Grid item xs={12} sm={6}>
           <HomeTitle title="Latest News" titleLink="/news" />
           {loading ? (
             <Box>
