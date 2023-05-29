@@ -44,6 +44,9 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
       case MentionTypes.REPLY:
         setText("Replied in");
         break;
+      case MentionTypes.EMOJI:
+        setText("reacted");
+        break;
       default:
         break;
     }
@@ -75,22 +78,13 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
             </Box>
           </Box>
           {mention.tweet && (
-            <ShowTweet
-              key={mention.id}
-              tweet={mention.tweet}
-              overideMt={0.5}
-            />
+            <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={0.5} />
           )}
         </div>
       )}
       {mention.type === MentionTypes.EMOJI && (
         <div>
           <Box display="flex">
-            {mention?.common?.emojiId && (
-              <Box mr={1}>
-                <Emoji emoji={mention?.common?.emojiId} size={20} />
-              </Box>
-            )}
             {fromUser && (
               <Box display={"flex"}>
                 <Box mr={0.5} position="relative">
@@ -123,6 +117,14 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
                     }}
                   />
                 )}
+              </Box>
+            )}
+            <Typography variant="body2" color="secondary">
+              {text}{" "}
+            </Typography>
+            {mention?.common?.emojiId && (
+              <Box ml={1}>
+                <Emoji emoji={mention?.common?.emojiId} size={20} />
               </Box>
             )}
           </Box>
