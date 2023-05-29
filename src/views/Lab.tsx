@@ -10,7 +10,6 @@ import SpeedIcon from "@mui/icons-material/Speed";
 import StyleIcon from "@mui/icons-material/Style";
 import ScienceIcon from "@mui/icons-material/Science";
 import { RoutePath } from "../constants";
-import { headerOffset } from "../utils/boom-web3/constants";
 
 export const Lab = () => {
   const theme = useTheme();
@@ -19,7 +18,7 @@ export const Lab = () => {
   };
   const user = { handle: "harkl" };
   return (
-    <Grid container spacing={1} p={2} sx={{ height: headerOffset }}>
+    <Grid container spacing={1} p={2}>
       <Grid item xs={12} display={"flex"}>
         <ScienceIcon fontSize="large" />
         <Typography variant="h1" display={"inline"}>

@@ -14,6 +14,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { headerOffset } from "../utils/boom-web3/constants";
 
 export const DAOView = () => {
   const handleSignUp = () => {};

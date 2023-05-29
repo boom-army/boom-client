@@ -26,6 +26,7 @@ import { Lab } from "./views/Lab";
 import { useSidebarState } from "./hooks";
 import { Notifications } from "./components/Notifications";
 import { Profile } from "./components/Profile/Profile";
+import { headerOffset } from "./utils/boom-web3/constants";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
@@ -95,7 +96,11 @@ export const AppRoutes: React.FC = () => {
                     )}
                   </Box>
                 ) : null}
-                <Box overflow="auto" width="100%">
+                <Box
+                  overflow="auto"
+                  width="100%"
+                  sx={{ maxHeight: headerOffset }}
+                >
                   <Routes>
                     {/* <Route
                       path="auctions"
