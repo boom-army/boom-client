@@ -63,6 +63,29 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
           : "transparent",
       }}
     >
+      {mention.type === MentionTypes.MENTION && (
+        <div>
+          {mention.tweet?.parentTweet && (
+            <Box>
+              <Box display="flex" alignItems="center">
+                <ReplyIcon sx={{ color: theme.accentColor }} fontSize="small" />
+                <Typography variant="body2" color="secondary">
+                  {text}{" "}
+                  {mention.tweet?.channel
+                    ? `${mention.tweet?.channel}`
+                    : "Feed"}
+                </Typography>
+              </Box>
+              <Box pb={1.5}>
+                <ThreadReply tweet={mention.tweet} />
+              </Box>
+            </Box>
+          )}
+          {mention.tweet && (
+            <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={0.5} />
+          )}
+        </div>
+      )}
       {mention.type === MentionTypes.REPLY && (
         <div>
           <Box>
