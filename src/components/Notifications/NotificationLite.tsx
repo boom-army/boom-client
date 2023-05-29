@@ -4,13 +4,14 @@ import { HARKL_ID } from "../../utils/utils";
 import { HerofiedIcon } from "../Icons";
 import { Link } from "react-router-dom";
 import ReplyIcon from "@mui/icons-material/Reply";
-import { Mention, useProfileByIdQuery, User } from "../../generated/graphql";
+import { Mention, TweetQuery, useProfileByIdQuery, User } from "../../generated/graphql";
 import { MentionTypes, RoutePath } from "../../constants";
 import { ShowTweet } from "../Tweet";
 import { ThreadReply } from "../Tweet/TweetThread/ThreadReply";
 import { UserAvatar } from "../UserAvatar";
 import { useEffect, useState } from "react";
 import { useNewMentions } from "../../hooks";
+import { truncate } from "lodash";
 
 interface NotificationProps {
   mention: Mention;
@@ -21,7 +22,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
   const [text, setText] = useState("");
   const [fromUser, setFromUser] = useState(mention?.tweet?.user);
   const { newMentions } = useNewMentions();
-
+  
   const mentionIsNew =
     newMentions?.length &&
     newMentions?.some((newMention) => newMention.id === mention.id);
@@ -70,7 +71,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
             </Typography>
           </Box>
           <Box pb={1.5}>
-            <ThreadReply tweet={mention.tweet?.parentTweet} />
+            <ThreadReply tweet={mention.tweet?.parentTweet as TweetQuery["tweet"]} />
           </Box>
         </Box>
       )}
@@ -118,7 +119,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
         </Box>
       )}
       {mention.tweet && (
-        <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={0.5} />
+        <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={0.5} truncated={30} />
       )}
     </Stack>
   );

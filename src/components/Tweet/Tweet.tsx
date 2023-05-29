@@ -24,12 +24,14 @@ import { useReaction } from "../../hooks/useReaction";
 import { HARKL_ID } from "../../utils/utils";
 import { PopUpResponse } from "./PopUpResponse";
 import { RoutePath } from "../../constants";
+import { truncate } from "lodash";
 
 interface Props {
   tweet: TweetQuery["tweet"];
   threaded?: boolean;
   popUpResponse?: boolean;
   overideMt?: number;
+  truncated?: number
 }
 
 const IconsStack = styled(Stack)((props) => ({
@@ -50,6 +52,7 @@ export const ShowTweet: React.FC<Props> = ({
   threaded,
   popUpResponse,
   overideMt,
+  truncated,
 }: Props) => {
   const {
     id,
@@ -164,7 +167,7 @@ export const ShowTweet: React.FC<Props> = ({
               a: { color: theme.accentColor },
             }}
           >
-            {text}
+            {truncated ? truncate(text, { length: truncated }) : text}
           </Typography>
         </Linkify>
         <UrlMetaData url={targetUrl} />
