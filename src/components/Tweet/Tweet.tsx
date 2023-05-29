@@ -68,6 +68,7 @@ export const ShowTweet: React.FC<Props> = ({
     reactions,
     commentsCount,
     parentTweet,
+    masterTweet,
     tipsCount,
     createdAt,
   } = tweet;
@@ -148,7 +149,7 @@ export const ShowTweet: React.FC<Props> = ({
           )}
         </Link>
         <Link
-          to={`/${RoutePath.MEEP_HASH}/${id}`}
+          to={`/${RoutePath.MEEP_HASH}/${masterTweet?.id ?? parentTweet?.id ?? id}`}
           className="secondary"
         >
           <Typography

@@ -71,7 +71,6 @@ export const AppHeader = () => {
       } = await getNonce({
         variables: { publicAddress: walletPublicKey },
       });
-      console.log(address);
 
       if (address.hasPublicAddress) {
         const data = new TextEncoder().encode(

@@ -3,11 +3,11 @@ import { Box, Stack, Typography } from "@mui/material";
 import { HashLink } from "react-router-hash-link";
 import { ReplyBox } from "../../Message/ReplyBox";
 import { UserAvatar } from "../../UserAvatar";
-import { TweetQuery } from "../../../generated/graphql";
+import { Maybe, Tweet, TweetQuery } from "../../../generated/graphql";
 import { RoutePath } from "../../../constants";
 
 interface Props {
-  tweet: TweetQuery["tweet"];
+  tweet: TweetQuery["tweet"] | Maybe<Tweet> | undefined;
 }
 
 export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
@@ -16,9 +16,7 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
   return (
     <Box sx={{ position: "relative", top: 17, left: 14, width: "100%" }}>
       <ReplyBox>
-        <HashLink
-          to={`/${RoutePath.MEEP_HASH}/${masterTweet?.id}`}
-        >
+        <HashLink to={`/${RoutePath.MEEP_HASH}/${masterTweet?.id ?? parentTweet?.id}`}>
           <Stack direction="row" pl={5.7}>
             <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
               <UserAvatar
