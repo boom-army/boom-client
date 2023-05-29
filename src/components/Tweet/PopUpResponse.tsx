@@ -7,11 +7,10 @@ import {
   IconButton,
   Link,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { CommentIcon } from "../Icons";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { NewTweet } from "./NewTweet";
 
 interface PURProps {
@@ -25,8 +24,6 @@ export const PopUpResponse = ({
   parentTweet,
   masterTweet,
 }: PURProps) => {
-  const theme = useTheme();
-
   const [openReply, setOpenReply] = useState(false);
 
   const handleClickOpen = () => {

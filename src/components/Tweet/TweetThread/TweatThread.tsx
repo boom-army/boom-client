@@ -38,7 +38,7 @@ export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
               tweet && (
                 <Grid item xs={12} key={tweet.id} sx={{ position: "relative" }}>
                   {tweet?.parentTweet && (
-                    <ThreadReply tweet={tweet?.parentTweet} />
+                    <ThreadReply tweet={tweet} />
                   )}
                   <ShowTweet
                     key={tweet.id}
