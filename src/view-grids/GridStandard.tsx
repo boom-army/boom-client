@@ -16,7 +16,7 @@ import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { TipLeaderboard } from "../views/TipLeaderboard";
 import { WhoToFollow } from "../components/SideBar/WhoToFollow";
 import { TipRank } from "../components/SideBar/TipRank";
-import { HeroFeed } from "../views/HeroFeed";
+import { Feed } from "../views/Feed";
 import { RoutePath } from "../constants";
 import { headerOffset } from "../utils/boom-web3/constants";
 
@@ -74,7 +74,7 @@ export const GridStandard: React.FC<GridProps> = ({
           <Route path={RoutePath.DAO_CHANNEL} element={<ChannelFeed />} />
           {/* <Route path={RoutePath.DAO} element={<Channels />} /> */}
           <Route path={RoutePath.EXPLORE} element={<Explore />} />
-          <Route path={RoutePath.FEED} element={<HeroFeed />} />
+          <Route path={RoutePath.FEED} element={<Feed />} />
           <Route path={RoutePath.FOLLOWING} element={<Following />} />
           <Route path={RoutePath.HANDLE_TWEET} element={<MasterTweet />} />
           <Route path={RoutePath.LEADERBOARD} element={<TipLeaderboard />} />

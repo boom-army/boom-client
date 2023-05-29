@@ -1,7 +1,7 @@
 import React from "react";
 import CheckCircleOutlineOutlined from "@mui/icons-material/CheckCircleOutlineOutlined";
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import {
   Box,
   Button,
@@ -21,7 +21,12 @@ export const DAOView = () => {
   const theme = useTheme();
 
   return (
-    <Grid container justifyContent="center" mt={2}>
+    <Grid container justifyContent="center" mt={2} px={2}>
+      <Grid item xs={12} md={3}>
+        <Typography variant="h1" mb={2}>
+          Have we really been doing DAO's right on Solana?
+        </Typography>
+      </Grid>
       <Grid item xs={12} md={9}>
         <Box
           display="flex"
@@ -29,9 +34,6 @@ export const DAOView = () => {
           alignItems="center"
           flexDirection="column"
         >
-          <Typography variant="h1" mb={2}>
-            Have we really been doing DAO's right on Solana?
-          </Typography>
           <img src="/assets/connect.png" alt="Are we connected?" width="80%" />
           <Stack
             direction="column"
@@ -43,9 +45,7 @@ export const DAOView = () => {
             <List>
               <ListItem>
                 <ListItemIcon>
-                  <HelpOutlineIcon
-                    sx={{ color: theme.accentColor }}
-                  />
+                  <HelpOutlineIcon sx={{ color: theme.accentColor }} />
                 </ListItemIcon>
                 <ListItemText>
                   Are you tired of using extra plugins and complicated stuff to
@@ -54,9 +54,7 @@ export const DAOView = () => {
               </ListItem>
               <ListItem>
                 <ListItemIcon>
-                  <HelpOutlineIcon
-                    sx={{ color: theme.accentColor }}
-                  />
+                  <HelpOutlineIcon sx={{ color: theme.accentColor }} />
                 </ListItemIcon>
                 <ListItemText>
                   Or joining chat groups that say they're DAOs but are actually
@@ -110,34 +108,34 @@ export const DAOView = () => {
             </List>
           </Stack>
         </Box>
-      <Box>
-        <Button variant="contained" onClick={handleSignUp}>
-          Join the Waiting List
-        </Button>
-      </Box>
-      <Box>
-        <Typography>
-          Buy a Boom Hero and be part of the alpha crew with full access and
-          participation in the build
-        </Typography>
-      </Box>
-      <Box>
-        <Typography>Shit post on Meeper while you wait</Typography>
-      </Box>
-      <Box>
-        <Typography>Read up on how our dev is progressing</Typography>
-      </Box>
-      <Box>
-        <Typography>
-          Get some $BMA and beat the supply-demand imbalance
-        </Typography>
-      </Box>
-      <Box>
-        <Typography>
-          VCs get in touch to be part of the funding round
-        </Typography>
-      </Box>
-    </Grid>
+        <Box>
+          <Button variant="contained" onClick={handleSignUp}>
+            Join the Waiting List
+          </Button>
+        </Box>
+        <Box>
+          <Typography>
+            Buy a Boom Hero and be part of the alpha crew with full access and
+            participation in the build
+          </Typography>
+        </Box>
+        <Box>
+          <Typography>Shit post on Meeper while you wait</Typography>
+        </Box>
+        <Box>
+          <Typography>Read up on how our dev is progressing</Typography>
+        </Box>
+        <Box>
+          <Typography>
+            Get some $BMA and beat the supply-demand imbalance
+          </Typography>
+        </Box>
+        <Box>
+          <Typography>
+            VCs get in touch to be part of the funding round
+          </Typography>
+        </Box>
+      </Grid>
     </Grid>
   );
 };

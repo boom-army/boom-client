@@ -6,7 +6,7 @@ import {
   useNewMeepsCountQuery,
 } from "../generated/graphql";
 
-export const HeroFeed: React.FC = () => {
+export const Feed: React.FC = () => {
   const {
     loading,
     error,
