@@ -113,7 +113,7 @@ export const FeedList: React.FC<Props> = ({
               )}
               {data?.length
                 ? data?.map((tweet) => (
-                    <TweetThread key={tweet.id} tweet={tweet as Tweet} />
+                    <TweetThread key={tweet.id} tweet={tweet} />
                   ))
                 : null}
             </InfiniteScroll>
