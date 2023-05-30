@@ -18,6 +18,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { Fxnction } from "../components/DAOTweets/Fxnction";
+import { DAOPromo } from "../components/Advertising/DAOPromo";
+import { RoutePath } from "../constants";
 
 export const DAOView = () => {
   const handleSignUp = () => {};
@@ -37,7 +39,7 @@ export const DAOView = () => {
           md={4}
           display={{ xs: "none", sm: "none", md: "flex" }}
         >
-          <Box sx={{ height: "100%" }}>
+          <Box sx={{ height: "100%", maxWidth: "100%" }}>
             <Fxnction />
           </Box>
         </Grid>
@@ -86,7 +88,7 @@ export const DAOView = () => {
                     <GroupAddIcon sx={{ color: theme.accentColor }} />
                   </ListItemIcon>
                   <ListItemText>
-                    Power users splintering into Telegram. Need we say more?
+                    Power traits splintering into Telegram. Need we say more?
                   </ListItemText>
                 </ListItem>
                 <ListItem>
@@ -153,34 +155,55 @@ export const DAOView = () => {
           </Box>
         </Grid>
       </Grid>
-      <Grid item xs={12} md={9}>
-        <Box>
-          <Button variant="contained" onClick={handleSignUp}>
-            Join the Waiting List
-          </Button>
-        </Box>
-        <Box>
-          <Typography>
-            Buy a Boom Hero and be part of the alpha crew with full access and
-            participation in the build
+      <Grid item xs={12}>
+        <Box py={4}>
+          <Typography variant="h2" textAlign="center">
+            Boom is building a better way
           </Typography>
         </Box>
-        <Box>
-          <Typography>Shit post on Meeper while you wait</Typography>
-        </Box>
-        <Box>
-          <Typography>Read up on how our dev is progressing</Typography>
-        </Box>
-        <Box>
-          <Typography>
-            Get some $BMA and beat the supply-demand imbalance
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <DAOPromo
+          heading="Become part of #BoomDAODAO"
+          body="Become part of the alpha crew, with full access and participation in Solana's first native Social DAO infrastructure by getting a Boom Hero NFT."
+          buttonText="Get a Boom Hero"
+          buttonLink="https://www.tensor.trade/trade/boomheroes"
+          openBlank={true}
+        />
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <DAOPromo
+          heading="Get updates in the Feed"
+          body="We'll be posting regular updates and progress to the Feed. You'll be able to publicly comment and interact with the Boom team and other Boom Heroes."
+          buttonText="Go to the Feed"
+          buttonLink={`/${RoutePath.FEED}`}
+        />
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <DAOPromo
+          heading="Read the dev diaries"
+          body="Dive into our dev journey and read about the nuts and bolts of delivery. Stay up-to-date with the latest news about DAOs through regular blog entries from harkl."
+          buttonText="Read the blog"
+          buttonLink="https://docs.boom.army/blog/"
+          openBlank={true}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Box py={4}>
+          <Typography variant="h2" textAlign="center">
+            We're actively looking for partners interested in DAO investment
+            Solana
           </Typography>
         </Box>
-        <Box>
-          <Typography>
-            VCs get in touch to be part of the funding round
-          </Typography>
-        </Box>
+      </Grid>
+      <Grid item xs={12}>
+        <DAOPromo
+          heading="Invest in the Future of DAOs on Solana"
+          body="We're actively seeking visionary venture capitalists who believe in the transformative power of Solana. Partner with us and contribute to the development of the first native Social DAO infrastructure on Solana. Bring your experience, passion, and vision to this journey."
+          buttonText="DM harkl on Twitter"
+          buttonLink="https://twitter.com/harkl_"
+          openBlank={true}
+        />
       </Grid>
     </Grid>
   );
