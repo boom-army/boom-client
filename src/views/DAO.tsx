@@ -1,7 +1,10 @@
 import React from "react";
-import CheckCircleOutlineOutlined from "@mui/icons-material/CheckCircleOutlineOutlined";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import BuildIcon from "@mui/icons-material/Build";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import {
   Box,
   Button,
@@ -14,7 +17,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { headerOffset } from "../utils/boom-web3/constants";
+import { Fxnction } from "../components/DAOTweets/Fxnction";
 
 export const DAOView = () => {
   const handleSignUp = () => {};
@@ -22,92 +25,135 @@ export const DAOView = () => {
 
   return (
     <Grid container justifyContent="center" mt={2} px={2}>
-      <Grid item xs={12} md={3}>
-        <Typography variant="h1" mb={2}>
-          Have we really been doing DAO's right on Solana?
+      <Grid item xs={12}>
+        <Typography variant="h1" mb={2} textAlign="center">
+          DAO Infrastructure is Broken on Solana...
         </Typography>
       </Grid>
-      <Grid item xs={12} md={9}>
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          flexDirection="column"
+      <Grid item xs={12} display="flex" sx={{ height: "100%" }}>
+        <Grid
+          item
+          xs={12}
+          md={4}
+          display={{ xs: "none", sm: "none", md: "flex" }}
         >
-          <img src="/assets/connect.png" alt="Are we connected?" width="80%" />
-          <Stack
-            direction="column"
-            spacing={2}
-            mt={2}
+          <Box sx={{ height: "100%" }}>
+            <Fxnction />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={8} sx={{ display: "flex" }}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
             width="100%"
-            sx={{ p: 2, my: 2, border: `1px solid ${theme.accentColor}` }}
           >
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <HelpOutlineIcon sx={{ color: theme.accentColor }} />
-                </ListItemIcon>
-                <ListItemText>
-                  Are you tired of using extra plugins and complicated stuff to
-                  make your DAO (Decentralized Autonomous Organization) work?
-                </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <HelpOutlineIcon sx={{ color: theme.accentColor }} />
-                </ListItemIcon>
-                <ListItemText>
-                  Or joining chat groups that say they're DAOs but are actually
-                  controlled by just a few people with opaque governance?
-                </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CheckCircleOutlineOutlined
-                    sx={{ color: theme.accentColor }}
-                  />
-                </ListItemIcon>
-                <ListItemText>
-                  Boom is creating the best solution ever for easy and
-                  decentralized governance and working together as a community.
-                </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <SentimentVerySatisfiedIcon
-                    sx={{ color: theme.accentColor }}
-                  />
-                </ListItemIcon>
-                <ListItemText>
-                  You won't need to shout at your friends to get their contact
-                  details on Telegram anymore.
-                </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <SentimentVerySatisfiedIcon
-                    sx={{ color: theme.accentColor }}
-                  />
-                </ListItemIcon>
-                <ListItemText>
-                  You won't have to struggle to make your DAO work with your
-                  NFTs.
-                </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CheckCircleOutlineOutlined
-                    sx={{ color: theme.accentColor }}
-                  />
-                </ListItemIcon>
-                <ListItemText>
-                  Boom is here to make everything easy for you and to bring the
-                  integrity back to DAOs.
-                </ListItemText>
-              </ListItem>
-            </List>
-          </Stack>
-        </Box>
+            <Stack
+              direction="column"
+              spacing={2}
+              mt={2}
+              width="100%"
+              sx={{
+                p: 2,
+                my: 2,
+                border: `1px solid ${theme.accentColor}`,
+                height: "100%", // Set the height to 100% to match the parent's height
+              }}
+            >
+              <Typography variant="h2" py={1}>
+                Really? What are the problems?
+              </Typography>
+              <List>
+                <ListItem>
+                  <ListItemIcon>
+                    <ErrorOutlineIcon sx={{ color: theme.accentColor }} />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Solana's native Social based DAO solution? Still missing.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <GroupAddIcon sx={{ color: theme.accentColor }} />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Discord DAOs: too often, just a power party.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <GroupAddIcon sx={{ color: theme.accentColor }} />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Power users splintering into Telegram. Need we say more?
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <BuildIcon sx={{ color: theme.accentColor }} />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Forced 3rd party integration with Solana? Yep.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <BuildIcon sx={{ color: theme.accentColor }} />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Day-to-day governance: a literal nightmare.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <VerifiedUserIcon sx={{ color: theme.accentColor }} />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Path to the council for users: unclear at best.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <ErrorOutlineIcon sx={{ color: theme.accentColor }} />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Clear vision and measurable goals? Hardly.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <VerifiedUserIcon sx={{ color: theme.accentColor }} />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Real incentives for user participation? Non-existent.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <LockOpenIcon sx={{ color: theme.accentColor }} />
+                  </ListItemIcon>
+                  <ListItemText>
+                    3rd party lock-in? Totally at the mercy of their API.
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <NotificationsActiveIcon
+                      sx={{ color: theme.accentColor }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Notifications? Scattered around like confetti in different
+                    view panes.
+                  </ListItemText>
+                </ListItem>
+              </List>
+            </Stack>
+          </Box>
+        </Grid>
+      </Grid>
+      <Grid item xs={12} md={9}>
         <Box>
           <Button variant="contained" onClick={handleSignUp}>
             Join the Waiting List
