@@ -97,7 +97,8 @@ export const TipInput: React.FC<Props> = ({
             toCreatorAcc
           );
 
-        let receiverAccount;
+        let receiverAccount,
+          instructions = [];
         try {
           receiverAccount = await sosolMint.getAccountInfo(toCreatorAcc);
         } catch (err) {
@@ -108,7 +109,6 @@ export const TipInput: React.FC<Props> = ({
         // TODO: move this out into a method in utils to use across the site
         // Create receiver sosol acc if null
         if (receiverAccount === null) {
-          const instructions = [];
           instructions.push(
             Token.createAssociatedTokenAccountInstruction(
               sosolMint.associatedProgramId,
