@@ -239,12 +239,9 @@ export const NFTMint: React.FC = (props) => {
                   autoFocus
                   id="name"
                   label="Name"
+                  color="secondary"
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.palette.secondary },
-                  }}
-                  InputProps={{
-                    style: { color: theme.palette.secondary },
                   }}
                   value={fields.name}
                   onChange={handleFormChange}
@@ -257,12 +254,9 @@ export const NFTMint: React.FC = (props) => {
                   fullWidth
                   id="input-collection-family"
                   label="Collection Family"
+                  color="secondary"
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.palette.secondary },
-                  }}
-                  InputProps={{
-                    style: { color: theme.palette.secondary },
                   }}
                   value={fields.collection.family}
                   onChange={(e) => {
@@ -284,12 +278,9 @@ export const NFTMint: React.FC = (props) => {
                   fullWidth
                   id="input-collection-name"
                   label="Collection Name"
+                  color="secondary"
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.palette.secondary },
-                  }}
-                  InputProps={{
-                    style: { color: theme.palette.secondary },
                   }}
                   value={fields.collection.name}
                   onChange={(e) => {
@@ -311,14 +302,11 @@ export const NFTMint: React.FC = (props) => {
                   fullWidth
                   id="description"
                   label="Description"
+                  color="secondary"
                   multiline={true}
                   rows={4}
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.palette.secondary },
-                  }}
-                  InputProps={{
-                    style: { color: theme.palette.secondary },
                   }}
                   value={fields.description}
                   onChange={handleFormChange}
@@ -348,12 +336,9 @@ export const NFTMint: React.FC = (props) => {
                         autoFocus
                         id={`trait${i}`}
                         label="Trait type"
+                        color="secondary"
                         InputLabelProps={{
                           shrink: true,
-                          style: { color: theme.palette.secondary },
-                        }}
-                        InputProps={{
-                          style: { color: theme.palette.secondary },
                         }}
                         value={fields?.attributes[i]?.trait_type}
                         onChange={(e) => {
@@ -374,12 +359,11 @@ export const NFTMint: React.FC = (props) => {
                         fullWidth
                         id={`value${i}`}
                         label="Value"
+                        color="secondary"
                         InputLabelProps={{
                           shrink: true,
-                          style: { color: theme.palette.secondary },
                         }}
                         InputProps={{
-                          style: { color: theme.palette.secondary },
                           endAdornment: (
                             <InputAdornment position="end">
                               <IconButton

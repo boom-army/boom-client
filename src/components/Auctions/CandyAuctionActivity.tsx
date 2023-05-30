@@ -177,9 +177,9 @@ export const AuctionActivity: React.FC<AuctionActivityProps> = ({
                     {canWithdraw ? (
                       <Button
                         size="small"
-                        sx={{
-                          "&.Mui-disabled": { color: theme.palette.secondary },
-                        }}
+                        // sx={{
+                        //   "&.Mui-disabled": { color: theme.palette.secondary },
+                        // }}
                         disabled={bidding}
                         onClick={async () => withdraw(index)}
                       >

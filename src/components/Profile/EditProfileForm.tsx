@@ -247,12 +247,9 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 autoFocus
                 id="handle"
                 label="Handle"
+                color="secondary"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.palette.secondary },
-                }}
-                InputProps={{
-                  style: { color: theme.palette.secondary },
                 }}
                 value={handle.value}
                 onChange={handle.onChange}
@@ -266,12 +263,9 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 autoFocus
                 id="name"
                 label="Name"
+                color="secondary"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.palette.secondary },
-                }}
-                InputProps={{
-                  style: { color: theme.palette.secondary },
                 }}
                 value={consumerName.value}
                 onChange={consumerName.onChange}
@@ -286,12 +280,9 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 rows={4}
                 id="bio"
                 label="Bio"
+                color="secondary"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.palette.secondary },
-                }}
-                InputProps={{
-                  style: { color: theme.palette.secondary },
                 }}
                 value={bio.value}
                 onChange={bio.onChange}
@@ -305,12 +296,9 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 autoFocus
                 id="website"
                 label="Website"
+                color="secondary"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.palette.secondary },
-                }}
-                InputProps={{
-                  style: { color: theme.palette.secondary },
                 }}
                 value={website.value}
                 onChange={website.onChange}
@@ -324,12 +312,9 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 autoFocus
                 id="dob"
                 label="Date of Birth"
+                color="secondary"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.palette.secondary },
-                }}
-                InputProps={{
-                  style: { color: theme.palette.secondary },
                 }}
                 value={dob.value}
                 onChange={dob.onChange}
@@ -343,12 +328,9 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
                 autoFocus
                 id="location"
                 label="Location"
+                color="secondary"
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: theme.palette.secondary },
-                }}
-                InputProps={{
-                  style: { color: theme.palette.secondary },
                 }}
                 value={location.value}
                 onChange={location.onChange}

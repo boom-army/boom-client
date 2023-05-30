@@ -21,7 +21,7 @@ export const PopoutNavMenu = () => {
       sx={{ "& .MuiDrawer-paper": { backgroundImage: "none" } }}
     >
       <Box sx={{ width: "20rem", pl: 2, pb: 5 }} role="presentation">
-        <Nav user={user} newMentionsCount={data?.profile?.newMentionsCount} />
+        <Nav />
       </Box>
     </SwipeableDrawer>
   );

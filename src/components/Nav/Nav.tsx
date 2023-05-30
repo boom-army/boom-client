@@ -7,24 +7,15 @@ import React from "react";
 import ScienceIcon from "@mui/icons-material/Science";
 import StarsIcon from "@mui/icons-material/Stars";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
-import { ColorModeContext } from "../../contexts/theme";
 import { HeroNavLink } from ".";
-import { Logout } from "../Auth/Logout";
 import { NavLink } from "react-router-dom";
 import { RoutePath } from "../../constants";
 import { Stack, Typography, useTheme } from "@mui/material";
-import { User } from "../../generated/graphql";
 import { styled } from "@mui/material/styles";
 import { BMAIcon } from "../Icons";
 
-interface Props {
-  newMentionsCount: number | undefined;
-  user: User | null;
-}
-
-export const Nav: React.FC<Props> = ({ newMentionsCount, user }) => {
+export const Nav: React.FC = () => {
   const theme = useTheme();
-  const { toggleColorMode } = React.useContext(ColorModeContext);
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
     color: isActive

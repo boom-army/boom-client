@@ -10,13 +10,10 @@ import {
   IconButton,
   Link,
   Popper,
-  // List,
-  // ListItem,
-  // ListItemAvatar,
-  // ListItemText,
   Stack,
   TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -26,7 +23,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 
-import { useContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { AuctionLabel } from "../components/Auctions/AuctionLabel";
 import { UserAvatar } from "../components/UserAvatar";
 import { useSnackbar } from "../contexts/snackbar";
@@ -549,12 +546,9 @@ export const BoomOnes = () => {
                   required
                   type="number"
                   size="small"
+                  color="secondary"
                   InputLabelProps={{
                     shrink: true,
-                    style: { color: theme.palette.secondary },
-                  }}
-                  InputProps={{
-                    style: { color: theme.palette.secondary },
                   }}
                   value={bid}
                   onChange={(e) => {

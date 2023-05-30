@@ -99,12 +99,11 @@ const SearchInput = () => {
             autoFocus
             id="search"
             label="Search"
+            color="secondary"
             InputLabelProps={{
               shrink: true,
-              style: { color: theme.palette.secondary },
             }}
             InputProps={{
-              style: { color: theme.palette.secondary },
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
