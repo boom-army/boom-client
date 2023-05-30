@@ -88,7 +88,6 @@ export const TipInput: React.FC<Props> = ({
           payer
         );
         const toCreatorAcc = new PublicKey(userPubKey);
-
         const associatedDestinationTokenAddr =
           await Token.getAssociatedTokenAddress(
             sosolMint.associatedProgramId,
@@ -97,10 +96,11 @@ export const TipInput: React.FC<Props> = ({
             toCreatorAcc
           );
 
-        let receiverAccount,
-          instructions = [];
+        let receiverAccount;
         try {
-          receiverAccount = await sosolMint.getAccountInfo(toCreatorAcc);
+          receiverAccount = await sosolMint.getAccountInfo(
+            associatedDestinationTokenAddr
+          );
         } catch (err) {
           console.log(err);
           receiverAccount = null;
@@ -109,6 +109,7 @@ export const TipInput: React.FC<Props> = ({
         // TODO: move this out into a method in utils to use across the site
         // Create receiver sosol acc if null
         if (receiverAccount === null) {
+          const instructions = [];
           instructions.push(
             Token.createAssociatedTokenAccountInstruction(
               sosolMint.associatedProgramId,
