@@ -1,11 +1,10 @@
 import BigNumber from "bignumber.js";
 import { MintInfo, TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { TokenAccount } from "../models";
 import { TokenInfo } from "@solana/spl-token-registry";
 // import { WAD } from "../package/constants";
 import { ZERO } from "../constants/math";
 import { useCallback, useState } from "react";
-import * as anchor from "@project-serum/anchor";
+import * as anchor from "@coral-xyz/anchor";
 import { SystemProgram } from "@solana/web3.js";
 import {
   LAMPORTS_PER_SOL,
@@ -14,6 +13,7 @@ import {
   PublicKey,
 } from "@solana/web3.js";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { TokenAccount } from "@metaplex-foundation/js";
 
 const WAD = new BigNumber("1e+18");
 
@@ -119,42 +119,6 @@ export function wadToLamports(amount: BigNumber): BigNumber {
   return new BigNumber(amount).div(WAD) || ZERO;
 }
 
-export function toLamports(
-  account?: TokenAccount | number,
-  mint?: MintInfo
-): number {
-  if (!account) {
-    return 0;
-  }
-
-  const amount =
-    typeof account === "number" ? account : account.info.amount?.toNumber();
-
-  const precision = Math.pow(10, mint?.decimals || 0);
-  return Math.floor(amount * precision);
-}
-
-export function fromLamports(
-  account?: TokenAccount | number | BigNumber,
-  mint?: MintInfo,
-  rate: number = 1.0
-): number {
-  if (!account) {
-    return 0;
-  }
-
-  const amount = Math.floor(
-    typeof account === "number"
-      ? account
-      : BigNumber.isBigNumber(account)
-      ? account.toNumber()
-      : account.info.amount.toNumber()
-  );
-
-  const precision = Math.pow(10, mint?.decimals || 0);
-  return (amount / precision) * rate;
-}
-
 var SI_SYMBOL = ["", "k", "M", "G", "T", "P", "E"];
 
 const abbreviateNumber = (number: number, precision: number) => {
@@ -174,26 +138,6 @@ export const formatAmount = (
   precision: number = 6,
   abbr: boolean = true
 ) => (abbr ? abbreviateNumber(val, precision) : val.toFixed(precision));
-
-export function formatTokenAmount(
-  account?: TokenAccount,
-  mint?: MintInfo,
-  rate: number = 1.0,
-  prefix = "",
-  suffix = "",
-  precision = 6,
-  abbr = false
-): string {
-  if (!account) {
-    return "";
-  }
-
-  return `${[prefix]}${formatAmount(
-    fromLamports(account, mint, rate),
-    precision,
-    abbr
-  )}${suffix}`;
-}
 
 export const formatUSD = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -221,24 +165,6 @@ export const formatPct = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
-
-export function convert(
-  account?: TokenAccount | number,
-  mint?: MintInfo,
-  rate: number = 1.0
-): number {
-  if (!account) {
-    return 0;
-  }
-
-  const amount =
-    typeof account === "number" ? account : account.info.amount?.toNumber();
-
-  const precision = Math.pow(10, mint?.decimals || 0);
-  let result = (amount / precision) * rate;
-
-  return result;
-}
 
 export function currentCluster() {
   const endpoint = import.meta.env.VITE_RPC_URL!;

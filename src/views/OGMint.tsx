@@ -1,5 +1,5 @@
 export {};
-// import { web3 } from "@project-serum/anchor";
+// import { web3 } from "@coral-xyz/anchor";
 // import { useContext } from "react";
 // import { Container } from "@mui/material";
 // import CheckIcon from "@mui/icons-material/Check";

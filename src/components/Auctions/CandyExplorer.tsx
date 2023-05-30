@@ -1,5 +1,5 @@
 import React from "react";
-import { web3 } from "@project-serum/anchor";
+import { web3 } from "@coral-xyz/anchor";
 import { shortenAddress } from "../../utils/utils";
 import { ExplorerLinkBase } from "@liqnft/candy-shop-sdk";
 import { Box, SxProps, Theme } from "@mui/material";

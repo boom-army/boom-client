@@ -1,4 +1,4 @@
-import { web3, BN, Program, AnchorProvider } from "@project-serum/anchor";
+import { web3, BN, Program, AnchorProvider } from "@coral-xyz/anchor";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import {
   TOKEN_PROGRAM_ID,

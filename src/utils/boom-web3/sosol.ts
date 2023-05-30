@@ -1,5 +1,5 @@
 // TODO: This should be JSON
-import { Idl } from "@project-serum/anchor";
+import { Idl } from "@coral-xyz/anchor";
 
 export const idl: Idl = {
   version: "0.0.0",
