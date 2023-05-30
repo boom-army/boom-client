@@ -97,8 +97,13 @@ export const TipInput: React.FC<Props> = ({
             toCreatorAcc
           );
 
-        const receiverAccount =
-          await sosolMint.getOrCreateAssociatedAccountInfo(toCreatorAcc);
+        let receiverAccount;
+        try {
+          receiverAccount = await sosolMint.getAccountInfo(toCreatorAcc);
+        } catch (err) {
+          console.log(err);
+          receiverAccount = null;
+        }
 
         // TODO: move this out into a method in utils to use across the site
         // Create receiver sosol acc if null
