@@ -44,7 +44,7 @@ export const News = () => {
           overflow: "auto",
         }}
       >
-        <Box mt={6}>
+        <Box mt={8}>
           <InfiniteScroll
             dataLength={data?.searchTweets?.length}
             next={() =>

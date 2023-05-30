@@ -1,3 +1,4 @@
+
 export const ERRORS = {
   NO_BMA: "No $BMA in your account so transaction can't be actioned",
   INSUFFICIENT_BMA: "Not enough $BMA for this transaction",

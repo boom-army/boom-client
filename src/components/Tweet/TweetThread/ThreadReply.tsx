@@ -5,6 +5,7 @@ import { ReplyBox } from "../../Message/ReplyBox";
 import { UserAvatar } from "../../UserAvatar";
 import { Maybe, Tweet, TweetQuery } from "../../../generated/graphql";
 import { RoutePath } from "../../../constants";
+import { truncate } from "lodash";
 
 interface Props {
   tweet: TweetQuery["tweet"] | Maybe<Tweet> | undefined;
@@ -16,9 +17,11 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
   return (
     <Box sx={{ position: "relative", top: 17, left: 14, width: "100%" }}>
       <ReplyBox>
-        <HashLink to={`/${RoutePath.MEEP_HASH}/${masterTweet?.id ?? parentTweet?.id}`}>
-          <Stack direction="row" pl={5.7}>
-            <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
+        <HashLink
+          to={`/${RoutePath.MEEP_HASH}/${masterTweet?.id ?? parentTweet?.id}`}
+        >
+          <Box pl={5.7} alignContent="center" display="flex" flexWrap="wrap">
+            <Box mr={0.5} pt={"2px"} display="inline-flex">
               <UserAvatar
                 sx={{
                   width: 16,
@@ -29,7 +32,7 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
                 isNFT={parentTweet?.user?.data?.avatarMint}
               />
             </Box>
-            <Box mr={1}>
+            <Box mr={1} display="inline-flex">
               <Typography color="secondary" variant="body2">
                 @{parentTweet?.user?.handle}
               </Typography>
@@ -38,10 +41,10 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
               pr={2}
               sx={{
                 flex: 1,
-                whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
               }}
+              display="inline-flex"
             >
               <Typography
                 variant="body2"
@@ -50,10 +53,10 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
                   fontWeight: "300",
                 }}
               >
-                {parentTweet?.text}
+                {truncate(parentTweet?.text ?? "", { length: 40 })}
               </Typography>
             </Box>
-          </Stack>
+          </Box>
         </HashLink>
       </ReplyBox>
     </Box>

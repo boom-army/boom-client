@@ -99,7 +99,10 @@ export const AppRoutes: React.FC = () => {
                 <Box
                   overflow="auto"
                   width="100%"
-                  sx={{ maxHeight: headerOffset }}
+                  sx={{
+                    maxWidth: "100vw",
+                    maxHeight: isMobile ? "100%" : headerOffset,
+                  }}
                 >
                   <Routes>
                     {/* <Route
