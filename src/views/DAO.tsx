@@ -191,8 +191,7 @@ export const DAOView = () => {
       <Grid item xs={12}>
         <Box py={4}>
           <Typography variant="h2" textAlign="center">
-            We're actively looking for partners interested in DAO investment
-            Solana
+            We're actively looking for Investment Partners
           </Typography>
         </Box>
       </Grid>

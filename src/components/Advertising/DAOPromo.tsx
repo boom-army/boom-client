@@ -47,7 +47,7 @@ export const DAOPromo: React.FC<Props> = ({
             variant="subtitle2"
             color="text.secondary"
             component="div"
-            pb={1}
+            pb={2}
           >
             {body}
           </Typography>

@@ -183,17 +183,17 @@ export const typography: { typography: TypographyOptions } = {
     h2: {
       fontFamily: 'VT323, monospace',
       fontSize: 40,
-      lineHeight: "1.2rem",
+      lineHeight: "3rem",
     },
     h3: {
       fontSize: 22,
       fontWeight: 600,
-      lineHeight: "1.2rem",
+      lineHeight: "2rem",
     },
     h4: {
       fontSize: 18,
       fontWeight: 600,
-      lineHeight: "1.2rem",
+      lineHeight: "1.8rem",
     },
     h5: {
       fontSize: 16,
