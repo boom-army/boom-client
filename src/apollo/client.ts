@@ -1,6 +1,7 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { offsetLimitPagination } from "@apollo/client/utilities";
+import generatedIntrospection from "../generated/fragment-matcher.json";
 
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_APOLLO_API || "http://locahost:7777",
@@ -8,9 +9,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
   const token = localStorage.getItem("token");
-  // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
@@ -19,27 +18,27 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-export const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache({
-    // https://www.apollographql.com/docs/react/data/fragments/#defining-possibletypes-manually
-    possibleTypes: {
-      Tweet: ["ParentTweet"],
-    },
-    typePolicies: {
-      Query: {
-        fields: {
-          feed: offsetLimitPagination(),
-          heroFeed: offsetLimitPagination(),
-          getChannelById: offsetLimitPagination(),
-          users: offsetLimitPagination(),
-          searchTweets: offsetLimitPagination(),
-          searchUser: offsetLimitPagination(),
-          mentions: offsetLimitPagination(),
-        },
+// Create an instance of InMemoryCache with possibleTypes configuration
+const cache = new InMemoryCache({
+  possibleTypes: generatedIntrospection.possibleTypes,
+  typePolicies: {
+    Query: {
+      fields: {
+        feed: offsetLimitPagination(),
+        heroFeed: offsetLimitPagination(),
+        getChannelById: offsetLimitPagination(),
+        users: offsetLimitPagination(),
+        searchTweets: offsetLimitPagination(),
+        searchUser: offsetLimitPagination(),
+        mentions: offsetLimitPagination(),
       },
     },
-  }),
+  },
+});
+
+export const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache, // Use the configured InMemoryCache instance
   defaultOptions: {
     watchQuery: {
       context: async ({ req }: any) => {
