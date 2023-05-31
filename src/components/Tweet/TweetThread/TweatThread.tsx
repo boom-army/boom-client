@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
-import { Box, Grid, Stack, Typography, useTheme } from "@mui/material";
+import React from "react";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { ShowTweet } from "../index";
 import { Link } from "react-router-dom";
 import { TweetQuery, Tweet } from "../../../generated/graphql";
 import { ThreadReply } from "./ThreadReply";
 import { RoutePath } from "../../../constants";
-import { truncate } from "lodash";
 
 interface Props {
   tweet: TweetQuery["tweet"];
