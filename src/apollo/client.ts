@@ -1,7 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { offsetLimitPagination } from "@apollo/client/utilities";
-import generatedIntrospection from "../generated/fragment-matcher.json";
 
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_APOLLO_API || "http://locahost:7777",
@@ -20,8 +19,13 @@ const authLink = setContext((_, { headers }) => {
 
 // Create an instance of InMemoryCache with possibleTypes configuration
 const cache = new InMemoryCache({
-  possibleTypes: generatedIntrospection.possibleTypes,
+  possibleTypes: {
+    Tweet: ["MasterTweet", "ParentTweet"],
+  },
   typePolicies: {
+    Tweet: {
+      keyFields: ["id"],
+    },
     Query: {
       fields: {
         feed: offsetLimitPagination(),

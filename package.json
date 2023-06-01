@@ -94,7 +94,6 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^3.2.1",
     "@graphql-codegen/client-preset": "^2.1.0",
-    "@graphql-codegen/fragment-matcher": "^5.0.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@sentry/cli": "^2.16.1",
     "@sentry/vite-plugin": "^0.4.0",
