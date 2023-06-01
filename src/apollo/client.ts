@@ -20,12 +20,9 @@ const authLink = setContext((_, { headers }) => {
 // Create an instance of InMemoryCache with possibleTypes configuration
 const cache = new InMemoryCache({
   possibleTypes: {
-    Tweet: ["MasterTweet", "ParentTweet"],
+    User: ['User'],
   },
   typePolicies: {
-    Tweet: {
-      keyFields: ["id"],
-    },
     Query: {
       fields: {
         feed: offsetLimitPagination(),

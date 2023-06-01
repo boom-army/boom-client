@@ -46,7 +46,6 @@ export const Notifications = () => {
 
   useEffect(() => {
     if (scrolling) {
-      data?.mentions && fetchData(data?.mentions.length - 10);
       setNewMentions(undefined);
       setScrolling(false);
     }
