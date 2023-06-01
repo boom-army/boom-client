@@ -8,13 +8,13 @@ import { RoutePath } from "../../../constants";
 
 interface Props {
   tweet: TweetQuery["tweet"];
-  showSliced?: boolean;
+  isMaster?: boolean;
 }
 
-export const TweetThread: React.FC<Props> = ({ tweet, showSliced = true }: Props) => {
-  const theme = useTheme();
-  const masterTweets = tweet.masterTweets || [];
-  const slicedTweets = showSliced ? masterTweets?.slice(0, 4) : masterTweets;
+export const TweetThread: React.FC<Props> = ({ tweet, isMaster = false }: Props) => {
+  const theme = useTheme();  
+  const masterTweets = tweet?.masterTweets?.filter(t => t?.id !== tweet.id) || [];
+  const slicedTweets = isMaster ? masterTweets : masterTweets?.slice(0, 4);
   const isThreaded = masterTweets.length > 0 ?? false;
   const hiddenTweetsCount =
     slicedTweets?.length && (masterTweets?.length - slicedTweets?.length);
@@ -25,12 +25,12 @@ export const TweetThread: React.FC<Props> = ({ tweet, showSliced = true }: Props
       pb={1.5}
       sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}
     >
-      <ShowTweet
+      {!isMaster && <ShowTweet
         key={tweet.id}
         tweet={tweet as Tweet}
         threaded={isThreaded}
         popUpResponse
-      />
+      />}
       {slicedTweets?.length
         ? slicedTweets.map(
             (tweet, i) =>
