@@ -8,12 +8,13 @@ import { RoutePath } from "../../../constants";
 
 interface Props {
   tweet: TweetQuery["tweet"];
+  showSliced?: boolean;
 }
 
-export const TweetThread: React.FC<Props> = ({ tweet }: Props) => {
+export const TweetThread: React.FC<Props> = ({ tweet, showSliced = true }: Props) => {
   const theme = useTheme();
   const masterTweets = tweet.masterTweets || [];
-  const slicedTweets = masterTweets?.slice(0, 4);
+  const slicedTweets = showSliced ? masterTweets?.slice(0, 4) : masterTweets;
   const isThreaded = masterTweets.length > 0 ?? false;
   const hiddenTweetsCount =
     slicedTweets?.length && (masterTweets?.length - slicedTweets?.length);
