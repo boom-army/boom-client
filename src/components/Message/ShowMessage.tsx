@@ -31,6 +31,7 @@ import { useReaction } from "../../hooks/useReaction";
 import { RoutePath } from "../../constants";
 import { ReplyBox } from "./ReplyBox";
 import dayjs from "dayjs";
+import { setDate } from "../../utils";
 
 const IconsBox = styled(Box)(({ theme }) => ({
   "& svg": {
@@ -147,7 +148,7 @@ export const ShowMessage: React.FC<Props> = ({
     reactions,
     tipsCount,
     createdAt,
-  } = tweet;
+  } = tweet;  
 
   const theme = useTheme();
   const { handleReaction } = useReaction({ tweetId: id });
@@ -348,7 +349,7 @@ export const ShowMessage: React.FC<Props> = ({
                 ) : null}
               </IconsBox>
               <Typography color="secondary" variant="body2">
-                {dayjs(createdAt).format("HH:mm")}
+                {dayjs(setDate(createdAt)).format("HH:mm")}
               </Typography>
             </Box>
           </MessageBox>
