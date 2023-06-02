@@ -148,7 +148,7 @@ export const ShowMessage: React.FC<Props> = ({
     reactions,
     tipsCount,
     createdAt,
-  } = tweet;  
+  } = tweet;
 
   const theme = useTheme();
   const { handleReaction } = useReaction({ tweetId: id });
@@ -163,6 +163,13 @@ export const ShowMessage: React.FC<Props> = ({
   };
   const popOpen = Boolean(popAnchor);
   const handle = user && user.handle;
+
+  const currentDate = dayjs();
+  const createdDate = dayjs(setDate(createdAt));
+  let formattedDate = createdDate.format("HH:mm");
+  if (!currentDate.isSame(createdDate, "day")) {
+    formattedDate = createdDate.format("ddd") + " " + formattedDate;
+  }
 
   return (
     <Grid item xs={12} mt={2} sx={{ position: "relative", padding: "0 1em" }}>
@@ -320,8 +327,9 @@ export const ShowMessage: React.FC<Props> = ({
               display="flex"
               justifyContent="space-between"
               alignItems="center"
+              mt={0.5}
             >
-              <IconsBox display="flex" alignItems="center" mt={0.5}>
+              <IconsBox display="flex" alignItems="center" mr={2}>
                 {reactions && reactions.length > 0 && (
                   <>
                     <ReactionsList
@@ -349,7 +357,7 @@ export const ShowMessage: React.FC<Props> = ({
                 ) : null}
               </IconsBox>
               <Typography color="secondary" variant="body2">
-                {dayjs(setDate(createdAt)).format("HH:mm")}
+                {formattedDate}
               </Typography>
             </Box>
           </MessageBox>
