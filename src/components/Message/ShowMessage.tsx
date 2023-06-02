@@ -3,7 +3,6 @@ import "linkify-plugin-mention";
 import Linkify from "linkify-react";
 import React, { useContext, useState } from "react";
 import ReplyIcon from "@mui/icons-material/Reply";
-import moment from "moment";
 import {
   Box,
   Grid,
@@ -23,16 +22,15 @@ import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { Popover } from "@mui/material";
 import { RecoilState, useSetRecoilState } from "recoil";
-
 import { TipCreator } from "../TipCreator";
 import { Tweet } from "../../generated/graphql";
 import { UserAvatar } from "../UserAvatar";
 import { VideoContainer } from "../Giphy/VideoContainer";
-import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
 import { RoutePath } from "../../constants";
 import { ReplyBox } from "./ReplyBox";
+import dayjs from "dayjs";
 
 const IconsBox = styled(Box)(({ theme }) => ({
   "& svg": {
@@ -57,8 +55,13 @@ interface Props {
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
 
+interface MessageBoxProps {
+  children: React.ReactNode;
+  isTweetMine: boolean;
+}
+
 const BubbleRight = styled(Paper)(({ theme }) => ({
-  background: alpha(theme.accentColor, 0.4),
+  background: alpha(theme.accentColor, 0.2),
   color: theme.palette.text.primary,
   maxWidth: "100%",
   padding: "0.5rem 1rem",
@@ -72,7 +75,7 @@ const BubbleRight = styled(Paper)(({ theme }) => ({
     right: "-8px",
     width: 0,
     height: 0,
-    borderTop: `8px solid ${alpha(theme.accentColor, 0.4)}`,
+    borderTop: `8px solid ${alpha(theme.accentColor, 0.2)}`,
     borderRight: "8px solid transparent",
   },
 }));
@@ -96,6 +99,34 @@ const BubbleLeft = styled(Paper)(({ theme }) => ({
     borderLeft: "8px solid transparent",
   },
 }));
+
+const MessageBox: React.FC<MessageBoxProps> = ({ children, isTweetMine }) => {
+  const linkifyOptions = {
+    className: "body",
+    nl2br: true,
+    target: { url: "_blank" },
+    formatHref: {
+      hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
+    },
+  };
+  return (
+    <Box
+      mb={0.5}
+      pr={2}
+      display="flex"
+      justifyContent={isTweetMine ? "flex-end" : "flex-start"}
+      width="100%"
+    >
+      <Linkify options={linkifyOptions}>
+        {isTweetMine ? (
+          <BubbleRight>{children}</BubbleRight>
+        ) : (
+          <BubbleLeft>{children}</BubbleLeft>
+        )}
+      </Linkify>
+    </Box>
+  );
+};
 
 export const ShowMessage: React.FC<Props> = ({
   tweet,
@@ -131,15 +162,6 @@ export const ShowMessage: React.FC<Props> = ({
   };
   const popOpen = Boolean(popAnchor);
   const handle = user && user.handle;
-
-  const linkifyOptions = {
-    className: "body",
-    nl2br: true,
-    target: { url: "_blank" },
-    formatHref: {
-      hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
-    },
-  };
 
   return (
     <Grid item xs={12} mt={2} sx={{ position: "relative", padding: "0 1em" }}>
@@ -277,61 +299,59 @@ export const ShowMessage: React.FC<Props> = ({
                 </Typography>
               </Link>
             </Box>
-            <Typography color="secondary">
-              {moment(setDate(createdAt)).fromNow()}
-            </Typography>
           </Stack>
-          <Box
-            mb={0.5}
-            pr={2}
-            display="flex"
-            justifyContent={isTweetMine ? "flex-end" : "flex-start"}
-            width="100%"
-          >
-            <Linkify options={linkifyOptions}>
-              {isTweetMine ? (
-                <BubbleRight>{text}</BubbleRight>
-              ) : (
-                <BubbleLeft>{text}</BubbleLeft>
-              )}
-            </Linkify>
-          </Box>
-          <Box>
-            {gif && <VideoContainer gif={gif} />}
-
-            {nft && <NFTTweet nftData={nft} />}
-
-            {files && !!files.length && (
-              <ImageBox files={files} disablelightbox={false} />
-            )}
-          </Box>
-          <IconsBox display="flex" alignItems="center">
-            {reactions && reactions.length > 0 && (
-              <>
-                <ReactionsList
-                  reactions={reactions}
-                  // @ts-ignore
-                  handleReaction={handleReaction}
-                  tweetId={id}
-                />
-                <Box ml={1} pt={0.7}>
-                  <EmojiTweet handleReaction={handleReaction} />
+          <MessageBox isTweetMine={isTweetMine}>
+            <Typography>{text}</Typography>
+            <Box>
+              {gif && (
+                <Box mt={1}>
+                  <VideoContainer gif={gif} />
                 </Box>
-              </>
-            )}
-            {tipsCount && parseInt(tipsCount) ? (
-              <Box ml={2}>
-                <TipCreator
-                  userPubKey={user?.publicAddress}
-                  tipAmount={
-                    tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL
-                  }
-                  tweetId={id}
-                  userId={user?.id}
-                />
-              </Box>
-            ) : null}
-          </IconsBox>
+              )}
+
+              {nft && <NFTTweet nftData={nft} />}
+
+              {files && !!files.length && (
+                <ImageBox files={files} disablelightbox={false} />
+              )}
+            </Box>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <IconsBox display="flex" alignItems="center" mt={0.5}>
+                {reactions && reactions.length > 0 && (
+                  <>
+                    <ReactionsList
+                      reactions={reactions}
+                      // @ts-ignore
+                      handleReaction={handleReaction}
+                      tweetId={id}
+                    />
+                    <Box ml={1} pt={0.7}>
+                      <EmojiTweet handleReaction={handleReaction} />
+                    </Box>
+                  </>
+                )}
+                {tipsCount && parseInt(tipsCount) ? (
+                  <Box ml={2}>
+                    <TipCreator
+                      userPubKey={user?.publicAddress}
+                      tipAmount={
+                        tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL
+                      }
+                      tweetId={id}
+                      userId={user?.id}
+                    />
+                  </Box>
+                ) : null}
+              </IconsBox>
+              <Typography color="secondary" variant="body2">
+                {dayjs(createdAt).format("HH:mm")}
+              </Typography>
+            </Box>
+          </MessageBox>
         </Box>
       </Box>
     </Grid>
