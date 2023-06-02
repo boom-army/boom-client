@@ -8,8 +8,10 @@ import {
   Box,
   Grid,
   IconButton,
+  Paper,
   Stack,
   Typography,
+  alpha,
   useTheme,
 } from "@mui/material";
 import { EmojiTweet } from "../Tweet/index";
@@ -55,6 +57,46 @@ interface Props {
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
 
+const BubbleRight = styled(Paper)(({ theme }) => ({
+  background: alpha(theme.accentColor, 0.4),
+  color: theme.palette.text.primary,
+  maxWidth: "100%",
+  padding: "0.5rem 1rem",
+  marginBottom: theme.spacing(1),
+  position: "relative",
+  borderRadius: "16px 0 16px 16px",
+  "&:after": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    right: "-8px",
+    width: 0,
+    height: 0,
+    borderTop: `8px solid ${alpha(theme.accentColor, 0.4)}`,
+    borderRight: "8px solid transparent",
+  },
+}));
+
+const BubbleLeft = styled(Paper)(({ theme }) => ({
+  background: theme.blue.light,
+  color: theme.palette.text.primary,
+  maxWidth: "100%",
+  padding: "0.5rem 1rem",
+  marginBottom: theme.spacing(1),
+  position: "relative",
+  borderRadius: "0 16px 16px 16px",
+  "&:before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: "-8px",
+    width: 0,
+    height: 0,
+    borderTop: `8px solid ${theme.blue.light}`,
+    borderLeft: "8px solid transparent",
+  },
+}));
+
 export const ShowMessage: React.FC<Props> = ({
   tweet,
   parentMeepState,
@@ -69,7 +111,7 @@ export const ShowMessage: React.FC<Props> = ({
     files,
     gif,
     nft,
-    // isTweetMine,
+    isTweetMine,
     parentTweet,
     reactions,
     tipsCount,
@@ -120,10 +162,7 @@ export const ShowMessage: React.FC<Props> = ({
                   />
                 </Box>
                 <Box mr={1}>
-                  <Typography
-                    variant="body2"
-                    color="secondary"
-                  >
+                  <Typography variant="body2" color="secondary">
                     @{parentTweet?.user?.handle}
                   </Typography>
                 </Box>
@@ -194,7 +233,7 @@ export const ShowMessage: React.FC<Props> = ({
             sx={{ padding: "0.2em" }}
           >
             <ReplyIcon
-            color="secondary"
+              color="secondary"
               sx={{
                 "&:hover": { color: theme.accentColor },
               }}
@@ -204,7 +243,8 @@ export const ShowMessage: React.FC<Props> = ({
       </Popover>
       <Box
         id={tweet?.id}
-        display={"flex"}
+        display="flex"
+        width="100%"
         aria-owns={popOpen ? "mouse-over-popover" : undefined}
         aria-haspopup="true"
         onClick={handlePopoverOpen}
@@ -228,7 +268,7 @@ export const ShowMessage: React.FC<Props> = ({
             />
           </Link>
         </Box>
-        <Box ml={1} pt={0.5}>
+        <Box ml={1} pt={0.5} width="100%">
           <Stack direction="row">
             <Box mr={1}>
               <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
@@ -241,9 +281,19 @@ export const ShowMessage: React.FC<Props> = ({
               {moment(setDate(createdAt)).fromNow()}
             </Typography>
           </Stack>
-          <Box mb={0.5} pr={2}>
+          <Box
+            mb={0.5}
+            pr={2}
+            display="flex"
+            justifyContent={isTweetMine ? "flex-end" : "flex-start"}
+            width="100%"
+          >
             <Linkify options={linkifyOptions}>
-              <MeepBody>{text}</MeepBody>
+              {isTweetMine ? (
+                <BubbleRight>{text}</BubbleRight>
+              ) : (
+                <BubbleLeft>{text}</BubbleLeft>
+              )}
             </Linkify>
           </Box>
           <Box>
