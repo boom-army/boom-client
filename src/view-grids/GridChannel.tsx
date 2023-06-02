@@ -17,7 +17,12 @@ export const GridChannel: React.FC = () => {
   const theme = useTheme();
   return (
     <Grid container>
-      <Grid item md={3} display={{ xs: "none", md: "block" }}>
+      <Grid
+        item
+        md={3}
+        display={{ xs: "none", md: "block" }}
+        sx={{ background: theme.blue.dark }}
+      >
         <Box
           display="flex"
           justifyContent="center"
