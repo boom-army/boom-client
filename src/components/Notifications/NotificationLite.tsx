@@ -25,16 +25,20 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
   const mentionIsNew =
     newMentions?.length &&
     newMentions?.some((newMention) => newMention.id === mention.id);
+  const mentionUserId =
+    mention?.common?.emojiUserId || mention?.common?.mentionUserId;
 
-  useProfileByIdQuery({
-    variables: {
-      id:
-        (mention?.common?.emojiUserId || mention?.common?.mentionUserId) ?? "",
-    },
-    onCompleted: ({ profileById }) => {
-      setFromUser(profileById as User);
-    },
-  });
+  if (mentionUserId) {
+    useProfileByIdQuery({
+      variables: {
+        id: mentionUserId,
+      },
+      onCompleted: ({ profileById }) => {
+        console.log("profileById", profileById);
+        setFromUser(profileById as User);
+      },
+    });
+  }
 
   useEffect(() => {
     switch (mention.type) {

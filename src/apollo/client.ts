@@ -21,8 +21,21 @@ const authLink = setContext((_, { headers }) => {
 const cache = new InMemoryCache({
   // https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function
   typePolicies: {
+    Tweet: {
+      keyFields: ["id"],
+      fields: {
+        user: {
+          merge(existing, incoming) {
+            return {
+              ...existing,
+              ...incoming,
+            };
+          },
+        },
+      },
+    },
     User: {
-      keyFields: ['id'],
+      keyFields: ["id"],
       merge(existing, incoming) {
         return {
           ...existing,
