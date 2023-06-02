@@ -6,7 +6,7 @@ import {
 } from "@solana/spl-token";
 
 /**
- * Checks is a user has an NFT from a given collection in their wallet
+ * Checks if a user has an NFT from a given collection in their wallet
  * @param userAddress USER_PUBLIC_KEY
  * @param collectionMintAddress COLLECTION_MINT_PUBLIC_KEY
  * @returns Boolean

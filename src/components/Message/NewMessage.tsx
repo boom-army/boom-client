@@ -194,7 +194,7 @@ export const NewMessage: React.FC<Props> = ({
   });
 
   return (
-    <>
+    <Box height={"10rem"}>
       {parentTweet && (
         <Box
           display={"flex"}
@@ -329,6 +329,6 @@ export const NewMessage: React.FC<Props> = ({
           </Box>
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 };

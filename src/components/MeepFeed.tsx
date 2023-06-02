@@ -51,7 +51,7 @@ export const MeepFeed: React.FC<Props> = ({
     <Grid
       id="scrollableDiv"
       sx={{
-        maxHeight: "80%",
+        height: `calc(${headerOffset} - 10rem)`,
         overflow: "auto",
         display: "flex",
         flexDirection: "column-reverse",
