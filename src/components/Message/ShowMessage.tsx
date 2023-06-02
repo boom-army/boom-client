@@ -287,24 +287,28 @@ export const ShowMessage: React.FC<Props> = ({
           },
         }}
       >
-        <Box>
-          <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
-            <UserAvatar
-              sx={{
-                width: "30px",
-                height: "30px",
-              }}
-              avatar={user?.avatar as string}
-              handle={user?.handle}
-              isNFT={user?.data?.avatarMint}
-            />
-          </Link>
-        </Box>
+        {!isTweetMine && (
+          <Box>
+            <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
+              <UserAvatar
+                sx={{
+                  width: "30px",
+                  height: "30px",
+                }}
+                avatar={user?.avatar as string}
+                handle={user?.handle}
+                isNFT={user?.data?.avatarMint}
+              />
+            </Link>
+          </Box>
+        )}
         <Box ml={1} pt={0.5} width="100%">
           <MessageBox isTweetMine={isTweetMine}>
-            {!isTweetMine && <Typography sx={{ fontWeight: "600" }}>
-              {user && user.consumerName}
-            </Typography>}
+            {!isTweetMine && (
+              <Typography sx={{ fontWeight: "600" }}>
+                {user && user.consumerName}
+              </Typography>
+            )}
             <Typography>{text}</Typography>
             <Box>
               {gif && (
