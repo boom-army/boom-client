@@ -161,27 +161,21 @@ export const components: Components = {
 
 export const typography: { typography: TypographyOptions } = {
   typography: {
-    fontFamily: [
-      '"Noto Sans"',
-      '"Trebuchet MS"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
+    fontFamily: ['"Noto Sans"', '"Trebuchet MS"', "Arial", "sans-serif"].join(
+      ","
+    ),
     fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 600,
     fontWeightBold: 800,
     h1: {
-      fontFamily: 'VT323, monospace',
+      fontFamily: '"Bangers", "Chalkduster", "Comic Sans MS", cursive',
       fontSize: 60,
       lineHeight: "4rem",
     },
     h2: {
-      fontFamily: 'VT323, monospace',
+      fontFamily: '"Bangers", "Chalkduster", "Comic Sans MS", cursive',
       fontSize: 40,
       lineHeight: "3rem",
     },
