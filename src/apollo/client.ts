@@ -19,10 +19,17 @@ const authLink = setContext((_, { headers }) => {
 
 // Create an instance of InMemoryCache with possibleTypes configuration
 const cache = new InMemoryCache({
-  possibleTypes: {
-    User: ['User'],
-  },
+  // https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function
   typePolicies: {
+    User: {
+      keyFields: ['id'],
+      merge(existing, incoming) {
+        return {
+          ...existing,
+          ...incoming,
+        };
+      },
+    },
     Query: {
       fields: {
         feed: offsetLimitPagination(),
