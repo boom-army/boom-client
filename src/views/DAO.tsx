@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import BuildIcon from "@mui/icons-material/Build";
@@ -19,9 +19,7 @@ import {
 import { Fxnction } from "../components/DAOTweets/Fxnction";
 import { DAOPromo } from "../components/Advertising/DAOPromo";
 import { ChannelStatus, RoutePath } from "../constants";
-import { publicKey } from "@metaplex-foundation/beet-solana";
 import { uniqBy, differenceBy } from "lodash";
-import { client } from "../apollo/client";
 import { displayError } from "../utils";
 import { useApolloClient } from "@apollo/client";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
@@ -33,7 +31,7 @@ import {
   useUnlinkChannelMutation,
 } from "../generated/graphql";
 
-export const DAOView = () => {
+export const DAOView: React.FC = () => {
   const theme = useTheme();
   const { connection } = useConnection();
   const metaplex = useMetaplex();
