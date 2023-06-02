@@ -51,13 +51,13 @@ const MeepBody = styled(Typography)(({ theme }) => ({
 
 interface Props {
   tweet: Tweet;
-  parentTweetState: RecoilState<string>;
+  parentMeepState: RecoilState<string>;
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
 
 export const ShowMessage: React.FC<Props> = ({
   tweet,
-  parentTweetState,
+  parentMeepState,
   scrollRef,
 }: Props) => {
   const {
@@ -78,7 +78,7 @@ export const ShowMessage: React.FC<Props> = ({
 
   const theme = useTheme();
   const { handleReaction } = useReaction({ tweetId: id });
-  const setParentTweetState = useSetRecoilState(parentTweetState);
+  const setParentMeepState = useSetRecoilState(parentMeepState);
   const [popAnchor, setPopAnchor] = useState<HTMLElement | null>(null);
 
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -187,7 +187,7 @@ export const ShowMessage: React.FC<Props> = ({
           />
           <IconButton
             onClick={() => {
-              setParentTweetState(id);
+              setParentMeepState(id);
               handlePopoverClose();
               scrollRef?.current?.scrollIntoView();
             }}

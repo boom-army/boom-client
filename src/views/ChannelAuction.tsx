@@ -17,8 +17,8 @@ export const ChannelAuction: React.FC = () => {
   const anchorWallet = useAnchorWallet();
   const theme = useTheme();
   const scrollRef = useRef<HTMLDivElement>();
-  const parentTweetState = atom({
-    key: "parentTweetState",
+  const parentMeepState = atom({
+    key: "parentMeepState",
     default: "",
   });
 
@@ -72,7 +72,7 @@ export const ChannelAuction: React.FC = () => {
         error={error}
         data={data?.getChannelById}
         fetchMore={fetchMore}
-        parentTweetState={parentTweetState}
+        parentMeepState={parentMeepState}
         scrollRef={scrollRef}
       />
       {!anchorWallet?.publicKey && (
@@ -89,7 +89,7 @@ export const ChannelAuction: React.FC = () => {
         <NewMessage
           feed={data?.getChannelById}
           channel={channelId}
-          parentTweetState={parentTweetState}
+          parentMeepState={parentMeepState}
           scrollRef={scrollRef}
         />
       )}

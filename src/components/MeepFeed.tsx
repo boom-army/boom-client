@@ -14,7 +14,7 @@ interface Props {
   loading: boolean;
   error: ApolloError | undefined;
   data: GetChannelByIdQuery["getChannelById"] | undefined;
-  parentTweetState: RecoilState<string>;
+  parentMeepState: RecoilState<string>;
   fetchMore: (props: any) => void;
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
@@ -23,7 +23,7 @@ export const MeepFeed: React.FC<Props> = ({
   loading,
   error,
   data,
-  parentTweetState,
+  parentMeepState,
   fetchMore,
   scrollRef,
 }) => {
@@ -77,7 +77,7 @@ export const MeepFeed: React.FC<Props> = ({
             <ShowMessage
               key={tweet.id}
               tweet={tweet as Tweet}
-              parentTweetState={parentTweetState}
+              parentMeepState={parentMeepState}
               scrollRef={scrollRef}
             />
           ))

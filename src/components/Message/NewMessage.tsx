@@ -41,7 +41,7 @@ import { UserAvatar } from "../UserAvatar";
 interface Props {
   feed?: any;
   channel?: string | undefined;
-  parentTweetState: RecoilState<string>;
+  parentMeepState: RecoilState<string>;
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
 
@@ -67,7 +67,7 @@ const ImageInput = styled("input")({
 export const NewMessage: React.FC<Props> = ({
   feed,
   channel,
-  parentTweetState,
+  parentMeepState,
   scrollRef,
 }) => {
   const theme = useTheme();
@@ -77,8 +77,8 @@ export const NewMessage: React.FC<Props> = ({
   const [tweetFiles, setTweetFiles]: any = useState([]);
   const tweet = useInput("");
 
-  const parentTweet = useRecoilValue(parentTweetState);
-  const setParentTweetState = useSetRecoilState(parentTweetState);
+  const parentTweet = useRecoilValue(parentMeepState);
+  const setParentMeepState = useSetRecoilState(parentMeepState);
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
@@ -216,7 +216,7 @@ export const NewMessage: React.FC<Props> = ({
           <Box>
             <IconButton
               onClick={() => {
-                setParentTweetState("");
+                setParentMeepState("");
               }}
               sx={{ padding: "0" }}
             >
@@ -320,7 +320,7 @@ export const NewMessage: React.FC<Props> = ({
             <IconButton
               disabled={loading}
               onClick={(e) => {
-                setParentTweetState("");
+                setParentMeepState("");
                 handleNewTweet(e);
               }}
             >

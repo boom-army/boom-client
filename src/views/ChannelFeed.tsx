@@ -17,8 +17,8 @@ export const ChannelFeed: React.FC = () => {
   const { publicKey } = useWallet();
   const { connection } = useConnection();
   const scrollRef = useRef<HTMLDivElement>();
-  const parentTweetState = atom({
-    key: "parentTweetState",
+  const parentMeepState = atom({
+    key: "parentMeepState",
     default: "",
   });
 
@@ -61,13 +61,13 @@ export const ChannelFeed: React.FC = () => {
         error={error}
         data={data?.getChannelById}
         fetchMore={fetchMore}
-        parentTweetState={parentTweetState}
+        parentMeepState={parentMeepState}
         scrollRef={scrollRef}
       />
       <NewMessage
         feed={data?.getChannelById}
         channel={channelId}
-        parentTweetState={parentTweetState}
+        parentMeepState={parentMeepState}
         scrollRef={scrollRef}
       />
     </Box>
