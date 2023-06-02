@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
@@ -33,13 +33,13 @@ export const VideoContainer: React.FC<videoProps> = ({ gif, onClose }) => {
 
     "> video": {
       width: "100%",
-      cursor: "pointer",
+      cursor: "auto",
     },
   });
 
-  const handleVideoPlayerClick = (e: React.MouseEvent<HTMLVideoElement>) => {
-    e.currentTarget.paused ? e.currentTarget.play() : e.currentTarget.pause();
-  };
+  // const handleVideoPlayerClick = (e: React.MouseEvent<HTMLVideoElement>) => {
+  //   e.currentTarget.paused ? e.currentTarget.play() : e.currentTarget.pause();
+  // };
 
   return (
     <VideoBoxWrapper>
@@ -67,14 +67,14 @@ export const VideoContainer: React.FC<videoProps> = ({ gif, onClose }) => {
       )}
 
       <video
-        onClick={(e) => handleVideoPlayerClick(e)}
+        // onClick={(e) => handleVideoPlayerClick(e)}
         preload="auto"
-        autoPlay={true}
-        muted={true}
-        loop={true}
+        autoPlay
+        muted
+        loop
         aria-label={title}
         src={fixedHeightUrl}
-      ></video>
+      />
       <Box
         sx={{
           position: "absolute",
