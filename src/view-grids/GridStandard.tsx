@@ -1,11 +1,9 @@
 import React from "react";
-import { Profile } from "../components/Profile/Profile";
 import { MasterTweet } from "../components/Tweet/MasterTweet";
 import { NFTMint } from "../components/Mint/NFTMint";
 import { EditProfile } from "../views/EditProfile";
 import { Route, Routes, Navigate } from "react-router-dom";
 import {
-  ChannelFeed,
   PeopleView,
   Explore,
   Following,
@@ -71,8 +69,6 @@ export const GridStandard: React.FC<GridProps> = ({
       >
         <Routes>
           <Route path={RoutePath.PEOPLE} element={<PeopleView />} />
-          <Route path={RoutePath.DAO_CHANNEL} element={<ChannelFeed />} />
-          {/* <Route path={RoutePath.DAO} element={<Channels />} /> */}
           <Route path={RoutePath.EXPLORE} element={<Explore />} />
           <Route path={RoutePath.FEED} element={<Feed />} />
           <Route path={RoutePath.FOLLOWING} element={<Following />} />

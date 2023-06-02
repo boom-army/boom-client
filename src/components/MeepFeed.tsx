@@ -8,6 +8,7 @@ import { Loader } from "./Loader";
 import { RecoilState } from "recoil";
 import { ShowMessage } from "./Message/ShowMessage";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { headerOffset } from "../utils/boom-web3/constants";
 
 interface Props {
   loading: boolean;
@@ -50,7 +51,7 @@ export const MeepFeed: React.FC<Props> = ({
     <Grid
       id="scrollableDiv"
       sx={{
-        height: "80vh",
+        maxHeight: "80%",
         overflow: "auto",
         display: "flex",
         flexDirection: "column-reverse",

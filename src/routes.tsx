@@ -17,7 +17,7 @@ import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
 import { GridStandard } from "./view-grids/GridStandard";
 // import { GridAuction } from "./view-grids/GridAuction";
-import { Dashboard } from "./views";
+import { ChannelFeed, Dashboard } from "./views";
 import { PopoutProfileMenu, PopoutNavMenu } from "./components/Nav";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
@@ -27,6 +27,7 @@ import { useSidebarState } from "./hooks";
 import { Notifications } from "./components/Notifications";
 import { Profile } from "./components/Profile/Profile";
 import { headerOffset } from "./utils/boom-web3/constants";
+import { GridChannel } from "./view-grids/GridChannel";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
@@ -115,6 +116,7 @@ export const AppRoutes: React.FC = () => {
                     <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
                     <Route path={RoutePath.LAB} element={<Lab />} />
                     <Route path={RoutePath.HANDLE} element={<Profile />} />
+                    <Route path={RoutePath.WILDCARD} element={<GridChannel />} />
                     <Route
                       path={RoutePath.WILDCARD}
                       element={
