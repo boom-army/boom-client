@@ -65,6 +65,7 @@ const BubbleRight = styled(Paper)(({ theme }) => ({
   background: alpha(theme.accentColor, 0.2),
   color: theme.palette.text.primary,
   maxWidth: "100%",
+  minWidth: "60%",
   padding: "0.5rem 1rem",
   marginBottom: theme.spacing(1),
   position: "relative",
@@ -85,6 +86,7 @@ const BubbleLeft = styled(Paper)(({ theme }) => ({
   background: theme.blue.light,
   color: theme.palette.text.primary,
   maxWidth: "100%",
+  minWidth: "60%",
   padding: "0.5rem 1rem",
   marginBottom: theme.spacing(1),
   position: "relative",
@@ -299,16 +301,10 @@ export const ShowMessage: React.FC<Props> = ({
           </Link>
         </Box>
         <Box ml={1} pt={0.5} width="100%">
-          <Stack direction="row">
-            <Box mr={1}>
-              <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
-                <Typography sx={{ fontWeight: "600" }}>
-                  {user && user.consumerName}
-                </Typography>
-              </Link>
-            </Box>
-          </Stack>
           <MessageBox isTweetMine={isTweetMine}>
+            {!isTweetMine && <Typography sx={{ fontWeight: "600" }}>
+              {user && user.consumerName}
+            </Typography>}
             <Typography>{text}</Typography>
             <Box>
               {gif && (
