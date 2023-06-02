@@ -17,7 +17,7 @@ export const GridChannel: React.FC = () => {
   const theme = useTheme();
   return (
     <Grid container>
-      <Grid item sm={12} md={5}>
+      <Grid item sm={12} md={3}>
         <Box display="flex" justifyContent="center" alignItems="center" height="100%">
           <Typography variant="h4">All the good DAO stuff happens here</Typography>
         </Box>
