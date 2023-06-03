@@ -176,50 +176,39 @@ export const ShowMessage: React.FC<Props> = ({
   return (
     <Grid item xs={12} mt={2} sx={{ position: "relative", padding: "0 1em" }}>
       {parentTweet && (
-        <Box sx={{ position: "relative" }}>
-          <ReplyBox>
-            <HashLink
-              to={`/${RoutePath.DAO}/${channel?.id}#${parentTweet?.id}`}
-            >
-              <Stack direction="row" pl={5}>
-                <Box mr={0.5} pt={"2px"} sx={{ alignItems: "center" }}>
-                  <UserAvatar
-                    sx={{
-                      width: 16,
-                      height: 16,
-                    }}
-                    avatar={parentTweet?.user?.avatar as string}
-                    handle={parentTweet?.user?.handle}
-                    isNFT={parentTweet?.user?.data?.avatarMint}
-                  />
-                </Box>
-                <Box mr={1}>
-                  <Typography variant="body2" color="secondary">
-                    @{parentTweet?.user?.handle}
-                  </Typography>
-                </Box>
-                <Box
-                  pr={2}
+        <Box
+          display="flex"
+          justifyContent={isTweetMine ? "flex-end" : "flex-start"}
+          width="100%"
+        >
+          <Box width="60%" ml={isTweetMine ? 0 : 5}>
+            <Stack direction="row">
+              <Box mr={1}>
+                <Typography variant="body2" color="secondary">
+                  @{parentTweet?.user?.handle}
+                </Typography>
+              </Box>
+              <Box
+                pr={2}
+                sx={{
+                  flex: 1,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  color="secondary"
                   sx={{
-                    flex: 1,
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
+                    fontWeight: "300",
                   }}
                 >
-                  <Typography
-                    variant="body2"
-                    color="secondary"
-                    sx={{
-                      fontWeight: "300",
-                    }}
-                  >
-                    {parentTweet?.text}
-                  </Typography>
-                </Box>
-              </Stack>
-            </HashLink>
-          </ReplyBox>
+                  {parentTweet?.text}
+                </Typography>
+              </Box>
+            </Stack>
+          </Box>
         </Box>
       )}
       <Popover
