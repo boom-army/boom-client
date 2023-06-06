@@ -69,6 +69,7 @@ export const NewTweet = ({
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles] = useState<string[]>([]);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [postDisabled, setPostDisabled] = useState(false);
   const tweet = useInput("");
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
@@ -98,6 +99,39 @@ export const NewTweet = ({
     fixedHeightUrl: gif.images.fixed_height.mp4,
     originalUrl: gif.images.original.mp4,
   });
+
+  const handlePaste = async (event: any) => {
+    const items = (event.clipboardData || event.originalEvent.clipboardData)
+      .items;
+    for (let item of items) {
+      if (item.type.indexOf("image") === 0) {
+        const blob = item.getAsFile();
+
+        try {
+          const file = getUniqueFileName(blob, userData?.id);
+          const { data } = await signFileMutation({
+            variables: {
+              file: file.name,
+              type: file.type,
+            },
+          });
+          const signedUrl = data.signFileUrl;
+          const imageData = await uploadFile(
+            file,
+            signedUrl,
+            enqueueSnackbar,
+            setUploadProgress
+          );
+          const imageUrl = imageData?.config?.url?.split("?")[0];
+          imageUrl && setTweetFiles([imageUrl, ...tweetFiles]);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setUploadProgress(0);
+        }
+      }
+    }
+  };
 
   const handleNewTweet = async (e: any) => {
     e.preventDefault();
@@ -141,6 +175,7 @@ export const NewTweet = ({
 
   const handleTweetFiles = async (e: any) => {
     try {
+      setPostDisabled(true);
       if (tweetFiles.length >= 4) {
         return enqueueSnackbar("You can only upload a maximum of 4 files", {
           variant: "error",
@@ -168,6 +203,7 @@ export const NewTweet = ({
       // reset value so the input event handler can trigger again
       e.target.value = null;
       setUploadProgress(0);
+      setPostDisabled(false);
     }
   };
 
@@ -200,6 +236,7 @@ export const NewTweet = ({
             maxRows={4}
             value={tweet.value}
             onChange={tweet.onChange}
+            onPaste={handlePaste}
             placeholder={"It's happening..."}
             fullWidth={true}
             variant="standard"
@@ -233,7 +270,7 @@ export const NewTweet = ({
           />
         </Stack>
       </Grid>
-      <IconsGrid item xs={6} pl={6}>
+      <IconsGrid item xs={12} sm={6} pl={6}>
         {gif && (
           <Box sx={{ marginBottom: 2 }}>
             <Stack direction="column">
@@ -270,10 +307,17 @@ export const NewTweet = ({
 
         {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
       </IconsGrid>
-      <Grid item xs={6} pr={1}>
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        pr={1}
+        sx={{ [theme.breakpoints.down("sm")]: { marginTop: 1 } }}
+      >
         <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
           <Button
             variant="contained"
+            disabled={postDisabled}
             size="small"
             loading={loading}
             onClick={handleNewTweet}

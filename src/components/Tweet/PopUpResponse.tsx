@@ -44,22 +44,26 @@ export const PopUpResponse = ({
           </Typography>
         </Box>
       </Link>
-      <Dialog open={openReply} onClose={handleClose}>
+      <Dialog
+        open={openReply}
+        onClose={handleClose}
+        PaperProps={{ elevation: 0 }}
+      >
         <DialogTitle>
           <IconButton
             aria-label="close"
             onClick={handleClose}
             sx={{
               position: "absolute",
-              right: 8,
-              top: 8,
+              right: 0,
+              top: 0,
               color: (theme) => theme.palette.grey[500],
             }}
           >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{ padding: 0 }}>
           <NewTweet
             parentTweet={parentTweet}
             masterTweet={masterTweet}

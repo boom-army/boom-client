@@ -2,7 +2,7 @@ import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
 import * as linkify from "linkifyjs";
 import Linkify from "linkify-react";
-import React, { useContext } from "react";
+import React from "react";
 import moment from "moment";
 import { Box, Grid, Stack, Typography, useTheme } from "@mui/material";
 import { CommentIcon, HerofiedIcon } from "../Icons";
@@ -87,7 +87,8 @@ export const ShowTweet: React.FC<Props> = ({
     nl2br: true,
     target: { url: "_blank" },
     formatHref: {
-      hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
+      hashtag: (href: string) => `explore?type=TAGS&term=${href.substring(1)}`,
+      mention: (href: string) => `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
     },
   };
 

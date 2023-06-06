@@ -110,6 +110,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ children, isTweetMine }) => {
     target: { url: "_blank" },
     formatHref: {
       hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
+      mention: (href: string) => `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
     },
   };
   return (
