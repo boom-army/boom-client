@@ -117,15 +117,6 @@ export const darkTheme = {
 };
 
 export const components: Components = {
-  MuiPaper: {
-    styleOverrides: {
-      root: ({ theme }: { theme: any }) =>
-        theme.unstable_sx({
-          boxShadow: `${theme.background2} 0px 3px 5px`,
-          backgroundImage: "none",
-        }),
-    },
-  },
   MuiSvgIcon: {
     styleOverrides: {
       root: ({ theme }: { theme: any }) => ({

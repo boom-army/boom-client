@@ -270,7 +270,7 @@ export const NewTweet = ({
           />
         </Stack>
       </Grid>
-      <IconsGrid item xs={6} pl={6}>
+      <IconsGrid item xs={12} sm={6} pl={6}>
         {gif && (
           <Box sx={{ marginBottom: 2 }}>
             <Stack direction="column">
@@ -307,7 +307,13 @@ export const NewTweet = ({
 
         {!tweetFiles.length && !gif && <NFTPicker setNftData={setNftData} />}
       </IconsGrid>
-      <Grid item xs={6} pr={1}>
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        pr={1}
+        sx={{ [theme.breakpoints.down("sm")]: { marginTop: 1 } }}
+      >
         <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
           <Button
             variant="contained"
