@@ -8,7 +8,6 @@ import React, { useContext } from "react";
 import { UserContext } from "../../contexts/user";
 import _ from "lodash";
 import { TweetThread } from "./TweetThread/TweatThread";
-import { headerOffset } from "../../utils/boom-web3/constants";
 
 export const MasterTweet: React.FC = () => {
   const { tweetId } = useParams();

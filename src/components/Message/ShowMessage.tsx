@@ -96,6 +96,7 @@ export const ShowMessage: React.FC<Props> = ({
     target: { url: "_blank" },
     formatHref: {
       hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
+      mention: (href: string) => `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
     },
   };
 
