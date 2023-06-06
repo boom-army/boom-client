@@ -39,7 +39,7 @@ export const NewsItem = ({ meep }: NewsProps) => {
   let [text] = meep.text.split("#news");
   text = truncString(text, 140, "...");
   return (
-    <Card>
+    <Card elevation={0}>
       <CardActionArea
         component={RouterLink}
         to={`/${RoutePath.MEEP_HASH}/${meep.id}`}
