@@ -2,12 +2,7 @@ import BoomArmy from "./images/raise-the-boomarmy.png";
 import BoomLogo from "./images/boom-logo.png";
 import React, { useContext } from "react";
 import { AppHeader } from "./components/AppHeader";
-import {
-  Box,
-  Slide,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Slide, useMediaQuery, useTheme } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GiphyContextProvider } from "./contexts/giphy";
 import { Helmet } from "react-helmet";
