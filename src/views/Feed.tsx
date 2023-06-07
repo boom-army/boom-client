@@ -27,11 +27,13 @@ export const Feed: React.FC = () => {
 
   useEffect(() => {
     if (data?.feed[0]?.createdAt) {
-      const feedData = data?.feed[0].masterTweets?.length ? data?.feed[0].masterTweets : [
-        { createdAt: data?.feed[0].createdAt },
-      ];
+      const feedData = data?.feed[0].masterTweets?.length
+        ? data?.feed[0].masterTweets
+        : [{ createdAt: data?.feed[0].createdAt }];
       const timestamps = feedData.map((item) =>
-        item?.createdAt ? parseInt(item?.createdAt as string) : 0
+        item?.createdAt
+          ? parseInt(item?.createdAt as string)
+          : dayjs().valueOf()
       );
       const mostRecentTimestamp = Math.max(0, ...timestamps);
       if (mostRecentTimestamp !== 0) {
