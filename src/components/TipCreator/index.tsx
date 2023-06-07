@@ -18,6 +18,7 @@ interface TipProps {
   userId: any;
   tweetId: string;
   hideAmount?: boolean;
+  fontSize?: number;
 }
 
 export const TipCreator: React.FC<TipProps> = ({
@@ -26,6 +27,7 @@ export const TipCreator: React.FC<TipProps> = ({
   tweetId,
   userId,
   hideAmount,
+  fontSize,
 }) => {
   const theme = useTheme();
   const [showTip, setShowTip] = useState(false);
@@ -38,7 +40,7 @@ export const TipCreator: React.FC<TipProps> = ({
           aria-label="tip"
           onClick={() => setShowTip(!showTip)}
         >
-          <BMAIcon color={theme.palette.secondary.main}/>
+          <BMAIcon color={theme.palette.secondary.main} fontSize={fontSize}/>
           {!hideAmount && (
             <Typography ml={0.5} color="secondary">
               {tipAmount ? tipAmount : null}

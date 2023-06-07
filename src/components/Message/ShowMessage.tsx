@@ -245,6 +245,7 @@ export const ShowMessage: React.FC<Props> = ({
             tweetId={id}
             userId={user?.id}
             hideAmount={true}
+            fontSize={23}
           />
           <IconButton
             onClick={() => {
