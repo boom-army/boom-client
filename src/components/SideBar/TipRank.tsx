@@ -26,7 +26,7 @@ import { map } from "lodash";
 
 import dayjs from "dayjs";
 import { UserAvatar } from "../UserAvatar";
-import { BMAIcon, HerofiedIcon } from "../Icons";
+import { BMAIcon } from "../Icons";
 import { styled } from "@mui/material/styles";
 import { NameCard } from "../UserLabels/NameCard";
 import { awardColorSelect } from "../../utils";
@@ -100,7 +100,7 @@ export const TipRank: FC<{}> = () => {
           alignSelf={"center"}
         >
           <BMAIconWrapper>
-          <BMAIcon color={theme.palette.secondary.main}/>
+            <BMAIcon color={theme.palette.secondary.main} />
           </BMAIconWrapper>{" "}
           Top Tippers
         </Typography>

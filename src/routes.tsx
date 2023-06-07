@@ -116,7 +116,6 @@ export const AppRoutes: React.FC = () => {
                     <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
                     <Route path={RoutePath.LAB} element={<Lab />} />
                     <Route path={RoutePath.HANDLE} element={<Profile />} />
-                    <Route path={RoutePath.WILDCARD} element={<GridChannel />} />
                     <Route
                       path={RoutePath.WILDCARD}
                       element={
@@ -127,6 +126,7 @@ export const AppRoutes: React.FC = () => {
                         />
                       }
                     />
+                    <Route path={RoutePath.DAO_CHANNEL} element={<GridChannel />} />
                   </Routes>
                 </Box>
                 {sidebar.rightNotificationsFull ? <Notifications /> : null}

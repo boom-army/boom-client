@@ -7,4 +7,5 @@ export { Following } from "./Following";
 export { Dashboard } from "./Dashboard";
 export { News } from "./News";
 export { Feed } from "./Feed";
+export { TipLeaderboard } from "./TipLeaderboard";
 // export { OGMint } from "./OGMint";
