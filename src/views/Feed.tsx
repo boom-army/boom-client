@@ -27,14 +27,18 @@ export const Feed: React.FC = () => {
 
   useEffect(() => {
     if (data?.feed[0]?.createdAt) {
-      const feedData = data?.feed[0].masterTweets || [data?.feed[0]];
+      const feedData = data?.feed[0].masterTweets?.length ? data?.feed[0].masterTweets : [
+        { createdAt: data?.feed[0].createdAt },
+      ];
       const timestamps = feedData.map((item) =>
-        item?.createdAt ? parseInt(item?.createdAt as string) : Number(dayjs().valueOf())
+        item?.createdAt ? parseInt(item?.createdAt as string) : 0
       );
-      const mostRecentTimestamp = Math.max(...timestamps);
-      setLastMeepDate(
-        dayjs(setDate(mostRecentTimestamp)).add(1, "second").toISOString()
-      );
+      const mostRecentTimestamp = Math.max(0, ...timestamps);
+      if (mostRecentTimestamp !== 0) {
+        setLastMeepDate(
+          dayjs(mostRecentTimestamp).add(1, "second").toISOString()
+        );
+      }
     }
   }, [data]);
 
@@ -42,7 +46,7 @@ export const Feed: React.FC = () => {
     variables: {
       date: lastMeepDate,
     },
-    pollInterval: 60000,
+    pollInterval: 1000,
   });
 
   return (
