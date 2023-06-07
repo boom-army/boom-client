@@ -29,7 +29,7 @@ export const Feed: React.FC = () => {
     if (data?.feed[0]?.createdAt) {
       const feedData = data?.feed[0].masterTweets || [data?.feed[0]];
       const timestamps = feedData.map((item) =>
-        item?.createdAt ? parseInt(item?.createdAt as string) : 0
+        item?.createdAt ? parseInt(item?.createdAt as string) : Number(dayjs().valueOf())
       );
       const mostRecentTimestamp = Math.max(...timestamps);
       setLastMeepDate(
