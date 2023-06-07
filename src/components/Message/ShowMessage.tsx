@@ -83,7 +83,7 @@ const BubbleRight = styled(Paper)(({ theme }) => ({
 }));
 
 const BubbleLeft = styled(Paper)(({ theme }) => ({
-  background: theme.blue.light,
+  background: theme.blue.dark,
   color: theme.palette.text.primary,
   maxWidth: "100%",
   minWidth: "60%",
@@ -98,7 +98,7 @@ const BubbleLeft = styled(Paper)(({ theme }) => ({
     left: "-8px",
     width: 0,
     height: 0,
-    borderTop: `8px solid ${theme.blue.light}`,
+    borderTop: `8px solid ${theme.blue.dark}`,
     borderLeft: "8px solid transparent",
   },
 }));

@@ -1,6 +1,6 @@
 export enum RoutePath {
-  DAO = "b",
-  DAO_CHANNEL = "b/:channelId",
+  DAO = "d",
+  DAO_CHANNEL = "d/:channelId",
   DASHBOARD = "dash",
   EXPLORE = "explore",
   FEED = "feed",
