@@ -30,10 +30,10 @@ export const Feed: React.FC = () => {
       const feedData = data?.feed[0].masterTweets?.length
         ? data?.feed[0].masterTweets
         : [{ createdAt: data?.feed[0].createdAt }];
-      const timestamps = feedData.map((item) =>
-        item?.createdAt
-          ? parseInt(item?.createdAt as string)
-          : dayjs().valueOf()
+      const timestamps = feedData.map(
+        (item) =>
+          parseInt(item?.createdAt as string) ||
+          dayjs().subtract(1, "year").valueOf()
       );
       const mostRecentTimestamp = Math.max(0, ...timestamps);
       if (mostRecentTimestamp !== 0) {
