@@ -26,11 +26,17 @@ export const Feed: React.FC = () => {
   });
 
   useEffect(() => {
-    if (data?.feed[0]?.createdAt)
-      setLastMeepDate(
-        dayjs(setDate(data?.feed[0]?.createdAt)).add(1, "second").toISOString()
+    if (data?.feed[0]?.createdAt) {
+      const feedData = data?.feed[0].masterTweets || [data?.feed[0]];
+      const timestamps = feedData.map((item) =>
+        item?.createdAt ? parseInt(item?.createdAt as string) : 0
       );
-  }, [data]);  
+      const mostRecentTimestamp = Math.max(...timestamps);
+      setLastMeepDate(
+        dayjs(setDate(mostRecentTimestamp)).add(1, "second").toISOString()
+      );
+    }
+  }, [data]);
 
   const { data: newMeepsCount, refetch: refetchCount } = useNewMeepsCountQuery({
     variables: {
