@@ -1,12 +1,11 @@
 import BoomArmy from "./images/raise-the-boomarmy.png";
 import BoomLogo from "./images/boom-logo.png";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { AppHeader } from "./components/AppHeader";
 import {
   Box,
   Slide,
   useMediaQuery,
-  useScrollTrigger,
   useTheme,
 } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -16,8 +15,15 @@ import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
 import { GridStandard } from "./view-grids/GridStandard";
-// import { GridAuction } from "./view-grids/GridAuction";
-import { ChannelFeed, Dashboard } from "./views";
+import {
+  Dashboard,
+  Explore,
+  Feed,
+  Following,
+  News,
+  PeopleView,
+  TipLeaderboard,
+} from "./views";
 import { PopoutProfileMenu, PopoutNavMenu } from "./components/Nav";
 import { RoutePath } from "./constants";
 import { DAOView } from "./views/DAO";
@@ -28,6 +34,9 @@ import { Notifications } from "./components/Notifications";
 import { Profile } from "./components/Profile/Profile";
 import { headerOffset } from "./utils/boom-web3/constants";
 import { GridChannel } from "./view-grids/GridChannel";
+import { NFTMint } from "./components/Mint/NFTMint";
+import { MasterTweet } from "./components/Tweet";
+import { EditProfile } from "./views/EditProfile";
 
 export const AppRoutes: React.FC = () => {
   const theme = useTheme();
@@ -117,16 +126,54 @@ export const AppRoutes: React.FC = () => {
                     <Route path={RoutePath.LAB} element={<Lab />} />
                     <Route path={RoutePath.HANDLE} element={<Profile />} />
                     <Route
-                      path={RoutePath.WILDCARD}
-                      element={
-                        <GridStandard
-                          loading={loading}
-                          data={data}
-                          setUser={setUser}
-                        />
-                      }
+                      path={RoutePath.DAO_CHANNEL}
+                      element={<GridChannel />}
                     />
-                    <Route path={RoutePath.DAO_CHANNEL} element={<GridChannel />} />
+                    <Route path={RoutePath.PEOPLE} element={<GridStandard />}>
+                      <Route index element={<PeopleView />} />
+                    </Route>
+                    <Route path={RoutePath.EXPLORE} element={<GridStandard />}>
+                      <Route index element={<Explore />} />
+                    </Route>
+                    <Route path={RoutePath.FEED} element={<GridStandard />}>
+                      <Route index element={<Feed />} />
+                    </Route>
+                    <Route
+                      path={RoutePath.FOLLOWING}
+                      element={<GridStandard />}
+                    >
+                      <Route index element={<Following />} />
+                    </Route>
+                    <Route path={RoutePath.MEEP} element={<GridStandard />}>
+                      <Route index element={<MasterTweet />} />
+                    </Route>
+                    <Route
+                      path={RoutePath.LEADERBOARD}
+                      element={<GridStandard />}
+                    >
+                      <Route index element={<TipLeaderboard />} />
+                    </Route>
+                    <Route path={RoutePath.MINT_NFT} element={<GridStandard />}>
+                      <Route index element={<NFTMint />} />
+                    </Route>
+                    <Route path={RoutePath.NEWS} element={<GridStandard />}>
+                      <Route index element={<News />} />
+                    </Route>
+                    <Route
+                      path={RoutePath.PROFILE_SETTINGS}
+                      element={<GridStandard />}
+                    >
+                      <Route
+                        index
+                        element={
+                          <EditProfile
+                            loading={loading}
+                            data={data}
+                            setUser={setUser}
+                          />
+                        }
+                      />
+                    </Route>
                   </Routes>
                 </Box>
                 {sidebar.rightNotificationsFull ? <Notifications /> : null}

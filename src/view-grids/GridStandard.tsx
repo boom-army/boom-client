@@ -1,34 +1,11 @@
 import React from "react";
-import { MasterTweet } from "../components/Tweet/MasterTweet";
-import { NFTMint } from "../components/Mint/NFTMint";
-import { EditProfile } from "../views/EditProfile";
-import { Route, Routes, Navigate } from "react-router-dom";
-import {
-  PeopleView,
-  Explore,
-  Following,
-  News,
-} from "../views";
-import { ProfileQuery, User } from "../generated/graphql";
+import { Outlet } from "react-router-dom";
 import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
-import { TipLeaderboard } from "../views/TipLeaderboard";
 import { WhoToFollow } from "../components/SideBar/WhoToFollow";
 import { TipRank } from "../components/SideBar/TipRank";
-import { Feed } from "../views/Feed";
-import { RoutePath } from "../constants";
 import { headerOffset } from "../utils/boom-web3/constants";
 
-interface GridProps {
-  data: ProfileQuery | undefined;
-  loading: boolean;
-  setUser: (user: User | null) => User | void;
-}
-
-export const GridStandard: React.FC<GridProps> = ({
-  data,
-  loading,
-  setUser,
-}) => {
+export const GridStandard: React.FC = () => {
   const theme = useTheme();
   const hideWidgets = useMediaQuery(theme.breakpoints.down("md"));
   return (
@@ -40,17 +17,8 @@ export const GridStandard: React.FC<GridProps> = ({
           display={{ xs: "none", sm: "none", md: "block" }}
           sx={{ height: headerOffset, overflow: "scroll" }}
         >
-          <Routes>
-            <Route
-              path="*"
-              element={
-                <>
-                  <TipRank />
-                  <WhoToFollow />
-                </>
-              }
-            />
-          </Routes>
+          <TipRank />
+          <WhoToFollow />
         </Grid>
       ) : null}
       <Box
@@ -67,26 +35,7 @@ export const GridStandard: React.FC<GridProps> = ({
           },
         }}
       >
-        <Routes>
-          <Route path={RoutePath.PEOPLE} element={<PeopleView />} />
-          <Route path={RoutePath.EXPLORE} element={<Explore />} />
-          <Route path={RoutePath.FEED} element={<Feed />} />
-          <Route path={RoutePath.FOLLOWING} element={<Following />} />
-          <Route path={RoutePath.MEEP} element={<MasterTweet />} />
-          <Route path={RoutePath.LEADERBOARD} element={<TipLeaderboard />} />
-          <Route path={RoutePath.MINT_NFT} element={<NFTMint />} />
-          <Route path={RoutePath.NEWS} element={<News />} />
-          <Route
-            path={RoutePath.PROFILE_SETTINGS}
-            element={
-              <EditProfile loading={loading} data={data} setUser={setUser} />
-            }
-          />
-          <Route
-            path={RoutePath.WILDCARD}
-            element={<Navigate replace to={RoutePath.HOME} />}
-          />
-        </Routes>
+        <Outlet />
       </Box>
     </Grid>
   );

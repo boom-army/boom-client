@@ -7,8 +7,6 @@ import { useQuery } from "@apollo/client";
 import { User } from "../User";
 
 export const WhoToFollow = () => {
-  const theme = useTheme();
-
   const { loading, error, data } = useQuery(USER_FOLLOW);
 
   if (loading) return <Loader />;
