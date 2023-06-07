@@ -269,11 +269,11 @@ export const ShowMessage: React.FC<Props> = ({
         width="100%"
         aria-owns={popOpen ? "mouse-over-popover" : undefined}
         aria-haspopup="true"
-        onClick={handlePopoverOpen}
+        onClick={(e) => !isTweetMine && handlePopoverOpen(e)}
         sx={{
           "&:hover": {
-            backgroundColor: theme.tertiaryColor2,
-            cursor: "pointer",
+            backgroundColor: !isTweetMine ? theme.tertiaryColor2 : "inherit",
+            cursor: !isTweetMine ? "pointer" : "inherit",
           },
         }}
       >
