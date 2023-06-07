@@ -115,12 +115,6 @@ export const AppRoutes: React.FC = () => {
                   }}
                 >
                   <Routes>
-                    {/* <Route
-                      path="auctions"
-                      element={
-                        <GridAuction />
-                      }
-                    /> */}
                     <Route path={RoutePath.HOME} element={<DAOView />} />
                     <Route path={RoutePath.DASHBOARD} element={<Dashboard />} />
                     <Route path={RoutePath.LAB} element={<Lab />} />
