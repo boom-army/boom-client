@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
-import { atom } from "recoil";
-import { useGetChannelByIdQuery } from "../generated/graphql";
+import { useGetChannelByIdQuery, useTypingSubscription, useUpdateTypingStatusMutation } from "../generated/graphql";
 import { useParams } from "react-router-dom";
 import { useChannelData } from "../hooks/useChannelData";
-import { Box } from "@mui/material";
+import { Box, debounce } from "@mui/material";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { userOwnsNFT } from "../utils/nfts";
+import { UserContext } from "../contexts/user";
 
 export const ChannelFeed: React.FC = () => {
   const BOOM_CHANNEL_ID = "cl20tx15a3168501mk7k79w0qs";
@@ -17,11 +17,20 @@ export const ChannelFeed: React.FC = () => {
   const { publicKey } = useWallet();
   const { connection } = useConnection();
   const scrollRef = useRef<HTMLDivElement>();
+  const { user } = useContext(UserContext);
   useChannelData();
-  const parentMeepState = atom({
-    key: "parentMeepState",
-    default: "",
-  });
+
+  const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
+  const { data: typingdata } = useTypingSubscription();
+  const handleTyping = () => {
+    const userId = user?.id;
+    userId && updateTypingStatusMutation({ variables: { userId, isTyping: true } });
+  };
+  const debouncedTypingHandler = debounce(handleTyping, 500);
+
+  useEffect(() => {
+    console.log("typingdata", typingdata);
+  }, [typingdata]);
 
   useEffect(() => {
     (async () => {
@@ -62,14 +71,19 @@ export const ChannelFeed: React.FC = () => {
         error={error}
         data={data?.getChannelById}
         fetchMore={fetchMore}
-        parentMeepState={parentMeepState}
         scrollRef={scrollRef}
       />
+      {typingdata?.typing && (
+        <Box>
+          {typingdata?.typing.map((user) => (
+            <span key={user.id}>{user.handle} is typing...</span>
+          ))}
+        </Box>
+      )}
       <NewMessage
-        feed={data?.getChannelById}
         channel={channelId}
-        parentMeepState={parentMeepState}
         scrollRef={scrollRef}
+        typingHandler={debouncedTypingHandler}
       />
     </Box>
   );

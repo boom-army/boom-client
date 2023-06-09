@@ -10,7 +10,7 @@ query topMeepers($dateFrom: String, $limit: Int) {
   }
 }
 
-query typing {
+subscription typing {
   typing {
     ...BaseUser
   }

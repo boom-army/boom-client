@@ -502,7 +502,6 @@ export type Query = {
   tipCount: TipCount;
   topMeepers: Meepers;
   tweet: Tweet;
-  typing: Array<User>;
   userFollow: Array<User>;
   users: Array<User>;
 };
@@ -638,6 +637,11 @@ export type Retweet = {
   tweet?: Maybe<Tweet>;
   updatedAt: Scalars['String'];
   user?: Maybe<User>;
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  typing: Array<User>;
 };
 
 export type Tag = {
@@ -1033,10 +1037,10 @@ export type TopMeepersQueryVariables = Exact<{
 
 export type TopMeepersQuery = { __typename?: 'Query', topMeepers: { __typename?: 'Meepers', dateFrom?: string | null, meepers?: Array<{ __typename?: 'UserWithMeepCount', meepCount?: number | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null> | null } };
 
-export type TypingQueryVariables = Exact<{ [key: string]: never; }>;
+export type TypingSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TypingQuery = { __typename?: 'Query', typing: Array<{ __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null }> };
+export type TypingSubscription = { __typename?: 'Subscription', typing: Array<{ __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null }> };
 
 export type UpdateTypingStatusMutationVariables = Exact<{
   userId: Scalars['String'];
@@ -2565,7 +2569,7 @@ export type TopMeepersQueryHookResult = ReturnType<typeof useTopMeepersQuery>;
 export type TopMeepersLazyQueryHookResult = ReturnType<typeof useTopMeepersLazyQuery>;
 export type TopMeepersQueryResult = Apollo.QueryResult<TopMeepersQuery, TopMeepersQueryVariables>;
 export const TypingDocument = gql`
-    query typing {
+    subscription typing {
   typing {
     ...BaseUser
   }
@@ -2573,31 +2577,26 @@ export const TypingDocument = gql`
     ${BaseUserFragmentDoc}`;
 
 /**
- * __useTypingQuery__
+ * __useTypingSubscription__
  *
- * To run a query within a React component, call `useTypingQuery` and pass it any options that fit your needs.
- * When your component renders, `useTypingQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useTypingSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useTypingSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useTypingQuery({
+ * const { data, loading, error } = useTypingSubscription({
  *   variables: {
  *   },
  * });
  */
-export function useTypingQuery(baseOptions?: Apollo.QueryHookOptions<TypingQuery, TypingQueryVariables>) {
+export function useTypingSubscription(baseOptions?: Apollo.SubscriptionHookOptions<TypingSubscription, TypingSubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TypingQuery, TypingQueryVariables>(TypingDocument, options);
+        return Apollo.useSubscription<TypingSubscription, TypingSubscriptionVariables>(TypingDocument, options);
       }
-export function useTypingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TypingQuery, TypingQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TypingQuery, TypingQueryVariables>(TypingDocument, options);
-        }
-export type TypingQueryHookResult = ReturnType<typeof useTypingQuery>;
-export type TypingLazyQueryHookResult = ReturnType<typeof useTypingLazyQuery>;
-export type TypingQueryResult = Apollo.QueryResult<TypingQuery, TypingQueryVariables>;
+export type TypingSubscriptionHookResult = ReturnType<typeof useTypingSubscription>;
+export type TypingSubscriptionResult = Apollo.SubscriptionResult<TypingSubscription>;
 export const UpdateTypingStatusDocument = gql`
     mutation updateTypingStatus($userId: String!, $isTyping: Boolean!) {
   updateTypingStatus(userId: $userId, isTyping: $isTyping) {
