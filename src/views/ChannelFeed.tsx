@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
-import { useGetChannelByIdQuery, useTypingSubscription, useUpdateTypingStatusMutation } from "../generated/graphql";
+import {
+  useGetChannelByIdQuery,
+  useTypingSubscription,
+  useUpdateTypingStatusMutation,
+} from "../generated/graphql";
 import { useParams } from "react-router-dom";
 import { useChannelData } from "../hooks/useChannelData";
 import { Box, debounce } from "@mui/material";
@@ -22,9 +26,18 @@ export const ChannelFeed: React.FC = () => {
 
   const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
   const { data: typingdata } = useTypingSubscription();
+  let typingTimeout: any;
   const handleTyping = () => {
     const userId = user?.id;
-    userId && updateTypingStatusMutation({ variables: { userId, isTyping: true } });
+    if (userId) {
+      clearTimeout(typingTimeout);
+      updateTypingStatusMutation({ variables: { userId, isTyping: true } });
+
+      // User stopped typing
+      typingTimeout = setTimeout(() => {
+        updateTypingStatusMutation({ variables: { userId, isTyping: false } });
+      }, 5000);
+    }
   };
   const debouncedTypingHandler = debounce(handleTyping, 500);
 
