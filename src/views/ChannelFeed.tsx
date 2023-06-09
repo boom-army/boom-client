@@ -4,10 +4,12 @@ import { NewMessage } from "../components/Message/NewMessage";
 import { atom } from "recoil";
 import { useGetChannelByIdQuery } from "../generated/graphql";
 import { useParams } from "react-router-dom";
+import { useChannelData } from "../hooks/useChannelData";
 
 export const ChannelFeed: React.FC = () => {
   const { channelId } = useParams();
   const scrollRef = useRef<HTMLDivElement>();
+  useChannelData();
   const parentTweetState = atom({
     key: "parentTweetState",
     default: "",
