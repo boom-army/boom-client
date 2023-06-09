@@ -25,7 +25,7 @@ export const Feed: React.FC = () => {
     },
   });
 
-  useEffect(() => {
+  useEffect(() => {    
     if (data?.feed[0]?.createdAt) {
       const feedData = data?.feed[0].masterTweets?.length
         ? data?.feed[0].masterTweets

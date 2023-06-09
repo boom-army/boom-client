@@ -15,10 +15,14 @@ export const sortFn = (a: any, b: any) => {
 };
 
 export const setDate = (date: any) => {
-  date = new Date(date / 1000);
+  const seconds = date / 1000;
+  const fractionalPart = seconds % 1;
+  const precision = fractionalPart.toString().split('.')[1]?.length || 0;
+  
   const newDate = new Date(0);
-  newDate.setUTCSeconds(date);
-  return newDate;
+  newDate.setUTCSeconds(seconds);
+  
+  return precision <= 3 ? newDate : newDate.getTime();
 };
 
 export const uploadFile = async (
