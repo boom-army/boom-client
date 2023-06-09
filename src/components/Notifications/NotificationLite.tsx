@@ -34,7 +34,6 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
         id: mentionUserId,
       },
       onCompleted: ({ profileById }) => {
-        console.log("profileById", profileById);
         setFromUser(profileById as User);
       },
     });

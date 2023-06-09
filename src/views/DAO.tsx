@@ -58,7 +58,6 @@ export const DAOView: React.FC = () => {
 
         const formatChannelData =
           nftData?.map(async (data, i) => {
-            console.log(data);
             try {
               const meta: any = await fetch(data.uri).then((response) =>
                 response.json()
