@@ -1,9 +1,17 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  createHttpLink,
+  split,
+  InMemoryCache,
+} from "@apollo/client";
+import { getMainDefinition } from "@apollo/client/utilities";
+import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
+import { createClient } from "graphql-ws";
 import { setContext } from "@apollo/client/link/context";
 import { offsetLimitPagination } from "@apollo/client/utilities";
 
 const httpLink = createHttpLink({
-  uri: import.meta.env.VITE_APOLLO_API || "http://locahost:7777",
+  uri: import.meta.env.VITE_APOLLO_API || "http://locahost:7777/gql",
   credentials: "include",
 });
 
@@ -17,9 +25,25 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-// Create an instance of InMemoryCache with possibleTypes configuration
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: import.meta.env.VITE_APOLLO_WS_API || "ws://localhost:7777/subscriptions",
+  })
+);
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
+  },
+  wsLink,
+  authLink.concat(httpLink)
+);
+
 const cache = new InMemoryCache({
-  // https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function
   typePolicies: {
     Tweet: {
       keyFields: ["id"],
@@ -58,8 +82,8 @@ const cache = new InMemoryCache({
 });
 
 export const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache, // Use the configured InMemoryCache instance
+  link: authLink.concat(splitLink),
+  cache,
   defaultOptions: {
     watchQuery: {
       context: async ({ req }: any) => {

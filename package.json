@@ -69,6 +69,7 @@
     "emoji-mart": "^3.0.1",
     "eventemitter3": "^4.0.7",
     "graphql": "^16.6.0",
+    "graphql-ws": "^5.13.1",
     "jazzicon": "^1.5.0",
     "linkify-plugin-hashtag": "^4.1.1",
     "linkify-plugin-mention": "^4.1.1",

@@ -8,10 +8,11 @@ import {
 } from "../generated/graphql";
 import { useParams } from "react-router-dom";
 import { useChannelData } from "../hooks/useChannelData";
-import { Box, debounce } from "@mui/material";
+import { Box, Stack, Typography, debounce, useTheme } from "@mui/material";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { userOwnsNFT } from "../utils/nfts";
 import { UserContext } from "../contexts/user";
+import { TypingDots } from "../components/TypingDots";
 
 export const ChannelFeed: React.FC = () => {
   const BOOM_CHANNEL_ID = "cl20tx15a3168501mk7k79w0qs";
@@ -22,6 +23,7 @@ export const ChannelFeed: React.FC = () => {
   const { connection } = useConnection();
   const scrollRef = useRef<HTMLDivElement>();
   const { user } = useContext(UserContext);
+  const theme = useTheme();
   useChannelData();
 
   const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
@@ -34,9 +36,9 @@ export const ChannelFeed: React.FC = () => {
       updateTypingStatusMutation({ variables: { userId, isTyping: true } });
 
       // User stopped typing
-      typingTimeout = setTimeout(() => {
-        updateTypingStatusMutation({ variables: { userId, isTyping: false } });
-      }, 5000);
+      // typingTimeout = setTimeout(() => {
+      //   updateTypingStatusMutation({ variables: { userId, isTyping: false } });
+      // }, 5000);
     }
   };
   const debouncedTypingHandler = debounce(handleTyping, 500);
@@ -86,13 +88,23 @@ export const ChannelFeed: React.FC = () => {
         fetchMore={fetchMore}
         scrollRef={scrollRef}
       />
-      {typingdata?.typing && (
-        <Box>
+      {typingdata?.typing.length ? (
+        <Stack
+          p={1}
+          sx={{ backgroundColor: theme.blue.darkest }}
+          direction="row"
+          spacing={0.5}
+        >
           {typingdata?.typing.map((user) => (
-            <span key={user.id}>{user.handle} is typing...</span>
+            <Typography key={user.id} display="inline" variant="body2">
+              @{user.handle}
+            </Typography>
           ))}
-        </Box>
-      )}
+          <Typography display="inline" variant="body2">
+            is typing <TypingDots />
+          </Typography>
+        </Stack>
+      ) : null}
       <NewMessage
         channel={channelId}
         scrollRef={scrollRef}
