@@ -5,11 +5,11 @@ import { HerofiedIcon } from "../Icons";
 import { Link } from "react-router-dom";
 import { Mention, useProfileByIdQuery, User } from "../../generated/graphql";
 import { UserAvatar } from "../UserAvatar";
-import { useContext, useEffect, useState } from "react";
-import moment from "moment";
+import { useEffect, useState } from "react";
 import { setDate } from "../../utils";
 import { ShowTweet } from "../Tweet";
 import { RoutePath } from "../../constants";
+import dayjs from "dayjs";
 
 interface NotificationProps {
   mention: Mention;
@@ -108,7 +108,7 @@ export const Notification = ({ mention }: NotificationProps) => {
             </Typography>
           )}
           <Typography variant="body2" color="secondary" pl={0.5}>
-            {moment(setDate(mention.createdAt)).fromNow()}
+            {dayjs(setDate(mention.createdAt)).fromNow()}
           </Typography>
         </Box>
       )}

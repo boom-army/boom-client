@@ -1,9 +1,8 @@
 import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
 import Linkify from "linkify-react";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ReplyIcon from "@mui/icons-material/Reply";
-import moment from "moment";
 import {
   Box,
   Grid,
@@ -26,11 +25,12 @@ import { TipCreator } from "../TipCreator";
 import { Tweet } from "../../generated/graphql";
 import { UserAvatar } from "../UserAvatar";
 import { VideoContainer } from "../Giphy/VideoContainer";
-import { setDate } from "../../utils";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
 import { RoutePath } from "../../constants";
 import { ReplyBox } from "./ReplyBox";
+import dayjs from "dayjs";
+import { setDate } from "../../utils";
 
 const IconsBox = styled(Box)(({ theme }) => ({
   "& svg": {
@@ -75,7 +75,7 @@ export const ShowMessage: React.FC<Props> = ({
     tipsCount,
     createdAt,
   } = tweet;
-
+  
   const theme = useTheme();
   const { handleReaction } = useReaction({ tweetId: id });
   const setParentTweetState = useSetRecoilState(parentTweetState);
@@ -239,7 +239,7 @@ export const ShowMessage: React.FC<Props> = ({
               </Link>
             </Box>
             <Typography color="secondary">
-              {moment(setDate(createdAt)).fromNow()}
+              {dayjs(setDate(createdAt)).fromNow()}
             </Typography>
           </Stack>
           <Box mb={0.5} pr={2}>

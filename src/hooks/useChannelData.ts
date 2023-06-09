@@ -123,5 +123,7 @@ export const useChannelData = () => {
 
   return {
     channelData: { ...data },
+    channelLoading: loading,
+    channelError: error,
   };
 };

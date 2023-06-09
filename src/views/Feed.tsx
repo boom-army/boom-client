@@ -38,7 +38,7 @@ export const Feed: React.FC = () => {
       const mostRecentTimestamp = Math.max(0, ...timestamps);
       if (mostRecentTimestamp !== 0) {
         setLastMeepDate(
-          dayjs(mostRecentTimestamp).add(1, "second").toISOString()
+          dayjs(setDate(mostRecentTimestamp)).add(1, "second").toISOString()
         );
       }
     }
