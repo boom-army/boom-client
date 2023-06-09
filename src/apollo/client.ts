@@ -27,7 +27,7 @@ const authLink = setContext((_, { headers }) => {
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: import.meta.env.VITE_APOLLO_WS_API || "ws://localhost:7777/subscriptions",
+    url: import.meta.env.VITE_APOLLO_WS_API || "ws://localhost:7777/sub",
   })
 );
 
