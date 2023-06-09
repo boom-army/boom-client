@@ -30,6 +30,7 @@ import { useReaction } from "../../hooks/useReaction";
 import { RoutePath } from "../../constants";
 import dayjs from "dayjs";
 import { setDate } from "../../utils";
+import { parentMeepState } from "../../hooks/useParentMeepState";
 
 const IconsBox = styled(Box)(({ theme }) => ({
   "& svg": {
@@ -46,7 +47,6 @@ const IconsBox = styled(Box)(({ theme }) => ({
 
 interface Props {
   tweet: Tweet;
-  parentMeepState: RecoilState<string>;
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
 
@@ -128,7 +128,6 @@ const MessageBox: React.FC<MessageBoxProps> = ({ children, isTweetMine }) => {
 
 export const ShowMessage: React.FC<Props> = ({
   tweet,
-  parentMeepState,
   scrollRef,
 }: Props) => {
   const {

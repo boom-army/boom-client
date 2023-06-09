@@ -2,7 +2,10 @@ import React from "react";
 import { ApolloError } from "@apollo/client";
 import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
-import { GetChannelByIdQuery, Tweet } from "../generated/graphql";
+import {
+  GetChannelByIdQuery,
+  Tweet,
+} from "../generated/graphql";
 import { Grid } from "@mui/material";
 import { Loader } from "./Loader";
 import { RecoilState } from "recoil";
@@ -14,7 +17,6 @@ interface Props {
   loading: boolean;
   error: ApolloError | undefined;
   data: GetChannelByIdQuery["getChannelById"] | undefined;
-  parentMeepState: RecoilState<string>;
   fetchMore: (props: any) => void;
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
 }
@@ -23,7 +25,6 @@ export const MeepFeed: React.FC<Props> = ({
   loading,
   error,
   data,
-  parentMeepState,
   fetchMore,
   scrollRef,
 }) => {
@@ -77,7 +78,6 @@ export const MeepFeed: React.FC<Props> = ({
             <ShowMessage
               key={tweet.id}
               tweet={tweet as Tweet}
-              parentMeepState={parentMeepState}
               scrollRef={scrollRef}
             />
           ))

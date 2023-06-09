@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import { ChannelStatus } from "../constants";
 import { CustomResponse } from "../components/CustomResponse";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
 
-import { atom } from "recoil";
 import {
   useAddChannelMutation,
   useGetChannelByIdQuery,
@@ -17,10 +16,6 @@ export const ChannelAuction: React.FC = () => {
   const anchorWallet = useAnchorWallet();
   const theme = useTheme();
   const scrollRef = useRef<HTMLDivElement>();
-  const parentMeepState = atom({
-    key: "parentMeepState",
-    default: "",
-  });
 
   const [addChannelMutation] = useAddChannelMutation();
   const { loading, error, data, fetchMore, refetch } = useGetChannelByIdQuery({
@@ -72,7 +67,6 @@ export const ChannelAuction: React.FC = () => {
         error={error}
         data={data?.getChannelById}
         fetchMore={fetchMore}
-        parentMeepState={parentMeepState}
         scrollRef={scrollRef}
       />
       {!anchorWallet?.publicKey && (
@@ -87,10 +81,9 @@ export const ChannelAuction: React.FC = () => {
       )}
       {anchorWallet?.publicKey && (
         <NewMessage
-          feed={data?.getChannelById}
           channel={channelId}
-          parentMeepState={parentMeepState}
           scrollRef={scrollRef}
+          typingHandler={() => {}}
         />
       )}
     </>

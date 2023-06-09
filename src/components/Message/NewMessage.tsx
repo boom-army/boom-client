@@ -24,7 +24,7 @@ import { GifyModal } from "../Giphy/GifyModal";
 import { ImageBox } from "../ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
-import { RecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
 
 import { UploadFileIcon } from "../Icons";
@@ -32,17 +32,17 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { client } from "../../apollo/client";
 import { displayError, uploadFile } from "../../utils";
 import { styled } from "@mui/material/styles";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useInput } from "../../hooks/useInput";
 import { useMutation, gql } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { UserAvatar } from "../UserAvatar";
+import { parentMeepState } from "../../hooks/useParentMeepState";
 
 interface Props {
-  feed?: any;
   channel?: string | undefined;
-  parentMeepState: RecoilState<string>;
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
+  typingHandler: () => void;
 }
 
 const IconsGrid = styled(Grid)(({ theme }) => ({
@@ -65,10 +65,9 @@ const ImageInput = styled("input")({
 });
 
 export const NewMessage: React.FC<Props> = ({
-  feed,
   channel,
-  parentMeepState,
   scrollRef,
+  typingHandler,
 }) => {
   const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
@@ -248,7 +247,10 @@ export const NewMessage: React.FC<Props> = ({
             />
             <Input
               value={tweet.value}
-              onChange={tweet.onChange}
+              onChange={(e) => {
+                typingHandler();
+                return tweet.onChange(e);
+              }}
               placeholder={`Meep in # ${channelData?.family} ${channelData?.name}`}
               fullWidth={true}
               autoFocus={true}
