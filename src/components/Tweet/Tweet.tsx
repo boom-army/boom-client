@@ -3,7 +3,6 @@ import "linkify-plugin-mention";
 import * as linkify from "linkifyjs";
 import Linkify from "linkify-react";
 import React from "react";
-import moment from "moment";
 import { Box, Grid, Stack, Typography, useTheme } from "@mui/material";
 import { CommentIcon, HerofiedIcon } from "../Icons";
 import { EmojiTweet, Retweet } from "./index";
@@ -25,6 +24,7 @@ import { HARKL_ID } from "../../utils/utils";
 import { PopUpResponse } from "./PopUpResponse";
 import { RoutePath } from "../../constants";
 import { truncate } from "lodash";
+import dayjs from "dayjs";
 
 interface Props {
   tweet: TweetQuery["tweet"];
@@ -158,7 +158,7 @@ export const ShowTweet: React.FC<Props> = ({
             sx={{ color: theme.palette.secondary.main }}
           >
             {" "}
-            {moment(setDate(createdAt)).fromNow()}
+            {dayjs(setDate(createdAt)).fromNow()}
           </Typography>
         </Link>
         <Linkify options={linkifyOptions}>

@@ -4,10 +4,10 @@ import { NewMessage } from "../components/Message/NewMessage";
 import { atom } from "recoil";
 import { useGetChannelByIdQuery } from "../generated/graphql";
 import { useParams } from "react-router-dom";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { userOwnsNFT } from "../utils/nfts";
+import { useChannelData } from "../hooks/useChannelData";
 import { Box } from "@mui/material";
-import { headerOffset } from "../utils/boom-web3/constants";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { userOwnsNFT } from "../utils/nfts";
 
 export const ChannelFeed: React.FC = () => {
   const BOOM_CHANNEL_ID = "cl20tx15a3168501mk7k79w0qs";
@@ -17,6 +17,7 @@ export const ChannelFeed: React.FC = () => {
   const { publicKey } = useWallet();
   const { connection } = useConnection();
   const scrollRef = useRef<HTMLDivElement>();
+  useChannelData();
   const parentMeepState = atom({
     key: "parentMeepState",
     default: "",

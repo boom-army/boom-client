@@ -1,7 +1,7 @@
 import "linkify-plugin-hashtag";
 import "linkify-plugin-mention";
 import Linkify from "linkify-react";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ReplyIcon from "@mui/icons-material/Reply";
 import {
   Box,
@@ -152,7 +152,7 @@ export const ShowMessage: React.FC<Props> = ({
     tipsCount,
     createdAt,
   } = tweet;
-
+  
   const theme = useTheme();
   const { handleReaction } = useReaction({ tweetId: id });
   const setParentMeepState = useSetRecoilState(parentMeepState);
