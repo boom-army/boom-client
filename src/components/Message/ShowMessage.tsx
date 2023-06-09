@@ -14,7 +14,6 @@ import {
   useTheme,
 } from "@mui/material";
 import { EmojiTweet } from "../Tweet/index";
-import { HashLink } from "react-router-hash-link";
 import { ImageBox } from "../ImageBox";
 import { LAMPORTS_PER_SOL } from "../../constants/math";
 import { Link } from "react-router-dom";
@@ -29,7 +28,6 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { styled } from "@mui/material/styles";
 import { useReaction } from "../../hooks/useReaction";
 import { RoutePath } from "../../constants";
-import { ReplyBox } from "./ReplyBox";
 import dayjs from "dayjs";
 import { setDate } from "../../utils";
 
@@ -44,10 +42,6 @@ const IconsBox = styled(Box)(({ theme }) => ({
   "& :hover svg path": {
     fill: theme.accentColor,
   },
-}));
-
-const MeepBody = styled(Typography)(({ theme }) => ({
-  a: { color: theme.accentColor },
 }));
 
 interface Props {
