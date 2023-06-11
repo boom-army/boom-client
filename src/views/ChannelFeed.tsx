@@ -27,7 +27,14 @@ export const ChannelFeed: React.FC = () => {
   useChannelData();
 
   const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
-  const { data: typingdata } = useTypingSubscription();
+  const { data: typingdata } = useTypingSubscription({
+    onData: ({ data }) => {
+      console.log("data", data);
+    },
+    onError: (error) => {
+      console.log("error", error);
+    },
+  });
   let typingTimeout: any;
   const handleTyping = () => {
     const userId = user?.id;
@@ -36,9 +43,9 @@ export const ChannelFeed: React.FC = () => {
       updateTypingStatusMutation({ variables: { userId, isTyping: true } });
 
       // User stopped typing
-      // typingTimeout = setTimeout(() => {
-      //   updateTypingStatusMutation({ variables: { userId, isTyping: false } });
-      // }, 5000);
+      typingTimeout = setTimeout(() => {
+        updateTypingStatusMutation({ variables: { userId, isTyping: false } });
+      }, 10000);
     }
   };
   const debouncedTypingHandler = debounce(handleTyping, 500);
@@ -68,7 +75,7 @@ export const ChannelFeed: React.FC = () => {
       limit: 10,
     },
     fetchPolicy: "network-only",
-    pollInterval: 10000,
+    pollInterval: 1000,
   });
 
   useEffect(() => {
