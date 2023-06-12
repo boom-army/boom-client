@@ -100,23 +100,30 @@ export const ChannelFeed: React.FC = () => {
         fetchMore={fetchMore}
         scrollRef={scrollRef}
       />
-      {typingdata?.typing && typingdata?.typing.length ? (
-        <Stack
-          p={1}
-          sx={{ backgroundColor: theme.blue.darkest }}
-          direction="row"
-          spacing={0.5}
-        >
-          <Typography display="inline" variant="body2">
-            {formatUserHandles(typingdata.typing)} is typing <TypingDots />
-          </Typography>
-        </Stack>
-      ) : null}
-      <NewMessage
-        channel={channelId}
-        scrollRef={scrollRef}
-        typingHandler={debouncedTypingHandler}
-      />
+      <Box sx={{ position: "relative" }}>
+        {typingdata?.typing && typingdata?.typing.length ? (
+          <Stack
+            p={1}
+            sx={{
+              backgroundColor: theme.blue.darkest,
+              position: "absolute",
+              top: -36,
+              width: "100%",
+            }}
+            direction="row"
+            spacing={0.5}
+          >
+            <Typography display="inline" variant="body2">
+              {formatUserHandles(typingdata.typing)} is typing <TypingDots />
+            </Typography>
+          </Stack>
+        ) : null}
+        <NewMessage
+          channel={channelId}
+          scrollRef={scrollRef}
+          typingHandler={debouncedTypingHandler}
+        />
+      </Box>
     </Box>
   );
 };
