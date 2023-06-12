@@ -411,7 +411,6 @@ export type MutationUpdateTweetArgs = {
 export type MutationUpdateTypingStatusArgs = {
   channelId: Scalars['String'];
   isTyping: Scalars['Boolean'];
-  userId: Scalars['String'];
 };
 
 export type Nft = {
@@ -2619,7 +2618,7 @@ export type TypingSubscriptionHookResult = ReturnType<typeof useTypingSubscripti
 export type TypingSubscriptionResult = Apollo.SubscriptionResult<TypingSubscription>;
 export const UpdateTypingStatusDocument = gql`
     mutation updateTypingStatus($userId: String!, $channelId: String!, $isTyping: Boolean!) {
-  updateTypingStatus(userId: $userId, channelId: $channelId, isTyping: $isTyping) {
+  updateTypingStatus(channelId: $channelId, isTyping: $isTyping) {
     user {
       ...BaseUser
     }

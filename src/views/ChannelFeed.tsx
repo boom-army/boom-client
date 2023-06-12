@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef } from "react";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
 import {
+  TypingSubscription,
   useGetChannelByIdQuery,
   useTypingSubscription,
   useUpdateTypingStatusMutation,
@@ -13,6 +14,16 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { userOwnsNFT } from "../utils/nfts";
 import { UserContext } from "../contexts/user";
 import { TypingDots } from "../components/TypingDots";
+
+function formatUserHandles(users: TypingSubscription["typing"]) {
+  if (users?.length === 1) {
+    return "@" + users[0].user?.handle;
+  } else {
+    const handles = users?.map((user) => "@" + user.user?.handle);
+    const lastHandle = handles?.pop();
+    return handles?.join(", ") + " and " + lastHandle;
+  }
+}
 
 export const ChannelFeed: React.FC = () => {
   const BOOM_CHANNEL_ID = "cl20tx15a3168501mk7k79w0qs";
@@ -107,13 +118,8 @@ export const ChannelFeed: React.FC = () => {
           direction="row"
           spacing={0.5}
         >
-          {typingdata?.typing.map(({ user }) => (
-            <Typography key={user?.id} display="inline" variant="body2">
-              @{user?.handle}
-            </Typography>
-          ))}
           <Typography display="inline" variant="body2">
-            is typing <TypingDots />
+            {formatUserHandles(typingdata.typing)} is typing <TypingDots />
           </Typography>
         </Stack>
       ) : null}

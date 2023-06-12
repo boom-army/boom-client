@@ -23,11 +23,7 @@ mutation updateTypingStatus(
   $channelId: String!
   $isTyping: Boolean!
 ) {
-  updateTypingStatus(
-    userId: $userId
-    channelId: $channelId
-    isTyping: $isTyping
-  ) {
+  updateTypingStatus(channelId: $channelId, isTyping: $isTyping) {
     user {
       ...BaseUser
     }
