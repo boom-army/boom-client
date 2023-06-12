@@ -28,6 +28,7 @@ export const ChannelFeed: React.FC = () => {
 
   const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
   const { data: typingdata } = useTypingSubscription({
+    variables: { channelId: BOOM_CHANNEL_ID },
     onData: ({ data }) => {
       console.log("data", data);
     },
@@ -40,11 +41,15 @@ export const ChannelFeed: React.FC = () => {
     const userId = user?.id;
     if (userId) {
       clearTimeout(typingTimeout);
-      updateTypingStatusMutation({ variables: { userId, isTyping: true } });
+      updateTypingStatusMutation({
+        variables: { userId, channelId: BOOM_CHANNEL_ID, isTyping: true },
+      });
 
       // User stopped typing
       typingTimeout = setTimeout(() => {
-        updateTypingStatusMutation({ variables: { userId, isTyping: false } });
+        updateTypingStatusMutation({
+          variables: { userId, channelId: BOOM_CHANNEL_ID, isTyping: false },
+        });
       }, 10000);
     }
   };
@@ -95,16 +100,16 @@ export const ChannelFeed: React.FC = () => {
         fetchMore={fetchMore}
         scrollRef={scrollRef}
       />
-      {typingdata?.typing.length ? (
+      {typingdata?.typing && typingdata?.typing.length ? (
         <Stack
           p={1}
           sx={{ backgroundColor: theme.blue.darkest }}
           direction="row"
           spacing={0.5}
         >
-          {typingdata?.typing.map((user) => (
-            <Typography key={user.id} display="inline" variant="body2">
-              @{user.handle}
+          {typingdata?.typing.map(({ user }) => (
+            <Typography key={user?.id} display="inline" variant="body2">
+              @{user?.handle}
             </Typography>
           ))}
           <Typography display="inline" variant="body2">

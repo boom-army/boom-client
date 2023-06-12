@@ -59,6 +59,14 @@ export type ChannelInput = {
   verified?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type ChannelUser = {
+  __typename?: 'ChannelUser';
+  channelId?: Maybe<Scalars['String']>;
+  isTyping?: Maybe<Scalars['Boolean']>;
+  user?: Maybe<User>;
+  userId?: Maybe<Scalars['String']>;
+};
+
 export type Collection = {
   __typename?: 'Collection';
   family?: Maybe<Scalars['String']>;
@@ -296,7 +304,7 @@ export type Mutation = {
   unfollow: Scalars['Boolean'];
   unlinkChannel: Scalars['Boolean'];
   updateTweet?: Maybe<Tweet>;
-  updateTypingStatus: User;
+  updateTypingStatus?: Maybe<Array<ChannelUser>>;
 };
 
 
@@ -401,6 +409,7 @@ export type MutationUpdateTweetArgs = {
 
 
 export type MutationUpdateTypingStatusArgs = {
+  channelId: Scalars['String'];
   isTyping: Scalars['Boolean'];
   userId: Scalars['String'];
 };
@@ -641,7 +650,12 @@ export type Retweet = {
 
 export type Subscription = {
   __typename?: 'Subscription';
-  typing: Array<User>;
+  typing?: Maybe<Array<ChannelUser>>;
+};
+
+
+export type SubscriptionTypingArgs = {
+  channelId: Scalars['String'];
 };
 
 export type Tag = {
@@ -1037,18 +1051,21 @@ export type TopMeepersQueryVariables = Exact<{
 
 export type TopMeepersQuery = { __typename?: 'Query', topMeepers: { __typename?: 'Meepers', dateFrom?: string | null, meepers?: Array<{ __typename?: 'UserWithMeepCount', meepCount?: number | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null> | null } };
 
-export type TypingSubscriptionVariables = Exact<{ [key: string]: never; }>;
+export type TypingSubscriptionVariables = Exact<{
+  channelId: Scalars['String'];
+}>;
 
 
-export type TypingSubscription = { __typename?: 'Subscription', typing: Array<{ __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null }> };
+export type TypingSubscription = { __typename?: 'Subscription', typing?: Array<{ __typename?: 'ChannelUser', user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null }> | null };
 
 export type UpdateTypingStatusMutationVariables = Exact<{
   userId: Scalars['String'];
+  channelId: Scalars['String'];
   isTyping: Scalars['Boolean'];
 }>;
 
 
-export type UpdateTypingStatusMutation = { __typename?: 'Mutation', updateTypingStatus: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } };
+export type UpdateTypingStatusMutation = { __typename?: 'Mutation', updateTypingStatus?: Array<{ __typename?: 'ChannelUser', user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null }> | null };
 
 export const BaseUserFragmentDoc = gql`
     fragment BaseUser on User {
@@ -2569,9 +2586,11 @@ export type TopMeepersQueryHookResult = ReturnType<typeof useTopMeepersQuery>;
 export type TopMeepersLazyQueryHookResult = ReturnType<typeof useTopMeepersLazyQuery>;
 export type TopMeepersQueryResult = Apollo.QueryResult<TopMeepersQuery, TopMeepersQueryVariables>;
 export const TypingDocument = gql`
-    subscription typing {
-  typing {
-    ...BaseUser
+    subscription typing($channelId: String!) {
+  typing(channelId: $channelId) {
+    user {
+      ...BaseUser
+    }
   }
 }
     ${BaseUserFragmentDoc}`;
@@ -2588,19 +2607,22 @@ export const TypingDocument = gql`
  * @example
  * const { data, loading, error } = useTypingSubscription({
  *   variables: {
+ *      channelId: // value for 'channelId'
  *   },
  * });
  */
-export function useTypingSubscription(baseOptions?: Apollo.SubscriptionHookOptions<TypingSubscription, TypingSubscriptionVariables>) {
+export function useTypingSubscription(baseOptions: Apollo.SubscriptionHookOptions<TypingSubscription, TypingSubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<TypingSubscription, TypingSubscriptionVariables>(TypingDocument, options);
       }
 export type TypingSubscriptionHookResult = ReturnType<typeof useTypingSubscription>;
 export type TypingSubscriptionResult = Apollo.SubscriptionResult<TypingSubscription>;
 export const UpdateTypingStatusDocument = gql`
-    mutation updateTypingStatus($userId: String!, $isTyping: Boolean!) {
-  updateTypingStatus(userId: $userId, isTyping: $isTyping) {
-    ...BaseUser
+    mutation updateTypingStatus($userId: String!, $channelId: String!, $isTyping: Boolean!) {
+  updateTypingStatus(userId: $userId, channelId: $channelId, isTyping: $isTyping) {
+    user {
+      ...BaseUser
+    }
   }
 }
     ${BaseUserFragmentDoc}`;
@@ -2620,6 +2642,7 @@ export type UpdateTypingStatusMutationFn = Apollo.MutationFunction<UpdateTypingS
  * const [updateTypingStatusMutation, { data, loading, error }] = useUpdateTypingStatusMutation({
  *   variables: {
  *      userId: // value for 'userId'
+ *      channelId: // value for 'channelId'
  *      isTyping: // value for 'isTyping'
  *   },
  * });

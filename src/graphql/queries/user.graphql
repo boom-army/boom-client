@@ -10,14 +10,26 @@ query topMeepers($dateFrom: String, $limit: Int) {
   }
 }
 
-subscription typing {
-  typing {
-    ...BaseUser
+subscription typing($channelId: String!) {
+  typing(channelId: $channelId) {
+    user {
+      ...BaseUser
+    }
   }
 }
 
-mutation updateTypingStatus($userId: String!, $isTyping: Boolean!) {
-  updateTypingStatus(userId: $userId, isTyping: $isTyping) {
-    ...BaseUser
+mutation updateTypingStatus(
+  $userId: String!
+  $channelId: String!
+  $isTyping: Boolean!
+) {
+  updateTypingStatus(
+    userId: $userId
+    channelId: $channelId
+    isTyping: $isTyping
+  ) {
+    user {
+      ...BaseUser
+    }
   }
 }
