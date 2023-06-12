@@ -40,12 +40,6 @@ export const ChannelFeed: React.FC = () => {
   const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
   const { data: typingdata } = useTypingSubscription({
     variables: { channelId: BOOM_CHANNEL_ID },
-    onData: ({ data }) => {
-      console.log("data", data);
-    },
-    onError: (error) => {
-      console.log("error", error);
-    },
   });
   let typingTimeout: any;
   const handleTyping = () => {
@@ -65,10 +59,6 @@ export const ChannelFeed: React.FC = () => {
     }
   };
   const debouncedTypingHandler = debounce(handleTyping, 500);
-
-  useEffect(() => {
-    console.log("typingdata", typingdata);
-  }, [typingdata]);
 
   useEffect(() => {
     (async () => {
