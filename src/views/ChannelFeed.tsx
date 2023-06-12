@@ -53,13 +53,13 @@ export const ChannelFeed: React.FC = () => {
     if (userId) {
       clearTimeout(typingTimeout);
       updateTypingStatusMutation({
-        variables: { userId, channelId: BOOM_CHANNEL_ID, isTyping: true },
+        variables: { channelId: BOOM_CHANNEL_ID, isTyping: true },
       });
 
       // User stopped typing
       typingTimeout = setTimeout(() => {
         updateTypingStatusMutation({
-          variables: { userId, channelId: BOOM_CHANNEL_ID, isTyping: false },
+          variables: { channelId: BOOM_CHANNEL_ID, isTyping: false },
         });
       }, 10000);
     }
@@ -91,7 +91,7 @@ export const ChannelFeed: React.FC = () => {
       limit: 10,
     },
     fetchPolicy: "network-only",
-    pollInterval: 1000,
+    pollInterval: 10000,
   });
 
   useEffect(() => {
