@@ -18,6 +18,7 @@ import {
   TweetDocument,
   useMeQuery,
   useNewTweetMutation,
+  useUpdateTypingStatusMutation,
 } from "../../generated/graphql";
 import { EmojiPicker } from "../Emojis/EmojiPicker";
 import { GifyModal } from "../Giphy/GifyModal";
@@ -38,6 +39,7 @@ import { useMutation, gql } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { UserAvatar } from "../UserAvatar";
 import { parentMeepState } from "../../hooks/useParentMeepState";
+import { BOOM_CHANNEL_ID } from "../../utils/ids";
 
 interface Props {
   channel?: string | undefined;
@@ -100,6 +102,7 @@ export const NewMessage: React.FC<Props> = ({
       }
     `,
   });
+  const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
   const parentTweetData =
     parentTweet &&
     client.readFragment({
@@ -151,6 +154,10 @@ export const NewMessage: React.FC<Props> = ({
     } catch (err) {
       console.log(err);
       return displayError(err, enqueueSnackbar);
+    } finally {
+      updateTypingStatusMutation({
+        variables: { channelId: BOOM_CHANNEL_ID, isTyping: false },
+      });
     }
 
     tweet.setValue("");

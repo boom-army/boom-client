@@ -14,6 +14,7 @@ import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { userOwnsNFT } from "../utils/nfts";
 import { UserContext } from "../contexts/user";
 import { TypingDots } from "../components/TypingDots";
+import { BOOM_CHANNEL_ID, BOOM_COLLECTION_MINT_PUBLIC_KEY } from "../utils/ids";
 
 function formatUserHandles(users: TypingSubscription["typing"]) {
   if (users?.length === 1) {
@@ -26,9 +27,6 @@ function formatUserHandles(users: TypingSubscription["typing"]) {
 }
 
 export const ChannelFeed: React.FC = () => {
-  const BOOM_CHANNEL_ID = "cl20tx15a3168501mk7k79w0qs";
-  const BOOM_COLLECTION_MINT_PUBLIC_KEY =
-    "EJqr8VRC3rJaEVDDkcbG9G122ixW1GQ4f6y6vMwaGoco";
   const { channelId } = useParams();
   const { publicKey } = useWallet();
   const { connection } = useConnection();
@@ -60,6 +58,7 @@ export const ChannelFeed: React.FC = () => {
   };
   const debouncedTypingHandler = debounce(handleTyping, 500);
 
+  // TODO: Remove this
   useEffect(() => {
     (async () => {
       if (publicKey)
