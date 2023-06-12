@@ -1058,7 +1058,6 @@ export type TypingSubscriptionVariables = Exact<{
 export type TypingSubscription = { __typename?: 'Subscription', typing?: Array<{ __typename?: 'ChannelUser', user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null }> | null };
 
 export type UpdateTypingStatusMutationVariables = Exact<{
-  userId: Scalars['String'];
   channelId: Scalars['String'];
   isTyping: Scalars['Boolean'];
 }>;
@@ -2617,7 +2616,7 @@ export function useTypingSubscription(baseOptions: Apollo.SubscriptionHookOption
 export type TypingSubscriptionHookResult = ReturnType<typeof useTypingSubscription>;
 export type TypingSubscriptionResult = Apollo.SubscriptionResult<TypingSubscription>;
 export const UpdateTypingStatusDocument = gql`
-    mutation updateTypingStatus($userId: String!, $channelId: String!, $isTyping: Boolean!) {
+    mutation updateTypingStatus($channelId: String!, $isTyping: Boolean!) {
   updateTypingStatus(channelId: $channelId, isTyping: $isTyping) {
     user {
       ...BaseUser
@@ -2640,7 +2639,6 @@ export type UpdateTypingStatusMutationFn = Apollo.MutationFunction<UpdateTypingS
  * @example
  * const [updateTypingStatusMutation, { data, loading, error }] = useUpdateTypingStatusMutation({
  *   variables: {
- *      userId: // value for 'userId'
  *      channelId: // value for 'channelId'
  *      isTyping: // value for 'isTyping'
  *   },

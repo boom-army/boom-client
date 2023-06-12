@@ -19,7 +19,6 @@ subscription typing($channelId: String!) {
 }
 
 mutation updateTypingStatus(
-  $userId: String!
   $channelId: String!
   $isTyping: Boolean!
 ) {
