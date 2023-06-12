@@ -17,9 +17,9 @@ import { TypingDots } from "../components/TypingDots";
 
 function formatUserHandles(users: TypingSubscription["typing"]) {
   if (users?.length === 1) {
-    return "@" + users[0].user?.handle;
+    return `@${users[0].user?.handle}`;
   } else {
-    const handles = users?.map((user) => "@" + user.user?.handle);
+    const handles = users?.map((user) => `@${user.user?.handle}`);
     const lastHandle = handles?.pop();
     return handles?.join(", ") + " and " + lastHandle;
   }
