@@ -104,7 +104,8 @@ const MessageBox: React.FC<MessageBoxProps> = ({ children, isTweetMine }) => {
     target: { url: "_blank" },
     formatHref: {
       hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
-      mention: (href: string) => `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
+      mention: (href: string) =>
+        `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
     },
   };
   return (
@@ -126,10 +127,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ children, isTweetMine }) => {
   );
 };
 
-export const ShowMessage: React.FC<Props> = ({
-  tweet,
-  scrollRef,
-}: Props) => {
+export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
   const {
     id,
     text,
@@ -145,7 +143,7 @@ export const ShowMessage: React.FC<Props> = ({
     tipsCount,
     createdAt,
   } = tweet;
-  
+
   const theme = useTheme();
   const { handleReaction } = useReaction({ tweetId: id });
   const setParentMeepState = useSetRecoilState(parentMeepState);
@@ -175,33 +173,30 @@ export const ShowMessage: React.FC<Props> = ({
           justifyContent={isTweetMine ? "flex-end" : "flex-start"}
           width="100%"
         >
-          <Box width="60%" ml={isTweetMine ? 0 : 5}>
-            <Stack direction="row">
-              <Box mr={1}>
-                <Typography variant="body2" color="secondary">
-                  @{parentTweet?.user?.handle}
-                </Typography>
-              </Box>
-              <Box
-                pr={2}
-                sx={{
-                  flex: 1,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  color="secondary"
-                  sx={{
-                    fontWeight: "300",
-                  }}
-                >
-                  {parentTweet?.text}
-                </Typography>
-              </Box>
-            </Stack>
+          <Box
+            width="60%"
+            ml={isTweetMine ? 0 : 5}
+            sx={{ borderLeft: `1px solid ${theme.tertiaryColor}`, pl: 1 }}
+          >
+            <Typography
+              color="secondary"
+              display="inline"
+              sx={{ fontSize: "0.9rem" }}
+            >
+              @{parentTweet?.user?.handle}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="secondary"
+              display="inline"
+              sx={{
+                fontWeight: "300",
+                width: "100%",
+                ml: 0.5,
+              }}
+            >
+              {parentTweet?.text}
+            </Typography>
           </Box>
         </Box>
       )}
@@ -266,7 +261,6 @@ export const ShowMessage: React.FC<Props> = ({
         onClick={(e) => !isTweetMine && handlePopoverOpen(e)}
         sx={{
           "&:hover": {
-            backgroundColor: !isTweetMine ? theme.tertiaryColor2 : "inherit",
             cursor: !isTweetMine ? "pointer" : "inherit",
           },
         }}
