@@ -176,7 +176,11 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
           <Box
             width="60%"
             ml={isTweetMine ? 0 : 5}
-            sx={{ borderLeft: `1px solid ${theme.tertiaryColor}`, pl: 1 }}
+            sx={{
+              borderLeft: `1px solid ${theme.tertiaryColor}`,
+              pl: 1,
+              overflow: "hidden",
+            }}
           >
             <Typography
               color="secondary"
