@@ -1,8 +1,6 @@
 import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
 import { ChannelFeed } from "../views";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
-import { RoutePath } from "../constants";
 
 export const GridChannel: React.FC = () => {
   const theme = useTheme();

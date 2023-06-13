@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { HashLink } from "react-router-hash-link";
 import { ReplyBox } from "../../Message/ReplyBox";
 import { UserAvatar } from "../../UserAvatar";
@@ -13,17 +13,32 @@ interface Props {
 }
 
 export const ThreadReply: React.FC<Props> = ({ tweet, fromUser }: Props) => {
+  const theme = useTheme();
   const masterTweet = tweet?.masterTweet;
   const parentTweet = tweet?.parentTweet;
-  const user = parentTweet?.user ?? fromUser;  
+  const user = parentTweet?.user ?? fromUser;
   return (
-    <Box sx={{ position: "relative", top: 17, left: 14, width: "100%" }}>
+    <Box sx={{ position: "relative", top: 15, left: 14, width: "100%" }}>
       <ReplyBox>
         <HashLink
           to={`/${RoutePath.MEEP_HASH}/${masterTweet?.id ?? parentTweet?.id}`}
         >
-          <Box pl={5.7} alignContent="center" display="flex" flexWrap="wrap">
-            <Box mr={0.5} pt={"2px"} display="inline-flex">
+          <Stack
+            pl={5.9}
+            pb={1}
+            direction="row"
+            alignContent="center"
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            <Box
+              mr={0.5}
+              display="flex"
+              alignItems="top"
+              pt={0.8}
+            >
               <UserAvatar
                 sx={{
                   width: 16,
@@ -34,31 +49,27 @@ export const ThreadReply: React.FC<Props> = ({ tweet, fromUser }: Props) => {
                 isNFT={user?.data?.avatarMint}
               />
             </Box>
-            <Box mr={1} display="inline-flex">
-              <Typography color="secondary" variant="body2">
-                @{user?.handle}
-              </Typography>
-            </Box>
-            <Box
-              pr={2}
-              sx={{
-                flex: 1,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-              display="inline-flex"
+            <Box>
+            <Typography
+              color="secondary"
+              variant="body2"
+              display="inline"
+              mr={1}
             >
-              <Typography
-                variant="body2"
-                color="secondary"
-                sx={{
-                  fontWeight: "300",
-                }}
-              >
-                {truncate(parentTweet?.text ?? "", { length: 40 })}
-              </Typography>
+              @{user?.handle}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="secondary"
+              display="inline"
+              sx={{
+                fontWeight: "300",
+              }}
+            >
+              {truncate(parentTweet?.text ?? "", { length: 90 })}
+            </Typography>
             </Box>
-          </Box>
+          </Stack>
         </HashLink>
       </ReplyBox>
     </Box>
