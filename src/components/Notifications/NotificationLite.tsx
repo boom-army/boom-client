@@ -55,6 +55,40 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
     }
   }, [mention]);
 
+  const ChannelInfo = ({ mention }: { mention: Mention }) => (
+    <Box display="flex" alignItems="center">
+      <ReplyIcon sx={{ color: theme.accentColor }} fontSize="small" />
+      <Typography variant="body2" color="secondary">
+        {text}
+      </Typography>
+      {mention.tweet?.channel ? (
+        <Link
+          to={`/${RoutePath.DAO}/${mention.tweet?.channel?.id}`}
+          style={{
+            color: theme.accentColor,
+            fontSize: "0.9rem",
+            fontWeight: 300,
+            marginLeft: "0.3rem",
+          }}
+        >
+          {mention.tweet?.channel?.family} - {mention.tweet?.channel?.name}
+        </Link>
+      ) : (
+        <Link
+          to={`/${RoutePath.FEED}`}
+          style={{
+            color: theme.accentColor,
+            fontSize: "0.9rem",
+            fontWeight: 300,
+            marginLeft: "0.3rem",
+          }}
+        >
+          Feed
+        </Link>
+      )}
+    </Box>
+  );
+
   return (
     <Stack
       direction="column"
@@ -66,19 +100,12 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
           : "transparent",
       }}
     >
-      {mention.type === MentionTypes.MENTION && (
-        <div>
-          {mention.tweet?.parentTweet && (
+      {(mention.type === MentionTypes.MENTION ||
+        mention.type === MentionTypes.REPLY) && (
+        <Box>
+          {(mention.tweet?.parentTweet || mention.tweet?.channel) && (
             <Box>
-              <Box display="flex" alignItems="center">
-                <ReplyIcon sx={{ color: theme.accentColor }} fontSize="small" />
-                <Typography variant="body2" color="secondary">
-                  {text}{" "}
-                  {mention.tweet?.channel
-                    ? `${mention.tweet?.channel}`
-                    : "Feed"}
-                </Typography>
-              </Box>
+              <ChannelInfo mention={mention} />
               <Box pb={1.5}>
                 <ThreadReply tweet={mention.tweet} />
               </Box>
@@ -87,26 +114,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
           {mention.tweet && (
             <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={0.5} />
           )}
-        </div>
-      )}
-      {mention.type === MentionTypes.REPLY && (
-        <div>
-          <Box>
-            <Box display="flex" alignItems="center">
-              <ReplyIcon sx={{ color: theme.accentColor }} fontSize="small" />
-              <Typography variant="body2" color="secondary">
-                {text}{" "}
-                {mention.tweet?.channel ? `${mention.tweet?.channel}` : "Feed"}
-              </Typography>
-            </Box>
-            <Box pb={1.5}>
-              <ThreadReply tweet={mention.tweet} />
-            </Box>
-          </Box>
-          {mention.tweet && (
-            <ShowTweet key={mention.id} tweet={mention.tweet} overideMt={0.5} />
-          )}
-        </div>
+        </Box>
       )}
       {mention.type === MentionTypes.EMOJI && (
         <div>
@@ -140,6 +148,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
                       width: "0.8rem",
                       height: "0.8rem",
                       verticalAlign: "1px",
+                      marginRight: "0.2rem",
                     }}
                   />
                 )}

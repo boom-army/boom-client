@@ -4,6 +4,9 @@ query mentions($offset: Int, $limit: Int) {
     type
     tweet {
       ...TweetData
+      channel {
+        ...ChannelData
+      }
     }
     user {
       ...BaseUser

@@ -29,6 +29,7 @@ fragment TweetData on Tweet {
   isRetweet
   tipsCount
   createdAt
+  channelId
   tags {
     id
     text
@@ -95,6 +96,7 @@ fragment TweetData on Tweet {
 
 fragment ChannelData on Channel {
   id
+  key
   mintAuthority
   name
   family
