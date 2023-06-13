@@ -20,7 +20,7 @@ export const GridChannel: React.FC = () => {
           alignItems="center"
           height="100%"
         >
-          <Typography variant="h4">
+          <Typography variant="h4" p={2}>
             All the good DAO stuff happens here
           </Typography>
         </Box>

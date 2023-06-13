@@ -107,7 +107,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
             <Box>
               <ChannelInfo mention={mention} />
               <Box pb={1.5}>
-                <ThreadReply tweet={mention.tweet} />
+                <ThreadReply tweet={mention.tweet} fromUser={fromUser} />
               </Box>
             </Box>
           )}

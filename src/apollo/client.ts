@@ -58,21 +58,18 @@ const cache = new InMemoryCache({
         },
         channel: {
           merge(existing, incoming) {
-            return {
-              ...existing,
-              ...incoming,
-            };
+            if (incoming || existing) {
+              return {
+                ...existing,
+                ...incoming,
+              };
+            }
+            return incoming;
           },
         },
-      },
-    },
-    User: {
-      keyFields: ["id"],
-      merge(existing, incoming) {
-        return {
-          ...existing,
-          ...incoming,
-        };
+        parentTweet: {
+          merge: true,
+        },
       },
     },
     Query: {
@@ -83,7 +80,7 @@ const cache = new InMemoryCache({
         users: offsetLimitPagination(),
         searchTweets: offsetLimitPagination(),
         searchUser: offsetLimitPagination(),
-        mentions: offsetLimitPagination(),
+        mentions: offsetLimitPagination(["tweet", "userid"]),
       },
     },
   },

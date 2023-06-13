@@ -3,17 +3,19 @@ import { Box, Stack, Typography } from "@mui/material";
 import { HashLink } from "react-router-hash-link";
 import { ReplyBox } from "../../Message/ReplyBox";
 import { UserAvatar } from "../../UserAvatar";
-import { Maybe, Tweet, TweetQuery } from "../../../generated/graphql";
+import { Maybe, Tweet, TweetQuery, User } from "../../../generated/graphql";
 import { RoutePath } from "../../../constants";
 import { truncate } from "lodash";
 
 interface Props {
   tweet: TweetQuery["tweet"] | Maybe<Tweet> | undefined;
+  fromUser?: User | null | undefined;
 }
 
-export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
+export const ThreadReply: React.FC<Props> = ({ tweet, fromUser }: Props) => {
   const masterTweet = tweet?.masterTweet;
   const parentTweet = tweet?.parentTweet;
+  const user = parentTweet?.user ?? fromUser;  
   return (
     <Box sx={{ position: "relative", top: 17, left: 14, width: "100%" }}>
       <ReplyBox>
@@ -27,14 +29,14 @@ export const ThreadReply: React.FC<Props> = ({ tweet }: Props) => {
                   width: 16,
                   height: 16,
                 }}
-                avatar={parentTweet?.user?.avatar}
-                handle={parentTweet?.user?.handle}
-                isNFT={parentTweet?.user?.data?.avatarMint}
+                avatar={user?.avatar}
+                handle={user?.handle}
+                isNFT={user?.data?.avatarMint}
               />
             </Box>
             <Box mr={1} display="inline-flex">
               <Typography color="secondary" variant="body2">
-                @{parentTweet?.user?.handle}
+                @{user?.handle}
               </Typography>
             </Box>
             <Box
