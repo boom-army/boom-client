@@ -56,6 +56,14 @@ const cache = new InMemoryCache({
             };
           },
         },
+        channel: {
+          merge(existing, incoming) {
+            return {
+              ...existing,
+              ...incoming,
+            };
+          },
+        },
       },
     },
     User: {

@@ -35,7 +35,7 @@ fragment TweetData on Tweet {
     text
   }
   channel {
-    id
+    ...ChannelData
   }
   masterTweet {
     ...SlimTweet
