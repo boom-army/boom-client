@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
 import {
@@ -9,12 +9,22 @@ import {
 } from "../generated/graphql";
 import { useParams } from "react-router-dom";
 import { useChannelData } from "../hooks/useChannelData";
-import { Box, Stack, Typography, debounce, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Typography,
+  alpha,
+  debounce,
+  useTheme,
+} from "@mui/material";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { userOwnsNFT } from "../utils/nfts";
 import { UserContext } from "../contexts/user";
 import { TypingDots } from "../components/TypingDots";
 import { BOOM_CHANNEL_ID, BOOM_COLLECTION_MINT_PUBLIC_KEY } from "../utils/ids";
+import { Twitter } from "@mui/icons-material";
 
 function formatUserHandles(users: TypingSubscription["typing"]) {
   if (users?.length === 1) {
@@ -27,6 +37,7 @@ function formatUserHandles(users: TypingSubscription["typing"]) {
 }
 
 export const ChannelFeed: React.FC = () => {
+  const [validNFT, setValidNFT] = useState(false);
   const { channelId } = useParams();
   const { publicKey } = useWallet();
   const { connection } = useConnection();
@@ -58,20 +69,19 @@ export const ChannelFeed: React.FC = () => {
   };
   const debouncedTypingHandler = debounce(handleTyping, 500);
 
-  // TODO: Remove this
   useEffect(() => {
     (async () => {
-      if (publicKey)
-        console.log(
-          "channelId",
-          await userOwnsNFT(
-            publicKey?.toBase58(),
-            BOOM_COLLECTION_MINT_PUBLIC_KEY,
-            connection
-          )
+      if (publicKey) {
+        const ownsNft = await userOwnsNFT(
+          publicKey?.toBase58(),
+          BOOM_COLLECTION_MINT_PUBLIC_KEY,
+          connection
         );
+        setValidNFT(ownsNft);
+        console.log("ownsNft", ownsNft);
+      }
     })();
-  }, [publicKey]);
+  }, [publicKey, connection]);
 
   const { loading, error, data, fetchMore, refetch } = useGetChannelByIdQuery({
     variables: {
@@ -91,7 +101,7 @@ export const ChannelFeed: React.FC = () => {
     scrollRef?.current?.scrollIntoView();
   }, [channelId]);
 
-  return (
+  return validNFT ? (
     <Box>
       <MeepFeed
         loading={loading}
@@ -123,6 +133,71 @@ export const ChannelFeed: React.FC = () => {
           scrollRef={scrollRef}
           typingHandler={debouncedTypingHandler}
         />
+      </Box>
+    </Box>
+  ) : (
+    <Box>
+      <Typography variant="h2" p={2} textAlign="center">
+        Welcome to the Boom Heroes DAO
+      </Typography>
+      <Box maxWidth="100%" sx={{ position: "relative" }}>
+        <img
+          src="https://arweave.net/gZSfTkhEe7pbu5Cnp2W9EkO6wk3bVmFYkjIlJBoqy5M?ext=png"
+          width="100%"
+        />
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            padding: "1rem",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            color: "white",
+          }}
+        >
+          <Typography variant="body1" sx={{ marginBottom: "1rem" }}>
+            Description: This is a sample description for an NFT DAO designing
+            how DAOs are going to work on the Solana Blockchain.
+          </Typography>
+          <Box
+            mb={4}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{
+              border: `1px solid ${theme.accentColor}`,
+              backgroundColor: alpha(theme.accentColor, 0.2),
+              padding: "1rem",
+            }}
+          >
+            <Box mb={0.5}>
+              <Typography sx={{ fontSize: 12 }}>Floor price:</Typography>
+              <Typography sx={{ fontSize: 18, fontWeight: "600" }}>
+                0.05 SOL
+              </Typography>
+            </Box>
+            <IconButton
+              sx={{ color: "white" }}
+              href="https://twitter.com/boom_army_"
+            >
+              <Twitter />
+            </IconButton>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="center"
+            sx={{ marginBottom: "1rem" }}
+          >
+            <Button
+              variant="contained"
+              href="https://www.tensor.trade/trade/boomheroes"
+              target="_blank"
+            >
+              Buy A Boom Hero and auto-join the DAO
+            </Button>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
