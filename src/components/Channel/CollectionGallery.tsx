@@ -21,7 +21,7 @@ export const CollectionGallery: React.FC = () => {
     fetchListings();
   }, []);
 
-  return (
+  return listings ? (
     <Grid container spacing={2}>
       {listings.map((listing: any, index: number) => (
         <Grid item xs={12} sm={6} md={3} key={index}>
@@ -36,5 +36,5 @@ export const CollectionGallery: React.FC = () => {
         </Grid>
       ))}
     </Grid>
-  );
+  ) : null;
 };
