@@ -33,6 +33,10 @@ import { setDate } from "../../utils";
 import { parentMeepState } from "../../hooks/useParentMeepState";
 
 const IconsBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  flexWrap: "wrap",
+  mr: "2px",
   "& svg": {
     width: "18px",
     height: "18px",
@@ -113,7 +117,10 @@ const MessageBox: React.FC<MessageBoxProps> = ({
     },
   };
   return (
-    <Box display="flex" justifyContent={isTweetMine ? "flex-end" : "flex-start"}>
+    <Box
+      display="flex"
+      justifyContent={isTweetMine ? "flex-end" : "flex-start"}
+    >
       <Stack direction="column" mb={0.5} pr={2} display="flex" maxWidth="70%">
         {parentTweet && (
           <Box
@@ -331,7 +338,11 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
                   </Box>
                 ) : null}
               </IconsBox>
-              <Typography color="secondary" variant="body2">
+              <Typography
+                color="secondary"
+                variant="body2"
+                sx={{ minWidth: "4rem" }}
+              >
                 {formattedDate}
               </Typography>
             </Box>
