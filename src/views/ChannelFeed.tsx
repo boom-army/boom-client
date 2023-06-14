@@ -27,6 +27,7 @@ import { TypingDots } from "../components/TypingDots";
 import { BOOM_CHANNEL_ID, BOOM_COLLECTION_MINT_PUBLIC_KEY } from "../utils/ids";
 import { Twitter } from "@mui/icons-material";
 import { CollectionStats } from "../components/Channel/CollectionStats";
+import { CollectionGallery } from "../components/Channel/CollectionGallery";
 
 function formatUserHandles(users: TypingSubscription["typing"]) {
   if (users?.length === 1) {
@@ -191,6 +192,7 @@ export const ChannelFeed: React.FC = () => {
           </Box>
         </Box>
       </Box>
+      {/* <CollectionGallery /> */}
     </Box>
   );
 };
