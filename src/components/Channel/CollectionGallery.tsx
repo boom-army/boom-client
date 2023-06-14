@@ -1,16 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  Box,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, Grid, Card, CardMedia } from "@mui/material";
 
 export const CollectionGallery: React.FC = () => {
   const [listings, setListings] = useState<any>([]);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -29,57 +21,20 @@ export const CollectionGallery: React.FC = () => {
     fetchListings();
   }, []);
 
-  const handleWheel = (e: React.WheelEvent) => {
-    if (!scrollContainerRef.current) return;
-    
-    const container = scrollContainerRef.current;
-    const containerScrollPosition = scrollContainerRef.current.scrollLeft;
-    
-    // If at start and trying to scroll left, or at end and trying to scroll right, prevent default action
-    if ((containerScrollPosition === 0 && e.deltaY < 0) || (containerScrollPosition === (container.scrollWidth - container.clientWidth) && e.deltaY > 0)) {
-      e.preventDefault();
-      return;
-    }
-  
-    container.scrollTo({
-      top: 0,
-      left: containerScrollPosition + Math.sign(e.deltaY) * 100,
-      behavior: 'smooth'
-    });
-  };
-  
-  
-  
-
   return (
-    <Box
-      ref={scrollContainerRef}
-      onWheel={handleWheel}
-      sx={{ overflowX: "auto", whiteSpace: "nowrap" }}
-    >
-      {listings
-        ? listings.map((listing: any, index: number) => (
-            <Card
-              key={index}
-              sx={{ minWidth: 100, display: "inline-block", margin: 2 }}
-            >
-              <CardMedia
-                component="img"
-                height="140"
-                image={listing.extra.img}
-                alt="NFT Image"
-              />
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  Price: {listing.price}
-                </Typography>
-                <Typography variant="body2">
-                  Rarity Rank: {listing.rarity.moonrank.rank}
-                </Typography>
-              </CardContent>
-            </Card>
-          ))
-        : null}
-    </Box>
+    <Grid container spacing={2}>
+      {listings.map((listing: any, index: number) => (
+        <Grid item xs={12} sm={6} md={3} key={index}>
+          <Card>
+            <CardMedia
+              component="img"
+              height="140"
+              image={listing.extra.img}
+              alt="NFT Image"
+            />
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
