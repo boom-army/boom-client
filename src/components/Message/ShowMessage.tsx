@@ -20,9 +20,9 @@ import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
 import { Popover } from "@mui/material";
-import { RecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { TipCreator } from "../TipCreator";
-import { Tweet } from "../../generated/graphql";
+import { Maybe, Tweet } from "../../generated/graphql";
 import { UserAvatar } from "../UserAvatar";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { styled } from "@mui/material/styles";
@@ -52,18 +52,18 @@ interface Props {
 
 interface MessageBoxProps {
   children: React.ReactNode;
+  parentTweet: Maybe<Tweet> | undefined;
   isTweetMine: boolean;
 }
 
 const BubbleRight = styled(Paper)(({ theme }) => ({
   background: alpha(theme.accentColor, 0.2),
   color: theme.palette.text.primary,
-  maxWidth: "100%",
-  minWidth: "60%",
   padding: "0.5rem 1rem",
   marginBottom: theme.spacing(1),
   position: "relative",
   borderRadius: "16px 0 16px 16px",
+  wordBreak: "break-word",
   "&:after": {
     content: '""',
     position: "absolute",
@@ -79,12 +79,11 @@ const BubbleRight = styled(Paper)(({ theme }) => ({
 const BubbleLeft = styled(Paper)(({ theme }) => ({
   background: theme.blue.dark,
   color: theme.palette.text.primary,
-  maxWidth: "100%",
-  minWidth: "60%",
   padding: "0.5rem 1rem",
   marginBottom: theme.spacing(1),
   position: "relative",
   borderRadius: "0 16px 16px 16px",
+  wordBreak: "break-word",
   "&:before": {
     content: '""',
     position: "absolute",
@@ -97,7 +96,12 @@ const BubbleLeft = styled(Paper)(({ theme }) => ({
   },
 }));
 
-const MessageBox: React.FC<MessageBoxProps> = ({ children, isTweetMine }) => {
+const MessageBox: React.FC<MessageBoxProps> = ({
+  children,
+  parentTweet,
+  isTweetMine,
+}) => {
+  const theme = useTheme();
   const linkifyOptions = {
     className: "body",
     nl2br: true,
@@ -109,20 +113,46 @@ const MessageBox: React.FC<MessageBoxProps> = ({ children, isTweetMine }) => {
     },
   };
   return (
-    <Box
-      mb={0.5}
-      pr={2}
-      display="flex"
-      justifyContent={isTweetMine ? "flex-end" : "flex-start"}
-      width="100%"
-    >
-      <Linkify options={linkifyOptions}>
-        {isTweetMine ? (
-          <BubbleRight>{children}</BubbleRight>
-        ) : (
-          <BubbleLeft>{children}</BubbleLeft>
+    <Box display="flex" justifyContent={isTweetMine ? "flex-end" : "flex-start"}>
+      <Stack direction="column" mb={0.5} pr={2} display="flex" maxWidth="70%">
+        {parentTweet && (
+          <Box
+            sx={{
+              borderLeft: `1px solid ${theme.tertiaryColor}`,
+              pl: 1,
+              mb: 0.5,
+              overflow: "hidden",
+            }}
+          >
+            <Typography
+              color="secondary"
+              display="inline"
+              sx={{ fontSize: "0.9rem" }}
+            >
+              @{parentTweet?.user?.handle}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="secondary"
+              display="inline"
+              sx={{
+                fontWeight: "300",
+                width: "100%",
+                ml: 0.5,
+              }}
+            >
+              {parentTweet?.text}
+            </Typography>
+          </Box>
         )}
-      </Linkify>
+        <Linkify options={linkifyOptions}>
+          {isTweetMine ? (
+            <BubbleRight>{children}</BubbleRight>
+          ) : (
+            <BubbleLeft>{children}</BubbleLeft>
+          )}
+        </Linkify>
+      </Stack>
     </Box>
   );
 };
@@ -166,44 +196,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
   }
 
   return (
-    <Grid item xs={12} mt={2} sx={{ position: "relative", padding: "0 1em" }}>
-      {parentTweet && (
-        <Box
-          display="flex"
-          justifyContent={isTweetMine ? "flex-end" : "flex-start"}
-          width="100%"
-        >
-          <Box
-            width="60%"
-            ml={isTweetMine ? 0 : 5}
-            sx={{
-              borderLeft: `1px solid ${theme.tertiaryColor}`,
-              pl: 1,
-              overflow: "hidden",
-            }}
-          >
-            <Typography
-              color="secondary"
-              display="inline"
-              sx={{ fontSize: "0.9rem" }}
-            >
-              @{parentTweet?.user?.handle}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="secondary"
-              display="inline"
-              sx={{
-                fontWeight: "300",
-                width: "100%",
-                ml: 0.5,
-              }}
-            >
-              {parentTweet?.text}
-            </Typography>
-          </Box>
-        </Box>
-      )}
+    <Grid item xs={12} mt={1} sx={{ position: "relative", padding: "0 1em" }}>
       <Popover
         id="mouse-over-popover"
         open={popOpen}
@@ -284,8 +277,8 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
             </Link>
           </Box>
         )}
-        <Box ml={1} pt={0.5} width="100%">
-          <MessageBox isTweetMine={isTweetMine}>
+        <Box ml={1} width="100%">
+          <MessageBox parentTweet={parentTweet} isTweetMine={isTweetMine}>
             {!isTweetMine && (
               <Typography sx={{ fontWeight: "600" }}>
                 {user && user.consumerName}

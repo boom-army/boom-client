@@ -30,6 +30,7 @@ export const GridChannel: React.FC = () => {
         sx={{
           borderRight: `1px solid ${theme.tertiaryColor}`,
           borderLeft: `1px solid ${theme.tertiaryColor}`,
+          maxWidth: "100%",
         }}
       >
         <ChannelFeed />
