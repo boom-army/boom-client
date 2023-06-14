@@ -39,7 +39,10 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 3000,
       cors: {
-        origin: [process.env.VITE_PUBLIC_URL!],
+        origin: [
+          process.env.VITE_PUBLIC_URL!,
+          "https://api-mainnet.magiceden.dev",
+        ],
         // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
         // credentials: true,
         // allowedHeaders: "Content-Type, Authorization, X-Requested-With, Accept",
