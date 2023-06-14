@@ -12,6 +12,7 @@ import { useChannelData } from "../hooks/useChannelData";
 import {
   Box,
   Button,
+  Divider,
   IconButton,
   Stack,
   Typography,
@@ -25,6 +26,7 @@ import { UserContext } from "../contexts/user";
 import { TypingDots } from "../components/TypingDots";
 import { BOOM_CHANNEL_ID, BOOM_COLLECTION_MINT_PUBLIC_KEY } from "../utils/ids";
 import { Twitter } from "@mui/icons-material";
+import { CollectionStats } from "../components/Channel/CollectionStats";
 
 function formatUserHandles(users: TypingSubscription["typing"]) {
   if (users?.length === 1) {
@@ -158,8 +160,8 @@ export const ChannelFeed: React.FC = () => {
         >
           <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
             <strong>Description:</strong> The #BoomDAODAO is the first Solana
-            native social DAO where everything happens on a single site
-            directly on-chain.
+            native social DAO where everything happens on a single site directly
+            on-chain.
           </Typography>
           <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
             <strong>Goals:</strong> This DAOs primary focus is to design the the
@@ -172,16 +174,8 @@ export const ChannelFeed: React.FC = () => {
             Hero and you will be able to access all DAO functionality on this
             page.
           </Typography>
-          <Box
-            mb={2}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Typography variant="body2">
-              Floor price: <strong>0.30 SOL</strong>
-            </Typography>
-          </Box>
+          <CollectionStats />
+          <Divider sx={{ pt: "1rem", mb: "1rem" }} />
           <Box
             display="flex"
             justifyContent="center"
