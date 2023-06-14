@@ -9,6 +9,7 @@ import {
   InputAdornment,
   Stack,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -72,6 +73,7 @@ export const NewMessage: React.FC<Props> = ({
   typingHandler,
 }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
   const [nftData, setNftData] = useState(null);
@@ -200,7 +202,12 @@ export const NewMessage: React.FC<Props> = ({
   });
 
   return (
-    <Box height={"10rem"}>
+    <Box
+      height={"9rem"}
+      sx={{
+        marginBottom: isMobile ? "56px" : 0,
+      }}
+    >
       {parentTweet && (
         <Box
           display={"flex"}
