@@ -156,33 +156,31 @@ export const ChannelFeed: React.FC = () => {
             color: "white",
           }}
         >
-          <Typography variant="body1" sx={{ marginBottom: "1rem" }}>
-            Description: This is a sample description for an NFT DAO designing
-            how DAOs are going to work on the Solana Blockchain.
+          <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
+            <strong>Description:</strong> The #BoomDAODAO is the first Solana
+            native social DAO where everything happens on a single site
+            directly on-chain.
+          </Typography>
+          <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
+            <strong>Goals:</strong> This DAOs primary focus is to design the the
+            way forward for Boom DAOs in the Solana ecosystem, and to build a
+            community of like-minded individuals who are passionate about the
+            future of Solana.
+          </Typography>
+          <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
+            <strong>How to join:</strong> Connect your wallet containing a Boom
+            Hero and you will be able to access all DAO functionality on this
+            page.
           </Typography>
           <Box
-            mb={4}
+            mb={2}
             display="flex"
-            justifyContent="space-between"
+            justifyContent="center"
             alignItems="center"
-            sx={{
-              border: `1px solid ${theme.accentColor}`,
-              backgroundColor: alpha(theme.accentColor, 0.2),
-              padding: "1rem",
-            }}
           >
-            <Box mb={0.5}>
-              <Typography sx={{ fontSize: 12 }}>Floor price:</Typography>
-              <Typography sx={{ fontSize: 18, fontWeight: "600" }}>
-                0.05 SOL
-              </Typography>
-            </Box>
-            <IconButton
-              sx={{ color: "white" }}
-              href="https://twitter.com/boom_army_"
-            >
-              <Twitter />
-            </IconButton>
+            <Typography variant="body2">
+              Floor price: <strong>0.30 SOL</strong>
+            </Typography>
           </Box>
           <Box
             display="flex"
@@ -194,7 +192,7 @@ export const ChannelFeed: React.FC = () => {
               href="https://www.tensor.trade/trade/boomheroes"
               target="_blank"
             >
-              Buy A Boom Hero and auto-join the DAO
+              Get a Boom Hero
             </Button>
           </Box>
         </Box>

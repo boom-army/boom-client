@@ -8,7 +8,7 @@ export const GridChannel: React.FC = () => {
     <Grid container height="100%">
       <Grid
         item
-        md={3}
+        md={4}
         display={{ xs: "none", md: "block" }}
         sx={{ background: theme.blue.dark }}
       >
@@ -19,7 +19,7 @@ export const GridChannel: React.FC = () => {
           height="100%"
         >
           <Typography variant="h4" p={2}>
-            All the good DAO stuff happens here
+            Secret DAO stuff happens here
           </Typography>
         </Box>
       </Grid>
