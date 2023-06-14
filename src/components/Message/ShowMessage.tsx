@@ -22,7 +22,7 @@ import { NFTTweet } from "../NFT/NFTTweet";
 import { Popover } from "@mui/material";
 import { useSetRecoilState } from "recoil";
 import { TipCreator } from "../TipCreator";
-import { Maybe, Tweet } from "../../generated/graphql";
+import { Maybe, Tweet, User } from "../../generated/graphql";
 import { UserAvatar } from "../UserAvatar";
 import { VideoContainer } from "../Giphy/VideoContainer";
 import { styled } from "@mui/material/styles";
@@ -56,6 +56,7 @@ interface Props {
 
 interface MessageBoxProps {
   children: React.ReactNode;
+  user: Maybe<User> | undefined;
   parentTweet: Maybe<Tweet> | undefined;
   isTweetMine: boolean;
 }
@@ -68,6 +69,7 @@ const BubbleRight = styled(Paper)(({ theme }) => ({
   position: "relative",
   borderRadius: "16px 0 16px 16px",
   wordBreak: "break-word",
+  width: "100%",
   "&:after": {
     content: '""',
     position: "absolute",
@@ -88,6 +90,7 @@ const BubbleLeft = styled(Paper)(({ theme }) => ({
   position: "relative",
   borderRadius: "0 16px 16px 16px",
   wordBreak: "break-word",
+  width: "100%",
   "&:before": {
     content: '""',
     position: "absolute",
@@ -102,6 +105,7 @@ const BubbleLeft = styled(Paper)(({ theme }) => ({
 
 const MessageBox: React.FC<MessageBoxProps> = ({
   children,
+  user,
   parentTweet,
   isTweetMine,
 }) => {
@@ -152,13 +156,30 @@ const MessageBox: React.FC<MessageBoxProps> = ({
             </Typography>
           </Box>
         )}
-        <Linkify options={linkifyOptions}>
-          {isTweetMine ? (
-            <BubbleRight>{children}</BubbleRight>
-          ) : (
-            <BubbleLeft>{children}</BubbleLeft>
+        <Box display="flex">
+          {!isTweetMine && (
+            <Box mr={1}>
+              <Link to={`/${RoutePath.HANDLE_HASH}/${user?.handle}`}>
+                <UserAvatar
+                  sx={{
+                    width: "30px",
+                    height: "30px",
+                  }}
+                  avatar={user?.avatar as string}
+                  handle={user?.handle}
+                  isNFT={user?.data?.avatarMint}
+                />
+              </Link>
+            </Box>
           )}
-        </Linkify>
+          <Linkify options={linkifyOptions}>
+            {isTweetMine ? (
+              <BubbleRight>{children}</BubbleRight>
+            ) : (
+              <BubbleLeft>{children}</BubbleLeft>
+            )}
+          </Linkify>
+        </Box>
       </Stack>
     </Box>
   );
@@ -269,23 +290,12 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
           },
         }}
       >
-        {!isTweetMine && (
-          <Box>
-            <Link to={`/${RoutePath.HANDLE_HASH}/${handle}`}>
-              <UserAvatar
-                sx={{
-                  width: "30px",
-                  height: "30px",
-                }}
-                avatar={user?.avatar as string}
-                handle={user?.handle}
-                isNFT={user?.data?.avatarMint}
-              />
-            </Link>
-          </Box>
-        )}
-        <Box ml={1} width="100%">
-          <MessageBox parentTweet={parentTweet} isTweetMine={isTweetMine}>
+        <Box width="100%">
+          <MessageBox
+            parentTweet={parentTweet}
+            user={user}
+            isTweetMine={isTweetMine}
+          >
             {!isTweetMine && (
               <Typography sx={{ fontWeight: "600" }}>
                 {user && user.consumerName}
