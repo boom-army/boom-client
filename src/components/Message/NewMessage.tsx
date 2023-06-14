@@ -203,7 +203,7 @@ export const NewMessage: React.FC<Props> = ({
 
   return (
     <Box
-      height={"9rem"}
+      height={"9.5rem"}
       sx={{
         marginBottom: isMobile ? "56px" : 0,
       }}

@@ -5,7 +5,7 @@ import { Box, Grid, Typography, useTheme } from "@mui/material";
 export const GridChannel: React.FC = () => {
   const theme = useTheme();
   return (
-    <Grid container>
+    <Grid container height="100%">
       <Grid
         item
         md={3}
