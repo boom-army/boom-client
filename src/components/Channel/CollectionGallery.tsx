@@ -1,26 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Box, Grid, Card, CardMedia } from "@mui/material";
+import React from "react";
+import { Grid, Card, CardMedia } from "@mui/material";
 
-export const CollectionGallery: React.FC = () => {
-  const [listings, setListings] = useState<any>([]);
+interface CollectionGalleryProps {
+  listings: any;
+}
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      const response = await fetch(
-        "https://api-mainnet.magiceden.dev/v2/collections/boomheroes/listings",
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
-      const result = await response.json();
-      setListings(result);
-    };
-
-    fetchListings();
-  }, []);
-
+export const CollectionGallery: React.FC<CollectionGalleryProps> = ({
+  listings,
+}) => {
   return listings ? (
     <Grid container spacing={2}>
       {listings.map((listing: any, index: number) => (

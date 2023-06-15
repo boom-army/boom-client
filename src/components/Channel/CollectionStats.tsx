@@ -1,44 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { boomNumFormat, formatNumber } from "../../utils/utils";
+import React from "react";
+import { boomNumFormat } from "../../utils/utils";
 import { Box, Stack, Typography } from "@mui/material";
 
-export const CollectionStats: React.FC = () => {
-  const [data, setData] = useState<any>(null);
+interface CollectionStatsProps {
+    info: any;
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://api-mainnet.magiceden.dev/v2/collections/boomheroes/stats",
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
-      const result = await response.json();
-      setData(result);
-    };
-    fetchData();
-  }, []);
-
+export const CollectionStats: React.FC<CollectionStatsProps> = ({ info }) => {
   return (
     <Box display="flex" justifyContent="center">
-      {data ? (
+      {info ? (
         <Stack direction="row" spacing={2}>
           <Typography variant="body2">
             Avg ◎:{" "}
-            <strong>{boomNumFormat(data.avgPrice24hr).toFixed(2)}</strong>
+            <strong>{boomNumFormat(info.avgPrice24hr).toFixed(2)}</strong>
           </Typography>
           <Typography variant="body2">
             Floor ◎:{" "}
-            <strong>{boomNumFormat(data.floorPrice).toFixed(2)}</strong>
+            <strong>{boomNumFormat(info.floorPrice).toFixed(2)}</strong>
           </Typography>
           <Typography variant="body2">
-            Listed: <strong>{data.listedCount}</strong>
+            Listed: <strong>{info.listedCount}</strong>
           </Typography>
           <Typography variant="body2">
-            Volume:{" "}
-            <strong>{boomNumFormat(data.volumeAll).toFixed(2)}</strong>
+            Volume: <strong>{boomNumFormat(info.volumeAll).toFixed(2)}</strong>
           </Typography>
         </Stack>
       ) : (

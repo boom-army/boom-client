@@ -1,0 +1,3 @@
+query getCollection($name: String!) {
+  getCollection(name: $name)
+}

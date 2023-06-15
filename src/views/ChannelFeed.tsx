@@ -4,6 +4,7 @@ import { NewMessage } from "../components/Message/NewMessage";
 import {
   TypingSubscription,
   useGetChannelByIdQuery,
+  useGetCollectionQuery,
   useTypingSubscription,
   useUpdateTypingStatusMutation,
 } from "../generated/graphql";
@@ -25,7 +26,6 @@ import { userOwnsNFT } from "../utils/nfts";
 import { UserContext } from "../contexts/user";
 import { TypingDots } from "../components/TypingDots";
 import { BOOM_CHANNEL_ID, BOOM_COLLECTION_MINT_PUBLIC_KEY } from "../utils/ids";
-import { Twitter } from "@mui/icons-material";
 import { CollectionStats } from "../components/Channel/CollectionStats";
 import { CollectionGallery } from "../components/Channel/CollectionGallery";
 import { headerOffset } from "../utils/boom-web3/constants";
@@ -87,6 +87,12 @@ export const ChannelFeed: React.FC = () => {
     })();
   }, [publicKey, connection]);
 
+  const { data: { getCollection: collection } = {} } = useGetCollectionQuery({
+    variables: {
+      name: "boomheroes",
+    },
+  });
+
   const { loading, error, data, fetchMore, refetch } = useGetChannelByIdQuery({
     variables: {
       channelId: channelId as string,
@@ -140,7 +146,7 @@ export const ChannelFeed: React.FC = () => {
       </Box>
     </Box>
   ) : (
-    <Box sx={{overflow: "auto", maxHeight: headerOffset}}>
+    <Box sx={{ overflow: "auto", maxHeight: headerOffset }}>
       <Typography variant="h2" p={2} textAlign="center">
         Welcome to the Boom Heroes DAO
       </Typography>
@@ -176,7 +182,7 @@ export const ChannelFeed: React.FC = () => {
             Hero and you will be able to access all DAO functionality on this
             page.
           </Typography>
-          <CollectionStats />
+          <CollectionStats info={collection.info} />
           <Divider sx={{ pt: "1rem", mb: "1rem" }} />
           <Box
             display="flex"
@@ -193,7 +199,7 @@ export const ChannelFeed: React.FC = () => {
           </Box>
         </Box>
       </Box>
-      <CollectionGallery />
+      <CollectionGallery listings={collection.listings} />
     </Box>
   );
 };
