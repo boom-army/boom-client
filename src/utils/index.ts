@@ -17,11 +17,11 @@ export const sortFn = (a: any, b: any) => {
 export const setDate = (date: any) => {
   const seconds = date / 1000;
   const fractionalPart = seconds % 1;
-  const precision = fractionalPart.toString().split('.')[1]?.length || 0;
-  
+  const precision = fractionalPart.toString().split(".")[1]?.length || 0;
+
   const newDate = new Date(0);
   newDate.setUTCSeconds(seconds);
-  
+
   return precision <= 3 ? newDate : newDate.getTime();
 };
 
@@ -95,3 +95,6 @@ export const localStorageLogout = () => {
   localStorage.removeItem("user");
   localStorage.removeItem("sidebarState");
 };
+
+export const getRandomFromArr = (arr: Array<any>) =>
+  arr[Math.floor(Math.random() * arr.length)];

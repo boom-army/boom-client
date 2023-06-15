@@ -14,10 +14,8 @@ import {
   Box,
   Button,
   Divider,
-  IconButton,
   Stack,
   Typography,
-  alpha,
   debounce,
   useTheme,
 } from "@mui/material";
@@ -27,8 +25,9 @@ import { UserContext } from "../contexts/user";
 import { TypingDots } from "../components/TypingDots";
 import { BOOM_CHANNEL_ID, BOOM_COLLECTION_MINT_PUBLIC_KEY } from "../utils/ids";
 import { CollectionStats } from "../components/Channel/CollectionStats";
-import { CollectionGallery } from "../components/Channel/CollectionGallery";
+// import { CollectionGallery } from "../components/Channel/CollectionGallery";
 import { headerOffset } from "../utils/boom-web3/constants";
+import { getRandomFromArr } from "../utils";
 
 function formatUserHandles(users: TypingSubscription["typing"]) {
   if (users?.length === 1) {
@@ -42,6 +41,18 @@ function formatUserHandles(users: TypingSubscription["typing"]) {
 
 export const ChannelFeed: React.FC = () => {
   const [validNFT, setValidNFT] = useState(false);
+  const [hero, setHero] = useState({
+    price: 1,
+    tokenMint: "4hVEfTPk5eLhX9tP4ENaySkjYfWnrePzMdjcH6A1DUJE",
+    rarity: {
+      moonrank: {
+        rank: 0,
+      },
+    },
+    extra: {
+      img: "https://arweave.net/gZSfTkhEe7pbu5Cnp2W9EkO6wk3bVmFYkjIlJBoqy5M?ext=png",
+    },
+  });
   const { channelId } = useParams();
   const { publicKey } = useWallet();
   const { connection } = useConnection();
@@ -54,6 +65,21 @@ export const ChannelFeed: React.FC = () => {
   const { data: typingdata } = useTypingSubscription({
     variables: { channelId: BOOM_CHANNEL_ID },
   });
+  const { data: { getCollection: collection } = {} } = useGetCollectionQuery({
+    variables: {
+      name: "boomheroes",
+    },
+  });
+  const { loading, error, data, fetchMore, refetch } = useGetChannelByIdQuery({
+    variables: {
+      channelId: channelId as string,
+      offset: 0,
+      limit: 10,
+    },
+    fetchPolicy: "network-only",
+    pollInterval: 10000,
+  });
+
   let typingTimeout: any;
   const handleTyping = () => {
     const userId = user?.id;
@@ -87,21 +113,13 @@ export const ChannelFeed: React.FC = () => {
     })();
   }, [publicKey, connection]);
 
-  const { data: { getCollection: collection } = {} } = useGetCollectionQuery({
-    variables: {
-      name: "boomheroes",
-    },
-  });
+  useEffect(() => {
+    console.log(collection);
 
-  const { loading, error, data, fetchMore, refetch } = useGetChannelByIdQuery({
-    variables: {
-      channelId: channelId as string,
-      offset: 0,
-      limit: 10,
-    },
-    fetchPolicy: "network-only",
-    pollInterval: 10000,
-  });
+    if (collection) {
+      setHero(getRandomFromArr(collection.listings));
+    }
+  }, [collection]);
 
   useEffect(() => {
     refetch({
@@ -151,10 +169,19 @@ export const ChannelFeed: React.FC = () => {
         Welcome to the Boom Heroes DAO
       </Typography>
       <Box maxWidth="100%" sx={{ position: "relative" }}>
-        <img
-          src="https://arweave.net/gZSfTkhEe7pbu5Cnp2W9EkO6wk3bVmFYkjIlJBoqy5M?ext=png"
-          width="100%"
-        />
+        <img src={hero.extra.img} width="100%" />
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ position: "absolute", top: "1rem", right: "1rem" }}
+          href={`https://magiceden.io/item-details/${hero.tokenMint}`}
+          target="_blank"
+        >
+          <Box display="inline" pt={0.9} mr={0.5}>
+            <img src="/assets/magic-eden-logo.png" width="16px" />
+          </Box>
+          Rank {hero.rarity.moonrank.rank} | ◎{hero.price}
+        </Button>
         <Box
           sx={{
             position: "absolute",
@@ -177,12 +204,7 @@ export const ChannelFeed: React.FC = () => {
             community of like-minded individuals who are passionate about the
             future of Solana.
           </Typography>
-          <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
-            <strong>How to join:</strong> Connect your wallet containing a Boom
-            Hero and you will be able to access all DAO functionality on this
-            page.
-          </Typography>
-          <CollectionStats info={collection.info} />
+          <CollectionStats info={collection?.info} />
           <Divider sx={{ pt: "1rem", mb: "1rem" }} />
           <Box
             display="flex"
@@ -194,12 +216,12 @@ export const ChannelFeed: React.FC = () => {
               href="https://www.tensor.trade/trade/boomheroes"
               target="_blank"
             >
-              Get a Boom Hero
+              #BoomHeroes on Tensor
             </Button>
           </Box>
         </Box>
       </Box>
-      <CollectionGallery listings={collection.listings} />
+      {/* <CollectionGallery listings={collection?.listings} /> */}
     </Box>
   );
 };
