@@ -351,6 +351,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
               <Typography
                 color="secondary"
                 variant="body2"
+                textAlign="right"
                 sx={{ minWidth: "4rem" }}
               >
                 {formattedDate}
