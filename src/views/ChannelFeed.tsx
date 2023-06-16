@@ -20,7 +20,6 @@ import {
   useTheme,
 } from "@mui/material";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import { userOwnsNFT } from "../utils/nfts";
 import { UserContext } from "../contexts/user";
 import { TypingDots } from "../components/TypingDots";
 import { BOOM_CHANNEL_ID, BOOM_COLLECTION_MINT_PUBLIC_KEY } from "../utils/ids";

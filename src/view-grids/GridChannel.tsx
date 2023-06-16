@@ -19,7 +19,7 @@ export const GridChannel: React.FC = () => {
           height="100%"
         >
           <Typography variant="h4" p={2}>
-            Voting window under development
+            Voting window in development
           </Typography>
         </Box>
       </Grid>
