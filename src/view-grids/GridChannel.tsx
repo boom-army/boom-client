@@ -19,7 +19,7 @@ export const GridChannel: React.FC = () => {
           height="100%"
         >
           <Typography variant="h4" p={2}>
-            Secret DAO stuff happens here
+            Voting window under development
           </Typography>
         </Box>
       </Grid>
