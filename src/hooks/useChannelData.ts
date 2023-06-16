@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useMemo } from "react";
 import { useApolloClient } from "@apollo/client";
 import { uniqBy, differenceBy } from "lodash";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
@@ -16,7 +16,7 @@ export const useChannelData = () => {
   const { connection } = useConnection();
   const metaplex = useMetaplex();
   const client = useApolloClient();
-  const { publicKey } = useWallet();
+  const { publicKey, connected } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
 
   const [getUserChannels, { data, loading, error }] =
@@ -26,10 +26,10 @@ export const useChannelData = () => {
   const [addChannelMutation] = useAddChannelMutation();
   const [channelUnlinkMutation] = useUnlinkChannelMutation();
 
-  useEffect(() => {
+  useMemo(() => {
     (async () => {
-      try {
-        if (!publicKey) displayError("Wallet not connected", enqueueSnackbar);
+      try {        
+        if (!connected) displayError("Wallet not connected", enqueueSnackbar);
         const nftData = publicKey
           ? await metaplex?.nfts().findAllByOwner({
               owner: publicKey,

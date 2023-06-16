@@ -28,6 +28,7 @@ import { CollectionStats } from "../components/Channel/CollectionStats";
 // import { CollectionGallery } from "../components/Channel/CollectionGallery";
 import { headerOffset } from "../utils/boom-web3/constants";
 import { getRandomFromArr } from "../utils";
+import { Loader } from "../components/Loader";
 
 function formatUserHandles(users: TypingSubscription["typing"]) {
   if (users?.length === 1) {
@@ -101,21 +102,16 @@ export const ChannelFeed: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      if (publicKey) {
-        const ownsNft = await userOwnsNFT(
-          publicKey?.toBase58(),
-          BOOM_COLLECTION_MINT_PUBLIC_KEY,
-          connection
-        );
-        setValidNFT(ownsNft);
-        console.log("ownsNft", ownsNft);
+      if (data) {
+        setValidNFT(true);
+      }
+      if (error?.message) {
+        setValidNFT(false);
       }
     })();
-  }, [publicKey, connection]);
+  }, [publicKey, connection, data, error]);
 
   useEffect(() => {
-    console.log(collection);
-
     if (collection) {
       setHero(getRandomFromArr(collection.listings));
     }
@@ -128,6 +124,8 @@ export const ChannelFeed: React.FC = () => {
     });
     scrollRef?.current?.scrollIntoView();
   }, [channelId]);
+
+  if (loading) return <Loader />;
 
   return validNFT ? (
     <Box>
