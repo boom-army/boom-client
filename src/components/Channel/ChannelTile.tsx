@@ -42,7 +42,7 @@ export const ChannelTile: React.FC<Props> = ({ channel }) => {
             marginTop: "1em",
           },
         }}
-        to={`/${RoutePath.DAO}/${channel?.id}`}
+        to={`/${RoutePath.DAO}/${channel?.key}`}
       >
         <Box mr={1}>
           <Avatar

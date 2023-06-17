@@ -3,7 +3,7 @@ import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
 import {
   TypingSubscription,
-  useGetChannelByIdQuery,
+  useGetChannelQuery,
   useGetCollectionQuery,
   useTypingSubscription,
   useUpdateTypingStatusMutation,
@@ -53,7 +53,7 @@ export const ChannelFeed: React.FC = () => {
       img: "https://arweave.net/gZSfTkhEe7pbu5Cnp2W9EkO6wk3bVmFYkjIlJBoqy5M?ext=png",
     },
   });
-  const { channelId } = useParams();
+  const { channelName } = useParams();  
   const { publicKey } = useWallet();
   const { connection } = useConnection();
   const scrollRef = useRef<HTMLDivElement>();
@@ -70,15 +70,15 @@ export const ChannelFeed: React.FC = () => {
       name: "boomheroes",
     },
   });
-  const { loading, error, data, fetchMore, refetch } = useGetChannelByIdQuery({
+  const { loading, error, data, fetchMore, refetch } = useGetChannelQuery({
     variables: {
-      channelId: channelId as string,
+      channelName: channelName as string,
       offset: 0,
       limit: 10,
     },
     fetchPolicy: "network-only",
     pollInterval: 10000,
-  });
+  });  
 
   let typingTimeout: any;
   const handleTyping = () => {
@@ -118,11 +118,11 @@ export const ChannelFeed: React.FC = () => {
 
   useEffect(() => {
     refetch({
-      channelId: channelId as string,
+      channelName: channelName as string,
       offset: 0,
     });
     scrollRef?.current?.scrollIntoView();
-  }, [channelId]);
+  }, [channelName]);
 
   if (loading) return <Loader />;
 
@@ -131,7 +131,7 @@ export const ChannelFeed: React.FC = () => {
       <MeepFeed
         loading={loading}
         error={error}
-        data={data?.getChannelById}
+        data={data?.getChannel}
         fetchMore={fetchMore}
         scrollRef={scrollRef}
       />
@@ -154,7 +154,7 @@ export const ChannelFeed: React.FC = () => {
           </Stack>
         ) : null}
         <NewMessage
-          channel={channelId}
+          channelId={data?.getChannel?.[0].channelId}
           scrollRef={scrollRef}
           typingHandler={debouncedTypingHandler}
         />

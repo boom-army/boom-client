@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import {
-  GetChannelByIdDocument,
+  GetChannelDocument,
   FeedDocument,
   TweetDocument,
   useMeQuery,
@@ -43,7 +43,7 @@ import { parentMeepState } from "../../hooks/useParentMeepState";
 import { BOOM_CHANNEL_ID } from "../../utils/ids";
 
 interface Props {
-  channel?: string | undefined;
+  channelId?: string | null | undefined;
   scrollRef: React.MutableRefObject<HTMLDivElement | undefined>;
   typingHandler: () => void;
 }
@@ -68,7 +68,7 @@ const ImageInput = styled("input")({
 });
 
 export const NewMessage: React.FC<Props> = ({
-  channel,
+  channelId,
   scrollRef,
   typingHandler,
 }) => {
@@ -86,7 +86,7 @@ export const NewMessage: React.FC<Props> = ({
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
       FeedDocument,
-      GetChannelByIdDocument,
+      GetChannelDocument,
       {
         query: TweetDocument,
         variables: { id: parentTweet },
@@ -95,7 +95,7 @@ export const NewMessage: React.FC<Props> = ({
   });
   const [signFileMutation] = useMutation(SIGN_FILE);
   const channelData = client.readFragment({
-    id: `Channel:${channel}`,
+    id: `Channel:${channelId}`,
     fragment: gql`
       fragment TweetChannel on Channel {
         id
@@ -147,7 +147,7 @@ export const NewMessage: React.FC<Props> = ({
           nft: nftData,
           files: tweetFiles,
           parentTweet,
-          channel,
+          channel: channelId,
         },
       });
 

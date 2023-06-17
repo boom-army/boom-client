@@ -76,7 +76,7 @@ const cache = new InMemoryCache({
       fields: {
         feed: offsetLimitPagination(),
         heroFeed: offsetLimitPagination(),
-        getChannelById: offsetLimitPagination(),
+        getChannel: offsetLimitPagination(),
         users: offsetLimitPagination(),
         searchTweets: offsetLimitPagination(),
         searchUser: offsetLimitPagination(),

@@ -63,7 +63,7 @@ export const NotificationLite = ({ mention }: NotificationProps) => {
       </Typography>
       {mention.tweet?.channel ? (
         <Link
-          to={`/${RoutePath.DAO}/${mention.tweet?.channel?.id}`}
+          to={`/${RoutePath.DAO}/${mention.tweet?.channel?.key}`}
           style={{
             color: theme.accentColor,
             fontSize: "0.9rem",

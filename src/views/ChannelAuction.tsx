@@ -7,7 +7,7 @@ import { NewMessage } from "../components/Message/NewMessage";
 
 import {
   useAddChannelMutation,
-  useGetChannelByIdQuery,
+  useGetChannelQuery,
 } from "../generated/graphql";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 
@@ -18,7 +18,7 @@ export const ChannelAuction: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>();
 
   const [addChannelMutation] = useAddChannelMutation();
-  const { loading, error, data, fetchMore, refetch } = useGetChannelByIdQuery({
+  const { loading, error, data, fetchMore, refetch } = useGetChannelQuery({
     variables: {
       channelId,
       offset: 0,
@@ -65,7 +65,7 @@ export const ChannelAuction: React.FC = () => {
       <MeepFeed
         loading={loading}
         error={error}
-        data={data?.getChannelById}
+        data={data?.getChannel}
         fetchMore={fetchMore}
         scrollRef={scrollRef}
       />
@@ -81,7 +81,7 @@ export const ChannelAuction: React.FC = () => {
       )}
       {anchorWallet?.publicKey && (
         <NewMessage
-          channel={channelId}
+          channelId={channelId}
           scrollRef={scrollRef}
           typingHandler={() => {}}
         />

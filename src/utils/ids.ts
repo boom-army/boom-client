@@ -1,6 +1,7 @@
 import { PublicKey } from "@solana/web3.js";
 
 export const BOOM_CHANNEL_ID = "cl20tx15a3168501mk7k79w0qs";
+export const BOOM_CHANNEL_NAME = "boom-army";
 export const BOOM_COLLECTION_MINT_PUBLIC_KEY =
   "EJqr8VRC3rJaEVDDkcbG9G122ixW1GQ4f6y6vMwaGoco";
 
