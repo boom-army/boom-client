@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
@@ -12,34 +12,42 @@ interface Gif {
   url?: string;
 }
 
-interface videoProps {
+interface VideoProps {
   gif: Gif;
   onClose?: (() => void) | undefined;
 }
 
-export const VideoContainer: React.FC<videoProps> = ({ gif, onClose }) => {
+export const VideoContainer: React.FC<VideoProps> = ({ gif, onClose }) => {
   const { fixedHeightUrl, title } = gif;
   const theme = useTheme();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const VideoBoxWrapper = styled("div")({
     display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
     borderRadius: "16px",
     border: `1px solid ${theme.palette.secondary}`,
-    overflow: "hidden",
     width: "90%",
-    flexWrap: "wrap",
     margin: "0 0 0.75rem",
-    position: "relative",
-
-    "> video": {
-      width: "100%",
-      cursor: "auto",
-    },
+    overflow: "hidden",
   });
 
-  // const handleVideoPlayerClick = (e: React.MouseEvent<HTMLVideoElement>) => {
-  //   e.currentTarget.paused ? e.currentTarget.play() : e.currentTarget.pause();
-  // };
+  const Video = styled("video")({
+    width: "100%",
+    cursor: "auto",
+  });
+
+  const handleVideoPlayerClick = () => {
+    const video = videoRef.current;
+    if (video && video.paused) {
+      video.play().catch((error) => {
+        console.error("Video playback failed:", error);
+      });
+    }
+  };
 
   return (
     <VideoBoxWrapper>
@@ -66,15 +74,18 @@ export const VideoContainer: React.FC<videoProps> = ({ gif, onClose }) => {
         </Box>
       )}
 
-      <video
-        // onClick={(e) => handleVideoPlayerClick(e)}
-        preload="auto"
+      <Video
+        ref={videoRef}
+        onClick={handleVideoPlayerClick}
+        playsInline
         autoPlay
         muted
         loop
         aria-label={title}
-        src={fixedHeightUrl}
-      />
+      >
+        <source src={fixedHeightUrl} type="video/mp4" />
+      </Video>
+
       <Box
         sx={{
           position: "absolute",
