@@ -154,6 +154,12 @@ export const NewMessage: React.FC<Props> = ({
     setGif(null);
   };
 
+  const handleKeyDown = (event: any) => {    
+    if (event.key === "Enter") {
+      handleNewTweet(event);
+    }
+  };
+
   const handleTweetFiles = async (e: any) => {
     try {
       if (tweetFiles.length >= 4) {
@@ -248,6 +254,7 @@ export const NewMessage: React.FC<Props> = ({
             />
             <Input
               value={tweet.value}
+              onKeyDown={handleKeyDown}
               onChange={(e) => {
                 typingHandler();
                 return tweet.onChange(e);
