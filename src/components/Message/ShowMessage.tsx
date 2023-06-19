@@ -122,7 +122,6 @@ const MessageBox: React.FC<MessageBoxProps> = ({
     >
       <Stack
         direction="column"
-        mb={0.5}
         pr={2}
         display="flex"
         maxWidth={isMobile ? "100%" : "80%"}
@@ -235,7 +234,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
   };
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} pl={1}>
       <Box
         id={tweet?.id}
         display="flex"
