@@ -216,7 +216,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
     nl2br: true,
     target: { url: "_blank" },
     formatHref: {
-      hashtag: (href: string) => `explore?type=TAGS&term=${href.substring(1)}`,
+      hashtag: (href: string) => `/explore?type=TAGS&term=${href.substring(1)}`,
       mention: (href: string) =>
         `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
     },
