@@ -11,6 +11,7 @@ import {
   Stack,
   Typography,
   alpha,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { EmojiTweet } from "../Tweet/index";
@@ -110,12 +111,19 @@ const MessageBox: React.FC<MessageBoxProps> = ({
   isTweetMine,
 }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box
       display="flex"
       justifyContent={isTweetMine ? "flex-end" : "flex-start"}
     >
-      <Stack direction="column" mb={0.5} pr={2} display="flex" maxWidth="70%">
+      <Stack
+        direction="column"
+        mb={0.5}
+        pr={2}
+        display="flex"
+        maxWidth={isMobile ? "100%" : "80%"}
+      >
         {parentTweet && (
           <Box
             sx={{
@@ -223,7 +231,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
   };
 
   return (
-    <Grid item xs={12} mt={1} sx={{ position: "relative", padding: "0 1em" }}>
+    <Grid item xs={12} sx={{ position: "relative", padding: "0 1em" }}>
       <Popover
         id="mouse-over-popover"
         open={popOpen}
