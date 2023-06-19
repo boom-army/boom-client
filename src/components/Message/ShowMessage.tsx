@@ -132,6 +132,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
               borderLeft: `1px solid ${theme.tertiaryColor}`,
               pl: 1,
               mb: 0.5,
+              ml: isTweetMine ? 0 : 5,
               overflow: "hidden",
             }}
           >
