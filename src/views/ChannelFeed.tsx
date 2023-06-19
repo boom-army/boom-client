@@ -17,6 +17,7 @@ import {
   Stack,
   Typography,
   debounce,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
@@ -60,6 +61,7 @@ export const ChannelFeed: React.FC = () => {
   const { user } = useContext(UserContext);
   const theme = useTheme();
   useChannelData();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
   const { data: typingdata } = useTypingSubscription({
@@ -135,7 +137,7 @@ export const ChannelFeed: React.FC = () => {
     );
 
   return validNFT ? (
-    <Box>
+    <Box sx={isMobile ? { overscrollBehaviorY: "none" } : {}}>
       <MeepFeed
         loading={loading}
         error={error}
@@ -199,15 +201,14 @@ export const ChannelFeed: React.FC = () => {
           }}
         >
           <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
-            <strong>Description:</strong> The #BoomDAODAO is the first Solana
+            <strong>Description:</strong> The #BoomDAODAO is the first Solana
             native social DAO where everything happens on a single site directly
             on-chain.
           </Typography>
           <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
-            <strong>Goals:</strong> This DAOs primary focus is to design the the
-            way forward for Boom DAOs in the Solana ecosystem, and to build a
-            community of like-minded individuals who are passionate about the
-            future of Solana.
+            <strong>Goals:</strong> This DAO's primary focus is to design the way
+            forward for Boom DAOs in the Solana ecosystem and to build a community
+            of like-minded individuals who are passionate about the future of Solana.
           </Typography>
           <CollectionStats info={collection?.info} />
           <Divider sx={{ pt: "1rem", mb: "1rem" }} />
