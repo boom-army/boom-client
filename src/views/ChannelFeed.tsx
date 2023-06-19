@@ -53,7 +53,7 @@ export const ChannelFeed: React.FC = () => {
       img: "https://arweave.net/gZSfTkhEe7pbu5Cnp2W9EkO6wk3bVmFYkjIlJBoqy5M?ext=png",
     },
   });
-  const { channelName } = useParams();  
+  const { channelName } = useParams();
   const { publicKey } = useWallet();
   const { connection } = useConnection();
   const scrollRef = useRef<HTMLDivElement>();
@@ -65,7 +65,10 @@ export const ChannelFeed: React.FC = () => {
   const { data: typingdata } = useTypingSubscription({
     variables: { channelId: BOOM_CHANNEL_ID },
   });
-  const { data: { getCollection: collection } = {} } = useGetCollectionQuery({
+  const {
+    data: { getCollection: collection } = {},
+    loading: collectionLoading,
+  } = useGetCollectionQuery({
     variables: {
       name: "boomheroes",
     },
@@ -78,7 +81,7 @@ export const ChannelFeed: React.FC = () => {
     },
     fetchPolicy: "network-only",
     pollInterval: 10000,
-  });  
+  });
 
   let typingTimeout: any;
   const handleTyping = () => {
@@ -124,7 +127,12 @@ export const ChannelFeed: React.FC = () => {
     scrollRef?.current?.scrollIntoView();
   }, [channelName]);
 
-  if (loading) return <Loader />;
+  if (loading || collectionLoading)
+    return (
+      <Box sx={{ marginTop: "1rem" }}>
+        <Loader />
+      </Box>
+    );
 
   return validNFT ? (
     <Box>
