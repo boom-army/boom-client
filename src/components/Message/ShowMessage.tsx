@@ -110,16 +110,6 @@ const MessageBox: React.FC<MessageBoxProps> = ({
   isTweetMine,
 }) => {
   const theme = useTheme();
-  const linkifyOptions = {
-    className: "body",
-    nl2br: true,
-    target: { url: "_blank" },
-    formatHref: {
-      hashtag: (href: any) => `explore?type=TAGS&term=${href.substring(1)}`,
-      mention: (href: string) =>
-        `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
-    },
-  };
   return (
     <Box
       display="flex"
@@ -173,13 +163,12 @@ const MessageBox: React.FC<MessageBoxProps> = ({
               </Link>
             </Box>
           )}
-          <Linkify options={linkifyOptions}>
-            {isTweetMine ? (
-              <BubbleRight>{children}</BubbleRight>
-            ) : (
-              <BubbleLeft>{children}</BubbleLeft>
-            )}
-          </Linkify>
+
+          {isTweetMine ? (
+            <BubbleRight>{children}</BubbleRight>
+          ) : (
+            <BubbleLeft>{children}</BubbleLeft>
+          )}
         </Box>
       </Stack>
     </Box>
@@ -215,7 +204,6 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
     setPopAnchor(null);
   };
   const popOpen = Boolean(popAnchor);
-  const handle = user && user.handle;
 
   const currentDate = dayjs();
   const createdDate = dayjs(setDate(createdAt));
@@ -223,6 +211,16 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
   if (!currentDate.isSame(createdDate, "day")) {
     formattedDate = createdDate.format("ddd") + " " + formattedDate;
   }
+
+  const linkifyOptions = {
+    nl2br: true,
+    target: { url: "_blank" },
+    formatHref: {
+      hashtag: (href: string) => `explore?type=TAGS&term=${href.substring(1)}`,
+      mention: (href: string) =>
+        `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
+    },
+  };
 
   return (
     <Grid item xs={12} mt={1} sx={{ position: "relative", padding: "0 1em" }}>
@@ -302,7 +300,16 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
                 {user && user.consumerName}
               </Typography>
             )}
-            <Typography>{text}</Typography>
+            <Linkify options={linkifyOptions}>
+              <Typography
+                sx={{
+                  wordBreak: "break-word",
+                  a: { color: theme.accentColor },
+                }}
+              >
+                {text}
+              </Typography>
+            </Linkify>
             <Box>
               {gif && (
                 <Box mt={1}>
