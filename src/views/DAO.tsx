@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import BuildIcon from "@mui/icons-material/Build";
@@ -19,7 +19,7 @@ import {
 import { Fxnction } from "../components/DAOTweets/Fxnction";
 import { DAOPromo } from "../components/Advertising/DAOPromo";
 import { ChannelStatus, RoutePath } from "../constants";
-import { uniqBy, differenceBy } from "lodash";
+import { uniqBy, differenceBy, some, get } from "lodash";
 import { displayError } from "../utils";
 import { useApolloClient } from "@apollo/client";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
@@ -38,13 +38,22 @@ export const DAOView: React.FC = () => {
   const client = useApolloClient();
   const { publicKey } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
+  const [isBoomer, setIsBoomer] = useState(false);
 
-  const [getUserChannels, { data, loading, error }] =
+  const [getUserChannels, { data }] =
     useGetUserChannelsLazyQuery({
       fetchPolicy: "network-only",
     });
   const [addChannelMutation] = useAddChannelMutation();
   const [channelUnlinkMutation] = useUnlinkChannelMutation();
+
+  useEffect(() => {
+    const hasKey = some(
+      data?.getUserChannels,
+      (obj) => get(obj, "key") === "boom-heroes"
+    );
+    setIsBoomer(hasKey);
+  }, [data]);
 
   useEffect(() => {
     (async () => {
@@ -275,15 +284,27 @@ export const DAOView: React.FC = () => {
           </Typography>
         </Box>
       </Grid>
-      <Grid item xs={12} md={4}>
-        <DAOPromo
-          heading="Become part of #BoomDAODAO"
-          body="Become part of the alpha crew, with full access and participation in Solana's first native Social DAO infrastructure by getting a Boom Hero NFT."
-          buttonText="Get a Boom Hero"
-          buttonLink="https://www.tensor.trade/trade/boomheroes"
-          openBlank={true}
-        />
-      </Grid>
+      {isBoomer ? (
+        <Grid item xs={12} md={4}>
+          <DAOPromo
+            heading="Jump into #BoomDAODAO"
+            body="You've got a Boom Hero NFT and you're part of the alpha crew, with full access and participation in Solana's first native Social DAO infrastructure!"
+            buttonText="Go to #BoomDAODAO"
+            buttonLink="https://boom.army/d/boom-heroes"
+          />
+        </Grid>
+      ) : (
+        <Grid item xs={12} md={4}>
+          <DAOPromo
+            heading="Become part of #BoomDAODAO"
+            body="Become part of the alpha crew, with full access and participation in Solana's first native Social DAO infrastructure by getting a Boom Hero NFT."
+            buttonText="Get a Boom Hero"
+            buttonLink="https://www.tensor.trade/trade/boomheroes"
+            openBlank={true}
+          />
+        </Grid>
+      )}
+
       <Grid item xs={12} md={4}>
         <DAOPromo
           heading="Get updates in the Feed"

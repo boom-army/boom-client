@@ -54,3 +54,7 @@ query getChannel($channelId: ID, $channelName: String, $offset: Int, $limit: Int
     ...TweetData
   }
 }
+
+query hasChannel($channelId: ID, $channelName: String) {
+  hasChannel(channelId: $channelId, channelName: $channelName)
+}

@@ -497,6 +497,7 @@ export type Query = {
   getMeta?: Maybe<Metadata>;
   getTags: Tags;
   getUserChannels: Array<Channel>;
+  hasChannel: Scalars['Boolean'];
   healthCheck: Scalars['String'];
   heroFeed: Array<Tweet>;
   homeStats: HomeStats;
@@ -551,6 +552,12 @@ export type QueryGetMetaArgs = {
 export type QueryGetTagsArgs = {
   dateFrom?: InputMaybe<Scalars['String']>;
   limit?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryHasChannelArgs = {
+  channelId?: InputMaybe<Scalars['ID']>;
+  channelName?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -838,6 +845,14 @@ export type GetChannelQueryVariables = Exact<{
 
 
 export type GetChannelQuery = { __typename?: 'Query', getChannel: Array<{ __typename?: 'Tweet', id: string, text: string, isTweetMine: boolean, commentsCount: number, retweetsCount: number, isRetweet: boolean, tipsCount?: string | null, createdAt?: string | null, channelId?: string | null, tags?: Array<{ __typename?: 'TweetTags', id: string, text?: string | null } | null> | null, channel?: { __typename?: 'Channel', id: string, key?: string | null, mintAuthority: string, name: string, family: string, description?: string | null, image?: string | null, channelParentId?: string | null, status?: string | null, verified?: boolean | null, membersCount?: { __typename?: 'MembersCount', count?: number | null, avatars?: Array<string | null> | null } | null } | null, masterTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, parentTweet?: { __typename?: 'Tweet', id: string, text: string, createdAt?: string | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null } | null, files?: Array<{ __typename?: 'File', id: string, url: string }> | null, gif?: { __typename?: 'Gif', id: string, title: string, fixedHeightUrl: string, originalUrl: string } | null, nft?: { __typename?: 'NFT', id: string, publicKey: string, name?: string | null, symbol?: string | null, description?: string | null, sellerFeeBasisPoints?: number | null, externalUrl?: string | null, image: string, attributes?: Array<{ __typename?: 'AttributesEntity', traitType?: string | null, value?: string | null } | null> | null, collection?: { __typename?: 'Collection', name?: string | null, family?: string | null } | null, properties?: { __typename?: 'Properties', category?: string | null, files?: Array<{ __typename?: 'FilesEntity', uri?: string | null, type?: string | null } | null> | null, creators?: Array<{ __typename?: 'CreatorsEntity', address?: string | null, share?: number | null } | null> | null } | null } | null, user?: { __typename?: 'User', id: string, avatar: string, handle: string, consumerName?: string | null, publicAddress: string, isTyping?: boolean | null, data?: { __typename?: 'UserData', avatarMint?: string | null, avatarUpdateAuthority?: string | null } | null } | null, reactions?: Array<{ __typename?: 'Reaction', id: string, emojiId: string, skin?: number | null, isMine: boolean, count: number }> | null }> };
+
+export type HasChannelQueryVariables = Exact<{
+  channelId?: InputMaybe<Scalars['ID']>;
+  channelName?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type HasChannelQuery = { __typename?: 'Query', hasChannel: boolean };
 
 export type GetCollectionQueryVariables = Exact<{
   name: Scalars['String'];
@@ -1405,6 +1420,40 @@ export function useGetChannelLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetChannelQueryHookResult = ReturnType<typeof useGetChannelQuery>;
 export type GetChannelLazyQueryHookResult = ReturnType<typeof useGetChannelLazyQuery>;
 export type GetChannelQueryResult = Apollo.QueryResult<GetChannelQuery, GetChannelQueryVariables>;
+export const HasChannelDocument = gql`
+    query hasChannel($channelId: ID, $channelName: String) {
+  hasChannel(channelId: $channelId, channelName: $channelName)
+}
+    `;
+
+/**
+ * __useHasChannelQuery__
+ *
+ * To run a query within a React component, call `useHasChannelQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHasChannelQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useHasChannelQuery({
+ *   variables: {
+ *      channelId: // value for 'channelId'
+ *      channelName: // value for 'channelName'
+ *   },
+ * });
+ */
+export function useHasChannelQuery(baseOptions?: Apollo.QueryHookOptions<HasChannelQuery, HasChannelQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<HasChannelQuery, HasChannelQueryVariables>(HasChannelDocument, options);
+      }
+export function useHasChannelLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HasChannelQuery, HasChannelQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<HasChannelQuery, HasChannelQueryVariables>(HasChannelDocument, options);
+        }
+export type HasChannelQueryHookResult = ReturnType<typeof useHasChannelQuery>;
+export type HasChannelLazyQueryHookResult = ReturnType<typeof useHasChannelLazyQuery>;
+export type HasChannelQueryResult = Apollo.QueryResult<HasChannelQuery, HasChannelQueryVariables>;
 export const GetCollectionDocument = gql`
     query getCollection($name: String!) {
   getCollection(name: $name)
