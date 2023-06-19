@@ -7,6 +7,8 @@ import {
   Box,
   Grid,
   IconButton,
+  Menu,
+  MenuItem,
   Paper,
   Stack,
   Typography,
@@ -20,7 +22,7 @@ import { LAMPORTS_PER_SOL } from "../../constants/math";
 import { Link } from "react-router-dom";
 import { List as ReactionsList } from "../Reactions/List";
 import { NFTTweet } from "../NFT/NFTTweet";
-import { Popover } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useSetRecoilState } from "recoil";
 import { TipCreator } from "../TipCreator";
 import { Maybe, Tweet, User } from "../../generated/graphql";
@@ -32,6 +34,7 @@ import { RoutePath } from "../../constants";
 import dayjs from "dayjs";
 import { setDate } from "../../utils";
 import { parentMeepState } from "../../hooks/useParentMeepState";
+import { EmojiMessage } from "./EmojiMessage";
 
 const IconsBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -201,17 +204,18 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
   } = tweet;
 
   const theme = useTheme();
-  const { handleReaction } = useReaction({ tweetId: id });
   const setParentMeepState = useSetRecoilState(parentMeepState);
-  const [popAnchor, setPopAnchor] = useState<HTMLElement | null>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setPopAnchor(event.currentTarget);
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
   };
-  const handlePopoverClose = () => {
-    setPopAnchor(null);
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
-  const popOpen = Boolean(popAnchor);
+  const open = Boolean(anchorEl);
+  const { handleReaction } = useReaction({ tweetId: id, handleClose });
 
   const currentDate = dayjs();
   const createdDate = dayjs(setDate(createdAt));
@@ -231,66 +235,11 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
   };
 
   return (
-    <Grid item xs={12} sx={{ position: "relative", padding: "0 1em" }}>
-      <Popover
-        id="mouse-over-popover"
-        open={popOpen}
-        anchorEl={popAnchor}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        onClose={handlePopoverClose}
-        disableRestoreFocus={true}
-      >
-        <Stack
-          direction={"row"}
-          spacing={2}
-          sx={{
-            background: theme.background2,
-            border: `1px solid ${theme.tertiaryColor}`,
-            padding: "0.2em 1em",
-            borderRadius: "5px",
-            alignItems: "baseline",
-          }}
-        >
-          <EmojiTweet handleReaction={handleReaction} />
-          <TipCreator
-            userPubKey={user?.publicAddress}
-            tipAmount={tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL}
-            tweetId={id}
-            userId={user?.id}
-            hideAmount={true}
-            fontSize={23}
-          />
-          <IconButton
-            onClick={() => {
-              setParentMeepState(tweet);
-              handlePopoverClose();
-              scrollRef?.current?.scrollIntoView();
-            }}
-            sx={{ padding: "0.2em" }}
-          >
-            <ReplyIcon
-              color="secondary"
-              sx={{
-                "&:hover": { color: theme.accentColor },
-              }}
-            />
-          </IconButton>
-        </Stack>
-      </Popover>
+    <Grid item xs={12}>
       <Box
         id={tweet?.id}
         display="flex"
         width="100%"
-        aria-owns={popOpen ? "mouse-over-popover" : undefined}
-        aria-haspopup="true"
-        onClick={(e) => !isTweetMine && handlePopoverOpen(e)}
         sx={{
           "&:hover": {
             cursor: !isTweetMine ? "pointer" : "inherit",
@@ -303,11 +252,87 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
             user={user}
             isTweetMine={isTweetMine}
           >
-            {!isTweetMine && (
-              <Typography sx={{ fontWeight: "600" }}>
-                {user && user.consumerName}
-              </Typography>
-            )}
+            {!isTweetMine ? (
+              <>
+                <IconButton
+                  aria-label="more"
+                  id="long-button"
+                  aria-controls="long-menu"
+                  aria-expanded={open ? "true" : undefined}
+                  aria-haspopup="true"
+                  size="small"
+                  onClick={handleClick}
+                  sx={{
+                    position: "absolute",
+                    top: "0",
+                    right: "0",
+                    "&:hover": {
+                      background: "transparent",
+                    },
+                  }}
+                >
+                  <ExpandMoreIcon sx={{ fontSize: 18 }} color="secondary" />
+                </IconButton>
+                <Menu
+                  id="long-menu"
+                  MenuListProps={{
+                    "aria-labelledby": "long-button",
+                  }}
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  PaperProps={{
+                    elevation: 0,
+                  }}
+                >
+                  <MenuItem key="EmojiMessage" onClick={() => handleReaction}>
+                    <EmojiMessage
+                      handleReaction={handleReaction}
+                      handleClose={handleClose}
+                    />
+                  </MenuItem>
+                  <MenuItem
+                    key="TipCreator"
+                    onClick={() => {
+                      scrollRef?.current?.scrollIntoView();
+                    }}
+                  >
+                    <TipCreator
+                      userPubKey={user?.publicAddress}
+                      tipAmount={
+                        tipsCount && parseInt(tipsCount) / LAMPORTS_PER_SOL
+                      }
+                      tweetId={id}
+                      userId={user?.id}
+                      hideAmount={true}
+                      fontSize={23}
+                      label="Tip this meep"
+                    />
+                  </MenuItem>
+                  <MenuItem
+                    key="ReplyIcon"
+                    onClick={() => {
+                      setParentMeepState(tweet);
+                      handleClose();
+                      scrollRef?.current?.scrollIntoView();
+                    }}
+                  >
+                    <ReplyIcon
+                      color="secondary"
+                      sx={{
+                        "&:hover": { color: theme.accentColor },
+                      }}
+                    />
+                    <Typography variant="body2" display="inline" pl={1}>
+                      Reply to {user?.handle}
+                    </Typography>
+                  </MenuItem>
+                </Menu>
+                <Typography sx={{ fontWeight: "600" }}>
+                  {user && user.consumerName}
+                </Typography>
+              </>
+            ) : null}
             <Linkify options={linkifyOptions}>
               <Typography
                 sx={{

@@ -4,7 +4,7 @@ import { Picker } from "emoji-mart";
 
 import "emoji-mart/css/emoji-mart.css";
 import { styled } from "@mui/material/styles";
-import { Box, Modal, useTheme } from "@mui/material";
+import { Box, Modal, Typography, useTheme } from "@mui/material";
 
 const PickerWrapper = styled(Box)((props: any) => ({
   position: "absolute" as "absolute",
@@ -54,6 +54,7 @@ interface EmojiPickerProps {
   emojiHandler?: any;
   customIcon?: any;
   dismissOnClick?: any;
+  label?: String;
   props?: any;
 }
 
@@ -61,6 +62,7 @@ export const EmojiPicker = ({
   emojiHandler,
   customIcon,
   dismissOnClick,
+  label,
 }: EmojiPickerProps) => {
   const [picker, togglePicker] = useState(false);
   const theme = useTheme();
@@ -75,6 +77,11 @@ export const EmojiPicker = ({
       <PickerIcon onClick={() => togglePicker(true)}>
         {customIcon ?? <InsertEmoticonIcon color="secondary" />}
       </PickerIcon>
+      {label ? (
+        <Typography onClick={() => togglePicker(true)} variant="body2" display="inline" pl={1}>
+          {label}
+        </Typography>
+      ) : null}
       <Modal
         open={picker}
         onClose={() => togglePicker(false)}

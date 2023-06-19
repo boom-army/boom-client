@@ -12,9 +12,10 @@ import {
 interface Props {
   tweetId: string;
   parentTweetId?: string;
+  handleClose?: () => void;
 }
 
-export const useReaction = ({ tweetId, parentTweetId }: Props) => {
+export const useReaction = ({ tweetId, parentTweetId, handleClose }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [toggleReactionMutation, { loading }] = useToggleReactionMutation({
@@ -32,6 +33,7 @@ export const useReaction = ({ tweetId, parentTweetId }: Props) => {
         await toggleReactionMutation({
           variables: { id: tweetId, emojiId, skin: null },
         });
+        handleClose && handleClose();
       } catch (err) {
         console.log(err);
         return displayError(err, enqueueSnackbar);
