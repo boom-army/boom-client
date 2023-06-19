@@ -8,6 +8,7 @@ import {
   Input,
   InputAdornment,
   Stack,
+  TextField,
   Typography,
   useMediaQuery,
   useTheme,
@@ -194,9 +195,9 @@ export const NewMessage: React.FC<Props> = ({
 
   return (
     <Box
-      height={parentTweet ? "13.5rem" : "9.5rem"}
       sx={{
-        marginBottom: isMobile ? "56px" : 0,
+        position: "sticky",
+        top: "56px",
       }}
     >
       {parentTweet && (
@@ -258,20 +259,30 @@ export const NewMessage: React.FC<Props> = ({
               handle={user?.handle}
               isNFT={user?.data?.avatarMint}
             />
-            <Input
+            <TextField
+              multiline
+              maxRows={4}
               value={tweet.value}
               onKeyDown={handleKeyDown}
               onChange={(e) => {
                 typingHandler();
                 return tweet.onChange(e);
               }}
-              placeholder={`Meep in # ${channelData?.family} ${channelData?.name}`}
+              // onPaste={handlePaste}
+              placeholder={`Meep in #${channelData?.name}`}
               fullWidth={true}
               autoFocus={true}
-              ref={scrollRef}
+              // ref={scrollRef}
+              variant="standard"
               sx={{
                 color: theme.palette.text.primary,
                 padding: "1em 1em 1em 0",
+                "& .MuiInput-root:before": {
+                  border: 0,
+                },
+                "& .MuiInputBase-inputMultiline": {
+                  overflow: "scroll",
+                },
                 "&:before": {
                   borderColor: theme.tertiaryColor2,
                 },
@@ -279,15 +290,17 @@ export const NewMessage: React.FC<Props> = ({
                   borderColor: theme.tertiaryColor2,
                 },
               }}
-              endAdornment={
-                <InputAdornment position="end">
-                  <EmojiPicker
-                    emojiHandler={(pickedEmoji: any) =>
-                      tweet.setValue(tweet.value + pickedEmoji.native)
-                    }
-                  />
-                </InputAdornment>
-              }
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <EmojiPicker
+                      emojiHandler={(pickedEmoji: any) =>
+                        tweet.setValue(tweet.value + pickedEmoji.native)
+                      }
+                    />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Stack>
         </Grid>
