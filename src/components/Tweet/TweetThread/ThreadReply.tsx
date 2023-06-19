@@ -33,12 +33,7 @@ export const ThreadReply: React.FC<Props> = ({ tweet, fromUser }: Props) => {
               textOverflow: "ellipsis",
             }}
           >
-            <Box
-              mr={0.5}
-              display="flex"
-              alignItems="top"
-              pt={0.8}
-            >
+            <Box mr={0.5} display="flex" alignItems="top" pt={0.8}>
               <UserAvatar
                 sx={{
                   width: 16,
@@ -50,24 +45,25 @@ export const ThreadReply: React.FC<Props> = ({ tweet, fromUser }: Props) => {
               />
             </Box>
             <Box>
-            <Typography
-              color="secondary"
-              variant="body2"
-              display="inline"
-              mr={1}
-            >
-              @{user?.handle}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="secondary"
-              display="inline"
-              sx={{
-                fontWeight: "300",
-              }}
-            >
-              {truncate(parentTweet?.text ?? "", { length: 90 })}
-            </Typography>
+              <Typography
+                color="secondary"
+                variant="body2"
+                display="inline"
+                mr={1}
+              >
+                @{user?.handle}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="secondary"
+                display="inline"
+                sx={{
+                  fontWeight: "300",
+                  wordBreak: "break-word",
+                }}
+              >
+                {truncate(parentTweet?.text ?? "", { length: 90 })}
+              </Typography>
             </Box>
           </Stack>
         </HashLink>
