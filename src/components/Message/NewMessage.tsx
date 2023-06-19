@@ -154,7 +154,7 @@ export const NewMessage: React.FC<Props> = ({
     setGif(null);
   };
 
-  const handleKeyDown = (event: any) => {    
+  const handleKeyDown = (event: any) => {
     if (event.key === "Enter") {
       handleNewTweet(event);
     }
@@ -194,7 +194,7 @@ export const NewMessage: React.FC<Props> = ({
 
   return (
     <Box
-      height={"9.5rem"}
+      height={parentTweet ? "13.5rem" : "9.5rem"}
       sx={{
         marginBottom: isMobile ? "56px" : 0,
       }}
@@ -210,10 +210,16 @@ export const NewMessage: React.FC<Props> = ({
         >
           <Stack spacing={1} direction="row">
             <ReplyIcon sx={{ color: theme.blue.lightest }} />
-            <Box display="flex">
-              <Typography fontWeight={200}>Replying to</Typography>
+            <Box>
+              <Typography fontWeight={200} display="inline">
+                Replying to
+              </Typography>
               {parentTweet.user ? (
-                <Typography ml={0.5}>
+                <Typography
+                  ml={0.5}
+                  display="inline"
+                  sx={{ wordBreak: "break-all" }}
+                >
                   @{parentTweet?.user.consumerName}
                 </Typography>
               ) : null}
