@@ -262,7 +262,7 @@ export const ShowMessage: React.FC<Props> = ({ tweet, scrollRef }: Props) => {
           />
           <IconButton
             onClick={() => {
-              setParentMeepState(id);
+              setParentMeepState(tweet);
               handlePopoverClose();
               scrollRef?.current?.scrollIntoView();
             }}

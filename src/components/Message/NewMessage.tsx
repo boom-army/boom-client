@@ -17,7 +17,6 @@ import {
   GetChannelDocument,
   FeedDocument,
   TweetDocument,
-  useMeQuery,
   useNewTweetMutation,
   useUpdateTypingStatusMutation,
 } from "../../generated/graphql";
@@ -26,7 +25,7 @@ import { GifyModal } from "../Giphy/GifyModal";
 import { ImageBox } from "../ImageBox";
 import { NFTPicker } from "../NFT/NFTPicker";
 import { NFTTweet } from "../NFT/NFTTweet";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { SIGN_FILE } from "../../queries/files";
 
 import { UploadFileIcon } from "../Icons";
@@ -34,13 +33,14 @@ import { VideoContainer } from "../Giphy/VideoContainer";
 import { client } from "../../apollo/client";
 import { displayError, uploadFile } from "../../utils";
 import { styled } from "@mui/material/styles";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useInput } from "../../hooks/useInput";
 import { useMutation, gql } from "@apollo/client";
 import { useSnackbar } from "../../contexts/snackbar";
 import { UserAvatar } from "../UserAvatar";
 import { parentMeepState } from "../../hooks/useParentMeepState";
 import { BOOM_CHANNEL_ID } from "../../utils/ids";
+import { UserContext } from "../../contexts/user";
 
 interface Props {
   channelId?: string | null | undefined;
@@ -79,9 +79,9 @@ export const NewMessage: React.FC<Props> = ({
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles]: any = useState([]);
   const tweet = useInput("");
+  const { user } = useContext(UserContext);
 
-  const parentTweet = useRecoilValue(parentMeepState);
-  const setParentMeepState = useSetRecoilState(parentMeepState);
+  const [parentTweet, setParentMeepState] = useRecoilState(parentMeepState);
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
@@ -105,19 +105,6 @@ export const NewMessage: React.FC<Props> = ({
     `,
   });
   const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
-  const parentTweetData =
-    parentTweet &&
-    client.readFragment({
-      id: `Tweet:${parentTweet}`,
-      fragment: gql`
-        fragment ParentTweet on Tweet {
-          text
-          user {
-            consumerName
-          }
-        }
-      `,
-    });
 
   const createGifInput = (gif: any) => ({
     title: gif.title,
@@ -146,7 +133,7 @@ export const NewMessage: React.FC<Props> = ({
           gif: gif ? createGifInput(gif) : null,
           nft: nftData,
           files: tweetFiles,
-          parentTweet,
+          parentTweet: parentTweet?.id ?? undefined,
           channel: channelId,
         },
       });
@@ -194,8 +181,6 @@ export const NewMessage: React.FC<Props> = ({
     }
   };
 
-  const { data } = useMeQuery();
-
   const mapTweetFiles = (url: string, index: number) => ({
     url,
     id: `preview-${index}`,
@@ -221,15 +206,17 @@ export const NewMessage: React.FC<Props> = ({
             <ReplyIcon sx={{ color: theme.blue.lightest }} />
             <Box display="flex">
               <Typography fontWeight={200}>Replying to</Typography>
-              <Typography ml={0.5}>
-                @{parentTweetData?.user.consumerName}
-              </Typography>
+              {parentTweet.user ? (
+                <Typography ml={0.5}>
+                  @{parentTweet?.user.consumerName}
+                </Typography>
+              ) : null}
             </Box>
           </Stack>
           <Box>
             <IconButton
               onClick={() => {
-                setParentMeepState("");
+                setParentMeepState(null);
               }}
               sx={{ padding: "0" }}
             >
@@ -255,9 +242,9 @@ export const NewMessage: React.FC<Props> = ({
                 width: 30,
                 height: 30,
               }}
-              avatar={data?.me?.avatar}
-              handle={data?.me?.handle}
-              isNFT={data?.me?.data?.avatarMint}
+              avatar={user?.avatar}
+              handle={user?.handle}
+              isNFT={user?.data?.avatarMint}
             />
             <Input
               value={tweet.value}
@@ -336,7 +323,7 @@ export const NewMessage: React.FC<Props> = ({
             <IconButton
               disabled={loading}
               onClick={(e) => {
-                setParentMeepState("");
+                setParentMeepState(null);
                 handleNewTweet(e);
               }}
             >
