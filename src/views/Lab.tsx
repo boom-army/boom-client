@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Grid, Stack, Typography, useTheme } from "@mui/material";
 import { HeroNavLink } from "../components/Nav";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -10,13 +10,14 @@ import SpeedIcon from "@mui/icons-material/Speed";
 import StyleIcon from "@mui/icons-material/Style";
 import ScienceIcon from "@mui/icons-material/Science";
 import { RoutePath } from "../constants";
+import { UserContext } from "../contexts/user";
 
 export const Lab = () => {
   const theme = useTheme();
   const iconProps = {
     color: theme.accentColor,
   };
-  const user = { handle: "harkl" };
+  const { user } = useContext(UserContext);
   return (
     <Grid container spacing={1} p={2}>
       <Grid item xs={12} display={"flex"}>
