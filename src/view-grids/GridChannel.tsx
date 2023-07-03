@@ -111,7 +111,7 @@ export const GridChannel: React.FC = () => {
         >
           {!validNFT && (
             <Typography variant="h4" color="white">
-              Chat is enable for all #BoomDAO members
+              Chat is enabled for all #BoomDAO members
             </Typography>
           )}
           {!showIframe && validNFT && (
