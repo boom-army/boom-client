@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChannelFeed } from "../views";
 import { Box, Grid, Button, useTheme, Typography } from "@mui/material";
 import VideoChatIcon from "@mui/icons-material/VideoChat";
-import CancelIcon from "@mui/icons-material/Cancel";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useSidebarState } from "../hooks";
 import {
   useGetChannelQuery,
@@ -117,13 +117,13 @@ export const GridChannel: React.FC = () => {
           {!showIframe && validNFT && (
             <Button variant="contained" color="primary" onClick={handleOpen}>
               <VideoChatIcon />
-              <Typography ml={1}>Join DAO Chat</Typography>
+              <Typography ml={1}>Join DAO Town Hall</Typography>
             </Button>
           )}
           {showIframe && (
             <Button color="primary" onClick={handleClose}>
-              <CancelIcon />
-              <Typography ml={1}>Quit DAO Chat</Typography>
+              <ExitToAppIcon />
+              <Typography ml={1}>Leave DAO Town Hall</Typography>
             </Button>
           )}
           {showIframe && validNFT && (
