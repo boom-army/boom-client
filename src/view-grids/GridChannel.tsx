@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { ChannelFeed } from "../views";
-import { Box, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Button, useTheme, Typography } from "@mui/material";
+import VideoChatIcon from "@mui/icons-material/VideoChat";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export const GridChannel: React.FC = () => {
   const theme = useTheme();
+  const [showIframe, setShowIframe] = useState(false);
+
+  const handleClick = () => {
+    setShowIframe(!showIframe);
+  };
+
   return (
     <Grid container height="100%">
       <Grid
@@ -16,11 +24,34 @@ export const GridChannel: React.FC = () => {
           display="flex"
           justifyContent="center"
           alignItems="center"
+          flexDirection="column"
           height="100%"
         >
-          <Typography variant="h4" p={2}>
-            Voting window in development
-          </Typography>
+          {!showIframe && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleClick}
+            >
+              <VideoChatIcon />
+              <Typography ml={1}>Join DAO Chat</Typography>
+            </Button>
+          )}
+          {showIframe && (
+            <Button color="primary" onClick={handleClick}>
+              <CancelIcon />
+              <Typography ml={1}>Quit DAO Chat</Typography>
+            </Button>
+          )}
+          {showIframe && (
+            <iframe
+              src="https://meet.boom.army/boom"
+              title="iframe"
+              width="100%"
+              height="100%"
+              allow="microphone; camera"
+            />
+          )}
         </Box>
       </Grid>
       <Grid
