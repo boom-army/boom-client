@@ -28,8 +28,8 @@ export const useChannelData = () => {
 
   useMemo(() => {
     (async () => {
-      try {        
-        if (!connected) displayError("Wallet not connected", enqueueSnackbar);
+      try {
+        if (!connected) return;
         const nftData = publicKey
           ? await metaplex?.nfts().findAllByOwner({
               owner: publicKey,
@@ -41,7 +41,7 @@ export const useChannelData = () => {
             try {
               const meta: any = await fetch(data.uri).then((response) =>
                 response.json()
-              );              
+              );
               return {
                 __typename: "Channel" as "Channel",
                 // @ts-ignore

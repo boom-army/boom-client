@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { MeepFeed } from "../components/MeepFeed";
 import { NewMessage } from "../components/Message/NewMessage";
 import {
+  GetChannelQuery,
+  GetCollectionQuery,
   TypingSubscription,
-  useGetChannelQuery,
-  useGetCollectionQuery,
   useTypingSubscription,
   useUpdateTypingStatusMutation,
 } from "../generated/graphql";
-import { useParams } from "react-router-dom";
 import { useChannelData } from "../hooks/useChannelData";
 import {
   Box,
@@ -20,15 +19,25 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { UserContext } from "../contexts/user";
 import { TypingDots } from "../components/TypingDots";
-import { BOOM_CHANNEL_ID, BOOM_COLLECTION_MINT_PUBLIC_KEY } from "../utils/ids";
+import { BOOM_CHANNEL_ID } from "../utils/ids";
 import { CollectionStats } from "../components/Channel/CollectionStats";
 // import { CollectionGallery } from "../components/Channel/CollectionGallery";
 import { headerOffset } from "../utils/boom-web3/constants";
 import { getRandomFromArr } from "../utils";
-import { Loader } from "../components/Loader";
+import { ApolloError } from "@apollo/client";
+
+interface ChannelFeedProps {
+  channelName: string | undefined;
+  collection: GetCollectionQuery["getCollection"];
+  data: GetChannelQuery | undefined;
+  error: ApolloError | undefined;
+  fetchMore: (props: any) => void;
+  loading: boolean;
+  refetch: (props: any) => void;
+  validNFT: boolean;
+}
 
 function formatUserHandles(users: TypingSubscription["typing"]) {
   if (users?.length === 1) {
@@ -40,8 +49,16 @@ function formatUserHandles(users: TypingSubscription["typing"]) {
   }
 }
 
-export const ChannelFeed: React.FC = () => {
-  const [validNFT, setValidNFT] = useState(false);
+export const ChannelFeed: React.FC<ChannelFeedProps> = ({
+  channelName,
+  refetch,
+  collection,
+  validNFT,
+  loading,
+  error,
+  data,
+  fetchMore,
+}) => {
   const [hero, setHero] = useState({
     price: 1,
     tokenMint: "4hVEfTPk5eLhX9tP4ENaySkjYfWnrePzMdjcH6A1DUJE",
@@ -54,35 +71,23 @@ export const ChannelFeed: React.FC = () => {
       img: "https://arweave.net/gZSfTkhEe7pbu5Cnp2W9EkO6wk3bVmFYkjIlJBoqy5M?ext=png",
     },
   });
-  const { channelName } = useParams();
-  const { publicKey } = useWallet();
-  const { connection } = useConnection();
   const scrollRef = useRef<HTMLDivElement>();
   const { user } = useContext(UserContext);
   const theme = useTheme();
   useChannelData();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  useEffect(() => {
+    refetch({
+      channelName: channelName as string,
+      offset: 0,
+    });
+    scrollRef?.current?.scrollIntoView();
+  }, [channelName]);
+
   const [updateTypingStatusMutation] = useUpdateTypingStatusMutation();
   const { data: typingdata } = useTypingSubscription({
     variables: { channelId: BOOM_CHANNEL_ID },
-  });
-  const {
-    data: { getCollection: collection } = {},
-    loading: collectionLoading,
-  } = useGetCollectionQuery({
-    variables: {
-      name: "boomheroes",
-    },
-  });
-  const { loading, error, data, fetchMore, refetch } = useGetChannelQuery({
-    variables: {
-      channelName: channelName as string,
-      offset: 0,
-      limit: 10,
-    },
-    fetchPolicy: "network-only",
-    pollInterval: 10000,
   });
 
   let typingTimeout: any;
@@ -105,36 +110,10 @@ export const ChannelFeed: React.FC = () => {
   const debouncedTypingHandler = debounce(handleTyping, 500);
 
   useEffect(() => {
-    (async () => {
-      if (data) {
-        setValidNFT(true);
-      }
-      if (error?.message) {
-        setValidNFT(false);
-      }
-    })();
-  }, [publicKey, connection, data, error]);
-
-  useEffect(() => {
     if (collection) {
       setHero(getRandomFromArr(collection.listings));
     }
   }, [collection]);
-
-  useEffect(() => {
-    refetch({
-      channelName: channelName as string,
-      offset: 0,
-    });
-    scrollRef?.current?.scrollIntoView();
-  }, [channelName]);
-
-  if (loading || collectionLoading)
-    return (
-      <Box sx={{ marginTop: "1rem" }}>
-        <Loader />
-      </Box>
-    );
 
   return validNFT ? (
     <Box sx={isMobile ? { overscrollBehaviorY: "none" } : {}}>
@@ -206,9 +185,10 @@ export const ChannelFeed: React.FC = () => {
             on-chain.
           </Typography>
           <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
-            <strong>Goals:</strong> This DAO's primary focus is to design the way
-            forward for Boom DAOs in the Solana ecosystem and to build a community
-            of like-minded individuals who are passionate about the future of Solana.
+            <strong>Goals:</strong> This DAO's primary focus is to design the
+            way forward for Boom DAOs in the Solana ecosystem and to build a
+            community of like-minded individuals who are passionate about the
+            future of Solana.
           </Typography>
           <CollectionStats info={collection?.info} />
           <Divider sx={{ pt: "1rem", mb: "1rem" }} />
