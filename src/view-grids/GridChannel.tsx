@@ -132,7 +132,7 @@ export const GridChannel: React.FC = () => {
             <iframe
               src={`https://meet.boom.army/boom#userInfo.displayName="${
                 user?.handle ?? "Boom enjooooyer"
-              }"&userInfo.avatarUrl="${user?.avatar ?? ""}`}
+              }`}
               title="iframe"
               width="100%"
               height="100%"
