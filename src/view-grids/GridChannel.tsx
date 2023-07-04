@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ChannelFeed } from "../views";
 import { Box, Grid, Button, useTheme, Typography } from "@mui/material";
 import VideoChatIcon from "@mui/icons-material/VideoChat";
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useSidebarState } from "../hooks";
 import {
   useGetChannelQuery,
@@ -11,6 +11,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Loader } from "../components/Loader";
+import { UserContext } from "../contexts/user";
 
 export const GridChannel: React.FC = () => {
   const theme = useTheme();
@@ -18,6 +19,7 @@ export const GridChannel: React.FC = () => {
   const { channelName } = useParams();
   const { publicKey } = useWallet();
   const { connection } = useConnection();
+  const { user } = useContext(UserContext);
 
   const [validNFT, setValidNFT] = useState(false);
 
@@ -128,7 +130,9 @@ export const GridChannel: React.FC = () => {
           )}
           {showIframe && validNFT && (
             <iframe
-              src="https://meet.boom.army/boom"
+              src={`https://meet.boom.army/boom#userInfo.displayName="${
+                user?.handle ?? "Boom enjooooyer"
+              }"&userInfo.avatarUrl="${user?.avatar ?? ""}`}
               title="iframe"
               width="100%"
               height="100%"
