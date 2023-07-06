@@ -130,7 +130,7 @@ export const GridChannel: React.FC = () => {
           )}
           {showIframe && validNFT && (
             <iframe
-              src={`https://meet.boom.army/boom#userInfo.displayName="${
+              src={`https://meet.boom.army/boom#config.startWithVideoMuted=true&config.startWithAudioMuted=true&userInfo.displayName="${
                 user?.handle ?? "Boom enjooooyer"
               }`}
               title="iframe"
