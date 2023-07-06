@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -17,28 +17,27 @@ interface VideoProps {
   onClose?: (() => void) | undefined;
 }
 
-export const VideoContainer: React.FC<VideoProps> = ({ gif, onClose }) => {
+const VideoBoxWrapper = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  position: "relative",
+  borderRadius: "16px",
+  border: `1px solid ${theme.palette.secondary}`,
+  width: "90%",
+  margin: "0 0 0.75rem",
+  overflow: "hidden",
+}));
+
+const Video = styled("video")({
+  width: "100%",
+  cursor: "auto",
+});
+
+export const VideoContainer = React.memo(({ gif, onClose }: VideoProps) => {
   const { fixedHeightUrl, title } = gif;
-  const theme = useTheme();
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  const VideoBoxWrapper = styled("div")({
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    borderRadius: "16px",
-    border: `1px solid ${theme.palette.secondary}`,
-    width: "90%",
-    margin: "0 0 0.75rem",
-    overflow: "hidden",
-  });
-
-  const Video = styled("video")({
-    width: "100%",
-    cursor: "auto",
-  });
 
   const handleVideoPlayerClick = () => {
     const video = videoRef.current;
@@ -102,4 +101,4 @@ export const VideoContainer: React.FC<VideoProps> = ({ gif, onClose }) => {
       </Box>
     </VideoBoxWrapper>
   );
-};
+});
