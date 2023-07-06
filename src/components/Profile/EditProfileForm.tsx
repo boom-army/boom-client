@@ -30,6 +30,7 @@ import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "../../contexts/snackbar";
 import { useState, useContext } from "react";
 import { UserAvatar } from "../UserAvatar";
+import { RoutePath } from "../../constants";
 
 interface Profile {
   profile: ProfileQuery["profile"];
@@ -90,7 +91,7 @@ export const EditProfileForm = ({ profile, setUser }: Profile) => {
 
       setUser(data.editProfile);
 
-      navigate(`/${data.editProfile.handle}`);
+      navigate(`/${RoutePath.HANDLE_HASH}/${data.editProfile.handle}`);
 
       enqueueSnackbar("Your profile has been updated 🥳.", {
         variant: "success",
