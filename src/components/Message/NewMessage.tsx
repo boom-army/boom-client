@@ -159,10 +159,11 @@ export const NewMessage: React.FC<Props> = ({
   };
 
   const handleKeyDown = (event: any) => {
-    if (event.key === "Enter" && !isButtonClicked) {
+    if (event.key === "Enter" && !event.shiftKey && !isButtonClicked) {
+      event.preventDefault(); // Prevent adding a new line when submitting the form
       handleNewTweet(event);
     }
-  };
+  };  
 
   const handleTweetFiles = async (e: any) => {
     try {
