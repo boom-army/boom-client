@@ -61,7 +61,7 @@ const ProfileInfo = ({ profile }: any) => {
           {isSelf ? (
             <Button
               component={Link}
-              to={RoutePath.PROFILE_SETTINGS}
+              to={`/${RoutePath.PROFILE_SETTINGS}`}
               variant="outlined"
               color="primary"
               size="small"
