@@ -73,16 +73,16 @@ export const NewMessage: React.FC<Props> = ({
   scrollRef,
   typingHandler,
 }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { enqueueSnackbar } = useSnackbar();
   const [gif, setGif]: any = useState(null);
+  const [isButtonClicked, setButtonClicked] = useState(false);
   const [nftData, setNftData] = useState(null);
   const [tweetFiles, setTweetFiles]: any = useState([]);
-  const tweet = useInput("");
-  const { user } = useContext(UserContext);
 
   const [parentTweet, setParentMeepState] = useRecoilState(parentMeepState);
+  const theme = useTheme();
+  const tweet = useInput("");
+  const { enqueueSnackbar } = useSnackbar();
+  const { user } = useContext(UserContext);
 
   const [newTweetMutation, { loading }] = useNewTweetMutation({
     refetchQueries: [
@@ -116,6 +116,8 @@ export const NewMessage: React.FC<Props> = ({
   const handleNewTweet = async (e: any) => {
     e.preventDefault();
 
+    setButtonClicked(true);
+
     // a tweet can have no text body if it has a gif
     if (!tweet.value && !gif && !tweetFiles.length && !nftData)
       return enqueueSnackbar("Write something...", { variant: "info" });
@@ -145,6 +147,7 @@ export const NewMessage: React.FC<Props> = ({
       console.log(err);
       return displayError(err, enqueueSnackbar);
     } finally {
+      setButtonClicked(false);
       updateTypingStatusMutation({
         variables: { channelId: BOOM_CHANNEL_ID, isTyping: false },
       });
@@ -156,7 +159,7 @@ export const NewMessage: React.FC<Props> = ({
   };
 
   const handleKeyDown = (event: any) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && !isButtonClicked) {
       handleNewTweet(event);
     }
   };
@@ -268,10 +271,10 @@ export const NewMessage: React.FC<Props> = ({
                 typingHandler();
                 return tweet.onChange(e);
               }}
-              // onPaste={handlePaste}
               placeholder={`Meep in #${channelData?.name}`}
               fullWidth={true}
               autoFocus={true}
+              disabled={isButtonClicked || loading}
               // ref={scrollRef}
               variant="standard"
               sx={{
@@ -347,13 +350,14 @@ export const NewMessage: React.FC<Props> = ({
         <Grid item xs={6} pr={1}>
           <Box display={"flex"} sx={{ justifyContent: "flex-end" }}>
             <IconButton
-              disabled={loading}
+              disabled={isButtonClicked || loading}
               onClick={(e) => {
                 setParentMeepState(null);
                 handleNewTweet(e);
               }}
+              aria-label="send"
             >
-              <SendIcon sx={{ color: theme.accentColor }} />
+              <SendIcon />
             </IconButton>
           </Box>
         </Grid>
