@@ -13,6 +13,7 @@ import {
   Box,
   Button,
   Divider,
+  Skeleton,
   Stack,
   Typography,
   debounce,
@@ -155,7 +156,11 @@ export const ChannelFeed: React.FC<ChannelFeedProps> = ({
         Welcome to the Boom Heroes DAO
       </Typography>
       <Box maxWidth="100%" sx={{ position: "relative" }}>
-        <img src={hero.extra.img} width="100%" />
+        {hero.extra.img ? (
+          <img src={hero.extra.img} width="100%" />
+        ) : (
+          <Skeleton variant="rectangular" height="40rem" />
+        )}
         <Button
           variant="contained"
           size="small"
