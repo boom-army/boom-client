@@ -175,13 +175,14 @@ export const ChannelFeed: React.FC<ChannelFeedProps> = ({
         </Button>
         <Box
           sx={{
-            position: "absolute",
+            position: isMobile ? "relative" : "absolute",
             bottom: 0,
             left: 0,
             width: "100%",
             padding: "1rem",
             backgroundColor: "rgba(0, 0, 0, 0.7)",
             color: "white",
+            mb: isMobile ? "4rem" : 0,
           }}
         >
           <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
