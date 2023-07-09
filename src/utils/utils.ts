@@ -168,6 +168,7 @@ export const formatPct = new Intl.NumberFormat("en-US", {
 
 export function currentCluster() {
   const endpoint = import.meta.env.VITE_RPC_URL!;
+  const arweaveEndpoint = import.meta.env.VITE_ARWEAVE_URL!;
   const clusterName = (endpoint: string) => {
     switch (true) {
       case endpoint.includes("dev"):
@@ -184,7 +185,7 @@ export function currentCluster() {
   if (!name) {
     throw new Error("Invalid RPC cluster");
   }
-  return { name, endpoint };
+  return { name, endpoint, arweaveEndpoint };
 }
 
 export interface AlertState {
