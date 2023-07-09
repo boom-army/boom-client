@@ -29,6 +29,7 @@ import { useUmi } from "../../contexts/umi";
 import { createGenericFileFromBrowserFile } from "@metaplex-foundation/umi";
 import { useMetaplex } from "../../contexts/metaplex";
 import { walletAdapterIdentity } from "@metaplex-foundation/js";
+import { snackAction } from "../TipCreator/tipInput";
 
 const ImageInput = styled("input")({
   display: "none",
@@ -144,17 +145,15 @@ export const NFTMint: React.FC = (props) => {
           },
         }
       );
-
       const mint = await metaplex?.nfts().create({
-        uri,
+        uri: imageUri,
         name: fields.name,
         sellerFeeBasisPoints: fields.seller_fee_basis_points,
       });
-
       setFields(defaultFieldsState);
       enqueueSnackbar("Successful mint:", {
         variant: "success",
-        action: snackAction(mint?.mintAddress),
+        action: snackAction(mint?.mintAddress.toBase58() as string),
       });
     } catch (e: any) {
       console.log(e);
@@ -164,7 +163,7 @@ export const NFTMint: React.FC = (props) => {
       setPreview(null);
       setImage(null);
     }
-  };
+  };  
 
   const addAttr = () => {
     const values = { ...fields };
@@ -532,8 +531,3 @@ export const NFTMint: React.FC = (props) => {
     </>
   );
 };
-function snackAction(
-  mintAddress: import("@solana/web3.js").PublicKey | undefined
-): React.ReactNode {
-  throw new Error("Function not implemented.");
-}

@@ -29,6 +29,12 @@ interface Props {
   tweetId: string;
 }
 
+export const snackAction = (signature: string) => (
+  <Link href={`https://solana.fm/tx/${signature}`} target={"_blank"}>
+    {signature.slice(0, 4) + ".." + signature.slice(-4)}
+  </Link>
+);
+
 export const TipInput: React.FC<Props> = ({
   userPubKey,
   setShowTip,
@@ -55,12 +61,6 @@ export const TipInput: React.FC<Props> = ({
       },
     ],
   });
-
-  const snackAction = (signature: string) => (
-    <Link href={`https://solana.fm/tx/${signature}`} target={"_blank"}>
-      {signature.slice(0, 4) + ".." + signature.slice(-4)}
-    </Link>
-  );
 
   const handleTipAction = useCallback(
     async ({ txAmount }: { txAmount: number }) => {
