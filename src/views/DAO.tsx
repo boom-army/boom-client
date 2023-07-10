@@ -40,10 +40,9 @@ export const DAOView: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [isBoomer, setIsBoomer] = useState(false);
 
-  const [getUserChannels, { data }] =
-    useGetUserChannelsLazyQuery({
-      fetchPolicy: "network-only",
-    });
+  const [getUserChannels, { data }] = useGetUserChannelsLazyQuery({
+    fetchPolicy: "network-only",
+  });
   const [addChannelMutation] = useAddChannelMutation();
   const [channelUnlinkMutation] = useUnlinkChannelMutation();
 

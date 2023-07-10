@@ -1,11 +1,11 @@
-import { Box } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Box } from "@mui/material";
+import React, { useEffect } from "react";
 
 export const Fxnction = () => {
   useEffect(() => {
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.async = true;
-    script.src = 'https://platform.twitter.com/widgets.js';
+    script.src = "https://platform.twitter.com/widgets.js";
     document.body.appendChild(script);
 
     return () => {
@@ -19,12 +19,18 @@ export const Fxnction = () => {
         <p lang="en" dir="ltr">
           DAO Infrastructure is Broken. <br />
           <br />
-          As I look at the current infrastructure for DAOs, I ask myself, what isn’t working?<br />
+          As I look at the current infrastructure for DAOs, I ask myself, what
+          isn’t working?
           <br />
-          Let’s take a look 👇 <a href="https://t.co/BBhrxM0Iyy">pic.twitter.com/BBhrxM0Iyy</a>
+          <br />
+          Let’s take a look 👇{" "}
+          <a href="https://t.co/BBhrxM0Iyy">pic.twitter.com/BBhrxM0Iyy</a>
         </p>
-        &mdash; fxnction (@fxnction) <a href="https://twitter.com/fxnction/status/1643300508864749568?ref_src=twsrc%5Etfw">April 4, 2023</a>
+        &mdash; fxnction (@fxnction){" "}
+        <a href="https://twitter.com/fxnction/status/1643300508864749568?ref_src=twsrc%5Etfw">
+          April 4, 2023
+        </a>
       </blockquote>
     </Box>
   );
-}
+};

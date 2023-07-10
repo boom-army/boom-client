@@ -2,10 +2,7 @@ import React from "react";
 import { ApolloError } from "@apollo/client";
 import { Box } from "@mui/system";
 import { CustomResponse } from "./CustomResponse";
-import {
-  GetChannelQuery,
-  Tweet,
-} from "../generated/graphql";
+import { GetChannelQuery, Tweet } from "../generated/graphql";
 import { Grid } from "@mui/material";
 import { Loader } from "./Loader";
 import { ShowMessage } from "./Message/ShowMessage";

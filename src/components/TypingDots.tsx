@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 export const TypingDots: React.FC = () => {
-  const [dots, setDots] = useState('');
+  const [dots, setDots] = useState("");
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setDots((prevDots) => {
         if (prevDots.length === 3) {
-          return '';
+          return "";
         } else {
-          return prevDots + '.';
+          return prevDots + ".";
         }
       });
     }, 500);
@@ -19,5 +19,5 @@ export const TypingDots: React.FC = () => {
     };
   }, []);
 
-  return (dots ? <span>{dots}</span> : <span>&nbsp;</span>);
+  return dots ? <span>{dots}</span> : <span>&nbsp;</span>;
 };

@@ -27,9 +27,7 @@ import { useSnackbar } from "../../contexts/snackbar";
 
 import { createGenericFileFromBrowserFile } from "@metaplex-foundation/umi";
 import { useMetaplex } from "../../contexts/metaplex";
-import {
-  toMetaplexFile,
-} from "@metaplex-foundation/js";
+import { toMetaplexFile } from "@metaplex-foundation/js";
 import { snackAction } from "../TipCreator/tipInput";
 
 const ImageInput = styled("input")({

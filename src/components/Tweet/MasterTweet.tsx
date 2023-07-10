@@ -47,7 +47,11 @@ export const MasterTweet: React.FC = () => {
               />
             )}
             {data?.tweet?.masterTweets?.length! > 0 ? (
-              <TweetThread key={tweetId} tweet={data?.tweet as TweetQuery["tweet"]} isMaster={true} />
+              <TweetThread
+                key={tweetId}
+                tweet={data?.tweet as TweetQuery["tweet"]}
+                isMaster={true}
+              />
             ) : (
               <Grid item xs={12}>
                 <CustomResponse text="No hero's have meeped." />

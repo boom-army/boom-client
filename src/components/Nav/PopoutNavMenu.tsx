@@ -5,7 +5,7 @@ import { useDrawerState } from "../../hooks";
 
 export const PopoutNavMenu = () => {
   const { toggleLeftNav, drawer } = useDrawerState();
-  
+
   const user = null;
   const data = {
     profile: {

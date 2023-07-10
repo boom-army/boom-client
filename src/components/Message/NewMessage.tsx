@@ -163,7 +163,7 @@ export const NewMessage: React.FC<Props> = ({
       event.preventDefault(); // Prevent adding a new line when submitting the form
       handleNewTweet(event);
     }
-  };  
+  };
 
   const handleTweetFiles = async (e: any) => {
     try {

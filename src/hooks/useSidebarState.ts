@@ -10,7 +10,7 @@ const sidebarStateKey = "sidebarState";
 
 export const sideBar = atom({
   key: "sidebarState",
-  default: JSON.parse(localStorage.getItem(sidebarStateKey) || 'null') || {
+  default: JSON.parse(localStorage.getItem(sidebarStateKey) || "null") || {
     leftSidebarFull: false,
     rightNotificationsFull: false,
   },

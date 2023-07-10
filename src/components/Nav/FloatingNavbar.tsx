@@ -75,22 +75,10 @@ export const FloatingNavbar = () => {
           alignItems: "center",
         }}
       >
-        <NavIconButton
-          icon={<HubIcon />}
-          route={RoutePath.HOME}
-        />
-        <NavIconButton
-          icon={<FeedIcon />}
-          route={`/${RoutePath.FEED}`}
-        />
-        <NavIconButton
-          icon={<NewspaperIcon />}
-          route={`/${RoutePath.NEWS}`}
-        />
-        <NavIconButton
-          icon={<ScienceIcon />}
-          route={`/${RoutePath.LAB}`}
-        />
+        <NavIconButton icon={<HubIcon />} route={RoutePath.HOME} />
+        <NavIconButton icon={<FeedIcon />} route={`/${RoutePath.FEED}`} />
+        <NavIconButton icon={<NewspaperIcon />} route={`/${RoutePath.NEWS}`} />
+        <NavIconButton icon={<ScienceIcon />} route={`/${RoutePath.LAB}`} />
       </Box>
     </Box>
   );

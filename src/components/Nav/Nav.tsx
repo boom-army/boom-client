@@ -82,7 +82,11 @@ export const Nav: React.FC = () => {
         key="bottom-nav-stack"
         direction="column"
         spacing={1}
-        sx={{ pb:3, width: "100%", borderBottom: `1px solid ${theme.tertiaryColor}` }}
+        sx={{
+          pb: 3,
+          width: "100%",
+          borderBottom: `1px solid ${theme.tertiaryColor}`,
+        }}
       >
         <NavLink
           style={applyActiveStyles}
@@ -126,7 +130,7 @@ export const Nav: React.FC = () => {
           target="_blank"
         >
           <Stack direction="row" {...stackProps}>
-            <BMAIcon {...iconProps} fontSize={20}/>
+            <BMAIcon {...iconProps} fontSize={20} />
             <Typography variant="body2" color="secondary">
               USDC-BMA
             </Typography>

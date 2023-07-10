@@ -31,7 +31,7 @@ interface Props {
   threaded?: boolean;
   popUpResponse?: boolean;
   overideMt?: number;
-  truncated?: number
+  truncated?: number;
 }
 
 const IconsStack = styled(Stack)((props) => ({
@@ -88,7 +88,8 @@ export const ShowTweet: React.FC<Props> = ({
     target: { url: "_blank" },
     formatHref: {
       hashtag: (href: string) => `explore?type=TAGS&term=${href.substring(1)}`,
-      mention: (href: string) => `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
+      mention: (href: string) =>
+        `/${RoutePath.HANDLE_HASH}/${href.substring(1)}`,
     },
   };
 
@@ -150,7 +151,9 @@ export const ShowTweet: React.FC<Props> = ({
           )}
         </Link>
         <Link
-          to={`/${RoutePath.MEEP_HASH}/${masterTweet?.id ?? parentTweet?.id ?? id}`}
+          to={`/${RoutePath.MEEP_HASH}/${
+            masterTweet?.id ?? parentTweet?.id ?? id
+          }`}
           className="secondary"
         >
           <Typography

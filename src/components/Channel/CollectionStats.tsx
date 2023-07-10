@@ -3,7 +3,7 @@ import { boomNumFormat } from "../../utils/utils";
 import { Box, Stack, Typography } from "@mui/material";
 
 interface CollectionStatsProps {
-    info: any;
+  info: any;
 }
 
 export const CollectionStats: React.FC<CollectionStatsProps> = ({ info }) => {

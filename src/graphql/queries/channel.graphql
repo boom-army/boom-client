@@ -49,8 +49,18 @@ mutation unlinkChannel($channelId: ID!) {
   unlinkChannel(channelId: $channelId)
 }
 
-query getChannel($channelId: ID, $channelName: String, $offset: Int, $limit: Int) {
-  getChannel(channelId: $channelId, channelName: $channelName, offset: $offset, limit: $limit) {
+query getChannel(
+  $channelId: ID
+  $channelName: String
+  $offset: Int
+  $limit: Int
+) {
+  getChannel(
+    channelId: $channelId
+    channelName: $channelName
+    offset: $offset
+    limit: $limit
+  ) {
     ...TweetData
   }
 }

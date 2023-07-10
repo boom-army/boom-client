@@ -11,13 +11,17 @@ interface Props {
   isMaster?: boolean;
 }
 
-export const TweetThread: React.FC<Props> = ({ tweet, isMaster = false }: Props) => {
-  const theme = useTheme();  
-  const masterTweets = tweet?.masterTweets?.filter(t => t?.id !== tweet.id) || [];
+export const TweetThread: React.FC<Props> = ({
+  tweet,
+  isMaster = false,
+}: Props) => {
+  const theme = useTheme();
+  const masterTweets =
+    tweet?.masterTweets?.filter((t) => t?.id !== tweet.id) || [];
   const slicedTweets = isMaster ? masterTweets : masterTweets?.slice(0, 4);
   const isThreaded = masterTweets.length > 0 ?? false;
   const hiddenTweetsCount =
-    slicedTweets?.length && (masterTweets?.length - slicedTweets?.length);
+    slicedTweets?.length && masterTweets?.length - slicedTweets?.length;
 
   return (
     <Grid
@@ -25,12 +29,14 @@ export const TweetThread: React.FC<Props> = ({ tweet, isMaster = false }: Props)
       pb={1.5}
       sx={{ borderBottom: `1px solid ${theme.tertiaryColor}` }}
     >
-      {!isMaster && <ShowTweet
-        key={tweet.id}
-        tweet={tweet as Tweet}
-        threaded={isThreaded}
-        popUpResponse
-      />}
+      {!isMaster && (
+        <ShowTweet
+          key={tweet.id}
+          tweet={tweet as Tweet}
+          threaded={isThreaded}
+          popUpResponse
+        />
+      )}
       {slicedTweets?.length
         ? slicedTweets.map(
             (tweet, i) =>
@@ -54,7 +60,9 @@ export const TweetThread: React.FC<Props> = ({ tweet, isMaster = false }: Props)
           <Box mx={2} mt={1} pl={7}>
             <Link
               style={{ cursor: "pointer", color: theme.accentColor }}
-              to={`/${RoutePath.MEEP_HASH}/${tweet?.masterTweet?.id ?? tweet.id}`}
+              to={`/${RoutePath.MEEP_HASH}/${
+                tweet?.masterTweet?.id ?? tweet.id
+              }`}
             >
               <Typography variant="body2">
                 {hiddenTweetsCount} more meep

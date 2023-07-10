@@ -78,7 +78,12 @@ export const EmojiPicker = ({
         {customIcon ?? <InsertEmoticonIcon color="secondary" />}
       </PickerIcon>
       {label ? (
-        <Typography onClick={() => togglePicker(true)} variant="body2" display="inline" pl={1}>
+        <Typography
+          onClick={() => togglePicker(true)}
+          variant="body2"
+          display="inline"
+          pl={1}
+        >
           {label}
         </Typography>
       ) : null}

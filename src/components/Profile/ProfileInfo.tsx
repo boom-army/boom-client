@@ -53,7 +53,11 @@ const ProfileInfo = ({ profile }: any) => {
             left: "0.5em",
           }}
         >
-          <UserAvatar avatar={avatar} handle={data?.handle} isNFT={data?.avatarMint} />
+          <UserAvatar
+            avatar={avatar}
+            handle={data?.handle}
+            isNFT={data?.avatarMint}
+          />
         </Box>
       </Box>
       <Box pl={3}>

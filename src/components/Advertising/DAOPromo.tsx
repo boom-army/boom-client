@@ -57,7 +57,7 @@ export const DAOPromo: React.FC<Props> = ({
               size="small"
               variant="contained"
               href={buttonLink}
-              target={ openBlank ? "_blank" : "_self" }
+              target={openBlank ? "_blank" : "_self"}
             >
               {buttonText}
             </Button>

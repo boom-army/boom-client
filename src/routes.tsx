@@ -5,7 +5,6 @@ import { AppHeader } from "./components/AppHeader";
 import { Box, Slide, useMediaQuery, useTheme } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GiphyContextProvider } from "./contexts/giphy";
-import { Helmet } from "react-helmet";
 import { UserContext } from "./contexts/user";
 import { Wallet } from "./contexts/wallet";
 import { useProfileQuery } from "./generated/graphql";
@@ -48,38 +47,6 @@ export const AppRoutes: React.FC = () => {
 
   return (
     <>
-      {/* @ts-ignore */}
-      <Helmet>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#16202B" />
-        <link rel="canonical" href="http://boom.army" />
-        <link rel="apple-touch-icon" href={BoomLogo} />
-
-        <title>Boom</title>
-        <meta name="title" content="Boom" />
-        <meta name="description" content="NFT Driven Communities on Solana." />
-
-        <meta name="og:type" content="website" />
-        <meta name="og:url" content={window.location.origin} />
-        <meta name="og:title" content="Boom" />
-        <meta
-          name="og:description"
-          content="NFT Driven Communities on Solana."
-        />
-        <meta name="og:image" content={BoomArmy} />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content={window.location.origin} />
-        <meta name="twitter:title" content="Boom" />
-        <meta
-          name="twitter:description"
-          content="NFT Driven Communities on Solana."
-        />
-        <meta name="twitter:image" content={BoomArmy} />
-        <meta name="twitter:creator" content="@boom_army_" />
-      </Helmet>
-
       <BrowserRouter basename={"/"}>
         <Wallet>
           <GiphyContextProvider>

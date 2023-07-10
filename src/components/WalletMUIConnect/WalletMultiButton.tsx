@@ -87,7 +87,7 @@ export const WalletMultiButton: FC<ButtonProps> = ({
 
   const handleLogout = useCallback(
     (event: any) => {
-      localStorageLogout()
+      localStorageLogout();
       disconnect().catch(() => {
         // Silently catch because any errors are caught by the context `onError` handler
       });

@@ -22,7 +22,7 @@ export const UmiProvider = ({
   endpoint: string;
   children: ReactNode;
 }) => {
-  const wallet = useWallet();  
+  const wallet = useWallet();
   const umi = createUmi(endpoint)
     .use(walletAdapterIdentity(wallet))
     .use(mplTokenMetadata());

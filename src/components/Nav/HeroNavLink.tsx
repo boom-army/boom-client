@@ -19,9 +19,7 @@ export const HeroNavLink: React.FC<HeroNavLinkProps> = ({
   const theme = useTheme();
 
   const applyActiveStyles = ({ isActive }: { isActive: boolean }) => ({
-    color: isActive
-      ? theme.accentColor
-      : (theme.palette.text.primary),
+    color: isActive ? theme.accentColor : theme.palette.text.primary,
     width: "100%",
   });
 

@@ -25,14 +25,10 @@ export const ParentTweet: React.FC<Props> = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <Link
-          to={`/${RoutePath.MEEP_HASH}/${props.parentTweet}`}
-        >
+        <Link to={`/${RoutePath.MEEP_HASH}/${props.parentTweet}`}>
           Jump up thread &#x2934;
         </Link>
-        <Link
-          to={`/${RoutePath.MEEP_HASH}/${props.masterTweet}`}
-        >
+        <Link to={`/${RoutePath.MEEP_HASH}/${props.masterTweet}`}>
           Jump to original &#x2934;
         </Link>
       </Box>

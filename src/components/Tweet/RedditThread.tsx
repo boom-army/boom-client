@@ -1,7 +1,6 @@
 // import boomLogo from "../../images/boom-logo.png";
 // import { styled } from "@mui/material/styles";
 import { CustomResponse } from "../CustomResponse";
-// import { Helmet } from "react-helmet";
 import { Loader } from "../Loader";
 import { NewTweet, ParentTweet, ShowTweet } from ".";
 import { Maybe, Tweet, useTweetQuery } from "../../generated/graphql";

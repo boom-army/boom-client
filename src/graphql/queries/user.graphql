@@ -18,10 +18,7 @@ subscription typing($channelId: String!) {
   }
 }
 
-mutation updateTypingStatus(
-  $channelId: String!
-  $isTyping: Boolean!
-) {
+mutation updateTypingStatus($channelId: String!, $isTyping: Boolean!) {
   updateTypingStatus(channelId: $channelId, isTyping: $isTyping) {
     user {
       ...BaseUser

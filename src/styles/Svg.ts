@@ -6,12 +6,14 @@ interface SvgProps extends SVGProps<SVGSVGElement> {
   loading?: boolean | string | undefined;
 }
 
-const Svg = styled("svg")<SvgProps>(({ theme, color, loading, width, height }) => ({
-  fill: color ? color : theme.palette.primary.main,
-  width: width || "16px",
-  height: height || "16px",
-  cursor: loading ? "not-allowed" : "inherit",
-}));
+const Svg = styled("svg")<SvgProps>(
+  ({ theme, color, loading, width, height }) => ({
+    fill: color ? color : theme.palette.primary.main,
+    width: width || "16px",
+    height: height || "16px",
+    cursor: loading ? "not-allowed" : "inherit",
+  })
+);
 
 export const DimmedSvg = styled("svg")<SvgProps>(({ theme, loading }) => ({
   fill: theme.palette.secondary.main,
