@@ -12,7 +12,10 @@ export const MetaplexProvider = ({ children }: { children: ReactNode }) => {
   const { connection } = useConnection();
   const wallet = useWallet();
   const metaplex = new Metaplex(connection);
-  metaplex.use(walletAdapterIdentity(wallet)).use(bundlrStorage());
+  metaplex.use(walletAdapterIdentity(wallet)).use(bundlrStorage({
+    address: import.meta.env.VITE_ARWEAVE_URL,
+    timeout: 60000,
+}));
 
   return (
     <MetaplexContext.Provider value={metaplex}>
