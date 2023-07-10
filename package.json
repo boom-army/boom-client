@@ -92,7 +92,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^3.2.1",
     "@graphql-codegen/client-preset": "^2.1.0",
-    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@rollup/plugin-inject": "^5.0.3",
     "@sentry/cli": "^2.16.1",
     "@sentry/vite-plugin": "^2.4.0",
     "@tsconfig/recommended": "^1.0.1",
@@ -116,6 +116,7 @@
     "babel-preset-env": "^1.7.0",
     "prettier": "^2.8.4",
     "react-test-renderer": "^17.0.2",
+    "rollup-plugin-named-exports": "^1.0.0",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.9.1",
     "tslint": "^6.1.3",

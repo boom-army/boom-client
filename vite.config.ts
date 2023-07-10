@@ -1,7 +1,8 @@
-import { defineConfig, loadEnv } from "vite";
+import inject from "@rollup/plugin-inject";
 import react from "@vitejs/plugin-react";
-import viteTsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
+import viteTsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig, loadEnv } from "vite";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 
@@ -11,6 +12,12 @@ export default defineConfig(({ mode }) => {
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   process.env = loadEnv(mode, process.cwd(), "");
   return {
+    resolve: {
+      alias: {
+        // This forces Vite to always resolve the browser version of packages
+        buffer: "buffer",
+      },
+    },
     esbuild: {
       target: "esnext",
     },
@@ -19,6 +26,11 @@ export default defineConfig(({ mode }) => {
       minify: "esbuild",
       rollupOptions: {
         cache: false,
+        plugins: [
+          inject({
+            Buffer: ["buffer", "Buffer"],
+          }),
+        ],
       },
     },
     plugins: [
@@ -45,6 +57,9 @@ export default defineConfig(({ mode }) => {
         authToken: process.env.SENTRY_AUTH_TOKEN,
       }),
     ],
+    optimizeDeps: {
+      include: ["borsh", "buffer"],
+    },
     server: {
       port: 3000,
       cors: {
