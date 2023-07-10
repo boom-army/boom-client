@@ -11,9 +11,8 @@ export const MetaplexContext = createContext<Metaplex | null>(null);
 export const MetaplexProvider = ({ children }: { children: ReactNode }) => {
   const { connection } = useConnection();
   const wallet = useWallet();
-  const metaplex = Metaplex.make(connection)
-    .use(walletAdapterIdentity(wallet))
-    .use(bundlrStorage());
+  const metaplex = new Metaplex(connection);
+  metaplex.use(walletAdapterIdentity(wallet)).use(bundlrStorage());
 
   return (
     <MetaplexContext.Provider value={metaplex}>
