@@ -479,7 +479,7 @@ export const NFTMint: React.FC = (props) => {
               </Typography>
             </Box>
             <Typography variant="body2" mb={2}>
-              You'll need to approve 3 transations for your files to be uploaded
+              You'll need to approve multiple transations for your files to be uploaded
               to the blockchain. This may take a few minutes.
             </Typography>
             <Box display="flex">
