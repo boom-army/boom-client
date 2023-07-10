@@ -1,8 +1,7 @@
 import { createContext, useContext, ReactNode } from "react";
-import { Umi } from "@metaplex-foundation/umi";
+import { Signer, Umi } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
-import { nftStorageUploader } from "@metaplex-foundation/umi-uploader-nft-storage";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
 
@@ -23,10 +22,9 @@ export const UmiProvider = ({
   endpoint: string;
   children: ReactNode;
 }) => {
-  const wallet = useWallet();
+  const wallet = useWallet();  
   const umi = createUmi(endpoint)
     .use(walletAdapterIdentity(wallet))
-    .use(nftStorageUploader())
     .use(mplTokenMetadata());
 
   return <UmiContext.Provider value={{ umi }}>{children}</UmiContext.Provider>;

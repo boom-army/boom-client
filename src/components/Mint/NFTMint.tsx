@@ -25,10 +25,11 @@ import { uniqBy } from "lodash";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useSnackbar } from "../../contexts/snackbar";
 
-import { useUmi } from "../../contexts/umi";
 import { createGenericFileFromBrowserFile } from "@metaplex-foundation/umi";
 import { useMetaplex } from "../../contexts/metaplex";
-import { walletAdapterIdentity } from "@metaplex-foundation/js";
+import {
+  toMetaplexFile,
+} from "@metaplex-foundation/js";
 import { snackAction } from "../TipCreator/tipInput";
 
 const ImageInput = styled("input")({
@@ -42,36 +43,36 @@ enum MetadataCategory {
 }
 
 interface FileObj {
-  uri: String;
-  type: String;
+  uri: string;
+  type: string;
+  [key: string]: unknown;
 }
 
 interface Attributes {
-  trait_type?: String;
-  value?: String;
+  trait_type?: string;
+  value?: string;
+  [key: string]: unknown;
 }
 
 export const NFTMint: React.FC = (props) => {
   const theme = useTheme();
-  const umi = useUmi();
-  const metaplex = useMetaplex();
-  const wallet = useWallet();
   const { publicKey } = useWallet();
   const { enqueueSnackbar } = useSnackbar();
+  const metaplex = useMetaplex();
 
   const [isMinting, setMinting] = useState<boolean>(false);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [uploadProgress, setUploadProgress] = useState(0);
+  // const [uploadProgress, setUploadProgress] = useState(0);
 
-  useEffect(() => {
-    if (uploadProgress > 0) {
-      enqueueSnackbar("Uploading...", {
-        variant: "info",
-        progress: uploadProgress,
-      });
-    }
-  }, [uploadProgress]);
+  // useEffect(() => {
+  //   if (uploadProgress > 0) {
+  //     enqueueSnackbar("Uploading...", {
+  //       variant: "info",
+  //       progress: uploadProgress,
+  //     });
+  //   }
+  // }, [uploadProgress]);
 
   const defaultFieldsState = {
     name: "",
@@ -108,45 +109,41 @@ export const NFTMint: React.FC = (props) => {
     event.preventDefault();
     setMinting(true);
     try {
-      if (!publicKey || !wallet) throw new Error("Wallet not connected");
+      if (!publicKey || !metaplex) throw new Error("Wallet not connected");
       if (!image) throw new Error("You need to upload an image");
       if (!fields.name) throw new Error("You need to add a name");
       if (!fields.description) throw new Error("You need to add a description");
       if (!fields.collection.name || !fields.collection.family)
         throw new Error("You need to add a collection name and family");
 
-      metaplex?.use(walletAdapterIdentity(wallet));
+      const metaplexImageData = await createGenericFileFromBrowserFile(image);
+      const imageData = toMetaplexFile(
+        metaplexImageData.buffer,
+        metaplexImageData.fileName
+      );
+      const imageUri = await metaplex?.storage().upload(imageData);
+      if (!imageUri) throw new Error("Image upload failed");
+      // const imageExt = imageUri + `?ext=${metaplexImageData?.extension || ""}`;
 
-      // Upload image and JSON data.
-      const imageFile = await createGenericFileFromBrowserFile(image);
-      const [imageUri] = await umi.uploader.upload([imageFile], {
-        onProgress: (progress) => {
-          setUploadProgress(progress);
-        },
-      });
       setFields((attr) => {
         attr.properties.files.push({
           uri: imageUri,
-          type: imageFile?.contentType || "",
+          type: imageData.contentType as string,
         });
         attr.properties.creators.push({
-          address: publicKey?.toBase58(),
+          address: publicKey?.toBase58() || "",
           share: 0,
         });
         attr.properties.files = uniqBy(attr.properties.files, "uri");
         attr.properties.creators = uniqBy(attr.properties.creators, "address");
         return { ...attr };
       });
-      const uri = await umi.uploader.uploadJson(
-        { ...fields, image: imageUri },
-        {
-          onProgress: (progress) => {
-            setUploadProgress(progress);
-          },
-        }
-      );
+      const metadata = await metaplex
+        ?.nfts()
+        .uploadMetadata({ ...fields, image: imageUri });
+      if (!metadata) throw new Error("Metadata upload failed");
       const mint = await metaplex?.nfts().create({
-        uri: imageUri,
+        uri: metadata.uri,
         name: fields.name,
         sellerFeeBasisPoints: fields.seller_fee_basis_points,
       });
@@ -163,11 +160,14 @@ export const NFTMint: React.FC = (props) => {
       setPreview(null);
       setImage(null);
     }
-  };  
+  };
 
   const addAttr = () => {
     const values = { ...fields };
-    values.attributes = [...values.attributes, { trait_type: "", value: "" }];
+    values.attributes = [
+      ...values.attributes,
+      { trait_type: "", value: "", key: Math.random() },
+    ];
     setFields(values);
   };
 
